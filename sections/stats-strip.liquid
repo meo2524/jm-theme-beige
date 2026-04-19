@@ -1,27 +1,127 @@
-<!-- STUB — full build coming next session -->
-<section class="section section--sm" style="background:var(--color-espresso);">
-  <div class="container">
-    <div class="grid grid--3">
-      <div style="text-align:center;color:var(--color-gold);">
-        <p class="t-display-md t-on-dark">99%</p>
-        <p class="t-label" style="color:var(--color-amber);">Chlorine removed</p>
-      </div>
-      <div style="text-align:center;color:var(--color-gold);">
-        <p class="t-display-md t-on-dark">6mo</p>
-        <p class="t-label" style="color:var(--color-amber);">Filter lifespan</p>
-      </div>
-      <div style="text-align:center;color:var(--color-gold);">
-        <p class="t-display-md t-on-dark">15+</p>
-        <p class="t-label" style="color:var(--color-amber);">Contaminants filtered</p>
-      </div>
+{%- liquid
+  assign stat_1_value = section.settings.stat_1_value | default: '99%'
+  assign stat_1_label = section.settings.stat_1_label | default: 'Chlorine removed'
+  assign stat_2_value = section.settings.stat_2_value | default: '15+'
+  assign stat_2_label = section.settings.stat_2_label | default: 'Contaminants filtered'
+  assign stat_3_value = section.settings.stat_3_value | default: '6 months'
+  assign stat_3_label = section.settings.stat_3_label | default: 'Filter lifespan'
+-%}
+
+<section class="stats-strip" aria-label="Product statistics">
+  <div class="stats-strip__inner container">
+
+    <div class="stats-strip__grid">
+
+      {%- for i in (1..3) -%}
+        {%- liquid
+          assign val   = 'stat_' | append: i | append: '_value'
+          assign label = 'stat_' | append: i | append: '_label'
+          assign val   = section.settings[val]
+          assign label = section.settings[label]
+        -%}
+        <div class="stats-strip__item">
+          <span class="stats-strip__value" aria-label="{{ val }} — {{ label }}">{{ val }}</span>
+          <span class="stats-strip__rule" aria-hidden="true"></span>
+          <span class="stats-strip__label">{{ label }}</span>
+        </div>
+        {%- unless forloop.last -%}
+          <span class="stats-strip__divider" aria-hidden="true"></span>
+        {%- endunless -%}
+      {%- endfor -%}
+
     </div>
+
   </div>
 </section>
+
+<style>
+  .stats-strip {
+    background-color: var(--color-espresso);
+    border-top: 1.5px solid rgba(200, 135, 74, 0.25);
+    border-bottom: 1.5px solid rgba(200, 135, 74, 0.25);
+    padding-block: var(--space-10);
+  }
+
+  .stats-strip__grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .stats-strip__item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    padding-inline: var(--space-8);
+    text-align: center;
+  }
+
+  .stats-strip__value {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-gold);
+  }
+
+  .stats-strip__rule {
+    display: block;
+    width: 1.5rem;
+    height: 1.5px;
+    background-color: var(--color-amber);
+    opacity: 0.6;
+  }
+
+  .stats-strip__label {
+    font-family: 'Inter', var(--font-label);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-amber);
+    opacity: 0.85;
+  }
+
+  .stats-strip__divider {
+    display: block;
+    width: 1px;
+    height: 60px;
+    background-color: rgba(232, 201, 154, 0.12);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 767px) {
+    .stats-strip__grid {
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+
+    .stats-strip__divider {
+      width: 60px;
+      height: 1px;
+    }
+
+    .stats-strip__item {
+      padding-inline: 0;
+    }
+  }
+</style>
 
 {% schema %}
 {
   "name": "Stats strip",
-  "settings": [],
+  "settings": [
+    { "type": "text", "id": "stat_1_value", "label": "Stat 1 — value", "default": "99%" },
+    { "type": "text", "id": "stat_1_label", "label": "Stat 1 — label", "default": "Chlorine removed" },
+    { "type": "text", "id": "stat_2_value", "label": "Stat 2 — value", "default": "15+" },
+    { "type": "text", "id": "stat_2_label", "label": "Stat 2 — label", "default": "Contaminants filtered" },
+    { "type": "text", "id": "stat_3_value", "label": "Stat 3 — value", "default": "6 months" },
+    { "type": "text", "id": "stat_3_label", "label": "Stat 3 — label", "default": "Filter lifespan" }
+  ],
   "presets": [{ "name": "Stats strip" }]
 }
 {% endschema %}

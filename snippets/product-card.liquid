@@ -1,0 +1,157 @@
+{%- liquid
+  assign card_image = product.featured_media
+  assign card_price = product.price
+  assign compare    = product.compare_at_price
+  assign on_sale    = false
+  if compare > card_price
+    assign on_sale = true
+  endif
+-%}
+
+<article class="card" aria-label="{{ product.title }}">
+  <a href="{{ product.url }}" class="card__media-link" tabindex="-1" aria-hidden="true">
+    <div class="card__media">
+      {%- if card_image != blank -%}
+        <img
+          src="{{ card_image | image_url: width: 600 }}"
+          srcset="
+            {{ card_image | image_url: width: 400 }} 400w,
+            {{ card_image | image_url: width: 600 }} 600w,
+            {{ card_image | image_url: width: 900 }} 900w
+          "
+          sizes="(max-width: 767px) 50vw, 33vw"
+          alt="{{ card_image.alt | default: product.title | escape }}"
+          width="600"
+          height="750"
+          loading="lazy"
+        >
+      {%- else -%}
+        {{ product.title | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+
+      {%- if on_sale -%}
+        <span class="card__badge badge badge--amber">Sale</span>
+      {%- elsif product.tags contains 'new' -%}
+        <span class="card__badge badge">New</span>
+      {%- endif -%}
+    </div>
+  </a>
+
+  <div class="card__info">
+    <div class="card__meta">
+      <a href="{{ product.url }}" class="card__title-link">
+        <h3 class="card__title">{{ product.title }}</h3>
+      </a>
+      {%- if product.metafields.custom.subtitle != blank -%}
+        <p class="card__subtitle t-body-sm">{{ product.metafields.custom.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="card__pricing">
+      {%- if on_sale -%}
+        <span class="price price--sale">{{ card_price | money }}</span>
+        <span class="price price--compare">{{ compare | money }}</span>
+      {%- else -%}
+        <span class="price">{{ card_price | money }}</span>
+      {%- endif -%}
+    </div>
+  </div>
+</article>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    cursor: pointer;
+  }
+
+  .card__media-link {
+    display: block;
+    text-decoration: none;
+  }
+
+  .card__media {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background-color: var(--color-linen-alt);
+    border-radius: var(--radius-base);
+  }
+
+  .card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card:hover .card__media img,
+  .card:focus-within .card__media img {
+    transform: scale(1.04);
+  }
+
+  .card__media .placeholder-svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--color-mahogany);
+    opacity: 0.08;
+  }
+
+  .card__badge {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+  }
+
+  .card__info {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .card__meta {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .card__title-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .card__title-link:focus-visible {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  .card__title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-md);
+    font-weight: 400;
+    color: var(--color-espresso);
+    line-height: 1.3;
+    transition: color var(--transition-fast);
+  }
+
+  .card__title-link:hover .card__title {
+    color: var(--color-amber);
+  }
+
+  .card__subtitle {
+    color: var(--color-mahogany);
+    opacity: 0.65;
+    margin-top: var(--space-1);
+  }
+
+  .card__pricing {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-1);
+    flex-shrink: 0;
+  }
+</style>

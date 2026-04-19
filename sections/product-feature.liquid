@@ -1,15 +1,250 @@
-<!-- STUB — full build coming next session -->
-<section class="section">
+{%- liquid
+  assign eyebrow  = section.settings.eyebrow   | default: 'The science'
+  assign heading  = section.settings.heading   | default: 'Most routines start too late.'
+  assign body     = section.settings.body      | default: 'Chlorine strips skin of its natural oils. Heavy metals accumulate in hair follicles over time. Every serum and shampoo you apply after an unfiltered shower is working against a contaminated baseline. The filter is the step that makes everything else work.'
+  assign cta_label = section.settings.cta_label | default: 'Learn more'
+  assign cta_url   = section.settings.cta_url
+  assign image     = section.settings.image
+  assign reverse   = section.settings.reverse
+-%}
+
+<section class="product-feature section">
   <div class="container">
-    <h2 class="t-display-md">{{ section.settings.heading | default: 'Why your filter matters more than your serum.' }}</h2>
+
+    <div class="product-feature__grid{% if reverse %} product-feature__grid--reverse{% endif %}">
+
+      <!-- Image -->
+      <div class="product-feature__media">
+        {%- if image != blank -%}
+          <img
+            src="{{ image | image_url: width: 900 }}"
+            srcset="
+              {{ image | image_url: width: 600 }} 600w,
+              {{ image | image_url: width: 900 }} 900w,
+              {{ image | image_url: width: 1200 }} 1200w
+            "
+            sizes="(max-width: 767px) 100vw, 50vw"
+            alt="{{ image.alt | default: heading | escape }}"
+            width="900"
+            height="1100"
+            loading="lazy"
+          >
+        {%- else -%}
+          <div class="product-feature__media-placeholder" aria-hidden="true"></div>
+        {%- endif -%}
+      </div>
+
+      <!-- Copy -->
+      <div class="product-feature__copy">
+
+        <span class="rule-above" aria-hidden="true"></span>
+
+        {%- if eyebrow != blank -%}
+          <p class="product-feature__eyebrow t-label">{{ eyebrow }}</p>
+        {%- endif -%}
+
+        <h2 class="product-feature__heading t-display-md">{{ heading }}</h2>
+
+        {%- if body != blank -%}
+          <div class="product-feature__body">
+            <p>{{ body }}</p>
+          </div>
+        {%- endif -%}
+
+        <!-- Optional bullet points -->
+        {%- if section.blocks.size > 0 -%}
+          <ul class="product-feature__bullets" role="list">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'bullet' -%}
+                <li class="product-feature__bullet" {{ block.shopify_attributes }}>
+                  <span class="product-feature__bullet-icon" aria-hidden="true">—</span>
+                  <span>{{ block.settings.text }}</span>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if cta_url != blank and cta_label != blank -%}
+          <a href="{{ cta_url }}" class="btn btn--secondary" style="margin-top: var(--space-8);">
+            {{ cta_label }}
+          </a>
+        {%- endif -%}
+
+      </div>
+      <!-- /product-feature__copy -->
+
+    </div>
+
   </div>
 </section>
+
+<style>
+  .product-feature__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+    align-items: center;
+  }
+
+  .product-feature__grid--reverse .product-feature__media {
+    order: 2;
+  }
+
+  .product-feature__grid--reverse .product-feature__copy {
+    order: 1;
+  }
+
+  /* ---- Media ---- */
+  .product-feature__media {
+    position: relative;
+    aspect-ratio: 9 / 11;
+    overflow: hidden;
+    border-radius: var(--radius-base);
+    background-color: var(--color-linen-alt);
+  }
+
+  .product-feature__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .product-feature__media-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-linen-alt);
+    border: 1px dashed rgba(107, 63, 31, 0.2);
+  }
+
+  /* ---- Copy ---- */
+  .product-feature__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-block: var(--space-8);
+  }
+
+  .product-feature__eyebrow {
+    color: var(--color-amber);
+    margin-bottom: var(--space-4);
+  }
+
+  .product-feature__heading {
+    margin-bottom: var(--space-6);
+    color: var(--color-espresso);
+  }
+
+  .product-feature__body {
+    color: var(--color-mahogany);
+    line-height: var(--line-height-body);
+    margin-bottom: var(--space-6);
+  }
+
+  .product-feature__body p {
+    max-width: 52ch;
+  }
+
+  /* ---- Bullets ---- */
+  .product-feature__bullets {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  .product-feature__bullet {
+    display: flex;
+    gap: var(--space-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-mahogany);
+    line-height: var(--line-height-body);
+  }
+
+  .product-feature__bullet-icon {
+    color: var(--color-amber);
+    flex-shrink: 0;
+    font-size: var(--font-size-md);
+    line-height: 1.4;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 767px) {
+    .product-feature__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+
+    .product-feature__grid--reverse .product-feature__media,
+    .product-feature__grid--reverse .product-feature__copy {
+      order: unset;
+    }
+
+    .product-feature__media {
+      aspect-ratio: 4 / 3;
+    }
+  }
+</style>
 
 {% schema %}
 {
   "name": "Product feature",
   "settings": [
-    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Why your filter matters more than your serum." }
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The science"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Most routines start too late."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body text",
+      "default": "Chlorine strips skin of its natural oils. Heavy metals accumulate in hair follicles over time. Every serum and shampoo you apply after an unfiltered shower is working against a contaminated baseline."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "reverse",
+      "label": "Reverse layout (image on right)",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bullet",
+      "name": "Bullet point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Removes 99% of chlorine and chloramines"
+        }
+      ]
+    }
   ],
   "presets": [{ "name": "Product feature" }]
 }
