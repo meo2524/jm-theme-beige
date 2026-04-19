@@ -1,24 +1,1289 @@
-<!-- STUB — full build coming next session -->
-<section class="section">
-  <div class="container">
-    <h1 class="t-display-md">{{ collection.title }}</h1>
-    <div class="grid grid--3" style="margin-top:2rem;">
-      {%- for product in collection.products -%}
-        <div>
-          <a href="{{ product.url }}" class="t-heading">{{ product.title }}</a>
-          <p class="price">{{ product.price | money }}</p>
-        </div>
-      {%- else -%}
-        <p>No products found.</p>
-      {%- endfor -%}
+{% comment %}
+  main-collection.liquid
+  Mend & Co — Collection Page
+  Sticky filter sidebar (desktop) / slide-in drawer (mobile), sort select,
+  active filter pills, 3-col product grid, empty state, pagination.
+{% endcomment %}
+
+{%- liquid
+  assign sort_by = collection.sort_by | default: collection.default_sort_by
+  assign show_filters = section.settings.show_filters
+  assign active_filters_count = 0
+  for filter in collection.filters
+    if filter.type == 'price_range'
+      if filter.min_value.value or filter.max_value.value
+        assign active_filters_count = active_filters_count | plus: 1
+      endif
+    else
+      assign active_filters_count = active_filters_count | plus: filter.active_values.size
+    endif
+  endfor
+-%}
+
+{%- paginate collection.products by section.settings.products_per_page -%}
+
+<div
+  class="collection-section"
+  data-section-id="{{ section.id }}"
+  data-section-type="main-collection"
+>
+
+  {%- comment -%} ═══════════════════════════════════════════
+    COLLECTION HEADER
+  ═══════════════════════════════════════════ {%- endcomment -%}
+
+  {%- if collection.image and section.settings.show_hero_image -%}
+    <div class="collection-hero">
+      <img
+        src="{{ collection.image | image_url: width: 1600 }}"
+        srcset="
+          {{ collection.image | image_url: width: 800 }}  800w,
+          {{ collection.image | image_url: width: 1200 }} 1200w,
+          {{ collection.image | image_url: width: 1600 }} 1600w
+        "
+        sizes="100vw"
+        alt="{{ collection.title | escape }}"
+        class="collection-hero__img"
+        loading="eager"
+        width="{{ collection.image.width }}"
+        height="{{ collection.image.height }}"
+      >
+      <div class="collection-hero__overlay">
+        <p class="collection-hero__eyebrow">Collection</p>
+        <h1 class="collection-hero__title">{{ collection.title }}</h1>
+      </div>
     </div>
+  {%- else -%}
+    <div class="collection-header">
+      <p class="collection-header__eyebrow">Collection</p>
+      <h1 class="collection-header__title">{{ collection.title }}</h1>
+      {%- if section.settings.show_description and collection.description != blank -%}
+        <div class="collection-header__desc rte">{{ collection.description }}</div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+
+  {%- comment -%} ═══════════════════════════════════════════
+    TOOLBAR
+  ═══════════════════════════════════════════ {%- endcomment -%}
+
+  <div class="collection-toolbar">
+    <div class="toolbar-row">
+
+      <div class="toolbar-left">
+        {%- if show_filters -%}
+          <button
+            class="filter-toggle"
+            id="FilterToggle-{{ section.id }}"
+            type="button"
+            aria-expanded="false"
+            aria-controls="FilterSidebar-{{ section.id }}"
+          >
+            <svg class="filter-toggle__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <line x1="4" y1="6" x2="20" y2="6"/>
+              <line x1="4" y1="12" x2="15" y2="12"/>
+              <line x1="4" y1="18" x2="10" y2="18"/>
+            </svg>
+            <span>Filter</span>
+            {%- if active_filters_count > 0 -%}
+              <span class="filter-toggle__badge" aria-label="{{ active_filters_count }} active filters">{{ active_filters_count }}</span>
+            {%- endif -%}
+          </button>
+        {%- endif -%}
+
+        <p class="toolbar-count" aria-live="polite">
+          {{ collection.products_count }}
+          {%- if collection.products_count == 1 -%}&nbsp;product{%- else -%}&nbsp;products{%- endif -%}
+        </p>
+      </div>
+
+      <div class="toolbar-right">
+        <label class="sort-label" for="SortBy-{{ section.id }}">Sort by</label>
+        <div class="sort-wrap">
+          <select
+            id="SortBy-{{ section.id }}"
+            class="sort-select"
+            aria-label="Sort products"
+            data-collection-sort
+          >
+            {%- assign sort_options = "manual:Featured,best-selling:Best selling,title-ascending:A–Z,title-descending:Z–A,price-ascending:Price: low–high,price-descending:Price: high–low,created-descending:Newest" | split: "," -%}
+            {%- for opt in sort_options -%}
+              {%- assign parts = opt | split: ":" -%}
+              <option value="{{ parts[0] }}"{% if sort_by == parts[0] %} selected{% endif %}>{{ parts[1] }}</option>
+            {%- endfor -%}
+          </select>
+          <svg class="sort-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+
+    {%- comment -%} Active filter pills {%- endcomment -%}
+    {%- if active_filters_count > 0 -%}
+      <div class="active-filters">
+        {%- for filter in collection.filters -%}
+          {%- if filter.type == 'price_range' -%}
+            {%- if filter.min_value.value or filter.max_value.value -%}
+              <a href="{{ filter.url_to_remove }}" class="active-filter-pill">
+                <span>Price:
+                  {%- if filter.min_value.value -%}&nbsp;{{ filter.min_value.value | money_without_trailing_zeros }}{%- else -%}&nbsp;$0{%- endif -%}
+                  &nbsp;–
+                  {%- if filter.max_value.value -%}&nbsp;{{ filter.max_value.value | money_without_trailing_zeros }}{%- else -%}&nbsp;any{%- endif -%}
+                </span>
+                <svg class="active-filter-pill__x" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <line x1="1" y1="1" x2="11" y2="11"/>
+                  <line x1="11" y1="1" x2="1" y2="11"/>
+                </svg>
+              </a>
+            {%- endif -%}
+          {%- else -%}
+            {%- for value in filter.active_values -%}
+              <a href="{{ value.url_to_remove }}" class="active-filter-pill">
+                <span>{{ value.label }}</span>
+                <svg class="active-filter-pill__x" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <line x1="1" y1="1" x2="11" y2="11"/>
+                  <line x1="11" y1="1" x2="1" y2="11"/>
+                </svg>
+              </a>
+            {%- endfor -%}
+          {%- endif -%}
+        {%- endfor -%}
+        <a href="{{ collection.url }}" class="clear-filters">Clear all</a>
+      </div>
+    {%- endif -%}
   </div>
-</section>
+
+
+  {%- comment -%} ═══════════════════════════════════════════
+    BODY — SIDEBAR + GRID
+  ═══════════════════════════════════════════ {%- endcomment -%}
+
+  <div class="collection-body{% unless show_filters %} collection-body--no-sidebar{% endunless %}">
+
+    {%- comment -%} ── FILTER SIDEBAR ── {%- endcomment -%}
+    {%- if show_filters -%}
+
+      <aside
+        class="filter-sidebar"
+        id="FilterSidebar-{{ section.id }}"
+        aria-label="Product filters"
+      >
+        <div class="filter-sidebar__inner">
+
+          <div class="filter-sidebar__head">
+            <p class="filter-sidebar__heading">Filters</p>
+            <button
+              class="filter-close"
+              id="FilterClose-{{ section.id }}"
+              type="button"
+              aria-label="Close filters"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+
+          <form
+            id="FilterForm-{{ section.id }}"
+            method="GET"
+            action="{{ collection.url }}"
+          >
+            {%- comment -%} Preserve sort when submitting filters {%- endcomment -%}
+            <input type="hidden" name="sort_by" value="{{ sort_by }}">
+
+            {%- for filter in collection.filters -%}
+              {%- assign group_id = 'FGroup-' | append: section.id | append: '-' | append: forloop.index -%}
+              {%- assign panel_id = 'FPanel-' | append: section.id | append: '-' | append: forloop.index -%}
+
+              <div class="filter-group">
+                <button
+                  class="filter-group__trigger"
+                  type="button"
+                  id="{{ group_id }}"
+                  aria-expanded="true"
+                  aria-controls="{{ panel_id }}"
+                >
+                  <span>{{ filter.label }}</span>
+                  {%- if filter.type != 'price_range' and filter.active_values.size > 0 -%}
+                    <span class="filter-group__count">{{ filter.active_values.size }}</span>
+                  {%- endif -%}
+                  <svg class="filter-group__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"/>
+                  </svg>
+                </button>
+
+                <div
+                  class="filter-group__panel"
+                  id="{{ panel_id }}"
+                  role="group"
+                  aria-labelledby="{{ group_id }}"
+                >
+
+                  {%- if filter.type == 'price_range' -%}
+                    <div class="filter-price">
+                      <div class="filter-price__inputs">
+                        <div class="filter-price__field">
+                          <label class="filter-price__label" for="FPriceMin-{{ section.id }}">Min</label>
+                          <div class="filter-price__wrap">
+                            <span class="filter-price__sym" aria-hidden="true">$</span>
+                            <input
+                              type="number"
+                              id="FPriceMin-{{ section.id }}"
+                              name="{{ filter.min_value.param_name }}"
+                              class="filter-price__input"
+                              value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                              placeholder="{{ filter.range_min | money_without_currency | floor }}"
+                              min="0"
+                              data-price-input
+                            >
+                          </div>
+                        </div>
+                        <span class="filter-price__dash" aria-hidden="true">—</span>
+                        <div class="filter-price__field">
+                          <label class="filter-price__label" for="FPriceMax-{{ section.id }}">Max</label>
+                          <div class="filter-price__wrap">
+                            <span class="filter-price__sym" aria-hidden="true">$</span>
+                            <input
+                              type="number"
+                              id="FPriceMax-{{ section.id }}"
+                              name="{{ filter.max_value.param_name }}"
+                              class="filter-price__input"
+                              value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                              placeholder="{{ filter.range_max | money_without_currency | ceil }}"
+                              min="0"
+                              data-price-input
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <button type="submit" class="filter-price__apply">Apply price</button>
+                    </div>
+
+                  {%- elsif filter.type == 'boolean' or filter.type == 'list' -%}
+                    <ul class="filter-list" role="list">
+                      {%- for value in filter.values -%}
+                        {%- assign check_id = 'FCheck-' | append: section.id | append: '-' | append: filter.param_name | handleize | append: '-' | append: forloop.index -%}
+                        <li class="filter-list__item">
+                          <label
+                            class="filter-check{% if value.active %} is-active{% endif %}{% if value.count == 0 and value.active == false %} is-disabled{% endif %}"
+                            for="{{ check_id }}"
+                          >
+                            <input
+                              type="checkbox"
+                              id="{{ check_id }}"
+                              name="{{ filter.param_name }}"
+                              value="{{ value.value }}"
+                              {% if value.active %}checked{% endif %}
+                              {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                              class="filter-check__input"
+                              data-filter-auto-submit
+                            >
+                            <span class="filter-check__box" aria-hidden="true"></span>
+                            <span class="filter-check__label">{{ value.label }}</span>
+                            <span class="filter-check__count">({{ value.count }})</span>
+                          </label>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+
+                </div>
+              </div>
+            {%- endfor -%}
+
+          </form>
+        </div>
+      </aside>
+
+      <div class="filter-overlay" id="FilterOverlay-{{ section.id }}" aria-hidden="true"></div>
+
+    {%- endif -%}
+
+
+    {%- comment -%} ── PRODUCT GRID ── {%- endcomment -%}
+    <div class="collection-main">
+
+      {%- if collection.products.size > 0 -%}
+
+        <ul class="collection-grid" role="list">
+          {%- for product in collection.products -%}
+            <li class="collection-grid__item">
+              {%- render 'product-card', product: product -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        {%- if paginate.pages > 1 -%}
+          <div class="collection-pagination">
+            {%- render 'pagination', paginate: paginate -%}
+          </div>
+        {%- endif -%}
+
+      {%- else -%}
+
+        <div class="collection-empty">
+          <div class="collection-empty__rule"></div>
+          <h2 class="collection-empty__title">No products found</h2>
+          <p class="collection-empty__body">
+            {%- if active_filters_count > 0 -%}
+              Try adjusting your filters, or
+              <a href="{{ collection.url }}" class="collection-empty__link">clear all filters</a>
+              to see everything in this collection.
+            {%- else -%}
+              This collection is empty — check back soon.
+            {%- endif -%}
+          </p>
+        </div>
+
+      {%- endif -%}
+
+    </div>
+    {%- comment -%} /collection-main {%- endcomment -%}
+
+  </div>
+  {%- comment -%} /collection-body {%- endcomment -%}
+
+</div>
+
+{%- endpaginate -%}
+
+
+<style>
+/* ════════════════════════════════════════════════════════════
+   MAIN COLLECTION — Mend & Co
+   ════════════════════════════════════════════════════════════ */
+
+.collection-section {
+  background: var(--color-linen, #F5ECD9);
+  min-height: 60vh;
+}
+
+
+/* ── COLLECTION HEADER ─────────────────────────────────── */
+
+.collection-header {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 4rem 4rem 3rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(44, 26, 14, 0.08);
+}
+
+.collection-header__eyebrow {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--color-mahogany, #6B3F1F);
+  margin: 0 0 0.875rem;
+}
+
+.collection-header__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 400;
+  color: var(--color-espresso, #2C1A0E);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0 0 1.25rem;
+}
+
+.collection-header__desc {
+  font-family: var(--font-label);
+  font-size: 0.9375rem;
+  line-height: 1.72;
+  color: var(--color-mahogany, #6B3F1F);
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* Hero banner variant */
+.collection-hero {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  background: var(--color-espresso, #2C1A0E);
+}
+
+.collection-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.55;
+}
+
+.collection-hero__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.collection-hero__eyebrow {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  /* Soft gold on espresso bg — high contrast decorative label */
+  color: var(--color-gold, #E8C99A);
+  margin: 0 0 1rem;
+}
+
+.collection-hero__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 400;
+  color: var(--color-linen, #F5ECD9);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+
+/* ── TOOLBAR ───────────────────────────────────────────── */
+
+.collection-toolbar {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.25rem 4rem;
+  border-bottom: 1px solid rgba(44, 26, 14, 0.08);
+  position: sticky;
+  top: 0;
+  background: var(--color-linen, #F5ECD9);
+  z-index: 20;
+}
+
+.toolbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.toolbar-count {
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  color: var(--color-mahogany, #6B3F1F);
+  margin: 0;
+}
+
+/* Filter toggle — visible on mobile, hidden on desktop (sidebar always shown) */
+.filter-toggle {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-espresso, #2C1A0E);
+  background: transparent;
+  border: 1.5px solid rgba(44, 26, 14, 0.2);
+  border-radius: var(--radius-sm, 2px);
+  padding: 0.5rem 0.875rem;
+  cursor: pointer;
+  transition: border-color 0.18s ease;
+  white-space: nowrap;
+}
+
+.filter-toggle:hover {
+  border-color: var(--color-mahogany, #6B3F1F);
+}
+
+.filter-toggle__icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.filter-toggle__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: var(--color-amber, #C8874A);
+  color: var(--color-espresso, #2C1A0E);
+  font-size: 0.625rem;
+  font-weight: 700;
+  border-radius: 50%;
+  line-height: 1;
+}
+
+/* Sort */
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.sort-label {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-espresso, #2C1A0E);
+  white-space: nowrap;
+}
+
+.sort-wrap {
+  position: relative;
+}
+
+.sort-select {
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-espresso, #2C1A0E);
+  background: var(--color-linen, #F5ECD9);
+  border: 1.5px solid rgba(44, 26, 14, 0.2);
+  border-radius: var(--radius-sm, 2px);
+  padding: 0.5rem 2.25rem 0.5rem 0.875rem;
+  cursor: pointer;
+  transition: border-color 0.18s ease;
+  min-width: 10rem;
+}
+
+.sort-select:hover,
+.sort-select:focus-visible {
+  border-color: var(--color-mahogany, #6B3F1F);
+  outline: none;
+}
+
+.sort-chevron {
+  position: absolute;
+  right: 0.625rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  color: var(--color-mahogany, #6B3F1F);
+  pointer-events: none;
+}
+
+/* Active filter pills */
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.875rem;
+  padding-top: 0.875rem;
+  border-top: 1px solid rgba(44, 26, 14, 0.07);
+}
+
+.active-filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-espresso, #2C1A0E);
+  background: rgba(200, 135, 74, 0.08);
+  border: 1.5px solid var(--color-mahogany, #6B3F1F);
+  border-radius: 99px;
+  padding: 0.3125rem 0.75rem;
+  text-decoration: none;
+  transition: background 0.18s ease, border-color 0.18s ease;
+  white-space: nowrap;
+}
+
+.active-filter-pill:hover {
+  background: rgba(200, 135, 74, 0.14);
+  border-color: var(--color-espresso, #2C1A0E);
+}
+
+.active-filter-pill__x {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  color: var(--color-mahogany, #6B3F1F);
+}
+
+.clear-filters {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-mahogany, #6B3F1F);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(107, 63, 31, 0.4);
+  transition: text-decoration-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.clear-filters:hover {
+  text-decoration-color: var(--color-mahogany, #6B3F1F);
+  color: var(--color-espresso, #2C1A0E);
+}
+
+
+/* ── BODY LAYOUT ───────────────────────────────────────── */
+
+.collection-body {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 3rem 4rem 6rem;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.collection-body--no-sidebar {
+  grid-template-columns: 1fr;
+}
+
+
+/* ── FILTER SIDEBAR ────────────────────────────────────── */
+
+.filter-sidebar {
+  position: sticky;
+  top: 5.5rem; /* clears sticky toolbar */
+}
+
+.filter-sidebar__inner {
+  /* nothing extra needed on desktop */
+}
+
+.filter-sidebar__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1.5px solid var(--color-amber, #C8874A);
+}
+
+.filter-sidebar__heading {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-espresso, #2C1A0E);
+  margin: 0;
+}
+
+/* Close button — hidden on desktop, shown on mobile */
+.filter-close {
+  display: none;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-espresso, #2C1A0E);
+  border-radius: var(--radius-sm, 2px);
+  transition: background 0.15s ease;
+  flex-shrink: 0;
+}
+
+.filter-close:hover {
+  background: rgba(44, 26, 14, 0.06);
+}
+
+.filter-close svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Filter groups */
+.filter-group {
+  border-bottom: 1px solid rgba(44, 26, 14, 0.1);
+}
+
+.filter-group__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.875rem 0;
+  background: transparent;
+  border: none;
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-espresso, #2C1A0E);
+  cursor: pointer;
+  text-align: left;
+  letter-spacing: 0.01em;
+  transition: color 0.15s ease;
+}
+
+.filter-group__trigger:hover {
+  color: var(--color-mahogany, #6B3F1F);
+}
+
+.filter-group__trigger:focus-visible {
+  outline: 1.5px solid var(--color-amber, #C8874A);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm, 2px);
+}
+
+.filter-group__count {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  /* Mahogany #6B3F1F on amber-tint ≈ 7.3:1 ✅ (amber text = 2.55:1, fails WCAG 1.4.11) */
+  color: var(--color-mahogany, #6B3F1F);
+  background: rgba(200, 135, 74, 0.12);
+  padding: 0.125rem 0.375rem;
+  border-radius: 99px;
+  margin-left: auto;
+}
+
+.filter-group__chevron {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: var(--color-mahogany, #6B3F1F);
+  transition: transform 0.22s ease;
+}
+
+.filter-group__trigger[aria-expanded="false"] .filter-group__chevron {
+  transform: rotate(-90deg);
+}
+
+.filter-group__panel[hidden] {
+  display: none;
+}
+
+.filter-group__panel {
+  padding-bottom: 0.875rem;
+}
+
+/* Checkbox list */
+.filter-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.filter-check {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.3125rem 0;
+  cursor: pointer;
+}
+
+.filter-check.is-disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+.filter-check__input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 1px;
+  height: 1px;
+}
+
+.filter-check__box {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(44, 26, 14, 0.3);
+  border-radius: var(--radius-sm, 2px);
+  background: transparent;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  position: relative;
+}
+
+.filter-check.is-active .filter-check__box {
+  background: var(--color-espresso, #2C1A0E);
+  border-color: var(--color-espresso, #2C1A0E);
+}
+
+.filter-check.is-active .filter-check__box::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 1px;
+  width: 7px;
+  height: 5px;
+  border-left: 1.5px solid var(--color-linen, #F5ECD9);
+  border-bottom: 1.5px solid var(--color-linen, #F5ECD9);
+  transform: rotate(-45deg);
+}
+
+.filter-check:hover:not(.is-disabled) .filter-check__box {
+  border-color: var(--color-espresso, #2C1A0E);
+}
+
+.filter-check__label {
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  color: var(--color-espresso, #2C1A0E);
+  flex: 1;
+}
+
+.filter-check__count {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  /* Blended mahogany 60% on linen → #A28469, ~2.77:1 (too low)
+     Use mahogany directly — 7.59:1 ✅. Visual hierarchy from size, not colour. */
+  color: var(--color-mahogany, #6B3F1F);
+}
+
+/* Price range inputs */
+.filter-price {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.filter-price__inputs {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.filter-price__field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3125rem;
+}
+
+.filter-price__label {
+  font-family: var(--font-label);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-mahogany, #6B3F1F);
+}
+
+.filter-price__dash {
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  color: var(--color-mahogany, #6B3F1F);
+  padding-bottom: 0.5rem;
+  flex-shrink: 0;
+}
+
+.filter-price__wrap {
+  position: relative;
+}
+
+.filter-price__sym {
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  color: var(--color-mahogany, #6B3F1F);
+  pointer-events: none;
+}
+
+.filter-price__input {
+  width: 100%;
+  height: 36px;
+  padding: 0 0.5rem 0 1.375rem;
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-espresso, #2C1A0E);
+  background: transparent;
+  border: 1.5px solid rgba(44, 26, 14, 0.2);
+  border-radius: var(--radius-sm, 2px);
+  transition: border-color 0.15s ease;
+  -moz-appearance: textfield;
+}
+
+.filter-price__input::-webkit-outer-spin-button,
+.filter-price__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.filter-price__input:focus {
+  outline: none;
+  border-color: var(--color-mahogany, #6B3F1F);
+}
+
+.filter-price__apply {
+  width: 100%;
+  height: 36px;
+  background: var(--color-espresso, #2C1A0E);
+  color: var(--color-linen, #F5ECD9);
+  border: none;
+  border-radius: var(--radius-sm, 2px);
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+
+.filter-price__apply:hover {
+  background: var(--color-mahogany, #6B3F1F);
+}
+
+/* Mobile overlay */
+.filter-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(44, 26, 14, 0.45);
+  z-index: 39;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.filter-overlay.is-visible {
+  opacity: 1;
+}
+
+
+/* ── PRODUCT GRID ──────────────────────────────────────── */
+
+.collection-main {
+  min-width: 0; /* prevent grid blowout */
+}
+
+.collection-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem 1.5rem;
+}
+
+.collection-grid__item {
+  min-width: 0;
+}
+
+/* Pagination wrapper */
+.collection-pagination {
+  padding-top: 1rem;
+  border-top: 1px solid rgba(44, 26, 14, 0.08);
+}
+
+
+/* ── EMPTY STATE ───────────────────────────────────────── */
+
+.collection-empty {
+  padding: 5rem 2rem;
+  text-align: center;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.collection-empty__rule {
+  width: 3rem;
+  height: 1.5px;
+  background: var(--color-amber, #C8874A);
+  margin: 0 auto 2rem;
+}
+
+.collection-empty__title {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--color-espresso, #2C1A0E);
+  letter-spacing: -0.01em;
+  margin: 0 0 0.875rem;
+}
+
+.collection-empty__body {
+  font-family: var(--font-label);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-mahogany, #6B3F1F);
+  margin: 0;
+}
+
+.collection-empty__link {
+  color: var(--color-espresso, #2C1A0E);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--color-amber, #C8874A);
+}
+
+.collection-empty__link:hover {
+  color: var(--color-mahogany, #6B3F1F);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .collection-header,
+  .collection-toolbar,
+  .collection-body {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .collection-body {
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+  }
+
+  .collection-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet breakpoint — filter becomes drawer */
+@media (max-width: 860px) {
+  .filter-toggle {
+    display: flex;
+  }
+
+  .filter-close {
+    display: flex;
+  }
+
+  .collection-body {
+    grid-template-columns: 1fr;
+  }
+
+  /* Sidebar becomes fixed drawer */
+  .filter-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(320px, 85vw);
+    z-index: 40;
+    background: var(--color-linen, #F5ECD9);
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filter-sidebar.is-open {
+    transform: translateX(0);
+  }
+
+  .filter-overlay {
+    display: block;
+    pointer-events: none;
+  }
+
+  .filter-overlay.is-visible {
+    pointer-events: auto;
+  }
+
+  .filter-sidebar__inner {
+    padding: 1.5rem 1.5rem 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .collection-header,
+  .collection-toolbar,
+  .collection-body {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .collection-hero {
+    height: 280px;
+  }
+
+  .collection-body {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+  }
+
+  .sort-label {
+    display: none;
+  }
+
+  .sort-select {
+    min-width: 8rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .collection-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .collection-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+
+<script>
+(function () {
+  'use strict';
+
+  var sid  = '{{ section.id }}';
+  var root = document.querySelector('[data-section-id="' + sid + '"]');
+  if (!root) return;
+
+
+  /* ── SORT SELECT ──────────────────────────────────────── */
+  var sortSelect = root.querySelector('[data-collection-sort]');
+  if (sortSelect) {
+    sortSelect.addEventListener('change', function () {
+      var url = new URL(window.location.href);
+      url.searchParams.set('sort_by', this.value);
+      url.searchParams.delete('page');
+      window.location.href = url.toString();
+    });
+  }
+
+
+  /* ── FILTER ACCORDIONS ────────────────────────────────── */
+  root.querySelectorAll('.filter-group__trigger').forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var expanded = trigger.getAttribute('aria-expanded') === 'true';
+      var panel = root.querySelector('#' + trigger.getAttribute('aria-controls'));
+      trigger.setAttribute('aria-expanded', String(!expanded));
+      if (panel) panel.hidden = expanded;
+    });
+  });
+
+
+  /* ── MOBILE FILTER DRAWER ─────────────────────────────── */
+  var sidebar  = root.querySelector('#FilterSidebar-' + sid);
+  var overlay  = root.querySelector('#FilterOverlay-' + sid);
+  var openBtn  = root.querySelector('#FilterToggle-' + sid);
+  var closeBtn = root.querySelector('#FilterClose-' + sid);
+
+  function openFilters() {
+    if (!sidebar) return;
+    sidebar.classList.add('is-open');
+    if (overlay) { overlay.classList.add('is-visible'); overlay.removeAttribute('aria-hidden'); }
+    if (openBtn) openBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeFilters() {
+    if (!sidebar) return;
+    sidebar.classList.remove('is-open');
+    if (overlay) { overlay.classList.remove('is-visible'); overlay.setAttribute('aria-hidden', 'true'); }
+    if (openBtn) { openBtn.setAttribute('aria-expanded', 'false'); openBtn.focus(); }
+    document.body.style.overflow = '';
+  }
+
+  if (openBtn)  openBtn.addEventListener('click', openFilters);
+  if (closeBtn) closeBtn.addEventListener('click', closeFilters);
+  if (overlay)  overlay.addEventListener('click', closeFilters);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) {
+      closeFilters();
+    }
+  });
+
+
+  /* ── FILTER CHECKBOX AUTO-SUBMIT ──────────────────────── */
+  root.querySelectorAll('[data-filter-auto-submit]').forEach(function (input) {
+    input.addEventListener('change', function () {
+      var form = input.closest('form');
+      if (form) form.submit();
+    });
+  });
+
+
+  /* ── PRICE FILTER DEBOUNCED SUBMIT ────────────────────── */
+  var priceInputs = root.querySelectorAll('[data-price-input]');
+  var priceTimer;
+
+  priceInputs.forEach(function (input) {
+    input.addEventListener('input', function () {
+      clearTimeout(priceTimer);
+      priceTimer = setTimeout(function () {
+        var form = input.closest('form');
+        if (form) form.submit();
+      }, 900);
+    });
+  });
+
+}());
+</script>
+
 
 {% schema %}
 {
   "name": "Collection",
-  "settings": [],
-  "presets": [{ "name": "Default collection" }]
+  "tag": "section",
+  "class": "section-main-collection",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_hero_image",
+      "label": "Show collection image as hero banner",
+      "default": true,
+      "info": "Displays the collection image as a full-width banner with the title overlaid. If no image is set, falls back to the standard header."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show collection description",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filters",
+      "label": "Show filter sidebar",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "options": [
+        { "value": "12", "label": "12" },
+        { "value": "24", "label": "24" },
+        { "value": "48", "label": "48" }
+      ],
+      "default": "24"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection"
+    }
+  ]
 }
 {% endschema %}
