@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- ============================================================
+       SEO & META
+       ============================================================ -->
+
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  <!-- Canonical -->
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <!-- Open Graph -->
+  {%- assign og_title       = page_title | default: shop.name -%}
+  {%- assign og_description = page_description | default: shop.description -%}
+  {%- assign og_url         = canonical_url -%}
+  {%- assign og_type        = 'website' -%}
+  {%- if template.name == 'product' -%}
+    {%- assign og_type = 'product' -%}
+    {%- assign og_image = product.featured_image | image_url: width: 1200 -%}
+  {%- elsif template.name == 'article' -%}
+    {%- assign og_type = 'article' -%}
+    {%- assign og_image = article.image | image_url: width: 1200 -%}
+  {%- else -%}
+    {%- assign og_image = settings.og_image | image_url: width: 1200 -%}
+  {%- endif -%}
+
+  <meta property="og:site_name"   content="{{ shop.name }}">
+  <meta property="og:url"         content="{{ og_url }}">
+  <meta property="og:title"       content="{{ og_title | escape }}">
+  <meta property="og:type"        content="{{ og_type }}">
+  {%- if og_description -%}
+    <meta property="og:description" content="{{ og_description | escape }}">
+  {%- endif -%}
+  {%- if og_image -%}
+    <meta property="og:image" content="https:{{ og_image }}">
+  {%- endif -%}
+
+  <!-- Twitter / X card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="{{ og_title | escape }}">
+  {%- if og_description -%}
+    <meta name="twitter:description" content="{{ og_description | escape }}">
+  {%- endif -%}
+  {%- if og_image -%}
+    <meta name="twitter:image" content="https:{{ og_image }}">
+  {%- endif -%}
+
+  <!-- ============================================================
+       GOOGLE FONTS
+       ============================================================ -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- ============================================================
+       FAVICON
+       ============================================================ -->
+
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
+
+  <!-- ============================================================
+       STYLES
+       ============================================================ -->
+
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+
+  {%- if template.name == 'index' or template.name == 'collection' or template.name == 'product' -%}
+    {{ 'component-card.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
+
+  {%- if template.name == 'product' or template.name == 'cart' -%}
+    {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
+
+  {{ content_for_header }}
+
+  <!-- ============================================================
+       THEME SETTINGS — CSS OVERRIDES
+       Allows merchant to adjust brand tokens via theme editor.
+       ============================================================ -->
+  <style>
+    :root {
+      {%- if settings.color_espresso != blank -%}
+        --color-espresso: {{ settings.color_espresso }};
+      {%- endif -%}
+      {%- if settings.color_amber != blank -%}
+        --color-amber: {{ settings.color_amber }};
+      {%- endif -%}
+      {%- if settings.color_linen != blank -%}
+        --color-linen: {{ settings.color_linen }};
+        --color-bg:    {{ settings.color_linen }};
+      {%- endif -%}
+    }
+  </style>
+
+</head>
+
+<body class="template-{{ template.name | replace: '/', '-' }}{% if customer %} customer-logged-in{% endif %}">
+
+  <!-- Skip to content -->
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- ============================================================
+       ANNOUNCEMENT BAR
+       ============================================================ -->
+  {%- sections 'announcement-bar' -%}
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  {%- section 'header' -%}
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main id="main-content" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  {%- section 'footer' -%}
+
+  <!-- ============================================================
+       CART DRAWER
+       ============================================================ -->
+  {%- render 'cart-drawer' -%}
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+
+  <!-- Cart drawer + interactions -->
+  <script src="{{ 'component-cart-drawer.js' | asset_url }}" defer></script>
+
+  <!-- Core theme — mobile menu, quantity, variant switching -->
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+</body>
+</html>
