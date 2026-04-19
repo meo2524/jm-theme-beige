@@ -1,0 +1,8 @@
+/* STUB — full styles coming with product-card build */
+.card { display: flex; flex-direction: column; gap: var(--space-3); }
+.card__media { aspect-ratio: 3/4; overflow: hidden; background: var(--color-linen-alt); border-radius: var(--radius-base); }
+.card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow); }
+.card:hover .card__media img { transform: scale(1.03); }
+.card__info { display: flex; flex-direction: column; gap: var(--space-2); }
+.card__title { font-family: var(--font-heading); font-size: var(--font-size-md); font-weight: var(--font-weight-normal); }
+.card__price { font-size: var(--font-size-sm); color: var(--color-mahogany); }

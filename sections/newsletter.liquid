@@ -1,0 +1,21 @@
+<!-- STUB — full build coming next session -->
+<section class="section section--sm">
+  <div class="container container--narrow" style="text-align:center;">
+    <h2 class="t-display-sm">{{ section.settings.heading | default: 'Stay informed.' }}</h2>
+    {%- form 'customer' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <input type="email" name="contact[email]" placeholder="your@email.com" class="field__input" style="max-width:320px;margin:1rem auto;display:block;">
+      <button type="submit" class="btn btn--primary">Subscribe</button>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Stay informed." }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

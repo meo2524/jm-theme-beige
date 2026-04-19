@@ -1,0 +1,36 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "stats-strip": {
+      "type": "stats-strip",
+      "settings": {}
+    },
+    "product-feature": {
+      "type": "product-feature",
+      "settings": {}
+    },
+    "product-grid": {
+      "type": "product-grid",
+      "settings": {}
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "stats-strip",
+    "product-feature",
+    "product-grid",
+    "testimonials",
+    "newsletter"
+  ]
+}

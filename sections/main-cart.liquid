@@ -1,0 +1,32 @@
+<!-- STUB — full build coming next session -->
+<section class="section">
+  <div class="container container--narrow">
+    <h1 class="t-display-md">Your cart</h1>
+    {%- if cart.item_count == 0 -%}
+      <p style="margin-top:2rem;">Your cart is empty.</p>
+      <a href="{{ routes.root_url }}" class="btn btn--secondary" style="margin-top:1rem;">Continue shopping</a>
+    {%- else -%}
+      {%- for item in cart.items -%}
+        <div style="display:flex;justify-content:space-between;padding:1rem 0;border-bottom:1px solid rgba(107,63,31,0.15);">
+          <span>{{ item.title }}</span>
+          <span>{{ item.line_price | money }}</span>
+        </div>
+      {%- endfor -%}
+      {%- form 'cart' -%}
+        <div style="display:flex;justify-content:space-between;margin-top:1.5rem;">
+          <strong>Total</strong>
+          <strong>{{ cart.total_price | money }}</strong>
+        </div>
+        <button type="submit" name="checkout" class="btn btn--primary btn--lg" style="width:100%;margin-top:1rem;">Checkout</button>
+      {%- endform -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [],
+  "presets": [{ "name": "Default cart" }]
+}
+{% endschema %}

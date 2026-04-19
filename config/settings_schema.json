@@ -1,0 +1,73 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Mend & Co",
+    "theme_version": "1.0.0",
+    "theme_author": "Mend & Co",
+    "theme_documentation_url": "https://github.com/meo2524/JM-Theme",
+    "theme_support_url": "https://github.com/meo2524/JM-Theme"
+  },
+  {
+    "name": "Brand colours",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_espresso",
+        "label": "Deep espresso",
+        "default": "#2C1A0E",
+        "info": "Logo, headings, primary text, dark backgrounds"
+      },
+      {
+        "type": "color",
+        "id": "color_amber",
+        "label": "Amber clay",
+        "default": "#C8874A",
+        "info": "CTA buttons, highlights, hover states"
+      },
+      {
+        "type": "color",
+        "id": "color_linen",
+        "label": "Linen cream",
+        "default": "#F5ECD9",
+        "info": "Page background, cards, light surfaces"
+      }
+    ]
+  },
+  {
+    "name": "Logo & favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "og_image",
+        "label": "Default social sharing image",
+        "info": "Used when no product or article image is present. 1200 × 630px recommended."
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "32 × 32px PNG recommended."
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram_link",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok_link",
+        "label": "TikTok URL"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook_link",
+        "label": "Facebook URL"
+      }
+    ]
+  }
+]

@@ -1,0 +1,24 @@
+<!-- STUB — full build coming next session -->
+<section class="section">
+  <div class="container">
+    <h1 class="t-display-md">{{ collection.title }}</h1>
+    <div class="grid grid--3" style="margin-top:2rem;">
+      {%- for product in collection.products -%}
+        <div>
+          <a href="{{ product.url }}" class="t-heading">{{ product.title }}</a>
+          <p class="price">{{ product.price | money }}</p>
+        </div>
+      {%- else -%}
+        <p>No products found.</p>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [],
+  "presets": [{ "name": "Default collection" }]
+}
+{% endschema %}

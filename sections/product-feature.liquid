@@ -1,0 +1,16 @@
+<!-- STUB — full build coming next session -->
+<section class="section">
+  <div class="container">
+    <h2 class="t-display-md">{{ section.settings.heading | default: 'Why your filter matters more than your serum.' }}</h2>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product feature",
+  "settings": [
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Why your filter matters more than your serum." }
+  ],
+  "presets": [{ "name": "Product feature" }]
+}
+{% endschema %}

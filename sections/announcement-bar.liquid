@@ -1,0 +1,64 @@
+{%- if section.settings.show and section.settings.text != blank -%}
+<div class="announcement-bar" role="region" aria-label="Announcement">
+  <div class="announcement-bar__inner container">
+    <p class="announcement-bar__text t-label">
+      {%- if section.settings.link != blank -%}
+        <a href="{{ section.settings.link }}" class="announcement-bar__link">{{ section.settings.text }}</a>
+      {%- else -%}
+        {{ section.settings.text }}
+      {%- endif -%}
+    </p>
+  </div>
+</div>
+
+<style>
+  .announcement-bar {
+    background-color: var(--color-espresso);
+    color: var(--color-gold);
+    padding-block: var(--space-2);
+    text-align: center;
+  }
+
+  .announcement-bar__text {
+    font-size: 11px;
+    letter-spacing: var(--letter-spacing-label);
+    opacity: 0.9;
+    max-width: none;
+  }
+
+  .announcement-bar__link {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .announcement-bar__link:hover {
+    color: var(--color-amber);
+  }
+</style>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement text",
+      "default": "Free shipping on orders over $75 — filtered water, clear skin."
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link (optional)"
+    }
+  ]
+}
+{% endschema %}

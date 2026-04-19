@@ -1,0 +1,27 @@
+<!-- STUB — full build coming next session -->
+<section class="section">
+  <div class="container">
+    <h2 class="t-display-md">{{ section.settings.heading | default: 'Shop' }}</h2>
+    {%- assign col = section.settings.collection -%}
+    {%- if col != blank -%}
+      <div class="grid grid--3" style="margin-top:2rem;">
+        {%- for product in col.products limit: 3 -%}
+          <div>
+            <a href="{{ product.url }}">{{ product.title }}</a>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product grid",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
+    { "type": "collection", "id": "collection", "label": "Collection" }
+  ],
+  "presets": [{ "name": "Product grid" }]
+}
+{% endschema %}

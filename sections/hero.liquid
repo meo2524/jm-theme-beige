@@ -1,0 +1,18 @@
+<!-- STUB — full build coming next session -->
+<section class="section section--dark" style="min-height:60vh;display:flex;align-items:center;">
+  <div class="container">
+    <p class="t-label" style="color:var(--color-amber);margin-bottom:1.5rem;">{{ section.settings.eyebrow | default: 'The routine before your routine.' }}</p>
+    <h1 class="t-display-xl t-on-dark">{{ section.settings.heading | default: 'Your shower is undoing everything.' }}</h1>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "The routine before your routine." },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Your shower is undoing everything." }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

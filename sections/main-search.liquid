@@ -1,0 +1,28 @@
+<!-- STUB — full build coming next session -->
+<section class="section">
+  <div class="container container--narrow">
+    <h1 class="t-display-md">Search</h1>
+    {%- form 'get', routes.search_url, style: 'margin-top:2rem;' -%}
+      <div style="display:flex;gap:0.5rem;">
+        <input type="text" name="q" value="{{ search.terms | escape }}" placeholder="Search…" class="field__input" style="flex:1;">
+        <button type="submit" class="btn btn--primary">Search</button>
+      </div>
+    {%- endform -%}
+    {%- if search.performed -%}
+      <p style="margin-top:1.5rem;">{{ search.results_count }} result{{ search.results_count | pluralize: '', 's' }} for "{{ search.terms }}"</p>
+      {%- for result in search.results -%}
+        <div style="margin-top:1rem;">
+          <a href="{{ result.url }}" class="t-heading">{{ result.title }}</a>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search",
+  "settings": [],
+  "presets": [{ "name": "Default search" }]
+}
+{% endschema %}

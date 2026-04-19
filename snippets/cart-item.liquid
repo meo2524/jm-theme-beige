@@ -1,0 +1,13 @@
+<!-- STUB — full build coming next session -->
+<div class="cart-item" data-cart-item="{{ item.key }}">
+  {%- if item.image -%}
+    <img src="{{ item.image | image_url: width: 80 }}" width="80" height="80" alt="{{ item.image.alt | escape }}" loading="lazy">
+  {%- endif -%}
+  <div class="cart-item__details">
+    <p class="cart-item__title">{{ item.product.title }}</p>
+    {%- unless item.product.has_only_default_variant -%}
+      <p class="t-body-sm" style="opacity:0.6;">{{ item.variant.title }}</p>
+    {%- endunless -%}
+    <p class="price">{{ item.final_line_price | money }}</p>
+  </div>
+</div>

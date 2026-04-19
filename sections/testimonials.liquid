@@ -1,0 +1,26 @@
+<!-- STUB — full build coming next session -->
+<section class="section section--dark">
+  <div class="container" style="text-align:center;">
+    <h2 class="t-display-md t-on-dark">{{ section.settings.heading | default: 'What people are saying.' }}</h2>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What people are saying." }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote" },
+        { "type": "text", "id": "author", "label": "Author" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Testimonials" }]
+}
+{% endschema %}

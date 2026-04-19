@@ -1,0 +1,20 @@
+<!-- STUB — full build coming next session -->
+<section class="section">
+  <div class="container">
+    <h1 class="t-display-md">{{ product.title }}</h1>
+    <p class="price price--large">{{ product.price | money }}</p>
+    <div class="product__description">{{ product.description }}</div>
+    {%- form 'product', product -%}
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <button type="submit" class="btn btn--primary btn--lg" style="margin-top:1.5rem;">Add to cart</button>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [],
+  "presets": [{ "name": "Default product" }]
+}
+{% endschema %}
