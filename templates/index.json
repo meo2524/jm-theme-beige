@@ -46,7 +46,6 @@
     },
     "product-grid": {
       "type": "product-grid",
-      "disabled": true,
       "settings": {
         "eyebrow": "Shop",
         "heading": "Start here.",
