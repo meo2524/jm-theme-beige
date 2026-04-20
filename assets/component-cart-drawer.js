@@ -349,6 +349,8 @@
       this.counts.forEach(function (el) {
         el.textContent = count > 0 ? count : '';
       });
+      /* theme.js handles .is-hidden toggle + bump animation */
+      document.dispatchEvent(new CustomEvent('cart:updated', { detail: { count: count } }));
     },
 
     _updateTotals: function (cents) {

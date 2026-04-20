@@ -7,6 +7,7 @@
     "theme_documentation_url": "https://github.com/meo2524/JM-Theme",
     "theme_support_url": "https://github.com/meo2524/JM-Theme"
   },
+
   {
     "name": "Brand colours",
     "settings": [
@@ -15,14 +16,21 @@
         "id": "color_espresso",
         "label": "Deep espresso",
         "default": "#2C1A0E",
-        "info": "Logo, headings, primary text, dark backgrounds"
+        "info": "Primary text, headings, dark backgrounds"
+      },
+      {
+        "type": "color",
+        "id": "color_mahogany",
+        "label": "Warm mahogany",
+        "default": "#6B3F1F",
+        "info": "Secondary text, subheadings"
       },
       {
         "type": "color",
         "id": "color_amber",
         "label": "Amber clay",
         "default": "#C8874A",
-        "info": "CTA buttons, highlights, hover states"
+        "info": "CTA buttons, structural dividers. Use sparingly."
       },
       {
         "type": "color",
@@ -30,43 +38,235 @@
         "label": "Linen cream",
         "default": "#F5ECD9",
         "info": "Page background, cards, light surfaces"
+      },
+      {
+        "type": "color",
+        "id": "color_sage",
+        "label": "Muted sage",
+        "default": "#4A7B72",
+        "info": "Badges, tags, secondary accents"
       }
     ]
   },
+
   {
-    "name": "Logo & favicon",
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading font",
+        "default": "playfair_display_n4",
+        "info": "Used for display headings and section titles"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body / UI font",
+        "default": "helvetica_neue_n4",
+        "info": "Used for labels, body text, buttons, and form fields"
+      },
+      {
+        "type": "range",
+        "id": "font_size_base",
+        "label": "Base font size (px)",
+        "min": 14,
+        "max": 18,
+        "step": 1,
+        "default": 16,
+        "info": "Root font size. All rem values scale from this."
+      }
+    ]
+  },
+
+  {
+    "name": "Logo & brand assets",
     "settings": [
       {
         "type": "image_picker",
-        "id": "og_image",
-        "label": "Default social sharing image",
-        "info": "Used when no product or article image is present. 1200 × 630px recommended."
+        "id": "logo",
+        "label": "Logo (light bg)",
+        "info": "Shown on linen/white backgrounds. SVG or PNG, max 300px wide."
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_inverted",
+        "label": "Logo (dark bg)",
+        "info": "Shown on espresso dark sections. Use a light-coloured version."
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo max width (px)",
+        "min": 80,
+        "max": 280,
+        "step": 4,
+        "default": 140
       },
       {
         "type": "image_picker",
         "id": "favicon",
         "label": "Favicon",
         "info": "32 × 32px PNG recommended."
+      },
+      {
+        "type": "image_picker",
+        "id": "og_image",
+        "label": "Default social sharing image",
+        "info": "Used when no product/article image is available. 1200 × 630px."
       }
     ]
   },
+
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "select",
+        "id": "header_sticky",
+        "label": "Header behaviour",
+        "options": [
+          { "value": "static",   "label": "Static — scrolls with page" },
+          { "value": "sticky",   "label": "Sticky — always visible" },
+          { "value": "on-scroll","label": "Reveal on scroll up" }
+        ],
+        "default": "sticky"
+      },
+      {
+        "type": "checkbox",
+        "id": "header_transparent_home",
+        "label": "Transparent on homepage hero",
+        "default": true,
+        "info": "Header starts transparent over the hero and becomes opaque on scroll."
+      }
+    ]
+  },
+
+  {
+    "name": "Announcement bar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_announcement",
+        "label": "Show announcement bar",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "announcement_text",
+        "label": "Announcement text",
+        "default": "Free shipping on orders over $75"
+      },
+      {
+        "type": "url",
+        "id": "announcement_link",
+        "label": "Link (optional)"
+      }
+    ]
+  },
+
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          { "value": "drawer", "label": "Slide-in drawer" },
+          { "value": "page",   "label": "Cart page" }
+        ],
+        "default": "drawer",
+        "info": "Drawer requires component-cart-drawer.js to be loaded."
+      },
+      {
+        "type": "text",
+        "id": "cart_free_shipping_threshold",
+        "label": "Free shipping threshold",
+        "placeholder": "e.g. 75",
+        "info": "Enter the dollar amount (no $ sign). Leave blank to hide the progress bar."
+      }
+    ]
+  },
+
+  {
+    "name": "Product cards",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "card_show_vendor",
+        "label": "Show vendor",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_rating",
+        "label": "Show star rating",
+        "default": true,
+        "info": "Requires product metafield reviews.rating (type: rating)."
+      },
+      {
+        "type": "select",
+        "id": "card_image_ratio",
+        "label": "Image aspect ratio",
+        "options": [
+          { "value": "square",   "label": "Square (1:1)" },
+          { "value": "portrait", "label": "Portrait (4:5)" },
+          { "value": "natural",  "label": "Natural (image proportions)" }
+        ],
+        "default": "portrait"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_quick_add",
+        "label": "Show quick-add button on hover",
+        "default": true
+      }
+    ]
+  },
+
   {
     "name": "Social media",
     "settings": [
       {
         "type": "url",
         "id": "social_instagram_link",
-        "label": "Instagram URL"
+        "label": "Instagram"
       },
       {
         "type": "url",
         "id": "social_tiktok_link",
-        "label": "TikTok URL"
+        "label": "TikTok"
       },
       {
         "type": "url",
         "id": "social_facebook_link",
-        "label": "Facebook URL"
+        "label": "Facebook"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube_link",
+        "label": "YouTube"
+      }
+    ]
+  },
+
+  {
+    "name": "SEO & analytics",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "seo_meta_description",
+        "label": "Default meta description",
+        "info": "Fallback when no page-specific description is set. Under 155 characters.",
+        "default": "Mend & Co — the shower filter that protects your skin and hair. The routine before your routine."
+      },
+      {
+        "type": "text",
+        "id": "google_analytics_id",
+        "label": "Google Analytics ID",
+        "placeholder": "G-XXXXXXXXXX",
+        "info": "Leave blank if using Shopify's built-in Google channel instead."
       }
     ]
   }
