@@ -1,13 +1,94 @@
-<!-- STUB — full build coming next session -->
-<div class="cart-item" data-cart-item="{{ item.key }}">
-  {%- if item.image -%}
-    <img src="{{ item.image | image_url: width: 80 }}" width="80" height="80" alt="{{ item.image.alt | escape }}" loading="lazy">
-  {%- endif -%}
-  <div class="cart-item__details">
-    <p class="cart-item__title">{{ item.product.title }}</p>
-    {%- unless item.product.has_only_default_variant -%}
-      <p class="t-body-sm" style="opacity:0.6;">{{ item.variant.title }}</p>
-    {%- endunless -%}
-    <p class="price">{{ item.final_line_price | money }}</p>
+{% comment %}
+  cart-item.liquid
+  Mend & Co — shared cart item used in both the cart page and cart drawer.
+  Parameters:
+    item    {object}  required  Shopify line item object
+    context {string}  optional  'page' (default) | 'drawer'
+{% endcomment %}
+
+{%- assign ctx = context | default: 'page' -%}
+{%- assign img_width = 120 -%}
+{%- if ctx == 'drawer' -%}
+  {%- assign img_width = 80 -%}
+{%- endif -%}
+
+<div
+  class="cart-item cart-item--{{ ctx }}"
+  data-cart-item="{{ item.key }}"
+  data-variant-id="{{ item.variant_id }}"
+>
+  {%- comment -%} Image {%- endcomment -%}
+  <a href="{{ item.url }}" class="cart-item__img-link" tabindex="-1" aria-hidden="true">
+    <div class="cart-item__img-wrap">
+      {%- if item.image -%}
+        <img
+          src="{{ item.image | image_url: width: img_width, height: img_width }}"
+          alt="{{ item.image.alt | default: item.title | escape }}"
+          width="{{ img_width }}"
+          height="{{ img_width }}"
+          loading="lazy"
+          class="cart-item__img"
+        >
+      {%- else -%}
+        <div class="cart-item__img-placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>
+      {%- endif -%}
+    </div>
+  </a>
+
+  {%- comment -%} Info {%- endcomment -%}
+  <div class="cart-item__body">
+
+    <div class="cart-item__meta">
+      <a href="{{ item.url }}" class="cart-item__title-link">
+        <span class="cart-item__title">{{ item.product.title }}</span>
+      </a>
+      {%- unless item.product.has_only_default_variant -%}
+        <p class="cart-item__variant">{{ item.variant.title }}</p>
+      {%- endunless -%}
+      {%- if item.selling_plan_allocation -%}
+        <p class="cart-item__sub">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="cart-item__controls">
+      <div class="cart-item__qty qty-stepper" role="group" aria-label="Quantity for {{ item.title | escape }}">
+        <button
+          class="qty-btn"
+          type="button"
+          aria-label="Decrease quantity"
+          data-qty-change="-1"
+        >−</button>
+        <input
+          class="qty-input"
+          type="number"
+          name="updates[]"
+          value="{{ item.quantity }}"
+          min="0"
+          aria-label="Quantity"
+          data-item-qty
+        >
+        <button
+          class="qty-btn"
+          type="button"
+          aria-label="Increase quantity"
+          data-qty-change="1"
+        >+</button>
+      </div>
+
+      <div class="cart-item__price-col">
+        <span class="cart-item__price" data-item-price>{{ item.final_line_price | money }}</span>
+        {%- if item.original_line_price != item.final_line_price -%}
+          <span class="cart-item__price-compare">{{ item.original_line_price | money }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <button
+      class="cart-item__remove"
+      type="button"
+      aria-label="Remove {{ item.title | escape }} from cart"
+      data-item-remove="{{ item.key }}"
+    >Remove</button>
+
   </div>
 </div>
