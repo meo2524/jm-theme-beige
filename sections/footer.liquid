@@ -1,8 +1,8 @@
-{% comment %}
-  footer.liquid
-  Mend & Co — site footer.
-  Dark espresso bg, 3-col grid, newsletter inline form, social icons, payment badges.
-{% endcomment %}
+<!-- ============================================================
+     footer.liquid
+     Mend & Co - site footer.
+     Dark espresso bg, 3-col grid, newsletter inline form, social icons, payment badges.
+     ============================================================ -->
 
 {%- assign footer_menu  = section.settings.footer_menu  | default: 'footer' -%}
 {%- assign legal_menu   = section.settings.legal_menu   | default: 'footer-legal' -%}
@@ -17,10 +17,10 @@
     <div class="container">
       <div class="footer__grid">
 
-        {%- comment -%} ── COL 1 : BRAND ──────────────────── {%- endcomment -%}
+        <!-- COL 1: BRAND -->
         <div class="footer__col footer__col--brand">
 
-          <a href="{{ routes.root_url }}" class="footer__logo-link" aria-label="{{ shop.name }} — home">
+          <a href="{{ routes.root_url }}" class="footer__logo-link" aria-label="{{ shop.name }} - home">
             {%- if section.settings.logo != blank -%}
               <img
                 src="{{ section.settings.logo | image_url: width: 160 }}"
@@ -81,7 +81,7 @@
 
         </div>
 
-        {%- comment -%} ── COL 2 : NAVIGATION ─────────────── {%- endcomment -%}
+        <!-- COL 2: NAVIGATION -->
         <div class="footer__col footer__col--nav">
           <p class="footer__col-heading">Explore</p>
           <ul class="footer__nav-list" role="list">
@@ -93,7 +93,7 @@
           </ul>
         </div>
 
-        {%- comment -%} ── COL 3 : NEWSLETTER ─────────────── {%- endcomment -%}
+        <!-- COL 3: NEWSLETTER -->
         <div class="footer__col footer__col--newsletter">
           <p class="footer__col-heading">{{ section.settings.newsletter_heading | default: 'Stay in the loop' }}</p>
           <p class="footer__nl-subtext">{{ section.settings.newsletter_subtext | default: 'Water quality guides, launch updates, and no noise.' }}</p>
@@ -139,7 +139,7 @@
     </div>
   </div>
 
-  {%- comment -%} ── BOTTOM BAR ─────────────────────────── {%- endcomment -%}
+  <!-- BOTTOM BAR -->
   <div class="footer__bottom">
     <div class="container">
       <div class="footer__bottom-inner">
