@@ -14,36 +14,36 @@
       {
         "type": "color",
         "id": "color_espresso",
-        "label": "Deep espresso",
-        "default": "#2C1A0E",
+        "label": "Charcoal warm",
+        "default": "#1C1612",
         "info": "Primary text, headings, dark backgrounds"
       },
       {
         "type": "color",
         "id": "color_mahogany",
-        "label": "Warm mahogany",
-        "default": "#6B3F1F",
+        "label": "Warm taupe",
+        "default": "#7A6459",
         "info": "Secondary text, subheadings"
       },
       {
         "type": "color",
         "id": "color_amber",
-        "label": "Amber clay",
-        "default": "#C8874A",
+        "label": "Terracotta rose",
+        "default": "#C4937A",
         "info": "CTA buttons, structural dividers. Use sparingly."
       },
       {
         "type": "color",
         "id": "color_linen",
-        "label": "Linen cream",
-        "default": "#F5ECD9",
+        "label": "Parchment",
+        "default": "#F1EBE7",
         "info": "Page background, cards, light surfaces"
       },
       {
         "type": "color",
         "id": "color_sage",
         "label": "Muted sage",
-        "default": "#4A7B72",
+        "default": "#8A9E96",
         "info": "Badges, tags, secondary accents"
       }
     ]

@@ -9,9 +9,9 @@
  */
 {
   "current": {
-    "color_espresso": "#2C1A0E",
-    "color_amber": "#C8874A",
-    "color_linen": "#F5ECD9",
+    "color_espresso": "#1C1612",
+    "color_amber": "#C4937A",
+    "color_linen": "#F1EBE7",
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
