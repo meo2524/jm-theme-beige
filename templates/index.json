@@ -55,18 +55,6 @@
     },
     "testimonials": {
       "type": "testimonials",
-      "blocks": {
-        "testimonial_aeyxCc": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "test",
-            "author": "test"
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_aeyxCc"
-      ],
       "settings": {
         "heading": "What people are saying."
       }
