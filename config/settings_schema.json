@@ -63,7 +63,7 @@
         "type": "font_picker",
         "id": "font_body",
         "label": "Body / UI font",
-        "default": "helvetica_neue_n4",
+        "default": "assistant_n4",
         "info": "Used for labels, body text, buttons, and form fields"
       },
       {
