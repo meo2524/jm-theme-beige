@@ -9,29 +9,29 @@
 
 :root {
 
-  /* Colour palette */
-  --color-espresso:       #2C1A0E;
-  --color-mahogany:       #6B3F1F;
-  --color-amber:          #C8874A;
-  --color-amber-hover:    #B57840;
-  --color-gold:           #E8C99A;
-  --color-linen:          #F5ECD9;
+  /* Colour palette — Garoa-inspired earthy minimalism */
+  --color-espresso:       #2A1F14;
+  --color-mahogany:       #6B5240;
+  --color-amber:          #ECD06F;
+  --color-amber-hover:    #D4B85A;
+  --color-gold:           #987654;
+  --color-linen:          #FFFFFF;
   --color-linen-alt:      #FAF6EE;
-  --color-sage:           #4A7B72;
-  --color-sage-deep:      #1C2B2A;
+  --color-sage:           #987654;
+  --color-sage-deep:      #6B5240;
 
   /* Semantic tokens */
   --color-bg:             var(--color-linen);
   --color-bg-alt:         var(--color-linen-alt);
-  --color-bg-dark:        var(--color-espresso);
+  --color-bg-dark:        var(--color-mahogany);
   --color-text:           var(--color-espresso);
-  --color-text-muted:     var(--color-mahogany);
-  --color-text-on-dark:   var(--color-gold);
-  --color-border:         var(--color-mahogany);
-  --color-rule:           var(--color-amber);
+  --color-text-muted:     var(--color-gold);
+  --color-text-on-dark:   #FFFFFF;
+  --color-border:         var(--color-gold);
+  --color-rule:           var(--color-gold);
   --color-cta:            var(--color-amber);
   --color-cta-hover:      var(--color-amber-hover);
-  --color-badge:          var(--color-sage);
+  --color-badge:          var(--color-gold);
 
   /* Typography */
   --font-heading:         'Playfair Display', Georgia, serif;
