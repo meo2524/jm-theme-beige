@@ -1,28 +1,84 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero",
-      "settings": {}
+      "settings": {
+        "eyebrow": "The routine before your routine.",
+        "heading": "Your shower is",
+        "heading_em": "undoing",
+        "heading_2": "everything.",
+        "subtext": "Chlorine, heavy metals, sediment — every product you apply after is working against a contaminated baseline.",
+        "cta_label": "Shop the filter",
+        "cta_url": "",
+        "show_scroll_cue": true
+      }
     },
     "stats-strip": {
       "type": "stats-strip",
-      "settings": {}
+      "settings": {
+        "stat_1_value": "99%",
+        "stat_1_label": "Chlorine removed",
+        "stat_2_value": "15+",
+        "stat_2_label": "Contaminants filtered",
+        "stat_3_value": "6 months",
+        "stat_3_label": "Filter lifespan"
+      }
     },
     "product-feature": {
       "type": "product-feature",
-      "settings": {}
+      "settings": {
+        "eyebrow": "The science",
+        "heading": "Most routines start too late.",
+        "body": "Chlorine strips skin of its natural oils. Heavy metals accumulate in hair follicles over time. Every serum and shampoo you apply after an unfiltered shower is working against a contaminated baseline.",
+        "cta_label": "Learn more",
+        "cta_url": "",
+        "reverse": false
+      }
     },
     "product-grid": {
       "type": "product-grid",
-      "settings": {}
+      "settings": {
+        "eyebrow": "Shop",
+        "heading": "Start here.",
+        "collection": "",
+        "product_limit": 3
+      }
     },
     "testimonials": {
       "type": "testimonials",
-      "settings": {}
+      "blocks": {
+        "testimonial_aeyxCc": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "test",
+            "author": "test"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_aeyxCc"
+      ],
+      "settings": {
+        "heading": "What people are saying."
+      }
     },
     "newsletter": {
       "type": "newsletter",
-      "settings": {}
+      "settings": {
+        "heading": "Skin starts in the shower.",
+        "subtext": "Join the list for the science, the rituals, and the offers worth opening.",
+        "btn_label": "Subscribe",
+        "success_message": "You’re in. We’ll be in touch."
+      }
     }
   },
   "order": [
