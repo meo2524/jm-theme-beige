@@ -8,6 +8,7 @@
 
   {%- comment -%} ── HERO IMAGE (optional) ──────────────── {%- endcomment -%}
   {%- if section.settings.hero_image != blank -%}
+    {%- assign hero_alt = section.settings.hero_image.alt | default: page.title | escape -%}
     <div class="pg__hero">
       {{
         section.settings.hero_image
@@ -16,7 +17,7 @@
           loading: 'eager',
           fetchpriority: 'high',
           class: 'pg__hero-img',
-          alt: section.settings.hero_image.alt | default: page.title | escape,
+          alt: hero_alt,
           widths: '480, 768, 1024, 1440',
           sizes: '100vw'
       }}
