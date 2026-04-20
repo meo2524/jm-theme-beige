@@ -46,7 +46,6 @@
     },
     "product-grid": {
       "type": "product-grid",
-      "disabled": true,
       "settings": {
         "eyebrow": "Shop",
         "heading": "Start here.",
@@ -56,7 +55,6 @@
     },
     "testimonials": {
       "type": "testimonials",
-      "disabled": true,
       "custom_css": [],
       "settings": {
         "eyebrow": "Real results",
