@@ -1,0 +1,93 @@
+{%- if settings.dbtfy_delivery_time -%}
+  {%- render 'widget-settings', key: 'dbtfy-delivery-time', settings: block.settings -%}
+  <link rel="stylesheet" href="{{ 'dbtfy-delivery-time.css' | asset_url }}" media="print" onload="this.media='all'">
+  <div class="cart-block" {{ block.shopify_attributes }}>
+    <dbtfy-cart-delivery-time>
+      <div class="dbtfy-delivery-time" {{ block.shopify_attributes }}>
+        <details id="Details-{{block.id}}">
+          <summary>
+            <div class="dbtfy-gap-5 flex flex-row">
+              <span class="delivery-time-label-icon">
+                {%- render 'material-icon', icon: block.settings.dbtfy_delivery_time_label_icon -%}
+              </span>
+              <span class="summary__title">
+                <span>{{ block.settings.dbtfy_delivery_time_heading }}</span>
+                <small class="dbtfy-cart-delivery-time-show"></small>
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </span>
+            </div>
+          </summary>
+          <div class="dbtfy-cart-delivery-time-block">
+            <div class="dbtfy-cart-delivery-time"></div>
+          </div>
+        </details>
+      </div>
+    </dbtfy-cart-delivery-time>
+  </div>
+  <script src="{{ 'dbtfy-delivery-time.js' | asset_url }}" defer></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.dbtfy-delivery-time.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-delivery-time.settings.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-delivery-time.settings.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_delivery_time_label_icon",
+      "label": "t:general.settings.icon",
+      "default": "local_offer",
+      "info": "t:sections.all.icon.info"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "dbtfy_delivery_time_heading",
+      "label": "t:general.settings.heading",
+      "default": "t:blocks.dbtfy-delivery-time.name"
+    },
+    {
+      "type": "number",
+      "id": "dbtfy_delivery_time_min",
+      "label": "t:blocks.dbtfy-delivery-time.settings.min_time.label",
+      "default": 8
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-delivery-time.settings.time_heading.info"
+    },
+    {
+      "type": "number",
+      "id": "dbtfy_delivery_time_max",
+      "label": "t:blocks.dbtfy-delivery-time.settings.max_time.label",
+      "default": 20
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-delivery-time.settings.time_heading.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "dbtfy_delivery_time_required_checkout",
+      "label": "t:blocks.dbtfy-delivery-date.settings.required_checkout.label"
+    }
+  ]
+}
+{%- endschema -%}

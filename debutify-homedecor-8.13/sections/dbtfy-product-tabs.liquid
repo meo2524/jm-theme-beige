@@ -1,0 +1,48 @@
+{%- render 'widget-blocker',
+  enabled: settings.dbtfy_product_tabs,
+  section: section,
+  name: 'Product tabs',
+  type: '⚡ Paid Sections'
+-%}
+{%- if request.design_mode or settings.dbtfy_product_tabs -%}
+  <div class="dbtfy-product-tab">
+    <div class="page-width">
+      <dbtfy-product-tab-horizontal>
+        <div class="dbtfy-product-tabs shown-as-separate dbtfy-product-tab--horizontal hidden">
+          <div class="dbtfy-product-tabs--title"></div>
+          <div class="dbtfy-product-tabs--description"></div>
+          <div class="d-grid"></div>
+        </div>
+      </dbtfy-product-tab-horizontal>
+    </div>
+  </div>
+{% endif %}
+{% schema %}
+{
+  "name": "t:blocks.dbtfy-product-tabs.name",
+  "disabled_on": { "groups": ["aside"] },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-product-tabs.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-product-tabs.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.dbtfy-product-tabs.name"
+    }
+  ]
+}
+{% endschema %}

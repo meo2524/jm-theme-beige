@@ -1,0 +1,22 @@
+{%- liquid
+  unless section.settings.product == blank
+    assign product = all_products[section.settings.product]
+  endunless
+-%}
+{%- capture products_data -%}
+    <script type="application/json" data-quantity-break-product>
+      {{- product | json -}}
+    </script>
+    <script type="application/json" data-quantity-break-collection>
+      {{- product.collections | json -}}
+    </script>
+{%- endcapture -%}
+
+<dbtfy-product-quantity-break
+  data-current-variant="{{ product.selected_or_first_available_variant.id }}"
+  data-current-variant-price="{{ product.selected_or_first_available_variant.price }}"
+  data-form-data
+>
+  {{ products_data }}
+</dbtfy-product-quantity-break>
+<script src="{{ 'dbtfy-product-quantity-break.js' | asset_url }}" defer="defer"></script>

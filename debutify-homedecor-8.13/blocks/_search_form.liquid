@@ -1,0 +1,36 @@
+{% if block.settings.search_display_type == 'minimal' %}
+  {% render 'dbtfy-search-bar-minimal' %}
+{% elsif block.settings.search_display_type == 'standard' %}
+  <div class="dbtfy-search-bar-standard">
+    {% render 'dbtfy-search-bar-standard' %}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-footer.settings.search_form",
+  "settings": [
+    {
+      "type": "select",
+      "id": "search_display_type",
+      "label": "t:blocks.dbtfy-product-tabs.settings.display_type.label",
+      "options": [
+        {
+          "value": "standard",
+          "label": "t:general.settings.type.option__1"
+        },
+        {
+          "value": "minimal",
+          "label": "t:sections.dbtfy-footer.blocks.search.settings.search_display_type.options__2.label"
+        }
+      ],
+      "default": "minimal"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-footer.settings.search_form"
+    }
+  ]
+}
+{% endschema %}

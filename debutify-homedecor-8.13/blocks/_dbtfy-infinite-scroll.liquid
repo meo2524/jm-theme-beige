@@ -1,0 +1,104 @@
+{%- if settings.dbtfy_infinite_scroll -%}
+  <link rel="stylesheet" href="{{ 'dbtfy-infinite-scroll.css' | asset_url }}" media="print" onload="this.media='all'">
+  {%- render 'widget-settings', key: 'infinite-scroll', settings: block.settings -%}
+  <script src="{{ 'dbtfy-infinite-scroll.js' | asset_url }}" defer></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:settings_schema.dbfty_infinite_scroll.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:settings_schema.dbfty_infinite_scroll.help_info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:settings_schema.dbfty_infinite_scroll.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "infinite_scroll_type",
+      "label": "t:settings_schema.dbfty_infinite_scroll.settings.type_select.label",
+      "default": "click",
+      "options": [
+        {
+          "value": "click",
+          "label": "t:settings_schema.dbfty_infinite_scroll.settings.type_select.options__1.label"
+        },
+        {
+          "value": "scroll",
+          "label": "t:settings_schema.dbfty_infinite_scroll.settings.type_select.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "inline_richtext",
+      "id": "infinite_scroll_button",
+      "label": "t:settings_schema.dbfty_infinite_scroll.settings.button.label",
+      "default": "t:settings_schema.dbfty_infinite_scroll.settings.button.default"
+    },
+    {
+      "type": "select",
+      "id": "banner_button_style",
+      "label": "t:blocks.dbtfy-product-sharing.settings.display_style.options__2",
+      "options": [
+        {
+          "value": "link underlined-link button--link",
+          "label": "t:sections.all.button.option_1_label"
+        },
+        {
+          "value": "button button--tertiary",
+          "label": "t:general.settings.style.default"
+        },
+        {
+          "value": "button button--primary",
+          "label": "t:sections.all.button.options__3.label"
+        },
+        {
+          "value": "button button--secondary",
+          "label": "t:sections.all.button.options__4.label"
+        }
+      ],
+      "default": "button button--secondary"
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "default": "inherit",
+      "label": "t:general.settings.size.label",
+      "options": [
+        { "value": "inherit", "label": "t:general.settings.size.option__1" },
+        {
+          "value": "button--small",
+          "label": "t:general.settings.small"
+        },
+        { "value": "button--medium", "label": "t:sections.all.animation.image_behavior.parallax_speed.medium" },
+        { "value": "button--regular", "label": "t:general.settings.size.option__10" }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "infinite_scroll_loading_image",
+      "label": "t:settings_schema.dbfty_infinite_scroll.settings.images_scroll.label",
+      "info": "t:settings_schema.dbfty_infinite_scroll.settings.images_scroll.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:settings_schema.dbfty_infinite_scroll.name"
+    }
+  ]
+}
+{%- endschema -%}

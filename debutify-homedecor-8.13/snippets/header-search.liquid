@@ -1,0 +1,41 @@
+{% comment %}
+  Renders a header search modal. Should be used with 'header.liquid'
+
+  Accepts:
+  - input_id: {String} Id for the search input element (required)
+
+  Usage:
+  {% render 'header-search', input_id: 'My-Id'%}
+{% endcomment %}
+
+<details-modal class="header__search">
+  <details>
+    <summary
+      class="header__icon header__icon--search header__icon--summary focus-inset modal__toggle {% if section.settings.show_search_text_icon == 'text' %} header-text-width {% endif %}"
+      aria-haspopup="dialog"
+      aria-label="{{ 'general.search.search' | t }}"
+    >
+      <span>
+        <span>
+          {% if section.settings.show_search_text_icon == 'text' %}
+            {{ 'general.search.search' | t }}
+          {% elsif section.settings.show_search_text_icon == 'icon' %}
+            {% render 'material-icon', icon: 'search' %}
+          {% endif %}
+        </span>
+        <span class="svg-icon header-text-width header__icon-close">
+          {% render 'material-icon', icon: 'close' %}
+        </span>
+      </span>
+    </summary>
+    <div
+      class="search-modal modal__content gradient"
+      role="dialog"
+      aria-modal="true"
+      aria-label="{{ 'general.search.search' | t }}"
+    >
+      <div class="modal-overlay"></div>
+      {% render 'dbtfy-search-bar-standard' %}
+    </div>
+  </details>
+</details-modal>

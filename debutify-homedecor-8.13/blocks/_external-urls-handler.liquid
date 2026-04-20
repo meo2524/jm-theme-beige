@@ -1,0 +1,65 @@
+{%- if request.design_mode -%}
+  {%- render 'widget-blocker-warning',
+    enabled: settings.dbtfy_external_urls_handler,
+    type: 'widget',
+    as: 'block',
+    name: 'External URLs Handler',
+    id: block
+  -%}
+{% endif %}
+{%- if settings.dbtfy_external_urls_handler -%}
+  <script>
+    Debutify.widgets['external-urls-handler'] = {
+      auto_scan: {{ block.settings.auto_scan }},
+      external_urls: "{{ block.settings.external_urls }}"
+    };
+  </script>
+  <script src="{{ 'dbtfy-external-urls-handler.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:blocks.dbtfy_external_urls_handler.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy_external_urls_handler.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy_external_urls_handler.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.enterprise_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_scan",
+      "label": "t:blocks.dbtfy_external_urls_handler.auto_scan_label",
+      "default": true,
+      "info": "t:blocks.dbtfy_external_urls_handler.auto_scan_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.or",
+      "info": "t:blocks.dbtfy_external_urls_handler.auto_scan_optional_info"
+    },
+    {
+      "type": "textarea",
+      "id": "external_urls",
+      "label": "t:blocks.dbtfy_external_urls_handler.external_urls.label",
+      "default": "debutify.com, google.com, facebook.com, x.com, linkedin.com, twitter.com",
+      "info": "t:blocks.dbtfy_external_urls_handler.external_urls.info"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,95 @@
+{%- capture item_data -%}
+  <div class="dbtfy-logo-list__inner">
+    {%- liquid
+      assign block_link = 'javascript:void(0);'
+      if block.settings.link
+        assign block_link = block.settings.link
+      endif
+    -%}
+    {%- if block.settings.image != blank -%}
+      <a
+        href="{{ block_link }}"
+        {% if block.settings.enable_link_new_tab %}
+          target="_blank"
+        {% endif %}
+        class="dbtfy-logo-list__media global-media-settings background-transparent {% if block.settings.image == blank %}placeholder{% else %}media{% endif %}{% if section.settings.enable_gray_logos %} gray-img{% endif %}"
+      >
+        {%- render 'dbtfy-img', img: block.settings.image, lazy: 'lazy' -%}
+      </a>
+    {%- endif -%}
+    {%- if block.settings.title != blank or block.settings.text != blank -%}
+      <div class="dbtfy-logo-list__content">
+        {%- if block.settings.title != blank -%}
+          <h5 class="dbtfy-logo-list__title h5 center">
+            {{ block.settings.title }}
+          </h5>
+        {%- endif -%}
+        {%- if block.settings.text != blank -%}
+          <div class="dbtfy-logo-list__rte rte center">
+            {{ block.settings.text }}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endcapture -%}
+
+<li
+  id="Slide-{{ section.id }}"
+  class="{% if section.settings.enable_scroll == false %}grid__item{% endif %}{% if section.settings.column_alignment == 'center' %} center{% endif %}{% if settings.animations_reveal_on_scroll and section.settings.enable_scroll == false %} scroll-trigger animate--slide-in{% endif %}"
+  {{- block.shopify_attributes -}}
+>
+  {%- if block.settings.image != blank or block.settings.title != blank or block.settings.text != blank -%}
+    {%- if section.settings.enable_card -%}
+      <div
+        class="dbtfy-logo-list__card card-background inner-spacing"
+      >
+        {{ item_data }}
+      </div>
+    {%- else -%}
+      {{ item_data }}
+    {%- endif -%}
+  {%- else -%}
+    {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+  {%- endif -%}
+</li>
+
+{% schema %}
+{
+  "name": "t:settings_schema.logo.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:general.settings.image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:general.settings.title"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:general.settings.text"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:blocks.dbtfy-product-tabs.block.settings.image_link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_link_new_tab",
+      "label": "t:sections.dbtfy-logo-list.blocks.logo.settings.enable_link_new_tab.label",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:settings_schema.logo.name"
+    }
+  ]
+}
+{% endschema %}

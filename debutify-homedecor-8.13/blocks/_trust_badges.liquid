@@ -1,0 +1,95 @@
+<trust-badge
+  data-show-heading="{{ block.settings.show_heading }}"
+  data-show-subheading="{{ block.settings.show_subheading }}"
+  data-show-informative-text="{{ block.settings.show_informative_text }}"
+  data-badge-alignment="{{ block.settings.badge_alignment }}"
+  data-alignment="{{ block.settings.trust_badges_alignment_footer }}"
+  data-layout="{{ block.settings.trust_badges_badge_type }}"
+>
+</trust-badge>
+<script src="{{ 'trust-badge.js' | asset_url }}" defer></script>
+{%- schema -%}
+{
+  "name": "t:sections.dbtfy-trust-badges.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-trust-badges.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-trust-badges.help.link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.free_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "trust_badges_badge_type",
+      "label": "t:settings_schema.layout.name",
+      "default": "payment_options",
+      "options": [
+        {
+          "value": "payment_options",
+          "label": "t:sections.dbtfy-trust-badges.settings.trust-badges-badge-type.option_1.label"
+        },
+        {
+          "value": "icon_blocks",
+          "label": "t:sections.dbtfy-trust-badges.settings.trust-badges-badge-type.option_2.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_icon_inline",
+      "default": false,
+      "label": "Forcely in Single Line (no wrapping)",
+      "visible_if": "{{ block.settings.trust_badges_badge_type == 'payment_options'}}"
+    },
+    {
+      "type": "checkbox",
+      "label": "t:sections.dbtfy-trust-badges.settings.show-heading",
+      "id": "show_heading",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "label": "t:sections.dbtfy-trust-badges.settings.show-subheading",
+      "id": "show_subheading",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "label": "t:sections.dbtfy-trust-badges.settings.show-informative",
+      "id": "show_informative_text",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "trust_badges_alignment_footer",
+      "label": "t:sections.dbtfy-trust-badges.settings.trust-badge-alignment.label",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "t:general.settings.alignment.option__4" },
+        { "value": "center", "label": "t:general.settings.alignment.option__5" },
+        { "value": "right", "label": "t:general.settings.alignment.option__6" },
+        { "value": "justify", "label": "t:general.settings.alignment.option__7" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-trust-badges.name"
+    }
+  ]
+}
+{%- endschema -%}

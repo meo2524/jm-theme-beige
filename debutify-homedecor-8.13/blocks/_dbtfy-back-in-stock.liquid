@@ -1,0 +1,144 @@
+{%- if settings.dbtfy_back_in_stock -%}
+  {% style %}
+    .dbtfy-back-in-stock-error {
+      padding: 0 0 0 2rem;
+    }
+  {% endstyle %}
+  {%- render 'widget-settings', key: 'dbtfy-back-in-stock', settings: block.settings -%}
+  <script src="{{ "dbtfy-back-in-stock.js" | asset_url  }}" defer></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.back_in_stock.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.back_in_stock.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.back_in_stock.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "get_message",
+      "label": "t:blocks.back_in_stock.settings.after_form_submission",
+      "default": "customer",
+      "info": "t:blocks.back_in_stock.settings.get_message_info",
+      "options": [
+        {
+          "value": "customer",
+          "label": "t:blocks.back_in_stock.settings.customer_list"
+        },
+        {
+          "value": "email",
+          "label": "t:sections.announcement-bar.blocks.contact_info.email"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_back_in_stock_button_name",
+      "label": "t:blocks.back_in_stock.settings.button.label",
+      "default": "t:blocks.back_in_stock.settings.button.default"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_back_in_stock_success_message",
+      "label": "t:blocks.back_in_stock.settings.sucess_message.label",
+      "default": "t:blocks.back_in_stock.settings.sucess_message.default"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_back_in_stock_icon",
+      "label": "t:general.settings.icon_label",
+      "info": "t:sections.all.icon.info",
+      "default": "notifications_active"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_back_in_stock_message",
+      "label": "t:blocks.minimum_order.settings.dbtfy_minimum_order_message.label",
+      "info": "t:blocks.back_in_stock.settings.message.info",
+      "default": "t:blocks.back_in_stock.settings.message.default"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.global.settings.element-animation.settings.header"
+    },
+    {
+      "type": "checkbox",
+      "id": "dbtfy_back_in_stock_animation_enable",
+      "label": "t:sections.main-product.blocks.buy_buttons.settings.add_to_cart_animation.enabled",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "dbtfy_back_in_stock_animation_type",
+      "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.label",
+      "default": "tada",
+      "options": [
+        {
+          "value": "bounce",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__1.label"
+        },
+        {
+          "value": "flash",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__2.label"
+        },
+        {
+          "value": "pulse",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__3.label"
+        },
+        {
+          "value": "shakeX",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__4.label"
+        },
+        {
+          "value": "shakeY",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__5.label"
+        },
+        {
+          "value": "tada",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__6.label"
+        },
+        {
+          "value": "heartBeat",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__7.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "dbtfy_back_in_stock_animation_interval",
+      "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_elment_animation_interval",
+      "min": 3,
+      "max": 20,
+      "unit": "s",
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "dbtfy_back_in_stock_animation_duration",
+      "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_elment_animation_duration.label",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    }
+  ]
+}
+{%- endschema -%}

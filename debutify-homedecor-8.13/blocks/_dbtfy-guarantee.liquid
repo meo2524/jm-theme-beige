@@ -1,0 +1,19 @@
+{% content_for 'blocks' %}
+
+{% schema %}
+{
+  "name": "Blocks",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_dbtfy-guarantee-block"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.guarantee.name",
+      "blocks": [{ "type": "_dbtfy-guarantee-block", "settings": {} }]
+    }
+  ]
+}
+{% endschema %}

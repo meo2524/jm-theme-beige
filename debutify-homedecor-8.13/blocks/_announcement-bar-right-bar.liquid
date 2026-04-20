@@ -1,0 +1,36 @@
+<div class="announcement-right" {{ block.shopify_attributes }}>
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.announcement-bar.blocks.right-bar.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.announcement-bar.settings.block_info.header"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_language-currency-selector-block"
+    },
+    {
+      "type": "_description-block"
+    },
+    {
+      "type": "_social-media-block"
+    },
+    {
+      "type": "_contact-info-block"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.announcement-bar.blocks.right-bar.name",
+      "blocks": [{ "type": "_language-currency-selector-block" }]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,637 @@
+{% if settings.dbtfy_product_subscription %}
+  {%- assign current_variant = product.selected_or_first_available_variant | default: product.variants.first -%}
+
+  {%- assign preselected_option = block.settings.preselected_option | default: 'one_time' -%}
+  {%- assign first_displayed_option = block.settings.first_displayed_option | default: 'one_time' -%}
+
+  {% if product.selling_plan_groups.size > 0 %}
+    <dbtfy-subscription-widget
+      class="selling_plan_app_container dbtfy-subscription-widget--{{ block.settings.layout }} {% if first_displayed_option == 'subscription' %}dbtfy-subscription-widget--sub-first{% endif %} {% if block.settings.minimal_layout %}dbtfy-subscription-widget--minimal{% endif %}"
+      data-section-id="{{ section.id }}"
+      data-preselected="{{ preselected_option }}"
+      data-layout="{{ block.settings.layout }}"
+      data-badge-template="{{ block.settings.subscription_badge_text | escape }}"
+    >
+      <script src="{{ 'dbtfy-product-subscription.js' | asset_url }}" defer></script>
+      <link rel="stylesheet" href="{{ 'dbtfy-product-subscription.css' | asset_url }}">
+      <style>
+        .selling_plan_theme_integration--hidden {
+          display: none;
+        }
+
+      </style>
+
+      {% for variant in product.variants %}
+        {%- liquid
+          assign variantPrice = variant.price | money | escape
+          assign variantComparedAtPrice = variant.compare_at_price | money | escape
+
+          # Build one-time price display from template
+          assign one_time_price_display = block.settings.one_time_price_text | replace: '{price}', variantPrice
+          assign one_time_compare_price_display = block.settings.one_time_compare_price_text | replace: '{compare_price}', variantComparedAtPrice
+
+          # One-time box is checked when preselected_option is one_time AND not requires_selling_plan
+          if preselected_option == 'one_time' and product.requires_selling_plan == false
+            assign one_time_checked = true
+          else
+            assign one_time_checked = false
+          endif
+        -%}
+
+        {% if variant.selling_plan_allocations.size > 0 %}
+          <section
+            data-variant-id="{{ variant.id }}"
+            class="selling_plan_theme_integration {% if variant.id != current_variant.id %}selling_plan_theme_integration--hidden{% endif %}"
+          >
+            <div class="dbtfy-subscription__wrapper">
+              {%- unless product.requires_selling_plan -%}
+                {% if block.settings.layout == 'horizontal' and first_displayed_option == 'subscription' %}
+                  <div class="dbtfy-subscription__show-first">
+                {% endif %}
+                <div
+                  class="dbtfy-subscription__box dbtfy-subscription__box--one-time {% if one_time_checked %}dbtfy-subscription__box--selected active_background-color{% endif %}"
+                  data-box-type="one_time_purchase"
+                >
+                  <div class="dbtfy-subscription__content {% if block.settings.one_time_selection_type == 'radio' or block.settings.one_time_image != blank %}content-start{% endif %}">
+                    {%- if block.settings.one_time_selection_type == 'image' and block.settings.one_time_image != blank -%}
+                    <img src="{{ block.settings.one_time_image | image_url: width: 500, height: 500 }}" alt="{{ block.settings.one_time_image.alt }}">
+                    {%- endif -%}
+                    <div class="dbtfy-subscription__content__left {% if block.settings.one_time_selection_type == 'radio' or block.settings.one_time_image != blank %}content-left{% endif %}">
+                      <label
+                        class="dbtfy-subscription__frequency-radio"
+                        for="{{ section.id }}_one_time_purchase_{{ variant.id }}"
+                      >
+                        <input
+                          aria-label="{{ block.settings.one_time_label }}. Product price {{ variantPrice }}"
+                          type="radio"
+                          name="purchaseOption_{{ section.id }}_{{ variant.id }}"
+                          {% if variant.available == false %}
+                            disabled
+                          {% endif %}
+                          id="{{ section.id }}_one_time_purchase_{{ variant.id }}"
+                          data-radio-type="one_time_purchase"
+                          data-variant-id="{{ variant.id }}"
+                          data-variant-price="{{ variantPrice }}"
+                          data-variant-compare-at-price="{{ variantComparedAtPrice }}"
+                          {% if one_time_checked %}
+                            checked
+                          {% endif %}
+                          style="display:none;"
+                        >
+                        {% if block.settings.one_time_selection_type == 'radio' %} 
+                          {% render 'material-icon', icon: 'radio_button_unchecked', class: 'icon-radio_button_unchecked icon-radio' %}
+                          {% render 'material-icon', icon: 'radio_button_checked', class: 'icon-radio_button_checked icon-radio' %}
+                        {% endif %}
+                        <h3 class="dbtfy-subscription__label">{{ block.settings.one_time_label }}</h3>
+                      </label>
+                    </div>
+                    <div class="dbtfy-subscription__content__right flex align-items-center">
+                      <span class="dbtfy-subscription__price">
+                        {{ one_time_price_display }}
+                      </span>
+                      {%- if variant.compare_at_price
+                        and variant.compare_at_price != variant.price
+                        and block.settings.one_time_compare_price_text != blank
+                      -%}
+                        <span class="dbtfy-subscription__compare-price">
+                          {{ one_time_compare_price_display }}
+                        </span>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+              {%- endunless -%}
+
+              {%- assign group_ids = variant.selling_plan_allocations | map: 'selling_plan_group_id' | uniq -%}
+              {%- for group_id in group_ids -%}
+                {%- liquid
+                  assign group = product | map: 'selling_plan_groups' | where: 'id', group_id | first
+                  assign allocations = variant | map: 'selling_plan_allocations' | where: 'selling_plan_group_id', group_id
+
+                  if forloop.first
+                    assign first_selling_plan_group = true
+                  else
+                    assign first_selling_plan_group = false
+                  endif
+
+                  assign first_allocation = allocations | first
+                  assign first_allocation_price = first_allocation.price | money | escape
+                  assign first_allocation_compare = first_allocation.compare_at_price | money | escape
+
+                  assign save_percent = null
+                  assign save_percent_str = null
+                  if first_allocation.compare_at_price and first_allocation.compare_at_price > first_allocation.price
+                    assign save_amount = first_allocation.compare_at_price | minus: first_allocation.price
+                    assign save_percent = save_amount | times: 100 | divided_by: first_allocation.compare_at_price
+                    assign save_percent_str = save_percent | append: '%'
+                  endif
+
+                  if save_percent_str
+                    assign badge_text = block.settings.subscription_badge_text | replace: '{percentage_saved}', save_percent_str
+                  else
+                    assign badge_text = null
+                  endif
+
+                  assign sub_price_display = block.settings.subscription_price_text | replace: '{price}', first_allocation_price
+                  assign sub_compare_display = block.settings.subscription_compare_price_text | replace: '{compare_price}', first_allocation_compare
+
+                  if block.settings.subscription_label != blank
+                    assign sub_label = block.settings.subscription_label
+                  else
+                    assign sub_label = group.name
+                  endif
+
+                  if first_selling_plan_group and product.requires_selling_plan
+                    assign sub_box_preselected = true
+                  elsif first_selling_plan_group and preselected_option == 'subscription'
+                    assign sub_box_preselected = true
+                  else
+                    assign sub_box_preselected = false
+                  endif
+                -%}
+
+                {%- capture icon_li -%}<li class="icon-text"><span>{% render 'material-icon', icon: block.settings.custom_bullet_icon %}</span>{%- endcapture -%}
+
+                {% capture subscription_content %}
+                  <div class="dbtfy-subscription__first--{{ block.settings.first_displayed_frequency_option }}">
+                    {%- if block.settings.subscription_description_text != blank -%}
+                      <div class="dbtfy-subscription__bottom dbtfy-subscription__benefits rte">
+                        {%- if block.settings.custom_bullet_icon != blank -%}
+                          {%- assign content = block.settings.subscription_description_text | replace: '<ul>', '<ul class="custom_bullet_icon">' | replace: '<li>', icon_li -%}
+                          {{ content }}
+                        {%- else -%}
+                          {{ block.settings.subscription_description_text }}
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+
+                    <div class="dbtfy-subscription__bottom dbtfy-subscription__frequency">
+                      {%- if allocations.size > 1 -%}
+                        {%- if block.settings.frequency_label != blank -%}
+                          <h4 class="dbtfy-subscription__frequency-label">{{ block.settings.frequency_label }}</h4>
+                        {%- endif -%}
+                        {%- if block.settings.frequency_layout == 'dropdown' -%}
+                          <div class="select">
+                            <select class="dbtfy-subscription__frequency-select select__select">
+                              {%- for allocation in allocations -%}
+                                {%- liquid
+                                  if sub_box_preselected and forloop.first
+                                    assign plan_selected = true
+                                  else
+                                    assign plan_selected = false
+                                  endif
+
+                                  assign allocation_price = allocation.price | money | escape
+                                  assign allocation_compared_at_price = allocation.compare_at_price | money | escape
+
+                                  assign alloc_save_percent = null
+                                  assign alloc_save_percent_str = null
+                                  if allocation.compare_at_price and allocation.compare_at_price > allocation.price
+                                    assign alloc_save_amount = allocation.compare_at_price | minus: allocation.price
+                                    assign alloc_save_percent = alloc_save_amount | times: 100 | divided_by: allocation.compare_at_price
+                                    assign alloc_save_percent_str = alloc_save_percent | append: '%'
+                                  endif
+
+                                  assign alloc_price_display = block.settings.subscription_price_text | replace: '{price}', allocation_price
+                                  assign alloc_compare_display = block.settings.subscription_compare_price_text | replace: '{compare_price}', allocation_compared_at_price
+                                -%}
+                                <option
+                                  value="{{ allocation.selling_plan.id }}"
+                                  data-radio-type="selling_plan"
+                                  data-selling-plan-id="{{ allocation.selling_plan.id }}"
+                                  data-selling-plan-group-id="{{ section.id }}_{{ group_id }}_{{ variant.id }}"
+                                  data-selling-plan-adjustment="{{ allocation.selling_plan.price_adjustments.size }}"
+                                  data-variant-price="{{ alloc_price_display | default: allocation_price }}"
+                                  data-variant-compare-at-price="{{ alloc_compare_display | default: allocation_compared_at_price }}"
+                                  data-variant-raw-price="{{ allocation_price }}"
+                                  data-variant-raw-compare="{{ allocation_compared_at_price }}"
+                                  {% if alloc_save_percent_str %}
+                                    data-save-percent="{{ alloc_save_percent_str }}"
+                                  {% endif %}
+                                  {% if plan_selected %}
+                                    selected
+                                  {% endif %}
+                                >
+                                  {{ allocation.selling_plan.name }}
+                                </option>
+                              {%- endfor -%}
+                            </select>
+                          <span class="svg-wrapper">
+                            <i class="material-icon outlined" translate="no" aria-hidden="true" data-icon="keyboard_arrow_down"></i>
+                            </span>
+                          </div>
+                        {%- else -%}
+                          <ul>
+                            {%- for allocation in allocations -%}
+                              {%- liquid
+                                if sub_box_preselected and forloop.first
+                                  assign plan_checked = true
+                                else
+                                  assign plan_checked = false
+                                endif
+
+                                assign allocation_price = allocation.price | money | escape
+                                assign allocation_compared_at_price = allocation.compare_at_price | money | escape
+
+                                assign alloc_save_percent = null
+                                assign alloc_save_percent_str = null
+                                if allocation.compare_at_price and allocation.compare_at_price > allocation.price
+                                  assign alloc_save_amount = allocation.compare_at_price | minus: allocation.price
+                                  assign alloc_save_percent = alloc_save_amount | times: 100 | divided_by: allocation.compare_at_price
+                                  assign alloc_save_percent_str = alloc_save_percent | append: '%'
+                                endif
+
+                                assign alloc_price_display = block.settings.subscription_price_text | replace: '{price}', allocation_price
+                                assign alloc_compare_display = block.settings.subscription_compare_price_text | replace: '{compare_price}', allocation_compared_at_price
+                              -%}
+                              <li>
+                                <label
+                                  class="dbtfy-subscription__frequency-radio"
+                                  for="{{ section.id }}_{{ group_id }}_{{ variant.id }}_{{ allocation.selling_plan.id }}"
+                                >
+                                  <input
+                                    type="radio"
+                                    {% if variant.available == false %}
+                                      disabled
+                                    {% endif %}
+                                    aria-label="{{ allocation.selling_plan.name }}. Product price {{ allocation_price }}"
+                                    name="purchaseOption_{{ section.id }}_{{ variant.id }}"
+                                    id="{{ section.id }}_{{ group_id }}_{{ variant.id }}_{{ allocation.selling_plan.id }}"
+                                    data-radio-type="selling_plan"
+                                    data-selling-plan-id="{{ allocation.selling_plan.id }}"
+                                    data-selling-plan-group-id="{{ section.id }}_{{ group_id }}_{{ variant.id }}"
+                                    data-selling-plan-adjustment="{{ allocation.selling_plan.price_adjustments.size }}"
+                                    data-variant-price="{{ alloc_price_display | default: allocation_price }}"
+                                    data-variant-compare-at-price="{{ alloc_compare_display | default: allocation_compared_at_price }}"
+                                    data-variant-raw-price="{{ allocation_price }}"
+                                    data-variant-raw-compare="{{ allocation_compared_at_price }}"
+                                    {% if alloc_save_percent_str %}
+                                      data-save-percent="{{ alloc_save_percent_str }}"
+                                    {% endif %}
+                                    {% if plan_checked %}
+                                      checked
+                                    {% endif %}
+                                    style="display:none;"
+                                  >
+                                  <span class="dbtfy-subscription__indicator"></span>
+                                  <span class="dbtfy-subscription__plan-name">{{ allocation.selling_plan.name }}</span>
+                                </label>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        {%- endif -%}
+                      {%- else -%}
+                        {%- for allocation in allocations -%}
+                          {%- liquid
+                            if sub_box_preselected and forloop.first
+                              assign plan_checked = true
+                            else
+                              assign plan_checked = false
+                            endif
+
+                            assign allocation_price_s = allocation.price | money | escape
+                            assign allocation_compared_at_price_s = allocation.compare_at_price | money | escape
+
+                            assign alloc_save_percent_s = null
+                            assign alloc_save_percent_str_s = null
+                            if allocation.compare_at_price and allocation.compare_at_price > allocation.price
+                              assign alloc_save_amount_s = allocation.compare_at_price | minus: allocation.price
+                              assign alloc_save_percent_s = alloc_save_amount_s | times: 100 | divided_by: allocation.compare_at_price
+                              assign alloc_save_percent_str_s = alloc_save_percent_s | append: '%'
+                            endif
+
+                            assign alloc_price_display_s = block.settings.subscription_price_text | replace: '{price}', allocation_price_s
+                            assign alloc_compare_display_s = block.settings.subscription_compare_price_text | replace: '{compare_price}', allocation_compared_at_price_s
+                          -%}
+                          <input
+                            type="radio"
+                            {% if variant.available == false %}
+                              disabled
+                            {% endif %}
+                            aria-label="{{ allocation.selling_plan.name }}. Product price {{ allocation_price_s }}"
+                            name="purchaseOption_{{ section.id }}_{{ variant.id }}"
+                            id="{{ section.id }}_{{ group_id }}_{{ variant.id }}_{{ allocation.selling_plan.id }}"
+                            data-radio-type="selling_plan"
+                            data-selling-plan-id="{{ allocation.selling_plan.id }}"
+                            data-selling-plan-group-id="{{ section.id }}_{{ group_id }}_{{ variant.id }}"
+                            data-selling-plan-adjustment="{{ allocation.selling_plan.price_adjustments.size }}"
+                            data-variant-price="{{ alloc_price_display_s }}"
+                            data-variant-compare-at-price="{{ alloc_compare_display_s }}"
+                            data-variant-raw-price="{{ allocation_price_s }}"
+                            data-variant-raw-compare="{{ allocation_compared_at_price_s }}"
+                            {% if alloc_save_percent_str_s %}
+                              data-save-percent="{{ alloc_save_percent_str_s }}"
+                            {% endif %}
+                            {% if plan_checked %}
+                              checked
+                            {% endif %}
+                            style="display:none;"
+                          >
+                        {%- endfor -%}
+                      {%- endif -%}
+                    </div>
+                  </div>
+                {% endcapture %}
+
+                <div
+                  class="dbtfy-subscription__box dbtfy-subscription__box--subscription {% if sub_box_preselected %}dbtfy-subscription__box--selected active_background-color{% endif %}"
+                  data-box-type="selling_plan"
+                  data-group-id="{{ section.id }}_{{ group_id }}_{{ variant.id }}"
+                >
+                  {%- if badge_text != blank -%}
+                    <span class="dbtfy-subscription__badge">{{ badge_text }}</span>
+                  {%- endif -%}
+
+                  <div class="dbtfy-subscription__content {% if block.settings.subscription_selection_type == 'radio' or block.settings.subscription_image != blank %}content-start{% endif %}">
+                    {% if block.settings.subscription_selection_type == 'image' and block.settings.subscription_image != blank %}
+                      <img src="{{ block.settings.subscription_image | image_url: width: 500, height: 500 }}" alt="{{ block.settings.subscription_image.alt }}">
+                    {% endif %}
+                      {% if block.settings.subscription_selection_type == 'radio' %} 
+                        {% render 'material-icon', icon: 'radio_button_unchecked', class: 'icon-radio_button_unchecked icon-radio' %}
+                        {% render 'material-icon', icon: 'radio_button_checked', class: 'icon-radio_button_checked icon-radio' %}
+                      {% endif %}
+                    <div class="dbtfy-subscription__content__left {% if block.settings.subscription_selection_type == 'radio' or block.settings.subscription_image != blank %}content-left{% endif %}">
+                      <h3 class="dbtfy-subscription__label">{{ sub_label }}</h3>
+                    </div>
+                    <div class="dbtfy-subscription__content__right d-flex align-items-center">
+                      <span
+                        class="dbtfy-subscription__price"
+                        data-group-price="{{ section.id }}_{{ group_id }}_{{ variant.id }}"
+                      >
+                        {{ sub_price_display }}
+                      </span>
+                      {%- if first_allocation.compare_at_price
+                        and first_allocation.compare_at_price != first_allocation.price
+                        and block.settings.subscription_compare_price_text != blank
+                      -%}
+                        <span
+                          class="dbtfy-subscription__compare-price"
+                          data-group-compare-price="{{ section.id }}_{{ group_id }}_{{ variant.id }}"
+                        >
+                          {{ sub_compare_display }}
+                        </span>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                  {% if block.settings.hide_frequency_unless_subscription %}
+                    <div class="dbtfy-subscription-frequency__show">
+                  {% endif %}
+                  {%- if group.options.size > 0 -%}
+                    <hr class="dbtfy-subscription__separator">
+                  {%- endif -%}
+
+                  {{ subscription_content }}
+
+                  {% if block.settings.hide_frequency_unless_subscription %}
+                    </div>
+                  {% endif %}
+                </div>
+                {% if block.settings.layout == 'horizontal' and first_displayed_option == 'subscription' %}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.layout == 'horizontal' %}
+                  <div class="dbtfy-bottom__content {% if sub_box_preselected %}subscription-box__content{% endif %}">
+                    <div class="dbtfy-subscription__content_bottom">
+                      {{ subscription_content }}
+                    </div>
+                  </div>
+                {% endif %}
+              {%- endfor -%}
+            </div>
+          </section>
+        {% endif %}
+      {% endfor %}
+
+      <input
+        name="selling_plan"
+        class="selected-selling-plan-id"
+        type="hidden"
+      >
+    </dbtfy-subscription-widget>
+  {% endif %}
+{% endif %}
+{% schema %}
+{
+  "name": "t:blocks.product-subscription.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.product-subscription.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.product-subscription.help_center.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.enterprise_info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.product-subscription.settings.how_to_use"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.product-subscription.settings.info_1"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.product-subscription.settings.info_2"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.product-subscription.settings.info_3"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "t:settings_schema.layout.name",
+      "options": [
+        { "label": "t:general.settings.alignment.option__11", "value": "vertical" },
+        { "label": "t:general.settings.alignment.option__10", "value": "horizontal" }
+      ],
+      "default": "vertical"
+    },
+    {
+      "type": "select",
+      "id": "first_displayed_option",
+      "label": "t:blocks.product-subscription.settings.first_displayed_option",
+      "options": [
+        { "label": "t:blocks.product-subscription.settings.one_time_purchase", "value": "one_time" },
+        { "label": "t:blocks.product-subscription.settings.subscription", "value": "subscription" }
+      ],
+      "default": "one_time"
+    },
+    {
+      "type": "select",
+      "id": "preselected_option",
+      "label": "t:blocks.product-subscription.settings.preselected_option",
+      "options": [
+        { "label": "t:blocks.product-subscription.settings.one_time_purchase", "value": "one_time" },
+        { "label": "t:blocks.product-subscription.settings.subscription", "value": "subscription" }
+      ],
+      "default": "one_time"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_frequency_unless_subscription",
+      "label": "t:blocks.product-subscription.settings.hide_frequency",
+      "default": false,
+      "visible_if": "{{ block.settings.layout == 'vertical' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "minimal_layout",
+      "label": "t:blocks.product-subscription.settings.minimal_layout",
+      "default": false,
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.product-subscription.settings.one_time_title"
+    },
+    {
+      "type": "select",
+      "id": "one_time_selection_type",
+      "label": "t:blocks.product-subscription.settings.selection_type",
+      "options": [
+        { "label": "t:sections.dbtfy-contact-form-builder.blocks.radio.name", "value": "radio" },
+        { "label": "t:general.settings.image", "value": "image" }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "image_picker",
+      "id": "one_time_image",
+      "label": "t:blocks.product-subscription.settings.one_time_purchase_image",
+      "visible_if": "{{ block.settings.one_time_selection_type == 'image' }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "one_time_label",
+      "label": "t:general.settings.title",
+      "default": "t:blocks.product-subscription.settings.one_time_default"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "one_time_price_text",
+      "label": "t:sections.featured-product.blocks.price.name",
+      "default": "t:blocks.product-subscription.settings.price_default",
+      "info": "t:blocks.product-subscription.settings.price_info",
+      "visible_if": "{{ block.settings.layout == 'vertical' }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "one_time_compare_price_text",
+      "label": "t:blocks.product-subscription.settings.compare_price",
+      "default": "t:blocks.product-subscription.settings.compare_price_default",
+      "info": "t:blocks.product-subscription.settings.compare_price_info",
+      "visible_if": "{{ block.settings.layout == 'vertical' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.product-subscription.settings.subscription_box_styling"
+    },
+        {
+      "type": "select",
+      "id": "subscription_selection_type",
+      "label": "t:blocks.product-subscription.settings.selection_type",
+      "options": [
+        { "label": "t:sections.dbtfy-contact-form-builder.blocks.radio.name", "value": "radio" },
+        { "label": "t:general.settings.image", "value": "image" }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "image_picker",
+      "id": "subscription_image",
+      "label": "t:blocks.product-subscription.settings.subscription_image",
+      "visible_if": "{{ block.settings.subscription_selection_type == 'image' }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subscription_label",
+      "label": "t:general.settings.title",
+      "default": "t:blocks.product-subscription.settings.subscription_label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subscription_price_text",
+      "label": "t:sections.featured-product.blocks.price.name",
+      "default": "t:blocks.product-subscription.settings.price_default",
+      "info": "t:blocks.product-subscription.settings.price_info",
+      "visible_if": "{{ block.settings.layout == 'vertical' }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subscription_compare_price_text",
+      "label": "t:blocks.product-subscription.settings.compare_price",
+      "default": "t:blocks.product-subscription.settings.compare_price_default",
+      "info": "t:blocks.product-subscription.settings.compare_price_info",
+      "visible_if": "{{ block.settings.layout == 'vertical' }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subscription_badge_text",
+      "label": "t:blocks.dbtfy-sales-popup.settigns.badge_text.label",
+      "default": "t:blocks.product-subscription.settings.badge_text",
+      "info": "t:blocks.product-subscription.settings.badge_info"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "frequency_label",
+      "label": "t:blocks.product-subscription.settings.delivery_frequency_title",
+      "default": "t:blocks.product-subscription.settings.delivery_frequency_title_default"
+    },
+    {
+      "type": "select",
+      "id": "first_displayed_frequency_option",
+      "label": "t:blocks.product-subscription.settings.first_displayed_option",
+      "options": [
+        { "label": "t:sections.benefits-and-guarantees.settings.name", "value": "benefits" },
+        { "label": "t:blocks.product-subscription.settings.frequency", "value": "frequency" }
+      ],
+      "default": "benefits"
+    },
+    {
+      "type": "select",
+      "id": "frequency_layout",
+      "label": "t:blocks.product-subscription.settings.frequency_selector_style",
+      "options": [
+        { "label": "t:blocks.customizable_products.blocks.group.settings.type.options__2.label", "value": "radio" },
+        { "label": "t:settings_schema.widgets.color_swatches.variant_style.options__1.label", "value": "dropdown" }
+      ],
+      "default": "radio"
+    },
+    {
+      "type": "richtext",
+      "id": "subscription_description_text",
+      "label": "t:blocks.product-subscription.settings.benefits_description",
+      "default": "t:blocks.product-subscription.settings.benefits_description_default"
+    },
+    {
+      "type": "text",
+      "id": "custom_bullet_icon",
+      "label": "t:general.settings.custom_bullet_icon.label",
+      "info": "t:sections.all.icon.info"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:general.settings.custom_bullet_icon.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.product-subscription.name"
+    }
+  ]
+}
+{% endschema %}

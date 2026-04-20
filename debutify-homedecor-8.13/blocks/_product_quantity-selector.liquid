@@ -1,0 +1,22 @@
+{% unless section.settings.add_to_cart_position %}
+  {% render 'product_quantity-selector', add_to_cart_position: add_to_cart_position %}
+{% endunless %}
+
+{% schema %}
+{
+  "name": "t:sections.main-product.blocks.quantity_selector.name",
+  "settings": [
+    {
+      "type": "checkbox",
+      "label": "Make Full Width",
+      "default": false,
+      "id": "full_width"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main-product.blocks.quantity_selector.name"
+    }
+  ]
+}
+{% endschema %}

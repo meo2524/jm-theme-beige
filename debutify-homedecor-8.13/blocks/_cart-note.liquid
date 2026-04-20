@@ -1,0 +1,48 @@
+{%- if settings.show_cart_note -%}
+  <div class="cart-block" {{ block.shopify_attributes }}>
+    <details id="Details-CartDrawer">
+      <summary>
+        <div class="dbtfy-gap-5 flex flex-row">
+          {%- render 'material-icon', icon: block.settings.dbtfy_cart_note_icon -%}
+          <span class="summary__title">
+            {{- block.settings.dbtfy_cart_note_heading -}}
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </span>
+        </div>
+      </summary>
+      <cart-note class="cart__note field">
+        <label class="visually-hidden" for="CartDrawer-Note">{{ 'sections.cart.note' | t }}</label>
+        <textarea
+          id="CartDrawer-Note"
+          class="text-area text-area--resize-vertical field__input"
+          name="note"
+          placeholder="{{ 'sections.cart.note' | t }}"
+        >{{ cart.note }}</textarea>
+      </cart-note>
+    </details>
+  </div>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:sections.cart-drawer.blocks.cart-note.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-drawer.blocks.cart-note.info"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_cart_note_icon",
+      "label": "t:general.settings.icon_label",
+      "default": "check_circle",
+      "info": "t:general.settings.icon_info"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_cart_note_heading",
+      "label": "t:general.settings.heading",
+      "default": "t:sections.main-cart-footer.blocks.cart-note.heading_default"
+    }
+  ]
+}
+{%- endschema -%}

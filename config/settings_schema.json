@@ -15,35 +15,35 @@
         "type": "color",
         "id": "color_espresso",
         "label": "Deep navy",
-        "default": "#0B2E3C",
+        "default": "#2B2B2B",
         "info": "Primary text, headings, dark backgrounds"
       },
       {
         "type": "color",
         "id": "color_mahogany",
         "label": "Deep teal",
-        "default": "#0B7285",
+        "default": "#A68966",
         "info": "Secondary text, muted UI, borders"
       },
       {
         "type": "color",
         "id": "color_amber",
         "label": "Ocean teal",
-        "default": "#0B7285",
+        "default": "#A68966",
         "info": "CTA buttons, structural accents. Use sparingly."
       },
       {
         "type": "color",
         "id": "color_linen",
         "label": "Pale aqua",
-        "default": "#E3FAFC",
+        "default": "#F2E8D5",
         "info": "Page background, cards, light surfaces"
       },
       {
         "type": "color",
         "id": "color_sage",
         "label": "Light blue",
-        "default": "#74C0FC",
+        "default": "#D7C4A3",
         "info": "Badges, tags, secondary accents"
       }
     ]

@@ -1,0 +1,78 @@
+<script>
+  Debutify.widgets['upsell_bundles'].blocks.push({{ block.settings | json }});
+</script>
+{%- schema -%}
+{
+  "name": "t:sections.dbtfy-upsell-bundle.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info",
+      "default": "t:sections.dbtfy-upsell-bundle.name"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.dbtfy-product-swatches.config_label"
+    },
+    {
+      "type": "product",
+      "id": "product_trigger",
+      "label": "t:sections.dbtfy-upsell-bundles.blocks.upsell-bundle.settings.product_trigger.label"
+    },
+    {
+      "type": "product",
+      "id": "product_offer_1",
+      "label": "t:blocks.dbtfy-upsell-popup.blocks.upsell-products.settings.product_offer.label"
+    },
+    {
+      "type": "product",
+      "id": "product_offer_2",
+      "label": "t:blocks.dbtfy-upsell-popup.blocks.upsell-products.settings.product_offer.label"
+    },
+    {
+      "type": "product",
+      "id": "product_offer_3",
+      "label": "t:blocks.dbtfy-upsell-popup.blocks.upsell-products.settings.product_offer.label"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.discount.header.content",
+      "info": "t:general.settings.discount.header.info_1"
+    },
+    {
+      "type": "text",
+      "id": "discount_code",
+      "label": "t:general.settings.discount.name.label"
+    },
+    {
+      "type": "select",
+      "id": "discount_type",
+      "label": "t:general.settings.discount.type.label",
+      "default": "%",
+      "options": [
+        {
+          "value": "%",
+          "label": "t:general.settings.discount.type.options__1.label"
+        },
+        {
+          "value": "$",
+          "label": "t:general.settings.discount.type.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "number",
+      "id": "discount_amount",
+      "label": "t:general.settings.discount.amount.label",
+      "info": "t:general.settings.discount.type.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-upsell-bundle.name"
+    }
+  ]
+}
+{%- endschema -%}

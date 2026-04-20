@@ -1,0 +1,396 @@
+{% liquid
+  assign initial_position = section.settings.initial_position | default: 50
+  assign initial_direction = section.settings.initial_direction | default: 'horizontal'
+  assign icon = section.settings.bullet_icon | default: 'code'
+%}
+<li
+  id="Slide-{{ section.id }}-{{ block.id }}"
+  class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {{ block.shopify_attributes }}
+>
+  <dbtfy-before-and-after data-layout="{{ initial_direction }}">
+    {% if initial_direction == 'vertical' %}
+      {% assign initial_position = 100 | minus: initial_position %}
+    {% endif %}
+    <div
+      class="dbtfy-before-after {% if section.settings.container_size == "page-width" %}global-media-radius{% endif %}"
+      style="--position: {{ initial_position }}%;"
+      data-index="{{ section.id }}--{{ block.id }}"
+    >
+      <div
+        class="background-img before-after-img color-{{ block.settings.custom_color_scheme_1 }} dbtfy-color-{{ block.settings.color_scheme_1 }} gradient"
+      >
+        <div class="before-after__label-wrapper">
+          {% if block.settings.text_1 != blank or block.settings.button_label_1 != blank %}
+            <div class="before-after__label {{ block.settings.content_position_1 }}">
+              {% if block.settings.text_1 != blank %}
+                <div class="before-after__label-text rte">{{ block.settings.text_1 }}</div>
+              {% endif %}
+              {% if block.settings.button_label_1 != blank %}
+                {% assign button_size = block.settings.button_size_1 %}
+                {% if button_size == 'inherit' %}
+                  {% assign button_size = settings.button_size %}
+                {% endif %}
+                <a
+                  class="{{ block.settings.button_style_1 }} {{ button_size }}"
+                  {% if block.settings.button_link_1 == blank %}
+                    disabled
+                  {% else %}
+                    href="{{ block.settings.button_link_1 }}"
+                  {% endif %}
+                >
+                  <span>
+                    {{- block.settings.button_label_1 -}}
+                  </span>
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+          <div class="before-after-box-background {% if block.settings.before_image_contain %} background-contain {% else %} before-after-box-background-cover {% endif %}">
+            {% if block.settings.image_1 == blank %}
+              <div class="relative placeholder" style="height: 100%;">
+                {{- 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' -}}
+              </div>
+            {% else %}
+              <div class="relative" style="height: 100%;">
+                {% render 'dbtfy-img', img: block.settings.image_1 %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="foreground-img before-after-img color-{{ block.settings.custom_color_scheme_2 }} dbtfy-color-{{ block.settings.color_scheme_2 }}  gradient">
+        <div class="before-after__label-wrapper">
+          {% if block.settings.text_2 != blank or block.settings.button_label_2 != blank %}
+            <div class="before-after__label {{ block.settings.content_position_2 }}">
+              {% if block.settings.text_2 != blank %}
+                <div class="before-after__label-text rte">{{ block.settings.text_2 }}</div>
+              {% endif %}
+              {% if block.settings.button_label_2 != blank %}
+                {% assign button_size = block.settings.button_size_2 %}
+                {% if button_size == 'inherit' %}
+                  {% assign button_size = settings.button_size %}
+                {% endif %}
+                <a
+                  class="{{ block.settings.button_style_2 }} {{ button_size }}"
+                  {% if block.settings.button_link_2 == blank %}
+                    disabled
+                  {% else %}
+                    href="{{ block.settings.button_link_2 }}"
+                  {% endif %}
+                >
+                  <span>
+                    {{- block.settings.button_label_2 -}}
+                  </span>
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+          <div class="before-after-box-background {%  if block.settings.after_image_contain %} background-contain {% endif %}">
+            <div class="relative" style="height: 100%;">
+              {% if block.settings.image_2 == blank %}
+                {{- 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' -}}
+              {% else %}
+                {% render 'dbtfy-img', img: block.settings.image_2 %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="before-after--handle">
+        <span class="before-after--handle-icon">
+          {% render 'material-icon', icon: icon %}
+        </span>
+      </span>
+    </div>
+  </dbtfy-before-and-after>
+</li>
+{% schema %}
+{
+  "name": "Before after block",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-before-and-after.blocks.before_and_after.settings.header__1.content"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme_1",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-3"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme_1",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "richtext",
+      "id": "text_1",
+      "label": "t:general.settings.text"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "t:general.settings.image"
+    },
+    {
+      "type": "checkbox",
+      "id": "before_image_contain",
+      "label": "t:sections.dbtfy-before-and-after.settings.enable_contain_image",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "t:blocks.news-letter.settings.thank_you_modal.button_text.label"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "t:sections.all.button.button_link_label"
+    },
+    {
+      "type": "select",
+      "id": "button_style_1",
+      "label": "t:blocks.dbtfy-product-sharing.settings.display_style.options__2",
+      "options": [
+        {
+          "value": "link underlined-link button--link",
+          "label": "t:sections.all.button.option_1_label"
+        },
+        {
+          "value": "button button--tertiary",
+          "label": "t:general.settings.style.default"
+        },
+        {
+          "value": "button button--primary",
+          "label": "t:sections.all.button.options__3.label"
+        },
+        {
+          "value": "button button--secondary",
+          "label": "t:sections.all.button.options__4.label"
+        }
+      ],
+      "default": "button button--primary"
+    },
+    {
+      "type": "select",
+      "id": "button_size_1",
+      "default": "inherit",
+      "label": "t:general.settings.size.label",
+      "options": [
+        { "value": "inherit", "label": "t:general.settings.size.option__1" },
+        {
+          "value": "button--small",
+          "label": "t:general.settings.small"
+        },
+        { "value": "button--medium", "label": "t:sections.all.animation.image_behavior.parallax_speed.medium" },
+        { "value": "", "label": "t:general.settings.size.option__10" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_position_1",
+      "label": "t:sections.dbtfy-before-and-after.blocks.before_and_after.settings.content_position.label",
+      "default": "left-middle",
+      "options": [
+        {
+          "value": "left-top",
+          "label": "t:sections.dbtfy-before-and-after.blocks.before_and_after.settings.content_position.options__1.label"
+        },
+        {
+          "value": "left-middle",
+          "label": "t:sections.dbtfy-before-and-after.blocks.before_and_after.settings.content_position.options__2.label"
+        },
+        {
+          "value": "left-bottom",
+          "label": "t:sections.dbtfy-before-and-after.blocks.before_and_after.settings.content_position.options__3.label"
+        },
+        {
+          "value": "right-top",
+          "label": "t:sections.dbtfy-before-and-after.blocks.before_and_after.settings.content_position.options__4.label"
+        },
+        {
+          "value": "right-middle",
+          "label": "t:sections.dbtfy-before-and-after.blocks.before_and_after.settings.content_position.options__5.label"
+        },
+        {
+          "value": "right-bottom",
+          "label": "t:sections.dbtfy-before-and-after.blocks.before_and_after.settings.content_position.options__6.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-before-and-after.blocks.before_and_after.settings.header__2.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme_2",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-3"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme_2",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "richtext",
+      "id": "text_2",
+      "label": "t:general.settings.text"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "t:general.settings.image"
+    },
+    {
+      "type": "checkbox",
+      "id": "after_image_contain",
+      "label": "t:sections.dbtfy-before-and-after.settings.enable_contain_image",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "t:blocks.news-letter.settings.thank_you_modal.button_text.label"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "t:sections.all.button.button_link_label"
+    },
+    {
+      "type": "select",
+      "id": "button_style_2",
+      "label": "t:blocks.dbtfy-product-sharing.settings.display_style.options__2",
+      "options": [
+        {
+          "value": "link underlined-link button--link",
+          "label": "t:sections.all.button.option_1_label"
+        },
+        {
+          "value": "button button--tertiary",
+          "label": "t:general.settings.style.default"
+        },
+        {
+          "value": "button button--primary",
+          "label": "t:sections.all.button.options__3.label"
+        },
+        {
+          "value": "button button--secondary",
+          "label": "t:sections.all.button.options__4.label"
+        }
+      ],
+      "default": "button button--secondary"
+    },
+    {
+      "type": "select",
+      "id": "button_size_2",
+      "default": "inherit",
+      "label": "t:general.settings.size.label",
+      "options": [
+        { "value": "inherit", "label": "t:general.settings.size.option__1" },
+        {
+          "value": "button--small",
+          "label": "t:general.settings.small"
+        },
+        { "value": "button--medium", "label": "t:sections.all.animation.image_behavior.parallax_speed.medium" },
+        { "value": "", "label": "t:general.settings.size.option__10" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_position_2",
+      "label": "t:sections.dbtfy-before-and-after.blocks.before_and_after.settings.content_position.label",
+      "default": "right-middle",
+      "options": [
+        {
+          "value": "left-top",
+          "label": "t:sections.dbtfy-before-and-after.blocks.before_and_after.settings.content_position.options__1.label"
+        },
+        {
+          "value": "left-middle",
+          "label": "t:sections.dbtfy-before-and-after.blocks.before_and_after.settings.content_position.options__2.label"
+        },
+        {
+          "value": "left-bottom",
+          "label": "t:sections.dbtfy-before-and-after.blocks.before_and_after.settings.content_position.options__3.label"
+        },
+        {
+          "value": "right-top",
+          "label": "t:sections.dbtfy-before-and-after.blocks.before_and_after.settings.content_position.options__4.label"
+        },
+        {
+          "value": "right-middle",
+          "label": "t:sections.dbtfy-before-and-after.blocks.before_and_after.settings.content_position.options__5.label"
+        },
+        {
+          "value": "right-bottom",
+          "label": "t:sections.dbtfy-before-and-after.blocks.before_and_after.settings.content_position.options__6.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-before-and-after.name"
+    }
+  ]
+}
+{% endschema %}

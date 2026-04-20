@@ -1,0 +1,141 @@
+<div class="d-grid select_box upsell-bundle__block {% if section.settings.upsell_bundle_style == 'outline' %}dbtfy-upsell-bundle__divider{% endif %}">
+  <div class="grid--12-col {% unless mobile_view %}grid--12-col-tablet grid--8-col-desktop{% endunless %}">
+    <div class="dbtfy-upsell-bundle__list d-grid upsell-bundle__list">
+      {% render 'dbtfy-upsell-bundle-item',
+        product: product,
+        product_form_id: product_form_id,
+        current_product: true,
+        section: section,
+        mobile_view: mobile_view,
+        index: 0,
+        current_product_badge: current_product_label,
+        show_rating: show_rating,
+        image_ratio: image_ratio
+      %}
+
+      {% for recommendation in recommendations.products %}
+        {%
+          render 'dbtfy-upsell-bundle-item',
+          product: recommendation,
+          product_form_id: product_form_id,
+          current_product: false,
+          section: section,
+          mobile_view: mobile_view,
+          index: {{ forloop.index }},
+          show_rating: show_rating,
+          image_ratio: image_ratio
+        %}
+      {% endfor %}
+    </div>
+    {% if section.settings.upsell_bundle_style == 'outline' %}
+      <div class="grid--12-col">
+        <div class="dbtfy-upsell-bundles__price-flex">
+          <h3 class="inline-richtext">{{ section.settings.total_price_label }}</h3>
+          <div class="grid--12-col">
+            <span class="dbtfy-upsell-bundles__save-price price"></span>
+            <div>
+              <span class="dbtfy-upsell-bundles__original-price price"></span>
+              <span class="dbtfy-upsell-bundles__discount-price price"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+  <div
+    class="grid--12-col dbtfy-upsell-bundles__form_add-to-cart {% unless mobile_view %}grid--12-col-tablet grid--4-col-desktop{% endunless %}"
+    style="align-content:center"
+  >
+    <div class="d-grid center dbtfy-upsell-bundles__form">
+      {% if section.settings.upsell_bundle_style != 'outline' %}
+        <div class="grid--12-col">
+          <div class="dbtfy-upsell-bundles__price-flex">
+            <h3 class="inline-richtext">{{ section.settings.total_price_label }}</h3>
+            <span class="dbtfy-upsell-bundles__original-price price"></span>
+            <span class="dbtfy-upsell-bundles__discount-price price"></span>
+          </div>
+        </div>
+        <div class="grid--12-col">
+          <span class="dbtfy-upsell-bundles__save-price price"></span>
+        </div>
+      {% endif %}
+      <div class="grid--12-col">
+        {%- liquid
+          assign product_variant_media = product.selected_or_first_available_variant.featured_media.preview_image | image_url: width: 100
+          if product.selected_or_first_available_variant.featured_media.preview_image == blank
+            assign product_variant_media = product.featured_media.preview_image | image_url: width: 100
+          endif
+        -%}
+        <product-form
+          class="product-form"
+          data-hide-errors="false"
+          data-section-id="{{ section.id }}"
+          data-product-variant-media="{{ product_variant_media }}"
+        >
+          <div class="product-form__error-message-wrapper" role="alert" hidden>
+            <span class="svg-wrapper">
+              {{- 'icon-error.svg' | inline_asset_content -}}
+            </span>
+            <span class="product-form__error-message"></span>
+          </div>
+
+          {%- form 'product',
+            product,
+            id: product_form_id,
+            class: 'form',
+            novalidate: 'novalidate',
+            data-type: 'add-to-cart-form'
+          -%}
+            <input
+              type="hidden"
+              name="id"
+              value="{{ product.selected_or_first_available_variant.id }}"
+              {% if product.selected_or_first_available_variant.available == false
+                or product.selected_or_first_available_variant == null
+              %}
+                disabled
+              {% endif %}
+              class="product-variant-id"
+            >
+
+            <div class="product-form__buttons" style="max-width: 100%">
+              {%- liquid
+                assign check_against_inventory = true
+                if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
+                  assign check_against_inventory = false
+                endif
+                if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
+                  assign quantity_rule_soldout = true
+                endif
+              -%}
+              {% assign button_size = button_size %}
+              {% if button_size == 'inherit' %}
+                {% assign button_size = settings.button_size %}
+              {% endif %}
+              <button
+                id="ProductSubmitButton-{{ section.id }}"
+                type="submit"
+                name="add"
+                class="product-form__submit {{ section.settings.button_style }} {{ button_size }}"
+                {% if product.selected_or_first_available_variant.available == false
+                  or quantity_rule_soldout
+                  or product.selected_or_first_available_variant == null
+                %}
+                  disabled
+                {% endif %}
+              >
+                <span>
+                  {{ section.settings.button_label }}
+                  {% if button_icon %}
+                    {% render 'material-icon', icon: button_icon %}
+                  {% endif %}
+                </span>
+                {%- render 'loading-spinner' -%}
+              </button>
+            </div>
+          {%- endform -%}
+        </product-form>
+      </div>
+    </div>
+  </div>
+</div>

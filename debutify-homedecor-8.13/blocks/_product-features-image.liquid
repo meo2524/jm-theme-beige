@@ -1,0 +1,50 @@
+{% if section.settings.image != blank %}
+  <img
+    src="{{ section.settings.image | image_url: width: 800, height: 800 }}"
+    alt="{{ section.settings.image.alt | escape }}"
+    class="product-features-image-dekstop"
+    width="800"
+    height="800"
+  >
+{% else %}
+  <div class="product-features-image-dekstop">
+    {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+  </div>
+{% endif %}
+
+{% if section.settings.mobile_image != blank %}
+  <img
+    src="{{ section.settings.mobile_image | image_url: width: 800, height: 800 }}"
+    alt="{{ section.settings.mobile_image.alt | escape }}"
+    class="product-features-image-mobile"
+    width="800"
+    height="800"
+  >
+{% else %}
+  <div class="product-features-image-mobile">
+    {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+  </div>
+{% endif %}
+<div class="dbtfy-feature-image-point-list" data-modal-open="{{ section.settings.open_modal_on }}">
+  {% content_for 'blocks' %}
+</div>
+{% schema %}
+{
+  "name": "t:sections.dbtfy-product-features.settings.product-features-images.name",
+  "tag": null,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "_dbtfy-features-image-point"
+    },
+    {
+      "type": "_dbtfy-features-bullet-point"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.icon_label"
+    }
+  ]
+}
+{% endschema %}

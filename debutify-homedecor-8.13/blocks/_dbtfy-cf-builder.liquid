@@ -1,0 +1,92 @@
+{% style %}
+  #section-{{ section.id }} .contact__fields .d-grid{
+    row-gap: {{ block.settings.row_gap }}px;
+  }
+  #section-{{ section.id }} .contact__fields .d-grid{
+    column-gap: {{ block.settings.column_gap }}px;
+  }
+{% endstyle %}
+
+<div class="contact__fields">
+  <div class="d-grid">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blocks",
+  "tag": null,
+  "settings": [
+    {
+      "type": "range",
+      "id": "row_gap",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "t:general.settings.gap.row",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "t:general.settings.gap.column",
+      "default": 16
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_dbtfy-cfb-email-block"
+    },
+    {
+      "type": "_dbtfy-cfb-input-block"
+    },
+    {
+      "type": "_dbtfy-cfb-phone-block"
+    },
+    {
+      "type": "_dbtfy-cfb-message-block"
+    },
+    {
+      "type": "_dbtfy-cfb-button-block"
+    },
+    {
+      "type": "_dbtfy-cfb-date-block"
+    },
+    {
+      "type": "_dbtfy-cfb-select-block"
+    },
+    {
+      "type": "_dbtfy-cfb-checkbox-block"
+    },
+    {
+      "type": "_dbtfy-cfb-radio-block"
+    },
+    {
+      "type": "_dbtfy-cfb-seprtor-block"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact form builder",
+      "blocks": [
+        { "type": "_dbtfy-cfb-email-block" },
+        { "type": "_dbtfy-cfb-input-block" },
+        { "type": "_dbtfy-cfb-phone-block" },
+        { "type": "_dbtfy-cfb-message-block" },
+        { "type": "_dbtfy-cfb-button-block" },
+        { "type": "_dbtfy-cfb-date-block" },
+        { "type": "_dbtfy-cfb-select-block" },
+        { "type": "_dbtfy-cfb-checkbox-block" },
+        { "type": "_dbtfy-cfb-radio-block" },
+        { "type": "_dbtfy-cfb-seprtor-block" }
+      ]
+    }
+  ]
+}
+{% endschema %}

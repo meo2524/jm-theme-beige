@@ -1,0 +1,303 @@
+{% comment %}
+  desktop_layout:
+    stacked: first image big and then 2 columns of thumbnails
+    columns: 2 columns all image side by side
+    thumbnail: main slider but thumbnail only showing not slider
+    thumbnail_slider: main slider with thumbnail slider below
+  mobile_layout:
+    columns: 2 columns all image side by side
+    show: main slider but thumbnail only showing not slider
+    hide: main slider but hide thumbnail
+{% endcomment %}
+
+{%- liquid
+  assign current_desktop_layout = desktop_layout | default: section.settings.gallery_layout | default: 'thumbnail_slider'
+  assign current_mobile_layout = mobile_layout | default: section.settings.mobile_thumbnails | default: 'hide'
+
+  assign thumbnail_position = thumbnail_position | default: section.settings.thumbnail_position | default: 'bottom'
+
+  assign show_desktop_thumbnails = false
+  if current_desktop_layout == 'thumbnail_slider'
+    assign show_desktop_thumbnails = true
+  endif
+
+  assign is_side_position = false
+  if show_desktop_thumbnails
+    if thumbnail_position == 'left' or thumbnail_position == 'right'
+      assign is_side_position = true
+    endif
+  endif
+
+  assign product_enable_arrows = product_enable_arrows | default: section.settings.product_enable_arrows | default: false
+  assign enable_arrows = enable_arrows | default: section.settings.enable_arrows | default: false
+  assign enable_progress_bar = enable_progress_bar | default: section.settings.enable_progress_bar | default: false
+-%}
+{% style %}
+    #MainProduct-{{ section.id }}{
+      @media screen and (min-width: 990px) {
+
+          .desktop-layout-thumbnail #thumbnail-carousel .splide__slide {
+            {% if is_side_position and current_desktop_layout == 'thumbnail_slider' %}
+              width: calc(20% - 0.4rem) !important;
+            {% endif %}
+              cursor: pointer;
+          }
+        }
+
+  }
+{% endstyle %}
+{%- liquid
+  assign hide_variants = false
+  if hide_variants_block
+    assign hide_variants = true
+  else
+    assign hide_variants = section.settings.hide_variants
+  endif
+
+  assign media_count = product.media.size
+  if hide_variants and media_count > 1 and variant_images.size > 0
+    assign media_count = media_count | minus: variant_images.size | plus: 1
+  endif
+%}
+
+{%- if settings.dbtfy_product_zooming == false or settings.dbtfy_product_zoom != 'lightbox' -%}
+  {%- assign image_on_click = 'onclick="return false;javascript:void(0);"' -%}
+{%- endif -%}
+{%- if settings.dbtfy_product_zooming == false -%}
+  <style>
+    .grid__item.product__media-wrapper main-product-gallery img {
+      cursor: default;
+    }
+  </style>
+{%- endif -%}
+{% if settings.dbtfy_product_zooming and settings.dbtfy_product_zoom == 'hover' %}
+  {%- assign image_on_hover = 'image-magnify-hover' -%}
+{%- endif -%}
+
+<main-product-gallery
+  class="
+    {% if section.settings.enable_sticky_info %}
+      product__column-sticky
+    {% endif %}
+    thumbnail-position-{{ thumbnail_position }}
+    desktop-layout-{{ current_desktop_layout }}
+    mobile-layout-{{ current_mobile_layout }}
+    {% if show_desktop_thumbnails and is_side_position %}
+      desktop-layout__columns
+    {% endif %}
+  "
+  id="main-carousel-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-synced-variant-image="{{ settings.dbtfy_synced_variant_image }}"
+  data-thumbnail-position="{{ thumbnail_position }}"
+  data-desktop-layout="{{ current_desktop_layout }}"
+  data-mobile-layout="{{ current_mobile_layout }}"
+>
+  <on-product-wishlist-compare>
+    {%- if settings.dbtfy_wish_list and settings.dbtfy_wish_list_product_page_position == 'on-product-image' -%}
+      {%- render 'dbtfy-wishlist-badge', product_url: product.url, dbtfy_wish_list_hover: false -%}
+    {%- endif -%}
+    {%- if settings.dbtfy_quick_compare and settings.dbtfy_quick_compare_product_page_position == 'on-product-image' -%}
+      {%- render 'dbtfy-compare-badge', product_url: product.url, dbtfy_compare_hover: false -%}
+    {%- endif -%}
+  </on-product-wishlist-compare>
+
+  <div
+    id="main-carousel"
+    aria-label="The carousel with thumbnails. Selecting a thumbnail will change the Beautiful Gallery carousel."
+    class="splide {% if show_desktop_thumbnails and is_side_position %}flex-basis-80{% endif %}"
+    data-show-arrows="{{ product_enable_arrows }}"
+  >
+    <div class="splide__track">
+      <ul class="splide__list">
+        {%- assign featured_media = product.featured_media -%}
+        {%- if settings.dbtfy_synced_variant_image -%}
+          {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
+        {%- endif -%}
+        {%- if featured_media != null -%}
+          <li class="splide__slide" data-position="1" data-media-id="{{ featured_media.id }}">
+            <a
+              href="{{ featured_media | image_url }}"
+              class="
+                product-media-container media-type-{{ media.media_type }} media-fit-{{ section.settings.media_fit }} global-media-settings gradient{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}
+                {% if image_ratio_position %}image--ratio{% endif %}
+              "
+              style="--ratio: {{ media_aspect_ratio | default: 1.0 }}; --preview-ratio: {{ media.preview_image.aspect_ratio | default: 1.0 }};"
+              {{ image_on_click }}
+            >
+              <div class="loading__spinner hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66">
+                  <circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle>
+                </svg>
+              </div>
+              <div class="{{ image_ratio_position }}">
+                {{
+                  featured_media
+                  | image_url: width: featured_media.width
+                  | image_tag: class: image_on_hover, loading: lazy, sizes: sizes, widths: '1346, 1426, 1646, 1946'
+                }}
+              </div>
+            </a>
+          </li>
+        {%- endif -%}
+        {% assign position = 2 %}
+        {%- for media in product.media -%}
+          {% if media.media_type == 'video' or media.media_type == 'external_video' %}
+            {% if media.media_type == 'video' %}
+              {% assign video_loaded = false %}
+              {% for media_video in media.sources %}
+                {% if video_loaded == false and media_video.format == 'mp4' %}
+                  {% assign video_loaded = true %}
+                  {% assign media_url = media_video.url %}
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              {% assign media_url = media | external_video_url %}
+            {% endif %}
+            <li class="splide__slide" data-position="{{ position }}" data-media-id="{{ media.id }}">
+              <a
+                href="{{media_url}}"
+                class="
+                   has-video product-media-container media-type-{{ media.media_type }} media-fit-{{ section.settings.media_fit }} global-media-settings gradient{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}
+                  {% if image_ratio_position %}image--ratio{% endif %}
+                "
+                style="--ratio: {{ media_aspect_ratio | default: 1.0 }}; --preview-ratio: {{ media.preview_image.aspect_ratio | default: 1.0 }};"
+                {{ image_on_click }}
+              >
+                <div class="{{ image_ratio_position }}">
+                  {% render 'product-thumbnail',
+                    media: media,
+                    media_count: media_count,
+                    position: media_position,
+                    desktop_layout: section.settings.gallery_layout,
+                    mobile_layout: section.settings.mobile_thumbnails,
+                    loop: section.settings.enable_video_looping,
+                    modal_id: section.id,
+                    xr_button: true,
+                    media_width: media_width,
+                    media_fit: section.settings.media_fit,
+                    constrain_to_viewport: section.settings.constrain_to_viewport,
+                    lazy_load: lazy_load
+                  %}
+                </div>
+              </a>
+            </li>
+          {% else %}
+            {%- unless media.id == featured_media.id -%}
+              <li class="splide__slide" data-position="{{ position }}" data-media-id="{{ media.id }}">
+                <a
+                  href="{{media | image_url}}"
+                  class="
+                    product-media-container media-type-{{ media.media_type }} media-fit-{{ section.settings.media_fit }} global-media-settings gradient{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}
+                    {% if image_ratio_position %}product--media image--ratio{% endif %}
+                  "
+                  style="--ratio: {{ media_aspect_ratio | default: 1.0 }}; --preview-ratio: {{ media.preview_image.aspect_ratio | default: 1.0 }};"
+                  {{ image_on_click }}
+                >
+                  <div class="loading__spinner hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66">
+                      <circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle>
+                    </svg>
+                  </div>
+                  <div class="{{ image_ratio_position }}">
+                    {{
+                      media.preview_image
+                      | image_url: width: media.preview_image.width
+                      | image_tag:
+                        loading: 'lazy',
+                        sizes: sizes,
+                        widths: '1346',
+                        id: thumbnail_id,
+                        alt: media.alt,
+                        class: image_on_hover
+                      | escape
+                    }}
+                  </div>
+                </a>
+              </li>
+            {% endunless %}
+          {% endif %}
+          {% assign position = position | plus: 1 %}
+        {% endfor %}
+      </ul>
+    </div>
+    {%- if product_enable_arrows -%}
+      {% render 'dbtfy-arrow',
+        class: 'splide__arrows',
+        prev_class: 'splide__arrow splide__arrow--prev',
+        next_class: 'splide__arrow splide__arrow--next'
+      %}
+    {%- endif -%}
+  </div>
+
+  <div
+    id="thumbnail-carousel"
+    class="splide {% if hide_variants %} hide_variants_thumbnail {% endif %} {% if show_desktop_thumbnails and is_side_position %}flex-basis-20{% endif %}"
+    aria-label="The carousel with thumbnails. Selecting a thumbnail will change the Beautiful Gallery carousel."
+    data-show-arrows="{{ enable_arrows }}"
+    data-show-arrows-mobile="{{ section.settings.mobile_thumbnails }}"
+  >
+    <div class="splide__track">
+      {%- assign featured_media = product.featured_media -%}
+      {% if settings.dbtfy_synced_variant_image %}
+        {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
+      {% endif %}
+
+      <ul class="splide__list">
+        {%- if featured_media != null -%}
+          <li
+            class="splide__slide"
+            data-position="1"
+            data-media-id="{{ featured_media.id }}"
+          >
+            {{
+              featured_media
+              | image_url: width: '200', height: '200'
+              | image_tag: class: image_class, loading: lazy, sizes: sizes, widths: '1346, 1426, 1646, 1946'
+            }}
+          </li>
+        {%- endif -%}
+        {% assign position = 2 %}
+        {%- for media in product.media -%}
+          {%- unless media.id == featured_media.id -%}
+            <li
+              class="splide__slide {% unless hide_variants and variant_images contains media.src %} thumbnail-list_item--carousel{% endunless %}"
+              data-position="{{ position }}"
+              data-media-id="{{ media.id }}"
+            >
+              {{
+                media.preview_image
+                | image_url: width: '200', height: '200'
+                | image_tag: loading: 'lazy', sizes: sizes, widths: '1346', id: thumbnail_id, alt: media.alt
+                | escape
+              }}
+            </li>
+            {% assign position = position | plus: 1 %}
+          {% endunless %}
+        {% endfor %}
+      </ul>
+    </div>
+
+    {%- if enable_arrows -%}
+      {% render 'dbtfy-arrow',
+        class: 'splide__arrows',
+        prev_class: 'splide__arrow splide__arrow--prev',
+        next_class: 'splide__arrow splide__arrow--next'
+      %}
+    {%- endif -%}
+  </div>
+  {% if enable_progress_bar %}
+    <div class="flex align-items-center dbtfy-carousel__progress_counter w-100">
+      <div class="thumbnail-carousel__progress">
+        <div class="thumbnail-carousel__progress-bar"></div>
+      </div>
+      <div class="thumbnail-carousel__image-count"></div>
+    </div>
+  {% endif %}
+</main-product-gallery>
+
+<script src="{{ 'main-product-gallery.js' | asset_url }}" defer="defer"></script>
+
+{%- if settings.dbtfy_product_zooming and settings.dbtfy_product_zoom == 'lightbox' -%}
+  {{ 'dbtfy-media-splide.js' | asset_url | script_tag }}
+{%- endif -%}

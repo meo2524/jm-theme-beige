@@ -1,0 +1,154 @@
+{%- liquid
+  assign product = block.settings.product
+  if block.settings.title != blank
+    assign title = block.settings.title
+  else
+    assign title = product.title
+  endif
+
+  if block.settings.description != blank
+    assign description = block.settings.description
+  else
+    assign description = product.description
+  endif
+
+  if block.settings.image != blank
+    assign image = block.settings.image
+  else
+    assign image = product.featured_image
+  endif
+
+  assign show_price = block.settings.show_price
+  assign show_description = block.settings.show_description
+
+  assign product_is_in_cart = cart.items | where: 'id', product.first_available_variant.id
+  assign productInCart = ''
+
+  if product_is_in_cart.size > 0
+    assign productInCart = 'checked'
+  endif
+-%}
+{% if product != blank and settings.dbtfy_add_on_cart %}
+  {%- render 'widget-settings', key: 'dbtfy-add-on-cart', settings: block.settings -%}
+
+  <link rel="stylesheet" href="{{ 'dbtfy-add-on-cart.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  <dbtfy-add-on-cart data-id="{{ product.first_available_variant.id }}">
+    <div class="dbtfy-add-on-cart">
+      <div class="dbtfy-add-on-cart__content">
+        <div class="dbtfy-add-on-cart__content-inner">
+          <div class="dbtfy-add-on-cart__image-container global">
+            <img src="{{ image | img_url: '300x300' }}" alt="{{ image.alt }}" class="dbtfy-add-on-cart__image">
+          </div>
+          <div class="dbtfy-add-on-cart__details">
+            <div class="dbtfy-add-on-cart__title">
+              <h4 class="dbtfy-add-on-cart__title-text">{{ title }}</h4>
+              {% if show_price %}
+                <div class="dbtfy-add-on-cart__price">
+                  {% render 'price', product: product, show_compare_at_price: true %}
+                </div>
+              {% endif %}
+            </div>
+            {% if show_description %}
+              <div class="dbtfy-add-on-cart__description rte">{{ description | strip_html }}</div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="dbtfy-add-on-cart__switch">
+          <label class="switch">
+            <input type="checkbox" {{ productInCart }}>
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </dbtfy-add-on-cart>
+  <script src="{{ 'dbtfy-add-on-cart.js' | asset_url }}" defer></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:sections.dbtfy-add-on-cart.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-add-on-cart.settings.product_in_cart_info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-add-on-cart.settings.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.enterprise_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info",
+      "default": "t:sections.dbtfy-add-on-cart.name"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:general.settings.visibility.product.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-add-on-cart.settings.header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:general.settings.title"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "t:general.settings.description"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:general.settings.image"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-add-on-cart.settings.header_2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_in_cart",
+      "label": "t:sections.dbtfy-add-on-cart.settings.product_in_cart",
+      "info": "t:sections.dbtfy-add-on-cart.settings.product_in_cart_info",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "t:blocks.dbtfy-lookbook-point.settings.show_price.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "t:sections.main-collection-product-grid.settings.show_description.label",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-add-on-cart.name"
+    }
+  ]
+}
+{%- endschema -%}

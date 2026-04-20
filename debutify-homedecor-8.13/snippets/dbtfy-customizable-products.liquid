@@ -1,0 +1,24 @@
+{%- if request.design_mode -%}
+  {%- render 'widget-blocker-warning',
+    enabled: settings.dbtfy_customizable_products,
+    type: 'widget',
+    as: 'block',
+    name: 'Customizable Products',
+    id: block
+  -%}
+{%- endif -%}
+{%- if request.design_mode or settings.dbtfy_customizable_products -%}
+  <link rel="stylesheet" href="{{ 'dbtfy-dropdown.css' | asset_url }}" media="print" onload="this.media='all'">
+  {{ 'dbtfy-customizable-products.css' | asset_url | stylesheet_tag: preload: true }}
+  <div {{ block.shopify_attributes }}>
+    <h3 class="inline-richtext">
+      {{ block.settings.heading }}
+    </h3>
+    <customizable-product-block
+      data-form-validator
+      data-form-id="product-form-{{ section.id }}"
+    ></customizable-product-block>
+  </div>
+  <script src="{{ 'dbtfy-dropdown.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'dbtfy-customizable-products.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}

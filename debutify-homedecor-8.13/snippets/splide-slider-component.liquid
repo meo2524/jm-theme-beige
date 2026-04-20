@@ -1,0 +1,266 @@
+{% comment %}
+  Renders a Splide slider component.
+
+  Accepts:
+  - setting: {Object} Section and Block settings. Required. Otherwise, default values will be used.
+  - inner_content: {String} Slider content. Required.
+  - slider_on: {String} Determines where the slider is enabled. Values are "desktop", "mobile", "none", or "both". Default is "both".
+  - loop: {String} Slider type. Values are "loop" or "slide". Default is "slide".
+  - autoplay: {Boolean} Enables autoplay. Default is true.
+  - autoplay_speed: {Number} Autoplay speed in milliseconds. Default is 5000.
+  - arrows: {Boolean} Enables navigation arrows. Default is true.
+  - arrow_position: {String} Position of navigation arrows. Values are "middle" or "bottom". Default is "middle".
+  - pagination: {Boolean} Enables pagination dots. Default is true.
+  - move_desktop: {Number} Number of slides to move on desktop. Default is 1.
+  - move_mobile: {Number} Number of slides to move on mobile. Default is 1.
+  - columns_desktop: {Number} Number of columns on desktop. Default is 3.
+  - columns_mobile: {Number} Number of columns on mobile. Default is 1.
+  - spacing_grid_horizontal_desktop: {Number} Horizontal spacing between slides on desktop. Default is 30.
+  - spacing_grid_horizontal_mobile: {Number} Horizontal spacing between slides on mobile. Default is 15.
+  - drag: {Boolean} Enables drag functionality. Default is true.
+  - padding_calc_desktop: {Boolean} Enables padding calculation for desktop. Default is false.
+  - padding_desktop: {Number} Padding value for desktop. Default is 0.
+  - padding_calc_mobile: {Boolean} Enables padding calculation for mobile. Default is false.
+  - padding_mobile: {Number} Padding value for mobile. Default is 0.
+  - pause_videos: {Boolean} Pauses videos in the slider. Default is false.
+  - custom_arrow_color_settings: {Boolean} Enables custom arrow color settings. Default is false.
+  - arrow_color: {Color} Custom color for navigation arrows.
+  - arrow_background_color: {Color} Custom background color for navigation arrows.
+  - auto_width: {Boolean} Enables auto width for slides. Default is false.
+  - overflow: {Boolean} Enables overflow for the slider. Default is false.
+
+  Usage:
+  {% render 'splide-slider-component', setting: section.settings, inner_content: inner_content %}
+{% endcomment %}
+{% liquid
+  if custom_arrow_color_settings == blank
+    if setting.arrow_color == 'custom'
+      assign arrow_color = setting.custom_arrow_color
+      assign arrow_background_color = setting.custom_arrow_background_color
+      assign custom_arrow_color = true
+    endif
+  else
+    assign custom_arrow_color = true
+  endif
+
+  if setting.slider_on == 'desktop'
+    assign mobile_destroy = true
+    assign desktop_destroy = false
+    assign grid_destroy = 'mobile'
+  elsif setting.slider_on == 'mobile'
+    assign mobile_destroy = false
+    assign desktop_destroy = true
+    assign grid_destroy = 'desktop'
+  elsif setting.slider_on == 'none'
+    assign mobile_destroy = true
+    assign desktop_destroy = true
+    assign grid_destroy = 'desktop splide--destroy-mobile'
+  else
+    assign mobile_destroy = false
+    assign desktop_destroy = false
+    assign grid_destroy = ''
+  endif
+
+  if loop == blank
+    if setting.enable_loop
+      assign loop = 'loop'
+    else
+      assign loop = 'slide'
+    endif
+  endif
+
+  if autoplay == blank
+    assign autoplay = setting.enable_autoplay
+  endif
+
+  if autoplay_speed == blank
+    assign autoplay_speed = setting.autoplay_speed
+  endif
+
+  if arrows == blank
+    assign arrows = setting.enable_arrows
+  endif
+
+  if arrow_position == blank
+    assign arrow_position = setting.arrow_position
+  endif
+
+  if pagination == blank
+    assign pagination = setting.enable_dots
+  endif
+
+  if move_desktop == blank
+    assign move_desktop = setting.move_desktop
+  endif
+
+  if move_mobile == blank
+    assign move_mobile = setting.move_mobile
+  endif
+
+  if columns_desktop == blank
+    assign columns_desktop = setting.columns_desktop
+  endif
+
+  if columns_mobile == blank
+    assign columns_mobile = setting.columns_mobile
+  endif
+
+  if spacing_grid_horizontal_desktop == blank
+    assign spacing_grid_horizontal_desktop = settings.spacing_grid_horizontal | minus: 8
+  endif
+
+  if spacing_grid_horizontal_mobile == blank
+    assign spacing_grid_horizontal_mobile = settings.spacing_grid_horizontal | divided_by: 2
+  endif
+
+  if drag == blank
+    assign drag = setting.drag
+  endif
+
+  if padding_calc_desktop == blank
+    assign padding_calc_desktop = setting.padding_calc_desktop
+  endif
+
+  if padding_calc_mobile == blank
+    assign padding_calc_mobile = setting.padding_calc_mobile
+  endif
+
+  if padding_desktop == blank
+    assign padding_desktop = setting.padding_desktop
+  endif
+
+  if padding_mobile == blank
+    assign padding_mobile = setting.padding_mobile
+  endif
+
+  if pause_videos == blank
+    assign pause_videos = setting.pause_videos
+  endif
+
+  if desktop_adaptive_height == ''
+    assign desktop_adaptive_height = true
+  else
+    assign desktop_adaptive_height = desktop_adaptive_height
+  endif
+
+  if auto_width == blank
+    assign auto_width = setting.auto_width
+  endif
+%}
+
+{% style %}
+  {% if arrows != true and pagination == true %}
+    #section-{{ section.id }} .splide__arrows.splide__arrows--ltr {
+      display: block !important;
+    }
+  {% endif %}
+{% endstyle %}
+
+{%- capture dots_class -%}
+    {%- if pagination -%}
+        splide--desktop-dots-under splide--mobile-dots-under
+    {%- else -%}
+        splide--desktop-dots-hidden splide--mobile-dots-hidden
+    {%- endif -%}
+{%- endcapture -%}
+
+{%- capture arrow_class -%}
+    {%- if arrows -%}
+        {%- if arrow_position == 'middle' -%}
+            splide--desktop-arrows-sides splide--mobile-arrows-sides
+        {%- else -%}
+            splide--desktop-arrows-under splide--mobile-arrows-under {% unless pagination %} splide--only-desktop-arrows {% endunless %}
+        {%- endif -%}
+    {%- else -%}
+        splide--desktop-arrows-hidden splide--mobile-arrows-hidden
+    {%- endif -%}
+{%- endcapture -%}
+<splide-component
+  data-type="{{ loop }}"
+  data-autoplay="{{ autoplay }}"
+  data-autoplay-speed="{{ autoplay_speed }}"
+  data-arrows="{{ arrows }}"
+  data-pagination="{{ pagination }}"
+  data-slides-desktop="{{ columns_desktop }}"
+  data-slides-mobile="{{ columns_mobile }}"
+  data-per-move-desktop="{{ move_desktop }}"
+  data-per-move-mobile="{{ move_mobile }}"
+  data-gap-desktop="{{ spacing_grid_horizontal_desktop }}"
+  data-gap-mobile="{{ spacing_grid_horizontal_mobile }}"
+  data-destroy-desktop="{{ desktop_destroy }}"
+  data-destroy-mobile="{{ mobile_destroy }}"
+  data-padding-calc-desktop="{{ padding_calc_desktop }}"
+  data-padding-calc-mobile="{{ padding_calc_mobile }}"
+  data-side-padding-desktop="{{ padding_desktop }}"
+  data-side-padding-mobile="{{ padding_mobile }}"
+  data-pause-videos="{{ pause_videos }}"
+  data-drag="{{ drag }}"
+  data-auto-width-enabled="{{ auto_width }}"
+  data-video-autoplay="{{ setting.autoplay_muted }}"
+  data-video-slider="{{ video_slider }}"
+
+  style="--columns-desktop: {{ columns_desktop  }};--columns-mobile:{{ columns_mobile }};--gap-desktop:{{ spacing_grid_horizontal_desktop }};--gap-mobile:{{ spacing_grid_horizontal_mobile }};"
+>
+  <div
+    class="new-slider splide {{ dots_class }} {{ arrow_class }} splide--destroy-{{ grid_destroy }}"
+    {%- if columns_desktop == 1 or columns_desktop == blank -%}
+      {% if desktop_adaptive_height %}
+        data-desktop-adaptive-height="true"
+      {% endif %}
+    {%- endif %}
+    {% if columns_mobile == 1 or columns_mobile == blank -%}
+      data-mobile-adaptive-height="true"
+    {%- endif -%}
+  >
+    <div class="splide__track new_slider">
+      <ul class="splide__list {% if center == true %} justify-center {% else %} justify-left {% endif %}">
+        {{ inner_content }}
+      </ul>
+    </div>
+    <div class="splide__dots-and-arrows">
+      <div class="splide__arrows">
+        <button
+          class="slider-button {% if arrow_position == 'middle' %}splide__arrow{% endif %} splide__arrow--prev"
+          type="button"
+          aria-label="Previous slide"
+          aria-controls="splide01-track"
+        >
+          {%- if custom_icon != blank -%}
+            <img
+              src="{{ custom_icon |  image_url: width: settings.desktop_arrowsize, height: settings.desktop_arrowsize }}"
+              alt="{{ custom_icon.alt }}"
+            >
+          {%- else -%}
+            {% render 'material-icon', icon: icon %}
+          {%- endif -%}
+        </button>
+        <ul class="splide__pagination"></ul>
+        <button
+          class="slider-button {% if arrow_position == 'middle' %}splide__arrow{% endif %} splide__arrow--next"
+          type="button"
+          aria-label="Next slide"
+          aria-controls="splide01-track"
+        >
+          {%- if custom_icon != blank -%}
+            <img
+              src="{{ custom_icon |  image_url: width: settings.desktop_arrowsize, height: settings.desktop_arrowsize }}"
+              alt="{{ custom_icon.alt }}"
+            >
+          {%- else -%}
+            {% render 'material-icon', icon: icon %}
+          {%- endif -%}
+        </button>
+      </div>
+    </div>
+  </div>
+</splide-component>
+
+{% if custom_arrow_color %}
+  {% style %}
+    #section-{{ section.id }} .splide__dots-and-arrows{
+        --arrow-color: {{ arrow_color }};
+        --color-button-text: {{ arrow_color }};
+        --arrow-background-color: {{ arrow_background_color }};
+    }
+  {% endstyle %}
+{% endif %}

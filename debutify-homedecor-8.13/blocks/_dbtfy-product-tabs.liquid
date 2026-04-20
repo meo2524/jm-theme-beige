@@ -1,0 +1,218 @@
+{%- if block.blocks.size > 0 -%}
+  {%- render 'widget-blocker',
+    enabled: settings.dbtfy_product_tabs,
+    section: section,
+    name: 'Product tabs',
+    type: '⚡ Paid Sections'
+  -%}
+{%- endif -%}
+<link rel="stylesheet" href="{{ 'dbtfy-product-tabs.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- render 'section-padding', section: section -%}
+<dbtfy-product-tab
+  data-display-type="{{ block.settings.display_type }}"
+  data-block="{{ block.settings.show_as_separate_section }}"
+>
+  <dbtfy-product-tabs-horizontal>
+    <div class="section-{{ section.id }}-padding dbtfy-product-tab hidden {% if block.settings.display_type == "horizontal" %}dbtfy-product-tabs-horizontal {% endif %} color-{{ block.settings.custom_color_scheme }} dbtfy-color-{{ block.settings.color_scheme }} section-{{ block.id }}-padding">
+      <div class="page-width">
+        <div class="d-grid">
+          {%- content_for 'blocks' -%}
+        </div>
+      </div>
+    </div>
+  </dbtfy-product-tabs-horizontal>
+</dbtfy-product-tab>
+<script src="{{ "dbtfy-product-tab.js" | asset_url }}" defer></script>
+{%- schema -%}
+{
+  "name": "t:blocks.dbtfy-product-tabs.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-product-tabs.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-product-tabs.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_as_separate_section",
+      "label": "t:blocks.dbtfy-product-tabs.settings.checkbox.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "display_type",
+      "label": "t:blocks.dbtfy-product-tabs.settings.display_type.label",
+      "info": "t:blocks.dbtfy-product-tabs.settings.display_type.info",
+      "default": "vertical",
+      "options": [
+        {
+          "value": "vertical",
+          "label": "t:general.settings.alignment.option__11"
+        },
+        {
+          "value": "horizontal",
+          "label": "t:general.settings.alignment.option__10"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.layout.settings.spacing.section_desktop.label"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.top",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.bottom",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_dbtfy-product_tabs_desc"
+    },
+    {
+      "type": "_dbtfy-product_tabs_review"
+    },
+    {
+      "type": "_dbtfy-product_tabs_text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.dbtfy-product-tabs.name"
+    }
+  ]
+}
+{%- endschema -%}

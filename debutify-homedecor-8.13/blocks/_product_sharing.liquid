@@ -1,0 +1,41 @@
+{%- if settings.dbtfy_product_sharing or request.design_mode -%}
+  {%- unless request.page_type == 'product' -%}
+    {%- assign product = section.settings.product -%}
+  {%- endunless -%}
+  {%- liquid
+    unless section.settings.product == blank
+      assign product = all_products[section.settings.product]
+    endunless
+  -%}
+  {%- capture products_data -%}
+      <script type="application/json" data-product-sharing-product>
+        {{- product | json -}}
+      </script>
+      <script type="application/json" data-product-sharing-collection>
+        {{- product.collections | json -}}
+      </script>
+  {%- endcapture -%}
+  <dbtfy-product-sharing
+    data-share-permalink="{{ request.host | append: product.url | prepend: 'https://' }}"
+    data-share-image="{{ product.featured_media | img_url: '800x' }}"
+    data-share-title="{{ product.title | escape }}"
+    data-share-description="{{ product.description | truncatewords: 20 | escape }}"
+    data-share-content="{{ product.title | append: ' — ' | append: product.description | truncatewords: 20 | escape }}"
+    data-share-title-escaped="{{ product.title | url_param_escape }}"
+    data-share-description-escaped="{{ product.description | url_param_escape }}"
+    data-share-content-escaped="{{ product.title | append: ' — ' | append: product.description | truncatewords: 20 | url_param_escape }}"
+    data-classes="color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} gradient inner-spacing m-0"
+  >
+    {{- products_data -}}
+  </dbtfy-product-sharing>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.dbtfy-product-sharing.name",
+  "presets": [
+    {
+      "name": "t:blocks.dbtfy-product-sharing.name"
+    }
+  ]
+}
+{%- endschema -%}

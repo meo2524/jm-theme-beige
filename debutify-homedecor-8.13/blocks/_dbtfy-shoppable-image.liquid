@@ -1,0 +1,61 @@
+{% assign media_ratio = 'media media--transparent media--' | append: section.settings.image_ratio | append: ' ratio' %}
+
+{%- if section.settings.image != blank -%}
+  <div
+    class="dbtfy-shoppable-image-dekstop image--ratio"
+  >
+    <div class="{{ media_ratio }}">
+      <img
+        src="{{ section.settings.image | image_url: width: 800, height: 800 }}"
+        alt="{{ section.settings.image.alt | escape }}"
+        style="object-fit: contain;"
+      >
+    </div>
+  </div>
+
+{%- else -%}
+  <div
+    class="dbtfy-shoppable-image-dekstop image--ratio"
+  >
+    <div class="{{ media_ratio }}">
+      {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  </div>
+{%- endif -%}
+
+{%- if section.settings.mobile_image != blank -%}
+  <div class="dbtfy-shoppable-image-mobile image--ratio">
+    <div class="{{ media_ratio }}">
+      <img
+        src="{{ section.settings.mobile_image | image_url: width: 800, height: 800 }}"
+        alt="{{ section.settings.mobile_image.alt | escape }}"
+        style="object-fit: contain;"
+      >
+    </div>
+  </div>
+{%- else -%}
+  <div class="dbtfy-shoppable-image-mobile image--ratio">
+    <div class="{{ media_ratio }}">
+      {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  </div>
+{%- endif -%}
+<div class="dbtfy-shoppable-image-point-list" data-modal-open="{{ section.settings.open_modal_on }}">
+  {%- content_for 'blocks' -%}
+</div>
+{%- schema -%}
+{
+  "name": "t:sections.dbtfy-shoppable-image.settings.header_1",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_dbtfy-shoppable-image-hotspot"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.icon_label"
+    }
+  ]
+}
+{%- endschema -%}

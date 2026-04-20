@@ -1,0 +1,165 @@
+{%- if block.blocks.size > 0 -%}
+  {%- render 'widget-blocker',
+    enabled: settings.dbtfy_product_bullet_points,
+    section: section,
+    name: 'Product Bullet Point',
+    type: '⚡ Paid widget'
+  -%}
+{%- endif -%}
+<link
+  rel="stylesheet"
+  href="{{ 'dbtfy-product-bullet-point.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+>
+{%- if settings.dbtfy_product_bullet_points -%}
+  <product-bullet-point
+    data-position="{{ block.settings.position }}"
+    data-position-in-description="{{ block.settings.position_in_description }}"
+    data-block-id="{{ block.id }}"
+    hidden
+    data-bullet-type="{{ block.settings.bullet_type }}"
+    data-text-alignment="{{ block.settings.text_alignment }}"
+    class="dbtfy_product_bullet_point {% unless block.settings.show_one_per_line %}multi-line{% endunless %} summary_title_{{ block.settings.text_alignment }}"
+  >
+    <bullet-point>
+      {%- if block.settings.bullet_type == 'icon' -%}
+        {% render 'material-icon', icon: 'fake-icon' %}
+      {%- elsif block.settings.bullet_type == 'numbers' -%}
+        <span class="bullet-number"></span>
+      {%- elsif block.settings.bullet_type == 'circle' -%}
+        <span class="dbtfy-product-bullet-point circle"></span>
+      {%- elsif block.settings.bullet_type == 'rounded' -%}
+        <span class="dbtfy-product-bullet-point rounded"></span>
+      {%- elsif block.settings.bullet_type == 'square' -%}
+        <span class="dbtfy-product-bullet-point square"></span>
+      {%- endif -%}
+    </bullet-point>
+    {%- content_for 'blocks' -%}
+  </product-bullet-point>
+{%- endif -%}
+<script src="{{ 'dbtfy-product-bullet-point.js' | asset_url }}" defer></script>
+{%- schema -%}
+{
+  "name": "t:blocks.dbtfy-product-bullet-points.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-product-bullet-points.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-product-bullet-points.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "t:settings_schema.wish_list.settings.icon_position_product_page.options.label",
+      "default": "separate-block",
+      "options": [
+        {
+          "value": "separate-block",
+          "label": "t:blocks.dbtfy-product-bullet-points.settings.position.options__1.label"
+        },
+        {
+          "value": "in-description",
+          "label": "t:blocks.dbtfy-product-bullet-points.settings.position.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "position_in_description",
+      "label": "t:blocks.dbtfy-product-bullet-points.settings.position-in-description.label",
+      "default": "above",
+      "options": [
+        {
+          "value": "above",
+          "label": "t:blocks.dbtfy-product-bullet-points.settings.position-in-description.options__1.label"
+        },
+        {
+          "value": "below",
+          "label": "t:blocks.dbtfy-product-bullet-points.settings.position-in-description.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_one_per_line",
+      "label": "t:blocks.dbtfy-product-bullet-points.settings.checkbox.label",
+      "info": "t:blocks.dbtfy-product-bullet-points.settings.checkbox.info",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "bullet_type",
+      "label": "t:blocks.dbtfy-product-bullet-points.settings.bullet-type.label",
+      "default": "icon",
+      "options": [
+        {
+          "value": "icon",
+          "label": "t:general.settings.icon_label"
+        },
+        {
+          "value": "numbers",
+          "label": "t:sections.main-product.blocks.complementary_products.settings.pagination_style.options.option_3"
+        },
+        {
+          "value": "circle",
+          "label": "t:general.settings.style.circle"
+        },
+        {
+          "value": "rounded",
+          "label": "t:general.settings.style.rounded"
+        },
+        {
+          "value": "square",
+          "label": "t:general.settings.style.square"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "t:general.settings.alignment.text_alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:general.settings.alignment.option__4"
+        },
+        {
+          "value": "center",
+          "label": "t:general.settings.alignment.option__5"
+        },
+        {
+          "value": "end",
+          "label": "t:general.settings.alignment.option__6"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_dbtfy-prod-bullet-point"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.dbtfy-product-bullet-points.name"
+    }
+  ]
+}
+{%- endschema -%}

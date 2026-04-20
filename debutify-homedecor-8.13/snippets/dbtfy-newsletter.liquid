@@ -1,0 +1,175 @@
+{% comment %}
+  {% render 'dbtfy-newsletter',
+    block ---- Block value for the block.shopify_attributes
+    show_newsletter_first_name  ---- Boolean value (true/false) for showing the name field
+    enable_newsletter_opt_in_checkbox  ----  Boolean value (true/false) for enabling the email marketing checkbox
+    customer_tag ---- A string value for assigning a customer tag
+    block_settings --- Block settings values
+  %}
+{% endcomment %}
+
+{% if customer_tag == blank %}
+  {% assign customer_tag = 'newsletter-form' %}
+{% endif %}
+{% liquid
+  assign label = 'newsletter.button_label' | t
+  assign button_label = button_settings.button_label | default: label
+  assign button_icon = button_settings.button_icon | default: 'mail'
+  assign button_style = button_settings.button_style | default: 'button button--primary'
+  assign button_custom_icon = button_settings.button_custom_icon
+  assign default_label_name = 'newsletter.name_label' | t
+  assign default_label_email = 'newsletter.label' | t
+  assign default_label_opt_checkbox = 'newsletter.email_marketing' | t
+
+  if block_id == blank
+    assign block_id = block.id
+  endif
+
+  assign customer_id = 'customer_id' | append: block_id
+%}
+
+<form-block
+  data-id="{{ customer_id }}"
+  data-customer-tag="{{ block.settings.customer_tag }}"
+  data-success-message="{{- 'newsletter.success' | t }}"
+  data-error-message="{{ block_settings.already_subscribed_message }}"
+  data-color-scheme="{{ section.settings.color_scheme }}"
+  data-custom-color-scheme="{{ section.settings.custom_color_scheme }}"
+>
+  <div {{ block }} class="{% if minimal_form %}minimal_form {% endif %}">
+    {% form 'customer', class: 'newsletter-form', id: customer_id %}
+      <input type="hidden" name="contact[tags]" value="{{customer_tag}}">
+      <div
+        class="newsletter-form__field-wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        {% if settings.animations_reveal_on_scroll %}
+          data-cascade
+          style="--animation-order: {{ forloop.index }};"
+        {% endif %}
+      >
+        {%- if show_newsletter_first_name and minimal_form != true -%}
+          {%- if label_name != blank -%}
+            <div class="field">
+              <input
+                id="NewsletterForm--{{ section.id }}"
+                type="text"
+                name="contact[first_name]"
+                class="field__input"
+                value="{{ form.first_name }}"
+                aria-required="true"
+                autocorrect="off"
+                autocapitalize="off"
+                autocomplete="first_name"
+                {% if form.errors %}
+                  autofocus
+                  aria-invalid="true"
+                  aria-describedby="Newsletter-error--{{ section.id }}"
+                {% elsif form.posted_successfully? %}
+                  aria-describedby="Newsletter-success--{{ section.id }}"
+                {% endif %}
+                placeholder="{{ label_name | default: default_label_name }}"
+                required
+              >
+              <label class="field__label" for="NewsletterForm--{{ section.id }}">
+                {{ label_name | default: default_label_name }}
+              </label>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if label_email != blank -%}
+          <div class="field">
+            <input
+              id="NewsletterForm--{{ section.id }}"
+              type="email"
+              name="contact[email]"
+              class="field__input"
+              value="{{ form.email }}"
+              aria-required="true"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              {% if form.errors %}
+                autofocus
+                aria-invalid="true"
+                aria-describedby="Newsletter-error--{{ section.id }}"
+              {% elsif form.posted_successfully? %}
+                aria-describedby="Newsletter-success--{{ section.id }}"
+              {% endif %}
+              placeholder="{{ label_email | default: default_label_email }}"
+              required
+            >
+            <label class="field__label" for="NewsletterForm--{{ section.id }}">
+              {{ label_email | default: default_label_email }}
+            </label>
+          </div>
+        {%- endif -%}
+
+        {%- if label_number != blank -%}
+          <div class="field">
+            <input
+              id="NewsletterFormPhone--{{ section.id }}"
+              type="tel"
+              name="contact[phone]"
+              class="field__input"
+              value="{{ form.phone }}"
+              aria-required="false"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="tel"
+              placeholder="{{ label_number | default: default_label_phone }}"
+            >
+            <label class="field__label" for="NewsletterFormPhone--{{ section.id }}">
+              {{ label_number }}
+            </label>
+          </div>
+        {%- endif -%}
+        {%- if enable_newsletter_opt_in_checkbox and minimal_form != true -%}
+          {%- if label_opt_checkbox != blank -%}
+            <div class="accepts-marketing checkbox_wraper">
+              <input type="hidden" name="customer[accepts_marketing]" value="false">
+
+              <input type="checkbox" id="accepts_marketing" name="customer[accepts_marketing]">
+              <span class="svg-wrapper">
+                {%- render 'material-icon', icon: 'done' -%}
+              </span>
+              <label for="accepts_marketing">
+                {{- label_opt_checkbox | default: default_label_opt_checkbox -}}
+              </label>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- assign button_size = button_settings.button_size -%}
+        {%- if button_size == 'inherit' -%}
+          {%- assign button_size = settings.button_size -%}
+        {%- endif -%}
+        <button
+          type="submit"
+          class="{{ button_style }} w-full {{ button_size }} submit_btn"
+          name="commit"
+          id="Subscribe"
+          aria-label="{{ button_label }}"
+        >
+          <span class="subscribe__button">
+            {%- if button_custom_icon != blank -%}
+              {{ button_custom_icon | image_url: width: 24 | image_tag }}
+            {%- else -%}
+              {%- render 'material-icon', icon: button_icon -%}
+            {%- endif -%}
+
+            {%- unless minimal_form -%}
+              {{ button_label }}
+            {%- endunless -%}
+          </span>
+        </button>
+
+        {%- if form.errors -%}
+          <form-error hidden>
+            {{- form.errors.translated_fields.email | capitalize }}
+            {{ form.errors.messages.email -}}
+          </form-error>
+        {%- endif -%}
+      </div>
+    {%- endform -%}
+  </div>
+</form-block>

@@ -1,0 +1,41 @@
+{% if cart == empty %}
+  <span class="svg-wrapper">
+    {% render 'material-icon', icon: settings.cart_empty_icon %}
+  </span>
+{% else %}
+  <span class="svg-wrapper">
+    {% render 'material-icon', icon: settings.cart_icon %}
+  </span>
+{% endif %}
+
+{% if settings.dbtfy_cart_bubble %}
+  <cart-bubble>
+    <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+    {%- if cart != empty -%}
+      <element-animator
+        data-enabled="{{ settings.dbtfy_cart_bubble_animation_enabled }}"
+        data-animation="dbtfy-element-animation-{{ settings.dbtfy_cart_bubble_animation_type }}"
+        data-interval="{{ settings.dbtfy_cart_bubble_animation_interval }}"
+        data-duration="{{ settings.dbtfy_cart_bubble_animation_duration }}"
+        data-selector=".cart-count-bubble"
+      >
+        <div class="cart-count-bubble dbtfy-bubble dbtfy-bubble--{{ settings.dbtfy_cart_bubble_position }} dbtfy-bubble--{{ settings.dbtfy_cart_bubble_size }}">
+          {% assign cart_item_count = cart.item_count %}
+          {% for item in cart.items %}
+            {% if item.properties._showProduct == 'false'
+              or item.product.tags contains 'cart-hidden'
+              or item.product.tags contains 'conditional-gift'
+              or item.properties._shipping_priority == 'true'
+            %}
+              {% assign cart_item_count = cart_item_count | minus: 1 %}
+            {% endif %}
+          {% endfor %}
+          {%- if cart_item_count < 100 -%}
+            <span aria-hidden="true">{{ cart_item_count }}</span>
+          {%- endif -%}
+          <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart_item_count }}</span>
+        </div>
+      </element-animator>
+    {%- endif -%}
+  </cart-bubble>
+{% endif %}

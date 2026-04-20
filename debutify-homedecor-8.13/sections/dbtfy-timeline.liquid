@@ -1,0 +1,432 @@
+{%- render 'widget-blocker',
+  enabled: settings.dbtfy_timeline,
+  name: 'dbtfy-timeline',
+  type: '👑 Enterprise sections'
+-%}
+{%- if settings.dbtfy_timeline -%}
+  {{ 'dbtfy-timeline.css' | asset_url | stylesheet_tag }}
+
+  {%- render 'section-padding', section: section -%}
+
+  {%- assign layout = section.settings.layout -%}
+  {%- assign layout_mobile = section.settings.layout_mobile -%}
+  {%- assign container_size = section.settings.container_size -%}
+  {%- assign show_on = section.settings.show_on -%}
+  <dbtfy-timeline>
+    <div class="section-{{ section.id }}-padding gradient show-on--{{ show_on }} color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} gradient">
+      <div class="{{ container_size }}">
+        <div class="dbtfy-timeline dbtfy-timeline--{{ layout }} dbtfy-timeline--mobile-{{ layout_mobile }}">
+          <div class="dbtfy-timeline__container">
+            <div class="dbtfy-timeline__media">
+              {% content_for 'block', type: '_image', id: 'image' %}
+            </div>
+
+            <div class="dbtfy-timeline__content-wrapper">
+              <div class="dbtfy-timeline__content-inner">
+                <div class="dbtfy-timeline__header">
+                  {% content_for 'block', type: '_heading', id: 'heading' %}
+                </div>
+
+                <!-- Timeline -->
+                <div class="dbtfy-timeline__steps dbtfy-timeline__steps--line">
+                  {% for i in (1..5) %}
+                    {% liquid
+                      assign time_key = 'time_' | append: i
+                      assign title_key = 'title_' | append: i
+                      assign desc_key = 'description_' | append: i
+
+                      assign time = section.settings[time_key]
+                      assign title = section.settings[title_key]
+                      assign description = section.settings[desc_key]
+                    %}
+
+                    {% if time != blank or title != blank or description != blank %}
+                      <div class="dbtfy-timeline__step">
+                        <div class="dbtfy-timeline__time-wrapper">
+                          <div class="dbtfy-timeline__time {% if section.settings.timeline_selection == 'image' %}dbtfy-timeline__time--image{% endif %}">
+                            {% if section.settings.timeline_selection == 'text' %}
+                              <span>{{ time }}</span>
+                            {% else %}
+                              {% liquid
+                                assign image_key = 'image_' | append: i
+                                assign image = section.settings[image_key]
+                              %}
+                              {% if image != blank %}
+                                <img src="{{ image | image_url: width: 500, height: 500 }}" alt="{{ title }}">
+                              {% else %}
+                                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                              {% endif %}
+                            {% endif %}
+                          </div>
+                        </div>
+
+                        <div class="dbtfy-timeline__step-content">
+                          {% if title != blank %}
+                            <h4 class="dbtfy-timeline__step-title">
+                              {{ title }}
+                            </h4>
+                          {% endif %}
+
+                          {% if description != blank %}
+                            <div class="dbtfy-timeline__step-description rte">
+                              {{ description }}
+                            </div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+
+                <div class="dbtfy-timeline__footer">
+                  {% content_for 'block', type: '_single_button', id: 'single_button' %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dbtfy-timeline>
+{%- endif -%}
+{% schema %}
+{
+  "name": "t:sections.dbtfy-timeline.name",
+  "disabled_on": { "groups": ["aside"] },
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:help.enterprise_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "t:sections.all.show_on.label",
+      "default": "both",
+      "options": [
+        { "value": "desktop-only", "label": "t:sections.all.show_on.options__1.label" },
+        { "value": "mobile-only", "label": "t:sections.all.show_on.options__2.label" },
+        { "value": "both", "label": "t:sections.all.show_on.options__3.label" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "container_size",
+      "label": "t:sections.all.container_size.label",
+      "default": "page-width",
+      "options": [
+        { "value": "page-width", "label": "t:general.settings.style.default" },
+        { "value": "", "label": "t:sections.all.container_size.options__2.label" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "default": "image_first",
+      "label": "t:sections.image-with-text.settings.layout.label",
+      "options": [
+        { "value": "image_first", "label": "t:general.settings.alignment.option__4" },
+        { "value": "text_first", "label": "t:general.settings.alignment.option__6" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "timeline_selection",
+      "label": "t:sections.dbtfy-timeline.settings.timeline_selection",
+      "default": "text",
+      "options": [
+        { "value": "text", "label": "t:general.settings.text" },
+        { "value": "image", "label": "t:general.settings.image" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.collage.settings.mobile_layout.label"
+    },
+    {
+      "type": "select",
+      "id": "layout_mobile",
+      "label": "t:sections.dbtfy-breadcrumbs.settings.show_icons_on.options__2.label",
+      "default": "top",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:general.settings.alignment.option__1"
+        },
+        {
+          "value": "bottom",
+          "label": "t:general.settings.alignment.option__3"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-timeline.settings.timeline_1"
+    },
+    {
+      "type": "text",
+      "id": "time_1",
+      "label": "t:sections.dbtfy-timeline.settings.time_label",
+      "default": "First Spray",
+      "visible_if": "{{ section.settings.timeline_selection == 'text' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "t:general.settings.image",
+      "visible_if": "{{ section.settings.timeline_selection == 'image' }}"
+    },
+    {
+      "type": "text",
+      "id": "title_1",
+      "label": "t:general.settings.text",
+      "default": "t:blocks.title.default"
+    },
+    {
+      "type": "richtext",
+      "id": "description_1",
+      "label": "t:general.settings.text",
+      "default": "t:blocks.description.default"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-timeline.settings.timeline_2"
+    },
+    {
+      "type": "text",
+      "id": "time_2",
+      "label": "t:sections.dbtfy-timeline.settings.time_label",
+      "default": "30 Minutes",
+      "visible_if": "{{ section.settings.timeline_selection == 'text' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "t:general.settings.image",
+      "visible_if": "{{ section.settings.timeline_selection == 'image' }}"
+    },
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "t:general.settings.text",
+      "default": "t:blocks.title.default"
+    },
+    {
+      "type": "richtext",
+      "id": "description_2",
+      "label": "t:general.settings.text",
+      "default": "t:blocks.description.default"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-timeline.settings.timeline_3"
+    },
+    {
+      "type": "text",
+      "id": "time_3",
+      "label": "t:sections.dbtfy-timeline.settings.time_label",
+      "default": "All Day",
+      "visible_if": "{{ section.settings.timeline_selection == 'text' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "t:general.settings.image",
+      "visible_if": "{{ section.settings.timeline_selection == 'image' }}"
+    },
+    {
+      "type": "text",
+      "id": "title_3",
+      "label": "t:general.settings.text",
+      "default": "t:blocks.title.default"
+    },
+    {
+      "type": "richtext",
+      "id": "description_3",
+      "label": "t:general.settings.text",
+      "default": "t:blocks.description.default"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-timeline.settings.timeline_4"
+    },
+    {
+      "type": "text",
+      "id": "time_4",
+      "label": "t:sections.dbtfy-timeline.settings.time_label",
+      "default": "Week One",
+      "visible_if": "{{ section.settings.timeline_selection == 'text' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "t:general.settings.image",
+      "visible_if": "{{ section.settings.timeline_selection == 'image' }}"
+    },
+    {
+      "type": "text",
+      "id": "title_4",
+      "label": "t:general.settings.text",
+      "default": "t:blocks.title.default"
+    },
+    {
+      "type": "richtext",
+      "id": "description_4",
+      "label": "t:general.settings.text",
+      "default": "t:blocks.description.default"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-timeline.settings.timeline_5"
+    },
+    {
+      "type": "text",
+      "id": "time_5",
+      "label": "t:sections.dbtfy-timeline.settings.time_label",
+      "visible_if": "{{ section.settings.timeline_selection == 'text' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5",
+      "label": "t:general.settings.image",
+      "visible_if": "{{ section.settings.timeline_selection == 'image' }}"
+    },
+    {
+      "type": "text",
+      "id": "title_5",
+      "label": "t:general.settings.text"
+    },
+    {
+      "type": "richtext",
+      "id": "description_5",
+      "label": "t:general.settings.text"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        { "value": "scheme-1", "label": "t:sections.all.color_schemes.default.options__1.label" },
+        { "value": "scheme-2", "label": "t:sections.all.color_schemes.default.options__2.label" },
+        { "value": "scheme-3", "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label" },
+        { "value": "scheme-4", "label": "t:sections.all.color_schemes.default.options__4.label" },
+        { "value": "custom", "label": "t:general.settings.size.option__9" }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.layout.settings.spacing.section_desktop.label"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.top",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "t:general.settings.size.option__1" },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        { "value": "small", "label": "t:general.settings.small" },
+        { "value": "medium", "label": "t:sections.all.animation.image_behavior.parallax_speed.medium" },
+        { "value": "large", "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label" },
+        { "value": "custom", "label": "t:general.settings.size.option__9" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.bottom",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "t:general.settings.size.option__1" },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        { "value": "small", "label": "t:general.settings.small" },
+        { "value": "medium", "label": "t:sections.all.animation.image_behavior.parallax_speed.medium" },
+        { "value": "large", "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label" },
+        { "value": "custom", "label": "t:general.settings.size.option__9" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [{ "type": "@theme" }],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-timeline.name",
+      "blocks": [
+        {
+          "type": "_image",
+          "static": true,
+          "id": "image",
+          "settings": {
+            "full_width": true,
+            "padding___top": "none",
+            "padding___bottom": "none"
+          }
+        },
+        {
+          "type": "_heading",
+          "static": true,
+          "id": "heading",
+          "blocks": [
+            { "type": "_title", "settings": { "title": "Timeline title" } },
+            {
+              "type": "_description",
+              "settings": {
+                "description": "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "type": "_single_button",
+          "static": true,
+          "id": "single_button",
+          "settings": {
+            "button_label": "button label"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

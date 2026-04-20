@@ -1,0 +1,23 @@
+{% if block.blocks.size > 5 and request.design_mode %}
+  <block-activation-info class="absolute top-0 left-0 w-full">{{ 'block_limit.block' | t }} </block-activation-info>
+{% endif %}
+<div class="wrap-images" {{ block.shopify_attributes }}>
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.stacked-images-with-text.blocks.stacked_images",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_stacked_image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.stacked-images-with-text.blocks.stacked_images"
+    }
+  ]
+}
+{% endschema %}

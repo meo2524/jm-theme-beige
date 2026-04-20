@@ -1,0 +1,66 @@
+{%- style -%}
+  {%- liquid
+
+    assign padding_top_selected = section.settings.padding___top
+    assign padding_bottom_selected = section.settings.padding___bottom
+
+    case section.settings.padding___top
+      when "inherit"
+        assign padding_top = settings["default_spacing_top"] | prepend: "spacing_"
+        assign padding_top = settings[padding_top]
+        assign padding_top_selected = settings["default_spacing_top"]
+      when "custom"
+        assign padding_top = section.settings.custom_padding_top
+      else
+        assign padding_top = section.settings.padding___top | prepend: "spacing_"
+        assign padding_top = settings[padding_top]
+    endcase
+
+    case section.settings.padding___bottom
+      when "inherit"
+        assign padding_bottom = settings["default_spacing_bottom"] | prepend: "spacing_"
+        assign padding_bottom = settings[padding_bottom]
+        assign padding_bottom_selected = settings["default_spacing_bottom"]
+      when "custom"
+        assign padding_bottom = section.settings.custom_padding_bottom
+      else
+        assign padding_bottom = section.settings.padding___bottom | prepend: "spacing_"
+        assign padding_bottom = settings[padding_bottom]
+    endcase
+  -%}
+  {% if setup_variable %}
+    #shopify-section-{{ section.id }}{
+      --section-padding-top: {{ padding_top }}px;
+      --section-padding-bottom: {{ padding_bottom }}px;
+    }
+  {% else %}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ padding_top }}px;
+      padding-bottom: {{ padding_bottom }}px;
+    }
+    {% if padding_top_selected != "custom"%}
+      {%- assign padding_top_selected = padding_top_selected | append: "_mobile" | prepend: 'spacing_' -%}
+      {%- assign padding_top_selected = settings[padding_top_selected] | plus: 0 -%}
+      {%- if padding_top_selected <= 0 -%}
+        {%- assign padding_top_selected = 1 -%}
+      {%- endif -%}
+      @media screen and (max-width: 749px) {
+        .section-{{ section.id }}-padding {
+          padding-top: {{ padding_top | divided_by: padding_top_selected }}px;
+        }
+      }
+    {%- endif -%}
+    {% if padding_bottom_selected != "custom" %}
+        {%- assign padding_bottom_selected = padding_bottom_selected | append: "_mobile" | prepend: 'spacing_' -%}
+        {%- assign padding_bottom_selected = settings[padding_bottom_selected] | plus: 0 -%}
+        {%- if padding_bottom_selected <= 0 -%}
+          {%- assign padding_bottom_selected = 1 -%}
+        {%- endif -%}
+        @media screen and (max-width: 749px) {
+        .section-{{ section.id }}-padding {
+          padding-bottom: {{ padding_bottom | divided_by: padding_bottom_selected }}px;
+        }
+      }
+    {%- endif -%}
+  {%- endif -%}
+{%- endstyle -%}

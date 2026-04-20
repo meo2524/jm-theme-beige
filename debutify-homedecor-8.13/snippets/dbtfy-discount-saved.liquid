@@ -1,0 +1,18 @@
+{%- liquid
+  assign sale_type = settings.sale_type
+-%}
+
+{%- capture discount_saved -%}
+        {%- if sale_type == 'amount' -%}
+            <span>{{ product_compare_price | minus: product_price | money }}</span>
+        {%- elsif sale_type == 'percentage' -%}
+          {{ product_compare_price | minus: product_price | times: 100 | divided_by: product_compare_price }}%
+        {%- endif -%}
+      {%- endcapture -%}
+
+{%- if product_compare_price > product_price -%}
+  <span class="badge dbtfy-discount-badge dbtfy-discount-saved">
+    {{ settings.sale_type_badge_text }}
+    {{ discount_saved }}
+  </span>
+{%- endif -%}

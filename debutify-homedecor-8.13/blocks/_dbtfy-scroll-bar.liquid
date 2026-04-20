@@ -1,0 +1,166 @@
+{%- if request.design_mode -%}
+  {%- render 'widget-blocker-warning',
+    enabled: settings.dbtfy_scrollbar_cursor,
+    type: 'widget',
+    as: 'block',
+    name: 'Scrollbar & Cursor',
+    id: block
+  -%}
+{% endif %}
+
+{%- if settings.dbtfy_scrollbar_cursor -%}
+  {%- if block.settings.scrollbar_style == 'customized' -%}
+    {%- liquid
+      assign scrollbar_radius = 0
+      if block.settings.scrollbar_edge_shape == 'rounded'
+        assign scrollbar_radius = 10
+      endif
+    -%}
+
+    {%- style -%}
+      /* WebKit Scrollbar Styles */
+      body::-webkit-scrollbar,
+      .cart-drawer-scroll::-webkit-scrollbar,
+      .drawer__inner::-webkit-scrollbar{
+        width: {{ block.settings.scrollbar_width }}px;
+        background-color: {{ block.settings.scrollbar_back_color }};
+      }
+
+      body::-webkit-scrollbar-thumb,
+      .cart-drawer-scroll::-webkit-scrollbar-thumb,
+      .drawer__inner::-webkit-scrollbar-thumb{
+        border-radius: {{ scrollbar_radius }}px;
+        background-color: {{ block.settings.scrollbar_color }};
+      }
+
+      body::-webkit-scrollbar-track,
+      .cart-drawer-scroll::-webkit-scrollbar-track,
+      .drawer__inner::-webkit-scrollbar-track{
+        border-radius: {{ scrollbar_radius }}px;
+        background-color: {{ block.settings.scrollbar_back_color }};
+      }
+
+      /* Firefox Scrollbar Styles */
+      body.browser--firefox,
+      body.browser--firefox .cart-drawer-scroll,
+      body.browser--firefox .drawer__inner{
+        scrollbar-width: {% if block.settings.scrollbar_width <= 8 %}thin{% else %}auto{% endif %};
+        scrollbar-color: {{ block.settings.scrollbar_color }} {{ block.settings.scrollbar_back_color }};
+      }
+
+      /* Cursor Style */
+      body{
+        cursor: {% if block.settings.cursor_img %}
+          url({{ block.settings.cursor_img | image_url: width: block.settings.cursor_size, format: 'png' }}), auto;
+        {% else %}
+          auto;
+        {% endif %}
+      }
+    {%- endstyle -%}
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:blocks.scrollbar_cursor.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.scrollbar_cursor.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.scrollbar_cursor.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.free_info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.scrollbar_cursor.settings.scrollbar.label"
+    },
+    {
+      "type": "select",
+      "id": "scrollbar_style",
+      "label": "t:blocks.scrollbar_cursor.settings.scrollbar_style.label",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:general.settings.style.default"
+        },
+        {
+          "value": "customized",
+          "label": "t:blocks.scrollbar_cursor.settings.scrollbar_style.option__2.label"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "color",
+      "id": "scrollbar_color",
+      "label": "t:blocks.scrollbar_cursor.settings.scrollbar_color.label",
+      "default": "#707070"
+    },
+    {
+      "type": "color",
+      "id": "scrollbar_back_color",
+      "label": "t:blocks.scrollbar_cursor.settings.scrollbar_back_color.label",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "range",
+      "id": "scrollbar_width",
+      "label": "t:blocks.scrollbar_cursor.settings.scrollbar_width.label",
+      "min": 0,
+      "max": 15,
+      "default": 7,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "scrollbar_edge_shape",
+      "label": "t:blocks.scrollbar_cursor.settings.scrollbar_edge_shape.label",
+      "options": [
+        {
+          "value": "square",
+          "label": "t:general.settings.style.square"
+        },
+        {
+          "value": "rounded",
+          "label": "t:general.settings.style.rounded"
+        }
+      ],
+      "default": "square"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.scrollbar_cursor.settings.cursor.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "cursor_img",
+      "label": "t:blocks.scrollbar_cursor.settings.cursor_img.label",
+      "info": "t:blocks.scrollbar_cursor.settings.cursor_img.info"
+    },
+    {
+      "type": "range",
+      "id": "cursor_size",
+      "label": "t:blocks.scrollbar_cursor.settings.cursor_size.label",
+      "min": 1,
+      "max": 50,
+      "default": 12,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.scrollbar_cursor.name"
+    }
+  ]
+}
+{% endschema %}

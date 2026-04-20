@@ -1,0 +1,157 @@
+{%- assign media_aspect_ratio = section.settings.image_ratio -%}
+{%- assign image_crop_position = section.settings.image_crop_position -%}
+
+{%- if media_aspect_ratio and media_aspect_ratio != 'inherit' -%}
+  {%- assign image_aspect_ratio = media_aspect_ratio -%}
+  {%- if media_aspect_ratio == 'circle' -%}
+    {%- assign image_aspect_ratio = '100%' -%}
+  {%- endif -%}
+  {% style %}
+    #section-{{ section.id }}{
+      --dbtfy-image-crop-ratio: {{ image_aspect_ratio }};
+    }
+  {% endstyle %}
+{%- else -%}
+  {%- assign media_aspect_ratio = settings.dbtfy_product_image_crop_ratio -%}
+{%- endif -%}
+
+{%- if image_crop_position and image_crop_position != 'inherit' -%}
+  {% style %}
+    #section-{{ section.id }}{
+      --dbtfy-image-crop-position: {{ image_crop_position }};
+    }
+  {% endstyle %}
+{%- endif -%}
+
+{%- liquid
+  assign background_overlay = section.settings.background_overlay
+  assign columns_mobile = section.settings.columns_mobile
+  assign show_overlay = false
+
+  if background_overlay
+    if media_aspect_ratio == 'inherit' or media_aspect_ratio == '100%' or media_aspect_ratio == '133.33%' or media_aspect_ratio == '150%'
+      if columns_mobile == '1' or columns_mobile == 1
+        assign show_overlay = true
+      endif
+    endif
+  endif
+
+  if block.settings.heading == blank and block.settings.description == blank
+    assign show_overlay = false
+  endif
+-%}
+
+<li class="splide__slide">
+  <div class="global-media-settings">
+    <a
+      href="{{ block.settings.link }}"
+      class="image-slide animate-item animate-item--child image--ratio {% if show_overlay %} image--overlay{% endif %}"
+      {{ block.shopify_attributes }}
+    >
+      <div
+        class="image-slide__image media media--transparent media-{{ media_aspect_ratio }} {%- unless media_aspect_ratio == 'circle' -%} ratio{%-endunless-%}"
+      >
+        {% if block.settings.image != blank %}
+          <img
+            src="{{ block.settings.image | img_url: '2048x' }}"
+            alt="{{ block.settings.image | img_url: '2048x' }}"
+            class="media__image"
+            sizes="(min-width: 1400px) 50vw, (min-width: 990px) 50vw, (min-width: 750px) 50vw, (min-width: 500px) 50vw, 100vw"
+          >
+        {% else %}
+          {% render 'random_placeholder', placeholder: 'product-' %}
+        {% endif %}
+      </div>
+
+      {%- if block.settings.label != blank -%}
+        <div class="card__badge top w-full text-body {{ block.settings.label_alignment }}">
+          <span class="badge image-slide-label">
+            {{ block.settings.label }}
+          </span>
+        </div>
+      {%- endif -%}
+
+      <div class="image-slide__content-wrapper {{ block.settings.text_alignment }}{% if show_overlay %} image-slide--overlay{% endif %}">
+        {%- if block.settings.heading != blank -%}
+          <div class="dbtfy-image-video-content rte {{ block.settings.heading_size }} ">
+            {{ block.settings.heading }}
+          </div>
+        {%- endif -%}
+        {%- if block.settings.description != blank -%}
+          <div class="dbtfy-image-video-description rte ">
+            {{ block.settings.description }}
+          </div>
+        {%- endif -%}
+      </div>
+    </a>
+  </div>
+</li>
+{% schema %}
+{
+  "name": "t:general.settings.image",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:general.settings.image"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.all.button.option_1_label",
+      "info": "The whole slide will be a clickable link"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "t:general.settings.heading"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:general.settings.description"
+    },
+    {
+      "type": "text_alignment",
+      "id": "text_alignment",
+      "label": "t:general.settings.alignment.text_alignment",
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.quantity_breaks.blocks.product_break.settings.badge_style.name"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:general.settings.text"
+    },
+    {
+      "type": "select",
+      "id": "label_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:general.settings.alignment.option__4"
+        },
+        {
+          "value": "center",
+          "label": "t:general.settings.alignment.option__5"
+        },
+        {
+          "value": "right",
+          "label": "t:general.settings.alignment.option__6"
+        }
+      ],
+      "default": "left",
+      "label": "t:general.settings.alignment.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.image"
+    }
+  ]
+}
+{% endschema %}

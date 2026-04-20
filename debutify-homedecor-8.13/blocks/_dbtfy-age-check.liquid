@@ -1,0 +1,275 @@
+{% if settings.dbtfy_age_check %}
+  {%- render 'widget-settings', key: 'age-check', settings: section.settings -%}
+
+  {{ 'dbtfy-age-check.css' | asset_url | stylesheet_tag: preload: true }}
+
+  {%- if block.settings.background_image -%}
+    {%- assign age_background_image = block.settings.background_image | image_url: width: 3840 -%}
+  {%- else -%}
+    {%- assign age_background_image = '' -%}
+  {%- endif -%}
+  {% style %}
+    .dbtfy-age-check-overlay {
+      background-image: url('{{ age_background_image }}');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  {% endstyle %}
+  <dbtfy-age-check
+    class="hidden"
+    data-valid-age="{{ block.settings.valid_age }}"
+    data-verification-type="{{ block.settings.verification_type }}"
+    {{ block.shopify_attributes }}
+  >
+    <div
+      class="dbtfy-age-check global-settings-popup dbtfy-modal__width--center-center color-{{ block.settings.custom_color_scheme }} dbtfy-color-{{ block.settings.color_scheme }} gradient inner-spacing"
+    >
+      {% if block.settings.logo != blank %}
+        <figure>
+          <img
+            src="{{ block.settings.logo | image_url: width: block.settings.logo_width }}"
+            alt="{{ block.settings.logo.alt }}"
+            width="{{block.settings.logo_width}}"
+            height="100"
+          >
+        </figure>
+      {%- endif -%}
+      {%- if block.settings.title != blank -%}
+        <h2 class="dbtfy-age-check-title">{{ block.settings.title }}</h2>
+      {%- endif -%}
+      {%- if block.settings.verify_err_text != blank -%}
+        <div class="dbtfy-age-check__verify--text text-center">{{ block.settings.verify_text }}</div>
+      {%- endif -%}
+      {%- if block.settings.verify_err_text != blank -%}
+        <div class="dbtfy-age-check__verify--error text-center">{{ block.settings.verify_err_text }}</div>
+      {%- endif -%}
+      {%- if block.settings.verify_birth_err_text != blank -%}
+        <div class="dbtfy-age-check__verify-birth--error text-center">{{ block.settings.verify_birth_err_text }}</div>
+      {%- endif -%}
+      {%- if block.settings.verification_type == 'birth-date' -%}
+        <div class="dbtfy-age-check-birthdate w-full {% if block.settings.birthdate_layout_type == "horizontal" %}dbtfy-age-check-horizhontal{% endif %}">
+          <div class="w-full dbtfy-age-check-select">
+            <select class="dbtfy-age-check__month-picker select w-full select__select">
+              <option value="0" disabled selected="">{{- 'sections.age-check.month_list.label' | t -}}</option>
+              <option value="1">{{- 'sections.age-check.month_list.jan' | t -}}</option>
+              <option value="2">{{- 'sections.age-check.month_list.feb' | t -}}</option>
+              <option value="3">{{- 'sections.age-check.month_list.mar' | t -}}</option>
+              <option value="4">{{- 'sections.age-check.month_list.apr' | t -}}</option>
+              <option value="5">{{- 'sections.age-check.month_list.may' | t -}}</option>
+              <option value="6">{{- 'sections.age-check.month_list.jun' | t -}}</option>
+              <option value="7">{{- 'sections.age-check.month_list.jul' | t -}}</option>
+              <option value="8">{{- 'sections.age-check.month_list.aug' | t -}}</option>
+              <option value="9">{{- 'sections.age-check.month_list.sep' | t -}}</option>
+              <option value="10">{{- 'sections.age-check.month_list.oct' | t -}}</option>
+              <option value="11">{{- 'sections.age-check.month_list.nov' | t -}}</option>
+              <option value="12">{{- 'sections.age-check.month_list.dec' | t -}}</option>
+            </select>
+            <select class="dbtfy-age-check__day-picker select w-full select__select">
+              <option value="0" disabled selected>Day</option>
+              {%- for i in (1..31) -%}
+                <option value="{{ forloop.index }}">{{ i }}</option>
+              {%- endfor -%}
+            </select>
+            <select class="dbtfy-age-check__year-picker select w-full select__select">
+              <option value="0" disabled selected>Year</option>
+              {% assign current_year = 'now' | date: '%Y' %}
+              {%- for i in (1910..current_year) reversed -%}
+                <option value="{{ i }}">{{ i }}</option>
+              {%- endfor -%}
+            </select>
+          </div>
+          {%- if block.settings.button_text != blank -%}
+            <button class="button w-full">
+              {{ block.settings.button_text }}
+            </button>
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        <div class="dbtfy-age-check-yes-no">
+          <button class="button button--primary" value="yes">{{ block.settings.yes_text }}</button>
+          <button class="button button--primary" value="no">{{ block.settings.no_text }}</button>
+        </div>
+      {%- endif -%}
+    </div>
+  </dbtfy-age-check>
+  <script src="{{ 'dbtfy-age-check.js' | asset_url }}" defer></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.age-check.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.age-check.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.age-check.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.heading",
+      "info": "t:general.settings.block-name.info",
+      "default": "t:blocks.age-check.name"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "t:blocks.age-check.settings.background_img.label"
+    },
+    {
+      "type": "select",
+      "id": "verification_type",
+      "label": "t:blocks.age-check.settings.verification_type.label",
+      "default": "birth-date",
+      "options": [
+        {
+          "value": "birth-date",
+          "label": "t:blocks.age-check.settings.verification_type.options__1.label"
+        },
+        {
+          "value": "yes-no",
+          "label": "t:blocks.age-check.settings.verification_type.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "birthdate_layout_type",
+      "label": "t:blocks.age-check.settings.birthdate_layout_type.label",
+      "default": "horizontal",
+      "options": [
+        {
+          "value": "horizontal",
+          "label": "t:general.settings.alignment.option__10"
+        },
+        {
+          "value": "vertical",
+          "label": "t:general.settings.alignment.option__11"
+        }
+      ]
+    },
+    {
+      "type": "inline_richtext",
+      "id": "yes_text",
+      "label": "t:blocks.age-check.settings.verification_type.options__2.label_yes",
+      "default": "t:blocks.age-check.settings.verification_type.options__2.default_yes"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "no_text",
+      "label": "t:blocks.age-check.settings.verification_type.options__2.label_no",
+      "default": "t:blocks.age-check.settings.verification_type.options__2.default_no"
+    },
+    {
+      "type": "range",
+      "id": "valid_age",
+      "label": "t:blocks.age-check.settings.valid_age.label",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:settings_schema.logo.name"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "t:settings_schema.logo.name",
+      "min": 50,
+      "max": 400,
+      "step": 5,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "t:general.settings.title",
+      "default": "t:blocks.age-check.name"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "verify_text",
+      "label": "t:blocks.age-check.settings.verify_text.label",
+      "default": "t:blocks.age-check.settings.verify_text.default"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "verify_err_text",
+      "label": "t:blocks.age-check.settings.verify_error_text.label",
+      "default": "t:blocks.age-check.settings.verify_error_text.default",
+      "info": "t:blocks.age-check.settings.verify_error_text.info"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "verify_birth_err_text",
+      "label": "t:blocks.age-check.settings.verify_birth_error_text.label",
+      "default": "t:blocks.age-check.settings.verify_birth_error_text.default",
+      "info": "t:blocks.age-check.settings.verify_birth_error_text.info"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:blocks.news-letter.settings.thank_you_modal.button_text.label",
+      "default": "t:blocks.age-check.settings.button.default"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    }
+  ]
+}
+{%- endschema -%}

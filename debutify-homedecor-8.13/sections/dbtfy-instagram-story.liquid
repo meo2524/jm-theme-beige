@@ -1,0 +1,441 @@
+{%- render 'widget-blocker',
+  enabled: settings.dbtfy_instagram_story,
+  section: section,
+  name: 'Instagram Stories',
+  type: '⚡ Paid Sections'
+-%}
+{%- if request.design_mode or settings.dbtfy_instagram_story -%}
+  {% render 'section-padding', section: section %}
+
+  {%- if section.settings.pattern_bg != 'none' -%}
+    {%- render 'dbtfy-background-pattern', setting: section.settings -%}
+  {%- endif -%}
+
+  {{ 'dbtfy-insta-story.css' | asset_url | stylesheet_tag }}
+  <div
+    class="color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} gradient show-on--{{ section.settings.show_on }} section-{{ section.id }}-padding dbtfy-background-pattern-{{ section.id }}"
+    id="section-{{ section.id }}"
+  >
+    <div class="page-width">
+      <div class="dbtfy-story-container">
+        {% content_for 'block', type: '_heading', id: 'heading' %}
+      </div>
+
+      <dbtfy-insta-story
+        class="dbtfy-insta-stories"
+        data-last-index="0"
+        data-section="{{ section.id }}"
+      >
+        <div class="dbtfy-insta-stories__open-buttons-and-arrows-container">
+          <div class="dbtfy-insta-stories__open-buttons-container">
+            {% render 'splide-slider-component',
+              setting: section.settings,
+              auto_width: true,
+              overflow: true,
+              spacing_grid_horizontal_desktop: 15,
+              spacing_grid_horizontal_mobile: 15,
+              arrow_position: 'middle',
+              center: true,
+              custom_icon: settings.custom_arrow_icon,
+              icon: settings.arrow_icon
+            %}
+          </div>
+        </div>
+
+        <div
+          class="dbtfy-insta-stories__modal color-inverse"
+          data-open="false"
+        >
+          <button class="dbtfy-insta-stories__modal__close dbtfy-insta-stories__close-button mobile-hidden">
+            {% render 'material-icon', icon: 'close' %}
+          </button>
+          <div class="dbtfy-insta-stories__slider-container">
+            <div class="dbtfy-insta-stories__slider">
+              {% content_for 'block', type: '_dbtfy-instagram-story', id: 'dbtfy-instagram-story' %}
+            </div>
+          </div>
+        </div>
+      </dbtfy-insta-story>
+    </div>
+  </div>
+
+  <script src="{{ 'dbtfy-insta-story.js' | asset_url }}" defer></script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-instastory.name",
+  "disabled_on": { "groups": ["aside"] },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-instastory.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-instastory.help.link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.professional_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "t:sections.all.show_on.label",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ],
+      "default": "both"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.global.settings.bubble.background_pattern_settings.label"
+    },
+    {
+      "type": "select",
+      "id": "pattern_bg",
+      "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.pattern",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "curved-grid",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__1"
+        },
+        {
+          "value": "radial-rings",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__2"
+        },
+        {
+          "value": "diamond-grid",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__3"
+        },
+        {
+          "value": "quatrefoils",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__4"
+        },
+        {
+          "value": "hexagons",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__5"
+        },
+        {
+          "value": "intersecting-circles",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__6"
+        },
+        {
+          "value": "brick-wall",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__7"
+        },
+        {
+          "value": "formal-invitation",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__8"
+        },
+        {
+          "value": "jupiter",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__9"
+        },
+        {
+          "value": "yyy",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__10"
+        },
+        {
+          "value": "temple",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__11"
+        },
+        {
+          "value": "lips",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__12"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "pattern_color",
+      "label": "t:settings_schema.widgets.color_swatches.option_name.default",
+      "default": "#A52A2A",
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_size",
+      "min": 4,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "t:general.settings.size.label",
+      "default": 20,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_bg != 'formal-invitation' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_size_thickness",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings_schema.global.settings.dimension.label",
+      "default": 1,
+      "visible_if": "{{ section.settings.pattern_bg == 'formal-invitation' or section.settings.pattern_bg == 'radial-rings' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "t:settings_schema.global.settings.bubble.opacity",
+      "default": 50,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.slider.slider_settings"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "t:general.settings.slider.autoplay_speed",
+      "default": 5,
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_dots",
+      "default": false,
+      "label": "t:general.settings.slider.show_dots"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_arrows",
+      "default": false,
+      "label": "t:general.settings.slider.show_arrows"
+    },
+    {
+      "type": "select",
+      "id": "arrow_color",
+      "default": "inherit",
+      "label": "t:general.settings.slider.arrow_color",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "visible_if": "{{ section.settings.enable_arrows == true }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_arrow_color",
+      "label": "t:general.settings.slider.custom-arrow-color",
+      "default": "#ffffff",
+      "visible_if": "{{ section.settings.arrow_color == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_arrow_background_color",
+      "label": "t:general.settings.slider.custom-arrow-bg-color",
+      "default": "#7559ff",
+      "visible_if": "{{ section.settings.arrow_color == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.layout.settings.spacing.section_desktop.label"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.top",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.bottom",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_bottom",
+      "default": 36
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram Stories",
+      "blocks": [
+        {
+          "type": "_heading",
+          "static": true,
+          "id": "heading",
+          "blocks": [
+            { "type": "_title", "settings": { "title": "Instagram Story", "alignment": "text-center" } },
+            {
+              "type": "_description",
+              "settings": {
+                "description": "<p>Highlight your brand's best moments in an Instagram-style story format</p>",
+                "alignment": "text-center"
+              }
+            }
+          ]
+        },
+        {
+          "type": "_dbtfy-instagram-story",
+          "static": true,
+          "id": "dbtfy-instagram-story",
+          "blocks": [
+            {
+              "type": "_dbtfy-instagram-user-post",
+              "blocks": [{ "type": "_dbtfy-instagram-user-story", "settings": {} }]
+            },
+            {
+              "type": "_dbtfy-instagram-user-post",
+              "blocks": [{ "type": "_dbtfy-instagram-user-story", "settings": {} }]
+            },
+            {
+              "type": "_dbtfy-instagram-user-post",
+              "blocks": [{ "type": "_dbtfy-instagram-user-story", "settings": {} }]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

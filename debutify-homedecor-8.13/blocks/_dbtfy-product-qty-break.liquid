@@ -1,0 +1,237 @@
+<script>
+  var qtyarr = Debutify.widgets['qty-breaks']['product_break']
+  var qtylastElement = qtyarr.pop();
+  if(qtylastElement.breaks === undefined) {
+    qtylastElement.breaks = [];
+  }
+  var block_setting = {{ block.settings | json }};
+  {% if block.settings.product_break_free_product %}
+    block_setting.free_product = {{ all_products[block.settings.product_break_free_product] | json }};
+  {% endif %}
+  {% if block.settings.product_break_money_guarantee_product %}
+    block_setting.money_guarantee_product = {{ all_products[block.settings.product_break_money_guarantee_product] | json }};
+  {% endif %}
+  {% if block.settings.product_break_shipping_protection_product %}
+    block_setting.shipping_protection_product = {{ all_products[block.settings.product_break_shipping_protection_product] | json }};
+  {% endif %}
+  qtylastElement.breaks.push(block_setting);
+  Debutify.widgets['qty-breaks']['product_break'].push(qtylastElement);
+</script>
+{%- schema -%}
+{
+  "name": "t:blocks.quantity_breaks.blocks.product_break.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info"
+    },
+    {
+      "type": "range",
+      "id": "product_break_range",
+      "label": "t:blocks.quantity_breaks.blocks.cart_break.settings.range.label",
+      "min": 2,
+      "max": 20,
+      "step": 1,
+      "default": 2,
+      "info": "t:blocks.quantity_breaks.blocks.cart_break.settings.range.info"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_break_image",
+      "label": "t:general.settings.image",
+      "info": "t:blocks.quantity_breaks.settings.image_info"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:blocks.quantity_breaks.blocks.cart_break.settings.qty_text_label",
+      "info": "t:blocks.quantity_breaks.blocks.cart_break.settings.qty_text_info"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "t:blocks.quantity_breaks.blocks.cart_break.settings.qty_subtext_label",
+      "info": "t:blocks.quantity_breaks.blocks.cart_break.settings.qty_subtext_info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.quantity_breaks.blocks.product_break.settings.badge_style.name"
+    },
+    {
+      "type": "select",
+      "id": "product_break_badge_style",
+      "label": "t:blocks.quantity_breaks.blocks.product_break.settings.badge_style.label",
+      "default": "simple",
+      "options": [
+        {
+          "value": "simple",
+          "label": "t:blocks.quantity_breaks.blocks.product_break.settings.badge_style.options__1"
+        },
+        {
+          "value": "most_popular",
+          "label": "t:blocks.quantity_breaks.blocks.product_break.settings.badge_style.options__2"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "badge_title",
+      "label": "t:blocks.quantity_breaks.blocks.product_break.settings.badge_title.label",
+      "default": "t:blocks.quantity_breaks.blocks.product_break.settings.badge_title.default",
+      "info": "t:blocks.quantity_breaks.blocks.product_break.settings.badge_title.info",
+      "visible_if": "{{ block.settings.product_break_badge_style == 'simple' }}"
+    },
+    {
+      "type": "header",
+      "content": "Free product"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_break_free_product_image",
+      "label": "t:blocks.quantity_breaks.blocks.product_break.settings.free_product.free_product_img.label",
+      "info": "t:blocks.quantity_breaks.blocks.product_break.settings.free_product.free_product_img.info"
+    },
+    {
+      "type": "product",
+      "id": "product_break_free_product",
+      "label": "t:blocks.quantity_breaks.blocks.product_break.settings.free_product.name",
+      "info": "t:blocks.quantity_breaks.blocks.product_break.settings.free_product.free_product.info"
+    },
+    {
+      "type": "range",
+      "id": "product_break_free_product_quantity",
+      "label": "t:blocks.quantity_breaks.blocks.cart_break.settings.free_qty_label",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1,
+      "info": "t:blocks.quantity_breaks.blocks.cart_break.settings.free_qty_info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-product.blocks.money_guarantee.name"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_break_money_guarantee_image",
+      "label": "t:sections.main-product.blocks.money_guarantee.settings.guarantee_image"
+    },
+    {
+      "type": "product",
+      "id": "product_break_money_guarantee_product",
+      "label": "t:sections.main-product.blocks.money_guarantee.settings.guarantee_product"
+    },
+    {
+      "type": "checkbox",
+      "id": "product_break_money_guarantee_checkbox",
+      "label": "t:sections.main-product.blocks.money_guarantee.settings.guarantee_checkbox",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "product_break_money_guarantee_checkbox_preselected",
+      "label": "t:sections.main-product.blocks.money_guarantee.settings.guarantee_checkbox_preselected",
+      "default": true,
+      "visible_if": "{{ block.settings.product_break_money_guarantee_checkbox }}"
+    },
+    {
+      "type": "text",
+      "id": "product_break_money_guarantee_text",
+      "label": "t:sections.main-product.blocks.money_guarantee.settings.guarantee_text"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-product.blocks.shipping_protection.name"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_break_shipping_protection_image",
+      "label": "t:sections.main-product.blocks.shipping_protection.settings.shipping_protection_image"
+    },
+    {
+      "type": "product",
+      "id": "product_break_shipping_protection_product",
+      "label": "t:sections.main-product.blocks.shipping_protection.settings.shipping_protection_product"
+    },
+    {
+      "type": "checkbox",
+      "id": "product_break_shipping_protection_checkbox",
+      "label": "t:sections.main-product.blocks.shipping_protection.settings.shipping_protection_checkbox",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "product_break_shipping_protection_checkbox_preselected",
+      "label": "t:sections.main-product.blocks.money_guarantee.settings.guarantee_checkbox_preselected",
+      "default": true,
+      "visible_if": "{{ block.settings.product_break_shipping_protection_checkbox }}"
+    },
+    {
+      "type": "text",
+      "id": "product_break_shipping_protection_text",
+      "label": "t:sections.main-product.blocks.shipping_protection.settings.shipping_protection_text"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.discount.header.content",
+      "info": "t:general.settings.discount.header.info_1"
+    },
+    {
+      "type": "text",
+      "id": "product_break_discount_code",
+      "label": "t:general.settings.discount.name.label"
+    },
+    {
+      "type": "text",
+      "id": "product_break_discount_amount",
+      "label": "t:general.settings.discount.amount.label"
+    },
+    {
+      "type": "select",
+      "id": "product_break_discount_type",
+      "label": "t:general.settings.discount.type.label",
+      "default": "%",
+      "options": [
+        {
+          "value": "%",
+          "label": "t:general.settings.discount.type.options__1.label"
+        },
+        {
+          "value": "$",
+          "label": "t:general.settings.discount.type.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "product_break_tag_1",
+      "label": "Tag"
+    },
+    {
+      "type": "color",
+      "id": "product_break_tag_1_background_color",
+      "label": "Background color",
+      "default": "#F2F0FF"
+    },
+    {
+      "type": "color",
+      "id": "product_break_tag_1_text_color",
+      "label": "Text color",
+      "default": "#7559FF"
+    },
+    {
+      "type": "color",
+      "id": "product_break_tag_1_border_color",
+      "label": "Border color",
+      "default": "#7559FF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.quantity_breaks.blocks.cart_break.settings.item.content"
+    }
+  ]
+}
+{%- endschema -%}

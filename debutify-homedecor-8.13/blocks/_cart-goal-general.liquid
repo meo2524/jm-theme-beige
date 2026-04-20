@@ -1,0 +1,26 @@
+<script>
+  var cart_goal_blocks = [];
+</script>
+{% content_for 'blocks' %}
+<script>
+  for (var i = 0; i < cart_goal_blocks.length; i++) {
+    Debutify.widgets['cart_goals']['global'].push(cart_goal_blocks[i]);
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Global",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "_cart-goal"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Global"
+    }
+  ]
+}
+{% endschema %}

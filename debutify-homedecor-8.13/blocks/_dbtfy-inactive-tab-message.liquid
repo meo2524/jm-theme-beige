@@ -1,0 +1,78 @@
+{%- if block.blocks.size > 0 -%}
+  {%- render 'widget-blocker',
+    enabled: settings.dbtfy_inactive_tab_message,
+    section: section,
+    name: 'Inactive Tab Message',
+    type: '⚡ Paid widget'
+  -%}
+{%- endif -%}
+{% if settings.dbtfy_inactive_tab_message %}
+  {%- render 'widget-settings', key: 'inactive-tab-message', settings: block.settings -%}
+  <script>
+    Debutify.widgets['inactive-tab-message'].blocks = [];
+    {%- content_for 'blocks' -%}
+  </script>
+  <inactive-tab-message
+    data-delay="{{ block.settings.inactive_tab_delay }}"
+  >
+  </inactive-tab-message>
+  <script src="{{ 'dbtfy-inactive-tab-message.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.inactive-tab-message.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.inactive-tab-message.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.inactive-tab-message.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "range",
+      "id": "inactive_tab_delay",
+      "label": "t:blocks.minimum_order.settings.dbtfy_minimum_order_message.label",
+      "min": 1,
+      "max": 5,
+      "unit": "s",
+      "step": 1,
+      "default": 1
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_dbtfy-inactive-message"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.inactive-tab-message.name",
+      "blocks": [
+        {
+          "type": "_dbtfy-inactive-message",
+          "settings": {
+            "message": "🔥 Don't forget this..."
+          }
+        }
+      ],
+      "settings": {
+        "inactive_tab_delay": 1
+      }
+    }
+  ]
+}
+{%- endschema -%}

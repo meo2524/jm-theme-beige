@@ -1,0 +1,103 @@
+{%- if settings.dbtfy_order_feedback -%}
+  {%- render 'widget-settings', key: 'dbtfy-order-feedback', settings: block.settings -%}
+  <link
+    rel="stylesheet"
+    href="{{ 'dbtfy-order-feedback.css' | asset_url }}"
+    media="print"
+    onload="this.media='all'"
+  >
+  {%- assign required_to_checkout = settings.dbtfy_order_feedback_required -%}
+  <div class="cart-block" {{ block.shopify_attributes }}>
+    <order-feedback>
+      <details id="Details-{{block.id}}">
+        <summary role="button" aria-expanded="false">
+          <div class="dbtfy-gap-5 flex flex-row">
+            <span class="feedback-label-icon">
+              {%- render 'material-icon', icon: block.settings.dbtfy_order_feedback_label_icon -%}
+            </span>
+            <span class="summary__title">
+              <span>{{ block.settings.dbtfy_order_feedback_question }}</span>
+              <small class="dbtfy-order-feedback-show"></small>
+            </span>
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </div>
+        </summary>
+        <div id="dbtfy-order-feedback" class="field-wrapper">
+          <div class="select">
+            <select
+              id="order-feedback-select"
+              class="select__select order-feedback-select {% if required_to_checkout %} required{% endif %}>"
+            >
+              <option value="" disabled selected>Select</option>
+            </select>
+            <svg class="icon icon-caret" viewBox="0 0 10 6">
+              <path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+        </div>
+        <input
+          type="text"
+          id="other-feedback-input"
+          class="order-feedback-input hidden"
+          placeholder="{{'sections.order-feedback.example_name' | t}}"
+        >
+      </details>
+    </order-feedback>
+  </div>
+  <script src="{{ 'dbtfy-order-feedback.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:sections.cart-drawer.blocks.order-feedback.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-drawer.blocks.order-feedback.info"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-drawer.blocks.order-feedback.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-drawer.blocks.order-feedback.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.professional_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_order_feedback_label_icon",
+      "label": "t:general.settings.icon",
+      "default": "local_offer",
+      "info": "t:general.settings.icon_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "dbtfy_order_feedback_required",
+      "label": "t:blocks.dbtfy-delivery-date.settings.required_checkout.label"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_order_feedback_question",
+      "label": "t:general.settings.heading",
+      "default": "t:blocks.dbtfy_order_feedback.settings.dbtfy_order_feedback_question.default"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_order_feedback_option",
+      "label": "t:blocks.dbtfy_order_feedback.settings.dbtfy_order_feedback_option.label",
+      "default": "t:blocks.dbtfy_order_feedback.settings.dbtfy_order_feedback_option.default"
+    }
+  ]
+}
+{%- endschema -%}

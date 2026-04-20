@@ -1,0 +1,35 @@
+{% content_for 'blocks' %}
+
+{% schema %}
+{
+  "name": "Review Preview",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_review-rating-overall"
+    },
+    {
+      "type": "_review-rating-progress"
+    },
+    {
+      "type": "_review-add-rating"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Review Preview",
+      "blocks": [
+        {
+          "type": "_review-rating-overall"
+        },
+        {
+          "type": "_review-rating-progress"
+        },
+        {
+          "type": "_review-add-rating"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

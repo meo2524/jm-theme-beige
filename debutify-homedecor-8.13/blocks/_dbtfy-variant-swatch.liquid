@@ -1,0 +1,82 @@
+{%- style -%}
+    {%- if block.settings.color_name != blank -%}
+      variant-selects [data-color-option="native-swatch"] input[type=radio][data-option-value="{{ block.settings.color_name | handleize }}"] + label .swatch {
+          {% if block.settings.image != blank %}
+          --swatch--background: url({{ block.settings.image | image_url: width: 30 }});
+          --swatch-focal-point: 50% 50%;
+          border-style: solid;
+          {% elsif block.settings.color != blank %}
+          --swatch--background: {{ block.settings.color }};
+          border-style: solid;
+          {% endif %}
+      }
+      variant-selects [data-color-option="custom-swatch"] input[type=radio][data-option-value="{{ block.settings.color_name | handleize }}"] + label .swatch,
+      facet-filters-form [data-color-option="custom-swatch"]  [data-option-value="{{ block.settings.color_name | handleize }}"] .swatch {
+          {% if block.settings.image != blank %}
+          --swatch--background: url({{ block.settings.image | image_url: width: 30 }}) !important;
+          --swatch-focal-point: 50% 50% !important;
+          border-style: solid;
+          {% elsif block.settings.color != blank %}
+          --swatch--background: {{ block.settings.color }} !important;
+          border-style: solid;
+          {% endif %}
+      }
+      variant-selects [data-color-option="native-swatch"] .dropdown-swatch[data-selected-value="{{ block.settings.color_name | handleize }}"] .swatch {
+          {% if block.settings.image != blank %}
+          --swatch--background: url({{ block.settings.image | image_url: width: 30 }});
+          --swatch-focal-point: 50% 50%;
+          border-style: solid;
+          {% elsif block.settings.color != blank %}
+          --swatch--background: {{ block.settings.color }};
+          border-style: solid;
+          {% endif %}
+      }
+      variant-selects [data-color-option="custom-swatch"] .dropdown-swatch[data-selected-value="{{ block.settings.color_name | handleize }}"] .swatch {
+          {% if block.settings.image != blank %}
+          --swatch--background: url({{ block.settings.image | image_url: width: 30 }}) !important;
+          --swatch-focal-point: 50% 50% !important;
+          border-style: solid;
+          {% elsif block.settings.color != blank %}
+          --swatch--background: {{ block.settings.color }} !important;
+          border-style: solid;
+          {% endif %}
+      }
+      .dropdown-swatch[data-selected-value="{{ block.settings.color_name | handleize }}"] {
+      display: inline-block !important;
+      }
+      .dropdown-swatch[data-selected-value="{{ block.settings.color_name | handleize }}"] + .select__select {
+      padding-left: calc(2.4rem + var(--swatch-input--size)) !important;
+      }
+  {%- endif -%}
+{%- endstyle -%}
+{% assign swatch_array = block.settings.color_name | split: ',' %}
+<script type="application/json" data-color-swatch-json>
+  {{ swatch_array | json }}
+</script>
+{%- schema -%}
+{
+  "name": "t:settings_schema.widgets.color_swatches.swatch_shape.label",
+  "settings": [
+    {
+      "type": "text",
+      "id": "color_name",
+      "label": "t:blocks.dbtfy-variant-swatches.blocks.color-swatch.settings.color_name.label"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "t:settings_schema.widgets.color_swatches.option_name.default"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:blocks.dbtfy-variant-swatches.blocks.color-swatch.settings.image.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:settings_schema.widgets.color_swatches.swatch_shape.label"
+    }
+  ]
+}
+{%- endschema -%}

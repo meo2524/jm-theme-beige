@@ -1,0 +1,41 @@
+{% assign min = 1 %}
+{% assign max = 6 %}
+{% assign diff = max | minus: min %}
+{% assign randomNumber = 'now' | date: '%N' | modulo: diff | plus: min %}
+{% assign placeholder_image = 'collection-' | append: randomNumber %}
+<div
+  class="collage__item collage__item--{{ block.type }} collage__item--{{ section.settings.desktop_layout }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {{ block.shopify_attributes }}
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+    style="--animation-order: {{ forloop.index }};"
+  {% endif %}
+>
+  {% render 'card-collection',
+    card_collection: block.settings.collection,
+    media_aspect_ratio: 'adapt',
+    columns: 2,
+    extend_height: true,
+    wrapper_class: section.settings.card_styles,
+    placeholder_image: placeholder_image
+  %}
+</div>
+
+{% schema %}
+{
+  "name": "t:general.settings.visibility.collection.label",
+  "tag": null,
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:general.settings.visibility.collection.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.visibility.collection.label"
+    }
+  ]
+}
+{% endschema %}

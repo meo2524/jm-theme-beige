@@ -1,0 +1,164 @@
+{% comment %}
+  Renders icon with text block
+
+  Accepts:
+  - block: {Object} passes in the block information.
+
+
+  Usage:
+  {% render 'icon-with-text',
+    block: block
+  %}
+{% endcomment %}
+
+{%- liquid
+  assign border = false
+  assign color_scheme_block = 'dbtfy-color-' | append: block.settings.color_scheme_block | append: ' color-' | append: block.settings.custom_color_scheme_block | append: ' gradient'
+  if block.settings.color_scheme_block != 'none'
+    if section.settings.color_scheme == block.settings.color_scheme_block
+      if section.settings.color_scheme == 'custom'
+        if section.settings.custom_color_scheme == block.settings.custom_color_scheme_block
+          assign border = true
+        endif
+      else
+        assign border = true
+      endif
+    endif
+    capture border_color
+      echo color_scheme_block
+      if border
+        echo ' dbtfy-icon-with-text-border '
+      endif
+      echo ' dbtfy-icon-with-text-color '
+    endcapture
+  endif
+
+  assign heading_1empty = false
+  assign heading_2empty = false
+  assign heading_3empty = false
+  assign text_only_all_items = true
+
+  if block.settings.heading_1 == empty
+    assign heading_1empty = true
+  endif
+
+  if block.settings.heading_2 == empty
+    assign heading_2empty = true
+  endif
+
+  if block.settings.heading_3 == empty
+    assign heading_3empty = true
+  endif
+
+  if heading_1empty == false and block.settings.icon_1 != 'none' or block.settings.image_1 != null
+    assign text_only_all_items = false
+  elsif heading_2empty == false and block.settings.icon_2 != 'none' or block.settings.image_2 != null
+    assign text_only_all_items = false
+  elsif heading_3empty == false and block.settings.icon_3 != 'none' or block.settings.image_3 != null
+    assign text_only_all_items = false
+  endif
+
+  if block.settings.enable_divider
+    assign divider = 'divider'
+  endif
+
+  assign separate_cards = block.settings.show_separate_cards
+
+  assign alignment = block.settings.alignment
+-%}
+
+<style>
+  {%- if block.settings.color_scheme != 'none' and block.settings.color_scheme != blank and separate_cards == false -%}
+    .icon-with-text {
+      border-radius: var(--text-boxes-radius);
+      padding: {% if block.settings.layout == 'vertical' %}var(--icon-size) 1.5rem 0 1.5rem{% else %}var(--icon-spacing) 1.5rem{% endif %};
+    }
+  {%- endif -%}
+</style>
+
+<ul
+  class="{% unless separate_cards  %}{{ border_color }}{% endunless %} icon-with-text icon-with-text--{{ block.settings.layout }} {{ divider }} list-unstyled {% if text_only_all_items %} icon-with-text--text-only{% endif %}{% if separate_cards and color_scheme_block != 'none' %} icon-with-text--separate-cards{% endif %} {{ alignment }}"
+  {{ block.shopify_attributes }}
+>
+  {%- unless heading_1empty -%}
+    <li class=" {% if  block.settings.show_separate_cards  %}{{border_color}}{% endif %} icon-with-text__item ">
+      {%- if block.settings.image_1 != blank -%}
+        <img
+          class="{{ block.settings.custom_icon_size }}"
+          src="{{ block.settings.image_1 | image_url }}"
+          {% if block.settings.image_1.alt != blank %}
+            alt="{{ block.settings.image_1.alt | escape }}"
+          {% else %}
+            role="presentation"
+          {% endif %}
+          height="auto"
+          width="auto"
+          loading="lazy"
+        >
+      {%- elsif block.settings.icon_1 == 'custom' -%}
+        {% render 'material-icon', icon: block.settings.custom_icon_1, class: block.settings.custom_icon_size %}
+      {%- elsif block.settings.icon_1 != blank -%}
+        {% render 'icon-accordion', icon: block.settings.icon_1 %}
+      {%- endif -%}
+      <span
+        class="{{ block.settings.text_size }} inline-richtext"
+      >
+        {{- block.settings.heading_1 -}}
+      </span>
+    </li>
+  {%- endunless -%}
+  {%- unless heading_2empty -%}
+    <li class="{% if  block.settings.show_separate_cards  %}{{border_color}}{% endif %} icon-with-text__item ">
+      {%- if block.settings.image_2 != blank -%}
+        <img
+          class="{{ block.settings.custom_icon_size }}"
+          src="{{ block.settings.image_2 | image_url }}"
+          {% if block.settings.image_2.alt != blank %}
+            alt="{{ block.settings.image_2.alt | escape }}"
+          {% else %}
+            role="presentation"
+          {% endif %}
+          height="auto"
+          width="auto"
+          loading="lazy"
+        >
+      {%- elsif block.settings.icon_2 == 'custom' -%}
+        {% render 'material-icon', icon: block.settings.custom_icon_2, class: block.settings.custom_icon_size %}
+      {%- elsif block.settings.icon_2 != blank -%}
+        {% render 'icon-accordion', icon: block.settings.icon_2 %}
+      {%- endif -%}
+      <span
+        class="{{ block.settings.text_size }} inline-richtext"
+      >
+        {{- block.settings.heading_2 -}}
+      </span>
+    </li>
+  {%- endunless -%}
+  {%- unless heading_3empty -%}
+    <li class="{% if  block.settings.show_separate_cards  %}{{border_color}}{% endif %} icon-with-text__item {% if separate_cards %}icon-with-text__item--separate {{ color_classes }}{% endif %}">
+      {%- if block.settings.image_3 != blank -%}
+        <img
+          class="{{ block.settings.custom_icon_size }}"
+          src="{{ block.settings.image_3 | image_url }}"
+          {% if block.settings.image_3.alt != blank %}
+            alt="{{ block.settings.image_3.alt | escape }}"
+          {% else %}
+            role="presentation"
+          {% endif %}
+          height="auto"
+          width="auto"
+          loading="lazy"
+        >
+      {%- elsif block.settings.icon_3 == 'custom' -%}
+        {% render 'material-icon', icon: block.settings.custom_icon_3, class: block.settings.custom_icon_size %}
+      {%- elsif block.settings.icon_3 != blank -%}
+        {% render 'icon-accordion', icon: block.settings.icon_3 %}
+      {%- endif -%}
+      <span
+        class="{{ block.settings.text_size }} inline-richtext"
+      >
+        {{- block.settings.heading_3 -}}
+      </span>
+    </li>
+  {%- endunless -%}
+</ul>

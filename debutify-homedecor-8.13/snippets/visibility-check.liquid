@@ -1,0 +1,83 @@
+{%- liquid
+  assign visibility = block.settings.visibility
+  assign collection_handle = block.settings.collection.handle
+  assign types = block.settings.types | downcase | split: ','
+  assign tags = block.settings.tags | downcase | split: ','
+  assign selected_product = block.settings.product
+  if selected_product == '' and request.page_type == 'product'
+    assign selected_product = product
+  endif
+
+  if checkFromCart == 'true'
+    assign enable_products = false
+    if cart != empty
+      case visibility
+        when 'all'
+          assign enable_products = true
+        when 'collection'
+          for item in cart.items
+            assign collection_handles = item.product.collections | map: 'handle'
+            if collection_handles contains collection_handle
+              assign enable_products = true
+              break
+            endif
+          endfor
+        when 'type'
+          for item in cart.items
+            if types contains item.product.type
+              assign enable_products = true
+              break
+            endif
+          endfor
+        when 'tag'
+          for item in cart.items
+            for tag in item.product.tags
+              if tags contains tag
+                assign enable_products = true
+                break
+              endif
+            endfor
+            if enable_products
+              break
+            endif
+          endfor
+        when 'product'
+          for item in cart.items
+            if item.product.id == selected_product.id
+              assign enable_products = true
+              break
+            endif
+          endfor
+      endcase
+    endif
+  else
+    assign enable_products = false
+    case visibility
+      when 'collection'
+        assign collection_handles = selected_product.collections | map: 'handle'
+        if collection_handles contains collection_handle
+          assign enable_products = true
+        endif
+      when 'type'
+        assign product_type = selected_product.type | downcase
+        if types contains product_type
+          assign enable_products = true
+        endif
+      when 'tag'
+        for tag in selected_product.tags
+          assign tag_downcase = tag | downcase
+          if tags contains tag_downcase
+            assign enable_products = true
+            break
+          endif
+        endfor
+      when 'product'
+        if product == selected_product
+          assign enable_products = true
+        endif
+      when 'all'
+        assign enable_products = true
+    endcase
+  endif
+  echo enable_products
+-%}

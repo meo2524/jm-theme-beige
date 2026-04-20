@@ -1,0 +1,274 @@
+{%- if section.settings.desktop_width == 'large' -%}
+  {%- assign wishlist_drawer_desktop_width = 'wishlist_width_large' -%}
+{%- endif -%}
+
+<dbtfy-drawer
+  data-position="right"
+  data-state-class="open"
+  data-color-scheme="dbtfy-color-{{ section.settings.color_scheme }}"
+  data-custom-color-scheme="color-{{ section.settings.custom_color_scheme }}"
+>
+  <dbtfy-wishlist-drawer
+    class="flex flex-column {{ wishlist_drawer_desktop_width }}"
+    data-drawer-title="{{ section.settings.wishlist_drawer_title }}"
+  >
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'drawer_title' -%}
+          <div class="dbtfy-drawer__header {{ block.settings.heading_alignment }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.wishlist_drawer_title != blank -%}
+              <h2
+                class="dbtfy-drawer__heading {{ block.settings.heading_size }}"
+                data-title="{{ block.settings.wishlist_drawer_title }}"
+              ></h2>
+            {%- endif -%}
+            <button
+              class="dbtfy-drawer__close"
+              type="button"
+              onclick="this.closest('dbtfy-drawer').close()"
+              aria-label="{{ section.settings.wishlist_drawer_icon }}"
+            >
+              {% render 'material-icon', icon: section.settings.wishlist_drawer_icon %}
+            </button>
+          </div>
+        {%- when 'drawer_items' -%}
+          <div class="dbtfy-drawer__contents" {{ block.shopify_attributes }}>
+            <div class="grid grid--2-col dbtfy-wishlist--items"></div>
+          </div>
+        {%- when 'drawer_empty' -%}
+          <div class="dbtfy-wishlist-drawer__empty-content text-center" {{ block.shopify_attributes }}>
+            {%- if block.settings.empty_drawer_text != blank -%}
+              <h2 class="{{ block.settings.empty_heading_size }}">{{ block.settings.empty_drawer_text }}</h2>
+            {%- endif -%}
+            <a href="{{ routes.all_products_collection_url }}" class="button button--primary">
+              {{ 'general.continue_shopping' | t }}
+            </a>
+            <button
+              class="dbtfy-drawer__close"
+              type="button"
+              onclick="this.closest('dbtfy-drawer').close()"
+              aria-label="{{ section.settings.wishlist_drawer_icon }}"
+            >
+              {%- render 'material-icon', icon: section.settings.wishlist_drawer_icon -%}
+            </button>
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+  </dbtfy-wishlist-drawer>
+</dbtfy-drawer>
+{%- schema -%}
+{
+  "name": "t:sections.dbtfy-wishlist-drawer.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-wishlist.settings.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-wishlist.settings.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.width"
+    },
+    {
+      "type": "select",
+      "id": "desktop_width",
+      "label": "t:sections.dbtfy-wishlist-drawer.settings.desktop_width.label",
+      "options": [
+        {
+          "value": "normal",
+          "label": "t:sections.dbtfy-wishlist-drawer.settings.desktop_width.options__1.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "text",
+      "id": "wishlist_drawer_icon",
+      "label": "t:blocks.cart-notification.settings.close_icon.label",
+      "default": "close",
+      "info": "t:sections.all.icon.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "drawer_title",
+      "name": "t:sections.dbtfy-wishlist-drawer.blocks.wishlist-heading.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.heading"
+        },
+        {
+          "type": "text",
+          "id": "wishlist_drawer_title",
+          "label": "t:general.settings.text",
+          "default": "t:sections.dbtfy-wishlist-drawer.blocks.wishlist-heading.settings.heading_text.default",
+          "info": "t:sections.dbtfy-wishlist-drawer.blocks.wishlist-heading.settings.heading_text.info"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "t:general.settings.small"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+            },
+            {
+              "value": "h0",
+              "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+            },
+            {
+              "value": "hxl",
+              "label": "t:general.settings.size.option__7"
+            },
+            {
+              "value": "hxxl",
+              "label": "t:general.settings.size.option__8"
+            }
+          ],
+          "default": "h2",
+          "label": "t:sections.dbtfy-content-tabs.blocks.heading_size"
+        },
+        {
+          "type": "select",
+          "id": "heading_alignment",
+          "label": "t:general.settings.alignment.label",
+          "options": [
+            {
+              "value": "left",
+              "label": "t:general.settings.alignment.option__4"
+            },
+            {
+              "value": "center",
+              "label": "t:general.settings.alignment.option__5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "drawer_items",
+      "name": "t:sections.dbtfy-wishlist-drawer.blocks.wishlist-items.name",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "drawer_empty",
+      "name": "t:sections.dbtfy-wishlist-drawer.blocks.wishlist-empty.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:sections.dbtfy-wishlist-drawer.blocks.wishlist-empty.content"
+        },
+        {
+          "type": "text",
+          "id": "empty_drawer_text",
+          "label": "t:sections.dbtfy-wishlist-drawer.blocks.wishlist-empty.settings.text.label",
+          "default": "t:sections.dbtfy-wishlist-drawer.blocks.wishlist-empty.settings.text.default"
+        },
+        {
+          "type": "select",
+          "id": "empty_heading_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "t:general.settings.small"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+            },
+            {
+              "value": "h0",
+              "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+            },
+            {
+              "value": "hxl",
+              "label": "t:general.settings.size.option__7"
+            },
+            {
+              "value": "hxxl",
+              "label": "t:general.settings.size.option__8"
+            }
+          ],
+          "default": "h2",
+          "label": "t:sections.dbtfy-content-tabs.blocks.heading_size"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "drawer_title"
+      },
+      {
+        "type": "drawer_items"
+      },
+      {
+        "type": "drawer_empty"
+      }
+    ]
+  }
+}
+{%- endschema -%}

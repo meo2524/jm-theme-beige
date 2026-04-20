@@ -1,0 +1,32 @@
+<script>
+  var lastElement = Debutify.widgets['product_as_variants']['blocks'][Debutify.widgets['product_as_variants']['blocks'].length - 1];
+  var block_settings = {{ block.settings | json }};
+  if (!lastElement.block_settings) {
+    lastElement.block_settings = [];
+  }
+  lastElement.block_settings.push(block_settings);
+</script>
+{%- schema -%}
+{
+  "name": "t:blocks.dbtfy-product-swatches.variant",
+  "settings": [
+    {
+      "type": "text",
+      "id": "values",
+      "label": "Option Value",
+      "default": "t:blocks.dbtfy-product-swatches.option_value_default",
+      "info": "t:blocks.dbtfy-product-swatches.all_option_by_separted"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:general.settings.visibility.product.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.dbtfy-product-swatches.variant"
+    }
+  ]
+}
+{%- endschema -%}

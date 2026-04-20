@@ -1,0 +1,53 @@
+<div class="">
+  <div
+    class="content-tabs content-tabs-{{ block.id }}"
+  >
+    <div class="hidden content-tabs__header">
+      {% content_for 'blocks' %}
+    </div>
+    <div class="content-tabs__body">
+      <div
+        class="{{ section.settings.tab_container_width }} content-tabs__buttons  content-tabs__buttons--animation-{{ section.settings.active_tab_button_animation }} animate-item animate-item--child index-1"
+      >
+        {% if section.settings.active_tab_button_animation == 'moving' %}
+          <div class="content-tab-buttom__active-bg">&nbsp</div>
+        {% endif %}
+      </div>
+      {% if section.settings.active_tab_style == 'dropdown' %}
+        <div class="content_tabs_dropdown hidden">
+          <div class="dbtfy-dropdown">
+            <div class="select">
+              <select class="select__select"></select>
+              <svg class="icon icon-caret" viewBox="0 0 10 6">
+                <path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+      <div class="content-tabs__tabs content-tabs__content animate-item animate-item--child index-2"></div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Block",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_dbtfy-tab-block"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Block",
+      "blocks": [
+        {
+          "type": "_dbtfy-tab-block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

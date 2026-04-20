@@ -1,0 +1,62 @@
+<script>
+  Debutify.widgets['product_as_variants'] = {
+    'blocks' : [],
+    'settings': {{ block.settings | json }}
+  };
+</script>
+{%- content_for 'blocks' -%}
+{%- schema -%}
+{
+  "name": "t:sections.main-product.blocks.product_as_variants.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-product.blocks.product_as_variants.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-product.blocks.product_as_variants.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.enterprise_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "checkbox",
+      "id": "ignore_swatch_case_product_as_variant",
+      "label": "t:sections.main-product.blocks.product_as_variants.ignore_case_label",
+      "info": "t:sections.main-product.blocks.product_as_variants.ignore_case_info",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_dbtfy-product-as-variant-group"
+    },
+    {
+      "type": "_dbtfy-pro-as-var-configurations"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main-product.blocks.product_as_variants.name",
+      "blocks": [
+        {
+          "type": "_dbtfy-pro-as-var-configurations"
+        },
+        {
+          "type": "_dbtfy-product-as-variant-group"
+        }
+      ]
+    }
+  ]
+}
+{%- endschema -%}

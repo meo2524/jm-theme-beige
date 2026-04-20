@@ -1,0 +1,5702 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Debutify",
+    "theme_author": "Debutify",
+    "theme_version": "8.13",
+    "theme_documentation_url": "https://help.debutify.com/en/",
+    "theme_support_email": "support@debutify.com"
+  },
+  {
+    "name": "t:settings_schema.global_settings.name",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "debug_mode",
+        "label": "Debug App?",
+        "info": "When you turn it on, All Inactive Widgets/Sections will appear at the top of the theme editor/section.",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global_settings.settings.product_section.name"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_dynamic_checkout",
+        "label": "t:settings_schema.global_settings.settings.product_section.show_dynamic_checkout",
+        "info": "t:settings_schema.global_settings.settings.product_section.show_dynamic_checkout_info",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "custom_add_to_cart_buttons",
+        "label": "t:settings_schema.global_settings.settings.button_style.label",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "add_to_cart_style",
+        "default": "button button--secondary",
+        "label": "t:settings_schema.global_settings.settings.button_style.add-to-cart-style.label",
+        "options": [
+          {
+            "value": "button button--tertiary",
+            "label": "t:general.settings.style.default"
+          },
+          {
+            "value": "button button--primary",
+            "label": "t:sections.all.button.options__3.label"
+          },
+          {
+            "value": "button button--secondary",
+            "label": "t:sections.all.button.options__4.label"
+          }
+        ],
+        "visible_if": "{{ settings.custom_add_to_cart_buttons == true }}"
+      },
+      {
+        "type": "select",
+        "id": "add_to_cart_color",
+        "default": "primary_color",
+        "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.label",
+        "options": [
+          {
+            "value": "primary_color",
+            "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.primary"
+          },
+          {
+            "value": "secondary_color",
+            "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.secondary"
+          },
+          {
+            "value": "light_color",
+            "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.light"
+          },
+          {
+            "value": "dark_color",
+            "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.dark"
+          },
+          {
+            "value": "custom_color",
+            "label": "Custom color"
+          }
+        ],
+        "visible_if": "{{ settings.custom_add_to_cart_buttons == true }}"
+      },
+      {
+        "type": "color",
+        "id": "add_to_cart__custom_background_color",
+        "label": "Primary Color",
+        "visible_if": "{{ settings.custom_add_to_cart_buttons == true and settings.add_to_cart_color == 'custom_color' }}"
+      },
+      {
+        "type": "color",
+        "id": "add_to_cart__custom_text_color",
+        "label": "Secondary color",
+        "visible_if": "{{ settings.custom_add_to_cart_buttons == true and settings.add_to_cart_color == 'custom_color' }}"
+      },
+      {
+        "type": "select",
+        "id": "buy_it_now_style",
+        "default": "button button--primary",
+        "label": "t:settings_schema.global_settings.settings.button_style.buy-it-now-style.label",
+        "options": [
+          {
+            "value": "button button--tertiary",
+            "label": "t:general.settings.style.default"
+          },
+          {
+            "value": "button button--primary",
+            "label": "t:sections.all.button.options__3.label"
+          },
+          {
+            "value": "button button--secondary",
+            "label": "t:sections.all.button.options__4.label"
+          }
+        ],
+        "visible_if": "{{ settings.custom_add_to_cart_buttons == true }}"
+      },
+      {
+        "type": "select",
+        "id": "buy_it_now_color",
+        "default": "secondary_color",
+        "label": "Buy it now Color",
+        "options": [
+          {
+            "value": "primary_color",
+            "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.primary"
+          },
+          {
+            "value": "secondary_color",
+            "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.secondary"
+          },
+          {
+            "value": "light_color",
+            "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.light"
+          },
+          {
+            "value": "dark_color",
+            "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.dark"
+          },
+          {
+            "value": "custom_color",
+            "label": "Custom color"
+          }
+        ],
+        "visible_if": "{{ settings.custom_add_to_cart_buttons == true }}"
+      },
+      {
+        "type": "color",
+        "id": "custom_buy_it_now_background_color",
+        "label": "Primary Color",
+        "visible_if": "{{ settings.custom_add_to_cart_buttons == true and settings.buy_it_now_color == 'custom_color' }}"
+      },
+      {
+        "type": "color",
+        "id": "custom_buy_it_now_text_color",
+        "label": "Secondary color",
+        "visible_if": "{{ settings.custom_add_to_cart_buttons == true and settings.buy_it_now_color == 'custom_color' }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "apply_auto_discount",
+        "label": "t:settings_schema.global_settings.settings.auto_discount",
+        "info": "t:settings_schema.global_settings.settings.auto_discount_info",
+        "default": true
+      },
+      {
+        "type": "paragraph",
+        "content": "t:settings_schema.global_settings.settings.auto_discount_info_2",
+        "visible_if": "{{ settings.apply_auto_discount == true }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_grid_enable_history_state",
+        "label": "t:settings_schema.widgets.color_swatches.enable_history_state",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.additional_SEO.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Dropshipping"
+      },
+      {
+        "type": "paragraph",
+        "content": "AutoDS"
+      },
+      {
+        "type": "paragraph",
+        "content": "Want to start your online business?"
+      },
+      {
+        "type": "paragraph",
+        "content": "Jumpstart your dropshipping journey with the best dropshipping solution. Our family is welcoming new members."
+      },
+      {
+        "type": "paragraph",
+        "content": "[Get started](https://debutify.com/partner/autods)"
+      },
+      {
+        "type": "paragraph",
+        "content": "14-day trial for $1 | Cancel any time"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.additional_SEO.name"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_SEO",
+        "label": "t:settings_schema.additional_SEO.settings.label",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "shipping_fee",
+        "label": "t:settings_schema.additional_SEO.settings.shopping_fee",
+        "info": "t:settings_schema.additional_SEO.settings.shopping_fee_info",
+        "visible_if": "{{ settings.enable_SEO == true }}"
+      },
+      {
+        "type": "text",
+        "id": "merchant_return_days",
+        "label": "t:settings_schema.additional_SEO.settings.merchant_return_days",
+        "info": "t:settings_schema.additional_SEO.settings.merchant_return_days_info",
+        "visible_if": "{{ settings.enable_SEO == true }}"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.integrations.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Dropshipping"
+      },
+      {
+        "type": "paragraph",
+        "content": "AutoDS"
+      },
+      {
+        "type": "paragraph",
+        "content": "Want to start your online business?"
+      },
+      {
+        "type": "paragraph",
+        "content": "Jumpstart your dropshipping journey with the best dropshipping solution. Our family is welcoming new members."
+      },
+      {
+        "type": "paragraph",
+        "content": "[Get started](https://debutify.com/partner/autods)"
+      },
+      {
+        "type": "paragraph",
+        "content": "14-day trial for $1 | Cancel any time"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.integrations.settings.header__5.content"
+      },
+      {
+        "type": "radio",
+        "id": "review_app",
+        "label": "t:settings_schema.integrations.settings.app_reviews.label",
+        "default": "",
+        "options": [
+          {
+            "value": "",
+            "label": "t:settings_schema.integrations.settings.app_reviews.options__1.label"
+          },
+          {
+            "value": "trustoo",
+            "label": "t:settings_schema.integrations.settings.app_reviews.option_11_label"
+          },
+          {
+            "value": "other_app",
+            "label": "t:settings_schema.integrations.settings.app_reviews.options__12_label"
+          }
+        ]
+      },
+      {
+        "type": "radio",
+        "id": "review_app_other",
+        "label": "t:settings_schema.integrations.settings.app_reviews.options__13_label",
+        "default": "debutify",
+        "options": [
+          {
+            "value": "debutify-dtm",
+            "label": "t:settings_schema.integrations.settings.app_reviews.options__9.label"
+          },
+          {
+            "value": "debutify",
+            "label": "t:settings_schema.integrations.settings.app_reviews.options__2.label"
+          },
+          {
+            "value": "loox",
+            "label": "t:settings_schema.integrations.settings.app_reviews.options__3.label"
+          },
+          {
+            "value": "judge_me",
+            "label": "t:settings_schema.integrations.settings.app_reviews.options__4.label"
+          },
+          {
+            "value": "kudosi",
+            "label": "t:settings_schema.integrations.settings.app_reviews.options__10.label"
+          },
+          {
+            "value": "ryviu",
+            "label": "t:settings_schema.integrations.settings.app_reviews.options__5.label"
+          },
+          {
+            "value": "stamped_io",
+            "label": "t:settings_schema.integrations.settings.app_reviews.options__6.label"
+          },
+          {
+            "value": "fera",
+            "label": "t:settings_schema.integrations.settings.app_reviews.options__7.label"
+          },
+          {
+            "value": "custom_review",
+            "label": "t:settings_schema.integrations.settings.app_reviews.options__8.label"
+          }
+        ],
+        "visible_if": "{{ settings.review_app == 'other_app' }}"
+      },
+      {
+        "type": "html",
+        "id": "review_widget_code",
+        "label": "t:settings_schema.integrations.settings.review_widget_code.custom_review_widget_code",
+        "visible_if": "{{ settings.review_app_other == 'custom_review' and settings.review_app == 'other_app' }}"
+      },
+      {
+        "type": "html",
+        "id": "review_star_rating_code",
+        "label": "t:settings_schema.integrations.settings.star_rating.custom_star_rating_code",
+        "visible_if": "{{ settings.review_app_other == 'custom_review' and settings.review_app == 'other_app' }}"
+      },
+      {
+        "type": "color",
+        "id": "star_filled_color",
+        "label": "t:settings_schema.integrations.settings.star_rating.filled_color_label",
+        "default": "#FFCC00",
+        "visible_if": "{{ settings.review_app_other == 'custom_review' and settings.review_app == 'other_app' }}"
+      },
+      {
+        "type": "color",
+        "id": "star_empty_color",
+        "label": "t:settings_schema.integrations.settings.star_rating.empty_color_label",
+        "default": "#B9B8B8",
+        "visible_if": "{{ settings.review_app_other == 'custom_review' and settings.review_app == 'other_app' }}"
+      },
+      {
+        "type": "select",
+        "id": "empty_star_style",
+        "label": "t:settings_schema.integrations.settings.star_rating.empty_star_style",
+        "default": "filled",
+        "options": [
+          {
+            "value": "outlined",
+            "label": "t:settings_schema.integrations.settings.star_rating.star_outlined"
+          },
+          {
+            "value": "filled",
+            "label": "t:settings_schema.integrations.settings.star_rating.star_filled"
+          }
+        ],
+        "visible_if": "{{ settings.review_app_other == 'custom_review' and settings.review_app == 'other_app' }}"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.integrations.settings.header__1.content"
+      },
+      {
+        "type": "radio",
+        "id": "newsletter_app",
+        "label": "t:settings_schema.integrations.settings.newsletter_app.label",
+        "default": "",
+        "options": [
+          {
+            "value": "",
+            "label": "t:settings_schema.integrations.settings.newsletter_app.options__1.label"
+          },
+          {
+            "value": "omnisend",
+            "label": "Omnisend"
+          },
+          {
+            "value": "mailchimp",
+            "label": "Mailchimp"
+          },
+          {
+            "value": "klaviyo",
+            "label": "Klaviyo"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "klaviyo_app_public_key",
+        "label": "t:settings_schema.integrations.settings.klaviyo_app_public_key.label"
+      },
+      {
+        "type": "text",
+        "id": "klaviyo_app_list_id",
+        "label": "t:settings_schema.integrations.settings.klaviyo_app_list_id.label"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.integrations.settings.header__2.content"
+      },
+      {
+        "type": "radio",
+        "id": "sms_app",
+        "label": "t:settings_schema.integrations.settings.app_sms.label",
+        "default": "",
+        "options": [
+          {
+            "value": "",
+            "label": "t:settings_schema.integrations.settings.app_sms.options__1.label"
+          },
+          {
+            "value": "yotpo_sms",
+            "label": "t:settings_schema.integrations.settings.app_sms.options__2.label"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.integrations.settings.header__3.content"
+      },
+      {
+        "type": "radio",
+        "id": "tracking_app",
+        "label": "t:settings_schema.integrations.settings.app_tracking.label",
+        "default": "",
+        "options": [
+          {
+            "value": "",
+            "label": "t:settings_schema.integrations.settings.app_tracking.options__1.label"
+          },
+          {
+            "value": "route",
+            "label": "t:settings_schema.integrations.settings.app_tracking.options__2.label"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "google_tag_manager_id",
+        "label": "t:settings_schema.integrations.settings.google_tag_manager.label",
+        "info": "t:settings_schema.integrations.settings.google_tag_manager.info"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.integrations.settings.header__4.content"
+      },
+      {
+        "type": "radio",
+        "id": "seo_app",
+        "label": "t:settings_schema.integrations.settings.app_seo.label",
+        "default": "",
+        "options": [
+          {
+            "value": "",
+            "label": "t:settings_schema.integrations.settings.app_seo.options__1.label"
+          },
+          {
+            "value": "plug_in_seo",
+            "label": "t:settings_schema.integrations.settings.app_seo.options__2.label"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Post Purchase"
+      },
+      {
+        "type": "paragraph",
+        "content": "ReConvert Upsell & Cross Sell [Install here](https://debutify.com/partner/reconvert-upsell-cross-sell)"
+      },
+      {
+        "type": "paragraph",
+        "content": "ReConvert helps you sell more, by making it easy to optimize your post-purchase journey. Add checkout upsells, one-click upsells, thank you page offers & more in minutes."
+      },
+      {
+        "type": "header",
+        "content": "Affiliate Marketing"
+      },
+      {
+        "type": "paragraph",
+        "content": "UpPromote Affiliate Marketing [Install here](https://debutify.com/partner/uppromote-affiliate-marketing)"
+      },
+      {
+        "type": "paragraph",
+        "content": "The top recommended affiliate/referral marketing solution on Shopify. An all-in-one solution to build, manage, and track your affiliate programs effortlessly."
+      }
+    ]
+  },
+  {
+    "name": "Partners",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Dropshipping"
+      },
+      {
+        "type": "paragraph",
+        "content": "AutoDS"
+      },
+      {
+        "type": "paragraph",
+        "content": "Want to start your online business?"
+      },
+      {
+        "type": "paragraph",
+        "content": "Jumpstart your dropshipping journey with the best dropshipping solution. Our family is welcoming new members."
+      },
+      {
+        "type": "paragraph",
+        "content": "[Get started](https://debutify.com/partner/autods)"
+      },
+      {
+        "type": "paragraph",
+        "content": "14-day trial for $1 | Cancel any time"
+      },
+      {
+        "type": "header",
+        "content": "Reviews"
+      },
+      {
+        "type": "paragraph",
+        "content": "TrustWILL Product Reviews app"
+      },
+      {
+        "type": "paragraph",
+        "content": "Make it easy for you to collect and display photo & video reviews, building social proof and boosting sale."
+      },
+      {
+        "type": "paragraph",
+        "content": "[Get 40% off](https://debutify.com/partner/trustoo-review)"
+      },
+      {
+        "type": "header",
+        "content": "Loyalty"
+      },
+      {
+        "type": "paragraph",
+        "content": "TrustWILL Loyalty & Referrals"
+      },
+      {
+        "type": "paragraph",
+        "content": "Get new customers, cultivate brand fans, create endless orders with loyalty solution! 70% OFF on all plans!"
+      },
+      {
+        "type": "paragraph",
+        "content": "[Get 70% off](https://debutify.com/partner/dropshipping-trustoo-loyalty)"
+      },
+      {
+        "type": "header",
+        "content": "SEO"
+      },
+      {
+        "type": "paragraph",
+        "content": "SEOWILL: AI SEO & AI Blog Post"
+      },
+      {
+        "type": "paragraph",
+        "content": "All-in-one SEO booster tools to increase traffic and sales, improve site speed and Google rankings."
+      },
+      {
+        "type": "paragraph",
+        "content": "[Get 30% off](https://debutify.com/partner/seowill)"
+      }
+    ]
+  },
+  {
+    "name": "🎁 Free widgets / sections",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "dbtfy_agree_to_terms",
+        "label": "Agree to Terms",
+        "info": "Require customers to accept your terms and conditions before completing their checkout. [Learn more](https://debutify.com/youtube-redirect/agree-to-terms)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_announcement_bar",
+        "label": "Announcement Bar",
+        "info": "Display important announcements and promotions at the top of your store for visibility. [Learn more](https://help.debutify.com/en/articles/10435017-how-to-use-the-announcement-bar-widget-in-the-debutify-theme-version-8)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_breadcrumbs",
+        "label": "Breadcrumbs",
+        "info": "Help customers find their way around your store with easy-to-follow navigation paths. [Learn more](https://help.debutify.com/en/articles/10435104-how-to-use-the-breadcrumbs-section-in-the-debutify-theme-version-8)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_cart_bubble",
+        "label": "Cart Bubble",
+        "info": "See the number of items in your cart at a glance with a clear and convenient visual cue. [Learn more](https://debutify.com/youtube-redirect/cart-bubble)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_cart_discount",
+        "label": "Cart Discount",
+        "info": "Enable customers to apply discount codes in the cart for a smoother checkout experience. [Learn more](https://debutify.com/youtube-redirect/cart-discount)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_cart_favicon",
+        "label": "Cart Favicon",
+        "info": "Swap the page favicon to a secondary image when a product is added to the cart. [Learn more](https://debutify.com/youtube-redirect/cart-favicon)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_cart_savings",
+        "label": "Cart Savings",
+        "info": "Show customers their total savings in the cart to boost satisfaction and drive purchases. [Learn more](https://debutify.com/youtube-redirect/cart-savings)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_collection_filters",
+        "label": "Collection Filters",
+        "info": "Let visitors filter products on collection pages by their preferred parameters easily. [Learn more](https://debutify.com/youtube-redirect/collection-filters)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_contact_form",
+        "label": "Contact Form",
+        "info": "Add a contact form to your store, allowing customers to easily reach out with inquiries. [Learn more](https://help.debutify.com/en/articles/10448080-how-to-use-the-contact-form-section-for-debutify-theme-version-8)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_cookie_box",
+        "label": "Cookie Box",
+        "info": "Show a cookie consent box to ensure your website stays GDPR-compliant and user-friendly. [Learn more](https://debutify.com/youtube-redirect/cookie-box)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_featured_blog",
+        "label": "Featured Blog",
+        "info": "Display your latest blog posts to engage visitors and keep them updated on new content. [Learn more](https://help.debutify.com/en/articles/10435060-how-to-use-the-featured-blog-section-in-the-debutify-theme-version-8)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_featured_collection",
+        "label": "Featured Collection",
+        "info": "Engage customers with appealing displays that highlight key products and promotions. [Learn more](https://help.debutify.com/en/articles/10435142-how-to-use-the-featured-collection-section-in-the-debutify-theme-version-8)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_featured_product",
+        "label": "Featured Product",
+        "info": "Highlight key products to drive attention, engage customers, and boost sales effectively. [Learn more](https://help.debutify.com/en/articles/10435356-how-to-use-the-featured-product-section-in-the-debutify-theme-version-8)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_fly_to_cart",
+        "label": "Fly to Cart",
+        "info": "Enhance the shopping experience with a smooth animation that visually adds items to the cart. [Learn more]",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_image_banner",
+        "label": "Image Banner",
+        "info": "Display visually striking image banners to capture attention and promote key products. [Learn more](https://help.debutify.com/en/articles/10435480-how-to-use-the-image-banner-section-in-the-debutify-theme-version-8)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_image_with_text",
+        "label": "Image with Text",
+        "info": "Enhance your store by combining impactful visuals with clear, concise descriptive text. [Learn more](https://help.debutify.com/en/articles/10435574-how-to-use-the-image-with-text-section-in-the-debutify-theme-version-8)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_linked_options",
+        "label": "Linked Options",
+        "info": "Hide unavailable product variants automatically for a seamless shopping experience. [Learn more](https://debutify.com/youtube-redirect/linked-options)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_logo_list",
+        "label": "Logo List",
+        "info": "Showcase a collection of featured logos on your store to build trust and credibility. [Learn more](https://help.debutify.com/en/articles/10446492-how-to-use-the-logo-list-section-for-debutify-theme-version-8)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_newsletter",
+        "label": "Newsletter",
+        "info": "Collect customer emails to send updates, news, deals, and exclusive promotional content. [Learn more](https://help.debutify.com/en/articles/10435588-how-to-use-the-newsletter-section-in-the-debutify-theme-version-8)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_page_transition",
+        "label": "Page Transition",
+        "info": "Show a custom preloader with your logo to keep customers engaged while the page loads. [Learn more](https://debutify.com/youtube-redirect/page-transition)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_product_image_crop",
+        "label": "Product Image Crop",
+        "info": "t:settings_schema.image_crop.enable_info",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_rich_text",
+        "label": "Rich Text",
+        "info": "Showcase styled content to enhance your store with informative text and key details. [Learn more](https://help.debutify.com/en/articles/10448144-how-to-use-the-rich-text-section-in-the-debutify-theme-version-8)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_scrollbar_cursor",
+        "label": "Scrollbar & Cursor",
+        "info": "Customize scrollbars and cursors to perfectly match your brand’s style and identity. [Learn more](https://debutify.com/youtube-redirect/scrollbar-cursor)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_skip_cart",
+        "label": "Skip Cart",
+        "info": "Send buyers directly to checkout, skipping the cart page for a quicker purchase process. [Learn more](https://debutify.com/youtube-redirect/skip-cart)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_slideshow",
+        "label": "Slideshow",
+        "info": "Showcase products with a dynamic slideshow to capture attention and engage visitors. [Learn more](https://help.debutify.com/en/articles/10435608-how-to-use-the-slideshow-section-in-the-debutify-theme-version-8)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_trust_badge",
+        "label": "Trust Badge",
+        "info": "Display payment icons or custom trust badges under the add-to-cart and checkout buttons. [Learn more](https://help.debutify.com/en/articles/10435634-how-to-use-the-trust-badge-section-in-the-debutify-theme-version-8)",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "🌱 Growth widgets / sections",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Free plan widgets included, plus extra widgets to grow your experience."
+      },
+      {
+        "type": "header",
+        "content": "Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_addtocart_animation",
+        "label": "Add to Cart Animation",
+        "info": "Add animation to the add-to-cart button for a more engaging product page experience. [Learn more](https://debutify.com/youtube-redirect/add-to-cart-animation)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_age_check",
+        "label": "Age Check",
+        "info": "Verify visitors age to ensure compliance before allowing access to your store. [Learn more](https://debutify.com/youtube-redirect/age-check)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_back_in_stock",
+        "label": "Back in Stock",
+        "info": "Let customers subscribe to back-in-stock alerts and stay updated on product availability. [Learn more](https://debutify.com/youtube-redirect/back-in-stock)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_back_to_top",
+        "label": "Back to Top",
+        "info": "Let users quickly return to the top of the page with a single click, no scrolling needed. [Learn more](https://debutify.com/youtube-redirect/back-to-top)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_cart_goal",
+        "label": "Cart Goal",
+        "info": "Unlock free shipping for customers when their cart total hits a specific amount. [Learn more](https://debutify.com/youtube-redirect/cart-goal)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_cart_notification",
+        "label": "Cart Notification",
+        "info": "Show a bottom notification with a 'View Cart' button when a product is added to the cart. [Learn more](https://debutify.com/youtube-redirect/cart-notification)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_cart_reminder",
+        "label": "Cart Reminder",
+        "info": "Display a toast with cart items on the screen to remind customers to complete checkout. [Learn more](https://debutify.com/youtube-redirect/cart-reminder)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_cart_upsell",
+        "label": "Cart Upsell",
+        "info": "Increase sales by displaying up-sells and cross-sells directly on your cart page. [Learn more](https://debutify.com/youtube-redirect/cart-upsell)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_delivery_date",
+        "label": "Delivery Date",
+        "info": "Enable customers to easily select their preferred delivery date directly from the cart. [Learn more](https://debutify.com/youtube-redirect/delivery-date)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_delivery_time",
+        "label": "Delivery Time",
+        "info": "Show an estimated delivery date to keep customers informed and enhance their experience. [Learn more](https://debutify.com/youtube-redirect/delivery-time)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_discount_saved",
+        "label": "Discount Saved",
+        "info": "Display the discount amount for sale product variants directly on the product page. [Learn more](https://debutify.com/youtube-redirect/discount-saved)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_faq",
+        "label": "FAQs",
+        "info": "Add a searchable Q&A module to your store for easy customer support and engagement. [Learn more](https://help.debutify.com/en/articles/10441244-how-to-use-the-faqs-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_guarantee",
+        "label": "Guarantee",
+        "info": "Highlight key product benefits and guarantees to build confidence and drive conversions. [Learn more](https://help.debutify.com/en/articles/10441237-how-to-use-the-guarantee-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_horizontal_ticker",
+        "label": "Horizontal Ticker",
+        "info": "Broadcasts time-sensitive offers and updates through an eye-catching moving text bar.[Learn more](https://help.debutify.com/en/articles/12953295-how-to-use-the-horizontal-ticker-widget-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_inactive_tab_message",
+        "label": "Inactive Tab Message",
+        "info": "Show a different page title when users switch tabs to enhance navigation and engagement. [Learn more](https://debutify.com/youtube-redirect/inactive-tab-message)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_inventory_quantity",
+        "label": "Inventory Quantity",
+        "info": "Displays the inventory for each product variant. [Learn more](https://debutify.com/youtube-redirect/inventory-quantity)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_infinite_scroll",
+        "label": "Infinite Scroll",
+        "info": "Replace pagination with 'Load More' or auto-load items for smoother scrolling. [Learn more](https://debutify.com/youtube-redirect/infinite-scroll)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_minimum_order",
+        "label": "Minimum Order",
+        "info": "Set a minimum order amount to ensure customers meet requirements before checkout. [Learn more](https://help.debutify.com/en/articles/10434381-how-to-use-the-minimum-order-widget-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_mobile_menu_bar",
+        "label": "Mobile Menu Bar",
+        "info": "Delivers intuitive menu access, making mobile shopping smooth and user-friendly. [Learn more](https://debutify.com/youtube-redirect/mobile-menu)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_order_tracking",
+        "label": "Order Tracking",
+        "info": "Allows customers to track their orders and stay updated on the status of their purchases. [Learn more](https://help.debutify.com/en/articles/10446513-how-to-use-the-order-tracking-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_product_bullet_points",
+        "label": "Product Bullet Points",
+        "info": "Show short, easy-to-read product details to help customers make informed decisions. [Learn more](https://debutify.com/youtube-redirect/product-bullet-points)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_product_tabs",
+        "label": "Product Tabs",
+        "info": "Add extra product details in customizable tabs for an organized, informative display. [Learn more](https://debutify.com/youtube-redirect/product-tabs)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_recently_viewed",
+        "label": "Recently Viewed",
+        "info": "Show the products a visitor has viewed while browsing your store for easy navigation. [Learn more](https://debutify.com/youtube-redirect/recently-viewed)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_remove_debutify_branding",
+        "label": "Remove Debutify Branding",
+        "info": "Remove 'Theme by Debutify' or 'Powered by Debutify' from the footer of your store pages. [Learn more](https://debutify.com/youtube-redirect/remove-debutify-branding)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_related_products",
+        "label": "Related Products",
+        "info": "Show related products to encourage more browsing and increase the chance of more sales. [Learn more](https://help.debutify.com/en/articles/10448123-how-to-use-the-related-product-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_scroll_indicator",
+        "label": "Scroll Indicator",
+        "info": "Guide shoppers with a clean progress bar that shows how far they've scrolled on the page. [Learn more](https://debutify.com/youtube-redirect/scroll-indicator)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_sticky_addtocart",
+        "label": "Sticky Add to Cart",
+        "info": "Show a sticky add-to-cart bar when scrolling past the button for easy access to checkout. [Learn more](https://debutify.com/youtube-redirect/sticky-add-to-cart)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_variant_swatches",
+        "label": "Swatches",
+        "info": "t:settings_schema.widgets.color_swatches.color_swatches.info",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_wish_list",
+        "label": "Wishlist",
+        "info": "t:settings_schema.wish_list.settings.dbtfy_wish_list_enable.info",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "💎 Professional widgets / sections",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Free + Growth plan widgets included, plus even more widgets for advanced features."
+      },
+      {
+        "type": "header",
+        "content": "Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_before_after_image",
+        "label": "Before After Image",
+        "info": "Showcase your products' effectiveness with engaging visuals to capture attention. [Learn more](https://help.debutify.com/en/articles/10441165-how-to-use-the-before-after-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_cart_countdown_timer",
+        "label": "Cart Countdown Timer",
+        "info": "Displays a countdown that motivates customers to act quickly, enhancing the likelihood of completing a purchase. [Learn more](https://debutify.com/youtube-redirect/cart-countdown-timer)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_cart_testimonial",
+        "label": "Cart Testimonial",
+        "info": "Build trust and reduce cart abandonment with testimonials directly in the cart. [Learn more](https://debutify.com/youtube-redirect/cart-testimonials)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_contact_form_builder",
+        "label": "Contact Form Builder",
+        "info": "Create custom contact forms with ease, allowing customers to send inquiries directly. [Learn more](https://help.debutify.com/en/articles/10448088-how-to-use-the-contact-form-builder-section-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_content_tabs",
+        "label": "Content Tabs",
+        "info": "Organize product info into tabs for a cleaner, easier shopping experience. [Learn more](https://help.debutify.com/en/articles/11477668-how-to-use-the-content-tabs-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_countdown_sale",
+        "label": "Countdown Sale",
+        "default": false,
+        "info": "Create urgency and boost conversions with a real-time countdown for limited-time offers. [Learn more](https://help.debutify.com/en/articles/10801086-how-to-use-the-countdown-sale-widget-for-debutify-theme-version-8)"
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_country_blocker",
+        "label": "Country Blocker",
+        "info": "Restrict store access by country to control visibility and protect your business. [Learn more](https://debutify.com/youtube-redirect/country-blocker)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_custom_code",
+        "label": "Custom Code",
+        "info": "Insert custom HTML or Liquid code to personalize and customize your site experience. [Learn more](https://help.debutify.com/en/articles/10441174-how-to-use-the-custom-code-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_double_image_banner",
+        "label": "Double Image Banner",
+        "info": "Enhance your store with two images in a banner to create a more impactful visual display. [Learn more](https://help.debutify.com/en/articles/10448139-how-to-use-the-double-image-banner-section-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_facebook_testimonials",
+        "label": "Facebook Testimonials",
+        "info": "Showcase real customer reviews from Facebook to build trust and boost conversions. [Learn more](https://help.debutify.com/en/articles/11501674-how-to-use-the-facebook-testimonial-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_featured_image",
+        "label": "Featured Image",
+        "info": "Showcase key products with a featured image section to capture attention and drive sales. [Learn more](https://help.debutify.com/en/articles/10448107-how-to-use-the-featured-image-section-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_gift_wrap",
+        "label": "Gift Wrap",
+        "info": "Let customers mark an order as a gift and include a personalized gift message. [Learn more](https://debutify.com/youtube-redirect/gift-wrap)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_image_with_text_parallax",
+        "label": "Image With Text Parallax",
+        "info": "Add depth with scrolling parallax effects and customizable text to highlight key content. [Learn more](https://help.debutify.com/en/articles/11401482-how-to-use-the-image-with-text-parallax-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_instagram_story",
+        "label": "Instagram Stories",
+        "info": "Engage visitors with Instagram-style stories to showcase your products, testimonials, and more. [Learn more](https://help.debutify.com/en/articles/11702760-how-to-use-the-instagram-story-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_map",
+        "label": "Map",
+        "info": "Add an interactive map to your store for displaying locations, directions, or details. [Learn more](https://help.debutify.com/en/articles/10448111-how-to-use-the-map-section-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_mega_menu",
+        "label": "Mega Menu",
+        "info": "Enhance your header navigation with nested menus, products, collections, and more. [Learn more](https://debutify.com/youtube-redirect/mega-menu)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_newsletter_popup",
+        "label": "Newsletter Popup",
+        "info": "Display a customizable newsletter pop-up to capture visitor emails before they leave. [Learn more](https://debutify.com/youtube-redirect/newsletter-popup)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_order_feedback",
+        "label": "Order Feedback",
+        "info": "Collect feedback to understand preferences and craft targeted marketing strategies. [Learn more](https://debutify.com/youtube-redirect/order-feedback)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_page_color_changer",
+        "label": "Page Color Changer",
+        "info": "Customize the color of your store pages to match your brand and enhance visual appeal. [Learn more](https://help.debutify.com/en/articles/11401803-how-to-use-the-page-color-changer-widget-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_pricing_table",
+        "label": "Pricing Table",
+        "info": "Display a clear comparison of pricing plans or product options to help customers make informed decisions. [Learn more](https://help.debutify.com/en/articles/10446517-how-to-use-the-pricing-table-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_product_in_empty_cart",
+        "label": "Product in Empty Cart",
+        "info": "Recommends relevant products to encourage purchases when shoppers have an empty cart.[Learn more](https://debutify.com/youtube-redirect/products-in-empty-cart)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_show_product_card_carousel",
+        "label": "Product Card Carousel",
+        "info": "Showcase product variants with an image slider on product cards for easy browsing. [Learn more](https://debutify.com/youtube-redirect/product-card-carousel)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_quantity_breaks",
+        "label": "Quantity Breaks",
+        "info": "Increase sales with automated quantity-based discounts to encourage larger orders. [Learn more](https://debutify.com/youtube-redirect/quantity-breaks)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_result_section",
+        "label": "Result Section",
+        "info": "Highlight your product’s impact and proven benefits to capture attention and drive sales. [Learn more](https://help.debutify.com/en/articles/10448136-how-to-use-the-results-section-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_sale_popup_notification",
+        "label": "Sale Popup Notification",
+        "info": "Show real-time purchase updates to create urgency and enhance your store's credibility.  [Learn more](https://debutify.com/youtube-redirect/sales-popup-notification)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_separator",
+        "label": "Separator",
+        "info": "Cleanly divide sections with a stylish separator for better content flow and readability. [Learn more](https://help.debutify.com/en/articles/10801004-how-to-use-the-separator-section-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_shop_protect",
+        "label": "Shop Protect",
+        "info": "Protect your product description, images, articles, and other content from being stolen. [Learn more](https://debutify.com/youtube-redirect/shop-protect)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_show_second_image_on_hover",
+        "label": "Show Second Image on Hover",
+        "info": "Let customers view a second product image from a different angle when they hover over it. [Learn more](https://debutify.com/youtube-redirect/show-second-image-on-hover)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_size_chart",
+        "label": "Size Chart",
+        "info": "Add customizable size guides with tables and images to help customers find the right fit. [Learn more](https://help.debutify.com/en/articles/10448014-how-to-use-the-size-chart-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_enabled",
+        "label": "Smart Search",
+        "info": "Elegant design meets lightning-fast search, right on your home screen. [Learn more](https://debutify.com/youtube-redirect/smart-search)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_shipping_priorities",
+        "label": "Shipping Priorities",
+        "info": "Provide multiple shipping options to match your customers' delivery needs and preferences. [Learn more](https://help.debutify.com/en/articles/11477632-how-to-use-the-shipping-priority-widget-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_social_discount",
+        "label": "Social Discount",
+        "info": "Encourage customers to share your products on social media by offering discount codes. [Learn more](https://help.debutify.com/en/articles/10448022-how-to-use-the-social-discount-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_star_rating",
+        "label": "Star Rating",
+        "info": "Show customer ratings to build trust, boost credibility, and increase conversions. [Learn more](https://help.debutify.com/en/articles/10912924-how-to-use-the-star-rating-widget-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_sticky_header",
+        "label": "Sticky Header",
+        "info": "Keep the website header visible while scrolling for easy and constant navigation access. [Learn more](https://debutify.com/youtube-redirect/sticky-header)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_synced_variant_image",
+        "label": "Synced Variant Image",
+        "info": "Automatically select the product variant when customers click on a thumbnail image. [Learn more](https://debutify.com/youtube-redirect/synced-variant-image)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_testimonials",
+        "label": "Testimonials",
+        "info": "Display authentic customer feedback with star ratings to increase trust and credibility. [Learn more](https://help.debutify.com/en/articles/10448027-how-to-use-the-testimonials-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_testimonials_card",
+        "label": "Testimonials Card",
+        "info": "Real stories from customers, sharing honest feedback and genuine satisfaction.",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_upsell_bundles",
+        "label": "Upsell Bundles",
+        "info": "Allow customers to buy multiple products in one click with attractive bundle deals. [Learn more](https://debutify.com/youtube-redirect/upsell-bundle)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_upsell_popup",
+        "label": "Upsell Popup",
+        "info": "Show a customizable upsell pop-up when a product is added to the cart to increase sales. [Learn more](https://debutify.com/youtube-redirect/upsell-popup)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_cart_variant_picker",
+        "label": "Variant Picker in cart",
+        "info": "Let customers easily switch product variants like size or color directly from the cart. [Learn more](https://debutify.com/youtube-redirect/variant-picker-in-cart)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_video",
+        "label": "Video",
+        "info": "Display a featured video on your store to captivate and inform customers effectively. [Learn more](https://help.debutify.com/en/articles/10448044-how-to-use-the-video-section-for-debutify-theme-version-8)",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "👑 Enterprise widgets / sections",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "All-inclusive: Free + Growth + Professional widgets, plus premium widgets for unlimited potential."
+      },
+      {
+        "type": "header",
+        "content": "Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_add_on_cart",
+        "label": "Add-on Cart",
+        "default": false,
+        "info": "Increase average order value by suggesting products directly in the cart. [Learn more](https://debutify.com/youtube-redirect/add-on-cart)"
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_benefits_status",
+        "label": "Benefits status",
+        "default": false,
+        "info": "Highlight key benefits and statistics to educate customers and build product trust."
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_cart_benefits",
+        "label": "Cart Benefits and Guarantees",
+        "info": "Reinforce buyer confidence with benefits and trust points in the cart. [Learn more](https://debutify.com/youtube-redirect/cart-benefits-and-guarantees)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_collage",
+        "label": "Collage",
+        "info": "Create an engaging layout by displaying multiple images in a stylish collage format. [Learn more](https://help.debutify.com/en/articles/10448050-how-to-use-the-collage-section-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_collpasible_content",
+        "label": "Collapsible Content",
+        "info": "Organize content with collapsible sections to streamline navigation and save page space. [Learn more](https://help.debutify.com/en/articles/10448065-how-to-use-the-collapsible-content-section-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_collections_list",
+        "label": "Collections List",
+        "info": "Simplify browsing by displaying multiple collections on one page for easy navigation. [Learn more](https://help.debutify.com/en/articles/10435127-how-to-use-the-collection-list-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_comparison_table",
+        "label": "Comparison Table",
+        "info": "Compare product features or competitors side by side for easier buying decisions. [Learn more](https://help.debutify.com/en/articles/12289590-how-to-use-the-comparison-table-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_custom_column",
+        "label": "Custom Column",
+        "info": "Flexible content layout with customizable column configurations. [Learn more](https://help.debutify.com/en/articles/11401490-how-to-use-the-custom-columns-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_custom_liquid",
+        "label": "Custom Liquid",
+        "info": "Insert custom liquid code to your store for enhanced functionality and tailored features. [Learn more](https://help.debutify.com/en/articles/10448105-how-to-use-the-custom-liquid-section-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_customizable_products",
+        "label": "Customizable Products",
+        "info": "Add multiple options and fields to let customers easily customize your products. [Learn more](https://debutify.com/youtube-redirect/customizable-products)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_extended_collections_list",
+        "label": "Extended collections List",
+        "info": "Simplify browsing by presenting various collections on one page. [Learn more](https://help.debutify.com/en/articles/10953350-how-to-use-the-extended-collection-list-section-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_external_urls_handler",
+        "label": "External URLs Handler",
+        "info": "Ensure a smooth user experience by automatically opening all external links in a new tab. [Learn more](https://debutify.com/youtube-redirect/external-urls-handler)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_conditional_gift",
+        "label": "Free/Conditional Gift",
+        "default": false,
+        "info": "Offer free or conditional gifts in the cart drawer to boost order value. [Learn more](https://help.debutify.com/en/articles/11702800-how-to-use-the-free-conditional-gift-in-cart-drawer-widget-in-the-debutify-theme-version-8)"
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_featured_on",
+        "label": "Featured On",
+        "info": "Display logos of media outlets or partners where your brand has been featured. [Learn more](https://help.debutify.com/en/articles/11702861-how-to-use-the-featured-on-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_global_music_player",
+        "label": "Global Music Player",
+        "info": "Add background music to your store to enhance your store’s shopping experience. [Learn more](https://debutify.com/youtube-redirect/global-music-player)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_image_video_slider",
+        "label": "Image and Video Slider",
+        "info": "Showcase multiple product images and videos in a sleek, interactive slider.[Learn more](https://help.debutify.com/en/articles/11401665-how-to-use-the-image-and-video-slider-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "image_video_with_testimonial",
+        "label": "Image / Video with Testimonial",
+        "info": "Showcase testimonials alongside images or videos to build trust and credibility. [Learn more](https://help.debutify.com/en/articles/11702842-how-to-use-the-image-video-with-testimonials-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_instagram_feed",
+        "label": "Instagram Feed",
+        "info": "Display your Instagram feed on your store's homepage and/or product pages. [Learn more](https://help.debutify.com/en/articles/10441263-how-to-use-the-instagram-feed-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_lookbook",
+        "label": "Lookbook",
+        "info": "Showcase products in a stylish, interactive gallery to inspire and engage shoppers. [Learn more](https://help.debutify.com/en/articles/10801137-how-to-use-the-lookbook-section-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_menu_bar",
+        "label": "Menu Bar",
+        "info": "Add a navigation bar for quick and easy access to your store pages and collections. [Learn more](https://help.debutify.com/en/articles/10446496-how-to-use-the-menu-bar-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_multicolumn",
+        "label": "Multicolumn",
+        "info": "Display content in multiple columns for a clean, organized, and easy-to-navigate layout. [Learn more](https://help.debutify.com/en/articles/10448113-how-to-use-the-multicolumn-section-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_multirow",
+        "label": "Multirow",
+        "info": "Display content across multiple rows for a more organized and flexible layout design. [Learn more](https://help.debutify.com/en/articles/10448115-how-to-use-the-multirow-section-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_parallax_image",
+        "label": "Parallax Image",
+        "default": false,
+        "info": "Add depth and motion to your store with visually dynamic parallax scrolling. [Learn more](https://help.debutify.com/en/articles/10912794-how-to-use-the-parallax-image-section-in-the-debutify-theme-version-8)"
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_product_features",
+        "label": "Product Features",
+        "info": "Draw attention to your product's standout features with interactive hotspots. [Learn more](https://help.debutify.com/en/articles/10448107-how-to-use-the-featured-image-section-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_product_sharing",
+        "label": "Product Sharing",
+        "info": "Allow customers to quickly share product links to boost visibility and traffic. [Learn more](https://debutify.com/youtube-redirect/product-sharing)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_product_subscription",
+        "label": "Product Subscription",
+        "info": "Auto-billed subscriptions (weekly, monthly, yearly) with built-in discounts. [Learn more](https://debutify.com/youtube-redirect/product-subscription)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_product_as_variant",
+        "label": "Product as Variant",
+        "info": "Display product variations under one page for a cleaner browsing experience. [Learn more](https://debutify.com/youtube-redirect/product-as-variant)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_product_zooming",
+        "label": "Product Zooming",
+        "info": "t:settings_schema.zooming.enable_info",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_quick_compare",
+        "label": "Quick Compare",
+        "info": "Allow customers to compare product features side by side to choose the best option. [Learn more](https://debutify.com/youtube-redirect/quick-compare)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_quick_order_list",
+        "label": "Quick Order List",
+        "info": "Enable customers to quickly add products to their cart with an easy-to-use variants list. [Learn more](https://help.debutify.com/en/articles/10448118-how-to-use-the-quick-order-list-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_quick_view",
+        "label": "Quick View",
+        "info": "Allow customers to quickly view product details before navigating to the product page. [Learn more](https://debutify.com/youtube-redirect/quick-view)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_scrolling_banner",
+        "label": "Scrolling Banner",
+        "info": "Highlight promotions, flash sales, and updates with a customizable scrolling banner. [Learn more](https://help.debutify.com/en/articles/10800910-how-to-use-the-scrolling-banner-section-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_shipping_checkpoint",
+        "label": "Shipping Checkpoint",
+        "info": "Verify shipping details at checkout to prevent errors and ensure smooth delivery. [Learn more](https://debutify.com/youtube-redirect/shipping-checkpoints)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_shipping_calculator",
+        "label": "Shipping Calculator",
+        "info": "Allow customers to calculate shipping costs in real-time for a smoother checkout process. [Learn more](https://debutify.com/youtube-redirect/shipping-calculator)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_shoppable_image",
+        "label": "Shoppable Image",
+        "info": "Make images interactive by tagging products directly for quick shopping. [Learn more](https://help.debutify.com/en/articles/11703068-how-to-use-the-shoppable-image-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_slideshow_schedule",
+        "label": "Slideshow Schedule Timeline",
+        "info": "Easily manage and schedule slides for a dynamic and well-timed display. [Learn more](https://debutify.com/youtube-redirect/slideshow-schedule)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_split_video_with_text",
+        "label": "Split Video with Text",
+        "info": "Showcase your products with a split text and video layout for an engaging display. [Learn more](https://help.debutify.com/en/articles/10448042-how-to-use-the-split-video-text-section-for-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "stacked_images_with_text",
+        "label": "Stacked Images with Text",
+        "info": "Show multiple images with captions in a stacked layout to highlight key features. [Learn more](https://help.debutify.com/en/articles/11702890-how-to-use-the-stacked-images-with-text-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_sticky_image",
+        "label": "Sticky Image",
+        "info": "Keep images fixed as customers scroll, ensuring key visuals stay visible throughout. [Learn more](https://help.debutify.com/en/articles/10454609-how-to-use-the-sticky-image-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_text_columns_with_images",
+        "label": "Text Columns with Images",
+        "info": "Combine images and text in a column layout to create engaging and informative sections. [Learn more](https://help.debutify.com/en/articles/10448039-how-to-use-the-text-column-with-images-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_tiktok_slider",
+        "label": "TikTok Slider",
+        "info": "Showcase TikTok videos in a smooth slider to boost engagement and social proof. [Learn more](https://help.debutify.com/en/articles/11703064-how-to-use-the-tiktok-slider-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_trustpilot_reviews",
+        "label": "Trustpilot Reviews",
+        "info": "Show your Trustpilot reviews directly on your store to build trust and boost credibility. [Learn more](https://help.debutify.com/en/articles/11589262-how-to-use-the-trustpilot-reviews-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_timeline",
+        "label": "Timeline",
+        "info": "Display a chronological list of events or milestones. [Learn more](https://help.debutify.com/en/articles/11703054-how-to-use-the-welcome-video-widget-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_ugc_carousel",
+        "label": "UGC Carousel",
+        "info": "Showcase customer video reviews and UGC content in an interactive, scrollable carousel. [Learn more](https://debutify.com/youtube-redirect/ugc-carousel)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_variant_sync_on_media",
+        "label": "Variant Sync on Media Change",
+        "info": "Updates the selected variant when a product image is clicked for a smoother experience. [Learn more](https://help.debutify.com/en/articles/11401627-how-to-use-the-variant-sync-on-media-change-widget-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_vertical_ticker",
+        "label": "Vertical Ticker",
+        "info": "Display scrolling messages or updates to grab attention and keep shoppers informed. [Learn more](https://help.debutify.com/en/articles/11477689-how-to-use-the-vertical-ticker-section-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_welcome_video",
+        "label": "Welcome Video",
+        "info": "Add a welcome video to introduce your brand and connect with visitors instantly. [Learn more](https://help.debutify.com/en/articles/11703054-how-to-use-the-welcome-video-widget-in-the-debutify-theme-version-8)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_whatsapp_chat",
+        "label": "WhatsApp Chat",
+        "info": "Let customers reach you through WhatsApp for quick support and real-time conversations. [Learn more](https://debutify.com/youtube-redirect/whatsapp-chat)",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.widgets.color_swatches.label",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Widget is disabled, Go to Theme Settings → [Growth Widgets](/editor?context=theme&category=🌱 Growth widgets / sections) to enable it",
+        "visible_if": "{{ settings.dbtfy_variant_swatches == false }}"
+      },
+      {
+        "type": "select",
+        "id": "swatches_priority",
+        "label": "t:settings_schema.widgets.color_swatches.swatches_priority.label",
+        "default": "native-swatch",
+        "options": [
+          {
+            "value": "native-swatch",
+            "label": "t:settings_schema.widgets.color_swatches.swatches_priority.options__1.label"
+          },
+          {
+            "value": "custom-swatch",
+            "label": "t:settings_schema.widgets.color_swatches.swatches_priority.options__2.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "variant_style",
+        "options": [
+          {
+            "value": "dropdown",
+            "label": "t:settings_schema.widgets.color_swatches.variant_style.options__1.label"
+          },
+          {
+            "value": "button",
+            "label": "t:settings_schema.widgets.color_swatches.variant_style.options__2.label"
+          }
+        ],
+        "default": "button",
+        "label": "t:general.settings.style.lable"
+      },
+      {
+        "id": "swatch_shape",
+        "label": "t:settings_schema.widgets.color_swatches.swatch_shape.label",
+        "type": "select",
+        "info": "t:settings_schema.widgets.color_swatches.swatch_shape.info",
+        "options": [
+          {
+            "value": "circle",
+            "label": "t:general.settings.style.circle"
+          },
+          {
+            "value": "square",
+            "label": "t:general.settings.style.square"
+          },
+          {
+            "value": "none",
+            "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+          }
+        ],
+        "default": "circle"
+      },
+      {
+        "type": "text",
+        "id": "color_option_names",
+        "label": "t:settings_schema.widgets.color_swatches.option_name.label",
+        "info": "t:settings_schema.widgets.color_swatches.option_name.info",
+        "default": "t:settings_schema.widgets.color_swatches.option_name.default"
+      },
+      {
+        "type": "checkbox",
+        "id": "ignore_swatch_case_varinat_picker",
+        "label": "t:sections.main-product.blocks.product_as_variants.ignore_case_label",
+        "info": "t:sections.main-product.blocks.product_as_variants.ignore_case_info",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_product_card_variant_picker",
+        "label": "t:settings_schema.widgets.color_swatches.show_product_card_variant_picker.label",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.quick_view.name",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Widget is disabled, Go to Theme Settings → [Enterprise Widgets](/editor?context=theme&category=👑 Enterprise widgets / sections) to enable it",
+        "visible_if": "{{ settings.dbtfy_quick_view == false }}"
+      },
+      {
+        "type": "color",
+        "id": "dbtfy_quick_view_icon_color",
+        "label": "t:settings_schema.quick_view.color",
+        "default": "#000000"
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_quick_view_hover",
+        "label": "t:settings_schema.wish_list.settings.dbtfy_wish_list_hover.label",
+        "info": "t:settings_schema.quick_compare.settings.dbtfy_quick_compare_hover.info",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.quick_compare.name",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Widget is disabled, Go to Theme Settings → [Enterprise Widgets](/editor?context=theme&category=👑 Enterprise widgets / sections) to enable it",
+        "visible_if": "{{ settings.dbtfy_quick_compare == false }}"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.bubble.header"
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_quick_compare_bubble_animation_enabled",
+        "label": "Enable quick compare bubble animation",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_quick_compare_bubble_animation_type",
+        "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.label",
+        "default": "tada",
+        "options": [
+          {
+            "value": "bounce",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__1.label"
+          },
+          {
+            "value": "flash",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__2.label"
+          },
+          {
+            "value": "pulse",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__3.label"
+          },
+          {
+            "value": "shakeX",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__4.label"
+          },
+          {
+            "value": "shakeY",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__5.label"
+          },
+          {
+            "value": "tada",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__6.label"
+          },
+          {
+            "value": "heartBeat",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__7.label"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "dbtfy_quick_compare_bubble_animation_interval",
+        "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_elment_animation_interval",
+        "min": 3,
+        "max": 20,
+        "unit": "s",
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "range",
+        "id": "dbtfy_quick_compare_bubble_animation_duration",
+        "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_elment_animation_duration.label",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "default": 1
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_quick_compare_bubble_size",
+        "label": "t:general.settings.size.label",
+        "default": "medium",
+        "options": [
+          {
+            "value": "small",
+            "label": "t:general.settings.small"
+          },
+          {
+            "value": "medium",
+            "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+          },
+          {
+            "value": "large",
+            "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_quick_compare_bubble_position",
+        "label": "t:settings_schema.wish_list.settings.icon_position_product_page.options.label",
+        "default": "bottom-right",
+        "options": [
+          {
+            "value": "top-left",
+            "label": "t:general.settings.position.option__1"
+          },
+          {
+            "value": "top-right",
+            "label": "t:general.settings.position.option__3"
+          },
+          {
+            "value": "bottom-left",
+            "label": "t:general.settings.position.option__7"
+          },
+          {
+            "value": "bottom-right",
+            "label": "t:general.settings.position.option__9"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_quick_compare_bubble_background_color",
+        "label": "t:settings_schema.global.settings.bubble.background_color.label",
+        "default": "inherit",
+        "info": "t:settings_schema.global.settings.bubble.custom_color.info",
+        "options": [
+          {
+            "value": "inherit",
+            "label": "t:general.settings.size.option__1"
+          },
+          {
+            "value": "custom",
+            "label": "t:general.settings.size.option__9"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "dbtfy_quick_compare_bubble_background_color_custom",
+        "label": "t:settings_schema.global.settings.bubble.custom_background_color.label",
+        "default": "#fff"
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_quick_compare_bubble_border_color",
+        "label": "t:settings_schema.global.settings.bubble.border_color.label",
+        "default": "inherit",
+        "info": "t:settings_schema.global.settings.bubble.custom_color.info",
+        "options": [
+          {
+            "value": "inherit",
+            "label": "t:general.settings.size.option__1"
+          },
+          {
+            "value": "custom",
+            "label": "t:general.settings.size.option__9"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "dbtfy_quick_compare_bubble_border_color_custom",
+        "label": "t:settings_schema.global.settings.bubble.custom_border_color.label",
+        "default": "#fff"
+      },
+      {
+        "type": "range",
+        "id": "dbtfy_quick_compare_bubble_opacity",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Color"
+      },
+      {
+        "type": "color",
+        "id": "dbtfy_quick_compare_color",
+        "label": "t:settings_schema.quick_compare.settings.dbtfy_quick_compare_color.label",
+        "default": "#000"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.all.show_on.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_quick_compare_show_count",
+        "label": "t:settings_schema.wish_list.settings.dbtfy_wish_list_show_count.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_quick_compare_hover",
+        "label": "t:settings_schema.wish_list.settings.dbtfy_wish_list_hover.label",
+        "info": "t:settings_schema.quick_compare.settings.dbtfy_quick_compare_hover.info",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.cart.settings.cart_type.page.label"
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_quick_compare_type",
+        "label": "t:settings_schema.quick_compare.settings.dbtfy_quick_compare_type.label",
+        "default": "popup",
+        "options": [
+          {
+            "value": "popup",
+            "label": "t:settings_schema.cart.settings.cart_type.drawer.label"
+          },
+          {
+            "value": "page",
+            "label": "t:settings_schema.cart.settings.cart_type.page.label"
+          }
+        ]
+      },
+      {
+        "type": "page",
+        "id": "dbtfy_quick_compare_page",
+        "label": "t:settings_schema.cart.settings.cart_type.page.label"
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.visibility.product.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_quick_compare_show_image",
+        "label": "t:settings_schema.quick_compare.settings.dbtfy_quick_compare_show_image.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_quick_compare_show_title",
+        "label": "t:settings_schema.quick_compare.settings.dbtfy_quick_compare_show_title.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_quick_compare_show_price",
+        "label": "t:settings_schema.search_input.settings.predictive_search_show_price.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_quick_compare_show_type",
+        "label": "t:settings_schema.quick_compare.settings.dbtfy_quick_compare_show_type.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_quick_compare_show_vendor",
+        "label": "t:settings_schema.search_input.settings.predictive_search_show_vendor.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_quick_compare_show_collections",
+        "label": "t:settings_schema.quick_compare.settings.dbtfy_quick_compare_show_collections.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_quick_compare_show_tags",
+        "label": "t:settings_schema.quick_compare.settings.dbtfy_quick_compare_show_tags.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_quick_compare_show_description",
+        "label": "t:settings_schema.quick_compare.settings.dbtfy_quick_compare_show_description.label",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.wish_list.settings.icon_position_product_page.label"
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_quick_compare_product_page_position",
+        "label": "t:settings_schema.wish_list.settings.icon_position_product_page.options.label",
+        "default": "on-product-image",
+        "options": [
+          {
+            "value": "inside-pricing-block",
+            "label": "t:settings_schema.wish_list.settings.icon_position_product_page.options.options__1.label"
+          },
+          {
+            "value": "on-product-image",
+            "label": "t:settings_schema.wish_list.settings.icon_position_product_page.options.options__2.label"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.wish_list.name",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Widget is disabled, Go to Theme Settings → [Growth Widgets](/editor?context=theme&category=🌱 Growth widgets / sections) to enable it",
+        "visible_if": "{{ settings.dbtfy_wish_list == false }}"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.bubble.header"
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_wish_list_bubble_animation_enabled",
+        "label": "Enable Wishlist bubble animation",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_wish_list_bubble_animation_type",
+        "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.label",
+        "default": "tada",
+        "options": [
+          {
+            "value": "bounce",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__1.label"
+          },
+          {
+            "value": "flash",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__2.label"
+          },
+          {
+            "value": "pulse",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__3.label"
+          },
+          {
+            "value": "shakeX",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__4.label"
+          },
+          {
+            "value": "shakeY",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__5.label"
+          },
+          {
+            "value": "tada",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__6.label"
+          },
+          {
+            "value": "heartBeat",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__7.label"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "dbtfy_wish_list_bubble_animation_interval",
+        "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_elment_animation_interval",
+        "min": 3,
+        "max": 20,
+        "unit": "s",
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "range",
+        "id": "dbtfy_wish_list_bubble_animation_duration",
+        "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_elment_animation_duration.label",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "default": 1
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_wish_list_bubble_size",
+        "label": "t:general.settings.size.label",
+        "default": "medium",
+        "options": [
+          {
+            "value": "small",
+            "label": "t:general.settings.small"
+          },
+          {
+            "value": "medium",
+            "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+          },
+          {
+            "value": "large",
+            "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_wish_list_bubble_position",
+        "label": "t:settings_schema.wish_list.settings.icon_position_product_page.options.label",
+        "default": "bottom-right",
+        "options": [
+          {
+            "value": "top-left",
+            "label": "t:general.settings.position.option__1"
+          },
+          {
+            "value": "top-right",
+            "label": "t:general.settings.position.option__3"
+          },
+          {
+            "value": "bottom-left",
+            "label": "t:general.settings.position.option__7"
+          },
+          {
+            "value": "bottom-right",
+            "label": "t:general.settings.position.option__9"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_wish_list_bubble_background_color",
+        "label": "t:settings_schema.global.settings.bubble.background_color.label",
+        "default": "inherit",
+        "info": "t:settings_schema.global.settings.bubble.custom_color.info",
+        "options": [
+          {
+            "value": "inherit",
+            "label": "t:general.settings.size.option__1"
+          },
+          {
+            "value": "custom",
+            "label": "t:general.settings.size.option__9"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "dbtfy_wish_list_bubble_background_color_custom",
+        "label": "t:settings_schema.global.settings.bubble.custom_background_color.label",
+        "default": "#fff"
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_wish_list_bubble_border_color",
+        "label": "t:settings_schema.global.settings.bubble.border_color.label",
+        "default": "inherit",
+        "info": "t:settings_schema.global.settings.bubble.custom_color.info",
+        "options": [
+          {
+            "value": "inherit",
+            "label": "t:general.settings.size.option__1"
+          },
+          {
+            "value": "custom",
+            "label": "t:general.settings.size.option__9"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "dbtfy_wish_list_bubble_border_color_custom",
+        "label": "t:settings_schema.global.settings.bubble.custom_border_color.label",
+        "default": "#fff"
+      },
+      {
+        "type": "range",
+        "id": "dbtfy_wish_list_bubble_opacity",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Color"
+      },
+      {
+        "type": "color",
+        "id": "dbtfy-wishlist-color",
+        "label": "t:settings_schema.wish_list.settings.dbtfy-wishlist-color.label",
+        "default": "#a52a2a"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.wish_list.settings.dbtfy_wish_list_show_count.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_wish_list_show_count",
+        "label": "t:settings_schema.wish_list.settings.dbtfy_wish_list_show_count.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_wish_list_hover",
+        "label": "t:settings_schema.wish_list.settings.dbtfy_wish_list_hover.label",
+        "info": "t:settings_schema.wish_list.settings.dbtfy_wish_list_hover.info",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.cart.settings.cart_type.page.label"
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_wish_list_type",
+        "label": "t:settings_schema.wish_list.settings.dbtfy_wish_list_type.label",
+        "default": "popup",
+        "options": [
+          {
+            "value": "popup",
+            "label": "t:settings_schema.cart.settings.cart_type.drawer.label"
+          },
+          {
+            "value": "page",
+            "label": "t:settings_schema.cart.settings.cart_type.page.label"
+          }
+        ]
+      },
+      {
+        "type": "page",
+        "id": "dbtfy_wish_list_page",
+        "label": "t:settings_schema.cart.settings.cart_type.page.label"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.wish_list.settings.icon_position_product_page.label"
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_wish_list_product_page_position",
+        "label": "t:settings_schema.wish_list.settings.icon_position_product_page.options.label",
+        "default": "on-product-image",
+        "options": [
+          {
+            "value": "inside-pricing-block",
+            "label": "t:settings_schema.wish_list.settings.icon_position_product_page.options.options__1.label"
+          },
+          {
+            "value": "on-product-image",
+            "label": "t:settings_schema.wish_list.settings.icon_position_product_page.options.options__2.label"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.image_crop.name",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Widget is disabled, Go to Theme Settings → [Free Widgets](/editor?context=theme&category=🎁 Free widgets / sections) to enable it",
+        "visible_if": "{{ settings.dbtfy_product_image_crop == false }}"
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_product_image_crop_ratio",
+        "label": "t:settings_schema.image_crop.ratio.label",
+        "default": "100%",
+        "options": [
+          {
+            "value": "56.25%",
+            "label": "t:settings_schema.image_crop.ratio.options.option_1"
+          },
+          {
+            "value": "66.666%",
+            "label": "t:settings_schema.image_crop.ratio.options.option_2"
+          },
+          {
+            "value": "75%",
+            "label": "t:settings_schema.image_crop.ratio.options.option_3"
+          },
+          {
+            "value": "100%",
+            "label": "t:settings_schema.image_crop.ratio.options.option_4"
+          },
+          {
+            "value": "133.33%",
+            "label": "t:settings_schema.image_crop.ratio.options.option_5"
+          },
+          {
+            "value": "150%",
+            "label": "t:settings_schema.image_crop.ratio.options.option_6"
+          },
+          {
+            "value": "circle",
+            "label": "t:general.settings.style.circle"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_product_image_crop_position",
+        "label": "t:settings_schema.image_crop.position",
+        "default": "center center",
+        "options": [
+          {
+            "value": "top left",
+            "label": "t:general.settings.position.option__1"
+          },
+          {
+            "value": "top center",
+            "label": "t:general.settings.position.option__2"
+          },
+          {
+            "value": "top right",
+            "label": "t:general.settings.position.option__3"
+          },
+          {
+            "value": "center left",
+            "label": "t:general.settings.position.option__4"
+          },
+          {
+            "value": "center center",
+            "label": "t:general.settings.position.option__5"
+          },
+          {
+            "value": "center right",
+            "label": "t:general.settings.position.option__6"
+          },
+          {
+            "value": "bottom left",
+            "label": "t:general.settings.position.option__7"
+          },
+          {
+            "value": "bottom center",
+            "label": "t:general.settings.position.option__8"
+          },
+          {
+            "value": "bottom right",
+            "label": "t:general.settings.position.option__9"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.zooming.name",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Widget is disabled, Go to Theme Settings → [Enterprise Widgets](/editor?context=theme&category=👑 Enterprise widgets / sections) to enable it",
+        "visible_if": "{{ settings.dbtfy_product_zooming == false }}"
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_product_zoom",
+        "label": "t:settings_schema.zooming.enable",
+        "options": [
+          {
+            "value": "lightbox",
+            "label": "t:sections.main-product.settings.image_zoom.options__1.label"
+          },
+          {
+            "value": "hover",
+            "label": "t:sections.main-product.settings.image_zoom.options__2.label"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.search_input.name",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Widget is disabled, Go to Theme Settings → [Professional Widgets](/editor?context=theme&category=💎 Professional widgets / sections) to enable it",
+        "visible_if": "{{ settings.predictive_search_enabled == false }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_show_vendor",
+        "default": true,
+        "label": "t:settings_schema.search_input.settings.predictive_search_show_vendor.label",
+        "info": "t:settings_schema.search_input.settings.predictive_search_show_price.info"
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_show_price",
+        "default": true,
+        "label": "t:settings_schema.search_input.settings.predictive_search_show_price.label",
+        "info": "t:settings_schema.search_input.settings.predictive_search_show_price.info"
+      },
+      {
+        "type": "range",
+        "id": "dbtfy_smart_search_result_limit",
+        "min": 2,
+        "max": 15,
+        "step": 1,
+        "default": 6,
+        "label": "t:settings_schema.search_input.settings.dbtfy_smart_search_result_limit.label"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.logo.name",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "t:settings_schema.logo.settings.favicon.label",
+        "info": "t:settings_schema.logo.settings.favicon.info"
+      },
+      {
+        "type": "header",
+        "content": "Desktop Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "t:settings_schema.logo.name"
+      },
+      {
+        "type": "image_picker",
+        "id": "transparent_logo",
+        "label": "t:settings_schema.logo.transparent",
+        "info": "t:settings_schema.logo.transparent_info"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 50,
+        "max": 300,
+        "step": 10,
+        "default": 100,
+        "unit": "px",
+        "label": "t:settings_schema.logo.name"
+      },
+      {
+        "type": "header",
+        "content": "Mobile Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_logo",
+        "label": "t:settings_schema.logo.name"
+      },
+      {
+        "type": "image_picker",
+        "id": "transparent_mobile_logo",
+        "label": "t:settings_schema.logo.transparent",
+        "info": "t:settings_schema.logo.transparent_info"
+      },
+      {
+        "type": "range",
+        "id": "mobile_logo_width",
+        "min": 50,
+        "max": 300,
+        "step": 10,
+        "default": 100,
+        "unit": "px",
+        "label": "t:settings_schema.logo.name"
+      }
+    ]
+  },
+  {
+    "name": "Icon",
+    "settings": [
+      {
+        "type": "select",
+        "id": "icon_style",
+        "label": "Icon style",
+        "default": "outlined",
+        "options": [
+          {
+            "value": "outlined",
+            "label": "Outlined"
+          },
+          {
+            "value": "rounded",
+            "label": "Rounded"
+          },
+          {
+            "value": "sharp",
+            "label": "Sharp"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "fillable",
+        "label": "Fillable",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "icon_weight",
+        "label": "Icon Weight",
+        "default": 300,
+        "step": 100,
+        "min": 100,
+        "max": 700
+      }
+    ]
+  },
+  {
+    "name": "t:sections.all.colors.content",
+    "settings": [
+      {
+        "type": "color",
+        "id": "light_color",
+        "label": "Light",
+        "default": "#EEEAFF"
+      },
+      {
+        "type": "color",
+        "id": "dark_color",
+        "label": "Dark",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Primary color"
+      },
+      {
+        "type": "color",
+        "id": "primary_color",
+        "label": "Primary",
+        "default": "#7559ff"
+      },
+      {
+        "type": "checkbox",
+        "id": "inverse_light_and_dark_for_primary_color",
+        "label": "Inverse light and dark",
+        "info": "If your primary color is light in nature then check this box",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Secondary color"
+      },
+      {
+        "type": "color",
+        "id": "secondary_color",
+        "label": "Secondary",
+        "default": "#9B046F"
+      },
+      {
+        "type": "checkbox",
+        "id": "inverse_light_and_dark_for_secondary_color",
+        "label": "Inverse light and dark",
+        "info": "If your secondary color is light in nature then check this box",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Custom colors"
+      },
+      {
+        "type": "color_scheme_group",
+        "id": "color_schemes",
+        "definition": [
+          {
+            "type": "color",
+            "id": "background",
+            "label": "t:settings_schema.colors.settings.background.label",
+            "default": "#FFFFFF"
+          },
+          {
+            "type": "color_background",
+            "id": "background_gradient",
+            "label": "t:settings_schema.colors.settings.background_gradient.label",
+            "info": "t:settings_schema.colors.settings.background_gradient.info"
+          },
+          {
+            "type": "color",
+            "id": "text",
+            "label": "t:general.settings.text",
+            "default": "#121212"
+          },
+          {
+            "type": "color",
+            "id": "button",
+            "label": "t:sections.page-color-changer.settigns.background.button",
+            "default": "#121212"
+          },
+          {
+            "type": "color",
+            "id": "button_label",
+            "label": "t:sections.page-color-changer.settigns.background.button_label",
+            "default": "#FFFFFF"
+          },
+          {
+            "type": "color",
+            "id": "secondary_button_label",
+            "label": "t:sections.page-color-changer.settigns.background.secondary_button_label",
+            "default": "#121212"
+          },
+          {
+            "type": "color",
+            "id": "shadow",
+            "label": "t:settings_schema.global.settings.shadow",
+            "default": "#121212"
+          }
+        ],
+        "role": {
+          "text": "text",
+          "background": {
+            "solid": "background",
+            "gradient": "background_gradient"
+          },
+          "links": "secondary_button_label",
+          "icons": "text",
+          "primary_button": "button",
+          "on_primary_button": "button_label",
+          "primary_button_border": "button",
+          "secondary_button": "background",
+          "on_secondary_button": "secondary_button_label",
+          "secondary_button_border": "secondary_button_label"
+        }
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.slider.custom_arrow_label"
+      },
+      {
+        "type": "select",
+        "id": "arrow_color",
+        "default": "default",
+        "label": "t:general.settings.slider.arrow_color",
+        "options": [
+          {
+            "value": "default",
+            "label": "t:general.settings.style.default"
+          },
+          {
+            "value": "custom",
+            "label": "t:general.settings.size.option__9"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "custom_arrow_color",
+        "label": "t:general.settings.slider.custom-arrow-color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "custom_arrow_background_color",
+        "label": "t:general.settings.slider.custom-arrow-bg-color",
+        "default": "#7559ff"
+      }
+    ]
+  },
+  {
+    "name": "t:general.settings.heading_tag.configuration_label",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "mobile_auto_optimization",
+        "label": "t:general.settings.mobile_auto_optimization",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.heading_tag.h1"
+      },
+      {
+        "type": "range",
+        "id": "h1_font_size",
+        "min": 20,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.font_size.label",
+        "default": 34
+      },
+      {
+        "type": "range",
+        "id": "h1_font_size_mobile",
+        "min": 10,
+        "max": 70,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.heading_tag.mobile",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "h1_line_height",
+        "min": 10,
+        "max": 70,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.line_height.label",
+        "default": 34
+      },
+      {
+        "type": "range",
+        "id": "h1_line_height_mobile",
+        "min": 10,
+        "max": 70,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.line_height.mobile",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "h1_letter_spacing",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "t:general.settings.letter_spacing.label",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "h1_letter_spacing_mobile",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "t:general.settings.letter_spacing.mobile",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.heading_tag.h2"
+      },
+      {
+        "type": "range",
+        "id": "h2_font_size",
+        "min": 20,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.font_size.label",
+        "default": 30
+      },
+      {
+        "type": "range",
+        "id": "h2_font_size_mobile",
+        "min": 10,
+        "max": 70,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.heading_tag.mobile",
+        "default": 18
+      },
+      {
+        "type": "range",
+        "id": "h2_line_height",
+        "min": 10,
+        "max": 70,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.line_height.label",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "h2_line_height_mobile",
+        "min": 10,
+        "max": 70,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.line_height.mobile",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "h2_letter_spacing",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "t:general.settings.letter_spacing.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "h2_letter_spacing_mobile",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "t:general.settings.letter_spacing.mobile",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.heading_tag.h3"
+      },
+      {
+        "type": "range",
+        "id": "h3_font_size",
+        "min": 20,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.font_size.label",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "h3_font_size_mobile",
+        "min": 10,
+        "max": 70,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.heading_tag.mobile",
+        "default": 18
+      },
+      {
+        "type": "range",
+        "id": "h3_line_height",
+        "min": 10,
+        "max": 70,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.line_height.label",
+        "default": 26
+      },
+      {
+        "type": "range",
+        "id": "h3_line_height_mobile",
+        "min": 10,
+        "max": 70,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.line_height.mobile",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "h3_letter_spacing",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "t:general.settings.letter_spacing.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "h3_letter_spacing_mobile",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "t:general.settings.letter_spacing.mobile",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.heading_tag.h4"
+      },
+      {
+        "type": "range",
+        "id": "h4_font_size",
+        "min": 20,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.font_size.label",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "h4_line_height",
+        "min": 10,
+        "max": 70,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.line_height.label",
+        "default": 22
+      },
+      {
+        "type": "range",
+        "id": "h4_letter_spacing",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "t:general.settings.letter_spacing.label",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.heading_tag.h5"
+      },
+      {
+        "type": "range",
+        "id": "h5_font_size",
+        "min": 10,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.font_size.label",
+        "default": 18
+      },
+      {
+        "type": "range",
+        "id": "h5_line_height",
+        "min": 10,
+        "max": 70,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.line_height.label",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "h5_letter_spacing",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "t:general.settings.letter_spacing.label",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.heading_tag.h6"
+      },
+      {
+        "type": "range",
+        "id": "h6_font_size",
+        "min": 10,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.font_size.label",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "h6_line_height",
+        "min": 10,
+        "max": 70,
+        "step": 2,
+        "unit": "px",
+        "label": "t:general.settings.line_height.label",
+        "default": 18
+      },
+      {
+        "type": "range",
+        "id": "h6_letter_spacing",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "t:general.settings.letter_spacing.label",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.typography.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.typography.settings.header__1.content"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "default": "poppins_n4",
+        "label": "t:settings_schema.typography.settings.type_body_font.label",
+        "info": "t:settings_schema.typography.settings.type_body_font.info"
+      },
+      {
+        "type": "paragraph",
+        "content": "or"
+      },
+      {
+        "type": "text",
+        "id": "custom_font_heading_link",
+        "label": "t:settings_schema.typography.settings.custom.font",
+        "info": "t:settings_schema.typography.settings.custom.font_note"
+      },
+      {
+        "type": "text",
+        "id": "custom_font_heading_name",
+        "label": "t:settings_schema.typography.settings.custom.name",
+        "info": "t:settings_schema.typography.settings.custom.name_note",
+        "default": "t:settings_schema.typography.settings.custom.heading_default"
+      },
+      {
+        "type": "range",
+        "id": "custom_heading_font_weight",
+        "min": 100,
+        "max": 600,
+        "step": 100,
+        "label": "t:settings_schema.typography.settings.font_weight.custom",
+        "default": 500
+      },
+      {
+        "type": "range",
+        "id": "heading_scale",
+        "min": 50,
+        "max": 150,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.typography.settings.heading_scale.label",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.style.body"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "default": "poppins_n4",
+        "label": "t:settings_schema.typography.settings.type_body_font.label",
+        "info": "t:settings_schema.typography.settings.type_body_font.info"
+      },
+      {
+        "type": "paragraph",
+        "content": "or"
+      },
+      {
+        "type": "text",
+        "id": "custom_font_body_link",
+        "label": "t:settings_schema.typography.settings.custom.font",
+        "info": "t:settings_schema.typography.settings.custom.font_note"
+      },
+      {
+        "type": "text",
+        "id": "custom_font_body_name",
+        "label": "t:settings_schema.typography.settings.custom.name",
+        "info": "t:settings_schema.typography.settings.custom.name_note",
+        "default": "t:settings_schema.typography.settings.custom.body_default"
+      },
+      {
+        "type": "range",
+        "id": "custom_body_font_weight",
+        "min": 100,
+        "max": 600,
+        "step": 100,
+        "label": "t:settings_schema.typography.settings.font_weight.custom",
+        "default": 500
+      },
+      {
+        "type": "range",
+        "id": "body_font_size",
+        "min": 12,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "t:general.settings.font_size.label",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "body_font_size_mobile",
+        "min": 12,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "t:general.settings.heading_tag.mobile",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "body_scale",
+        "min": 50,
+        "max": 130,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.typography.settings.body_scale.label",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.title"
+      },
+      {
+        "type": "select",
+        "id": "title_alignment",
+        "label": "t:general.settings.alignment.label",
+        "default": "text-left",
+        "options": [
+          {
+            "value": "text-left",
+            "label": "t:general.settings.alignment.option__4"
+          },
+          {
+            "value": "text-center",
+            "label": "t:general.settings.alignment.option__5"
+          },
+          {
+            "value": "text-right",
+            "label": "t:general.settings.alignment.option__6"
+          },
+          {
+            "value": "text-justify",
+            "label": "t:general.settings.alignment.option__7"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "title_size",
+        "options": [
+          {
+            "value": "h1",
+            "label": "t:general.settings.heading_tag.h1"
+          },
+          {
+            "value": "h2",
+            "label": "t:general.settings.heading_tag.h2"
+          },
+          {
+            "value": "h3",
+            "label": "t:general.settings.heading_tag.h3"
+          },
+          {
+            "value": "h4",
+            "label": "t:general.settings.heading_tag.h4"
+          },
+          {
+            "value": "h5",
+            "label": "t:general.settings.heading_tag.h5"
+          },
+          {
+            "value": "h6",
+            "label": "t:general.settings.heading_tag.h6"
+          }
+        ],
+        "default": "h2",
+        "label": "t:general.settings.size.label"
+      },
+      {
+        "type": "color",
+        "id": "title_text_color_custom",
+        "label": "t:blocks.title_color.custom_title_color",
+        "default": "#A52A2A"
+      },
+      {
+        "type": "color",
+        "id": "title_color",
+        "label": "t:blocks.title_color.label",
+        "default": "#A52A2A"
+      },
+      {
+        "type": "select",
+        "id": "title_style",
+        "label": "t:general.settings.style.lable",
+        "default": "default",
+        "options": [
+          {
+            "value": "default",
+            "label": "t:general.settings.style.default"
+          },
+          {
+            "value": "uppercase",
+            "label": "t:general.settings.style.uppercase"
+          },
+          {
+            "value": "lowercase",
+            "label": "t:general.settings.style.lowercase"
+          },
+          {
+            "value": "capitalize",
+            "label": "t:general.settings.style.capitalize"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "title_default_spacing_top",
+        "label": "t:settings_schema.layout.settings.spacing.block_padding.top",
+        "default": "extra_small",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+          },
+          {
+            "value": "extra_small",
+            "label": "t:general.settings.size.option__4"
+          },
+          {
+            "value": "small",
+            "label": "t:general.settings.small"
+          },
+          {
+            "value": "medium",
+            "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+          },
+          {
+            "value": "large",
+            "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+          },
+          {
+            "value": "extra_large",
+            "label": "t:general.settings.size.option__7"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "title_default_spacing_bottom",
+        "label": "t:settings_schema.layout.settings.spacing.block_padding.bottom",
+        "default": "small",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+          },
+          {
+            "value": "extra_small",
+            "label": "t:general.settings.size.option__4"
+          },
+          {
+            "value": "small",
+            "label": "t:general.settings.small"
+          },
+          {
+            "value": "medium",
+            "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+          },
+          {
+            "value": "large",
+            "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+          },
+          {
+            "value": "extra_large",
+            "label": "t:general.settings.size.option__7"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.style.subtitle"
+      },
+      {
+        "type": "select",
+        "id": "subtitle_alignment",
+        "label": "t:general.settings.alignment.label",
+        "default": "text-left",
+        "options": [
+          {
+            "value": "text-left",
+            "label": "t:general.settings.alignment.option__4"
+          },
+          {
+            "value": "text-center",
+            "label": "t:general.settings.alignment.option__5"
+          },
+          {
+            "value": "text-right",
+            "label": "t:general.settings.alignment.option__6"
+          },
+          {
+            "value": "text-justify",
+            "label": "t:general.settings.alignment.option__7"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "subtitle_size",
+        "options": [
+          {
+            "value": "h1",
+            "label": "t:general.settings.heading_tag.h1"
+          },
+          {
+            "value": "h2",
+            "label": "t:general.settings.heading_tag.h2"
+          },
+          {
+            "value": "h3",
+            "label": "t:general.settings.heading_tag.h3"
+          },
+          {
+            "value": "h4",
+            "label": "t:general.settings.heading_tag.h4"
+          },
+          {
+            "value": "h5",
+            "label": "t:general.settings.heading_tag.h5"
+          },
+          {
+            "value": "h6",
+            "label": "t:general.settings.heading_tag.h6"
+          }
+        ],
+        "default": "h3",
+        "label": "t:general.settings.size.label"
+      },
+      {
+        "type": "select",
+        "id": "subtitle_style",
+        "label": "t:general.settings.style.lable",
+        "default": "default",
+        "options": [
+          {
+            "value": "default",
+            "label": "t:general.settings.style.default"
+          },
+          {
+            "value": "uppercase",
+            "label": "t:general.settings.style.uppercase"
+          },
+          {
+            "value": "lowercase",
+            "label": "t:general.settings.style.lowercase"
+          },
+          {
+            "value": "capitalize",
+            "label": "t:general.settings.style.capitalize"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "subtitle_default_spacing_top",
+        "label": "t:settings_schema.layout.settings.spacing.block_padding.top",
+        "default": "extra_small",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+          },
+          {
+            "value": "extra_small",
+            "label": "t:general.settings.size.option__4"
+          },
+          {
+            "value": "small",
+            "label": "t:general.settings.small"
+          },
+          {
+            "value": "medium",
+            "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+          },
+          {
+            "value": "large",
+            "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+          },
+          {
+            "value": "extra_large",
+            "label": "t:general.settings.size.option__7"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "subtitle_default_spacing_bottom",
+        "label": "t:settings_schema.layout.settings.spacing.block_padding.bottom",
+        "default": "extra_small",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+          },
+          {
+            "value": "extra_small",
+            "label": "t:general.settings.size.option__4"
+          },
+          {
+            "value": "small",
+            "label": "t:general.settings.small"
+          },
+          {
+            "value": "medium",
+            "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+          },
+          {
+            "value": "large",
+            "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+          },
+          {
+            "value": "extra_large",
+            "label": "t:general.settings.size.option__7"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.caption"
+      },
+      {
+        "type": "select",
+        "id": "caption_alignment",
+        "label": "t:general.settings.alignment.label",
+        "default": "text-left",
+        "options": [
+          {
+            "value": "text-left",
+            "label": "t:general.settings.alignment.option__4"
+          },
+          {
+            "value": "text-center",
+            "label": "t:general.settings.alignment.option__5"
+          },
+          {
+            "value": "text-right",
+            "label": "t:general.settings.alignment.option__6"
+          },
+          {
+            "value": "text-justify",
+            "label": "t:general.settings.alignment.option__7"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "caption_style",
+        "options": [
+          {
+            "value": "subtitle",
+            "label": "t:general.settings.style.body"
+          },
+          {
+            "value": "caption-with-letter-spacing",
+            "label": "t:general.settings.style.subtitle"
+          }
+        ],
+        "default": "subtitle",
+        "label": "t:general.settings.style.text_style"
+      },
+      {
+        "type": "select",
+        "id": "caption_default_spacing_top",
+        "label": "t:settings_schema.layout.settings.spacing.block_padding.top",
+        "default": "extra_small",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+          },
+          {
+            "value": "extra_small",
+            "label": "t:general.settings.size.option__4"
+          },
+          {
+            "value": "small",
+            "label": "t:general.settings.small"
+          },
+          {
+            "value": "medium",
+            "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+          },
+          {
+            "value": "large",
+            "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+          },
+          {
+            "value": "extra_large",
+            "label": "t:general.settings.size.option__7"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "caption_default_spacing_bottom",
+        "label": "t:settings_schema.layout.settings.spacing.block_padding.bottom",
+        "default": "extra_small",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+          },
+          {
+            "value": "extra_small",
+            "label": "t:general.settings.size.option__4"
+          },
+          {
+            "value": "small",
+            "label": "t:general.settings.small"
+          },
+          {
+            "value": "medium",
+            "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+          },
+          {
+            "value": "large",
+            "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+          },
+          {
+            "value": "extra_large",
+            "label": "t:general.settings.size.option__7"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.description"
+      },
+      {
+        "type": "select",
+        "id": "description_alignment",
+        "label": "t:general.settings.alignment.label",
+        "default": "text-left",
+        "options": [
+          {
+            "value": "text-left",
+            "label": "t:general.settings.alignment.option__4"
+          },
+          {
+            "value": "text-center",
+            "label": "t:general.settings.alignment.option__5"
+          },
+          {
+            "value": "text-right",
+            "label": "t:general.settings.alignment.option__6"
+          },
+          {
+            "value": "text-justify",
+            "label": "t:general.settings.alignment.option__7"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "description_default_spacing_top",
+        "label": "t:settings_schema.layout.settings.spacing.block_padding.top",
+        "default": "extra_small",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+          },
+          {
+            "value": "extra_small",
+            "label": "t:general.settings.size.option__4"
+          },
+          {
+            "value": "small",
+            "label": "t:general.settings.small"
+          },
+          {
+            "value": "medium",
+            "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+          },
+          {
+            "value": "large",
+            "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+          },
+          {
+            "value": "extra_large",
+            "label": "t:general.settings.size.option__7"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "description_default_spacing_bottom",
+        "label": "t:settings_schema.layout.settings.spacing.block_padding.bottom",
+        "default": "extra_small",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+          },
+          {
+            "value": "extra_small",
+            "label": "t:general.settings.size.option__4"
+          },
+          {
+            "value": "small",
+            "label": "t:general.settings.small"
+          },
+          {
+            "value": "medium",
+            "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+          },
+          {
+            "value": "large",
+            "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+          },
+          {
+            "value": "extra_large",
+            "label": "t:general.settings.size.option__7"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.layout.name",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "min": 1000,
+        "max": 1600,
+        "step": 100,
+        "default": 1200,
+        "unit": "px",
+        "label": "t:settings_schema.layout.settings.page_width"
+      },
+      {
+        "type": "range",
+        "id": "spacing_sections",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:settings_schema.layout.settings.spacing_sections",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "t:sections.featured-collection.settings.display-type.options__1"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:settings_schema.layout.settings.paragraph__grid.content"
+      },
+      {
+        "type": "range",
+        "id": "spacing_grid_horizontal",
+        "min": 4,
+        "max": 40,
+        "step": 4,
+        "default": 8,
+        "unit": "px",
+        "label": "t:settings_schema.layout.settings.spacing_grid_horizontal.label"
+      },
+      {
+        "type": "range",
+        "id": "spacing_grid_vertical",
+        "min": 4,
+        "max": 40,
+        "step": 4,
+        "default": 8,
+        "unit": "px",
+        "label": "t:settings_schema.layout.settings.spacing_grid_vertical.label"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.layout.settings.spacing.section_desktop.label"
+      },
+      {
+        "type": "select",
+        "id": "default_spacing_top",
+        "label": "t:settings_schema.layout.settings.spacing.section_desktop.top",
+        "default": "medium",
+        "options": [
+          {
+            "value": "small",
+            "label": "t:general.settings.small"
+          },
+          {
+            "value": "medium",
+            "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+          },
+          {
+            "value": "large",
+            "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "default_spacing_bottom",
+        "label": "t:settings_schema.layout.settings.spacing.section_desktop.bottom",
+        "default": "medium",
+        "options": [
+          {
+            "value": "small",
+            "label": "t:general.settings.small"
+          },
+          {
+            "value": "medium",
+            "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+          },
+          {
+            "value": "large",
+            "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.layout.settings.spacing.label",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.layout.settings.spacing.header_2.content"
+      },
+      {
+        "type": "range",
+        "id": "spacing_extra_small",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:general.settings.size.option__4",
+        "default": 8
+      },
+      {
+        "type": "range",
+        "id": "spacing_small",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:general.settings.small",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "spacing_medium",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.animation.image_behavior.parallax_speed.medium",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "spacing_large",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label",
+        "default": 48
+      },
+      {
+        "type": "range",
+        "id": "spacing_extra_large",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:general.settings.size.option__7",
+        "default": 52
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.layout.settings.spacing.header_2.content_2"
+      },
+      {
+        "type": "paragraph",
+        "content": "This scaling will be a division of the desktop font size, ensuring optimal readability and user experience on smaller screens."
+      },
+      {
+        "type": "range",
+        "id": "spacing_extra_small_mobile",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "label": "t:general.settings.size.option__4",
+        "default": 2
+      },
+      {
+        "type": "range",
+        "id": "spacing_small_mobile",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "label": "t:general.settings.small",
+        "default": 2
+      },
+      {
+        "type": "range",
+        "id": "spacing_medium_mobile",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "label": "t:sections.all.animation.image_behavior.parallax_speed.medium",
+        "default": 2
+      },
+      {
+        "type": "range",
+        "id": "spacing_large_mobile",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label",
+        "default": 2
+      },
+      {
+        "type": "range",
+        "id": "spacing_extra_large_mobile",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "label": "t:general.settings.size.option__7",
+        "default": 2
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.global.settings.element-animation.settings.header",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "animations_reveal_on_scroll",
+        "label": "t:settings_schema.animations.settings.animations_reveal_on_scroll.label",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "animations_hover_elements",
+        "options": [
+          {
+            "value": "default",
+            "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+          },
+          {
+            "value": "vertical-lift",
+            "label": "t:settings_schema.animations.settings.animations_hover_elements.options__2.label"
+          },
+          {
+            "value": "3d-lift",
+            "label": "t:settings_schema.animations.settings.animations_hover_elements.options__3.label"
+          }
+        ],
+        "default": "default",
+        "label": "t:settings_schema.animations.settings.animations_hover_elements.label",
+        "info": "t:settings_schema.animations.settings.animations_hover_elements.info"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.buttons.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "buttons_border_thickness",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "buttons_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "buttons_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 6
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.shadow"
+      },
+      {
+        "type": "range",
+        "id": "buttons_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "buttons_shadow_horizontal_offset",
+        "min": -12,
+        "max": 12,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "buttons_shadow_vertical_offset",
+        "min": -12,
+        "max": 12,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "buttons_shadow_blur",
+        "min": 0,
+        "max": 20,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Style"
+      },
+      {
+        "type": "select",
+        "id": "button_size",
+        "label": "t:general.settings.size.label",
+        "default": "",
+        "options": [
+          {
+            "value": "button--small",
+            "label": "t:general.settings.small"
+          },
+          {
+            "value": "button--medium",
+            "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+          },
+          {
+            "value": "",
+            "label": "t:general.settings.size.option__10"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "t:general.settings.style.text_style",
+        "default": "default",
+        "options": [
+          {
+            "value": "default",
+            "label": "t:general.settings.style.default"
+          },
+          {
+            "value": "uppercase",
+            "label": "t:general.settings.style.uppercase"
+          },
+          {
+            "value": "lowercase",
+            "label": "t:general.settings.style.lowercase"
+          },
+          {
+            "value": "capitalize",
+            "label": "t:general.settings.style.capitalize"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:sections.all.padding_section.padding"
+      },
+      {
+        "type": "select",
+        "id": "cta_default_spacing_top",
+        "label": "t:settings_schema.layout.settings.spacing.cta_button.top",
+        "default": "extra_small",
+        "options": [
+          {
+            "value": "extra_small",
+            "label": "t:general.settings.size.option__4"
+          },
+          {
+            "value": "small",
+            "label": "t:general.settings.small"
+          },
+          {
+            "value": "medium",
+            "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+          },
+          {
+            "value": "large",
+            "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+          },
+          {
+            "value": "extra_large",
+            "label": "t:general.settings.size.option__7"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "cta_default_spacing_bottom",
+        "label": "t:settings_schema.layout.settings.spacing.cta_button.bottom",
+        "default": "extra_small",
+        "options": [
+          {
+            "value": "extra_small",
+            "label": "t:general.settings.size.option__4"
+          },
+          {
+            "value": "small",
+            "label": "t:general.settings.small"
+          },
+          {
+            "value": "medium",
+            "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+          },
+          {
+            "value": "large",
+            "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+          },
+          {
+            "value": "extra_large",
+            "label": "t:general.settings.size.option__7"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.buttons.aniamtion"
+      },
+      {
+        "type": "select",
+        "id": "add_to_cart_animation_effect",
+        "default": "glacier",
+        "label": "Add to cart Overlay Effect",
+        "options": [
+          {
+            "value": "glacier",
+            "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__2"
+          },
+          {
+            "value": "",
+            "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "button_animation",
+        "label": "Hover Sliding effect",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Slider arrow",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Adding the right arrow will automatically add the left arrow."
+      },
+      {
+        "type": "text",
+        "id": "arrow_icon",
+        "label": "Arrow icon",
+        "info": "t:sections.all.icon.info",
+        "default": "arrow_right"
+      },
+      {
+        "type": "range",
+        "id": "desktop_arrowsize",
+        "label": "Desktop arrow size",
+        "default": 24,
+        "min": 14,
+        "max": 70,
+        "step": 2,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mobile_arrowsize",
+        "label": "Mobile arrow size",
+        "default": 24,
+        "min": 10,
+        "max": 50,
+        "step": 2,
+        "unit": "px"
+      },
+      {
+        "type": "image_picker",
+        "id": "custom_arrow_icon",
+        "label": "Custom arrow icon"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.variant_pills.name",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:settings_schema.variant_pills.paragraph"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "variant_pills_border_thickness",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "variant_pills_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 55
+      },
+      {
+        "type": "range",
+        "id": "variant_pills_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 40
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.shadow"
+      },
+      {
+        "type": "range",
+        "id": "variant_pills_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "variant_pills_shadow_horizontal_offset",
+        "min": -12,
+        "max": 12,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "variant_pills_shadow_vertical_offset",
+        "min": -12,
+        "max": 12,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "variant_pills_shadow_blur",
+        "min": 0,
+        "max": 20,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.inputs.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "inputs_border_thickness",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "inputs_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 55
+      },
+      {
+        "type": "range",
+        "id": "inputs_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 6
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.shadow"
+      },
+      {
+        "type": "range",
+        "id": "inputs_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "inputs_shadow_horizontal_offset",
+        "min": -12,
+        "max": 12,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "inputs_shadow_vertical_offset",
+        "min": -12,
+        "max": 12,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "inputs_shadow_blur",
+        "min": 0,
+        "max": 20,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.cards.name",
+    "settings": [
+      {
+        "type": "select",
+        "id": "card_style",
+        "options": [
+          {
+            "value": "standard",
+            "label": "t:general.settings.type.option__1"
+          },
+          {
+            "value": "card",
+            "label": "t:general.settings.type.option__2"
+          }
+        ],
+        "default": "standard",
+        "label": "t:general.settings.style.lable"
+      },
+      {
+        "type": "range",
+        "id": "card_image_padding",
+        "min": 0,
+        "max": 20,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.image_padding.label",
+        "default": 0
+      },
+      {
+        "type": "select",
+        "id": "card_text_alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "t:general.settings.alignment.option__4"
+          },
+          {
+            "value": "center",
+            "label": "t:general.settings.alignment.option__5"
+          },
+          {
+            "value": "right",
+            "label": "t:general.settings.alignment.option__6"
+          }
+        ],
+        "default": "left",
+        "label": "t:general.settings.alignment.text_alignment"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.all.color_schemes.header.heading.label",
+        "info": "t:sections.all.color_schemes.header.info.content"
+      },
+      {
+        "type": "select",
+        "id": "card_color_scheme",
+        "label": "t:sections.all.color_schemes.default.label",
+        "options": [
+          {
+            "value": "scheme-1",
+            "label": "t:sections.all.color_schemes.default.options__1.label"
+          },
+          {
+            "value": "scheme-2",
+            "label": "t:sections.all.color_schemes.default.options__2.label"
+          },
+          {
+            "value": "scheme-3",
+            "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+          },
+          {
+            "value": "scheme-4",
+            "label": "t:sections.all.color_schemes.default.options__4.label"
+          },
+          {
+            "value": "custom",
+            "label": "t:general.settings.size.option__9"
+          }
+        ],
+        "default": "scheme-1"
+      },
+      {
+        "type": "color_scheme",
+        "id": "card_custom_color_scheme",
+        "label": "t:sections.all.color_schemes.custom.label",
+        "default": "scheme-1"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "card_border_thickness",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 0
+      },
+      {
+        "type": "select",
+        "id": "card_border_type",
+        "label": "t:settings_schema.global.settings.border_type.label",
+        "options": [
+          {
+            "value": "solid",
+            "label": "t:sections.all.button.options__3.label"
+          },
+          {
+            "value": "dotted",
+            "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.dotted"
+          },
+          {
+            "value": "dashed",
+            "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.dashed"
+          },
+          {
+            "value": "double",
+            "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.double"
+          },
+          {
+            "value": "inset",
+            "label": "t:settings_schema.global.settings.border_type.inset"
+          },
+          {
+            "value": "outset",
+            "label": "t:settings_schema.global.settings.border_type.outset"
+          }
+        ],
+        "default": "solid"
+      },
+      {
+        "type": "select",
+        "id": "custom_card_border_color",
+        "label": "Custom border color",
+        "options": [
+          {
+            "value": "inherit",
+            "label": "t:general.settings.size.option__1"
+          },
+          {
+            "value": "custom",
+            "label": "t:general.settings.size.option__9"
+          }
+        ],
+        "default": "inherit"
+      },
+      {
+        "type": "color",
+        "id": "card_border_color",
+        "label": "t:settings_schema.global.settings.bubble.border_color.label",
+        "visible_if": "{{ settings.custom_card_border_color == 'custom' }}",
+        "default": "#323841"
+      },
+      {
+        "type": "checkbox",
+        "id": "custom_card_border_gradient",
+        "label": "t:blocks.dbtfy-product-swatches.enable_gradient_color",
+        "default": false,
+        "visible_if": "{{ settings.custom_card_border_color == 'custom' }}",
+        "info": "t:blocks.dbtfy-product-swatches.enable_gradient_border_info"
+      },
+      {
+        "type": "color_background",
+        "id": "card_border_gradient",
+        "default": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        "label": "t:blocks.dbtfy-product-swatches.gradient_color",
+        "info": "t:blocks.dbtfy-product-swatches.gradient_border_info",
+        "visible_if": "{{ settings.custom_card_border_color == 'custom' and settings.custom_card_border_gradient == true }}"
+      },
+      {
+        "type": "range",
+        "id": "card_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "card_corner_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 6
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.shadow"
+      },
+      {
+        "type": "range",
+        "id": "card_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "card_shadow_horizontal_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "card_shadow_vertical_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "card_shadow_blur",
+        "min": 0,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.collection_cards.name",
+    "settings": [
+      {
+        "type": "select",
+        "id": "collection_card_style",
+        "options": [
+          {
+            "value": "standard",
+            "label": "t:general.settings.type.option__1"
+          },
+          {
+            "value": "card",
+            "label": "t:general.settings.type.option__2"
+          }
+        ],
+        "default": "standard",
+        "label": "t:general.settings.style.lable"
+      },
+      {
+        "type": "range",
+        "id": "collection_card_image_padding",
+        "min": 0,
+        "max": 20,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.image_padding.label",
+        "default": 0
+      },
+      {
+        "type": "select",
+        "id": "collection_card_text_alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "t:general.settings.alignment.option__4"
+          },
+          {
+            "value": "center",
+            "label": "t:general.settings.alignment.option__5"
+          },
+          {
+            "value": "right",
+            "label": "t:general.settings.alignment.option__6"
+          }
+        ],
+        "default": "left",
+        "label": "t:general.settings.alignment.text_alignment"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.all.color_schemes.header.heading.label",
+        "info": "t:sections.all.color_schemes.header.info.content"
+      },
+      {
+        "type": "select",
+        "id": "collection_card_color_scheme",
+        "label": "t:sections.all.color_schemes.default.label",
+        "options": [
+          {
+            "value": "scheme-1",
+            "label": "t:sections.all.color_schemes.default.options__1.label"
+          },
+          {
+            "value": "scheme-2",
+            "label": "t:sections.all.color_schemes.default.options__2.label"
+          },
+          {
+            "value": "scheme-3",
+            "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+          },
+          {
+            "value": "scheme-4",
+            "label": "t:sections.all.color_schemes.default.options__4.label"
+          },
+          {
+            "value": "custom",
+            "label": "t:general.settings.size.option__9"
+          }
+        ],
+        "default": "scheme-1"
+      },
+      {
+        "type": "color_scheme",
+        "id": "custom_collection_card_color_scheme",
+        "label": "t:sections.all.color_schemes.custom.label",
+        "default": "scheme-1"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "collection_card_border_thickness",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "collection_card_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "collection_card_corner_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 6
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.shadow"
+      },
+      {
+        "type": "range",
+        "id": "collection_card_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "collection_card_shadow_horizontal_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "collection_card_shadow_vertical_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "collection_card_shadow_blur",
+        "min": 0,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.blog_cards.name",
+    "settings": [
+      {
+        "type": "select",
+        "id": "blog_card_style",
+        "options": [
+          {
+            "value": "standard",
+            "label": "t:general.settings.type.option__1"
+          },
+          {
+            "value": "card",
+            "label": "t:general.settings.type.option__2"
+          }
+        ],
+        "default": "standard",
+        "label": "t:general.settings.style.lable"
+      },
+      {
+        "type": "range",
+        "id": "blog_card_image_padding",
+        "min": 0,
+        "max": 20,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.image_padding.label",
+        "default": 0
+      },
+      {
+        "type": "select",
+        "id": "blog_card_text_alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "t:general.settings.alignment.option__4"
+          },
+          {
+            "value": "center",
+            "label": "t:general.settings.alignment.option__5"
+          },
+          {
+            "value": "right",
+            "label": "t:general.settings.alignment.option__6"
+          }
+        ],
+        "default": "left",
+        "label": "t:general.settings.alignment.text_alignment"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.all.color_schemes.header.heading.label",
+        "info": "t:sections.all.color_schemes.header.info.content"
+      },
+      {
+        "type": "select",
+        "id": "blog_card_color_scheme",
+        "label": "t:sections.all.color_schemes.default.label",
+        "options": [
+          {
+            "value": "scheme-1",
+            "label": "t:sections.all.color_schemes.default.options__1.label"
+          },
+          {
+            "value": "scheme-2",
+            "label": "t:sections.all.color_schemes.default.options__2.label"
+          },
+          {
+            "value": "scheme-3",
+            "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+          },
+          {
+            "value": "scheme-4",
+            "label": "t:sections.all.color_schemes.default.options__4.label"
+          },
+          {
+            "value": "custom",
+            "label": "t:general.settings.size.option__9"
+          }
+        ],
+        "default": "scheme-1"
+      },
+      {
+        "type": "color_scheme",
+        "id": "custom_blog_card_color_scheme",
+        "label": "t:sections.all.color_schemes.custom.label",
+        "default": "scheme-1"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "blog_card_border_thickness",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "blog_card_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "blog_card_corner_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 6
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.shadow"
+      },
+      {
+        "type": "range",
+        "id": "blog_card_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "blog_card_shadow_horizontal_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "blog_card_shadow_vertical_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "blog_card_shadow_blur",
+        "min": 0,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.content_containers.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "text_boxes_border_thickness",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "text_boxes_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "text_boxes_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 6
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.shadow"
+      },
+      {
+        "type": "range",
+        "id": "text_boxes_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "text_boxes_shadow_horizontal_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "text_boxes_shadow_vertical_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "text_boxes_shadow_blur",
+        "min": 0,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "t:sections.newsletter.blocks.media.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "media_border_thickness",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "media_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 5
+      },
+      {
+        "type": "range",
+        "id": "media_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 6
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.shadow"
+      },
+      {
+        "type": "range",
+        "id": "media_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "media_shadow_horizontal_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "media_shadow_vertical_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "media_shadow_blur",
+        "min": 0,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.popups.name",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:settings_schema.popups.paragraph"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "popup_border_thickness",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "popup_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "popup_corner_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 6
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.shadow"
+      },
+      {
+        "type": "range",
+        "id": "popup_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "popup_shadow_horizontal_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "popup_shadow_vertical_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "popup_shadow_blur",
+        "min": 0,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.drawers.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "drawer_border_thickness",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "drawer_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 10
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.shadow"
+      },
+      {
+        "type": "range",
+        "id": "drawer_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "drawer_shadow_horizontal_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "drawer_shadow_vertical_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "drawer_shadow_blur",
+        "min": 0,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.badges.name",
+    "settings": [
+      {
+        "type": "select",
+        "id": "badge_position",
+        "options": [
+          {
+            "value": "bottom left",
+            "label": "t:general.settings.position.option__7"
+          },
+          {
+            "value": "bottom right",
+            "label": "t:general.settings.position.option__9"
+          },
+          {
+            "value": "top left",
+            "label": "t:general.settings.position.option__1"
+          },
+          {
+            "value": "top right",
+            "label": "t:general.settings.position.option__3"
+          }
+        ],
+        "default": "top left",
+        "label": "t:settings_schema.badges.settings.position.label"
+      },
+      {
+        "type": "range",
+        "id": "badge_corner_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 40
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.badges.settings.discount.content"
+      },
+      {
+        "type": "color",
+        "id": "discount_background_color",
+        "label": "t:settings_schema.global.settings.bubble.background_color.label",
+        "default": "#323841"
+      },
+      {
+        "type": "color_background",
+        "id": "discount_background_gradient_color",
+        "label": "t:settings_schema.badges.settings.badges.backgroun_gradient_color",
+        "info": "t:settings_schema.badges.settings.badges.info"
+      },
+      {
+        "type": "color",
+        "id": "discount_text_color",
+        "label": "t:settings_schema.badges.settings.badges.text_color",
+        "default": "#fff"
+      },
+      {
+        "type": "select",
+        "id": "sale_type",
+        "label": "t:settings_schema.badges.settings.discount.settings.type",
+        "info": "t:settings_schema.badges.settings.discount.header",
+        "default": "percentage",
+        "options": [
+          {
+            "value": "amount",
+            "label": "t:settings_schema.badges.settings.discount.settings.options__1.label"
+          },
+          {
+            "value": "percentage",
+            "label": "t:settings_schema.badges.settings.discount.settings.options__2.label"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "sale_type_badge_text",
+        "label": "t:general.settings.text",
+        "default": "t:settings_schema.badges.settings.discount.default"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.badges.settings.sale.content"
+      },
+      {
+        "type": "text",
+        "id": "sale_badge_text",
+        "label": "t:general.settings.text",
+        "default": "t:settings_schema.badges.settings.sale.default"
+      },
+      {
+        "type": "color",
+        "id": "sale_badge_background_color",
+        "label": "t:settings_schema.global.settings.bubble.background_color.label",
+        "default": "#323841"
+      },
+      {
+        "type": "color_background",
+        "id": "sale_badge_background_gradient_color",
+        "label": "t:settings_schema.badges.settings.badges.backgroun_gradient_color",
+        "info": "t:settings_schema.badges.settings.badges.info"
+      },
+      {
+        "type": "color",
+        "id": "sale_badge_text_color",
+        "label": "t:settings_schema.badges.settings.badges.text_color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.badges.settings.sold_out.content"
+      },
+      {
+        "type": "text",
+        "id": "sold_out_badge_text",
+        "label": "t:general.settings.text",
+        "default": "SOLD OUT"
+      },
+      {
+        "type": "color",
+        "id": "sold_out_background_color",
+        "label": "t:settings_schema.global.settings.bubble.background_color.label",
+        "default": "#C2B7AC"
+      },
+      {
+        "type": "color_background",
+        "id": "sold_out_background_gradient_color",
+        "label": "t:settings_schema.badges.settings.badges.backgroun_gradient_color",
+        "info": "t:settings_schema.badges.settings.badges.info"
+      },
+      {
+        "type": "color",
+        "id": "sold_out_text_color",
+        "label": "t:settings_schema.badges.settings.badges.text_color",
+        "default": "#262626"
+      }
+    ]
+  },
+  {
+    "name": "t:sections.footer.blocks.brand_information.name",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:settings_schema.brand_information.settings.paragraph.content"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "brand_headline",
+        "label": "t:settings_schema.brand_information.settings.brand_headline.label"
+      },
+      {
+        "type": "richtext",
+        "id": "brand_description",
+        "label": "t:general.settings.description"
+      },
+      {
+        "type": "image_picker",
+        "id": "brand_image",
+        "label": "t:general.settings.image"
+      },
+      {
+        "type": "range",
+        "id": "brand_image_width",
+        "min": 50,
+        "max": 550,
+        "step": 5,
+        "default": 100,
+        "unit": "px",
+        "label": "t:sections.multicolumn.settings.image_width.label"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.social-media.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.social-media.settings.header"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "t:settings_schema.social-media.settings.social_facebook_link.label",
+        "placeholder": "t:settings_schema.social-media.settings.social_facebook_link.info",
+        "default": "#"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "t:settings_schema.social-media.settings.social_instagram_link.label",
+        "placeholder": "t:settings_schema.social-media.settings.social_instagram_link.info",
+        "default": "#"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "t:settings_schema.social-media.settings.social_youtube_link.label",
+        "placeholder": "t:settings_schema.social-media.settings.social_youtube_link.info",
+        "default": "#"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_link",
+        "label": "t:settings_schema.social-media.settings.social_tiktok_link.label",
+        "placeholder": "t:settings_schema.social-media.settings.social_tiktok_link.info"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "t:settings_schema.social-media.settings.social_twitter_link.label",
+        "placeholder": "t:settings_schema.social-media.settings.social_twitter_link.info"
+      },
+      {
+        "type": "text",
+        "id": "social_snapchat_link",
+        "label": "t:settings_schema.social-media.settings.social_snapchat_link.label",
+        "placeholder": "t:settings_schema.social-media.settings.social_snapchat_link.info"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "t:settings_schema.social-media.settings.social_pinterest_link.label",
+        "placeholder": "t:settings_schema.social-media.settings.social_pinterest_link.info"
+      },
+      {
+        "type": "text",
+        "id": "social_tumblr_link",
+        "label": "t:settings_schema.social-media.settings.social_tumblr_link.label",
+        "placeholder": "t:settings_schema.social-media.settings.social_tumblr_link.info"
+      },
+      {
+        "type": "text",
+        "id": "social_vimeo_link",
+        "label": "t:settings_schema.social-media.settings.social_vimeo_link.label",
+        "placeholder": "t:settings_schema.social-media.settings.social_vimeo_link.info"
+      },
+      {
+        "type": "text",
+        "id": "social_messenger_link",
+        "label": "t:settings_schema.social-media.settings.social_messenger_link.label",
+        "placeholder": "t:settings_schema.social-media.settings.social_messenger_link.info"
+      },
+      {
+        "type": "text",
+        "id": "social_reddit_link",
+        "label": "t:settings_schema.social-media.settings.social_reddit_link.label",
+        "placeholder": "t:settings_schema.social-media.settings.social_reddit_link.info"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.currency_format.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.currency_format.settings.content"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:settings_schema.currency_format.settings.paragraph"
+      },
+      {
+        "type": "checkbox",
+        "id": "currency_code_enabled",
+        "label": "t:settings_schema.currency_format.settings.currency_code_enabled.label",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.cart.name",
+    "settings": [
+      {
+        "type": "text",
+        "id": "cart_empty_icon",
+        "label": "t:settings_schema.cart.settings.cart_empty_icon.label",
+        "info": "t:general.settings.icon_info",
+        "default": "shopping_cart"
+      },
+      {
+        "type": "text",
+        "id": "cart_icon",
+        "label": "t:settings_schema.cart.settings.cart_icon.label",
+        "info": "t:general.settings.icon_info",
+        "default": "shopping_cart_checkout"
+      },
+      {
+        "type": "select",
+        "id": "cart_type",
+        "options": [
+          {
+            "value": "drawer",
+            "label": "t:settings_schema.cart.settings.cart_type.drawer.label"
+          },
+          {
+            "value": "page",
+            "label": "t:settings_schema.cart.settings.cart_type.page.label"
+          },
+          {
+            "value": "notification",
+            "label": "t:settings_schema.cart.settings.cart_type.notification.label"
+          }
+        ],
+        "default": "drawer",
+        "label": "t:settings_schema.cart.settings.cart_type.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_type_action",
+        "label": "Open cart on \"Add to cart\"",
+        "default": true,
+        "info": "This option work on Drawer and Page only."
+      },
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "t:settings_schema.cart.settings.show_vendor.label",
+        "default": true
+      },
+      {
+        "type": "url",
+        "id": "continue_shopping_url",
+        "label": "t:settings_schema.cart.settings.continue_shopping_url_label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_cart_note",
+        "label": "t:settings_schema.cart.settings.show_cart_note.label",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.bubble.header"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.cart-bubble.help.youtube_link"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:help.free_info"
+      },
+      {
+        "type": "checkbox",
+        "id": "dbtfy_cart_bubble_animation_enabled",
+        "label": "Enable cart bubble animation",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_cart_bubble_animation_type",
+        "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.label",
+        "default": "tada",
+        "options": [
+          {
+            "value": "bounce",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__1.label"
+          },
+          {
+            "value": "flash",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__2.label"
+          },
+          {
+            "value": "pulse",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__3.label"
+          },
+          {
+            "value": "shakeX",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__4.label"
+          },
+          {
+            "value": "shakeY",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__5.label"
+          },
+          {
+            "value": "tada",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__6.label"
+          },
+          {
+            "value": "heartBeat",
+            "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__7.label"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "dbtfy_cart_bubble_animation_interval",
+        "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_elment_animation_interval",
+        "min": 3,
+        "max": 20,
+        "unit": "s",
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "range",
+        "id": "dbtfy_cart_bubble_animation_duration",
+        "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_elment_animation_duration.label",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "default": 1
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_cart_bubble_size",
+        "label": "t:general.settings.size.label",
+        "default": "medium",
+        "options": [
+          {
+            "value": "small",
+            "label": "t:general.settings.small"
+          },
+          {
+            "value": "medium",
+            "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+          },
+          {
+            "value": "large",
+            "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_cart_bubble_position",
+        "label": "t:settings_schema.wish_list.settings.icon_position_product_page.options.label",
+        "default": "bottom-right",
+        "options": [
+          {
+            "value": "top-left",
+            "label": "t:general.settings.position.option__1"
+          },
+          {
+            "value": "top-right",
+            "label": "t:general.settings.position.option__3"
+          },
+          {
+            "value": "bottom-left",
+            "label": "t:general.settings.position.option__7"
+          },
+          {
+            "value": "bottom-right",
+            "label": "t:general.settings.position.option__9"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_cart_bubble_background_color",
+        "label": "t:settings_schema.global.settings.bubble.background_color.label",
+        "default": "inherit",
+        "info": "t:settings_schema.global.settings.bubble.custom_color.info",
+        "options": [
+          {
+            "value": "inherit",
+            "label": "t:general.settings.size.option__1"
+          },
+          {
+            "value": "custom",
+            "label": "t:general.settings.size.option__9"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "dbtfy_cart_bubble_background_color_custom",
+        "label": "t:settings_schema.global.settings.bubble.custom_background_color.label",
+        "default": "#fff"
+      },
+      {
+        "type": "select",
+        "id": "dbtfy_cart_bubble_border_color",
+        "label": "t:settings_schema.global.settings.bubble.border_color.label",
+        "default": "inherit",
+        "info": "t:settings_schema.global.settings.bubble.custom_color.info",
+        "options": [
+          {
+            "value": "inherit",
+            "label": "t:general.settings.size.option__1"
+          },
+          {
+            "value": "custom",
+            "label": "t:general.settings.size.option__9"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "dbtfy_cart_bubble_border_color_custom",
+        "label": "t:settings_schema.global.settings.bubble.custom_border_color.label",
+        "default": "#fff"
+      },
+      {
+        "type": "range",
+        "id": "dbtfy_cart_bubble_opacity",
+        "label": "t:settings_schema.global.settings.bubble.opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.cart.settings.cart_saving.header"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "cart_saving",
+        "label": "t:general.settings.heading",
+        "default": "t:settings_schema.cart.settings.cart_saving.default"
+      }
+    ]
+  }
+]

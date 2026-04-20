@@ -9,9 +9,9 @@
  */
 {
   "current": {
-    "color_espresso": "#0B2E3C",
-    "color_amber": "#0B7285",
-    "color_linen": "#E3FAFC",
+    "color_espresso": "#2B2B2B",
+    "color_amber": "#A68966",
+    "color_linen": "#F2E8D5",
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
@@ -19,8 +19,8 @@
           "show": true,
           "text": "Free shipping on orders over $75 — filtered water, clear skin.",
           "link": "",
-          "bg_color": "#0B2E3C",
-          "text_color": "#E3FAFC"
+          "bg_color": "#2B2B2B",
+          "text_color": "#F2E8D5"
         }
       },
       "header": {

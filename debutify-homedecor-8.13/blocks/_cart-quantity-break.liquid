@@ -1,0 +1,32 @@
+{% if settings.dbtfy_quantity_breaks %}
+  {% render 'dbtfy-cart-quantity-break', block: block %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:blocks.quantity_breaks.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-drawer.blocks.cart-quantity-break.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.quantity_breaks.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.professional_info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.quantity_breaks.name"
+    }
+  ]
+}
+{% endschema %}

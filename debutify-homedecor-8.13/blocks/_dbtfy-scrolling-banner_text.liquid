@@ -1,0 +1,118 @@
+{%- liquid
+  assign text = block.settings.text
+
+  if block.settings.stroked_text != blank and block.settings.is_all_stroked == false
+    assign words = block.settings.stroked_text | split: ','
+
+    for word in words
+      if text contains word
+        assign new_text = '<span class="text-stroke">' | append: word | append: '</span>'
+        assign text = text | replace: word, new_text
+      endif
+    endfor
+  endif
+-%}
+<li
+  class="{% if block.settings.is_all_stroked %} text-stroke{% endif %}"
+  {{ block.shopify_attributes }}
+>
+  <h2
+    {% if block.settings.heading_size == 'custom' %}
+      style="font-size: {{ block.settings.custom_heading_size }}px;"
+    {% else %}
+      class="{{ block.settings.heading_size }} m-0"
+    {% endif %}
+  >
+    {%- if block.settings.url -%}
+      <a href="{{ block.settings.url }}">
+        {{ text }}
+      </a>
+    {%- else -%}
+      {{ text }}
+    {%- endif -%}
+  </h2>
+</li>
+
+{% schema %}
+{
+  "name": "t:general.settings.text",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "t:general.settings.text",
+      "default": "t:general.settings.text"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "t:sections.all.button.option_1_label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:general.settings.size.option__7"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:general.settings.size.option__8"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.dbtfy-content-tabs.blocks.heading_size"
+    },
+    {
+      "type": "range",
+      "id": "custom_heading_size",
+      "label": "t:general.settings.size.option__11",
+      "min": 10,
+      "max": 70,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-scrolling-banner.block.text.stroked_text"
+    },
+    {
+      "type": "checkbox",
+      "label": "t:sections.dbtfy-scrolling-banner.block.text.show_all_stroked_label",
+      "info": "t:sections.dbtfy-scrolling-banner.block.text.stroked_text",
+      "id": "is_all_stroked"
+    },
+    {
+      "type": "textarea",
+      "label": "t:sections.dbtfy-scrolling-banner.block.text.stroked_text_label",
+      "info": "t:sections.dbtfy-scrolling-banner.block.text.stroked_text_info",
+      "id": "stroked_text",
+      "default": "t:sections.dbtfy-scrolling-banner.block.text.stroked_text_default"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.text"
+    }
+  ]
+}
+{% endschema %}

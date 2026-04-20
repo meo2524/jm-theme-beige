@@ -1,0 +1,193 @@
+{% liquid
+  assign timestamp = 'now' | date: '%s'
+  assign random_number = timestamp | times: 1 | modulo: 990001 | plus: 10000
+%}
+
+{%- if block.settings.highlight_story and block.settings.highlight_color_for_story -%}
+  <style>
+    button.{{ block.id }}{
+      --highlight-color: {{ block.settings.highlight_color_for_story | default: '#cb1d1d' }};
+    }
+  </style>
+{%- endif -%}
+
+<button
+  class="splide__slide dbtfy-insta-story-open-btn animate-item animate-item--child button button--tertiary {{ block.id }}"
+  data-index="{{ random_number }}"
+  style="--index:{{ random_number }};"
+  {{ block.shopify_attributes }}
+>
+  <div class="dbtfy-insta-story-open-btn__pfp-ring{% if block.settings.highlight_story %} dbtfy-insta-story-open-btn__pfp-ring--close-friends{% endif %}">
+    <div class="dbtfy-insta-story-open-btn__pfp-ring-offset">
+      <div class="dbtfy-insta-story-open-btn__pfp">
+        {% if block.settings.profile_picture != blank %}
+          <img
+            src="{{ block.settings.profile_picture | image_url: width: 400 }}"
+            alt="{{ block.settings.user_name }}"
+            width="auto"
+            height="auto"
+            loading="lazy"
+          >
+        {% else %}
+          {% render 'material-icon', icon: 'person' %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <span class="dbtfy-insta-story-open-btn__username">{{ block.settings.user_name }}</span>
+</button>
+
+<div
+  class="dbtfy-insta-story"
+  data-index="{{ random_number }}"
+  data-active-media-index="0"
+  {{ block.shopify_attributes }}
+>
+  <div class="dbtfy-insta-story__top dbtfy-insta-stories-active-content">
+    <div class="dbtfy-insta-story__progress"></div>
+    <div class="dbtfy-insta-story__info">
+      <div class="dbtfy-insta-story-open-btn__pfp dbtfy-insta-story__pfp">
+        {% if block.settings.profile_picture != blank %}
+          <img
+            src="{{ block.settings.profile_picture | image_url: width: 400 }}"
+            alt="{{ block.settings.user_name }}"
+            width="auto"
+            height="auto"
+            loading="lazy"
+          >
+        {% else %}
+          {% render 'material-icon', icon: 'person' %}
+        {% endif %}
+      </div>
+      <p class="dbtfy-insta-story__info__text">
+        <span class="dbtfy-insta-story__username">
+          {{ block.settings.user_name }}
+        </span>
+        {% if block.settings.highlight_story %}
+          <span class="dbtfy-insta-story__user_verify">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+              <path d="M7.14846 3.21713C7.55762 2.26096 8.91309 2.26096 9.32224 3.21713C9.57489 3.80754 10.2527 4.08829 10.8488 3.84945C11.8142 3.46265 12.7727 4.42111 12.3859 5.38654C12.1471 5.98268 12.4278 6.66046 13.0182 6.91311C13.9744 7.32227 13.9744 8.67773 13.0182 9.08689C12.4278 9.33954 12.1471 10.0173 12.3859 10.6135C12.7727 11.5789 11.8142 12.5373 10.8488 12.1506C10.2527 11.9117 9.57489 12.1925 9.32224 12.7829C8.91309 13.739 7.55762 13.739 7.14846 12.7829C6.89581 12.1925 6.21803 11.9117 5.6219 12.1506C4.65647 12.5373 3.69801 11.5789 4.0848 10.6135C4.32364 10.0173 4.0429 9.33954 3.45248 9.08689C2.49631 8.67773 2.49631 7.32227 3.45248 6.91311C4.0429 6.66046 4.32364 5.98268 4.0848 5.38654C3.69801 4.42111 4.65647 3.46265 5.6219 3.84945C6.21803 4.08829 6.89581 3.80754 7.14846 3.21713Z" fill="white" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6.73535 8.00005L8.05903 9.25005L9.98535 6.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        {% endif %}
+        <span class="dbtfy-insta-story__time-posted"></span>
+      </p>
+      <button class="dbtfy-insta-story__info__btn dbtfy-insta-story__pause-resume-btn" data-paused="false">
+        {% render 'material-icon', icon: 'pause' %}
+        {% render 'material-icon', icon: 'play_arrow' %}
+      </button>
+      <button
+        class="dbtfy-insta-story__info__btn dbtfy-insta-story__info__volume-btn dbtfy-insta-story__volume-btn flex-center"
+        data-muted="true"
+      >
+        <svg fill="currentColor" height="16" role="img" viewBox="0 0 24 24" width="16">
+          <path d="M16.636 7.028a1.5 1.5 0 1 0-2.395 1.807 5.365 5.365 0 0 1 1.103 3.17 5.378 5.378 0 0 1-1.105 3.176 1.5 1.5 0 1 0 2.395 1.806 8.396 8.396 0 0 0 1.71-4.981 8.39 8.39 0 0 0-1.708-4.978Zm3.73-2.332A1.5 1.5 0 1 0 18.04 6.59 8.823 8.823 0 0 1 20 12.007a8.798 8.798 0 0 1-1.96 5.415 1.5 1.5 0 0 0 2.326 1.894 11.672 11.672 0 0 0 2.635-7.31 11.682 11.682 0 0 0-2.635-7.31Zm-8.963-3.613a1.001 1.001 0 0 0-1.082.187L5.265 6H2a1 1 0 0 0-1 1v10.003a1 1 0 0 0 1 1h3.265l5.01 4.682.02.021a1 1 0 0 0 1.704-.814L12.005 2a1 1 0 0 0-.602-.917Z"></path>
+        </svg>
+        <svg fill="currentColor" height="16" role="img" viewBox="0 0 48 48" width="16">
+          <path clip-rule="evenodd" d="M1.5 13.3c-.8 0-1.5.7-1.5 1.5v18.4c0 .8.7 1.5 1.5 1.5h8.7l12.9 12.9c.9.9 2.5.3 2.5-1v-9.8c0-.4-.2-.8-.4-1.1l-22-22c-.3-.3-.7-.4-1.1-.4h-.6zm46.8 31.4-5.5-5.5C44.9 36.6 48 31.4 48 24c0-11.4-7.2-17.4-7.2-17.4-.6-.6-1.6-.6-2.2 0L37.2 8c-.6.6-.6 1.6 0 2.2 0 0 5.7 5 5.7 13.8 0 5.4-2.1 9.3-3.8 11.6L35.5 32c1.1-1.7 2.3-4.4 2.3-8 0-6.8-4.1-10.3-4.1-10.3-.6-.6-1.6-.6-2.2 0l-1.4 1.4c-.6.6-.6 1.6 0 2.2 0 0 2.6 2 2.6 6.7 0 1.8-.4 3.2-.9 4.3L25.5 22V1.4c0-1.3-1.6-1.9-2.5-1L13.5 10 3.3-.3c-.6-.6-1.5-.6-2.1 0L-.2 1.1c-.6.6-.6 1.5 0 2.1L4 7.6l26.8 26.8 13.9 13.9c.6.6 1.5.6 2.1 0l1.4-1.4c.7-.6.7-1.6.1-2.2z" fill-rule="evenodd"></path>
+        </svg>
+      </button>
+      <button class="dbtfy-insta-story__info__btn dbtfy-insta-story__info__close-btn dbtfy-insta-stories__close-button">
+        {% render 'material-icon', icon: 'close' %}
+      </button>
+    </div>
+  </div>
+  {% content_for 'blocks' %}
+  <button
+    class="dbtfy-insta-story__inactive-overlay dbtfy-inactive-content dbtfy-insta-story__slide-btn"
+  >
+    <div class="dbtfy-insta-story-open-btn__pfp-ring{% if block.settings.highlight_story %} dbtfy-insta-story-open-btn__pfp-ring--close-friends{% endif %} mobile-hidden">
+      <div
+        class="dbtfy-insta-story-open-btn__pfp-ring-offset"
+        {% if block.settings.highlight_color_for_story and block.settings.highlight_story -%}
+          style="background: {{ block.settings.highlight_color_for_story }};"
+        {%- endif -%}
+      >
+        <div class="dbtfy-insta-story-open-btn__pfp">
+          {% if block.settings.profile_picture != blank %}
+            <img
+              src="{{ block.settings.profile_picture | image_url: width: 400 }}"
+              alt="{{ block.settings.user_name }}"
+              width="auto"
+              height="auto"
+              loading="lazy"
+            >
+          {% else %}
+            {% render 'material-icon', icon: 'person' %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <span class="dbtfy-insta-story__username mobile-hidden">
+      {{ block.settings.user_name }}
+    </span>
+  </button>
+  <button
+    class="dbtfy-insta-story__invisible-btn dbtfy-insta-story__invisible-btn--prev dbtfy-insta-story__prev dbtfy-insta-stories-active-content"
+    data-index="{{ random_number }}"
+  >
+    &nbsp
+  </button>
+  <button
+    class="dbtfy-insta-story__invisible-btn dbtfy-insta-story__invisible-btn--next dbtfy-insta-story__next dbtfy-insta-stories-active-content"
+    data-index="{{ random_number }}"
+  >
+    &nbsp
+  </button>
+  <button
+    class="dbtfy-insta-story__arrow dbtfy-insta-story__arrow--prev dbtfy-insta-stories-active-content dbtfy-insta-story__prev mobile-hidden"
+    data-index="{{ random_number }}"
+  >
+    {% render 'material-icon', icon: 'chevron_left' %}
+  </button>
+  <button
+    class="dbtfy-insta-story__arrow dbtfy-insta-story__arrow--next dbtfy-insta-stories-active-content dbtfy-insta-story__next mobile-hidden"
+    data-index="{{ random_number }}"
+  >
+    {% render 'material-icon', icon: 'chevron_right' %}
+  </button>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-instastory.user_post.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "user_name",
+      "label": "t:sections.dbtfy-instastory.user_post.username",
+      "default": "t:sections.dbtfy-instastory.user_post.username"
+    },
+    {
+      "type": "checkbox",
+      "id": "highlight_story",
+      "label": "t:sections.dbtfy-instastory.user_post.hightlight_story",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "highlight_color_for_story",
+      "label": "t:sections.dbtfy-instastory.user_post.hightlight_story_color",
+      "info": "t:sections.dbtfy-instastory.user_post.hightlight_story_image",
+      "default": "#d300c5"
+    },
+    {
+      "type": "image_picker",
+      "id": "profile_picture",
+      "label": "t:sections.dbtfy-instastory.user_post.profile_picture"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_dbtfy-instagram-user-story"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-instastory.user_post.name"
+    }
+  ]
+}
+{% endschema %}

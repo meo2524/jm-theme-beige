@@ -1,0 +1,224 @@
+{% style %}
+  #shopify-block-{{ block.id }} .dbtfy-lookbook-point-list-item button {
+    left: {{ block.settings.mobile_pos_left }}%;
+    top: {{ block.settings.mobile_pos_top }}%;
+  }
+
+  {% unless block.settings.use_default_point_color %}
+    #shopify-block-{{ block.id }} .dbtfy-lookbook-point-list-item button > span {
+      display: block;
+      padding: 3px;
+      border-radius: 50%;
+      border: 1px solid currentColor;
+      background-color: transparent;
+      transition: all .2s ease-out;
+      animation: dbtfy-lookbook-point-animation-{{ block.id }} 2s infinite;
+    }
+
+    #shopify-block-{{ block.id }} .dbtfy-lookbook-point-list-item button span {
+      border-color: {{ block.settings.custom_point_color }};
+    }
+
+    #shopify-block-{{ block.id }} .dbtfy-lookbook-point-list-item button > span > span {
+      background: {{ block.settings.custom_point_color }};
+      width: {{ section.settings.point_diameter | append: 'rem' }};
+      height: {{ section.settings.point_diameter | append: 'rem' }};
+    }
+
+    @keyframes dbtfy-lookbook-point-animation-{{ block.id }} {
+      0% { box-shadow: 0 0 0 0px rgba({{ block.settings.custom_point_color | color_to_rgb | remove: 'rgb(' | remove: ')' }}, 0.25); }
+      100% { box-shadow: 0 0 0 20px rgba({{ block.settings.custom_point_color | color_to_rgb | remove: 'rgb(' | remove: ')' }}, 0); }
+    }
+  {% endunless %}
+
+  @media (min-width: 750px) {
+    #shopify-block-{{ block.id }} .dbtfy-lookbook-point-list-item button {
+        left: {{ block.settings.desktop_pos_left }}%;
+        top: {{ block.settings.desktop_pos_top }}%;
+    }
+  }
+{% endstyle %}
+<div
+  class="dbtfy-lookbook-point-list-item"
+  role="listitem"
+>
+  {% liquid
+    assign product = block.settings.product
+  %}
+  <button>
+    <span><span> </span></span>
+  </button>
+  <div class="dbtfy-tooltip" role="tooltip">
+    <div class="card-wrapper product-card-wrapper">
+      <div
+        class="
+          card card--{{ settings.card_style }} inner-spacing
+          {% if product != null and block.settings.show_image %} card--media{% else %} card--text{% endif %}
+           color-{{ settings.card_custom_color_scheme }} dbtfy-color-{{ settings.card_color_scheme }} gradient
+        "
+      >
+        {% unless block.settings.title == blank %}
+          <h3 class="title">
+            {{ block.settings.title }}
+          </h3>
+        {% endunless %}
+        {% if product != null and block.settings.show_image %}
+          <img
+            class="dbtfy-lookbook-product-img"
+            src="{{ product.featured_image | image_url: width: 600 }}"
+            alt="{{ product.featured_image.alt }}"
+            width="600"
+            height="{{ 600 | divided_by: product.featured_image.aspect_ratio | round }}"
+            loading="lazy"
+          >
+        {% endif %}
+        {% if product != null and block.settings.show_price %}
+          <p class="dbtfy-lookbook-product-price">
+            {% if product.compare_at_price > product.price %}
+              <span class="dbtfy-lookbook-product-price-compare">
+                <span class="visually-hidden visually-hidden--inline">
+                  {{ 'products.product.price.regular_price' | t }}
+                </span>
+                <s>{{ product.compare_at_price | money }}</s>
+              </span>
+            {% endif %}
+            <span class="dbtfy-lookbook-product-price-final">
+              {{ product.price | money }}
+            </span>
+          </p>
+        {% endif %}
+        {% unless block.settings.description == blank %}
+          <div class="description rte">
+            {{ block.settings.description }}
+          </div>
+        {% endunless %}
+        {% if product != null and block.settings.btn_text != blank %}
+          <a
+            class="{{ section.settings.tooltip_btn_style }}"
+            href="{{ product.url }}"
+            aria-hidden="true"
+          >
+            {{ block.settings.btn_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:blocks.dbtfy-product-bullet-points.block.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info",
+      "default": "t:blocks.dbtfy-product-bullet-points.block.name"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:general.settings.title",
+      "default": "t:general.settings.title"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "description",
+      "label": "t:general.settings.description",
+      "default": "t:blocks.dbtfy-lookbook-point.settings.description.default",
+      "info": "t:blocks.dbtfy-lookbook-point.settings.description.info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.visibility.product.label",
+      "info": "t:blocks.dbtfy-lookbook-point.settings.header__1.info"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:general.settings.visibility.product.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_default_point_color",
+      "label": "t:blocks.dbtfy-lookbook-point.settings.use_default_point_color.label",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "custom_point_color",
+      "label": "t:blocks.dbtfy-lookbook-point.settings.custom_point_color.label",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "t:blocks.dbtfy-lookbook-point.settings.show_image.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "t:blocks.dbtfy-lookbook-point.settings.show_price.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "t:blocks.news-letter.settings.thank_you_modal.button_text.label",
+      "default": "t:blocks.dbtfy-lookbook-point.settings.button_text.default"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.dbtfy-lookbook-point.settings.header__2.content"
+    },
+    {
+      "type": "range",
+      "id": "desktop_pos_left",
+      "label": "t:blocks.dbtfy-lookbook-point.settings.desktop_pos_left.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "desktop_pos_top",
+      "label": "t:blocks.dbtfy-lookbook-point.settings.desktop_pos_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.dbtfy-lookbook-point.settings.header__3.content"
+    },
+    {
+      "type": "range",
+      "id": "mobile_pos_left",
+      "label": "t:blocks.dbtfy-lookbook-point.settings.desktop_pos_left.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "mobile_pos_top",
+      "label": "t:blocks.dbtfy-lookbook-point.settings.desktop_pos_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.dbtfy-product-bullet-points.block.name"
+    }
+  ]
+}
+{% endschema %}

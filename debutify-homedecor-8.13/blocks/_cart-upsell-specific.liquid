@@ -1,0 +1,62 @@
+<script>
+  var block_setting = {
+    heading: "{{ block.settings.heading }}",
+    product_trigger: "{{ block.settings.product_trigger | default: '' }}",
+    adding_type: "{{ block.settings.adding_type }}",
+    product_offers: [
+      {%- for product_offer in block.settings.product_offer -%}
+        {
+          "handle": "{{ product_offer.handle }}",
+          "id": "{{ product_offer.id }}"
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  };
+  Debutify.widgets['cart_upsell']['specific'].push(block_setting);
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.cart-upsell.specific.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info",
+      "default": "t:sections.cart-upsell.specific.name"
+    },
+    {
+      "type": "product",
+      "id": "product_trigger",
+      "label": "t:blocks.dbtfy-upsell-popup.blocks.upsell-products.settings.product_trigger.label",
+      "info": "For Specific Product, you need to select Product trigger, otherwise Upsell will show as General"
+    },
+    {
+      "type": "product_list",
+      "id": "product_offer",
+      "label": "t:blocks.dbtfy-upsell-popup.blocks.upsell-products.settings.product_offer.label"
+    },
+    {
+      "type": "radio",
+      "id": "adding_type",
+      "label": "t:sections.cart-upsell.specific.adding_type.label",
+      "options": [
+        {
+          "value": "new",
+          "label": "t:sections.cart-upsell.specific.adding_type.options__1"
+        },
+        {
+          "value": "replace",
+          "label": "t:sections.cart-upsell.specific.adding_type.options__2"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.cart-upsell.specific.name"
+    }
+  ]
+}
+{% endschema %}

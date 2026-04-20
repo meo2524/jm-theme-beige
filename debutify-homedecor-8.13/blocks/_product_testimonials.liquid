@@ -1,0 +1,233 @@
+{% liquid
+  capture blocks
+    content_for 'blocks'
+  endcapture
+%}
+
+{% style %}
+  .product-testimonial-border {
+    border: 1px solid;
+  }
+
+  .dbtfy-cart-testimonial dbtfy-slider-component ul.slider.slider--everywhere li {
+    padding: 1.5rem;
+
+    &.product-testimonial__review {
+      border-radius: var(--text-boxes-radius);
+    }
+  }
+
+  {% if block.settings.arrow_color == 'custom'  %}
+  #block-{{ block.id }} .slider-buttons {
+    {% if block.settings.arrow_color == 'custom' %}
+      --arrow-color: {{ block.settings.custom_arrow_color }};
+      --color-button-text: {{ block.settings.custom_arrow_color }};
+      --arrow-background-color: {{ block.settings.custom_arrow_background_color }};
+    {% endif %}
+  }
+  {% endif %}
+
+  #block-{{ block.id }}.product-testimonial .slider-counter__link--active.slider-counter__link--dots .dot {
+    background-color: rgb(var(--color-background));
+  }
+
+  #block-{{ block.id }}.product-testimonial .slider-counter__link--dots .dot {
+    background-color: rgba(var(--color-background), 0.5);
+  }
+
+  #block-{{ block.id }} .tesimonial__review .star-svg path {
+    fill: rgb(var(--color-foreground));
+    stroke: rgb(var(--color-foreground));
+  }
+{% endstyle %}
+
+<div id="block-{{ block.id }}" class="product-testimonial">
+  {% render 'product_cart_testimonials', block: block, blocks: blocks %}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.featured-product.blocks.product_testimonials",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "range",
+      "id": "number_of_line",
+      "label": "t:general.settings.cart_testimonials.line_limit",
+      "default": 5,
+      "min": 1,
+      "max": 5,
+      "step": 1
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.slider.slider_settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "default": false,
+      "label": "t:general.settings.slider.enable_autoplay"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "t:general.settings.slider.autoplay_speed",
+      "default": 5,
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_loop",
+      "default": true,
+      "label": "Loop",
+      "info": "t:sections.dbtfy-footer.blocks.newsletter.settings.media_setting.loop.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_arrows",
+      "default": false,
+      "label": "t:general.settings.slider.show_arrows"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_dots",
+      "default": false,
+      "label": "t:general.settings.slider.show_dots"
+    },
+    {
+      "type": "select",
+      "id": "review_layout",
+      "default": "layout_2",
+      "label": "t:settings_schema.layout.name",
+      "options": [
+        {
+          "value": "layout_1",
+          "label": "t:sections.dbtfy-scrolling-banner.layout_1"
+        },
+        {
+          "value": "layout_2",
+          "label": "t:sections.dbtfy-scrolling-banner.layout_2"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "arrow_color",
+      "default": "inherit",
+      "label": "t:general.settings.slider.arrow_color",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "custom_arrow_color",
+      "label": "t:general.settings.slider.custom-arrow-color",
+      "default": "#ffffff",
+      "visible_if": "{{ block.settings.arrow_color == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_arrow_background_color",
+      "label": "t:general.settings.slider.custom-arrow-bg-color",
+      "default": "#7559ff",
+      "visible_if": "{{ block.settings.arrow_color == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "arrow_position",
+      "default": "bottom",
+      "label": "t:sections.dbtfy-before-and-after.settings.arrow_position.label",
+      "options": [
+        {
+          "value": "middle",
+          "label": "t:general.settings.alignment.option__2"
+        },
+        {
+          "value": "bottom",
+          "label": "t:general.settings.alignment.option__3"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "block_color",
+      "default": "inherit",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.BlockColor",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "color_scheme_block",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1",
+      "visible_if": "{{ block.settings.block_color == 'custom' }}"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme_block",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1",
+      "visible_if": "{{ block.settings.block_color == 'custom' }}"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_testimonial-review"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.featured-product.blocks.product_testimonials",
+      "blocks": [
+        { "type": "_testimonial-review", "settings": { "text": "t:sections.dbtfy-shipping-checkpoints.text_default" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

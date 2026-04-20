@@ -1,0 +1,70 @@
+<hr
+  class="field {% if block.settings.width_separator == 'full-width' %}grid--12-col{% else %}grid--6-col{% endif %}"
+  style="
+    opacity: {{ block.settings.opacity }};
+    margin-top: {{ block.settings.mt }}rem;
+    margin-bottom: {{ block.settings.mb }}rem;
+  "
+>
+{% schema %}
+{
+  "name": "Separator",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info"
+    },
+    {
+      "type": "range",
+      "id": "opacity",
+      "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.settings.border_opacity.label",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.2
+    },
+    {
+      "type": "range",
+      "id": "mt",
+      "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.settings.margin_top.label",
+      "min": 0,
+      "max": 7,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "mb",
+      "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.settings.margin_bottom.label",
+      "min": 0,
+      "max": 7,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "width_separator",
+      "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.settings.width_separator.label",
+      "default": "half-width",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "t:sections.dbtfy-content-tabs.settings.full_width"
+        },
+        {
+          "value": "half-width",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.settings.width_separator.options__2.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Separator"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,95 @@
+{% render 'dbtfy-featured-blog',
+  block_id: block.id,
+  blog: block.settings.blog,
+  blog_limit: block.settings.blog_limit,
+  slider_on_text: 'both',
+  enable_loop: block.settings.enable_loop,
+  arrow_position: block.settings.arrow_position,
+  show_arrows: block.settings.show_arrows,
+  show_dots: false,
+  enable_autoplay: block.settings.enable_autoplay,
+  autoplay_speed: block.settings.autoplay_speed,
+  desktop-width: block.settings.column_width,
+  tablet-width: block.settings.column_width,
+  mobile-width: 6,
+  block: block.shopify_attributes,
+  per_view_desktop: 1,
+  per_view_tablet: 1,
+  per_view_mobile: 1
+%}
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-footer.blocks.featured_blog.name",
+  "settings": [
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "t:sections.dbtfy-footer.blocks.featured_blog.settings.blog.label"
+    },
+    {
+      "type": "range",
+      "id": "blog_limit",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.dbtfy-footer.blocks.featured_blog.settings.blog_limit.label",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.slider.slider_settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_loop",
+      "default": true,
+      "label": "Loop",
+      "info": "Continue from the last slide to the first slide"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "t:general.settings.slider.show_arrows",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "t:general.settings.slider.enable_autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "t:general.settings.slider.autoplay_speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    },
+    {
+      "type": "select",
+      "id": "arrow_position",
+      "default": "bottom",
+      "label": "t:sections.dbtfy-before-and-after.settings.arrow_position.label",
+      "options": [
+        {
+          "value": "middle",
+          "label": "t:general.settings.alignment.option__2"
+        },
+        {
+          "value": "bottom",
+          "label": "t:general.settings.alignment.option__3"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-footer.blocks.featured_blog.name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,40 @@
+<div class="dbtfy-gap-5 flex flex-row" {{ block.shopify_attributes }}>
+  {%- if block.settings.custom_icon -%}
+    {{ block.settings.custom_icon | image_url: width: 24 | image_tag }}
+  {%- else -%}
+    {%- render 'material-icon', icon: block.settings.icon -%}
+  {%- endif -%}
+  <span>{{ block.settings.title }}</span>
+</div>
+{%- schema -%}
+{
+  "name": "t:sections.benefits-and-guarantees.settings.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:general.settings.title",
+      "default": "t:sections.benefits-and-guarantees.settings.name"
+    },
+    {
+      "type": "text",
+      "id": "icon",
+      "label": "t:general.settings.icon_label",
+      "info": "t:sections.all.icon.info",
+      "default": "shield"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_icon",
+      "label": "t:general.settings.custom_icon",
+      "info": "t:blocks.dbtfy-sales-popup.settigns.custom_badge_icon.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.benefits-and-guarantees.settings.name"
+    }
+  ]
+}
+{%- endschema -%}

@@ -1,0 +1,60 @@
+<li class="splide__slide dbtfy-featured-on" {{ block.shopify_attributes }}>
+  <div class="dbtfy-logo">
+    <div class="dbtfy-logo__container global-media-radius">
+      {%- liquid
+        assign block_link = 'javascript:void(0);'
+        if block.settings.link != blank
+          assign block_link = block.settings.link
+        endif
+
+        assign logo_classes = 'dbtfy-featured-logo__media'
+        if section.settings.grey_logos
+          assign logo_classes = logo_classes | append: ' gray-img'
+        endif
+      -%}
+
+      {% if block.settings.logo %}
+        <a
+          href="{{ block_link }}"
+          {% if block.settings.enable_link_new_tab %}
+            target="_blank" rel="noopener"
+          {% endif %}
+        >
+          {{ block.settings.logo | image_url: width: 500 | image_tag: width: 500, class: logo_classes }}
+        </a>
+      {% else %}
+        {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+    </div>
+  </div>
+</li>
+{% schema %}
+{
+  "name": "t:settings_schema.logo.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:settings_schema.logo.name"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.all.button.option_1_label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_link_new_tab",
+      "label": "t:sections.dbtfy-logo-list.blocks.logo.settings.enable_link_new_tab.label",
+      "default": false
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "t:settings_schema.logo.name"
+    }
+  ]
+}
+{% endschema %}

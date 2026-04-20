@@ -1,0 +1,34 @@
+{%- liquid
+  unless section.settings.product == blank
+    assign product = section.settings.product
+  endunless
+
+  assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
+  render 'share-button', block: block, share_link: share_url
+-%}
+{% schema %}
+{
+  "name": "t:sections.main-product.blocks.share.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "share_label",
+      "label": "t:general.settings.text",
+      "default": "t:sections.main-product.blocks.share.settings.text.default"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-product.blocks.share.settings.featured_image_info.content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-product.blocks.share.settings.title_info.content"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main-product.blocks.share.name"
+    }
+  ]
+}
+{% endschema %}

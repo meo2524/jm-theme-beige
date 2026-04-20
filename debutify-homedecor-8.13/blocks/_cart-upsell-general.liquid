@@ -1,0 +1,41 @@
+<script>
+  var block_setting = {
+    heading: "{{ block.settings.heading }}",
+    product_trigger: "",
+    adding_type: "quantity",
+    product_offers: [
+      {%- for product_offer in block.settings.product_offer -%}
+        {
+          "handle": "{{ product_offer.handle }}",
+          "id": {{ product_offer.id }}
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  };
+  Debutify.widgets['cart_upsell']['global'].push(block_setting);
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.cart-upsell.general.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info",
+      "default": "t:sections.cart-upsell.general.name"
+    },
+    {
+      "type": "product_list",
+      "id": "product_offer",
+      "label": "t:blocks.dbtfy-upsell-popup.blocks.upsell-products.settings.product_offer.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.cart-upsell.general.name"
+    }
+  ]
+}
+{% endschema %}

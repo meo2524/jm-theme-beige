@@ -1,0 +1,326 @@
+{%- assign media_aspect_ratio = section.settings.image_ratio -%}
+{%- assign image_crop_position = section.settings.image_crop_position -%}
+
+{%- if media_aspect_ratio and media_aspect_ratio != 'inherit' -%}
+  {%- assign image_aspect_ratio = media_aspect_ratio -%}
+  {%- if media_aspect_ratio == 'circle' -%}
+    {%- assign image_aspect_ratio = '100%' -%}
+  {%- endif -%}
+  {% style %}
+    #shopify-section-{{ section.id }}{
+      --dbtfy-image-crop-ratio: {{ image_aspect_ratio }};
+    }
+  {% endstyle %}
+{%- else -%}
+  {%- assign media_aspect_ratio = settings.dbtfy_product_image_crop_ratio -%}
+{%- endif -%}
+
+{%- if image_crop_position and image_crop_position != 'inherit' -%}
+  {% style %}
+    #shopify-section-{{ section.id }}{
+      --dbtfy-image-crop-position: {{ image_crop_position }};
+    }
+  {% endstyle %}
+{%- endif -%}
+
+<li class="splide__slide" {{ block.shopify_attributes }}>
+  <div class="splide__slide__container">
+    <div class="facebook-post custom-border-hex global-media-radius">
+      <div class="facebook-post__top flex">
+        <div class="facebook-post__profile-picture media media--transparent circle ">
+          {%- if block.settings.author_profile != blank -%}
+            {{ block.settings.author_profile | image_url: width: 200 | image_tag: width: 100 }}
+          {%- else -%}
+            <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41.67 41.67" fill="none">
+              <path class="cls-1" d="M21,41.84A20.83,20.83,0,1,0,.16,21,20.82,20.82,0,0,0,21,41.84Z" transform="translate(-0.16 -0.18)" fill="#C9CCD1"/>
+              <path class="cls-2" d="M21,10.45a7.8,7.8,0,0,0-.1,15.6h.37A7.8,7.8,0,0,0,21,10.45Z" transform="translate(-0.16 -0.18)" fill="#FDFDFE"/>
+              <path class="cls-2" d="M35.12,36.32a20.83,20.83,0,0,1-28.25,0,8.94,8.94,0,0,1,3.83-5c5.69-3.79,14.94-3.79,20.58,0A8.87,8.87,0,0,1,35.12,36.32Z" transform="translate(-0.16 -0.18)" fill="#FDFDFE"/>
+            </svg>
+          {%- endif -%}
+        </div>
+        <div class="facebook-post__top__info flex-grow">
+          {%- if block.settings.author_name != blank -%}
+            <div class="flex">
+              <p class="text--bold facebook-post__author text--bold flex flex-align-center">
+                {{- block.settings.author_name -}}
+                {%- if block.settings.author_verified -%}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    class="verified-icon"
+                    viewBox="0 0 122.88 116.87"
+                  >
+                    <polygon fill="#0866FF" fill-rule="evenodd" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"></polygon>
+                    <path fill="#fff" d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"></path>
+                  </svg>
+                {%- endif -%}
+              </p>
+            </div>
+          {%- endif -%}
+          {%- if block.settings.time_posted != blank -%}
+            <p class="facebook-post__time">{{ block.settings.time_posted }}</p>
+          {%- endif -%}
+        </div>
+        <div class="facebook-post__top__options flex-shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512" fill="currentColor">
+            <path d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path>
+          </svg>
+        </div>
+      </div>
+      <div class="facebook-post__content">
+        {%- if block.settings.text != blank -%}
+          <div class="facebook-post__content__text">
+            <p>{{ block.settings.text }}</p>
+          </div>
+        {%- endif -%}
+        <div class="image--ratio">
+          {% if block.settings.image != blank %}
+            {%- capture sizes -%}
+            (min-width: 990px) {% if section.blocks.size <= 2 %}710px{% else %}550px{% endif %}, (min-width:
+            750px) {% if section.blocks.size == 1 %}710px{% else %}550px{% endif %}, calc(100vw - 30px)
+          {%- endcapture -%}
+            <div
+              class="media media-set media--transparent media-{{ media_aspect_ratio }} {%- unless media_aspect_ratio == 'circle' -%} ratio{%-endunless-%}"
+            >
+              {{
+                block.settings.image
+                | image_url: width: 1420
+                | image_tag: sizes: sizes, widths: '275, 550, 710, 1420', class: 'facebook-post__content__image'
+              }}
+            </div>
+          {% elsif block.settings.video != blank %}
+            <deferred-media
+              class="facebook-testimonials-video__media deferred-media  gradien {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} media media-set media--transparent media-{{ media_aspect_ratio }} {%- unless media_aspect_ratio == 'circle' -%} ratio{%-endunless-%}"
+              data-media-id="{{ block.settings.video.id }}"
+            >
+              <button
+                id="Deferred-Poster-Modal-{{ block.settings.video.id }}"
+                class="facebook-testimonials-video__poster media deferred-media__poster media--landscape media media-set media--transparent media-{{ media_aspect_ratio }} {%- unless media_aspect_ratio == 'circle' -%} ratio{%-endunless-%}"
+                type="button"
+                aria-label="{{ block.settings.video_thumbnail.alt }}"
+              >
+                {%- if block.settings.video_thumbnail != null -%}
+                  {{
+                    block.settings.video_thumbnail
+                    | image_url: width: 3840
+                    | image_tag: sizes: sizes, widths: '375, 750, 1100, 1500, 1780, 2000, 3000, 3840', alt: alt
+                  }}
+                {%- else -%}
+                  {{
+                    block.settings.video.preview_image
+                    | image_url: width: 3840
+                    | image_tag: sizes: sizes, widths: '375, 750, 1100, 1500, 1780, 2000, 3000, 3840', alt: alt
+                  }}
+                {%- endif -%}
+                <span class="deferred-media__poster-button motion-reduce">
+                  <span class="svg-wrapper">
+                    {{- 'icon-play.svg' | inline_asset_content -}}
+                  </span>
+                </span>
+              </button>
+              <template class="media media--transparent media-{{ media_aspect_ratio }} {%- unless media_aspect_ratio == 'circle' -%} ratio{%-endunless-%}">
+                {{ block.settings.video | video_tag: image_size: '1100x', autoplay: true, loop: true, controls: true }}
+              </template>
+            </deferred-media>
+          {% endif %}
+        </div>
+      </div>
+      <div class="facebook-post__reactions flex overflow-hidden">
+        <div class="facebook-post__reactions__icons flex ">
+          {%- if block.settings.display_reaction != blank -%}
+            {%- assign reactions_arr = block.settings.display_reaction | split: ',' -%}
+            <div class="facebook-post__reactions__icons flex ">
+              {% for reaction in reactions_arr %}
+                {%- assign id = block.id | append: forloop.index0 -%}
+                {%- assign reaction_strip = reaction | strip -%}
+                {% render 'facebook-reaction-icon', icon: reaction_strip, id: id %}
+              {% endfor %}
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- if block.settings.reaction_text != blank -%}
+          <p class="facebook-post__reactions__text flex-grow">{{ block.settings.reaction_text }}</p>
+        {%- endif -%}
+
+        {%- if block.settings.comment_text != blank -%}
+          <p class="facebook-post__reactions__comments-text flex-shrink-0">
+            {{ block.settings.comment_text }}
+            {{ 'sections.facebook-testimonials.comments' | t }}
+          </p>
+        {%- endif -%}
+      </div>
+      <div class="facebook-post__ctas overflow-hidden">
+        <div class="facebook-post__ctas__btn flex-center">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+                d="M8 10V20M8 10L4 9.99998V20L8 20M8 10L13.1956 3.93847C13.6886 3.3633 14.4642 3.11604 15.1992 3.29977L15.2467 3.31166C16.5885 3.64711 17.1929 5.21057 16.4258 6.36135L14 9.99998H18.5604C19.8225 9.99998 20.7691 11.1546 20.5216 12.3922L19.3216 18.3922C19.1346 19.3271 18.3138 20 17.3604 20L8 20"
+                stroke="currentColor" stroke-width="1.44" stroke-linecap="round"
+                stroke-linejoin="round"></path>
+          </svg>
+          {{- 'sections.facebook-testimonials.like' | t -}}
+        </div>
+        <div class="facebook-post__ctas__btn flex-center">
+          <svg
+            width="20"
+            height="20"
+            viewBox="-3.2 -3.2 38.40 38.40"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+          >
+            <g stroke-width="1.92" fill="none" fill-rule="evenodd">
+                <g transform="translate(-100.000000, -255.000000)" fill="currentColor">
+                    <path
+                        d="M116,281 C114.832,281 113.704,280.864 112.62,280.633 L107.912,283.463 L107.975,278.824 C104.366,276.654 102,273.066 102,269 C102,262.373 108.268,257 116,257 C123.732,257 130,262.373 130,269 C130,275.628 123.732,281 116,281 L116,281 Z M116,255 C107.164,255 100,261.269 100,269 C100,273.419 102.345,277.354 106,279.919 L106,287 L113.009,282.747 C113.979,282.907 114.977,283 116,283 C124.836,283 132,276.732 132,269 C132,261.269 124.836,255 116,255 L116,255 Z"
+                        sketch:type="MSShapeGroup"></path>
+                </g>
+            </g>
+          </svg>
+          {{- 'sections.facebook-testimonials.comment' | t -}}
+        </div>
+        <div class="facebook-post__ctas__btn flex-center">
+          <svg
+            fill="currentColor"
+            width="20"
+            height="20"
+            viewBox="0 0 32 32"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke="currentColor"
+            stroke-width="0.00032"
+          >
+            <path
+                d="M29.28,12.47,18.6,3.62a2,2,0,0,0-2.17-.27,2,2,0,0,0-1.15,1.81v2A19.82,19.82,0,0,0,2,25.94a19.18,19.18,0,0,0,.25,3.11,1,1,0,0,0,.82.83h.17a1,1,0,0,0,.88-.53,17.29,17.29,0,0,1,11.16-8.68v2.16a2,2,0,0,0,1.15,1.81,2.09,2.09,0,0,0,.88.2,2,2,0,0,0,1.29-.48l4.86-4,.09-.07,5.73-4.75a2,2,0,0,0,0-3.06Zm-6.93,6.2-.09.07-5,4.1V19.42a.19.19,0,0,0,0-.08s0-.06,0-.09,0-.07-.05-.11a1.34,1.34,0,0,0-.07-.18A.57.57,0,0,0,17,18.8a.49.49,0,0,0-.12-.13,1,1,0,0,0-.17-.12l-.15-.07-.22,0-.1,0-.08,0h-.09A19.19,19.19,0,0,0,4,25.85a17.81,17.81,0,0,1,12.56-17l.05,0a1.11,1.11,0,0,0,.19-.09A1.43,1.43,0,0,0,17,8.63l.12-.14a.54.54,0,0,0,.1-.16.85.85,0,0,0,.06-.17,1.3,1.3,0,0,0,0-.21.43.43,0,0,0,0,0l0-2.74L28,14Z">
+            </path>
+          </svg>
+          {{- 'sections.facebook-testimonials.share' | t -}}
+        </div>
+      </div>
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</li>
+
+{% schema %}
+{
+  "name": "Testimonial",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.facebook_tesimonial.settings.author.post_author"
+    },
+    {
+      "type": "text",
+      "id": "author_name",
+      "label": "t:sections.facebook_tesimonial.settings.author.name",
+      "default": "t:sections.facebook_tesimonial.settings.author.name_default"
+    },
+    {
+      "type": "checkbox",
+      "id": "author_verified",
+      "label": "t:sections.facebook_tesimonial.settings.author.verified"
+    },
+    {
+      "type": "text",
+      "id": "time_posted",
+      "label": "t:sections.facebook_tesimonial.settings.post.time_posted",
+      "default": "t:sections.facebook_tesimonial.settings.post.time_posted_default"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.facebook_tesimonial.settings.post.post_content"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:general.settings.text",
+      "default": "t:sections.facebook_tesimonial.settings.post.text_default"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:general.settings.image"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:general.settings.or"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:general.settings.video.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_thumbnail",
+      "label": "t:sections.facebook_tesimonial.settings.post.video_thumbnail",
+      "info": "t:general.settings.video.video_thumbnail_info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.facebook_tesimonial.settings.post.post_reactions"
+    },
+    {
+      "type": "text",
+      "id": "display_reaction",
+      "label": "t:sections.facebook_tesimonial.settings.post.display_reactions",
+      "info": "Split reactions whose icons you want to display with a comma. Available options: like, love, care, haha, wow, sad, angry.",
+      "default": "like, love, care, haha, wow, sad, angry"
+    },
+    {
+      "type": "image_picker",
+      "id": "author_profile",
+      "label": "t:sections.facebook_tesimonial.settings.author.profile"
+    },
+    {
+      "type": "text",
+      "id": "reaction_text",
+      "label": "t:sections.facebook_tesimonial.settings.post.reaction_text",
+      "default": "1.1k"
+    },
+    {
+      "type": "number",
+      "id": "comment_text",
+      "label": "t:sections.facebook_tesimonial.settings.post.comment_text",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_facebook-testimonial-comment"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonial",
+      "blocks": [
+        {
+          "type": "_facebook-testimonial-comment",
+          "settings": {
+            "author_profile_image": "",
+            "time_posted": "3h ago",
+            "author_name": "Janice A.",
+            "author_comment": "<p>Absolutely love this product! It exceeded my expectations</p>"
+          }
+        },
+        {
+          "type": "_facebook-testimonial-comment",
+          "settings": {
+            "author_profile_image": "",
+            "time_posted": "3h ago",
+            "author_name": "Janice A.",
+            "author_comment": "<p>Absolutely love this product! It exceeded my expectations</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

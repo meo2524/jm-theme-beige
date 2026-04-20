@@ -1,0 +1,158 @@
+{%- liquid
+  assign product = block.settings.product
+
+  assign video_id = block.settings.video.id | default: block.settings.video_url.id
+  assign poster = block.settings.cover_image | default: block.settings.video.preview_image | image_url: width: 1100, height: 1100
+
+  assign youtube_vimeo = false
+  if block.settings.video == blank and block.settings.video_url != blank
+    assign youtube_vimeo = true
+  endif
+
+  assign video_loop = section.settings.enable_video_looping
+-%}
+
+{% if block.settings.video == blank and block.settings.video_url != blank %}
+  {%- liquid
+    assign video_id = block.settings.video_url.id
+  -%}
+{% endif %}
+
+<li
+  class="splide__slide grid__item {% if product != blank %} video-product-blank {% endif %} "
+  {{ block.shopify_attributes }}
+>
+  <div class="dbtfy-ugc-carousel-block {% if youtube_vimeo %}dbtfy-ugc-carousel-block__youtube{% endif %}">
+    <div class="dbtfy-ugc-carousel-block__content">
+      <div class="dbtfy-ugc-carousel-block__video">
+        {% if youtube_vimeo == false %}
+          <span class="dbtfy-ugc-carousel-block__play-button">
+            <span class="svg-wrapper">
+              {{- 'icon-play.svg' | inline_asset_content -}}
+            </span>
+          </span>
+        {% endif %}
+        {%- if block.settings.video == null and block.settings.video_url != null -%}
+          {%- liquid
+            assign loop = ''
+            if section.settings.enable_video_looping
+              assign loop = '&loop=1&playlist=' | append: video_id
+            endif
+            assign autoplay = 0
+          -%}
+          {%- if block.settings.video_url.type == 'youtube' -%}
+            <iframe
+              src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay={{ autoplay }}{{ loop }}&controls=true"
+              class="js-youtube global-media-settings"
+              allow="{% if autoplay == 1 %}autoplay{% endif %}; encrypted-media"
+              allowfullscreen
+              title="{{ block.settings.description | escape }}"
+            ></iframe>
+          {%- else -%}
+            <iframe
+              src="https://player.vimeo.com/video/{{ video_id }}?autoplay={{ autoplay }}{{ loop }}&controls=true"
+              class="js-vimeo global-media-settings"
+              allow="{% if autoplay == 1 %}autoplay{% endif %}; encrypted-media"
+              allowfullscreen
+              title="{{ block.settings.description | escape }}"
+            ></iframe>
+          {%- endif -%}
+        {%- else -%}
+          {{
+            block.settings.video
+            | video_tag:
+              image_size: '1100x',
+              autoplay: false,
+              loop: video_loop,
+              muted: true,
+              poster: poster,
+              class: 'global-media-settings'
+          -}}
+        {%- endif -%}
+        {% if youtube_vimeo == false %}
+          <div class="dbtfy-ugc-carousel-volume__controls hidden">
+            {% render 'material-icon', icon: 'volume_up', class: 'hidden' %}
+            {% render 'material-icon', icon: 'volume_off' %}
+          </div>
+        {% endif %}
+      </div>
+      {% if product != blank %}
+        <div class="dbtfy-ugc-carousel-block__product collection-list collection-type-list">
+          <ul>
+            {% render 'card-product',
+              card_product: product,
+              media_aspect_ratio: '100%',
+              image_crop_position: 'center center',
+              image_shape: 'default',
+              show_sale_badge: false,
+              show_sold_out_badge: false,
+              show_secondary_image: true,
+              show_carousel: true,
+              show_vendor: block.settings.show_vendor,
+              show_rating: true,
+              list_type: true,
+              section_id: section.id,
+              quick_add: 'standard'
+            %}
+          </ul>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</li>
+
+{% schema %}
+{
+  "name": "t:general.settings.video.label",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.video.settings.header__1.content"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:general.settings.video.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.video.settings.header__2.content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.ugc-carousel.note"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "accept": ["youtube", "vimeo"],
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+      "label": "t:sections.collage.blocks.video.settings.video_url.label",
+      "info": "t:sections.ugc-carousel.note_2"
+    },
+    {
+      "type": "image_picker",
+      "id": "cover_image",
+      "label": "t:sections.video.settings.cover_image.label",
+      "info": "t:sections.video.settings.cover_image.info"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "t:sections.video.settings.description.label",
+      "info": "t:sections.video.settings.description.info"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:general.settings.visibility.product.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.video.label"
+    }
+  ]
+}
+{% endschema %}

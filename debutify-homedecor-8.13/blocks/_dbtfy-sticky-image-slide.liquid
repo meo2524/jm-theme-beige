@@ -1,0 +1,49 @@
+<div
+  class="dbtfy-sticky-image-caption-inner"
+>
+  <div class="dbtfy-sticky-image-caption-inner-inner page-width w-100">
+    {% content_for 'block', type: '_cta_block', id: 'cta_block' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:blocks.name",
+  "blocks": [
+    {
+      "type": "@theme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.name",
+      "blocks": [
+        {
+          "type": "_cta_block",
+          "static": true,
+          "id": "cta_block",
+          "blocks": [
+            {
+              "type": "_subtitle",
+              "settings": {
+                "alignment": "text-center",
+                "padding___bottom": "custom",
+                "custom_padding_bottom": 0,
+                "size": "h6"
+              }
+            },
+            { "type": "_title", "settings": { "alignment": "text-center" } },
+            {
+              "type": "_double_button",
+              "settings": {
+                "alignment": "justify-content-center",
+                "button_style_2": "button button--secondary"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

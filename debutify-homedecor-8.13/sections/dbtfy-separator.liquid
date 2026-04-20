@@ -1,0 +1,695 @@
+{%- if request.design_mode or settings.dbtfy_separator -%}
+  {%- render 'widget-blocker',
+    enabled: settings.dbtfy_separator,
+    section: section,
+    name: 'Separator',
+    type: '⚡ Paid Sections'
+  -%}
+  {%- render 'section-padding', section: section -%}
+
+  {% style %}
+     #section_{{ section.id }} {
+        @media screen and (min-width: 750px) {
+       --separator-height: 110px;
+        }
+      {% if section.settings.separator_color_scheme == 'custom' %}
+       color: {{ section.settings.color | default: '#000000' }};
+      {% else %}
+        .dbtfy-color-{{ section.settings.separator_color_scheme }} {
+          color: var(--gradient-background);
+        }
+      {% endif %}
+     }
+
+    @media screen and (max-width: 749px) {
+       #section_{{ section.id }} {
+         --separator-height: {{ section.settings.separator_height }}px;
+       }
+     }
+
+     #section_{{ section.id }} hr {
+       background-color: transparent;
+       opacity: {{ section.settings.opacity | times: 0.01 }};
+       border-color: currentColor;
+     }
+
+     #section_{{ section.id }} svg {
+       height: var(--separator-height);
+       width: 100%;
+       vertical-align: middle;
+       opacity: {{ section.settings.opacity | times: 0.01 }};
+       fill: currentColor;
+       transform: rotate(0deg);
+     }
+
+     {% if section.settings.flip %}
+       #section_{{ section.id }} svg {
+         transform: rotate(180deg);
+       }
+     {% endif %}
+
+     #section_{{ section.id }} svg path {
+       fill: currentColor;
+     }
+
+     #section_{{ section.id }} .waves-animated-1 {
+       --max-height: 3rem;
+       margin: 0;
+     }
+
+     #section_{{ section.id }} .parallax1 > use {
+       animation: move-forever1 10s linear infinite;
+     }
+
+     #section_{{ section.id }} .parallax2 > use {
+       animation: move-forever2 8s linear infinite;
+       opacity: 0.4;
+     }
+
+     #section_{{ section.id }} .parallax3 > use {
+       animation: move-forever3 6s linear infinite;
+       opacity: 0.3;
+     }
+
+     #section_{{ section.id }} .parallax4 > use {
+       animation: move-forever4 4s linear infinite;
+       opacity: 0.2;
+     }
+
+     @keyframes move-forever1 {
+       from { transform: translate(85px, 0); }
+       to   { transform: translate(-90px, 0); }
+     }
+
+     @keyframes move-forever2 {
+       from { transform: translate(-90px, 0); }
+       to   { transform: translate(85px, 0); }
+     }
+
+     @keyframes move-forever3 {
+       from { transform: translate(85px, 0); }
+       to   { transform: translate(-90px, 0); }
+     }
+
+     @keyframes move-forever4 {
+       from { transform: translate(-90px, 0); }
+       to   { transform: translate(85px, 0); }
+     }
+
+     @media screen and (min-width: 1000px) {
+       #section_{{ section.id }} .waves-animated-1 {
+         --max-height: 6rem;
+       }
+     }
+  {% endstyle %}
+
+  {% liquid
+    if section.settings.separator_color_scheme != 'custom'
+      assign color = 'dbtfy-color-' | append: section.settings.separator_color_scheme
+      assign border_color = 'currentColor'
+    else
+      assign border_color = section.settings.color
+    endif
+  %}
+
+  <dbtfy-separator>
+    <div
+      class="section-{{ section.id }}-padding {{ section.settings.container_size }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} show-on--{{ section.settings.show_on }} color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} gradient"
+      id="section_{{ section.id }}"
+    >
+      {%- if section.settings.separator_type == 'straight' -%}
+        <hr
+          class="m-0 {{ color }}"
+          style="border-top: 1px solid {{ border_color }}"
+        >
+      {%- elsif section.settings.separator_type == 'dashed' -%}
+        <hr
+          style="border-top: 2px dashed {{ border_color }};"
+          class="m-0 {{ color }}"
+        >
+      {%- elsif section.settings.separator_type == 'dotted' -%}
+        <hr
+          style="border-top: 2px dotted {{ border_color }};"
+          class="m-0 {{ color }}"
+        >
+      {%- elsif section.settings.separator_type == 'double' -%}
+        <hr
+          style="border-top: 4px double {{ border_color }};"
+          class="m-0 {{ color }}"
+        >
+      {%- elsif section.settings.separator_type == 'groove' -%}
+        <hr
+          style="border-top: 4px groove {{ border_color }};"
+          class="m-0 {{ color }}"
+        >
+      {%- elsif section.settings.separator_type == 'diagonal' -%}
+        <div class="w-100 dbtfy-color-{{ section.settings.separator_color_scheme }}">
+          <svg
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M1200 0L0 120h1200V0z"
+            ></path>
+          </svg>
+        </div>
+      {%- elsif section.settings.separator_type == 'curve_1' -%}
+        <div class="curve-1-separator dbtfy-color-{{ section.settings.separator_color_scheme }}">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 360 74.65"
+            preserveAspectRatio="none"
+          >
+            <path fill="currentColor" fill-opacity="1" d="M0,20.29,12,23.6A474.72,474.72,0,0,0,72,37c24,3.31,48,3.31,72-6.69S192,.29,216,7c24,6.43,48,40.18,72,50,24,10.18,48-3.57,60-10l12-6.69v40H0Z" transform="translate(0 -5.64)"/>
+          </svg>
+        </div>
+      {%- elsif section.settings.separator_type == 'curve_2' -%}
+        <div class="curve-2-separator dbtfy-color-{{ section.settings.separator_color_scheme }}">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 320"
+            preserveAspectRatio="none"
+          >
+            <path fill="currentColor" fill-opacity="1" d="M0,192L48,181.3C96,171,192,149,288,144C384,139,480,149,576,149.3C672,149,768,139,864,144C960,149,1056,171,1152,154.7C1248,139,1344,85,1392,58.7L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" data-darkreader-inline-fill="" style="--darkreader-inline-fill: #007acc;"></path>
+          </svg>
+        </div>
+      {%- elsif section.settings.separator_type == 'curve_3' -%}
+        <div class="curve-3-separator dbtfy-color-{{ section.settings.separator_color_scheme }}">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 195"
+            preserveAspectRatio="none"
+          >
+            <path fill="currentColor" fill-opacity="1" d="M0,140l34.3-5.3C68.6,129,137,119,206,92c68.3-27,137-69,205-64,69,5,138,59,206,58.7C685.7,87,754,33,823,28c68.4-5,137,37,206,37.3C1097.1,65,1166,23,1234,12c68.9-11,137,11,172,21.3L1440,44V204H0Z" transform="translate(0 -9)"/>
+          </svg>
+        </div>
+      {%- elsif section.settings.separator_type == 'curve_4' -%}
+        <div class="curve-4-separator dbtfy-color-{{ section.settings.separator_color_scheme }}">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 226.97"
+            preserveAspectRatio="none"
+          >
+            <path fill="currentColor" fill-opacity="1" d="M0,81,21.8,70.3C43.6,60,87,38,131,27.7,174.5,17,218,17,262,49c43.5,32,87,96,131,106.7C436.4,166,480,124,524,97c43.3-27,87-37,131-26.7,43.2,10.7,87,42.7,130,64C829.1,156,873,166,916,161c44-5,88-27,131-58.7C1090.9,70,1135,28,1178,17c43.8-11,87,11,131,26.7,43.7,16.3,87,26.3,109,32l22,5.3V241H0Z" transform="translate(0 -14.03)"/>
+          </svg>
+        </div>
+      {%- elsif section.settings.separator_type == 'waves' -%}
+        <div
+          class="waves-separator dbtfy-color-{{ section.settings.separator_color_scheme }}"
+        >
+          <svg
+            id="wave"
+            viewBox="0 0 1440 250"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+          >
+            <path style="transform:translate(0, 0px); opacity:1" fill="currentColor" d="M0,125L30,120.8C60,117,120,108,180,104.2C240,100,300,100,360,120.8C420,142,480,183,540,191.7C600,200,660,175,720,162.5C780,150,840,150,900,145.8C960,142,1020,133,1080,125C1140,117,1200,108,1260,108.3C1320,108,1380,117,1440,133.3C1500,150,1560,175,1620,170.8C1680,167,1740,133,1800,125C1860,117,1920,133,1980,125C2040,117,2100,83,2160,62.5C2220,42,2280,33,2340,25C2400,17,2460,8,2520,16.7C2580,25,2640,50,2700,58.3C2760,67,2820,58,2880,50C2940,42,3000,33,3060,41.7C3120,50,3180,75,3240,108.3C3300,142,3360,183,3420,183.3C3480,183,3540,142,3600,108.3C3660,75,3720,50,3780,33.3C3840,17,3900,8,3960,37.5C4020,67,4080,133,4140,158.3C4200,183,4260,167,4290,158.3L4320,150L4320,250L4290,250C4260,250,4200,250,4140,250C4080,250,4020,250,3960,250C3900,250,3840,250,3780,250C3720,250,3660,250,3600,250C3540,250,3480,250,3420,250C3360,250,3300,250,3240,250C3180,250,3120,250,3060,250C3000,250,2940,250,2880,250C2820,250,2760,250,2700,250C2640,250,2580,250,2520,250C2460,250,2400,250,2340,250C2280,250,2220,250,2160,250C2100,250,2040,250,1980,250C1920,250,1860,250,1800,250C1740,250,1680,250,1620,250C1560,250,1500,250,1440,250C1380,250,1320,250,1260,250C1200,250,1140,250,1080,250C1020,250,960,250,900,250C840,250,780,250,720,250C660,250,600,250,540,250C480,250,420,250,360,250C300,250,240,250,180,250C120,250,60,250,30,250L0,250Z"></path>
+            <path style="transform:translate(0, 15%); opacity:0.5" fill="currentColor" d="M0,75L30,62.5C60,50,120,25,180,41.7C240,58,300,117,360,125C420,133,480,92,540,87.5C600,83,660,117,720,116.7C780,117,840,83,900,62.5C960,42,1020,33,1080,50C1140,67,1200,108,1260,129.2C1320,150,1380,150,1440,141.7C1500,133,1560,117,1620,95.8C1680,75,1740,50,1800,70.8C1860,92,1920,158,1980,158.3C2040,158,2100,92,2160,79.2C2220,67,2280,108,2340,129.2C2400,150,2460,150,2520,150C2580,150,2640,150,2700,162.5C2760,175,2820,200,2880,212.5C2940,225,3000,225,3060,187.5C3120,150,3180,75,3240,66.7C3300,58,3360,117,3420,116.7C3480,117,3540,58,3600,50C3660,42,3720,83,3780,83.3C3840,83,3900,42,3960,37.5C4020,33,4080,67,4140,100C4200,133,4260,167,4290,183.3L4320,200L4320,250L4290,250C4260,250,4200,250,4140,250C4080,250,4020,250,3960,250C3900,250,3840,250,3780,250C3720,250,3660,250,3600,250C3540,250,3480,250,3420,250C3360,250,3300,250,3240,250C3180,250,3120,250,3060,250C3000,250,2940,250,2880,250C2820,250,2760,250,2700,250C2640,250,2580,250,2520,250C2460,250,2400,250,2340,250C2280,250,2220,250,2160,250C2100,250,2040,250,1980,250C1920,250,1860,250,1800,250C1740,250,1680,250,1620,250C1560,250,1500,250,1440,250C1380,250,1320,250,1260,250C1200,250,1140,250,1080,250C1020,250,960,250,900,250C840,250,780,250,720,250C660,250,600,250,540,250C480,250,420,250,360,250C300,250,240,250,180,250C120,250,60,250,30,250L0,250Z"></path>
+          </svg>
+        </div>
+
+      {%- elsif section.settings.separator_type == 'waves_2' -%}
+        <div
+          class="waves-2-separator dbtfy-color-{{ section.settings.separator_color_scheme }}"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            style="object-fit:cover"
+            id="wave_2"
+            version="1"
+            baseProfile="full"
+            width="100%"
+            height="100%"
+            viewBox="0 0 1536 730"
+            preserveAspectRatio="none"
+          >
+            <path transform="scale(1, 1)" d="M 0,730 V 0,365 C 18.628575906824253,308.98639287752303 37.257151813648505,252.97278575504606 52,260 C 66.7428481863515,267.02721424495394 77.59996865223023,337.0952498573388 96,397 C 114.40003134776977,456.9047501426612 140.3429735774306,506.64621481559885 159,454 C 177.6570264225694,401.35378518440115 189.02813703804748,246.31989088026592 206,236 C 222.97186296195252,225.68010911973408 245.54447827037967,360.0742216633375 262,382 C 278.45552172962033,403.9257783366625 288.7939498804336,313.38322246638404 305,294 C 321.2060501195664,274.61677753361596 343.27972220788575,326.3928884711265 364,374 C 384.72027779211425,421.6071115288735 404.08716128802354,465.0452236491099 418,464 C 431.91283871197646,462.9547763508901 440.3716326400199,417.4262169324337 457,382 C 473.6283673599801,346.5737830675663 498.4263081518967,321.24990862115504 516,335 C 533.5736918481033,348.75009137884496 543.9231347523934,401.57414858294595 559,373 C 574.0768652476066,344.42585141705405 593.8811528385295,234.45349704706118 612,231 C 630.1188471614705,227.54650295293882 646.5522538934888,330.61186322880945 666,394 C 685.4477461065112,457.38813677119055 707.9098315875152,481.0990500377013 724,484 C 740.0901684124848,486.9009499622987 749.8084197564502,468.9919366203853 765,467 C 780.1915802435498,465.0080633796147 800.8564893866837,478.9332034807577 821,437 C 841.1435106133163,395.0667965192423 860.765622696815,297.27524945658394 874,294 C 887.234377303185,290.72475054341606 894.0810198260566,381.9657986929065 913,433 C 931.9189801739434,484.0342013070935 962.910297998959,494.86155577178965 981,474 C 999.089702001041,453.13844422821035 1004.2777881781074,400.5879782199347 1021,386 C 1037.7222118218926,371.4120217800653 1065.978549288611,394.7865313484715 1083,387 C 1100.021450711389,379.2134686515285 1105.808014667448,340.26589638617907 1121,308 C 1136.191985332552,275.73410361382093 1160.7893920415968,250.14988310681218 1181,255 C 1201.2106079584032,259.8501168931878 1217.0344171661648,295.13457118657215 1235,297 C 1252.9655828338352,298.86542881342785 1273.0729392937442,267.31183214689923 1289,274 C 1304.9270607062558,280.68816785310077 1316.6738256588585,325.61810022583086 1330,371 C 1343.3261743411415,416.38189977416914 1358.2317580708213,462.2157669497773 1378,438 C 1397.7682419291787,413.7842330502227 1422.399142057856,319.5188319750599 1438,303 C 1453.600857942144,286.4811680249401 1460.1716736977555,347.70890514998285 1475,371 C 1489.8283263022445,394.29109485001715 1512.9141631511222,379.64554742500854 1536,365 C 1536,365 1536,730 1536,730 Z" stroke="none" stroke-width="0" fill="currentColor" fill-opacity="0.5" style="transform-origin: center center;"/>
+
+            <path transform="scale(1, 1)" d="M 0,730 V 0,547 C 21.272020025657007,467.1823871129475 42.54404005131401,387.36477422589496 57,411 C 71.45595994868599,434.63522577410504 79.09585982040097,561.7232902093676 93,619 C 106.90414017959903,676.2767097906324 127.07252066708216,663.7420649366345 147,630 C 166.92747933291784,596.2579350633655 186.6140575112704,541.3084500440946 204,494 C 221.3859424887296,446.69154995590543 236.47124928783632,407.0241348869871 252,458 C 267.5287507121637,508.9758651130129 283.50094533738434,650.595010407957 302,683 C 320.49905466261566,715.404989592043 341.52496936262656,638.5958234811852 360,604 C 378.47503063737344,569.4041765188148 394.39917721210946,577.0216956673021 410,584 C 425.60082278789054,590.9783043326979 440.87832178893547,597.3173938496066 456,584 C 471.12167821106453,570.6826061503934 486.08753563214873,537.7087289342719 505,490 C 523.9124643678513,442.2912710657281 546.7715356824696,379.8476904133058 568,429 C 589.2284643175304,478.1523095866942 608.8263216379729,638.900509412505 623,648 C 637.1736783620271,657.099490587495 645.923177765639,514.5502719366742 659,492 C 672.076822234361,469.4497280633258 689.4809672994713,566.8984028407982 712,563 C 734.5190327005287,559.1015971592018 762.1529530364758,453.8561167001324 777,428 C 791.8470469635242,402.1438832998676 793.9072205546252,455.6771303586723 811,474 C 828.0927794453748,492.3228696413277 860.2181647450233,475.4353618651785 879,460 C 897.7818352549767,444.5646381348215 903.2201204652822,430.5814221806137 917,413 C 930.7798795347178,395.4185778193863 952.9013533938484,374.2389494123669 973,421 C 993.0986466061516,467.7610505876331 1011.1744659593244,582.4627801699183 1030,608 C 1048.8255340406756,633.5372198300817 1068.4007827688533,569.9099299079594 1081,576 C 1093.5992172311467,582.0900700920406 1099.2224029652618,657.8975001982446 1117,617 C 1134.7775970347382,576.1024998017554 1164.7096053700989,418.5000692990619 1183,440 C 1201.2903946299011,461.4999307009381 1207.9391755543427,662.1022226055072 1223,671 C 1238.0608244456573,679.8977773944928 1261.53369241253,497.0910402789092 1281,433 C 1300.46630758747,368.9089597210908 1315.9260547955373,423.5336162788558 1333,504 C 1350.0739452044627,584.4663837211442 1368.76208840532,690.7744946056674 1387,679 C 1405.23791159468,667.2255053943326 1423.0255915831829,537.3684052984742 1440,531 C 1456.9744084168171,524.6315947015258 1473.1355452619478,641.7518842004358 1489,665 C 1504.8644547380522,688.2481157995642 1520.4322273690261,617.6240578997821 1536,547 C 1536,547 1536,730 1536,730 Z" stroke="none" stroke-width="0" fill="currentColor" style="transform-origin: center center;"/>
+          </svg>
+        </div>
+      {%- elsif section.settings.separator_type == 'waves_animated' -%}
+        <div
+          class="waves-animated-separator dbtfy-color-{{ section.settings.separator_color_scheme }}"
+        >
+          <svg
+            class="waves-animated-1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <path id="gentle-wave-{{ section.id }}"
+              d="M-160 44c30 0
+                58-18 88-18s
+                58 18 88 18
+                58-18 88-18
+                58 18 88 18
+                v44h-352z" />
+            </defs>
+            <g class="parallax1">
+              <use xlink:href="#gentle-wave-{{ section.id }}" x="50" y="3" fill="currentColor"/>
+            </g>
+            <g class="parallax2">
+              <use xlink:href="#gentle-wave-{{ section.id }}" x="50" y="0" fill="currentColor"/>
+            </g>
+            <g class="parallax3">
+              <use xlink:href="#gentle-wave-{{ section.id }}" x="50" y="9" fill="currentColor"/>
+            </g>
+            <g class="parallax4">
+              <use xlink:href="#gentle-wave-{{ section.id }}" x="50" y="6" fill="currentColor"/>
+            </g>
+          </svg>
+        </div>
+
+      {%- elsif section.settings.separator_type == 'waves_animated_2' -%}
+        <div
+          class="waves-animated-separator_2 dbtfy-color-{{ section.settings.separator_color_scheme }}"
+        >
+          <svg
+            class="wave"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1083 214"
+            preserveAspectRatio="none"
+            width="100%"
+            height="214"
+          >
+            <defs>
+              <linearGradient id="lg-{{ section.id }}" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="currentColor"/>
+                <stop offset="1" stop-color="currentColor"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Rotate group 180 degrees -->
+            <g transform="translate(1083 214) rotate(180)">
+
+              <!-- Path 1 -->
+              <path fill="currentColor" opacity="0.2">
+                <animate attributeName="d" dur="1s" repeatCount="indefinite"
+                  values="
+                    M0 0 L0 136.23 Q108.3 160.234 216.6 131.878 T433.2 74.1995 T649.8 93.2802 T866.4 74.3187 T1083 74.2703 L1083 0 Z;
+                    M0 0 L0 126.23 Q108.3 150.234 216.6 121.878 T433.2 64.1995 T649.8 83.2802 T866.4 64.3187 T1083 64.2703 L1083 0 Z;
+                    M0 0 L0 136.23 Q108.3 160.234 216.6 131.878 T433.2 74.1995 T649.8 93.2802 T866.4 74.3187 T1083 74.2703 L1083 0 Z
+                  " />
+              </path>
+
+              <!-- Path 2 -->
+              <path fill="currentColor" opacity="0.9">
+                <animate attributeName="d" dur="1s" repeatCount="indefinite" begin="-2.5s"
+                  values="
+                    M0 0 L0 82.9298 Q108.3 116.561 216.6 91.8922 T433.2 118.1 T649.8 102.204 T866.4 54.3205 T1083 87.0027 L1083 0 Z;
+                    M0 0 L0 92.9298 Q108.3 126.561 216.6 101.8922 T433.2 108.1 T649.8 112.204 T866.4 64.3205 T1083 97.0027 L1083 0 Z;
+                    M0 0 L0 82.9298 Q108.3 116.561 216.6 91.8922 T433.2 118.1 T649.8 102.204 T866.4 54.3205 T1083 87.0027 L1083 0 Z
+                  " />
+              </path>
+
+              <!-- Path 3 -->
+              <path fill="currentColor" opacity="0.4">
+                <animate attributeName="d" dur="1s" repeatCount="indefinite" begin="-5s"
+                  values="
+                    M0 0 L0 135.839 Q108.3 126.212 216.6 87.9514 T433.2 82.1401 T649.8 118.449 T866.4 56.5681 T1083 68.7464 L1083 0 Z;
+                    M0 0 L0 125.839 Q108.3 116.212 216.6 77.9514 T433.2 72.1401 T649.8 108.449 T866.4 46.5681 T1083 58.7464 L1083 0 Z;
+                    M0 0 L0 135.839 Q108.3 126.212 216.6 87.9514 T433.2 82.1401 T649.8 118.449 T866.4 56.5681 T1083 68.7464 L1083 0 Z
+                  " />
+              </path>
+
+
+            </g>
+          </svg>
+        </div>
+
+      {%- elsif section.settings.separator_type == 'clouds' -%}
+        <div class="clouds-separator dbtfy-color-{{ section.settings.separator_color_scheme }}">
+          <svg
+            id="clouds"
+            xmlns="http://www.w3.org/2000/svg"
+            version="1.1"
+            width="100%"
+            height="100"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+          >
+            <path d="M-5 100 Q 0 20 5 100 Z
+                 M0 100 Q 5 0 10 100
+                 M5 100 Q 10 30 15 100
+                 M10 100 Q 15 10 20 100
+                 M15 100 Q 20 30 25 100
+                 M20 100 Q 25 -10 30 100
+                 M25 100 Q 30 10 35 100
+                 M30 100 Q 35 30 40 100
+                 M35 100 Q 40 10 45 100
+                 M40 100 Q 45 50 50 100
+                 M45 100 Q 50 20 55 100
+                 M50 100 Q 55 40 60 100
+                 M55 100 Q 60 60 65 100
+                 M60 100 Q 65 50 70 100
+                 M65 100 Q 70 20 75 100
+                 M70 100 Q 75 45 80 100
+                 M75 100 Q 80 30 85 100
+                 M80 100 Q 85 20 90 100
+                 M85 100 Q 90 50 95 100
+                 M90 100 Q 95 25 100 100
+                 M95 100 Q 100 15 105 100 Z"
+                fill="currentColor"></path>
+          </svg>
+        </div>
+      {%- endif -%}
+    </div>
+  </dbtfy-separator>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Separator",
+  "tag": "div",
+  "disabled_on": { "groups": ["aside"] },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-contact-form-builder.blocks.separator.settings.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-contact-form-builder.blocks.separator.settings.help.link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.professional_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "t:sections.all.show_on.label",
+      "default": "both",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "container_size",
+      "label": "t:sections.all.container_size.label",
+      "default": "page-width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:general.settings.style.default"
+        },
+        {
+          "value": "",
+          "label": "t:sections.all.container_size.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "opacity",
+      "label": "t:settings_schema.global.settings.bubble.opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "select",
+      "id": "separator_type",
+      "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.separator_type",
+      "default": "straight",
+      "options": [
+        {
+          "value": "straight",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.straight"
+        },
+        {
+          "value": "dashed",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.dashed"
+        },
+        {
+          "value": "dotted",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.dotted"
+        },
+        {
+          "value": "double",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.double"
+        },
+        {
+          "value": "groove",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.groove"
+        },
+        {
+          "value": "diagonal",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.diagonal"
+        },
+        {
+          "value": "curve_1",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.curve_1"
+        },
+        {
+          "value": "curve_2",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.curve_2"
+        },
+        {
+          "value": "curve_3",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.curve_3"
+        },
+        {
+          "value": "curve_4",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.curve_4"
+        },
+        {
+          "value": "waves",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.wave_1"
+        },
+        {
+          "value": "waves_2",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.wave_2"
+        },
+        {
+          "value": "waves_animated",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.waves_animated"
+        },
+        {
+          "value": "waves_animated_2",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.waves_animated_2"
+        },
+        {
+          "value": "clouds",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.clouds"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "flip",
+      "label": "Flip (Reverse)",
+      "default": false,
+      "info": "Flip work only for Diagonal, Curve 1, Curve 2, Curve 3, Curve 4, Waves and Waves Animated"
+    },
+    {
+      "type": "select",
+      "id": "separator_color_scheme",
+      "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.separator_color_schemes",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "custom",
+      "info": "t:sections.dbtfy-contact-form-builder.blocks.separator.separator_color_info"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "t:settings_schema.widgets.color_swatches.option_name.default",
+      "visible_if": "{{ section.settings.separator_color_scheme == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-contact-form-builder.blocks.separator.content"
+    },
+    {
+      "type": "range",
+      "id": "separator_height",
+      "min": 65,
+      "max": 110,
+      "step": 3,
+      "unit": "px",
+      "label": "t:sections.dbtfy-contact-form-builder.blocks.separator.separator_height",
+      "default": 110,
+      "info": "Separator works only for Diagonal, Curve 1, Curve 2, Curve 3, Curve 4, Waves and Waves Animated"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.layout.settings.spacing.section_desktop.label"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.top",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.bottom",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Separator"
+    }
+  ]
+}
+{% endschema %}

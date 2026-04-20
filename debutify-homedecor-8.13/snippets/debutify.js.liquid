@@ -1,0 +1,187 @@
+Debutify.permanent_domain = "{{ shop.permanent_domain }}";
+Debutify.designMode = "{{ request.design_mode }}" === "true";
+Debutify.host = "{{ request.host }}";
+Debutify.locale = {{ request.locale | json }};
+Debutify.language = Debutify?.locale?.shop_locale;
+Debutify.available_languages = {{localization.available_languages | json}};
+Debutify.cart = {{ cart | json }};
+Debutify.settings = {{ settings | json }};
+Debutify.widgets = {};
+Debutify.wishlist = JSON.parse(localStorage.getItem("dbtfy-wishlist")) || [];
+Debutify.compare = JSON.parse(localStorage.getItem("dbtfy-compare")) || [];
+Debutify.recentlyViewed = JSON.parse(localStorage.getItem("dbtfy-recently-viewed")) || [];
+Debutify.checkout = {};
+Debutify.reviewAPIPrefix = "https://theme-api.debutify.com/api/";
+
+// Helper functions
+
+/**
+ * Replace variables in a given HTML string with data.
+ * @param {string} html - The HTML string to replace variables in.
+ * @param {Object} data - The data to replace variables with.
+ * @returns {string} - The HTML string with variables replaced.
+*/
+
+function replaceVariables(html, data) {
+  return html.replace(/\{(\w+)\}/g, (match, key) => {
+      return key in data ? data[key] : '';
+  });
+}
+
+Debutify.replaceVariables = replaceVariables;
+
+/**
+ * Fetch HTML content from a given URL with specified locale and view type.
+ * @param {string} url - The URL to fetch content from.
+ * @param {string} view - The view type for the URL query.
+ * @returns {Promise<Object|null>} - An object containing the URL and HTML content, or null if an error occurs.
+ */
+async function fetchProductMarkup(url) {
+  let locale = Debutify.language.primary ? "" : `/${Debutify.language.locale}`;
+  try {
+    const res = await fetch(`${locale}${url}`);
+    if (res.ok) {
+      return await res.text();
+    } else {
+      console.error("HTTP-Error: " + res.status);
+      return null;
+    }
+  } catch (error) {
+    console.error("Error: " + error);
+    return null;
+  }
+}
+
+Debutify.fetchProductMarkup = fetchProductMarkup;
+
+/**
+ * Remove the locale from a given URL.
+ * @param {string} url - The URL to clean.
+ * @returns {string} - The cleaned URL.
+ */
+
+function removeLocalFromUrl(url) {
+  return url.replace(`/${Debutify.language.locale}`, "");
+}
+
+Debutify.removeLocalFromUrl = removeLocalFromUrl;
+
+async function ajaxAddToCart(data) {
+  const cart = document.querySelector("cart-notification") || document.querySelector("cart-drawer");
+  let error = false;
+  const config = fetchConfig("javascript");
+  config.headers["X-Requested-With"] = "XMLHttpRequest";
+  delete config.headers["Content-Type"];
+
+  const formData = new FormData();
+  for (const key in data) {
+    if (data.hasOwnProperty(key)) {
+      formData.append(key, data[key]);
+    }
+  }
+
+  if (cart) {
+    formData.append(
+      "sections",
+      cart.getSectionsToRender().map((section) => section.id)
+    );
+    formData.append("sections_url", window.location.pathname);
+    cart.setActiveElement(document.activeElement);
+  }
+
+  config.body = formData;
+
+  try {
+    const response = await fetch(`${routes.cart_add_url}`, config);
+
+    if (!response.ok) {
+      // Handle non-200 responses
+      const errorResponse = await response.json();
+      publish(PUB_SUB_EVENTS.cartError, {
+        source: "product-form",
+        productVariantId: formData.get("id"),
+        errors: errorResponse.errors || errorResponse.description,
+        message: errorResponse.message,
+      });
+      error = true;
+      return;
+    }
+
+    const jsonResponse = await response.json();
+
+    if (!cart) {
+      window.location = window.routes.cart_url;
+      return;
+    }
+
+    if (!error) {
+      publish(PUB_SUB_EVENTS.cartUpdate, {
+        source: "product-form",
+        productVariantId: formData.get("id"),
+        cartData: jsonResponse,
+      });
+    }
+
+    error = false;
+    cart.renderContents(jsonResponse);
+  } catch (e) {
+    console.error(e);
+  } finally {
+    if (cart && cart.classList.contains("is-empty")) {
+      cart.classList.remove("is-empty");
+    }
+  }
+}
+
+Debutify.ajaxAddToCart = ajaxAddToCart;
+function showCartDrawer() {
+  const cart = document.querySelector("cart-notification") || document.querySelector("cart-drawer");
+  if (!cart) {
+    return;
+  }
+  cart.classList.remove("active");
+  cart.classList.remove("hidden");
+  setTimeout(() => {
+    cart.classList.add("active");
+    document.querySelector('cart-order-summary')?.stickyBlock();
+  }, 300);
+}
+
+Debutify.showCartDrawer = showCartDrawer;
+
+function hideCartDrawer() {
+  const cart = document.querySelector("cart-notification") || document.querySelector("cart-drawer");
+  if (cart) cart.classList.add("hidden");
+}
+
+Debutify.hideCartDrawer = hideCartDrawer;
+
+let currencyWithSymbol = JSON.parse(`{{ cart.currency.symbol | json }}`);
+let currencyWithoutSymbol = JSON.parse(`{{ shop.currency | json }}`);
+
+let mergedCurrency = {
+  symbol: currencyWithSymbol || "",
+  code: currencyWithoutSymbol || "",
+};
+
+Debutify.currency = mergedCurrency;
+
+function removeHTMLTags(htmlString) {
+  // Create a new DOMParser instance
+  const parser = new DOMParser();
+  // Parse the HTML string
+  const doc = parser.parseFromString(htmlString, 'text/html');
+  // Extract text content
+  const textContent = doc.body.textContent || "";
+  // Trim whitespace
+  return textContent.trim();
+}
+Debutify.removeHTMLTags = removeHTMLTags;
+
+function replaceVariables(html, data,prefix = '{', suffix = '}') {
+  const regex = new RegExp(`${prefix}(\\w+)${suffix}`, 'g');
+  return html.replace(regex, (match, key) => {
+      return key in data ? data[key] : match;
+  });
+}
+Debutify.replaceVariables = replaceVariables;

@@ -1,0 +1,604 @@
+{%- render 'widget-blocker',
+  enabled: settings.dbtfy_result_section,
+  section: section,
+  name: 'Result section',
+  type: '⚡ Paid Sections'
+-%}
+{%- if request.design_mode or settings.dbtfy_result_section -%}
+  {% liquid
+    assign result_type = block.settings.result_type
+    assign result_placement = block.settings.result_placement
+    assign result_columns = block.settings.result_columns
+    assign result_text_alignment = block.settings.result_text_alignment
+  %}
+
+  {% render 'block-padding', block: block %}
+
+  <style>
+    .block-{{ block.id }}-padding .dbtfy-result-header__heading strong,
+    .block-{{ block.id }}-padding .dbtfy-result-header__heading b {
+        color: {{ block.settings.heading_color }};
+        font-weight: var(--font-heading-weight);
+    }
+
+    .block-{{ block.id }}-padding .dbtfy-result-rows__heading strong,
+    .block-{{ block.id }}-padding .dbtfy-result-rows__heading b {
+        color: {{ block.settings.result_heading_color }};
+        font-weight: var(--font-heading-weight);
+    }
+    .section-{{ section.id }}-padding .dbtfy-result-rows {
+      --rows-vertical-spacing: {{ block.settings.rows_vertical_spacing }}px;
+    }
+
+    @media screen and (max-width: 749px) {
+      .section-{{ section.id }}-padding .dbtfy-result-rows {
+        --rows-vertical-spacing: {{ block.settings.rows_vertical_spacing_mobile }}px;
+      }
+    }
+  </style>
+
+  <link rel="stylesheet" href="{{ 'video-section.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link
+    rel="stylesheet"
+    href="{{ 'component-deferred-media.css' | asset_url }}"
+    media="print"
+    onload="this.media='all'"
+  >
+  {{ 'dbtfy-ugc-carousel.css' | asset_url | stylesheet_tag }}
+  <link rel="stylesheet" href="{{ 'dbtfy-result-section.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'dbtfy-progress-bar.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  <dbtfy-result-section
+    data-type="{{ block.settings.result_type }}"
+    class="h-full {% if block.settings.vertical_center %}flex flex-column justify-content-center{% endif %}"
+  >
+    <div
+      class="color-{{ block.settings.custom_color_scheme }} dbtfy-color-{{ block.settings.color_scheme }} gradient show-on--{{ block.settings.show_on }} block-{{ block.id }}-padding"
+    >
+      <div class="page-width">
+        <div
+          class="grid{% unless result_placement == 'result-bottom' %} grid--1-col grid--2-col-tablet{% endunless %} dbtfy-result-wrapper"
+          data-result-placement="{{ result_placement }}"
+        >
+          <div class="{{ result_text_alignment }} dbtfy-result-content">
+            {% if block.settings.result_heading != blank %}
+              <h2
+                class="dbtfy-result-rows__heading inline-richtext {{ block.settings.result_heading_font_size }}{% if result_placement == 'result-bottom' %} center{% endif %}{% if block.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                data-cascade
+                style="--animation-order: 4"
+              >
+                {{ block.settings.result_heading }}
+              </h2>
+            {% endif %}
+            {% if block.settings.result_text != blank %}
+              <div
+                class="dbtfy-result-rows__rte rte {% if result_placement == 'result-bottom' %} center{% endif %}{% if block.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                data-cascade
+                style="--animation-order: 5"
+              >
+                {{ block.settings.result_text }}
+              </div>
+            {% endif %}
+            {% content_for 'block',
+              type: '_result-section',
+              id: 'result-section',
+              result_type: block.settings.result_type
+            %}
+
+            {% if block.settings.caption != blank %}
+              <div class="dbtfy-result-caption{% if result_placement == 'result-bottom' %} center{% endif %}">
+                {{ block.settings.caption }}
+              </div>
+            {% endif %}
+            <div class="dbtfy-result-buttons{% if result_placement == 'result-bottom' %} justify-content-center center{% endif %}">
+              {% if block.settings.button_label != blank %}
+                {% assign button_size = block.settings.button_size %}
+                {% if button_size == 'inherit' %}
+                  {% assign button_size = settings.button_size %}
+                {% endif %}
+                <a
+                  class="{{ block.settings.button_style }} {{ button_size }}"
+                  {% if block.settings.button_link != blank %}
+                    href="{{ block.settings.button_link }}"
+                  {% else %}
+                    role="link" aria-disabled="true"
+                  {% endif %}
+                >
+                  <span class="button-text">
+                    {% capture icon_content %}<span class="dbtfy-result-button__icon">{% render 'material-icon', icon: block.settings.button_icon %}</span>{% endcapture %}
+                    {% capture custom_icon_content %}
+    <span class="dbtfy-result-button__icon">
+      {{ block.settings.button_custom_icon | image_url: width: 16 | image_tag: loading: 'eager', sizes: '100vw', widths: '300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600' }}
+    </span>
+  {% endcapture %}
+                    {% liquid
+                      if block.settings.button_custom_icon != blank
+                        echo custom_icon_content
+                      elsif block.settings.button_icon != blank
+                        echo icon_content
+                      endif
+                    %}
+                    {{ block.settings.button_label }}
+                  </span>
+                </a>
+              {% endif %}
+
+              {% if block.settings.add_to_cart_label != blank %}
+                {% assign button_size = block.settings.button_size_add_to_cart %}
+                {% if button_size == 'inherit' %}
+                  {% assign button_size = settings.button_size %}
+                {% endif %}
+                <a
+                  class="{{ block.settings.add_to_cart_style }} {{ button_size }}"
+                  {% if block.settings.add_to_cart_link != blank %}
+                    href="{{ block.settings.add_to_cart_link }}"
+                  {% else %}
+                    role="link" aria-disabled="true"
+                  {% endif %}
+                >
+                  <span class="button-text">
+                    {% capture icon_content %}<span class="dbtfy-result-button__icon">{% render 'material-icon', icon: block.settings.add_to_cart_icon %}</span>{% endcapture %}
+                    {% capture custom_icon_content %}
+                  <span class="dbtfy-result-button__icon">
+                    {{ block.settings.add_to_cart_custom_icon | image_url: width: 16 | image_tag: loading: 'eager', sizes: '100vw', widths: '300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600' }}
+                  </span>
+                {% endcapture %}
+                    {% liquid
+                      if block.settings.add_to_cart_custom_icon != blank
+                        echo custom_icon_content
+                      elsif block.settings.add_to_cart_icon != blank
+                        echo icon_content
+                      endif
+                    %}
+                    {{ block.settings.add_to_cart_label }}
+                  </span>
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dbtfy-result-section>
+
+  <script src="{{ 'dbtfy-progress-bar.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'dbtfy-ugc-carousel.js' | asset_url }}"></script>
+{% endif %}
+{% schema %}
+{
+  "name": "t:sections.dbtfy_result_section.name",
+  "class": "dbtfy-result-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy_result_section.settings.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy_result_section.settings.help.link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.professional_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "t:sections.all.show_on.label",
+      "default": "both",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "vertical_center",
+      "default": false,
+      "label": "t:general.settings.center_title"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:general.settings.image",
+      "info": "t:sections.dbtfy_result_section.settings.image.info",
+      "visible_if": "{{ section.settings.ugc_slider == false }}"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:general.settings.video.label",
+      "info": "t:sections.dbtfy_result_section.settings.video.info",
+      "visible_if": "{{ section.settings.ugc_slider == false }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "t:general.settings.slider.enable_autoplay",
+      "default": true,
+      "visible_if": "{{ section.settings.ugc_slider == false }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy_result_section.blocks.result_row.settings.result_rows_spacing"
+    },
+    {
+      "type": "range",
+      "id": "rows_vertical_spacing",
+      "label": "t:sections.dbtfy_result_section.blocks.result_row.settings.row_vertical_gap_desktop",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "rows_vertical_spacing_mobile",
+      "label": "t:sections.dbtfy_result_section.blocks.result_row.settings.row_vertical_gap_mobile",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy_result_section.settings.header__3.content"
+    },
+    {
+      "type": "select",
+      "id": "result_type",
+      "label": "t:sections.dbtfy_result_section.settings.result_type.label",
+      "default": "donut-chart",
+      "options": [
+        {
+          "value": "donut-chart",
+          "label": "t:sections.dbtfy_result_section.settings.result_type.options__1.label"
+        },
+        {
+          "value": "pie-chart",
+          "label": "t:sections.dbtfy_result_section.settings.result_type.options__2.label"
+        },
+        {
+          "value": "bar-chart",
+          "label": "t:sections.dbtfy_result_section.settings.result_type.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "result_columns",
+      "label": "t:sections.dbtfy_result_section.settings.result_columns.label",
+      "default": 3,
+      "min": 1,
+      "max": 4,
+      "step": 1
+    },
+    {
+      "type": "inline_richtext",
+      "id": "result_heading",
+      "label": "t:sections.dbtfy_result_section.settings.result_heading.label",
+      "default": "Real People, Real Results"
+    },
+    {
+      "type": "color",
+      "id": "result_heading_color",
+      "label": "t:sections.dbtfy_result_section.settings.result_heading_color.label",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "result_heading_font_size",
+      "label": "t:sections.dbtfy_result_section.settings.result_heading_font_size.label",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:general.settings.size.option__7"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:general.settings.size.option__8"
+        }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "richtext",
+      "id": "result_text",
+      "label": "t:sections.dbtfy_result_section.settings.result_text.label",
+      "default": "<p>Here's what our customers say about our products</p>"
+    },
+    {
+      "type": "select",
+      "id": "result_text_alignment",
+      "label": "t:sections.dbtfy_result_section.settings.result_text_alignment.label",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:general.settings.alignment.option__4"
+        },
+        {
+          "value": "center",
+          "label": "t:general.settings.alignment.option__5"
+        }
+      ]
+    },
+    {
+      "type": "richtext",
+      "id": "caption",
+      "label": "t:general.settings.caption",
+      "default": "<p>Read detailed customer stories and see the science behind our supplements</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.dbtfy_result_section.settings.button_label.label",
+      "info": "t:sections.dbtfy_result_section.settings.button_label.label",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.dbtfy_result_section.settings.button_link.label"
+    },
+    {
+      "type": "text",
+      "id": "button_icon",
+      "label": "t:sections.dbtfy_result_section.settings.button_icon.label",
+      "info": "t:general.settings.icon_info"
+    },
+    {
+      "type": "image_picker",
+      "id": "button_custom_icon",
+      "label": "t:general.settings.custom_icon",
+      "info": "t:blocks.double_button.custom_icon.info"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:sections.dbtfy_result_section.settings.button_style.label",
+      "default": "button button--tertiary",
+      "options": [
+        {
+          "value": "link underlined-link button--link",
+          "label": "t:sections.all.button.option_1_label"
+        },
+        {
+          "value": "button button--tertiary",
+          "label": "t:general.settings.style.default"
+        },
+        {
+          "value": "button button--primary",
+          "label": "t:sections.all.button.options__3.label"
+        },
+        {
+          "value": "button button--secondary",
+          "label": "t:sections.all.button.options__4.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "default": "inherit",
+      "label": "t:general.settings.size.label",
+      "options": [
+        { "value": "inherit", "label": "t:general.settings.size.option__1" },
+        {
+          "value": "button--small",
+          "label": "t:general.settings.small"
+        },
+        { "value": "button--medium", "label": "t:sections.all.animation.image_behavior.parallax_speed.medium" },
+        { "value": "", "label": "t:general.settings.size.option__10" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_label",
+      "label": "t:sections.dbtfy_result_section.settings.add_to_cart_label.label",
+      "info": "t:sections.dbtfy_result_section.settings.add_to_cart_label.info",
+      "default": "Buy now"
+    },
+    {
+      "type": "url",
+      "id": "add_to_cart_link",
+      "label": "t:sections.dbtfy_result_section.settings.add_to_cart_link.label"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_icon",
+      "label": "t:sections.dbtfy_result_section.settings.add_to_cart_icon.label",
+      "info": "t:general.settings.icon_info",
+      "default": "near_me"
+    },
+    {
+      "type": "image_picker",
+      "id": "add_to_cart_custom_icon",
+      "label": "t:general.settings.custom_icon",
+      "info": "t:blocks.double_button.custom_icon.info"
+    },
+    {
+      "type": "select",
+      "id": "add_to_cart_style",
+      "label": "t:sections.dbtfy_result_section.settings.button_style.label",
+      "default": "button button--tertiary",
+      "options": [
+        {
+          "value": "link underlined-link button--link",
+          "label": "t:sections.all.button.option_1_label"
+        },
+        {
+          "value": "button button--tertiary",
+          "label": "t:general.settings.style.default"
+        },
+        {
+          "value": "button button--primary",
+          "label": "t:sections.all.button.options__3.label"
+        },
+        {
+          "value": "button button--secondary",
+          "label": "t:sections.all.button.options__4.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_size_add_to_cart",
+      "default": "inherit",
+      "label": "t:general.settings.size.label",
+      "options": [
+        { "value": "inherit", "label": "t:general.settings.size.option__1" },
+        {
+          "value": "button--small",
+          "label": "t:general.settings.small"
+        },
+        { "value": "button--medium", "label": "t:sections.all.animation.image_behavior.parallax_speed.medium" },
+        { "value": "", "label": "t:general.settings.size.option__10" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.layout.settings.spacing.section_desktop.label"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.top",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.bottom",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_bottom",
+      "default": 36
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "_result-section-block"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy_result_section.name",
+      "blocks": [
+        {
+          "type": "_result-section",
+          "static": true,
+          "id": "result-section",
+          "blocks": [
+            { "type": "_result-section-block" },
+            { "type": "_result-section-block" },
+            { "type": "_result-section-block" }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

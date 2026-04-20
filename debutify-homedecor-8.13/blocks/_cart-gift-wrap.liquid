@@ -1,0 +1,96 @@
+{%- if settings.dbtfy_gift_wrap -%}
+  {%- render 'widget-settings', key: 'dbtfy-gift-wrap', settings: block.settings -%}
+  <link rel="stylesheet" href="{{ 'dbtfy-gift-wrap.css' | asset_url }}" media="print" onload="this.media='all'">
+  <dbtfy-gift-wrap {{ block.shopify_attributes }}>
+    <div class="cart-block">
+      <details id="Details-{{block.id}}">
+        <summary>
+          <div class="dbtfy-gap-5 flex flex-row">
+            {%- render 'material-icon', icon: block.settings.dbtfy_gift_wrap_label_icon -%}
+            <span class="summary__title">
+              Gift wrap
+              {{- 'icon-caret.svg' | inline_asset_content -}}
+            </span>
+          </div>
+        </summary>
+        <div class="dbtfy-gift-wrap">
+          <div class="dbtfy-gift-wrap__form flex align-items-center">
+            <input
+              type="checkbox"
+              class="dbtfy-gift-wrap__checkbox hidden"
+              id="gift-wrap-checkbox"
+            >
+            <label for="gift-wrap-checkbox" class="flex align-items-center">
+              <span class="dbtfy-gift-wrap__checkbox-icon flex align-items-center">
+                {%- render 'material-icon', icon: 'check' -%}
+              </span>
+              {{ 'widgets.gift_wrap.checkbox_label' | t }}
+              <span class="price"></span>
+            </label>
+          </div>
+          <div class="dbtfy-gift-wrap__message hidden">
+            <div>
+              <label for="gift-wrap-message">{{ 'widgets.gift_wrap.text_field_label' | t }}</label>
+              <textarea
+                id="gift-wrap-message"
+                class="text-area text-area--resize-vertical field__input"
+                name="attributes[Gift wrap]"
+                placeholder="{{ 'widgets.gift_wrap.text_field_placeholder' | t }}"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </dbtfy-gift-wrap>
+  <script src="{{ 'dbtfy-gift-wrap.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.dbtfy-gift-wrap.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-drawer.blocks.cart-gift-wrap.info"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-gift-wrap.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-gift-wrap.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.professional_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_gift_wrap_label_icon",
+      "label": "t:general.settings.icon",
+      "default": "card_giftcard",
+      "info": "t:general.settings.icon_info"
+    },
+    {
+      "type": "product",
+      "id": "dbtfy_gift_wrap_product",
+      "label": "t:blocks.dbtfy-gift-wrap.settings.dbtfy_gift_wrap_product.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "dbtfy_gift_wrap_show_price",
+      "label": "t:blocks.dbtfy-gift-wrap.settings.dbtfy_gift_wrap_show_price.label",
+      "default": true
+    }
+  ]
+}
+{%- endschema -%}

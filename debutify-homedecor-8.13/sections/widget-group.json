@@ -1,0 +1,501 @@
+{
+  "name": "Widget Group",
+  "type": "aside",
+  "sections": {
+    "cart-drawer": {
+      "type": "cart-drawer",
+      "blocks": {
+        "product-in-empty-cart": {
+          "type": "_product_in_empty_cart",
+          "static": true,
+          "settings": {
+            "heading": "Cart empty",
+            "direction": "vertical",
+            "cart_collection": "",
+            "cart_product_list": [],
+            "show_star_ratings": true,
+            "enable_autoplay": false,
+            "autoplay_speed": 5,
+            "enable_loop": true,
+            "enable_arrows": true,
+            "enable_dots": true,
+            "arrow_color": "inherit",
+            "custom_arrow_color": "#ffffff",
+            "custom_arrow_background_color": "#7559ff",
+            "arrow_position": "middle"
+          },
+          "blocks": {}
+        },
+        "cart-heading": {
+          "type": "_cart-heading",
+          "static": true,
+          "settings": {
+            "heading_text": "Cart • {count} items",
+            "heading_alignment": "flex-start",
+            "close_icon": "close"
+          },
+          "blocks": {}
+        },
+        "cart-goals": {
+          "type": "_cart-goals",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "cart_goal_general_nHJwAc": {
+              "type": "_cart-goal-general",
+              "name": "Global",
+              "settings": {},
+              "blocks": {
+                "cart_goal_cBd64D": {
+                  "type": "_cart-goal",
+                  "name": "t:blocks.cart-goal.name",
+                  "settings": {
+                    "cart_goal_text": "Add items worth {amount} to your cart to reach your goal!",
+                    "cart_goal_success_text": "🎉 Congrats! Now you're eligible for free shipping!",
+                    "goal_amount": 5000,
+                    "goal_reached_before_color": "#0a5d5d",
+                    "goal_reached_after_color": "#f7ffff"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "cart_goal_cBd64D"
+              ]
+            }
+          },
+          "block_order": [
+            "cart_goal_general_nHJwAc"
+          ]
+        },
+        "cart-countdown-timer": {
+          "type": "_cart-countdown-timer",
+          "static": true,
+          "settings": {},
+          "blocks": {}
+        },
+        "cart-preferences": {
+          "type": "_cart-preferences",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "cart_conditional_gift_dEvtqw": {
+              "type": "_conditional-gift",
+              "settings": {
+                "heading": "Free/Conditional Gift",
+                "product": "",
+                "hide_product_featured_image": false,
+                "product_description": "Product description will show here.",
+                "unlock_requirement": 0,
+                "progress_text": "You're {amount} away from a free gift!",
+                "unlock_product_description": "Product description will show here.",
+                "unlocked_text": "Congrats! You unlocked a free gift!",
+                "text_alignment": "left",
+                "display_lock_over_image_while_product_is_locked": true,
+                "show_product_price": false,
+                "price_content": "FREE",
+                "show_discounted_with_original_price": true,
+                "show_variant_picker": true
+              },
+              "blocks": {}
+            },
+            "cart_benefits": {
+              "type": "_cart-benefits",
+              "settings": {
+                "heading": "",
+                "title": "Benefits",
+                "alignment": "justify-content-left text-left",
+                "as_content_container": true
+              },
+              "blocks": {
+                "cart_benifit_VbdtUe": {
+                  "type": "_cart-benefit",
+                  "settings": {
+                    "title": "100% Satisfaction Guarantee",
+                    "icon": "verified_user"
+                  },
+                  "blocks": {}
+                },
+                "cart_benifit_PjNGj6": {
+                  "type": "_cart-benefit",
+                  "settings": {
+                    "title": "Fast US Shipping",
+                    "icon": "event_available"
+                  },
+                  "blocks": {}
+                },
+                "cart_benifit_i7TWaJ": {
+                  "type": "_cart-benefit",
+                  "settings": {
+                    "title": "30 Day Return",
+                    "icon": "favorite"
+                  },
+                  "blocks": {}
+                },
+                "cart_benifit_6wjzbJ": {
+                  "type": "_cart-benefit",
+                  "settings": {
+                    "title": "Same Day Fulfillment",
+                    "icon": "schedule"
+                  },
+                  "blocks": {}
+                },
+                "cart_benifit_7dALMd": {
+                  "type": "_cart-benefit",
+                  "settings": {
+                    "title": "14 Days Return Policy",
+                    "icon": "undo"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "cart_benifit_VbdtUe",
+                "cart_benifit_PjNGj6",
+                "cart_benifit_i7TWaJ",
+                "cart_benifit_6wjzbJ",
+                "cart_benifit_7dALMd"
+              ]
+            },
+            "cart_discount_j3bydh": {
+              "type": "_cart-discount",
+              "settings": {
+                "dbtfy_cart_discount_label_icon": "local_offer",
+                "dbtfy_cart_discount_text": "Cart Discount",
+                "dbtfy_cart_discount_icon": "arrow_forward",
+                "dbtfy_cart_discount_placeholder_text": "Enter a discount code here",
+                "default_open": false
+              },
+              "blocks": {}
+            },
+            "cart_delivery_date_hV83HJ": {
+              "type": "_cart-delivery-date",
+              "settings": {
+                "dbtfy_delivery_label_icon": "local_offer",
+                "dbtfy_delivery_date_heading": "Delivery date",
+                "dbtfy_delivery_date_exclude_days": "SAT, SUN, THU",
+                "dbtfy_delivery_date_required_checkout": false
+              },
+              "blocks": {}
+            },
+            "cart_delivery_time_7EYML3": {
+              "type": "_cart-delivery-time",
+              "settings": {
+                "dbtfy_delivery_time_label_icon": "local_offer",
+                "dbtfy_delivery_time_heading": "Delivery Time",
+                "dbtfy_delivery_time_min": 8,
+                "dbtfy_delivery_time_max": 20,
+                "dbtfy_delivery_time_required_checkout": false
+              },
+              "blocks": {}
+            },
+            "order_feedback_p9BrHW": {
+              "type": "_order-feedback",
+              "settings": {
+                "dbtfy_order_feedback_label_icon": "local_offer",
+                "dbtfy_order_feedback_required": false,
+                "dbtfy_order_feedback_question": "How did you hear about us?",
+                "dbtfy_order_feedback_option": "Facebook,Twitter,Google,Instagram,Youtube,Other"
+              },
+              "blocks": {}
+            },
+            "cart_note_qQtbPd": {
+              "type": "_cart-note",
+              "settings": {
+                "dbtfy_cart_note_icon": "check_circle",
+                "dbtfy_cart_note_heading": "Order special instructions"
+              },
+              "blocks": {}
+            },
+            "cart_gift_wrap_PC3nM8": {
+              "type": "_cart-gift-wrap",
+              "settings": {
+                "dbtfy_gift_wrap_label_icon": "card_giftcard",
+                "dbtfy_gift_wrap_product": "",
+                "dbtfy_gift_wrap_show_price": true
+              },
+              "blocks": {}
+            },
+            "cart_shipping_calculator_zDdted": {
+              "type": "_cart-shipping-calculator",
+              "settings": {
+                "shipping_calculator_label_icon": "location_on",
+                "title": "Shipping calculator",
+                "text_no_results": "No shipping rates found!",
+                "text_country": "Country",
+                "text_province": "Province",
+                "text_zip": "Zip",
+                "btn_label": "Calculate",
+                "btn_style": "button button--primary",
+                "button_size": "inherit"
+              },
+              "blocks": {}
+            },
+            "cart_upsell": {
+              "type": "_cart-upsell",
+              "settings": {
+                "heading": "",
+                "title": "",
+                "heading_alignment": "text-left",
+                "product_alignment": false,
+                "upsell_direction": "vertical",
+                "show_rating": true,
+                "hide_product": true,
+                "enable_autoplay": false,
+                "autoplay_speed": 5,
+                "enable_loop": true,
+                "enable_arrows": true,
+                "arrow_color": "inherit",
+                "custom_arrow_color": "#ffffff",
+                "custom_arrow_background_color": "#7559ff"
+              },
+              "blocks": {}
+            },
+            "shipping_priorities": {
+              "type": "_shipping-priorities",
+              "settings": {},
+              "blocks": {
+                "shipping_priorities_D4VbdtUe": {
+                  "type": "_shipping-priorities-block",
+                  "settings": {
+                    "product": "",
+                    "shipping_title": "Shipping priorities",
+                    "icon": "sailing",
+                    "shipping_transit_time": "1-2 business day",
+                    "checked_priority": false
+                  },
+                  "blocks": {}
+                },
+                "shipping_priorities_D4VDrtUe": {
+                  "type": "_shipping-priorities-block",
+                  "settings": {
+                    "product": "",
+                    "shipping_title": "Standard Shipping",
+                    "icon": "travel",
+                    "shipping_transit_time": "1 - 5 business days",
+                    "checked_priority": false
+                  },
+                  "blocks": {}
+                },
+                "shipping_priorities_D4Vbdtmk": {
+                  "type": "_shipping-priorities-block",
+                  "settings": {
+                    "product": "",
+                    "shipping_title": "Express Shipping",
+                    "icon": "rocket_launch",
+                    "shipping_transit_time": "Overnight",
+                    "checked_priority": false
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "shipping_priorities_D4VbdtUe",
+                "shipping_priorities_D4VDrtUe",
+                "shipping_priorities_D4Vbdtmk"
+              ]
+            },
+            "cart_testimonials": {
+              "type": "_cart-testimonials",
+              "settings": {
+                "number_of_line": 3,
+                "enable_autoplay": false,
+                "autoplay_speed": 5,
+                "enable_loop": true,
+                "enable_dots": true,
+                "padding___top": "none",
+                "custom_padding_top": 36,
+                "padding___bottom": "none",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "cart_conditional_gift_dEvtqw",
+            "cart_benefits",
+            "cart_discount_j3bydh",
+            "cart_delivery_date_hV83HJ",
+            "cart_delivery_time_7EYML3",
+            "order_feedback_p9BrHW",
+            "cart_note_qQtbPd",
+            "cart_gift_wrap_PC3nM8",
+            "cart_shipping_calculator_zDdted",
+            "cart_upsell",
+            "shipping_priorities",
+            "cart_testimonials"
+          ]
+        },
+        "cart-order-summary": {
+          "type": "_cart-order-summary",
+          "static": true,
+          "settings": {
+            "sticky_block": true
+          },
+          "blocks": {
+            "trust_badges_Qmc7jf": {
+              "type": "_trust_badges",
+              "settings": {
+                "trust_badges_badge_type": "payment_options",
+                "payment_icon_inline": false,
+                "show_heading": false,
+                "show_subheading": false,
+                "show_informative_text": false,
+                "trust_badges_alignment_footer": "center"
+              },
+              "blocks": {}
+            },
+            "cart_subtotal_GbjzGh": {
+              "type": "_cart-subtotal",
+              "settings": {},
+              "blocks": {}
+            },
+            "cart_agree_to_terms_t4QdgQ": {
+              "type": "_cart-agree-to-terms",
+              "settings": {
+                "agree_to_terms_text": "<p>I agree with the <a href='/pages/terms-of-service'>terms & conditions</a></p>",
+                "is_agree_to_terms_checked": false
+              },
+              "blocks": {}
+            },
+            "cart_tax_3KjGkK": {
+              "type": "_cart-tax",
+              "settings": {},
+              "blocks": {}
+            },
+            "add_on_cart_65sh": {
+              "type": "_add-on-cart",
+              "settings": {
+                "heading": "Add-on Cart",
+                "product": "",
+                "title": "",
+                "description": "",
+                "show_product_in_cart": true,
+                "show_price": true,
+                "show_description": true
+              },
+              "blocks": {}
+            },
+            "cart_checkout_CMx8R9": {
+              "type": "_cart-checkout",
+              "settings": {
+                "dbtfy_checkout_icon": "",
+                "hide_price": false
+              },
+              "blocks": {}
+            },
+            "cart_minimum_order_Q67Gyn": {
+              "type": "_cart-minimum-order",
+              "settings": {
+                "dbtfy_minimum_order_amount": 0,
+                "dbtfy_minimum_order_icon": "info_outline",
+                "dbtfy_minimum_order_message": "You still haven't reached the minimum order amount. Add {amount} to proceed.",
+                "dbtfy_minimum_order_achieve_message": "Minimum order amount reached. You may proceed to checkout."
+              },
+              "blocks": {}
+            },
+            "cart_quantity_break_iE3V6n": {
+              "type": "_cart-quantity-break",
+              "settings": {},
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "trust_badges_Qmc7jf",
+            "cart_subtotal_GbjzGh",
+            "cart_agree_to_terms_t4QdgQ",
+            "cart_tax_3KjGkK",
+            "add_on_cart_65sh",
+            "cart_checkout_CMx8R9",
+            "cart_minimum_order_Q67Gyn",
+            "cart_quantity_break_iE3V6n"
+          ]
+        }
+      },
+      "settings": {
+        "desktop_width": "normal",
+        "mobile_width": "partial",
+        "cart_drawer_collection": "",
+        "continue_shopping_text": "",
+        "color_scheme": "scheme-2",
+        "custom_color_scheme": ""
+      }
+    },
+    "dbtfy-wishlist-drawer": {
+      "type": "dbtfy-wishlist-drawer",
+      "blocks": {
+        "dbtfy-wishlist-drawer-0": {
+          "type": "drawer_title",
+          "settings": {
+            "wishlist_drawer_title": "Wishlist • {count} items",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "dbtfy-wishlist-drawer-1": {
+          "type": "drawer_items",
+          "settings": {}
+        },
+        "dbtfy-wishlist-drawer-2": {
+          "type": "drawer_empty",
+          "settings": {
+            "empty_drawer_text": "Your wishlist is empty",
+            "empty_heading_size": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "dbtfy-wishlist-drawer-0",
+        "dbtfy-wishlist-drawer-1",
+        "dbtfy-wishlist-drawer-2"
+      ],
+      "settings": {
+        "desktop_width": "normal",
+        "wishlist_drawer_icon": "close",
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "scheme-2"
+      }
+    },
+    "dbtfy-compare-drawer": {
+      "type": "dbtfy-compare-drawer",
+      "blocks": {
+        "dbtfy-compare-drawer-0": {
+          "type": "drawer_title",
+          "settings": {
+            "quick_compare_drawer_title": "Compare • {count} items",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "dbtfy-compare-drawer-1": {
+          "type": "drawer_items",
+          "settings": {}
+        },
+        "dbtfy-compare-drawer-2": {
+          "type": "drawer_empty",
+          "settings": {
+            "empty_drawer_text": "Your quick compare is empty",
+            "empty_heading_size": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "dbtfy-compare-drawer-0",
+        "dbtfy-compare-drawer-1",
+        "dbtfy-compare-drawer-2"
+      ],
+      "settings": {
+        "desktop_width": "normal",
+        "quick_compare_drawer_icon": "close",
+        "quick_compare_product_image_height": 100,
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": ""
+      }
+    }
+  },
+  "order": [
+    "cart-drawer",
+    "dbtfy-wishlist-drawer",
+    "dbtfy-compare-drawer"
+  ]
+}

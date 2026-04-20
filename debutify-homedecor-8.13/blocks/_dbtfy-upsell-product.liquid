@@ -1,0 +1,141 @@
+{% liquid
+  assign collection_trigger = block.settings.collection_trigger
+  assign product_trigger = block.settings.product_trigger
+  assign product_offer = block.settings.product_offer
+  assign discount_name = block.settings.discount_name
+  assign discount_amount = block.settings.discount_amount
+  assign discount_type = block.settings.discount_type
+  assign offer_text = block.settings.title
+  assign description = block.settings.text
+  assign button_label = block.settings.button_label
+  assign button_icon = block.settings.button_icon
+
+  assign product_handles = ''
+  if collection_trigger != blank
+    paginate collection_trigger.products by 1000
+      for product in collection_trigger.products
+        if forloop.first
+          assign product_handles = product.handle
+        else
+          assign product_handles = product_handles | append: ',' | append: product.handle
+        endif
+      endfor
+    endpaginate
+  endif
+%}
+
+{% if product_offer != blank %}
+  <script type="application/json" data-upsell-popup-block-settings>
+    {
+        "productTrigger": {{ product_trigger | json }},
+        "productOffer": {{ product_offer | json }},
+        "productTitle": "{{ product_offer.title }}",
+        "discountName": {{ discount_name | json }},
+        "discountAmount": {{ discount_amount | json }},
+        "discountType": {{ discount_type | json }},
+        "productHandles": {{ product_handles | split: ',' | json }},
+        "offerText": {{ offer_text | json }},
+        "buttonLabel": {{ button_label | json }},
+        "buttonIcon": {{ button_icon | json }},
+        "description": {{ description | json }}
+
+    }
+  </script>
+  <div class="dbtfy-upsell-quick-view-button-icon hidden">
+    {% render 'material-icon', icon: block.settings.button_icon %}
+    {%- render 'loading-spinner' -%}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:blocks.dbtfy-upsell-popup.blocks.upsell-products.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info",
+      "default": "t:blocks.dbtfy-upsell-popup.blocks.upsell-products.name"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:general.settings.heading",
+      "default": "t:blocks.dbtfy-upsell-popup.settings.block_heading_default"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:general.settings.text",
+      "default": "t:blocks.dbtfy-upsell-popup.settings.block_text_default"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:settings_schema.dbfty_infinite_scroll.settings.button.label",
+      "default": "t:blocks.dbtfy-upsell-popup.blocks.upsell-products.settings.button_label.default"
+    },
+    {
+      "type": "text",
+      "id": "button_icon",
+      "label": "t:blocks.news-letter.settings.modal.button_icon.label",
+      "default": "card_giftcard",
+      "info": "t:general.settings.icon_info"
+    },
+    {
+      "type": "collection",
+      "id": "collection_trigger",
+      "label": "t:blocks.dbtfy-upsell-popup.blocks.upsell-products.settings.collection_trigger.label"
+    },
+    {
+      "type": "product",
+      "id": "product_trigger",
+      "label": "t:blocks.dbtfy-upsell-popup.blocks.upsell-products.settings.product_trigger.label",
+      "info": "t:blocks.dbtfy-upsell-popup.blocks.upsell-products.settings.product_trigger.info"
+    },
+    {
+      "type": "product",
+      "id": "product_offer",
+      "label": "t:blocks.dbtfy-upsell-popup.blocks.upsell-products.settings.product_offer.label"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.discount.header.content",
+      "info": "t:general.settings.discount.header.info_1"
+    },
+    {
+      "type": "text",
+      "id": "discount_name",
+      "label": "t:general.settings.discount.name.label"
+    },
+    {
+      "type": "select",
+      "id": "discount_type",
+      "label": "t:general.settings.discount.type.label",
+      "default": "%",
+      "options": [
+        {
+          "value": "%",
+          "label": "t:general.settings.discount.type.options__1.label"
+        },
+        {
+          "value": "$",
+          "label": "t:general.settings.discount.type.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "discount_amount",
+      "label": "t:general.settings.discount.amount.label",
+      "info": "t:general.settings.discount.type.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.dbtfy-upsell-popup.blocks.upsell-products.name"
+    }
+  ]
+}
+{% endschema %}

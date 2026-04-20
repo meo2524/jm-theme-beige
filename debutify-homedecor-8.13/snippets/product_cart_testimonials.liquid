@@ -1,0 +1,78 @@
+{%- style -%}
+  #block-{{ block.id }} dbtfy-slider-component {
+    background-color: transparent;
+    --gradient-background: transparent;
+  }
+{%- endstyle -%}
+{%- liquid
+  assign slider_on = 'slider slider--everywhere'
+
+  capture slider_parameters
+    echo ' data-autoplay="' | append: block.settings.enable_autoplay | append: '"'
+    echo ' data-speed="' | append: block.settings.autoplay_speed | append: '"'
+    echo ' data-loop="' | append: block.settings.enable_loop | append: '"'
+    echo ' data-dots="' | append: block.settings.enable_dots | append: '"'
+    echo ' data-arrows="' | append: block.settings.enable_arrows | append: '"'
+  endcapture
+
+  assign arrow_class = ''
+  if block.settings.arrow_position == 'middle'
+    assign arrow_class = 'slideshow__controls slideshow__controls--top'
+  endif
+
+  render 'custom-arrow-style'
+-%}
+{%- liquid
+  assign border = false
+  assign color_scheme_block = 'dbtfy-color-' | append: block.settings.color_scheme_block | append: ' color-' | append: block.settings.custom_color_scheme_block | append: ' gradient'
+
+  if section.settings.color_scheme == block.settings.color_scheme_block
+    if section.settings.block_color == 'custom'
+      if section.settings.custom_color_scheme == block.settings.custom_color_scheme_block
+        assign border = true
+      endif
+    else
+      assign border = true
+    endif
+  endif
+
+  assign class = ''
+  if block.settings.block_color == 'custom'
+    assign class = color_scheme_block
+  endif
+-%}
+
+{%- capture blocks -%}
+  {%- if class != blank -%}
+    {%- capture replacement_class -%} product-testimonial__review {{ class }} {% if border %} product-testimonial-border {% endif %} {%- endcapture -%}
+    {{ blocks | replace: 'product-testimonial__color-scheme', replacement_class }}
+  {%- else -%}
+    {{ blocks }}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- render 'block-padding', block: block -%}
+<link rel="stylesheet" href="{{ 'testimonial-review.css' | asset_url }}">
+
+{%- style -%}
+  #Slider-{{ block.id }}{
+    --line-clamp: {{ block.settings.number_of_line }};
+  }
+{%- endstyle -%}
+
+<div
+  id="block-{{ block.id }}"
+  class="block-{{ block.id }}-padding tesimonial-review-item dbtfy-cart-testimonial"
+  {{ block.shopify_attributes }}
+>
+  <dbtfy-slider-component class="{{ class }}" {{ slider_parameters }}>
+    <ul
+      class="{{ slider_on }} grid grid--1-col grid--1-col-desktop grid--1-col-tablet {{ block.settings.review_layout }}"
+      id="Slider-{{ block.id }}"
+    >
+      {{ blocks }}
+    </ul>
+    {%- render 'dbtfy-arrow', class: arrow_class -%}
+  </dbtfy-slider-component>
+</div>
+<script src="{{ 'dbtfy-rte.js' | asset_url }}" defer></script>

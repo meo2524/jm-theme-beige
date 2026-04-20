@@ -1,0 +1,23 @@
+{% if section.settings.show_wishlist_text_icon == 'text' %}
+  {{ 'widgets.wishlist.name' | t }}
+{% elsif section.settings.show_wishlist_text_icon == 'icon' %}
+  {% render 'material-icon', icon: 'favorite' %}
+{% endif %}
+{% if settings.dbtfy_wish_list_show_count %}
+  <dbtfy-wishlist-count class="dbtfy-wishlist-bubble">
+    <element-animator
+      data-enabled="{{settings.dbtfy_wish_list_bubble_animation_enabled}}"
+      data-animation="dbtfy-element-animation-{{settings.dbtfy_wish_list_bubble_animation_type}}"
+      data-interval="{{ settings.dbtfy_wish_list_bubble_animation_interval }}"
+      data-duration="{{ settings.dbtfy_wish_list_bubble_animation_duration }}"
+      data-selector=".wishlist-count-bubble"
+      data-dependency="wishlist"
+    >
+      {% if section.settings.show_wishlist_text_icon == 'icon' %}
+        <div class="wishlist-count-bubble dbtfy-bubble dbtfy-bubble--{{ settings.dbtfy_wish_list_bubble_position }} dbtfy-bubble--{{ settings.dbtfy_wish_list_bubble_size }}">
+          <span>0</span>
+        </div>
+      {% endif %}
+    </element-animator>
+  </dbtfy-wishlist-count>
+{% endif %}

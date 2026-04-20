@@ -1,0 +1,12 @@
+{% liquid
+  assign reviews_metafield = product.metafields.overall_rating.reviews.value.data
+  assign star_size = '1.5rem'
+%}
+
+<div class="rating-score">
+  {% assign overall_rating = reviews_metafield.overall_rating | default: '0' %}
+  <span class="rating-value" data-review="{{overall_rating}}"></span>
+  <span class="stars star-svg empty-{{ settings.empty_star_style }}" style="font-size: {{ star_size }}">
+    <i data-star="{{ overall_rating }}"></i>
+  </span>
+</div>

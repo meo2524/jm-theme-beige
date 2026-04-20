@@ -1,0 +1,76 @@
+{% render 'dbtfy-newsletter',
+  minimal_form: block.settings.minimal_form,
+  show_newsletter_first_name: block.settings.show_newsletter_first_name,
+  enable_newsletter_opt_in_checkbox: block.settings.enable_newsletter_opt_in_checkbox,
+  customer_tag: block.settings.customer_tag,
+  label_name: block.settings.label_name,
+  label_email: block.settings.label_email,
+  label_number: block.settings.label_number,
+  label_opt_checkbox: block.settings.label_opt_checkbox
+%}
+
+{% schema %}
+{
+  "name": "t:settings_schema.integrations.settings.header__1.content",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "minimal_form",
+      "label": "t:sections.newsletter.settings.minimal_form.label",
+      "default": false,
+      "info": "t:sections.newsletter.settings.minimal_form.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter_first_name",
+      "label": "t:sections.dbtfy-footer.blocks.newsletter.settings.show_name_feild.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_newsletter_opt_in_checkbox",
+      "label": "t:sections.dbtfy-footer.blocks.newsletter.settings.show_checkbox.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "customer_tag",
+      "label": "t:blocks.news-letter.settings.customer_tag.label",
+      "default": "t:settings_schema.integrations.settings.header__1.content",
+      "info": "t:blocks.news-letter.settings.customer_tag.info"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.news-letter.settings.customer_tag.paragraph"
+    },
+    {
+      "type": "text",
+      "id": "label_name",
+      "label": "t:sections.dbtfy-footer.settings.newsletter.name.label",
+      "default": "t:sections.dbtfy-footer.settings.newsletter.name.default"
+    },
+    {
+      "type": "text",
+      "id": "label_email",
+      "label": "t:sections.dbtfy-footer.settings.newsletter.email.label",
+      "default": "t:sections.dbtfy-footer.settings.newsletter.email.default"
+    },
+    {
+      "type": "text",
+      "id": "label_number",
+      "label": "t:sections.dbtfy-footer.settings.newsletter.phone_number.label"
+    },
+    {
+      "type": "text",
+      "id": "label_opt_checkbox",
+      "label": "t:sections.newsletter.settings.label_opt_checkbox.label",
+      "default": "t:sections.newsletter.settings.label_opt_checkbox.default"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:settings_schema.integrations.settings.header__1.content"
+    }
+  ]
+}
+{% endschema %}

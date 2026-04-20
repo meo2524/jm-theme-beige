@@ -1,0 +1,87 @@
+{% comment %}
+  {% render 'dbtfy-featured-blog',
+    block ---- Block value for the block.shopify_attributes
+    heading ---- Heading value for the heading
+    subheading ----  Subheading value for the subheading
+    blog ---- Blog value for the blogs artical list to be displayed
+    blog_limit ---- Blog limit value for the number of blogs to be displayed
+    show_arrows ---- Show arrows value for the arrows to be displayed
+    show_dots ---- Show dots value for the dots to be displayed
+    enable_autoplay ---- Enable autoplay value for the autoplay to be enabled
+    autoplay_speed ---- Autoplay speed value for the autoplay speed
+    per_view_desktop ---- Desktop slides to show value for the number of slides to be shown on desktop
+    per_view_tablet ---- Tablet slides to show value for the number of slides to be shown on tablet
+    per_view_mobile ---- Mobile slides to show value for the number of slides to be shown on mobile
+  %}
+{% endcomment %}
+{% liquid
+  capture slider_parameters
+    echo ' data-autoplay="' | append: enable_autoplay | append: '"'
+    echo ' data-speed="' | append: autoplay_speed | append: '"'
+    echo ' data-loop="' | append: enable_loop | append: '"'
+    echo ' data-dots="' | append: show_dots | append: '"'
+    echo ' data-arrows="' | append: show_arrows | append: '"'
+    echo ' data-controls-position="' | append: control_position | append: '"'
+  endcapture
+
+  assign slider_on = 'slider slider--everywhere'
+  if slider_on_text == 'none'
+    assign slider_on = ''
+    assign slider_parameters = ''
+  elsif slider_on_text != 'both'
+    assign slider_on = 'slider slider--' | append: slider_on_text
+  endif
+
+  assign arrow_class = ''
+  if arrow_position == 'middle'
+    assign arrow_class = 'slideshow__controls slideshow__controls--top'
+  endif
+%}
+<div
+  class="grid--{{desktop-width}}-col-desktop grid--{{tablet-width}}-col-tablet grid--12-col"
+  {{ block }}
+>
+  <dbtfy-slider-component
+    {{ slider_parameters }}
+  >
+    <div>
+      {% if heading != blank or subheading != blank %}
+        <div class="dbtfy-footer-heading">
+          {% if heading != blank %}
+            <h2 class="dbtfy-block__heading inline-richtext">{{ heading }}</h2>
+          {% endif %}
+          {% if subheading != blank %}
+            <h4 class="dbtfy-block__subheading inline-richtext">{{ subheading }}</h4>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <div class="dbtfy-block__featured-blog__grid relative">
+        <ul
+          class="{{ slider_on }} width-auto-adjusted contains-content-container grid grid--{{ per_view_mobile }}-col grid--{{ per_view_desktop }}-col-desktop grid--{{ per_view_tablet }}-col-tablet"
+          id="Slider-{{ section.id }}"
+          role="list"
+        >
+          {%- for article in blog.articles limit: blog_limit -%}
+            {% if article %}
+              <li
+                id="Slide-{{ section.id }}-{{ forloop.index }}"
+                class="grid__item"
+              >
+                {% render 'article-card',
+                  article: article,
+                  media_aspect_ratio: 'inherit',
+                  show_image: true,
+                  show_date: true,
+                  show_author: true,
+                  show_excerpt: true
+                %}
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+        {% render 'dbtfy-arrow', class: arrow_class %}
+      </div>
+    </div>
+  </dbtfy-slider-component>
+</div>

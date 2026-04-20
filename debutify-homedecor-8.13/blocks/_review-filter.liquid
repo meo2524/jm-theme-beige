@@ -1,0 +1,223 @@
+<div
+  class="review-filters"
+  {{ block.shopify_attributes }}
+>
+  <div class="checkbox_wraper">
+    {% if block.settings.show_reviews_with_media_only_checkbox %}
+      <input type="checkbox" id="reviews-with-media" name="reviews-with-media">
+      <span class="svg-wrapper">
+        {% render 'material-icon', icon: 'done' %}
+      </span>
+      <label for="reviews-with-media">
+        {{- block.settings.reviews_with_media_only_label -}}
+      </label>
+    {% endif %}
+  </div>
+  <div class="review-select__container">
+    <div>
+      <label for="sort-reviews">
+        {{- block.settings.sort_by_label -}}
+      </label>
+      <select id="sort-reviews" name="sort-reviews" class="select__select">
+        <option
+          value="most_recent"
+          {% if block.settings.default_sort_by_option == 'most_recent' %}
+            selected="selected"
+          {% endif %}
+        >
+          {{ block.settings.most_recent_label }}
+        </option>
+        <option
+          value="highest_rating"
+          {% if block.settings.default_sort_by_option == 'highest_rating' %}
+            selected="selected"
+          {% endif %}
+        >
+          {{ block.settings.highest_rating_label }}
+        </option>
+        <option
+          value="lowest_rating"
+          {% if block.settings.default_sort_by_option == 'lowest_rating' %}
+            selected="selected"
+          {% endif %}
+        >
+          {{ block.settings.lowest_rating_label }}
+        </option>
+        <option
+          value="most_helpful"
+          {% if block.settings.default_sort_by_option == 'most_helpful' %}
+            selected="selected"
+          {% endif %}
+        >
+          {{ block.settings.most_helpful_label }}
+        </option>
+        <option
+          value="oldest"
+          {% if block.settings.default_sort_by_option == 'oldest' %}
+            selected="selected"
+          {% endif %}
+        >
+          {{ block.settings.oldest_label }}
+        </option>
+      </select>
+    </div>
+
+    <div>
+      <label for="per-page" class="per-page-label">
+        {{- block.settings.default_show_label -}}
+      </label>
+      <select id="per-page" name="per-page" class="select__select">
+        <option
+          value="5"
+          {% if block.settings.default_show_option == '5' %}
+            selected="selected"
+          {% endif %}
+        >
+          5
+        </option>
+        <option
+          value="10"
+          {% if block.settings.default_show_option == '10' %}
+            selected="selected"
+          {% endif %}
+        >
+          10
+        </option>
+        <option
+          value="20"
+          {% if block.settings.default_show_option == '20' %}
+            selected="selected"
+          {% endif %}
+        >
+          20
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-review.review-filter.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "default_sort_by_option",
+      "label": "t:sections.dbtfy-review.sort-by-option.label",
+      "options": [
+        {
+          "value": "highest_rating",
+          "label": "t:sections.dbtfy-review.sort-by-option.highest_rating"
+        },
+        {
+          "value": "lowest_rating",
+          "label": "t:sections.dbtfy-review.sort-by-option.lowest_rating"
+        },
+        {
+          "value": "most_recent",
+          "label": "t:sections.dbtfy-review.sort-by-option.most_recent"
+        },
+        {
+          "value": "with_imagesvideos",
+          "label": "t:sections.dbtfy-review.sort-by-option.with_imagesvideos"
+        },
+        {
+          "value": "most_helpful",
+          "label": "t:sections.dbtfy-review.sort-by-option.most_helpful"
+        },
+        {
+          "value": "oldest",
+          "label": "t:sections.dbtfy-review.sort-by-option.oldest"
+        }
+      ],
+      "default": "highest_rating"
+    },
+    {
+      "type": "text",
+      "id": "sort_by_label",
+      "label": "t:sections.dbtfy-review.sort-by-option.sort_by_label",
+      "default": "t:sections.dbtfy-review.sort-by-option.sort_by_default"
+    },
+    {
+      "type": "text",
+      "id": "most_recent_label",
+      "label": "t:sections.dbtfy-review.sort-by-option.most-recent-label",
+      "default": "t:sections.dbtfy-review.sort-by-option.most-recent-default"
+    },
+    {
+      "type": "text",
+      "id": "highest_rating_label",
+      "label": "t:sections.dbtfy-review.sort-by-option.highest_rating_label",
+      "default": "t:sections.dbtfy-review.sort-by-option.highest_rating_default"
+    },
+    {
+      "type": "text",
+      "id": "lowest_rating_label",
+      "label": "t:sections.dbtfy-review.sort-by-option.lowest_rating_label",
+      "default": "t:sections.dbtfy-review.sort-by-option.lowest_rating_default"
+    },
+    {
+      "type": "text",
+      "id": "with_imagesvideos_label",
+      "label": "t:sections.dbtfy-review.sort-by-option.with_imagesvideos_label",
+      "default": "t:sections.dbtfy-review.sort-by-option.with_imagesvideos_default"
+    },
+    {
+      "type": "text",
+      "id": "most_helpful_label",
+      "label": "t:sections.dbtfy-review.sort-by-option.most_helpful_label",
+      "default": "t:sections.dbtfy-review.sort-by-option.most_helpful_default"
+    },
+    {
+      "type": "text",
+      "id": "oldest_label",
+      "label": "t:sections.dbtfy-review.sort-by-option.oldest_label",
+      "default": "t:sections.dbtfy-review.sort-by-option.oldest_default"
+    },
+    {
+      "type": "text",
+      "id": "default_show_label",
+      "label": "t:sections.dbtfy-review.sort-by-option.default_show_label",
+      "default": "t:sections.dbtfy-review.sort-by-option.default_show_default"
+    },
+    {
+      "type": "select",
+      "id": "default_show_option",
+      "label": "t:sections.dbtfy-review.sort-by-option.default_show_option_label",
+      "default": "20",
+      "options": [
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "10",
+          "label": "10"
+        },
+        {
+          "value": "20",
+          "label": "20"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "reviews_with_media_only_label",
+      "label": "t:sections.dbtfy-review.sort-by-option.reviews_with_media_label",
+      "default": "t:sections.dbtfy-review.sort-by-option.reviews_with_media_default"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews_with_media_only_checkbox",
+      "label": "t:sections.dbtfy-review.sort-by-option.reviews_with_media_checkbox_label",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-review.review-filter.name"
+    }
+  ]
+}
+{% endschema %}

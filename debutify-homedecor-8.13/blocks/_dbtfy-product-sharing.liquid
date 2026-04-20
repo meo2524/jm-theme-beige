@@ -1,0 +1,284 @@
+{%- if request.design_mode -%}
+  {%- render 'widget-blocker-warning',
+    enabled: settings.dbtfy_product_sharing,
+    type: 'widget',
+    as: 'block',
+    name: 'Product sharing',
+    id: block
+  -%}
+{%- endif -%}
+{%- if settings.dbtfy_product_sharing -%}
+  {%- liquid
+    if block.settings.custom_icon != blank
+      assign image = block.settings.custom_icon
+    elsif block.settings.button_icon != blank
+      assign icon = block.settings.button_icon
+    endif
+
+    if block.settings.display_style == 'button'
+      assign social_title = true
+    endif
+  -%}
+  <script>
+    Debutify.widgets['product_sharing'] = [];
+    Debutify.widgets['product_sharing'].push({{ block.settings | json }});
+  </script>
+  <div
+    class="dbtfy-product-sharing-block hidden"
+    {{ block.shopify_attributes }}
+  >
+    {{- section.settings.product -}}
+    <div class="dbtfy-product-sharing-block-inner {% if block.settings.inline_button_style != "only_icon" %} button_style {{ block.settings.inline_button_style }}{% endif %}">
+      {%- render 'social-sharing',
+        copy_link: block.settings.copy_link,
+        facebook: block.settings.facebook,
+        messenger: block.settings.messenger,
+        twitter: block.settings.twitter,
+        pinterest: block.settings.pinterest,
+        linkedin: block.settings.linkedin,
+        whatsapp: block.settings.whatsapp,
+        reddit: block.settings.reddit,
+        email: block.settings.email,
+        title: block.settings.button_inline_label,
+        button_icon: icon,
+        button_image: image,
+        button_style: block.settings.button_style,
+        display_style: block.settings.display_style,
+        social_title: social_title,
+        sharer_data: true,
+        share_permalink: '{share_permalink}',
+        share_image: '{share_image}',
+        share_title: '{share_title}',
+        share_content: '{share_content}',
+        share_description: '{share_description}',
+        share_title_escaped: '{share_title_escaped}',
+        share_description_escaped: '{share_description_escaped}',
+        share_content_escaped: '{share_content_escaped}'
+      -%}
+    </div>
+  </div>
+  <script src="{{ 'floating-ui.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ "dbtfy-product-sharing.js" | asset_url }}" defer="defer"></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.dbtfy-product-sharing.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-product-sharing.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-product-sharing.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.enterprise_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "display_style",
+      "label": "t:blocks.dbtfy-product-sharing.settings.display_style.label",
+      "options": [
+        {
+          "value": "inline",
+          "label": "t:blocks.dbtfy-product-sharing.settings.display_style.options__1"
+        },
+        {
+          "value": "button",
+          "label": "t:blocks.dbtfy-product-sharing.settings.display_style.options__2"
+        }
+      ],
+      "default": "inline",
+      "info": "t:blocks.dbtfy-product-sharing.settings.display_style.info"
+    },
+    {
+      "type": "select",
+      "id": "inline_button_style",
+      "label": "t:blocks.dbtfy-product-sharing.settings.inline_button_style.label",
+      "options": [
+        {
+          "value": "only_icon",
+          "label": "t:blocks.dbtfy-product-sharing.settings.inline_button_style.options__1"
+        },
+        {
+          "value": "icon_with_button_square",
+          "label": "t:blocks.dbtfy-product-sharing.settings.inline_button_style.options__2"
+        },
+        {
+          "value": "icon_with_button_rounded",
+          "label": "t:blocks.dbtfy-product-sharing.settings.inline_button_style.options__3"
+        },
+        {
+          "value": "icon_with_button_circle",
+          "label": "t:blocks.dbtfy-product-sharing.settings.inline_button_style.options__4"
+        }
+      ],
+      "default": "only_icon"
+    },
+    {
+      "type": "text",
+      "id": "button_icon",
+      "label": "t:general.settings.icon",
+      "default": "share",
+      "info": "t:general.settings.icon_info"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:sections.newsletter.blocks.email_form.settings.button_style.label",
+      "options": [
+        {
+          "value": "button button--primary",
+          "label": "t:settings_schema.integrations.settings.star_rating.star_filled"
+        },
+        { "value": "button button--secondary", "label": "t:sections.all.button.options__4.label" },
+        { "value": "link underlined-link button--link", "label": "t:general.settings.text" }
+      ],
+      "default": "button button--secondary"
+    },
+    {
+      "type": "text",
+      "id": "button_inline_label",
+      "label": "t:blocks.dbtfy-product-sharing.settings.button_inline.label",
+      "default": "Share",
+      "info": "t:blocks.dbtfy-product-sharing.settings.button_inline.info"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_icon",
+      "label": "t:general.settings.custom_icon",
+      "info": "t:blocks.double_button.custom_icon.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.dbtfy-product-sharing.settings.social_share.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "copy_link",
+      "label": "t:settings_schema.social-media.settings.copy_link",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "messenger",
+      "label": "t:settings_schema.social-media.settings.social_messenger_link.label",
+      "default": true,
+      "info": "t:settings_schema.social-media.settings.social_messenger_link.messanger_mobile_only"
+    },
+    {
+      "type": "checkbox",
+      "id": "facebook",
+      "label": "t:settings_schema.social-media.settings.social_facebook_link.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "twitter",
+      "label": "t:settings_schema.social-media.settings.social_twitter_link.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "pinterest",
+      "label": "t:settings_schema.social-media.settings.social_pinterest_link.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "linkedin",
+      "label": "t:settings_schema.social-media.settings.social_linkedin_link.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "whatsapp",
+      "label": "t:settings_schema.social-media.settings.social_whatsapp_link.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "reddit",
+      "label": "t:settings_schema.social-media.settings.social_reddit_link.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "email",
+      "label": "t:settings_schema.social-media.settings.social_email_link.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.visibility.header.content",
+      "info": "t:general.settings.visibility.header.info"
+    },
+    {
+      "type": "radio",
+      "id": "visibility",
+      "label": "t:general.settings.visibility.visibility.label",
+      "info": "t:general.settings.visibility.visibility.info",
+      "default": "all",
+      "options": [
+        {
+          "value": "all",
+          "label": "t:general.settings.visibility.visibility.options__1"
+        },
+        {
+          "value": "collection",
+          "label": "t:general.settings.visibility.visibility.options__2"
+        },
+        {
+          "value": "type",
+          "label": "t:general.settings.visibility.visibility.options__3"
+        },
+        {
+          "value": "tag",
+          "label": "t:general.settings.visibility.visibility.options__4"
+        },
+        {
+          "value": "product",
+          "label": "t:general.settings.visibility.visibility.options__5"
+        }
+      ]
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:general.settings.visibility.collection.label"
+    },
+    {
+      "type": "text",
+      "id": "types",
+      "label": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.label",
+      "info": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.info"
+    },
+    {
+      "type": "text",
+      "id": "tags",
+      "label": "t:general.settings.visibility.tags.label",
+      "info": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.info"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:general.settings.visibility.product.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.dbtfy-product-sharing.name"
+    }
+  ]
+}
+{%- endschema -%}

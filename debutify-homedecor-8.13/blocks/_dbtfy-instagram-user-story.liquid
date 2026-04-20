@@ -1,0 +1,82 @@
+{% if block.settings.video != blank %}
+  <div
+    class="dbtfy-insta-story__media"
+    data-type="video"
+    data-duration="{{ block.settings.video.duration | divided_by: 1000.0 }}"
+    data-time-posted="{{ block.settings.time_posted }}"
+    style="--background:{{ block.settings.background }};--object-fit:{{ block.settings.display_option }}"
+  >
+    {{
+      block.settings.video
+      | video_tag: image_size: '1000x', loop: false, muted: true, playsinline: '', autoplay: false
+    }}
+  </div>
+{% elsif block.settings.story_image != blank or block.settings.video != blank %}
+  <div
+    class="dbtfy-insta-story__media"
+    data-type="image"
+    data-duration="{{ section.settings.autoplay_speed }}"
+    data-time-posted="{{ block.settings.time_posted }}"
+    style="--background:{{ block.settings.background }};--object-fit:{{ block.settings.display_option }}"
+  >
+    {{
+      block.settings.story_image
+      | image_url: width: 1500
+      | image_tag: loading: 'lazy', widths: '165, 360, 535, 750, 1070, 1250, 1500'
+    }}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-instastory.user_story.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "story_image",
+      "label": "t:sections.dbtfy-instastory.user_story.story_image"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:sections.dbtfy-instastory.user_story.story_video",
+      "info": "t:sections.dbtfy-instastory.user_story.story_video_info"
+    },
+    {
+      "type": "radio",
+      "id": "display_option",
+      "label": "t:sections.dbtfy-instastory.user_story.display_option",
+      "options": [
+        {
+          "value": "contain",
+          "label": "t:sections.dbtfy-instastory.user_story.contain"
+        },
+        {
+          "value": "cover",
+          "label": "t:sections.dbtfy-instastory.user_story.cover"
+        }
+      ],
+      "default": "contain",
+      "info": "t:sections.dbtfy-instastory.user_story.display_option_info"
+    },
+    {
+      "type": "text",
+      "id": "time_posted",
+      "label": "t:sections.facebook_tesimonial.settings.post.time_posted",
+      "default": "10m"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "t:settings_schema.colors.settings.background.label",
+      "info": "t:sections.dbtfy-instastory.user_story.background_info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-instastory.user_story.name"
+    }
+  ]
+}
+{% endschema %}

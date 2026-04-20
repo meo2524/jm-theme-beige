@@ -1,0 +1,11 @@
+<script>
+  Debutify.widgets['{{ key }}'] = {{ settings | json }};
+  {%- if section.blocks.size > 0 -%}
+    Debutify.widgets['{{ key }}'].blocks = [];
+    {%- for block in section.blocks -%}
+    {%- if block.settings.length -%}
+      Debutify.widgets['{{ key }}'].blocks.push({{ block.settings | json }});
+    {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+</script>

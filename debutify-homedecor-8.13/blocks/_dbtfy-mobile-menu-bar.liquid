@@ -1,0 +1,133 @@
+{%- if request.design_mode -%}
+  {%- render 'widget-blocker-warning',
+    enabled: settings.dbtfy_mobile_menu_bar,
+    type: 'widget',
+    as: 'block',
+    name: 'Mobile Menu Bar',
+    id: block
+  -%}
+{%- endif -%}
+{%- if block.blocks.size > 0 -%}
+  {{ 'dbtfy-mobile-menu-bar.css' | asset_url | stylesheet_tag }}
+  <div
+    class="dbtfy-mobile-menu-bar color-{{ block.settings.custom_color_scheme }} dbtfy-color-{{ block.settings.color_scheme }} gradient {% if block.settings.enable_radius_corner %}dbtfy-menu-bar-radius{% endif %}"
+    {% assign border_thickness = 0 %}
+    {% if block.settings.selected_menu_style == 'bottom-border' %}
+      {% assign border_thickness = 3 %}
+    {% endif %}
+    style="--dbtfy-menu-bar-thickness: {{ block.settings.selected_menu_border_tickness | plus: border_thickness }}px;"
+  >
+    <ul class="{{ block.settings.selected_menu_style }}">
+      {%- content_for 'blocks' -%}
+    </ul>
+  </div>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.dbtfy-mobile-menu-bar.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-mobile-menu-bar.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-mobile-menu-bar.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.layout.name"
+    },
+    {
+      "type": "select",
+      "id": "selected_menu_style",
+      "label": "t:blocks.dbtfy-mobile-menu-bar.settings.item_style",
+      "options": [
+        {
+          "value": "top-border",
+          "label": "t:blocks.dbtfy-mobile-menu-bar.settings.top_border"
+        },
+        {
+          "value": "bottom-border",
+          "label": "t:blocks.dbtfy-mobile-menu-bar.settings.bottom_border"
+        }
+      ],
+      "default": "top-border"
+    },
+    {
+      "type": "range",
+      "id": "selected_menu_border_tickness",
+      "label": "t:blocks.dbtfy-mobile-menu-bar.settings.item_border_thickness",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "default": 2,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_radius_corner",
+      "label": "t:blocks.dbtfy-mobile-menu-bar.settings.radius_corner",
+      "info": "t:blocks.dbtfy-mobile-menu-bar.settings.radius_corner_info",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_dbtfy-mobile-menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.dbtfy-mobile-menu-bar.name"
+    }
+  ]
+}
+{%- endschema -%}

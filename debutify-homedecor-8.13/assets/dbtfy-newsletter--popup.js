@@ -1,0 +1,1 @@
+window.addEventListener("load",function(){setTimeout(function(){localStorage.setItem("dbtfyNewsletterPopup","true")},100)}),document.querySelector("dbtfy-newsletter-popup-sidebar")&&(document.querySelector("dbtfy-newsletter-popup-sidebar").dataset.activateModal="page_load");

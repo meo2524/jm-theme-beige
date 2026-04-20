@@ -1,0 +1,65 @@
+<div class="{% if cart == empty %}hidden{% endif %}">
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.cart-drawer.blocks.cart-preferences.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-drawer.blocks.block-info"
+    }
+  ],
+  "class": "cart-preferences",
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "_cart-gift-wrap"
+    },
+    {
+      "type": "_order-feedback"
+    },
+    {
+      "type": "_cart-delivery-date"
+    },
+    {
+      "type": "_cart-delivery-time"
+    },
+    {
+      "type": "_cart-discount"
+    },
+    {
+      "type": "_cart-shipping-calculator"
+    },
+    {
+      "type": "_cart-note"
+    },
+    {
+      "type": "_cart-upsell"
+    },
+    {
+      "type": "_cart-testimonials"
+    },
+    {
+      "type": "_cart-benefits"
+    },
+    {
+      "type": "_add-on-cart"
+    },
+    {
+      "type": "_conditional-gift"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.cart-drawer.blocks.cart-preferences.name"
+    }
+  ]
+}
+{% endschema %}

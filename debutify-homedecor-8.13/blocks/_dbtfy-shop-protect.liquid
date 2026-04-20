@@ -1,0 +1,70 @@
+{% if settings.dbtfy_shop_protect %}
+  {%- render 'widget-settings', key: 'shop-protect', settings: block.settings -%}
+  <dbtfy-shop-protect />
+  <script src="{{ 'dbtfy-shop-protect.js' | asset_url }}" defer></script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:blocks.shop_protect.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.shop_protect.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.shop_protect.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.professional_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "checkbox",
+      "id": "dbtfy_shop_protect_disable_images_copy",
+      "label": "t:blocks.shop_protect.settings.dbtfy_shop_protect_disable_images_copy.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "dbtfy_shop_protect_images_dragging",
+      "label": "t:blocks.shop_protect.settings.dbtfy_shop_protect_images_dragging.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "dbtfy_shop_protect_disable_product_text_copy",
+      "label": "t:blocks.shop_protect.settings.dbtfy_shop_protect_disable_product_text_copy.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "dbtfy_shop_protect_disable_article_text_copy",
+      "label": "t:blocks.shop_protect.settings.dbtfy_shop_protect_disable_article_text_copy.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "dbtfy_shop_protect_disable_best_selling",
+      "label": "t:blocks.shop_protect.settings.dbtfy_shop_protect_disable_best_selling.label",
+      "info": "t:blocks.shop_protect.settings.dbtfy_shop_protect_disable_best_selling.info",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "dbtfy_shop_protect_disable_inspect_element",
+      "label": "t:blocks.shop_protect.settings.dbtfy_shop_protect_disable_inspect_element.label",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

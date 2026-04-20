@@ -1,0 +1,58 @@
+<cart-order-summary class="cart-order-summary {% if block.settings.sticky_block %}sticky-block{% endif %}">
+  <script>
+    Debutify.widgets['cart-order-summary'] = {{ block.settings | json }}
+  </script>
+  {%- content_for 'blocks' -%}
+</cart-order-summary>
+{%- schema -%}
+{
+  "name": "t:sections.cart-drawer.blocks.cart-order-summary.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-drawer.blocks.block-info"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_block",
+      "label": "t:sections.cart-drawer.blocks.cart-order-summary.sticky-block",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "_trust_badges"
+    },
+    {
+      "type": "_cart-subtotal"
+    },
+    {
+      "type": "_cart-agree-to-terms"
+    },
+    {
+      "type": "_cart-tax"
+    },
+    {
+      "type": "_cart-quantity-break"
+    },
+    {
+      "type": "_cart-checkout"
+    },
+    {
+      "type": "_cart-minimum-order"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.cart-drawer.blocks.cart-order-summary.name"
+    }
+  ]
+}
+{%- endschema -%}

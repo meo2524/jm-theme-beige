@@ -1,0 +1,135 @@
+{%- if settings.dbtfy_cart_discount -%}
+  {%- render 'widget-settings', key: 'dbtfy-cart-discount', settings: block.settings -%}
+  <link
+    rel="stylesheet"
+    href="{{ 'dbtfy-cart-discount.css' | asset_url }}"
+    media="print"
+    onload="this.media='all'"
+  >
+  <div class="cart-block" {{ block.shopify_attributes }}>
+    <dbtfy-cart-discount
+      data-type="cartDrawer"
+      data-relace-text="{{ 'sections.cart.discount.discount_replace' | t }}"
+    >
+      <div class="dbtfy-cart-discount">
+        <details
+          id="Details-CartDiscount"
+          {% if block.settings.default_open %}
+            open
+          {% endif %}
+        >
+          <summary
+            {% if block.settings.default_open %}
+              aria-expanded="true"
+            {% endif %}
+          >
+            <div class="dbtfy-gap-5 flex flex-row">
+              <span class="delivery-label-icon"> {% render 'material-icon', icon: '' %} </span>
+              <span class="summary__title">
+                <span>{{ block.settings.dbtfy_cart_discount_text }}</span>
+                <small class="discount-status hidden badge dbtfy-discount-badge"></small>
+                <small class="dbtfy-cart-discount-show"></small>
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </span>
+            </div>
+          </summary>
+          <dbtfy-discount-modal class="dbtfy-discount-modal hidden">
+            <div class="dbtfy-discount-modal global-settings-popup dbtfy-modal__width--center-center color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} gradient inner-spacing">
+              <h3 class="dbtfy-discount-modal--header text-center"></h3>
+              <div class="dbtfy-discount-modal-check-yes-no">
+                <button class="button button--primary" value="yes">Yes</button>
+                <button class="button button--primary" value="no">No</button>
+              </div>
+            </div>
+          </dbtfy-discount-modal>
+          <div class="dbtfy-cart-discount__container">
+            <div class="field">
+              <input
+                class="dbtfy-cart-discount__input field__input"
+                autocomplete="off"
+                type="text"
+                name="discount"
+                placeholder="{{ block.settings.dbtfy_cart_discount_placeholder_text }}"
+                aria-placeholder="{{ block.settings.dbtfy_cart_discount_placeholder_text }}"
+              >
+              <label class="field__label">{{ block.settings.dbtfy_cart_discount_placeholder_text }}</label>
+              <button
+                type="submit"
+                class="dbtfy-cart-discount__button btn btn--primary"
+                aria-label="{{'sections.cart.discount.apply' | t }}"
+                title="{{'sections.cart.discount.apply' | t }}"
+              >
+                {%- render 'material-icon', icon: block.settings.dbtfy_cart_discount_icon -%}
+              </button>
+            </div>
+          </div>
+        </details>
+      </div>
+    </dbtfy-cart-discount>
+  </div>
+  <script src="{{ 'dbtfy-cart-discount.js' | asset_url }}" defer></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.cart_discount.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-drawer.blocks.cart-discount.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.cart_discount.settings.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.free_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_cart_discount_label_icon",
+      "label": "t:general.settings.icon",
+      "default": "local_offer",
+      "info": "t:general.settings.icon_info"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_cart_discount_text",
+      "label": "t:blocks.cart_discount.settings.dbtfy_cart_discount_text.label",
+      "default": "t:blocks.cart_discount.name"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_cart_discount_icon",
+      "label": "t:blocks.news-letter.settings.modal.button_icon.label",
+      "default": "arrow_forward",
+      "info": "t:sections.all.icon.info"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_cart_discount_placeholder_text",
+      "label": "t:blocks.cart_discount.settings.dbtfy_cart_discount_placeholder_text.label",
+      "default": "t:blocks.cart_discount.settings.dbtfy_cart_discount_placeholder_text.default"
+    },
+    {
+      "type": "checkbox",
+      "id": "default_open",
+      "label": "t:blocks.cart_discount.settings.default_open_label",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.cart_discount.name"
+    }
+  ]
+}
+{%- endschema -%}

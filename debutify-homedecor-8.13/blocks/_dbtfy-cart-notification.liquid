@@ -1,0 +1,182 @@
+{%- if request.design_mode -%}
+  {%- render 'widget-blocker-warning',
+    enabled: settings.dbtfy_cart_notification,
+    type: 'widget',
+    as: 'block',
+    name: 'Cart Notification',
+    id: block
+  -%}
+{%- endif -%}
+{%- if settings.dbtfy_cart_notification -%}
+  {% if settings.dbtfy_skip_cart == false or request.design_mode %}
+    {%- render 'widget-settings', key: 'cart-notification', settings: block.settings -%}
+    <link
+      rel="stylesheet"
+      href="{{ 'dbtfy-cart-notification.css' | asset_url }}"
+      media="print"
+      onload="this.media='all'"
+    >
+    <dbtfy-cart-notification
+      class="hidden"
+      data-block-id="{{ block.id }}"
+      data-close-icon="{{ block.settings.close_icon }}"
+      data-show-on-device="{{ block.settings.show_on }}"
+      data-color-scheme="{{ block.settings.color_scheme }}"
+      data-custom-color-scheme="{{ block.settings.custom_color_scheme }}"
+      {{ block.shopify_attributes }}
+    >
+      <div class="dbtfy-cart-notification inner-spacing">
+        <div class="grid">
+          <div class="dbtfy-cart-notification-left">
+            {%- if block.settings.show_product_image != blank -%}
+              <div class="global-media-settings">
+                {%- if request.design_mode -%}
+                  <div class="img-placeholder">
+                    {{ 'placeholder.svg' | inline_asset_content }}
+                  </div>
+                {%- else -%}
+                  <img class="dbtfy-cart-notification__img" src="" width="100%" height="auto">
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <div
+                class="dbtfy-cart-notification__block--text"
+                {% if block.settings.show_product_image == blank %}
+                  style="padding-left: var(--grid-desktop-horizontal-spacing, 12px)";
+                {% endif %}
+              >
+                <h3 class="title h5">{{ block.settings.text }}</h3>
+              </div>
+            {%- endif -%}
+          </div>
+          <div class="dbtfy-cart-notification-right">
+            {%- if block.settings.button_text != blank -%}
+              <a href="/checkout" class="button button--small">{{ block.settings.button_text }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </dbtfy-cart-notification>
+    <script src="{{ "dbtfy-cart-notification.js" | asset_url }}" defer></script>
+  {%- endif -%}
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.cart-notification.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.cart-notification.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.cart-notification.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.heading",
+      "info": "t:general.settings.block-name.info",
+      "default": "t:blocks.cart-notification.name"
+    },
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "Show on",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ],
+      "default": "desktop-only"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_image",
+      "label": "t:settings_schema.quick_compare.settings.dbtfy_quick_compare_show_image.label",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "t:general.settings.text",
+      "default": "t:blocks.cart-notification.settings.text.default",
+      "info": "t:blocks.cart-notification.settings.text.info"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:blocks.dbtfy-cart-reminder.settings.button.label",
+      "default": "t:blocks.dbtfy-cart-reminder.settings.button.default"
+    },
+    {
+      "type": "text",
+      "id": "close_icon",
+      "label": "t:blocks.cart-notification.settings.close_icon.label",
+      "default": "close",
+      "info": "t:sections.all.icon.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-3"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    }
+  ]
+}
+{%- endschema -%}

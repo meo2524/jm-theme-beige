@@ -1,0 +1,100 @@
+{%- liquid
+  unless section.settings.product == blank
+    assign product = section.settings.product
+  endunless
+-%}
+<p
+  class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
+  {{ block.shopify_attributes }}
+  id="Inventory-{{ section.id }}"
+  role="status"
+>
+  {%- if product.selected_or_first_available_variant.inventory_quantity > 0 -%}
+    {%- if product.selected_or_first_available_variant.inventory_quantity <= block.settings.inventory_threshold -%}
+      <span class="svg-wrapper" style="color: rgb(238, 148, 65)">
+        {{- 'icon-inventory-status.svg' | inline_asset_content -}}
+      </span>
+      {%- if block.settings.show_inventory_quantity -%}
+        {{-
+          'products.product.inventory_low_stock_show_count'
+          | t: quantity: product.selected_or_first_available_variant.inventory_quantity
+        -}}
+      {%- else -%}
+        {{- 'products.product.inventory_low_stock' | t -}}
+      {%- endif -%}
+    {%- else -%}
+      <span class="svg-wrapper" style="color: rgb(62, 214, 96)">
+        {{- 'icon-inventory-status.svg' | inline_asset_content -}}
+      </span>
+      {%- if block.settings.show_inventory_quantity -%}
+        {{-
+          'products.product.inventory_in_stock_show_count'
+          | t: quantity: product.selected_or_first_available_variant.inventory_quantity
+        -}}
+      {%- else -%}
+        {{- 'products.product.inventory_in_stock' | t -}}
+      {%- endif -%}
+    {%- endif -%}
+  {%- else -%}
+    {%- if product.selected_or_first_available_variant.inventory_policy == 'continue' -%}
+      <span class="svg-wrapper" style="color: rgb(62, 214, 96)">
+        {{- 'icon-inventory-status.svg' | inline_asset_content -}}
+      </span>
+      {{- 'products.product.inventory_out_of_stock_continue_selling' | t -}}
+    {%- else -%}
+      <span class="svg-wrapper" style="color: rgb(200, 200, 200)">
+        {{- 'icon-inventory-status.svg' | inline_asset_content -}}
+      </span>
+      {{- 'products.product.inventory_out_of_stock' | t -}}
+    {%- endif -%}
+  {%- endif -%}
+</p>
+
+{% schema %}
+{
+  "name": "t:sections.main-product.blocks.inventory.name",
+  "settings": [
+    {
+      "type": "select",
+      "id": "text_style",
+      "options": [
+        {
+          "value": "body",
+          "label": "t:general.settings.style.body"
+        },
+        {
+          "value": "subtitle",
+          "label": "t:general.settings.style.subtitle"
+        },
+        {
+          "value": "uppercase",
+          "label": "t:general.settings.style.uppercase"
+        }
+      ],
+      "default": "body",
+      "label": "t:general.settings.style.text_style"
+    },
+    {
+      "type": "range",
+      "id": "inventory_threshold",
+      "label": "t:sections.main-product.blocks.inventory.settings.inventory_threshold.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "info": "t:sections.main-product.blocks.inventory.settings.inventory_threshold.info",
+      "default": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "show_inventory_quantity",
+      "label": "t:sections.main-product.blocks.inventory.settings.show_inventory_quantity.label",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main-product.blocks.inventory.name"
+    }
+  ]
+}
+{% endschema %}

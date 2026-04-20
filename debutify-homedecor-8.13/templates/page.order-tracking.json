@@ -1,0 +1,36 @@
+{
+  "sections": {
+    "dbtfy-breadcrumbs": {
+      "type": "dbtfy-breadcrumbs",
+      "settings": {
+        "show_on": "both",
+        "show_social_media_icons": "both",
+        "share_on_facebook": true,
+        "share_on_messenger": true,
+        "tweet_on_twitter": true,
+        "pin_on_pinterest": true,
+        "share_on_whatsapp": true,
+        "share_on_linkedin": true,
+        "share_on_reddit": true,
+        "share_on_email": true,
+        "color_scheme": "scheme-2"
+      }
+    },
+    "main": {
+      "type": "dbtfy-order-tracking",
+      "settings": {
+        "show_on": "both",
+        "container_size": "page-width",
+        "color_scheme": "scheme-1",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "dbtfy-breadcrumbs",
+    "main"
+  ]
+}

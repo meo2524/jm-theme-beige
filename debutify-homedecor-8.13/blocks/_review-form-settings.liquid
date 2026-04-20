@@ -1,0 +1,288 @@
+<div class="review-form" id="review-form" style="display: block;" {{ block.shopify_attributes }}>
+  <form id="reviewForm">
+    <div class="d-grid">
+      <!-- Name Field -->
+      <div class="grid--6-col">
+        <div class="field">
+          <input
+            class="field__input"
+            type="text"
+            id="reviewerName"
+            placeholder="{{ block.settings.name_field_label | handle }}"
+            name="reviewerName"
+            {% if block.settings.make_the_name_field_mandatory %}
+              required=""
+            {% endif %}
+          >
+          <label class="field__label" for="reviewerName">
+            {{ block.settings.name_field_label }}
+            {% if block.settings.make_the_name_field_mandatory %}
+              <span aria-hidden="true">*</span>
+            {% endif %}
+          </label>
+        </div>
+
+        {% if block.settings.make_the_name_field_mandatory %}
+          <small class="error-message w-100 hidden">
+            <span class="svg-wrapper">
+              <svg class="icon icon-error" viewBox="0 0 13 13">
+                <circle cx="6.5" cy="6.5" r="5.5" stroke="#fff" stroke-width="2"></circle><circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width=".7"></circle><path fill="#fff" d="m5.874 3.528.1 4.044h1.053l.1-4.044zm.627 6.133c.38 0 .68-.288.68-.656s-.3-.656-.68-.656-.681.288-.681.656.3.656.68.656"></path><path fill="#fff" stroke="#EB001B" stroke-width=".7" d="M5.874 3.178h-.359l.01.359.1 4.044.008.341h1.736l.008-.341.1-4.044.01-.359H5.873Zm.627 6.833c.56 0 1.03-.432 1.03-1.006s-.47-1.006-1.03-1.006-1.031.432-1.031 1.006.47 1.006 1.03 1.006Z"></path>
+              </svg>
+            </span>
+            <span class="error-message-text"> Please enter a {{ block.settings.name_field_label }} </span>
+          </small>
+        {% endif %}
+      </div>
+
+      <div class="grid--6-col">
+        <div class="field">
+          <input
+            class="field__input"
+            type="text"
+            id="reviewerEmail"
+            placeholder="{{ block.settings.email_field_label | handle }}"
+            name="reviewerEmail"
+            required=""
+          >
+          <label class="field__label" for="reviewerEmail">
+            {{ block.settings.email_field_label }}
+            <span aria-hidden="true">*</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="grid--6-col">
+        <!-- Rating Field (Always Required) -->
+        <div class="form-group">
+          <label for="review-rating">
+            {{ block.settings.rating_field_label }}
+          </label>
+          <div id="rating-star-wrapper">
+            <div class="rating-group">
+              <input
+                disabled
+                {% unless block.settings.preset_rating_to_5 %}
+                  checked
+                {% endunless %}
+                class="rating__input rating__input--none"
+                name="rating"
+                id="rating3-none"
+                value="0"
+                type="radio"
+              >
+
+              {% assign random_number = 'now' | date: '%s' | plus: 0 | modulo: 100 | plus: 1 %}
+
+              {% for star in (1..5) %}
+                <label aria-label="{{ star }} star" class="rating__label" for="rating-{{random_number }}-{{ star }}">
+                  {% comment %}
+                    <i class="rating__icon rating__icon--star fa fa-star">
+                      {% render 'star', star_size: '16px' %}
+                    </i>
+                  {% endcomment %}
+                  {% render 'star', star_size: '16px', star_color: 'rgba(var(--color-button))', class: 'star-svg' %}
+                </label>
+                <input
+                  class="rating__input"
+                  name="rating"
+                  id="rating-{{random_number }}-{{ star }}"
+                  value="{{ star }}"
+                  type="radio"
+                  {% if star == 5 and block.settings.preset_rating_to_5 %}
+                    checked
+                  {% endif %}
+                >
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid--12-col">
+        <div class="field">
+          <input
+            class="field__input"
+            type="text"
+            id="title"
+            placeholder="{{ block.settings.review_title_label | handle }}"
+            name="title"
+            required
+          >
+          <label class="field__label" for="title">
+            {{ block.settings.review_title_label }}
+            <span aria-hidden="true">*</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="grid--12-col">
+        <div class="field">
+          <textarea
+            class="text-area field__input"
+            type="text"
+            id="body"
+            placeholder="{{ block.settings.review_body_label | handle }}"
+            name="body"
+            {% if block.settings.make_the_review_body_mandatory %}
+              required=""
+            {% endif %}
+          ></textarea>
+          <label class="field__label" for="body">
+            {{ block.settings.review_body_label }}
+            {% if block.settings.make_the_review_body_mandatory %}
+              <span aria-hidden="true">*</span>
+            {% endif %}
+          </label>
+        </div>
+
+        {% if block.settings.make_the_review_body_mandatory %}
+          <small class="error-message w-100 hidden">
+            <span class="svg-wrapper">
+              <svg class="icon icon-error" viewBox="0 0 13 13">
+                <circle cx="6.5" cy="6.5" r="5.5" stroke="#fff" stroke-width="2"></circle><circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width=".7"></circle><path fill="#fff" d="m5.874 3.528.1 4.044h1.053l.1-4.044zm.627 6.133c.38 0 .68-.288.68-.656s-.3-.656-.68-.656-.681.288-.681.656.3.656.68.656"></path><path fill="#fff" stroke="#EB001B" stroke-width=".7" d="M5.874 3.178h-.359l.01.359.1 4.044.008.341h1.736l.008-.341.1-4.044.01-.359H5.873Zm.627 6.833c.56 0 1.03-.432 1.03-1.006s-.47-1.006-1.03-1.006-1.031.432-1.031 1.006.47 1.006 1.03 1.006Z"></path>
+              </svg>
+            </span>
+            <span class="error-message-text"> Please enter a {{ block.settings.review_body_label }} </span>
+          </small>
+        {% endif %}
+      </div>
+
+      {% if block.settings.allow_customers_to_attach_photos %}
+        <div class="grid--12-col">
+          <div class="form-group">
+            <label
+              for="review-media"
+              class="upload-label"
+            >
+              Media
+            </label>
+
+            <!-- Drag & Drop File Upload Box -->
+            <div id="dropbox" class="dropbox">
+              <div class="upload-content">
+                <svg
+                  class="upload-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                >
+                  <path fill="#666" d="M19 9h-4V3H9v6H5l7 7zM5 18v2h14v-2z"></path>
+                </svg>
+                <p>Drag and drop images or video here</p>
+              </div>
+              <input
+                type="file"
+                id="review-media"
+                name="review-media"
+                accept="image/*, video/*"
+                multiple
+                hidden
+              >
+            </div>
+
+            <div id="preview-container"></div>
+            <p class="upload-info">{{ 'products.product.review.max_file' | t }}</p>
+          </div>
+        </div>
+      {% endif %}
+      <div class="grid--12-col">
+        {% if block.settings.allow_customers_to_attach_photos %}
+          <div class="upload-progress hidden">
+            {% render 'loading-spinner' %}
+          </div>
+          <div class="media-limit hidden form_required">{{ 'products.product.review.file_size' | t }}</div>
+          <div class="media-required hidden form_required">{{ 'products.product.review.media_required' | t }}</div>
+        {% endif %}
+        <div class="review-form-error hidden form_required"></div>
+      </div>
+
+      <div class="grid--12-col">
+        <!-- Submit Button -->
+        <div class="form-btn text-right">
+          <button type="reset" class="cancel-btn button button--tertiary">
+            {{ 'customer.login_page.cancel' | t }}
+          </button>
+          <button type="submit" class="submit-btn button button--primary">
+            {% render 'loading-spinner' %}
+            {{ block.settings.submit_review_label }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-review.review-form.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "preset_rating_to_5",
+      "label": "t:sections.dbtfy-review.review-form.settings.preset_rating",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_customers_to_attach_photos",
+      "label": "t:sections.dbtfy-review.review-form.settings.customer_photo",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "name_field_label",
+      "label": "t:sections.dbtfy-review.review-form.settings.name.label",
+      "default": "t:sections.dbtfy-review.review-form.settings.name.default"
+    },
+    {
+      "type": "checkbox",
+      "id": "make_the_name_field_mandatory",
+      "label": "t:sections.dbtfy-review.review-form.settings.name.mandatory",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "email_field_label",
+      "label": "t:sections.dbtfy-review.review-form.settings.email.label",
+      "default": "t:sections.dbtfy-review.review-form.settings.email.default"
+    },
+    {
+      "type": "text",
+      "id": "rating_field_label",
+      "label": "t:sections.dbtfy-review.review-form.settings.rating_field.label",
+      "default": "t:blocks.star_rating.rating_label"
+    },
+    {
+      "type": "text",
+      "id": "review_title_label",
+      "label": "t:sections.dbtfy-review.review-form.settings.review_title.label",
+      "default": "t:sections.dbtfy-review.review-form.settings.review_title.default"
+    },
+    {
+      "type": "checkbox",
+      "id": "make_the_review_title_mandatory",
+      "label": "t:sections.dbtfy-review.review-form.settings.review_title.mandatory",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "review_body_label",
+      "label": "t:sections.dbtfy-review.review-form.settings.body.label",
+      "default": "t:sections.dbtfy-review.review-form.settings.body.default"
+    },
+    {
+      "type": "checkbox",
+      "id": "make_the_review_body_mandatory",
+      "label": "t:sections.dbtfy-review.review-form.settings.body.mandatory",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "submit_review_label",
+      "label": "t:sections.dbtfy-review.review-form.settings.submit_review.label",
+      "default": "t:sections.dbtfy-review.review-form.settings.submit_review.default"
+    }
+  ]
+}
+{% endschema %}

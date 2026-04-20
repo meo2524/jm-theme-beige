@@ -1,0 +1,31 @@
+<ul class="dbtfy-link-list list-unstyled">
+  {%- for link in block.settings.menu.links -%}
+    <li>
+      <a
+        href="{{ link.url }}"
+        class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+      >
+        {{ link.title | escape }}
+      </a>
+    </li>
+  {%- endfor -%}
+</ul>
+
+{% schema %}
+{
+  "name": "t:sections.footer.blocks.link_list.name",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:sections.dbtfy-footer.blocks.link_list.settings.menu.label",
+      "default": "footer"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.footer.blocks.link_list.name"
+    }
+  ]
+}
+{% endschema %}

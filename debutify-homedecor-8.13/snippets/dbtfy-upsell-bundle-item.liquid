@@ -1,0 +1,115 @@
+{%- liquid
+  assign check_against_inventory = true
+  if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
+    assign check_against_inventory = false
+  endif
+  if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
+    assign quantity_rule_soldout = true
+  endif
+-%}
+
+{% unless product.selected_or_first_available_variant.available == false
+  or quantity_rule_soldout
+  or product.selected_or_first_available_variant == null
+%}
+  {% assign current_variant = product.selected_or_first_available_variant %}
+  <div class="dbtfy-upsell-bundles__item grid--12-col {% unless mobile_view %}grid--6-col-desktop grid--6-col-tablet{% endunless %}">
+    <div class=" product__accordion quick-add-hidden d-grid">
+      <div class="dbtfy-upsell-bundle__media-item align-content-center">
+        {% render 'dbtfy-upsell-bundle-media-item', product: product, image_ratio: image_ratio %}
+      </div>
+      <div class="dbtfy-upsell-bundle__content-item">
+        <div class="summary__title bundle__title">
+          {% if section.settings.upsell_bundle_style == 'outline' %}
+            <div class="product_title_wrapper">
+              <div class="product-title_divider"></div>
+              <div class="price_wrapper_divider">
+                {% if current_variant.compare_at_price > current_variant.price %}
+                  <span class="price-sale"
+                    ><s>{{ current_variant.compare_at_price | money }}</s></span
+                  >
+                {% endif %}
+                <span class="price-reg">{{ current_variant.price | money }}</span>
+              </div>
+            </div>
+          {% else %}
+            {% if current_product_badge %}
+              <span class="badge dbtfy-sale-badge">
+                <span>{{ current_product_badge }}</span>
+              </span>
+            {% endif %}
+            {% liquid
+              assign title = product.title
+              assign money = current_variant.price | money
+              unless product.has_only_default_variant
+                assign title = title | append: ' | ' | append: current_variant.title
+              endunless
+              assign title = title | append: ' | ' | append: money
+            %}
+            <div class="product-title">{{ title -}}</div>
+          {% endif %}
+        </div>
+
+        {% if show_rating %}
+          {% render 'product-rating', product: product, block: section, position: 'product_grid' %}
+        {% endif %}
+
+        <div class="{% if product.has_only_default_variant %} hidden{% endif %}">
+          <div class="dbtfy-upsell-bundles__item-content">
+            <div class="field-wrapper">
+              <div class="select">
+                <select
+                  class="select__select dbtfy-variant-picker__selector"
+                  name="id[]"
+                  form="{{ product_form_id }}"
+                >
+                  {% for variant in product.variants %}
+                    <option
+                      value="{{ variant.id }}"
+                      {% if variant.id == product.first_available_variant.id %}
+                        selected
+                      {% endif %}
+                      {% unless variant.available %}
+                        disabled
+                      {% endunless %}
+                      data-variant-id="{{ variant.id }}"
+                      data-title="{{ variant.title }}"
+                      data-inventory-policy="{{ variant.inventory_policy }}"
+                      data-inventory-quantity="{{ variant.inventory_quantity }}"
+                    >
+                      {{ variant.title }} | {{ variant.price | money }}
+                    </option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input
+          type="checkbox"
+          id="dbtfy-upsell-product-item--{{ product.id }}"
+          class="dbtfy-upsell-product-item__checkbox hidden"
+          value="{{ product.id }}"
+          checked
+        >
+        {% unless current_product %}
+          <span class="svg-wrapper custom_checkbox">
+            {% render 'material-icon', icon: 'done' %}
+          </span>
+        {% endunless %}
+
+        <script type="application/json" data-product>
+          {{ product | json }}
+        </script>
+      </div>
+    </div>
+  </div>
+
+  {% if section.settings.upsell_bundle_style == 'outline' %}
+    <div class="bundle-offer__divider">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
+      </svg>
+    </div>
+  {% endif %}
+{% endunless %}

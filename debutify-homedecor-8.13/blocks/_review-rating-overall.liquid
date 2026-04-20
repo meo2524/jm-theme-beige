@@ -1,0 +1,74 @@
+{% style %}
+  {% assign review_base_text = block.settings.review_text | replace: '{number}', "'attr(data-review)'" %}
+  .review_based_on_text::before {
+    content: '{{ review_base_text }}';
+  }
+{% endstyle %}
+
+{% liquid
+  assign reviews_metafield = product.metafields.overall_rating.reviews.value.data
+%}
+
+<div class="overall-rating grid--3-col-desktop grid--3-col-tablet grid--12-col" {{ block.shopify_attributes }}>
+  {% if block.settings.rating_heading != blank %}
+    <h3 class="m-0">
+      {{ block.settings.rating_heading }}
+    </h3>
+  {% endif %}
+
+  {% render 'dtm-star-rating' %}
+
+  {% if block.settings.show_review_text %}
+    <p class="m-0 review_based_on_text" data-review="{{reviews_metafield.total_reviews}}"></p>
+  {% endif %}
+
+  {%- if block.settings.show_verified_purchase -%}
+    <p class="dbtfy-review-verify-purchase-text">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 17" fill="#5600e3" style="width: 16px;">
+        <path d="M8 1C9.125 1 10.125 1.65625 10.625 2.625C11.6562 2.28125 12.8438 2.53125 13.6562 3.34375C14.4688 4.15625 14.7188 5.34375 14.375 6.375C15.3438 6.875 16 7.875 16 9C16 10.1562 15.3438 11.1562 14.375 11.6562C14.7188 12.6875 14.4688 13.8438 13.6562 14.6562C12.8438 15.4688 11.6562 15.7188 10.625 15.4062C10.125 16.375 9.125 17 8 17C6.84375 17 5.84375 16.375 5.34375 15.4062C4.3125 15.7188 3.15625 15.4688 2.34375 14.6562C1.53125 13.8438 1.28125 12.6875 1.59375 11.6562C0.625 11.1562 0 10.1562 0 9C0 7.875 0.625 6.875 1.59375 6.375C1.28125 5.34375 1.53125 4.15625 2.34375 3.34375C3.15625 2.53125 4.3125 2.28125 5.34375 2.625C5.84375 1.65625 6.84375 1 8 1ZM11.5312 7.53125C11.8125 7.25 11.8125 6.78125 11.5312 6.5C11.2188 6.1875 10.75 6.1875 10.4688 6.5L7 9.96875L5.53125 8.5C5.21875 8.1875 4.75 8.1875 4.46875 8.5C4.15625 8.78125 4.15625 9.25 4.46875 9.53125L6.46875 11.5312C6.75 11.8438 7.21875 11.8438 7.53125 11.5312L11.5312 7.53125Z" ></path>
+      </svg>
+      <span>
+        <span class="review-counter"> {{ block.settings.verified_text }}</span>
+      </span>
+    </p>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-review.rating-overall.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "rating_heading",
+      "label": "t:sections.dbtfy-review.rating-overall.settings.rating.label",
+      "default": "t:sections.dbtfy-review.rating-overall.settings.rating.default"
+    },
+    {
+      "type": "text",
+      "id": "review_text",
+      "label": "t:sections.dbtfy-review.rating-overall.settings.review_text.label",
+      "default": "t:sections.dbtfy-review.rating-overall.settings.review_text.default"
+    },
+    {
+      "type": "text",
+      "id": "verified_text",
+      "label": "t:sections.dbtfy-review.rating-overall.settings.verified_text.label",
+      "default": "t:sections.dbtfy-review.rating-overall.settings.verified_text.default"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_review_text",
+      "label": "t:sections.dbtfy-review.rating-overall.settings.show_review_text_label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_verified_purchase",
+      "label": "t:sections.dbtfy-review.rating-overall.settings.show_verified_purchase_label",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

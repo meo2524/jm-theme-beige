@@ -1,0 +1,1 @@
+.product-card-wrapper .quick-view-opener{z-index:2}.product-card-wrapper .quickview-badge{background-color:transparent;color:var(--dbtfy-quick-view-icon-color);cursor:pointer;height:36px;padding:0;width:36px}.product-card-wrapper:hover .quickview-badge .loading__spinner{display:none}.product-card-wrapper:hover .quickview-badge.hidden{display:inline-block!important}

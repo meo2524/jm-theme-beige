@@ -1,0 +1,91 @@
+{% comment %}
+  {% render 'dbtfy-text',
+    heading  ---- Heading value for the heading
+    subheading  ----  Subheading value for the subheading
+    logo  ---- Logo value for the logo
+    logo_url  ---- Logo Link value for the logo Link
+    logo_width  ---- Logo width value for the logo width
+    text  ---- Text value for the text
+    show_email  ---- Show email value for the show store email
+    show_phone  ---- Show phone value for the show store phone
+    show_fax  ---- Show fax value for the show fax
+    show_location  ---- Show location value for the show store location
+    show_social_media  ---- Show social media value for the show social media
+    social_media_title ---- Social media title value for the social media title
+  %}
+{% endcomment %}
+
+<div
+  class="grid--{{desktop-width}}-col-desktop grid--{{tablet-width}}-col-tablet grid--12-col"
+  {{ block }}
+>
+  <div>
+    {% if heading != blank or subheading != blank %}
+      <div class="dbtfy-footer-heading">
+        {% if heading != blank %}
+          <h2 class="dbtfy-block__heading inline-richtext">{{ heading }}</h2>
+        {% endif %}
+        {% if subheading != blank %}
+          <h4 class="dbtfy-block__subheading inline-richtext">{{ subheading }}</h4>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if logo != blank %}
+      <div class="dbtfy-block__img" style="max-width:{{ logo_width }}px">
+        {% if logo_url != blank %}
+          <a href="{{ logo_url }}">
+        {% endif %}
+        <img src="{{ logo | image_url: width: 200, height: 200 }}" alt="{{ logo.alt }}">
+        {% if logo_url != blank %}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if text != blank %}
+      <div class="rte dbtfy-footer-text">{{ text }}</div>
+    {% endif %}
+    <div class="dbtfy-block__store-info-list">
+      {%- if show_email or show_phone -%}
+        <div>
+          {%- if show_email -%}
+            <a class="link" href="mailto:{{ shop.email | escape }}">
+              {% render 'material-icon', icon: 'mail' %}
+              {{ shop.email }}
+            </a>
+          {%- endif -%}
+
+          {%- if show_phone and shop.phone -%}
+            <a class="link" href="tel:{{ shop.phone | remove: '-' | replace: ' ', '' }}">
+              {% render 'material-icon', icon: 'call' %}
+              {{ shop.phone }}
+            </a>
+          {%- endif -%}
+
+          {%- if show_fax and fax != blank -%}
+            <a class="link" href="fax:{{ fax | remove: '-' | replace: ' ', '' }}">
+              {% render 'material-icon', icon: 'print' %}
+              {{ fax }}
+            </a>
+          {%- endif -%}
+
+          {%- if show_location -%}
+            <a class="link" href="https://maps.google.com?daddr={{ shop.address.summary | escape }}">
+              {% render 'material-icon', icon: 'location_on' %}
+              {{ shop.address.summary }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if show_social_media -%}
+    <div class="dbtfy-block___social-media">
+      {%- if social_media_title != blank -%}
+        <h5 class="link">{{ social_media_title }}</h5>
+      {%- endif -%}
+      {%- render 'social-icons' -%}
+    </div>
+  {%- endif -%}
+</div>

@@ -1,0 +1,59 @@
+<div class="contact-info-block" {{ block.shopify_attributes }}>
+  {%- if block.settings.label != blank -%}
+    {{ block.settings.label }}
+  {%- endif -%}
+  {%- if block.settings.mobile_url != blank -%}
+    <a href="tel:{{ block.settings.mobile_url }}" class="contact-info-block">
+      {%- if block.settings.mobile_icon != blank -%}
+        {%- render 'material-icon', icon: block.settings.mobile_icon -%}
+      {%- endif -%}
+    </a>
+  {%- endif -%}
+  {%- if block.settings.email_url != blank -%}
+    <a href="mailto:{{ block.settings.email_url }}" class="contact-info-block">
+      {%- if block.settings.email_icon != blank -%}
+        {%- render 'material-icon', icon: block.settings.email_icon -%}
+      {%- endif -%}
+    </a>
+  {%- endif -%}
+</div>
+
+{%- schema -%}
+{
+  "name": "t:sections.announcement-bar.blocks.contact_info.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:general.settings.label",
+      "default": "t:sections.announcement-bar.blocks.contact_info.label"
+    },
+    {
+      "type": "text",
+      "id": "mobile_icon",
+      "label": "t:sections.announcement-bar.blocks.contact_info.phone_icon",
+      "info": "t:general.settings.icon_info",
+      "default": "phone"
+    },
+    {
+      "type": "text",
+      "id": "mobile_url",
+      "label": "t:sections.announcement-bar.blocks.contact_info.phone"
+    },
+    {
+      "type": "text",
+      "id": "email_icon",
+      "label": "t:sections.announcement-bar.blocks.contact_info.email_icon",
+      "info": "t:general.settings.icon_info",
+      "default": "email"
+    },
+    {
+      "type": "text",
+      "id": "email_url",
+      "label": "t:sections.announcement-bar.blocks.contact_info.email"
+    }
+  ],
+  "presets": [{ "name": "t:sections.announcement-bar.blocks.contact_info.name" }]
+}
+{%- endschema -%}

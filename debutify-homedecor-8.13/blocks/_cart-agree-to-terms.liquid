@@ -1,0 +1,72 @@
+{% if settings.dbtfy_agree_to_terms %}
+  <link rel="stylesheet" href="{{ 'dbtfy-agree-to-terms.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  {%- assign order_title = 'widgets.agree_to_terms.order_title' | t -%}
+  {%- assign yes_label = 'widgets.agree_to_terms.yes_label' | t -%}
+
+  <div {{ block.shopify_attributes }}>
+    <agree-to-terms-page>
+      <div class="agree-to-terms-page">
+        <div class="rte text-center">
+          <input
+            id="agree-to-terms-page-checkbox-{{ section.id }}"
+            type="checkbox"
+            {%- if block.settings.is_agree_to_terms_checked -%}
+              checked
+            {% endif %}
+            name="{{ order_title }}"
+            value="{{ yes_label }}"
+          >
+          <label for="agree-to-terms-page-checkbox-{{ section.id }}" class="">
+            <small class="agree-to-terms-page-label">{{ block.settings.agree_to_terms_text }}</small>
+          </label>
+        </div>
+      </div>
+    </agree-to-terms-page>
+  </div>
+  <script src="{{ 'dbtfy-agree-to-terms-page.js' | asset_url }}" defer></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.agree-to-terms.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-drawer.blocks.cart-agree-to-terms.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.agree-to-terms.settings.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.free_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "richtext",
+      "id": "agree_to_terms_text",
+      "label": "t:general.settings.text",
+      "default": "t:blocks.agree-to-terms.settings.text.default"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_agree_to_terms_checked",
+      "label": "t:sections.cart-drawer.blocks.cart-agree-to-terms.default",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.agree-to-terms.name"
+    }
+  ]
+}
+{%- endschema -%}

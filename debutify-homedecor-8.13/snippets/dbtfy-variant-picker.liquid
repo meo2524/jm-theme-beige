@@ -1,0 +1,37 @@
+<dbtfy-variant-picker
+  data-id="{{ picker_id }}"
+  data-url="{{ product.url }}"
+  data-option-unavailable="{{- 'products.product.value_unavailable' | t: option_value: '' -}}"
+>
+  <div class="dbtfy-variant-picker__picker"></div>
+  {% if product.has_only_default_variant %}
+    <input
+      type="hidden"
+      name="id[]"
+      form="{{ product_form_id }}"
+      value="{{ product.first_available_variant.id }}"
+      {% unless product.first_available_variant.available %}
+        disabled
+      {% endunless %}
+    >
+  {% else %}
+    <select class="dbtfy-variant-picker__selector hidden" name="id[]" form="{{ product_form_id }}">
+      {% for variant in product.variants %}
+        <option
+          value="{{ variant.id }}"
+          {% if variant.id == product.first_available_variant.id %}
+            selected
+          {% endif %}
+          {% unless variant.available %}
+            disabled
+          {% endunless %}
+          data-title="{{ variant.title }}"
+          data-inventory-policy="{{ variant.inventory_policy }}"
+          data-inventory-quantity="{{ variant.inventory_quantity }}"
+        >
+          {{ variant.title }} | {{ variant.price | money }}
+        </option>
+      {% endfor %}
+    </select>
+  {% endif %}
+</dbtfy-variant-picker>

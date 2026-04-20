@@ -1,0 +1,30 @@
+<div
+  id="Slide-{{ section.id }}"
+  class="dbtfy-instagram-feed__column grid__item global-media-radius"
+  {{- block.shopify_attributes -}}
+>
+  {%- if block.settings.image != blank -%}
+    {{ block.settings.image | image_url: width: 990 | image_tag: widths: '246, 493, 600, 713, 823, 990' }}
+  {%- else -%}
+    {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg fill-foreground' }}
+  {%- endif -%}
+  <div class="dbtfy-instagram-container">
+    <span>
+      {{- 'icon-instagram.svg' | inline_asset_content -}}
+    </span>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "t:general.settings.image",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:general.settings.image"
+    }
+  ],
+  "presets": [{ "name": "t:general.settings.image" }]
+}
+{% endschema %}

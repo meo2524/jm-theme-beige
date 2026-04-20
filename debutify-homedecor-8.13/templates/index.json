@@ -1,0 +1,2470 @@
+{
+  "sections": {
+    "slideshow_CnH9TB": {
+      "type": "slideshow",
+      "blocks": {
+        "slideshow_item_fkjFBc": {
+          "type": "_slideshow-item",
+          "settings": {
+            "enable_schedule": false,
+            "schedule_start": "",
+            "schedule_end": "",
+            "media_priority": "image",
+            "image_desktop": "shopify://shop_images/banner--02.jpg",
+            "image_position_desktop": "center-left",
+            "image_position_mobile": "center-left",
+            "box_align": "middle-left",
+            "box_align_mobile": "middle-left",
+            "show_text_box": false,
+            "image_overlay_opacity": 0,
+            "image_overlay_opacity_mobile": 0,
+            "color_scheme": "scheme-1",
+            "custom_color_scheme": ""
+          },
+          "blocks": {
+            "title_ey8rQJ": {
+              "type": "_title",
+              "settings": {
+                "title": "<em>New </em><em><strong>Arrivals</strong></em>",
+                "custom_color": true,
+                "title_color": "#0a5d5d",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "inherit",
+                "alignment_mobile": "",
+                "size": "h5",
+                "style": "inherit",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "small",
+                "icon_alignment": "align-items-center",
+                "padding___top": "large",
+                "custom_padding_top": 36,
+                "padding___bottom": "small",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "title_LqdgiH": {
+              "type": "_title",
+              "settings": {
+                "title": "<strong>Elevate </strong>Your Living",
+                "custom_color": true,
+                "title_color": "#0a5d5d",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "inherit",
+                "alignment_mobile": "",
+                "size": "h1",
+                "style": "uppercase",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "custom",
+                "custom_padding_top": 0,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "description_WMqQmA": {
+              "type": "_description",
+              "settings": {
+                "description": "<p>Discover premium décor pieces crafted to bring comfort and elegance into every corner of your home.</p>",
+                "alignment": "inherit",
+                "alignment_mobile": "",
+                "custom_bullet_icon": "",
+                "text_animation": "none",
+                "glacier_speed": 5,
+                "typing_speed": 50,
+                "typing_initial_delay": 0,
+                "typing_pause_duration": 2000,
+                "typing_deleting_speed": 30,
+                "typing_show_cursor": true,
+                "typing_cursor_character": "|",
+                "typing_cursor_blink_duration": 500,
+                "typing_hide_cursor_while_typing": false,
+                "padding___top": "custom",
+                "custom_padding_top": 0,
+                "padding___bottom": "custom",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "single_button_4tc6jx": {
+              "type": "_single_button",
+              "name": "t:blocks.single_button.heading",
+              "settings": {
+                "button_label": "Shop Collection",
+                "button_link": "shopify://collections/home-decoer",
+                "button_style": "button button--secondary",
+                "button_size": "",
+                "text_style": "uppercase",
+                "button_icon_show": true,
+                "button_icon": "keyboard_double_arrow_right",
+                "icon_position": "right",
+                "alignment": "justify-content-left",
+                "alignment_mobile": "",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "large",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "title_ey8rQJ",
+            "title_LqdgiH",
+            "description_WMqQmA",
+            "single_button_4tc6jx"
+          ]
+        },
+        "slideshow_item_fA4Nd7": {
+          "type": "_slideshow-item",
+          "settings": {
+            "enable_schedule": false,
+            "schedule_start": "",
+            "schedule_end": "",
+            "media_priority": "image",
+            "image_desktop": "shopify://shop_images/banner--03.jpg",
+            "image_position_desktop": "center-right",
+            "image_position_mobile": "center-right",
+            "box_align": "middle-right",
+            "box_align_mobile": "middle-right",
+            "show_text_box": false,
+            "image_overlay_opacity": 0,
+            "image_overlay_opacity_mobile": 0,
+            "color_scheme": "scheme-1",
+            "custom_color_scheme": ""
+          },
+          "blocks": {
+            "title_c3RYQK": {
+              "type": "_title",
+              "settings": {
+                "title": "<em>Best in </em><em><strong>Decor</strong></em>",
+                "custom_color": true,
+                "title_color": "#0a5d5d",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "inherit",
+                "alignment_mobile": "",
+                "size": "h5",
+                "style": "inherit",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "small",
+                "icon_alignment": "align-items-center",
+                "padding___top": "large",
+                "custom_padding_top": 36,
+                "padding___bottom": "small",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "title_8qddtn": {
+              "type": "_title",
+              "settings": {
+                "title": "Comfort<strong> Meets Style</strong>",
+                "custom_color": true,
+                "title_color": "#0a5d5d",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "inherit",
+                "alignment_mobile": "",
+                "size": "h1",
+                "style": "uppercase",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "custom",
+                "custom_padding_top": 0,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "description_yWHF9i": {
+              "type": "_description",
+              "settings": {
+                "description": "<p>Premium furniture designed to enhance your living environment with sophistication.</p>",
+                "alignment": "inherit",
+                "alignment_mobile": "",
+                "custom_bullet_icon": "",
+                "text_animation": "none",
+                "glacier_speed": 5,
+                "typing_speed": 50,
+                "typing_initial_delay": 0,
+                "typing_pause_duration": 2000,
+                "typing_deleting_speed": 30,
+                "typing_show_cursor": true,
+                "typing_cursor_character": "|",
+                "typing_cursor_blink_duration": 500,
+                "typing_hide_cursor_while_typing": false,
+                "padding___top": "custom",
+                "custom_padding_top": 0,
+                "padding___bottom": "custom",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "single_button_cxKWfc": {
+              "type": "_single_button",
+              "name": "t:blocks.single_button.heading",
+              "settings": {
+                "button_label": "Discover More",
+                "button_link": "shopify://collections/home-decoer",
+                "button_style": "button button--secondary",
+                "button_size": "",
+                "text_style": "uppercase",
+                "button_icon_show": true,
+                "button_icon": "arrow_right_alt",
+                "icon_position": "right",
+                "alignment": "justify-content-left",
+                "alignment_mobile": "",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "title_c3RYQK",
+            "title_8qddtn",
+            "description_yWHF9i",
+            "single_button_cxKWfc"
+          ]
+        },
+        "slideshow_item_FxfGdj": {
+          "type": "_slideshow-item",
+          "settings": {
+            "enable_schedule": false,
+            "schedule_start": "",
+            "schedule_end": "",
+            "media_priority": "image",
+            "image_desktop": "shopify://shop_images/banner--01.jpg",
+            "image_position_desktop": "top-center",
+            "image_position_mobile": "center-center",
+            "box_align": "top-center",
+            "box_align_mobile": "top-center",
+            "show_text_box": false,
+            "image_overlay_opacity": 0,
+            "image_overlay_opacity_mobile": 0,
+            "color_scheme": "scheme-1",
+            "custom_color_scheme": ""
+          },
+          "blocks": {
+            "title_LeyMwF": {
+              "type": "_title",
+              "settings": {
+                "title": "<em>Modern </em><em><strong>Living</strong></em>",
+                "custom_color": true,
+                "title_color": "#0a5d5d",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "inherit",
+                "alignment_mobile": "",
+                "size": "h5",
+                "style": "inherit",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "small",
+                "icon_alignment": "align-items-center",
+                "padding___top": "large",
+                "custom_padding_top": 36,
+                "padding___bottom": "small",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "title_MWEPnf": {
+              "type": "_title",
+              "settings": {
+                "title": "<strong>Style Made </strong>Simple",
+                "custom_color": true,
+                "title_color": "#0a5d5d",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "inherit",
+                "alignment_mobile": "",
+                "size": "h1",
+                "style": "uppercase",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "custom",
+                "custom_padding_top": 0,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "description_TheXER": {
+              "type": "_description",
+              "settings": {
+                "description": "<p>Redesign Your Space Boldly: Clean Lines, Warm Tones, All the Inspiration You Need!</p>",
+                "alignment": "inherit",
+                "alignment_mobile": "",
+                "custom_bullet_icon": "",
+                "text_animation": "none",
+                "glacier_speed": 5,
+                "typing_speed": 50,
+                "typing_initial_delay": 0,
+                "typing_pause_duration": 2000,
+                "typing_deleting_speed": 30,
+                "typing_show_cursor": true,
+                "typing_cursor_character": "|",
+                "typing_cursor_blink_duration": 500,
+                "typing_hide_cursor_while_typing": false,
+                "padding___top": "custom",
+                "custom_padding_top": 0,
+                "padding___bottom": "custom",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "single_button_ntawwy": {
+              "type": "_single_button",
+              "name": "t:blocks.single_button.heading",
+              "settings": {
+                "button_label": "Explore Now",
+                "button_link": "shopify://collections/home-decoer",
+                "button_style": "button button--secondary",
+                "button_size": "",
+                "text_style": "uppercase",
+                "button_icon_show": true,
+                "button_icon": "arrow_right_alt",
+                "icon_position": "right",
+                "alignment": "justify-content-left",
+                "alignment_mobile": "",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "title_LeyMwF",
+            "title_MWEPnf",
+            "description_TheXER",
+            "single_button_ntawwy"
+          ]
+        }
+      },
+      "block_order": [
+        "slideshow_item_fkjFBc",
+        "slideshow_item_fA4Nd7",
+        "slideshow_item_FxfGdj"
+      ],
+      "settings": {
+        "show_on": "both",
+        "container_size": "",
+        "slide_height": "large",
+        "slide_height_mobile": "medium",
+        "image_behavior": "ambient",
+        "show_text_below": "inside",
+        "enable_autoplay": false,
+        "autoplay_speed": 5,
+        "enable_loop": true,
+        "enable_dots": true,
+        "enable_arrows": false,
+        "arrow_color": "inherit",
+        "custom_arrow_color": "#ffffff",
+        "custom_arrow_background_color": "#7559ff",
+        "arrow_position": "middle",
+        "control_position": "inside",
+        "accessibility_info": "Slideshow about our brand"
+      }
+    },
+    "dbtfy_scrolling_banner_K8JiYz": {
+      "type": "dbtfy-scrolling-banner",
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 1,
+            "row_gap": 20,
+            "column_gap": 20,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "none",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {}
+        },
+        "dbtfy-scrolling-banner": {
+          "type": "_dbtfy-scrolling-banner",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "dbtfy_scrolling_banner_text_NmX6fg": {
+              "type": "_dbtfy-scrolling-banner_text",
+              "settings": {
+                "text": "LIVORO HOME",
+                "url": "",
+                "heading_size": "h1",
+                "custom_heading_size": 70,
+                "is_all_stroked": true,
+                "stroked_text": "L,V,R,H,M"
+              },
+              "blocks": {}
+            },
+            "dbtfy_scrolling_banner_image_mHLijJ": {
+              "type": "_dbtfy-scrolling-banner_image",
+              "name": "t:general.settings.image",
+              "settings": {
+                "image": "shopify://shop_images/ONLY_LOGO.png",
+                "image_height_on_desktop": 50,
+                "image_height_on_mobile": 50
+              },
+              "blocks": {}
+            },
+            "dbtfy_scrolling_banner_text_R8BMKm": {
+              "type": "_dbtfy-scrolling-banner_text",
+              "settings": {
+                "text": "LIVORO HOME",
+                "url": "",
+                "heading_size": "h1",
+                "custom_heading_size": 70,
+                "is_all_stroked": false,
+                "stroked_text": ""
+              },
+              "blocks": {}
+            },
+            "dbtfy_scrolling_banner_image_cihWXp": {
+              "type": "_dbtfy-scrolling-banner_image",
+              "name": "t:general.settings.image",
+              "settings": {
+                "image": "shopify://shop_images/ONLY_LOGO.png",
+                "image_height_on_desktop": 50,
+                "image_height_on_mobile": 50
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dbtfy_scrolling_banner_text_NmX6fg",
+            "dbtfy_scrolling_banner_image_mHLijJ",
+            "dbtfy_scrolling_banner_text_R8BMKm",
+            "dbtfy_scrolling_banner_image_cihWXp"
+          ]
+        }
+      },
+      "name": "t:sections.dbtfy-scrolling-banner.name",
+      "settings": {
+        "show_on": "both",
+        "show_overlay": false,
+        "image_overlay_opacity": 0,
+        "marquee_direction": "right",
+        "animation_duration": 10,
+        "pause_on_hover": true,
+        "gap": 8,
+        "mobile_gap": 4,
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "color_scheme": "scheme-2",
+        "custom_color_scheme": "",
+        "padding___top": "small",
+        "custom_padding_top": 36,
+        "padding___bottom": "none",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy_separator_mXMHYD": {
+      "type": "dbtfy-separator",
+      "name": "Separator",
+      "settings": {
+        "show_on": "both",
+        "container_size": "",
+        "opacity": 100,
+        "separator_type": "waves_animated",
+        "flip": true,
+        "color": "#0a5d5d",
+        "separator_height": 65,
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "scheme-1",
+        "padding___top": "none",
+        "custom_padding_top": 36,
+        "padding___bottom": "none",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy_extended_collection_list_ncKj8j": {
+      "type": "dbtfy-extended-collection-list",
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 1,
+            "row_gap": 20,
+            "column_gap": 20,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "none",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {
+            "title_feedUd": {
+              "type": "_title",
+              "disabled": true,
+              "settings": {
+                "title": "Collections",
+                "custom_color": false,
+                "title_color": "#000000",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "size": "h2",
+                "style": "uppercase",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "extra_small",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "image_Td8UXf": {
+              "type": "_image",
+              "name": "t:general.settings.image",
+              "disabled": true,
+              "settings": {
+                "image": "shopify://shop_images/line_1f498263-bef6-4b08-860e-721b0224ef23.png",
+                "width": 200,
+                "full_width": false,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "padding___top": "none",
+                "custom_padding_top": 36,
+                "padding___bottom": "small",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "title_feedUd",
+            "image_Td8UXf"
+          ]
+        },
+        "extended-collection-list": {
+          "type": "_extended-collection-list",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "extended_collection_list_block_AMAyii": {
+              "type": "_extended-collection-list-block",
+              "settings": {
+                "collection": "home-decoer",
+                "image_position": "center center",
+                "title": "CHAIN LAMP",
+                "image": "shopify://shop_images/pendant-lamps-right.png"
+              },
+              "blocks": {}
+            },
+            "extended_collection_list_block_YK34C8": {
+              "type": "_extended-collection-list-block",
+              "settings": {
+                "collection": "home-decoer",
+                "image_position": "center center",
+                "title": "NEW PLANTS",
+                "image": "shopify://shop_images/potted-plants-right.png"
+              },
+              "blocks": {}
+            },
+            "extended_collection_list_block_hwyTAK": {
+              "type": "_extended-collection-list-block",
+              "settings": {
+                "collection": "home-decoer",
+                "image_position": "center center",
+                "title": "NEW CHAIR",
+                "image": "shopify://shop_images/lounge-chair-right.png"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "extended_collection_list_block_AMAyii",
+            "extended_collection_list_block_YK34C8",
+            "extended_collection_list_block_hwyTAK"
+          ]
+        }
+      },
+      "name": "t:sections.extended-collection-list.name",
+      "settings": {
+        "show_on": "both",
+        "container_size": "page-width",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "show_view_all": false,
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "columns_mobile": "1",
+        "inside_box": true,
+        "collection_content_alignment": "middle-left",
+        "show_collection_title": true,
+        "show_collection_product_count": false,
+        "enable_animation_on_hover": true,
+        "show_collection_button": true,
+        "button_style": "button button--primary",
+        "button_size": "button--medium",
+        "content_spacing": 11,
+        "title_size": "h2",
+        "overlay": 0,
+        "slider_on": "mobile",
+        "enable_autoplay": false,
+        "autoplay_speed": 5,
+        "enable_loop": true,
+        "enable_dots": true,
+        "enable_arrows": false,
+        "arrow_color": "inherit",
+        "custom_arrow_color": "#ffffff",
+        "custom_arrow_background_color": "#7559ff",
+        "arrow_position": "middle",
+        "color_scheme": "scheme-3",
+        "custom_color_scheme": "",
+        "padding___top": "large",
+        "custom_padding_top": 36,
+        "padding___bottom": "large",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy_separator_4Kegd9": {
+      "type": "dbtfy-separator",
+      "name": "Separator",
+      "settings": {
+        "show_on": "both",
+        "container_size": "",
+        "opacity": 100,
+        "separator_type": "diagonal",
+        "flip": false,
+        "color": "#0a5d5d",
+        "separator_height": 65,
+        "color_scheme": "scheme-3",
+        "custom_color_scheme": "",
+        "padding___top": "none",
+        "custom_padding_top": 36,
+        "padding___bottom": "none",
+        "custom_padding_bottom": 36
+      }
+    },
+    "featured_collection1": {
+      "type": "featured-collection",
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 1,
+            "row_gap": 20,
+            "column_gap": 20,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "none",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {
+            "image_QY8Whp": {
+              "type": "_image",
+              "name": "t:general.settings.image",
+              "settings": {
+                "image": "shopify://shop_images/line_2.png",
+                "width": 200,
+                "full_width": false,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "padding___top": "none",
+                "custom_padding_top": 36,
+                "padding___bottom": "none",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            },
+            "title_XHmYJk": {
+              "type": "_title",
+              "settings": {
+                "title": "Best of Home Decor",
+                "custom_color": false,
+                "title_color": "#000000",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "size": "h2",
+                "style": "uppercase",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "small",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_QY8Whp",
+            "title_XHmYJk"
+          ]
+        }
+      },
+      "settings": {
+        "show_on": "both",
+        "container_size": "",
+        "collection": "home-decoer",
+        "products_to_show": 25,
+        "columns_desktop": 3,
+        "list_type": false,
+        "show_view_all": false,
+        "view_all_text": "View all",
+        "view_all_link": "",
+        "view_all_style": "link underlined-link button--link",
+        "button_size": "inherit",
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "custom_badge_label": "",
+        "custom_badge_icon": "",
+        "custom_badge_bg_color": "#0a5d5d",
+        "custom_badge_color": "#ffffff",
+        "image_ratio": "100%",
+        "image_crop_position": "top center",
+        "image_shape": "parallelogram",
+        "show_secondary_image": "inherit",
+        "show_carousel": "inherit",
+        "show_vendor": false,
+        "show_rating": true,
+        "show_description": false,
+        "show_price": true,
+        "show_variant_swatches": "inherit",
+        "show_out_of_stock_products": true,
+        "show_sold_out_badge": true,
+        "show_sale_badge": true,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "slider_on": "both",
+        "enable_autoplay": true,
+        "autoplay_speed": 5,
+        "enable_loop": true,
+        "enable_dots": false,
+        "enable_arrows": false,
+        "arrow_color": "inherit",
+        "custom_arrow_color": "#ffffff",
+        "custom_arrow_background_color": "#7559ff",
+        "arrow_position": "bottom",
+        "color_scheme": "scheme-2",
+        "custom_color_scheme": "",
+        "padding___top": "custom",
+        "custom_padding_top": 0,
+        "padding___bottom": "custom",
+        "custom_padding_bottom": 0
+      }
+    },
+    "dbtfy_separator_jJCK9f": {
+      "type": "dbtfy-separator",
+      "name": "Separator",
+      "settings": {
+        "show_on": "both",
+        "container_size": "",
+        "opacity": 100,
+        "separator_type": "diagonal",
+        "flip": true,
+        "color": "#0a5d5d",
+        "separator_height": 65,
+        "color_scheme": "scheme-3",
+        "custom_color_scheme": "",
+        "padding___top": "none",
+        "custom_padding_top": 48,
+        "padding___bottom": "none",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy_vertical_ticker_EMGqCz": {
+      "type": "dbtfy-vertical-ticker",
+      "blocks": {
+        "cta-block": {
+          "type": "_cta_block",
+          "static": true,
+          "settings": {
+            "padding___top": "medium",
+            "custom_padding_top": 36,
+            "padding___bottom": "medium",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {
+            "image_wBEFBM": {
+              "type": "_image",
+              "name": "t:general.settings.image",
+              "settings": {
+                "image": "shopify://shop_images/line_1f498263-bef6-4b08-860e-721b0224ef23.png",
+                "width": 200,
+                "full_width": false,
+                "alignment": "text-left",
+                "alignment_mobile": "mobile-text-center",
+                "padding___top": "none",
+                "custom_padding_top": 36,
+                "padding___bottom": "none",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            },
+            "title_eKfktf": {
+              "type": "_title",
+              "settings": {
+                "title": "MODERN <strong>HOME </strong>STYLE",
+                "custom_color": false,
+                "title_color": "#000000",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "text-left",
+                "alignment_mobile": "mobile-text-center",
+                "size": "h2",
+                "style": "uppercase",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "extra_small",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "description_GVy39N": {
+              "type": "_description",
+              "settings": {
+                "description": "<p>Discover beautifully-crafted décor and furniture pieces made to elevate every corner of your home. From subtle accents to statement essentials, bring warmth, comfort, and elegance into your everyday living.</p>",
+                "alignment": "text-left",
+                "alignment_mobile": "mobile-text-center",
+                "custom_bullet_icon": "",
+                "text_animation": "none",
+                "glacier_speed": 5,
+                "typing_speed": 50,
+                "typing_initial_delay": 0,
+                "typing_pause_duration": 2000,
+                "typing_deleting_speed": 30,
+                "typing_show_cursor": true,
+                "typing_cursor_character": "|",
+                "typing_cursor_blink_duration": 500,
+                "typing_hide_cursor_while_typing": false,
+                "padding___top": "small",
+                "custom_padding_top": 0,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            },
+            "single_button_R7RLgJ": {
+              "type": "_single_button",
+              "name": "t:blocks.single_button.heading",
+              "settings": {
+                "button_label": "BUY NOW",
+                "button_link": "shopify://collections/home-decoer",
+                "button_style": "button button--secondary",
+                "button_size": "",
+                "text_style": "uppercase",
+                "button_icon_show": true,
+                "button_icon": "arrow_right_alt",
+                "icon_position": "right",
+                "alignment": "justify-content-left",
+                "alignment_mobile": "mobile-justify-content-center",
+                "padding___top": "small",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_wBEFBM",
+            "title_eKfktf",
+            "description_GVy39N",
+            "single_button_R7RLgJ"
+          ]
+        },
+        "dbtfy-vertical-tickers": {
+          "type": "_dbtfy-vertical-tickers",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "dbtfy_vertical_ticker_HXVGFH": {
+              "type": "_dbtfy-vertical-ticker",
+              "settings": {
+                "text": "Curate Your Space"
+              },
+              "blocks": {}
+            },
+            "dbtfy_vertical_ticker_rQJnn7": {
+              "type": "_dbtfy-vertical-ticker",
+              "settings": {
+                "text": "Inspire Every Corner"
+              },
+              "blocks": {}
+            },
+            "dbtfy_vertical_ticker_Cmgd98": {
+              "type": "_dbtfy-vertical-ticker",
+              "settings": {
+                "text": "Redefine Your Home"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dbtfy_vertical_ticker_HXVGFH",
+            "dbtfy_vertical_ticker_rQJnn7",
+            "dbtfy_vertical_ticker_Cmgd98"
+          ]
+        }
+      },
+      "name": "t:sections.vertical-ticker.name",
+      "settings": {
+        "show_on": "both",
+        "container_size": "page-full",
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "ticker_placement_desktop": "left",
+        "ticker_placement_mobile": "top",
+        "number_of_tickers_display": 8,
+        "ticker_speed": 1,
+        "text_size": 3,
+        "bold": true,
+        "uppercase": true,
+        "italic": true,
+        "space_between_tickers": 10,
+        "pause_ticker_on_hover": false,
+        "show_content": "both",
+        "content_default_color_scheme": "scheme-1",
+        "content_default_custom_color_scheme": "",
+        "overlay_opacity": 0,
+        "default_color_scheme": "custom",
+        "custom_color": "scheme-2",
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "",
+        "padding___top": "large",
+        "custom_padding_top": 36,
+        "padding___bottom": "large",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy_separator_RcxVbV": {
+      "type": "dbtfy-separator",
+      "disabled": true,
+      "name": "Separator",
+      "settings": {
+        "show_on": "both",
+        "container_size": "",
+        "opacity": 100,
+        "separator_type": "waves",
+        "flip": false,
+        "color": "#0a5d5d",
+        "separator_height": 65,
+        "color_scheme": "scheme-3",
+        "custom_color_scheme": "",
+        "padding___top": "none",
+        "custom_padding_top": 36,
+        "padding___bottom": "none",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy_lookbook_inXANg": {
+      "type": "dbtfy-lookbook",
+      "blocks": {
+        "dbtfy_lookbook_points_iwhFdM": {
+          "type": "_dbtfy-lookbook-points",
+          "settings": {},
+          "blocks": {
+            "dbtfy_lookbook_point_bFP6wC": {
+              "type": "_dbtfy-lookbook-point",
+              "settings": {
+                "heading": "Point",
+                "title": "Mini Bamboo Pot",
+                "description": "",
+                "product": "mini-bamboo-pot",
+                "use_default_point_color": true,
+                "custom_point_color": "#0a5d5d",
+                "show_image": true,
+                "show_price": true,
+                "btn_text": "View product",
+                "desktop_pos_left": 5,
+                "desktop_pos_top": 19,
+                "mobile_pos_left": 40,
+                "mobile_pos_top": 33
+              },
+              "blocks": {}
+            },
+            "dbtfy_lookbook_point_XkPjdm": {
+              "type": "_dbtfy-lookbook-point",
+              "settings": {
+                "heading": "Point",
+                "title": "Matte Black Sky",
+                "description": "",
+                "product": "matte-black-sky",
+                "use_default_point_color": true,
+                "custom_point_color": "#ffffff",
+                "show_image": true,
+                "show_price": true,
+                "btn_text": "View product",
+                "desktop_pos_left": 71,
+                "desktop_pos_top": 18,
+                "mobile_pos_left": 60,
+                "mobile_pos_top": 40
+              },
+              "blocks": {}
+            },
+            "dbtfy_lookbook_point_mK863f": {
+              "type": "_dbtfy-lookbook-point",
+              "settings": {
+                "heading": "Point",
+                "title": "Modern Armrest Sofa",
+                "description": "",
+                "product": "modern-armrest-sofa",
+                "use_default_point_color": true,
+                "custom_point_color": "#ffffff",
+                "show_image": true,
+                "show_price": true,
+                "btn_text": "View product",
+                "desktop_pos_left": 45,
+                "desktop_pos_top": 70,
+                "mobile_pos_left": 40,
+                "mobile_pos_top": 78
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dbtfy_lookbook_point_bFP6wC",
+            "dbtfy_lookbook_point_XkPjdm",
+            "dbtfy_lookbook_point_mK863f"
+          ]
+        },
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 1,
+            "row_gap": 20,
+            "column_gap": 20,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "small",
+            "custom_padding_top": 36,
+            "padding___bottom": "small",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {
+            "image_BL4xka": {
+              "type": "_image",
+              "name": "t:general.settings.image",
+              "settings": {
+                "image": "shopify://shop_images/line_1f498263-bef6-4b08-860e-721b0224ef23.png",
+                "width": 200,
+                "full_width": false,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "padding___top": "none",
+                "custom_padding_top": 36,
+                "padding___bottom": "none",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            },
+            "title_UimKxd": {
+              "type": "_title",
+              "settings": {
+                "title": "<strong>Elevated</strong> Home<strong> Looks</strong>",
+                "custom_color": false,
+                "title_color": "#000000",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "text-center",
+                "alignment_mobile": "mobile-text-center",
+                "size": "h2",
+                "style": "capitalize",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "custom",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "description_e7mATx": {
+              "type": "_description",
+              "name": "t:general.settings.description",
+              "settings": {
+                "description": "<p>Designed to Inspire Your Space</p>",
+                "alignment": "text-center",
+                "alignment_mobile": "mobile-text-center",
+                "custom_bullet_icon": "",
+                "text_animation": "none",
+                "glacier_speed": 5,
+                "typing_speed": 50,
+                "typing_initial_delay": 0,
+                "typing_pause_duration": 2000,
+                "typing_deleting_speed": 30,
+                "typing_show_cursor": true,
+                "typing_cursor_character": "|",
+                "typing_cursor_blink_duration": 500,
+                "typing_hide_cursor_while_typing": false,
+                "padding___top": "custom",
+                "custom_padding_top": 0,
+                "padding___bottom": "custom",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_BL4xka",
+            "title_UimKxd",
+            "description_e7mATx"
+          ]
+        }
+      },
+      "block_order": [
+        "dbtfy_lookbook_points_iwhFdM"
+      ],
+      "name": "t:sections.dbtfy-lookbook.name",
+      "settings": {
+        "show_on": "both",
+        "container_size": "",
+        "desktop_image": "shopify://shop_images/premium-lookbook-16-9.png",
+        "mobile_image": "shopify://shop_images/premium-home-decor-lookbook.png",
+        "image_border_radius": 0.4,
+        "point_color": "#ffffff",
+        "point_diameter": 1.6,
+        "tooltip_width": 260,
+        "tooltip_text_align": "center",
+        "tooltip_btn_style": "button button--primary",
+        "color_scheme": "scheme-3",
+        "custom_color_scheme": "",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy_testimonials_tBXxwM": {
+      "type": "dbtfy-testimonials",
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 1,
+            "row_gap": 20,
+            "column_gap": 20,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "none",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {
+            "image_y8Btke": {
+              "type": "_image",
+              "name": "t:general.settings.image",
+              "settings": {
+                "image": "shopify://shop_images/line_1f498263-bef6-4b08-860e-721b0224ef23.png",
+                "width": 200,
+                "full_width": false,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "padding___top": "none",
+                "custom_padding_top": 36,
+                "padding___bottom": "none",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            },
+            "title_RYLJHY": {
+              "type": "_title",
+              "settings": {
+                "title": "Stories From <strong>Our Homes</strong>",
+                "custom_color": false,
+                "title_color": "#000000",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "size": "h2",
+                "style": "uppercase",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "small",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_y8Btke",
+            "title_RYLJHY"
+          ]
+        },
+        "testimonials": {
+          "type": "_dbtfy-testimonials",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "dbtfy_testimonial_item_enMW4K": {
+              "type": "_dbtfy-testimonial-item",
+              "settings": {
+                "star_rating": 5,
+                "video_link": "",
+                "enable_autoplay": false,
+                "enalbe_mute": false,
+                "text": "<p>Beautiful quality and elegant finish! Instantly elevated my living room's worth every rupee.</p>",
+                "date": "",
+                "profession": "INTERIOR DESIGNER",
+                "author": "Noah Bennett",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "dbtfy_testimonial_item_NEHPjd": {
+              "type": "_dbtfy-testimonial-item",
+              "settings": {
+                "star_rating": 5,
+                "video_link": "",
+                "enable_autoplay": false,
+                "enalbe_mute": false,
+                "text": "<p>Crafted with Precision: Explore our Collection of Perfectly Designed Pieces.</p>",
+                "date": "",
+                "profession": "ARCHITECT",
+                "author": "Oliver Harris",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "dbtfy_testimonial_item_RWWHH9": {
+              "type": "_dbtfy-testimonial-item",
+              "settings": {
+                "star_rating": 5,
+                "video_link": "",
+                "enable_autoplay": false,
+                "enalbe_mute": false,
+                "text": "<p>Minimal, modern, and perfectly crafted. The colour and texture are just stunning.</p>",
+                "date": "",
+                "profession": "ARCHITECT",
+                "author": "Mason Carter",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "dbtfy_testimonial_item_nqULcf": {
+              "type": "_dbtfy-testimonial-item",
+              "settings": {
+                "star_rating": 5,
+                "video_link": "",
+                "enable_autoplay": false,
+                "enalbe_mute": false,
+                "text": "<p>Love the premium feel! Blends effortlessly into my space and looks even better in person.</p>",
+                "date": "",
+                "profession": "SOFTWARE ENGINEER",
+                "author": "Henry Collins",
+                "link": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dbtfy_testimonial_item_enMW4K",
+            "dbtfy_testimonial_item_NEHPjd",
+            "dbtfy_testimonial_item_RWWHH9",
+            "dbtfy_testimonial_item_nqULcf"
+          ]
+        }
+      },
+      "settings": {
+        "show_on": "both",
+        "container_size": "page-width",
+        "display_type": "carousel",
+        "layout": "layout_1",
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "columns_desktop": 3,
+        "enable_star_rating": true,
+        "enable_author_image": false,
+        "enable_line_before_author_name": false,
+        "enable_default_avatar": true,
+        "enable_author_name": true,
+        "enable_paragraph": true,
+        "enable_compay_profession": true,
+        "enable_date": true,
+        "date_format": "1",
+        "profile_picture_style": "rounded",
+        "user_data_location": "below",
+        "profile_content_alignment": "left",
+        "review_content_aignment": "left",
+        "border_radius": "default",
+        "border_radius_custom": 10,
+        "media_position": "image-first",
+        "enable_quotation_icon": true,
+        "icon": "format_quote",
+        "custom_icon": "shopify://shop_images/double-quotes-svgrepo-com_1.svg",
+        "icon_position": "right",
+        "icon_height": "extra-large",
+        "icon_height_mobile": "medium",
+        "line_limit": 5,
+        "enable_read_more": true,
+        "button_style": "button button--primary",
+        "button_size": "inherit",
+        "read_more_label": "Show more",
+        "read_less_label": "Show less",
+        "enable_read_more_shadow": false,
+        "show_more_gradient": "",
+        "show_more_gradient_height": 40,
+        "slider_on": "both",
+        "enable_autoplay": true,
+        "autoplay_speed": 5,
+        "enable_loop": true,
+        "enable_dots": true,
+        "enable_arrows": false,
+        "arrow_color": "inherit",
+        "custom_arrow_color": "#ffffff",
+        "custom_arrow_background_color": "#7559ff",
+        "arrow_position": "bottom",
+        "block_color": "custom",
+        "color_scheme_block": "scheme-2",
+        "custom_color_scheme_block": "scheme-2",
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 36
+      }
+    },
+    "featured_blog_FF8jNR": {
+      "type": "featured-blog",
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 1,
+            "row_gap": 20,
+            "column_gap": 20,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "none",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {
+            "image_9jLaHK": {
+              "type": "_image",
+              "name": "t:general.settings.image",
+              "settings": {
+                "image": "shopify://shop_images/line_1f498263-bef6-4b08-860e-721b0224ef23.png",
+                "width": 200,
+                "full_width": false,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "padding___top": "none",
+                "custom_padding_top": 36,
+                "padding___bottom": "none",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            },
+            "title_Bb4Gy4": {
+              "type": "_title",
+              "settings": {
+                "title": "Explore the <strong>Look</strong>",
+                "custom_color": false,
+                "title_color": "#f7ffff",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "size": "h2",
+                "style": "uppercase",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "small",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_9jLaHK",
+            "title_Bb4Gy4"
+          ]
+        }
+      },
+      "settings": {
+        "show_on": "both",
+        "container_size": "page-width",
+        "blog": "news",
+        "post_limit": 3,
+        "columns_desktop": 3,
+        "columns_mobile": "2",
+        "show_image": true,
+        "image_ratio": "100%",
+        "image_crop_position": "center center",
+        "show_date": true,
+        "show_author": false,
+        "show_view_all": false,
+        "button_style": "button button--primary",
+        "button_size": "inherit",
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "description_word_count": 5,
+        "show_tags": true,
+        "show_comments": false,
+        "slider_on": "mobile",
+        "enable_autoplay": true,
+        "autoplay_speed": 5,
+        "enable_loop": true,
+        "enable_dots": false,
+        "enable_arrows": true,
+        "arrow_color": "inherit",
+        "custom_arrow_color": "#ffffff",
+        "custom_arrow_background_color": "#7559ff",
+        "arrow_position": "middle",
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy_separator_BRmhiR": {
+      "type": "dbtfy-separator",
+      "name": "Separator",
+      "settings": {
+        "show_on": "both",
+        "container_size": "",
+        "opacity": 100,
+        "separator_type": "waves_2",
+        "flip": false,
+        "color": "#0a5d5d",
+        "separator_height": 65,
+        "color_scheme": "scheme-3",
+        "custom_color_scheme": "",
+        "padding___top": "none",
+        "custom_padding_top": 48,
+        "padding___bottom": "none",
+        "custom_padding_bottom": 36
+      }
+    },
+    "custom_column_YRVfa4": {
+      "type": "custom-column",
+      "blocks": {
+        "custom_column_H9ByCL": {
+          "type": "_custom-column",
+          "name": "t:general.settings.column",
+          "settings": {
+            "show_on": "both",
+            "desktop_col_width": 6,
+            "tablet_col_width": 12,
+            "mobile_col_width": 12,
+            "gap": 5,
+            "vertical_alignment": "",
+            "text_alignment": "",
+            "padding": "inherit",
+            "custom_padding_horizontal": 36,
+            "custom_padding_vertical": 36
+          },
+          "blocks": {
+            "row_Ugb9yJ": {
+              "type": "_row",
+              "name": "Row",
+              "settings": {
+                "show_on": "both",
+                "text_alignment": "",
+                "vertical_alignment": "none",
+                "gap": "custom",
+                "column_gap": 15,
+                "row_gap": 15,
+                "padding___top": "none",
+                "custom_padding_top": 36,
+                "padding___bottom": "none",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {
+                "image_ekNCey": {
+                  "type": "_image",
+                  "name": "Image",
+                  "settings": {
+                    "image": "shopify://shop_images/line_2.png",
+                    "width": 200,
+                    "full_width": false,
+                    "alignment": "text-left",
+                    "alignment_mobile": "mobile-text-center",
+                    "padding___top": "none",
+                    "custom_padding_top": 36,
+                    "padding___bottom": "none",
+                    "custom_padding_bottom": 36
+                  },
+                  "blocks": {}
+                },
+                "caption_aiUWQt": {
+                  "type": "_caption",
+                  "name": "Caption",
+                  "settings": {
+                    "caption": "Styled Moments, Real Homes",
+                    "alignment": "",
+                    "alignment_mobile": "",
+                    "text_style": "inherit",
+                    "padding___top": "custom",
+                    "custom_padding_top": 0,
+                    "padding___bottom": "custom",
+                    "custom_padding_bottom": 0
+                  },
+                  "blocks": {}
+                },
+                "title_BqT6Dg": {
+                  "type": "_title",
+                  "name": "Title",
+                  "settings": {
+                    "title": "Home <strong>Décor</strong> in <strong>Motion</strong>",
+                    "custom_color": true,
+                    "title_color": "#f7ffff",
+                    "title_line": "none",
+                    "title_bg_color": "#000000",
+                    "highlighted_1_border_radius": 8,
+                    "highlighted_1_border_width": 0,
+                    "highlighted_1_border": "solid",
+                    "highlighted_1_border_color": "#003934",
+                    "highlighted_1_vertical_padding": 20,
+                    "highlighted_1_horizontal_padding": 20,
+                    "stroke_thickness": 20,
+                    "half_stroke_thickness": 40,
+                    "stroke_vertical_position": 100,
+                    "alignment": "inherit",
+                    "alignment_mobile": "mobile-text-center",
+                    "size": "h2",
+                    "style": "capitalize",
+                    "icon_enable": false,
+                    "icon": "lock",
+                    "icon_size": "medium",
+                    "icon_alignment": "align-items-center",
+                    "padding___top": "custom",
+                    "custom_padding_top": 0,
+                    "padding___bottom": "custom",
+                    "custom_padding_bottom": 0
+                  },
+                  "blocks": {}
+                },
+                "description_W7P6aC": {
+                  "type": "_description",
+                  "name": "Description",
+                  "settings": {
+                    "description": "<p>Discover how our home décor pieces come to life in real spaces. Watch Instagram stories featuring styled rooms, cozy details, and everyday inspiration designed for modern living.</p>",
+                    "alignment": "",
+                    "alignment_mobile": "mobile-text-center",
+                    "custom_bullet_icon": "",
+                    "text_animation": "none",
+                    "glacier_speed": 5,
+                    "typing_speed": 50,
+                    "typing_initial_delay": 0,
+                    "typing_pause_duration": 2000,
+                    "typing_deleting_speed": 30,
+                    "typing_show_cursor": true,
+                    "typing_cursor_character": "|",
+                    "typing_cursor_blink_duration": 500,
+                    "typing_hide_cursor_while_typing": false,
+                    "padding___top": "custom",
+                    "custom_padding_top": 0,
+                    "padding___bottom": "custom",
+                    "custom_padding_bottom": 0
+                  },
+                  "blocks": {}
+                },
+                "single_button_nQ4fxa": {
+                  "type": "_single_button",
+                  "name": "Single Button",
+                  "settings": {
+                    "button_label": "Explore Our Stories",
+                    "button_link": "shopify://blogs/home-decor",
+                    "button_style": "button button--primary",
+                    "button_size": "",
+                    "text_style": "uppercase",
+                    "button_icon_show": true,
+                    "button_icon": "home",
+                    "icon_position": "left",
+                    "alignment": "justify-content-left",
+                    "alignment_mobile": "mobile-justify-content-center",
+                    "padding___top": "custom",
+                    "custom_padding_top": 0,
+                    "padding___bottom": "custom",
+                    "custom_padding_bottom": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "image_ekNCey",
+                "caption_aiUWQt",
+                "title_BqT6Dg",
+                "description_W7P6aC",
+                "single_button_nQ4fxa"
+              ]
+            }
+          },
+          "block_order": [
+            "row_Ugb9yJ"
+          ]
+        },
+        "custom_column_kichFb": {
+          "type": "_custom-column",
+          "name": "t:general.settings.column",
+          "settings": {
+            "show_on": "both",
+            "desktop_col_width": 6,
+            "tablet_col_width": 12,
+            "mobile_col_width": 12,
+            "gap": 5,
+            "vertical_alignment": "align-content-center",
+            "text_alignment": "text-center",
+            "padding": "custom",
+            "custom_padding_horizontal": 16,
+            "custom_padding_vertical": 64
+          },
+          "blocks": {
+            "title_3j6iRD": {
+              "type": "_title",
+              "name": "Title",
+              "settings": {
+                "title": "Our Story's",
+                "custom_color": false,
+                "title_color": "#e4e4e4",
+                "title_line": "curve",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "text-center",
+                "alignment_mobile": "mobile-text-center",
+                "size": "inherit",
+                "style": "inherit",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            },
+            "cc_dbtfy_instagram_story_jAFzEn": {
+              "type": "_cc_dbtfy-instagram-story",
+              "name": "Instagram Stories",
+              "settings": {
+                "show_on": "both",
+                "vertical_center": true,
+                "autoplay_speed": 5,
+                "enable_dots": false,
+                "enable_arrows": false,
+                "show_center": true,
+                "arrow_color": "inherit",
+                "custom_arrow_color": "#ffffff",
+                "custom_arrow_background_color": "#7559ff",
+                "padding___top": "none",
+                "custom_padding_top": 0,
+                "padding___bottom": "none",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {
+                "dbtfy-instagram-story": {
+                  "type": "_dbtfy-instagram-story",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {
+                    "dbtfy_instagram_user_post_PRDrA9": {
+                      "type": "_dbtfy-instagram-user-post",
+                      "settings": {
+                        "user_name": "@StyledNestHome",
+                        "highlight_story": true,
+                        "highlight_color_for_story": "#f7ffff",
+                        "profile_picture": "shopify://shop_images/image-1.png"
+                      },
+                      "blocks": {
+                        "dbtfy_instagram_user_story_MawbXe": {
+                          "type": "_dbtfy-instagram-user-story",
+                          "blocks": {}
+                        }
+                      },
+                      "block_order": [
+                        "dbtfy_instagram_user_story_MawbXe"
+                      ]
+                    },
+                    "dbtfy_instagram_user_post_fynzhE": {
+                      "type": "_dbtfy-instagram-user-post",
+                      "settings": {
+                        "user_name": "@GreenAuraDecor",
+                        "highlight_story": true,
+                        "highlight_color_for_story": "#f7ffff",
+                        "profile_picture": "shopify://shop_images/image-3.png"
+                      },
+                      "blocks": {
+                        "dbtfy_instagram_user_story_4NHxWE": {
+                          "type": "_dbtfy-instagram-user-story",
+                          "blocks": {}
+                        }
+                      },
+                      "block_order": [
+                        "dbtfy_instagram_user_story_4NHxWE"
+                      ]
+                    },
+                    "dbtfy_instagram_user_post_giTw3c": {
+                      "type": "_dbtfy-instagram-user-post",
+                      "settings": {
+                        "user_name": "@ModernHavenCo",
+                        "highlight_story": true,
+                        "highlight_color_for_story": "#f7ffff",
+                        "profile_picture": "shopify://shop_images/image-5.png"
+                      },
+                      "blocks": {
+                        "dbtfy_instagram_user_story_DcccrM": {
+                          "type": "_dbtfy-instagram-user-story",
+                          "blocks": {}
+                        }
+                      },
+                      "block_order": [
+                        "dbtfy_instagram_user_story_DcccrM"
+                      ]
+                    },
+                    "dbtfy_instagram_user_post_bGqiKb": {
+                      "type": "_dbtfy-instagram-user-post",
+                      "name": "t:sections.dbtfy-instastory.user_post.name",
+                      "settings": {
+                        "user_name": "@CalmLivingStudio",
+                        "highlight_story": true,
+                        "highlight_color_for_story": "#f7ffff",
+                        "profile_picture": "shopify://shop_images/image-6.png"
+                      },
+                      "blocks": {
+                        "dbtfy_instagram_user_story_awD6B7": {
+                          "type": "_dbtfy-instagram-user-story",
+                          "name": "t:sections.dbtfy-instastory.user_story.name",
+                          "blocks": {}
+                        }
+                      },
+                      "block_order": [
+                        "dbtfy_instagram_user_story_awD6B7"
+                      ]
+                    },
+                    "dbtfy_instagram_user_post_BiJYeM": {
+                      "type": "_dbtfy-instagram-user-post",
+                      "name": "t:sections.dbtfy-instastory.user_post.name",
+                      "settings": {
+                        "user_name": "@HomeBloomDesign",
+                        "highlight_story": true,
+                        "highlight_color_for_story": "#f7ffff",
+                        "profile_picture": "shopify://shop_images/image-7.png"
+                      },
+                      "blocks": {
+                        "dbtfy_instagram_user_story_Nnk9ta": {
+                          "type": "_dbtfy-instagram-user-story",
+                          "name": "t:sections.dbtfy-instastory.user_story.name",
+                          "blocks": {}
+                        }
+                      },
+                      "block_order": [
+                        "dbtfy_instagram_user_story_Nnk9ta"
+                      ]
+                    }
+                  },
+                  "block_order": [
+                    "dbtfy_instagram_user_post_PRDrA9",
+                    "dbtfy_instagram_user_post_fynzhE",
+                    "dbtfy_instagram_user_post_giTw3c",
+                    "dbtfy_instagram_user_post_bGqiKb",
+                    "dbtfy_instagram_user_post_BiJYeM"
+                  ]
+                }
+              },
+              "block_order": []
+            }
+          },
+          "block_order": [
+            "title_3j6iRD",
+            "cc_dbtfy_instagram_story_jAFzEn"
+          ]
+        }
+      },
+      "block_order": [
+        "custom_column_H9ByCL",
+        "custom_column_kichFb"
+      ],
+      "name": "Custom Columns",
+      "settings": {
+        "show_on": "both",
+        "container_size": "page-width",
+        "color_scheme": "scheme-2",
+        "custom_color_scheme": "",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy_separator_bBAb34": {
+      "type": "dbtfy-separator",
+      "name": "Separator",
+      "settings": {
+        "show_on": "both",
+        "container_size": "",
+        "opacity": 100,
+        "separator_type": "waves_2",
+        "flip": true,
+        "color": "#0a5d5d",
+        "separator_height": 65,
+        "color_scheme": "scheme-3",
+        "custom_color_scheme": "",
+        "padding___top": "none",
+        "custom_padding_top": 48,
+        "padding___bottom": "none",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy-instagram": {
+      "type": "dbtfy-instagram",
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 1,
+            "row_gap": 20,
+            "column_gap": 20,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "none",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {
+            "image_Aip4GR": {
+              "type": "_image",
+              "name": "t:general.settings.image",
+              "settings": {
+                "image": "shopify://shop_images/line_1f498263-bef6-4b08-860e-721b0224ef23.png",
+                "width": 200,
+                "full_width": false,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "padding___top": "none",
+                "custom_padding_top": 36,
+                "padding___bottom": "none",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            },
+            "title_AYMDPx": {
+              "type": "_title",
+              "settings": {
+                "title": "See What’s <strong>New</strong>",
+                "custom_color": true,
+                "title_color": "#0a5d5d",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "size": "h2",
+                "style": "uppercase",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_Aip4GR",
+            "title_AYMDPx"
+          ]
+        },
+        "instagram_images": {
+          "type": "_instagram_images",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "instagram_image_TPY9nE": {
+              "type": "_instagram_image",
+              "settings": {
+                "image": "shopify://shop_images/decorative-sculpture.png"
+              },
+              "blocks": {}
+            },
+            "instagram_image_ACFgKe": {
+              "type": "_instagram_image",
+              "settings": {
+                "image": "shopify://shop_images/bedding-throw-blanket.png"
+              },
+              "blocks": {}
+            },
+            "instagram_image_pRTmp9": {
+              "type": "_instagram_image",
+              "settings": {
+                "image": "shopify://shop_images/table-lamp-minimal.png"
+              },
+              "blocks": {}
+            },
+            "instagram_image_haRXYq": {
+              "type": "_instagram_image",
+              "settings": {
+                "image": "shopify://shop_images/designer-vase-flower.png"
+              },
+              "blocks": {}
+            },
+            "instagram_image_AJpREt": {
+              "type": "_instagram_image",
+              "settings": {
+                "image": "shopify://shop_images/wall-art-frame.png"
+              },
+              "blocks": {}
+            },
+            "instagram_image_Wfh7mp": {
+              "type": "_instagram_image",
+              "settings": {
+                "image": "shopify://shop_images/modern-accent-chair.png"
+              },
+              "blocks": {}
+            },
+            "instagram_image_QaUHq4": {
+              "type": "_instagram_image",
+              "settings": {
+                "image": "shopify://shop_images/cozy-sofa-section.png"
+              },
+              "blocks": {}
+            },
+            "instagram_image_3ArXrf": {
+              "type": "_instagram_image",
+              "settings": {
+                "image": "shopify://shop_images/wood-coffee-table.png"
+              },
+              "blocks": {}
+            },
+            "instagram_image_cDAQjK": {
+              "type": "_instagram_image",
+              "settings": {
+                "image": "shopify://shop_images/modern-accent-chair.png"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "instagram_image_TPY9nE",
+            "instagram_image_ACFgKe",
+            "instagram_image_pRTmp9",
+            "instagram_image_haRXYq",
+            "instagram_image_AJpREt",
+            "instagram_image_Wfh7mp",
+            "instagram_image_QaUHq4",
+            "instagram_image_3ArXrf",
+            "instagram_image_cDAQjK"
+          ]
+        }
+      },
+      "settings": {
+        "show_on": "both",
+        "container_size": "page-full",
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "enalbled_icon": false,
+        "alignment": "justify-content-center",
+        "dbtfy_instagram_feed_size": 50,
+        "column_desktop": 6,
+        "column_mobile": "2",
+        "slider_on": "both",
+        "enable_autoplay": true,
+        "autoplay_speed": 5,
+        "enable_loop": true,
+        "enable_dots": false,
+        "enable_arrows": false,
+        "arrow_color": "inherit",
+        "custom_arrow_color": "#ffffff",
+        "custom_arrow_background_color": "#7559ff",
+        "arrow_position": "middle",
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "",
+        "padding___top": "small",
+        "custom_padding_top": 56,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 56
+      }
+    },
+    "dbtfy_horizontal_ticker_ra6W7V": {
+      "type": "dbtfy-horizontal-ticker",
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 1,
+            "row_gap": 20,
+            "column_gap": 20,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "none",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {}
+        },
+        "dbtfy-horizontal-ticker-block": {
+          "type": "_dbtfy-horizontal-ticker-block",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "dbtfy_horizontal_ticker_KRjerK": {
+              "type": "_dbtfy-horizontal-ticker",
+              "name": "t:sections.horizontal_ticker.name_1",
+              "settings": {
+                "star_rating": 5,
+                "text": "Delivery was fast and packaging was excellent. The product feels luxurious and sturdy.",
+                "author_image": "shopify://shop_images/riya-malhotra.png",
+                "author": "<p><em><strong>Liam Anderson</strong></em></p>",
+                "color_scheme": "scheme-1",
+                "custom_color_scheme": "scheme-3"
+              },
+              "blocks": {}
+            },
+            "dbtfy_horizontal_ticker_F6gbG9": {
+              "type": "_dbtfy-horizontal-ticker",
+              "name": "t:sections.horizontal_ticker.name_1",
+              "settings": {
+                "star_rating": 5,
+                "text": "Exactly what I pictured, simple, classy, and beautifully made. Highly recommend!",
+                "author_image": "shopify://shop_images/veer-kapoor.png",
+                "author": "<p><em><strong>Ethan Walker</strong></em></p>",
+                "color_scheme": "scheme-1",
+                "custom_color_scheme": "scheme-3"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dbtfy_horizontal_ticker_KRjerK",
+            "dbtfy_horizontal_ticker_F6gbG9"
+          ]
+        }
+      },
+      "name": "t:sections.horizontal_ticker.name",
+      "settings": {
+        "show_on": "both",
+        "show_overlay": false,
+        "image_overlay_opacity": 0,
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "marquee_direction": "left",
+        "animation_duration": 12,
+        "pause_on_hover": true,
+        "gap": 6,
+        "mobile_gap": 4,
+        "color_scheme": "scheme-3",
+        "custom_color_scheme": "",
+        "padding___top": "small",
+        "custom_padding_top": 36,
+        "padding___bottom": "small",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy_faq_PrKTnp": {
+      "type": "dbtfy-faq",
+      "blocks": {
+        "dbtfy_faq_group_kQ43FU": {
+          "type": "_dbtfy-faq-group",
+          "settings": {
+            "heading": "",
+            "title": "",
+            "icon": ""
+          },
+          "blocks": {
+            "dbtfy_faq_question_6hfAgA": {
+              "type": "_dbtfy-faq-question",
+              "settings": {
+                "heading": "",
+                "open_by_default": false,
+                "question": "<em>What materials are your products made from?</em>",
+                "answer": "<p>We use high-quality materials including natural wood, premium fabrics, metal accents, and eco-friendly finishes. Each product is crafted to ensure durability and long-lasting beauty.</p>",
+                "icon": "counter_1"
+              },
+              "blocks": {}
+            },
+            "dbtfy_faq_question_UaPVkA": {
+              "type": "_dbtfy-faq-question",
+              "settings": {
+                "heading": "",
+                "open_by_default": false,
+                "question": "<em>How do I care for my furniture?</em>",
+                "answer": "<p>Regular dusting and gentle cleaning with a soft cloth are recommended. Avoid harsh chemicals, direct sunlight, and moisture exposure to maintain longevity.</p>",
+                "icon": "counter_2"
+              },
+              "blocks": {}
+            },
+            "dbtfy_faq_question_xFtBrM": {
+              "type": "_dbtfy-faq-question",
+              "settings": {
+                "heading": "",
+                "open_by_default": false,
+                "question": "<em>Do you offer customisation?</em>",
+                "answer": "<p>Some products are available in multiple finishes, sizes, and fabrics. Check the product page for customization options.</p>",
+                "icon": "counter_3"
+              },
+              "blocks": {}
+            },
+            "dbtfy_faq_question_TJJaMM": {
+              "type": "_dbtfy-faq-question",
+              "settings": {
+                "heading": "",
+                "open_by_default": false,
+                "question": "<em>What is your return policy?</em>",
+                "answer": "<p>We accept returns within 7 days of delivery if the product is unused and in its original packaging. For more details, don't hesitate to get in touch with our support team.</p>",
+                "icon": "counter_4"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dbtfy_faq_question_6hfAgA",
+            "dbtfy_faq_question_UaPVkA",
+            "dbtfy_faq_question_xFtBrM",
+            "dbtfy_faq_question_TJJaMM"
+          ]
+        },
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 1,
+            "row_gap": 20,
+            "column_gap": 20,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "none",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {
+            "image_qFe944": {
+              "type": "_image",
+              "name": "t:general.settings.image",
+              "settings": {
+                "image": "shopify://shop_images/line_2.png",
+                "width": 200,
+                "full_width": false,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "padding___top": "none",
+                "custom_padding_top": 36,
+                "padding___bottom": "none",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            },
+            "title_kATB8C": {
+              "type": "_title",
+              "settings": {
+                "title": "Customer Help Desk",
+                "custom_color": false,
+                "title_color": "#000000",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "size": "h2",
+                "style": "uppercase",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "small",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_qFe944",
+            "title_kATB8C"
+          ]
+        }
+      },
+      "block_order": [
+        "dbtfy_faq_group_kQ43FU"
+      ],
+      "name": "t:sections.dbtfy-faq.name",
+      "settings": {
+        "show_on": "both",
+        "container_size": "container",
+        "show_search": false,
+        "search_placeholder": "Search questions...",
+        "no_result_text": "No results found....",
+        "text_alignment": "text-left",
+        "text_alignment_mobile": "text-left",
+        "show_banner": false,
+        "banner_icon": "",
+        "banner_heading": "",
+        "banner_subheading": "",
+        "banner_button_label": "",
+        "banner_button_url": "",
+        "banner_button_style": "button button--secondary",
+        "button_size": "inherit",
+        "fillable_color": true,
+        "fillable_type": "inherit",
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "color_scheme_block": "scheme-1",
+        "custom_color_scheme_block": "",
+        "color_scheme": "scheme-2",
+        "custom_color_scheme": "",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "slideshow_CnH9TB",
+    "dbtfy_scrolling_banner_K8JiYz",
+    "dbtfy_separator_mXMHYD",
+    "dbtfy_extended_collection_list_ncKj8j",
+    "dbtfy_separator_4Kegd9",
+    "featured_collection1",
+    "dbtfy_separator_jJCK9f",
+    "dbtfy_vertical_ticker_EMGqCz",
+    "dbtfy_separator_RcxVbV",
+    "dbtfy_lookbook_inXANg",
+    "dbtfy_testimonials_tBXxwM",
+    "featured_blog_FF8jNR",
+    "dbtfy_separator_BRmhiR",
+    "custom_column_YRVfa4",
+    "dbtfy_separator_bBAb34",
+    "dbtfy-instagram",
+    "dbtfy_horizontal_ticker_ra6W7V",
+    "dbtfy_faq_PrKTnp"
+  ]
+}

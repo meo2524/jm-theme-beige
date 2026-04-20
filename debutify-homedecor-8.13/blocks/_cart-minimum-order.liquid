@@ -1,0 +1,73 @@
+{%- if cart != empty and settings.dbtfy_minimum_order -%}
+  {%- render 'widget-settings', key: 'dbtfy-minimum-order', settings: block.settings -%}
+  {{ 'dbtfy-minimum-order.css' | asset_url | stylesheet_tag: preload: true }}
+  <div {{ block.shopify_attributes }}>
+    <dbtfy-minimum-order data-cart-total="{{ cart.total_price }}">
+      <div class="dbtfy-minimum-order">
+        <div class="dbtfy-minimum-order__message">
+          <small>
+            {%- render 'material-icon', icon: icon -%}
+            <span class="dbtfy-minimum-order--message"></span>
+            <span class="dbtfy-minimum-order--achieve_message"></span>
+          </small>
+        </div>
+      </div>
+    </dbtfy-minimum-order>
+  </div>
+  <script src="{{ 'dbtfy-minimum-order.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:sections.cart-drawer.blocks.cart-minimum-order.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.minimum_order.settings.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.minimum_order.settings.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    },
+    {
+      "type": "number",
+      "id": "dbtfy_minimum_order_amount",
+      "label": "t:blocks.minimum_order.settings.dbtfy_minimum_order_amount.label",
+      "info": "t:blocks.minimum_order.settings.dbtfy_minimum_order_amount.info",
+      "default": 0
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_minimum_order_icon",
+      "label": "t:general.settings.icon_label",
+      "info": "t:general.settings.icon_info",
+      "default": "info_outline"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "dbtfy_minimum_order_message",
+      "label": "t:blocks.minimum_order.settings.dbtfy_minimum_order_message.label",
+      "default": "t:blocks.minimum_order.settings.dbtfy_minimum_order_message.default",
+      "info": "t:blocks.minimum_order.settings.dbtfy_minimum_order_message.info"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "dbtfy_minimum_order_achieve_message",
+      "label": "t:blocks.minimum_order.settings.dbtfy_minimum_order_achieve_message.label",
+      "default": "t:blocks.minimum_order.settings.dbtfy_minimum_order_achieve_message.default"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.cart-drawer.blocks.cart-minimum-order.name"
+    }
+  ]
+}
+{%- endschema -%}

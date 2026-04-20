@@ -1,0 +1,102 @@
+{% capture profileContent %}
+    <div class="tesimonial__profile-media-content {% if block.settings.star_position %}testimonial__star-below{% endif %}">
+      <h4 class="m-0">{{ block.settings.author }}</h4>
+        <div class="tesimonial__review">
+          {% for i in (1..5) %}
+            {% if i > block.settings.star_rating %}
+              {% render 'icon-empty-star' %}
+            {% else %}
+              {% render 'icon-star' %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+{% endcapture %}
+<li
+  {{ block.shopify_attributes }}
+  id="Slide-{{ block.id }}"
+  class="testimonial-item testimonial-item__grid grid__item product-testimonial__color-scheme"
+>
+  <div class="testimonial-card image-first">
+    <div class="tesimonial__body">
+      <div class="tesimonial__profile tesimonial__profile--left">
+        <div class="tesimonial__profile-content">
+          <div class="tesimonial__profile-media">
+            <div class="media media--circle placeholder">
+              {%- if block.settings.author_image -%}
+                {{ block.settings.author_image | image_url: width: 200 | image_tag }}
+              {%- else -%}
+                {{- 'icon-account.svg' | inline_asset_content -}}
+              {%- endif -%}
+            </div>
+          </div>
+          {{ profileContent }}
+        </div>
+      </div>
+      {% if block.settings.text != blank %}
+        <div class="testimonial__text left">
+          <dbtfy-rte class="tesimonial__rte">
+            <div class="short-description rte">
+              <p>
+                {{ block.settings.text }}
+              </p>
+            </div>
+
+            <a class="link underlined-link button--link rte-toggle-button">
+              <span class="read-more-text button-show">{{ 'products.facets.show_more' | t }} </span>
+              <span class="read-less-text button-show">{{ 'products.facets.show_less' | t }} </span>
+            </a>
+          </dbtfy-rte>
+          {{ profileContent }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</li>
+
+{% schema %}
+{
+  "name": "t:settings_schema.integrations.settings.header__5.content",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "author_image",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.author_image.label"
+    },
+    {
+      "type": "text",
+      "id": "author",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.author.label",
+      "default": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.author.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "t:general.settings.text",
+      "default": "Share blog posts, products, or promotions with your customers. Use this text to describe products, share details on availability and style, or as a space to display recent reviews or FAQs."
+    },
+    {
+      "type": "range",
+      "id": "star_rating",
+      "label": "t:blocks.star_rating.name",
+      "default": 5,
+      "min": 1,
+      "max": 5,
+      "step": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "star_position",
+      "label": "t:sections.featured-product.blocks.star_position",
+      "default": true,
+      "info": "t:sections.featured-product.blocks.star_position_info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:settings_schema.integrations.settings.header__5.content"
+    }
+  ]
+}
+{% endschema %}

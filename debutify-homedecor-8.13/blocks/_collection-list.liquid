@@ -1,0 +1,25 @@
+{% content_for 'blocks' %}
+
+{% schema %}
+{
+  "name": "t:blocks.name",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "_collection-list-block"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection list",
+      "blocks": [{ "type": "_collection-list-block" }]
+    }
+  ]
+}
+{% endschema %}

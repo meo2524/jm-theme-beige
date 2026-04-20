@@ -1,0 +1,152 @@
+{%- capture enable_products -%}
+{%- render 'visibility-check' -%}
+{%- endcapture -%}
+
+{%- assign selected_product = false -%}
+{%- if request.page_type != 'product' and block.settings.visibility == 'product' and block.settings.product != blank -%}
+  {%- assign selected_product = block.settings.product -%}
+  {%- assign enable_products = 'true' -%}
+{%- endif -%}
+
+{%- if enable_products == 'true' and block.settings.title != blank -%}
+  {%- capture "block_title" -%}
+    <div class="product-tab-details relative {% if block.settings.open_by_default %}product-tab-active{% endif %}" data-id="{{ block.id }}">
+      {%- if block.settings.banner_icon != blank -%}
+        <span class="svg-wrapper">
+          {%- render 'material-icon', icon: block.settings.banner_icon -%}
+        </span>
+      {%- endif -%}
+      <h2 class="h4 accordion__title inline-richtext">
+        {{ block.settings.title | default: block.settings.page.title | escape }}
+      </h2>
+      <span class="summary-icon-caret">
+      {{- 'icon-caret.svg' | inline_asset_content -}}
+      </span>
+    </div>
+  {%- endcapture -%}
+  <div
+    class="dbtfy-product-tab-block product__accordion dbtfy-product-tabs-description"
+    data-product="{{ selected_product.id }}"
+    {{- block.shopify_attributes -}}
+  >
+    <div class="product-tab-block">
+      {{ block_title }}
+      <div
+        class="product-tab-content rte {% unless block.settings.open_by_default %}hidden{% endunless %} {{ block.settings.text_alignment }}"
+        data-id="{{ block.id }}"
+      >
+        {{- product.description -}}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:general.settings.description",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_by_default",
+      "label": "t:blocks.dbtfy-product-tabs.block.settings.checkbox.label",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "banner_icon",
+      "label": "t:sections.dbtfy-faq.settings.banner_icon.label",
+      "info": "t:sections.all.icon.info",
+      "default": "live_help"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:general.settings.heading",
+      "default": "t:blocks.dbtfy-product-tabs.block.settings.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "default": "text-left",
+      "options": [
+        { "value": "text-left", "label": "t:general.settings.alignment.option__4" },
+        { "value": "text-center", "label": "t:general.settings.alignment.option__5" },
+        { "value": "text-right", "label": "t:general.settings.alignment.option__6" },
+        { "value": "text-justify", "label": "t:general.settings.alignment.option__7" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.visibility.header.content",
+      "info": "t:general.settings.visibility.header.info"
+    },
+    {
+      "type": "radio",
+      "id": "visibility",
+      "label": "t:general.settings.visibility.visibility.label",
+      "info": "t:general.settings.visibility.visibility.info",
+      "default": "all",
+      "options": [
+        {
+          "value": "all",
+          "label": "t:general.settings.visibility.visibility.options__1"
+        },
+        {
+          "value": "collection",
+          "label": "t:general.settings.visibility.visibility.options__2"
+        },
+        {
+          "value": "type",
+          "label": "t:general.settings.visibility.visibility.options__3"
+        },
+        {
+          "value": "tag",
+          "label": "t:general.settings.visibility.visibility.options__4"
+        },
+        {
+          "value": "product",
+          "label": "t:general.settings.visibility.visibility.options__5"
+        }
+      ]
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:general.settings.visibility.collection.label"
+    },
+    {
+      "type": "text",
+      "id": "types",
+      "label": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.label",
+      "info": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.info"
+    },
+    {
+      "type": "text",
+      "id": "tags",
+      "label": "t:general.settings.visibility.tags.label",
+      "info": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.info"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:general.settings.visibility.product.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.description"
+    }
+  ]
+}
+{%- endschema -%}

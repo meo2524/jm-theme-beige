@@ -1,0 +1,61 @@
+{%- if settings.dbtfy_cart_goal -%}
+  {%- render 'widget-settings', key: 'dbtfy-cart-goal', settings: block.settings -%}
+  <link rel="stylesheet" href="{{ 'dbtfy-cart-goal.css' | asset_url }}" media="print" onload="this.media='all'">
+  <script>
+    Debutify.widgets['cart_goals'] = [];
+    Debutify.widgets['cart_goals']['global'] = [];
+  </script>
+  {%- content_for 'blocks' -%}
+  {%- unless cart == empty -%}
+    <dbtfy-cart-goal data-cart-total="{{ cart.total_price }}" {{ block.shopify_attributes }} hidden>
+      <div>
+        <div class="dbtfy-cart-progress-bar-container">
+          <span id="dbtfy-cart-progress-bar" style="width: var(--dbtfy-cart-goal-percenatge);"></span>
+        </div>
+        <div class="dbtfy-goal-message text-center">
+          <small>
+            <span class="dbtfy-cart-goal--message"></span>
+          </small>
+        </div>
+      </div>
+    </dbtfy-cart-goal>
+  {%- endunless -%}
+{%- endif -%}
+<script src="{{ 'dbtfy-cart-goal.js' | asset_url }}" defer></script>
+{%- schema -%}
+{
+  "name": "t:blocks.cart-goal.name",
+  "class": "cart-goal",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Unlock free shipping for customers when their cart total hits a specific amount."
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.cart-goal.settings.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_cart-goal-general"
+    },
+    {
+      "type": "_cart-goal-by-country"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.cart-goal.name"
+    }
+  ]
+}
+{%- endschema -%}

@@ -1,0 +1,483 @@
+<mega-menu-item
+  class="dbtfy-mega-menu__item"
+  data-menu-type="{{ block.type }}"
+>
+  <header-menu
+    data-hover="{% if section.settings.open_dropdown_hover %}true{% else %}false{% endif %}"
+  >
+    <details
+      id="Details-HeaderMenu-{{ link_count }}"
+      class="mega-menu {% if request.path == link_megamenu and section.settings.active_badge %} active_menu {% endif %} {% if request.path == link_megamenu %}header__active-menu-item{% endif %}"
+    >
+      <summary
+        id="HeaderMenu-{{ link_name | handleize }}"
+        class="header__menu-item list-menu__item link focus-inset mega-menu__list-item mega-menu--item-first"
+      >
+        {% if link_megamenu != blank %}
+          <span>
+            <a
+              href="{{ link_megamenu }}"
+            >
+              {{- link_name | escape -}}
+            </a>
+          </span>
+        {% else %}
+          <span>
+            {{- link_name | escape -}}
+          </span>
+        {% endif %}
+
+        {{- 'icon-caret.svg' | inline_asset_content -}}
+      </summary>
+      <div
+        id="MegaMenu-Content-{{ link_count }}"
+        class="mega-menu__content color-{{ block_settings.custom_color_scheme }} dbtfy-color-{{ block_settings.color_scheme }} gradient motion-reduce global-settings-popup"
+        tabindex="-1"
+      >
+        <ul
+          class="{% if block_settings.enable_full_width %}page-full{% else %}page-width{% endif %}"
+          role="list"
+        >
+          {% if block_settings.products_to_show %}
+            {%- liquid
+              assign show_header = block_settings.show_header
+              assign heading = block_settings.title
+              assign collection_setting = block_settings.collection
+              assign collection = collections[collection_setting]
+              assign products_to_show = block_settings.products_to_show | times: 1
+              assign block_width = 'grid--5-col-desktop'
+
+              if products_to_show == 4
+                assign block_width = 'grid--4-col-desktop'
+              endif
+            -%}
+
+            {% if collection != blank and collection.products.size > 0 %}
+              {% if show_header %}
+                <div class="dbtfy-mega-menu__header">
+                  <a href="{{ collection.url }}" class="mega-menu__link mega-menu__link--level-2 link">
+                    {%- if heading != blank -%}
+                      {{ heading | escape }}
+                    {%- else -%}
+                      {{ collection.title | escape }}
+                    {%- endif -%}
+                  </a>
+
+                  <a
+                    class="mega-menu__link mega-menu__link--level-2 link"
+                    href="{{ collection.url }}"
+                  >
+                    {{ 'sections.featured_blog.view_all' | t }}
+                  </a>
+                </div>
+              {% endif %}
+
+              <div class="grid {{ block_width }} dbtfy-mega-menu__row">
+                {% for product in collection.products limit: products_to_show %}
+                  <div class="grid__item">
+                    {% render 'card-product',
+                      card_product: product,
+                      media_aspect_ratio: '100%',
+                      image_shape: 'default',
+                      show_secondary_image: true
+                    %}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+          {% elsif block_settings.image_ratio %}
+            {%- liquid
+              assign show_header = block_settings.show_header
+              assign heading = block_settings.title
+            -%}
+
+            {%- if show_header and heading != blank -%}
+              <div class="dbtfy-mega-menu__header">
+                <a
+                  href="{{ routes.collections_url }}"
+                  class="mega-menu__link mega-menu__link--level-2 link"
+                >
+                  {{ heading | escape }}
+                </a>
+
+                <a
+                  class="mega-menu__link mega-menu__link--level-2 link"
+                  href="{{ routes.collections_url }}"
+                >
+                  {{ 'sections.featured_blog.view_all' | t }}
+                </a>
+              </div>
+            {%- endif -%}
+
+            {%- liquid
+              capture collections_count
+                assign total_collections = 0
+
+                for i in (1..9)
+                  assign index = forloop.index
+
+                  capture collection_setting
+                    echo 'collection_' | append: i
+                  endcapture
+
+                  assign collection_handle = block_settings[collection_setting]
+
+                  if collection_handle != blank
+                    assign collection = collections[collection_handle]
+
+                    if collection != blank
+                      assign total_collections = total_collections | plus: 1
+                    endif
+                  endif
+                endfor
+                echo total_collections
+              endcapture
+
+              assign collections_count = collections_count | plus: 0
+            -%}
+
+            <div class="extended-collection-list collection-list grid grid--{{ block_settings.columns_desktop }}-col-desktop grid--2-col-tablet-down">
+              {% for i in (1..9) %}
+                {% assign collection_key = 'collection_' | append: i %}
+                {% assign collection_handle = block_settings[collection_key] %}
+                {% if collection_handle != blank %}
+                  {% assign assign collection = collections[collection_handle] %}
+                  <div
+                    class="collection-list__item grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    {% if settings.animations_reveal_on_scroll %}
+                      data-cascade
+                      style="--animation-order: {{ forloop.index }};"
+                    {% endif %}
+                  >
+                    {%- if block_settings.content_inside_image -%}
+                      <link
+                        rel="stylesheet"
+                        href="{{ 'dbtfy-extended-collection-list.css' | asset_url }}"
+                        media="print"
+                        onload="this.media='all'"
+                      >
+                      {%- render 'extended-card-collection',
+                        card_collection: collection,
+                        columns: 2,
+                        inside_box: true,
+                        size: 'h3',
+                        show_collection_title: true,
+                        show_collection_button: true,
+                        show_collection_product_count: true,
+                        collection_content_alignment: 'middle-center',
+                        button_size: 'button button--primary'
+                      -%}
+                    {%- else -%}
+                      {% render 'card-collection',
+                        card_collection: collection,
+                        media_aspect_ratio: '100%',
+                        columns: 3
+                      %}
+                    {%- endif -%}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% elsif block_settings.blog %}
+            {%- liquid
+              assign show_header = block_settings.show_header
+              assign heading = block_settings.title
+              assign blog = block_settings.blog
+            -%}
+
+            {%- if blog != blank and blog.articles.size > 0 -%}
+              {%- if show_header -%}
+                <div class="dbtfy-mega-menu__header">
+                  <a href="{{ blog.url }}" class="mega-menu__link mega-menu__link--level-2 link">
+                    {%- if heading != blank -%}
+                      {{ heading | escape }}
+                    {%- else -%}
+                      {{ blog.title | escape }}
+                    {%- endif -%}
+                  </a>
+
+                  <a
+                    class="mega-menu__link mega-menu__link--level-2 link"
+                    href="{{ blog.url }}"
+                  >
+                    {{ 'sections.featured_blog.view_all' | t }}
+                  </a>
+                </div>
+              {%- endif -%}
+
+              <div class="grid grid--4-col grid--4-col-desktop">
+                {%- for article in blog.articles limit: 6 -%}
+                  <li
+                    class="blog__post grid__item article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    {% if settings.animations_reveal_on_scroll %}
+                      data-cascade
+                      style="--animation-order: {{ forloop.index }};"
+                    {% endif %}
+                  >
+                    {% render 'article-card',
+                      blog: blog,
+                      article: article,
+                      show_image: true,
+                      show_date: true,
+                      show_author: true,
+                      show_excerpt: true
+                    %}
+                  </li>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          {% elsif block_settings.html %}
+            {%- liquid
+              assign heading = block_settings.title
+              assign code = block_settings.html
+            -%}
+
+            {%- if code != blank -%}
+              {%- if heading != blank -%}
+                <div class="dbtfy-mega-menu__header">
+                  <h4 class="mega-menu__link mega-menu__link--level-2 no-link">
+                    {{ heading | escape }}
+                  </h4>
+                </div>
+              {%- endif -%}
+
+              <div class="rte">
+                {{ code }}
+              </div>
+            {%- endif -%}
+          {% else %}
+            {% liquid
+              assign show_menu_headers = block_settings.show_menu_headers
+              assign limit = block_settings.product_slider_total_products_count | times: 1
+              assign menu = block_settings.menu
+              assign product_slider_heading = block_settings.product_slider_heading
+              assign product_slider_heading_link = block_settings.product_slider_heading_link
+              assign product_slider_collection = block_settings.product_slider_collection
+              assign product_slider_show_arrows = block_settings.product_slider_show_arrows
+              assign product_slider_show_dots = block_settings.product_slider_show_dots
+              assign product_slider_loop = block_settings.product_slider_loop
+              assign product_slider_enable_autoplay = block_settings.product_slider_autoplay
+              assign product_slider_autoplay_speed = block_settings.product_slider_autoplay_speed
+              assign product_slider_slides_to_show = block_settings.product_slider_products_count_per_view | times: 1
+
+              assign empty_state = false
+
+              if product_slider_collection == blank or collections[product_slider_collection].products_count == 0
+                assign empty_state = true
+              endif
+
+              capture menu_container_class
+                if empty_state or menu == blank
+                  echo 'grid grid--1-col'
+                else
+                  if product_slider_slides_to_show == 1
+                    echo 'grid grid--3-col'
+                  else
+                    echo 'grid grid--2-col'
+                  endif
+                endif
+              endcapture
+            %}
+            <div class="dbtfy-mega-menu__row">
+              <div class="dbtfy-mega-menu__upper-section">
+                <div class="{{ menu_container_class }}">
+                  <div class="dbtfy-mega-menu__menu-container grid__item">
+                    {% if menu != blank %}
+                      {%- liquid
+                        assign menu_links_count = linklists[menu].links.size
+
+                        case menu_links_count
+                          when 1
+                            assign menu_column_class = 'grid grid--1-col'
+
+                          when 2
+                            assign menu_column_class = 'grid grid--2-col'
+
+                          else
+                            assign menu_column_class = 'grid grid--3-col'
+                        endcase
+                      -%}
+                      {%- if menu_links_count > 0 -%}
+                        <div class="{{ menu_column_class }} {% if block_settings.enable_full_width %}full-width-menu{% endif %}">
+                          {%- for link in linklists[menu].links -%}
+                            <div class="dbtfy-mega-menu__menu-item grid__item">
+                              {%- if show_menu_headers -%}
+                                <a
+                                  href="{{ link.url }}"
+                                  class="mega-menu__link mega-menu__link--level-2 link"
+                                >
+                                  {{ link.title }}
+                                </a>
+                              {%- endif -%}
+
+                              {%- if link.links != blank -%}
+                                <ul class="list-unstyled" role="list">
+                                  {%- for grandchildlink in link.links -%}
+                                    <li>
+                                      <a
+                                        href="{{ grandchildlink.url }}"
+                                        class="mega-menu__link link"
+                                      >
+                                        {{ grandchildlink.title | escape }}
+                                      </a>
+                                    </li>
+                                  {%- endfor -%}
+                                </ul>
+                              {%- endif -%}
+                            </div>
+                          {%- endfor -%}
+                        </div>
+                      {%- endif -%}
+                    {% endif %}
+                  </div>
+                  {% unless empty_state %}
+                    <div class="dbtfy-mega-menu__product-slider-container grid__item">
+                      {% assign block_id = block.id %}
+                      {%
+                        render 'dbtfy-featured-collection',
+                        heading: product_slider_heading,
+                        heading_link: product_slider_heading_link,
+                        collection: product_slider_collection,
+                        collection_limit: limit,
+                        quick_add = 'standard',
+                        block_id= block_id,
+                        show_arrows: product_slider_show_arrows,
+                        show_dots: product_slider_show_dots,
+                        enable_loop: product_slider_loop,
+                        enable_autoplay: product_slider_enable_autoplay,
+                        arrow_position: "middle",
+                        slider_on_text: "both",
+                        autoplay_speed: product_slider_autoplay_speed,
+                        desktop-width: 12,
+                        tablet-width: 12,
+                        mobile-width: 12,
+                        per_view_desktop: product_slider_slides_to_show,
+                        per_view_tablet: product_slider_slides_to_show,
+                        per_view_mobile: 1,
+                        block: block.shopify_attributes
+                      %}
+                    </div>
+                  {% endunless %}
+                </div>
+              </div>
+
+              {%- liquid
+                assign images_count = 0
+                assign images_slider_show_arrows = block_settings.images_slider_show_arrows
+                assign images_slider_show_dots = block_settings.images_slider_show_dots
+                assign images_slider_loop = block_settings.images_slider_loop
+                assign images_slider_enable_autoplay = block_settings.images_slider_autoplay
+                assign images_slider_autoplay_speed = block_settings.images_slider_autoplay_speed
+                assign enable_images_slider = false
+
+                for i in (1..6)
+                  assign index = forloop.index
+
+                  capture image_setting
+                    echo 'image_' | append: i
+                  endcapture
+
+                  capture image_link_setting
+                    echo 'image_link_' | append: i
+                  endcapture
+
+                  assign image = block_settings[image_setting]
+                  assign image_link = block_settings[image_link_setting]
+
+                  if image != blank
+                    assign images_count = images_count | plus: 1
+                  endif
+                endfor
+
+                if images_count > 3
+                  assign enable_images_slider = true
+                endif
+
+                assign slider_on = 'slider slider--everywhere'
+
+                capture slider_parameters
+                  echo ' data-autoplay="' | append: images_slider_enable_autoplay | append: '"'
+                  echo ' data-speed="' | append: images_slider_autoplay_speed | append: '"'
+                  echo ' data-loop="' | append: images_slider_loop | append: '"'
+                  echo ' data-dots="' | append: images_slider_show_dots | append: '"'
+                  echo ' data-arrows="' | append: images_slider_show_arrows | append: '"'
+                  echo ' data-controls-position="' | append: 'middle"'
+                endcapture
+
+                assign image_slider_class = 'grid--2-col grid--3-col-desktop grid--3-col-tablet'
+
+                if block_settings.images_full_width
+                  assign image_slider_class = 'grid--1-col'
+                endif
+              -%}
+
+              <div class="d-grid dbtfy-mega-menu__images">
+                <div class="grid--12-col">
+                  <dbtfy-slider-component {{ slider_parameters }}>
+                    <div class="relative">
+                      <ul
+                        class="{{ slider_on }} contains-content-container grid {{ image_slider_class }}"
+                        id="Slider-{{ section.id }}"
+                        role="list"
+                      >
+                        {%- for i in (1..6) -%}
+                          {%- liquid
+                            assign index = forloop.index
+
+                            capture image_setting
+                              echo 'image_' | append: i
+                            endcapture
+
+                            capture image_link_setting
+                              echo 'image_link_' | append: i
+                            endcapture
+
+                            assign image = block_settings[image_setting]
+                            assign image_link = block_settings[image_link_setting]
+                          -%}
+
+                          {%- if image != blank -%}
+                            <li
+                              id="Slide-{{ section.id }}-{{ forloop.index }}"
+                              class="grid__item"
+                              {{ block.shopify_attributes }}
+                            >
+                              {%- if image_link != blank -%}
+                                <a href="{{ image_link }}">
+                              {%- endif -%}
+
+                              {%- capture sizes -%}{{ 100 | divided_by: images_count }}vw{% endcapture %}
+
+                              <div class="dbtfy-mega-menu__image-media global-media-settings">
+                                {{-
+                                  image
+                                  | image_url: width: image.width
+                                  | image_tag:
+                                    loading: 'lazy',
+                                    sizes: sizes,
+                                    widths: '300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600',
+                                    class: 'media'
+                                -}}
+                              </div>
+
+                              {%- if image_link != blank -%}
+                                </a>
+                              {%- endif -%}
+                            </li>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </ul>
+                      {% if enable_images_slider %}
+                        {% render 'dbtfy-arrow', class: 'slideshow__controls slideshow__controls--top' %}
+                      {% endif %}
+                    </div>
+                  </dbtfy-slider-component>
+                </div>
+              </div>
+          {% endif %}
+        </ul>
+      </div>
+    </details>
+  </header-menu>
+</mega-menu-item>

@@ -1,0 +1,208 @@
+{% liquid
+  assign autoplay_muted = section.settings.autoplay_muted
+  assign muted = false
+  assign play_icon = false
+  assign video_thumbnail_url = block.settings.video_thumbnail_url
+  if autoplay_muted == true
+    assign muted = true
+    assign play_icon = true
+  endif
+
+  assign size = block.settings.size
+  if size == 'inherit'
+    assign size = 'h2'
+  endif
+%}
+{% assign media_aspect_ratio = section.settings.ratio %}
+
+{% if media_aspect_ratio and media_aspect_ratio != 'inherit' %}
+  {% assign image_aspect_ratio = media_aspect_ratio %}
+  {% if media_aspect_ratio == 'circle' %}
+    {% assign image_aspect_ratio = '100%' %}
+  {% endif %}
+  {% style %}
+    #section-{{ section.id }}{
+      --dbtfy-image-crop-ratio: {{ image_aspect_ratio }};
+    }
+  {% endstyle %}
+{% else %}
+  {% assign media_aspect_ratio = settings.dbtfy_product_image_crop_ratio %}
+{% endif %}
+<li class="splide__slide dbtfy-tiktok-slider-item custom-border-radius relative {{ block.shopify_attributes }}">
+  <div class="global-settings-popup image--ratio image-crop-media-{{ media_aspect_ratio }}">
+    <div class="dbtfy-tiktok-slider__video-wrapper video_slider media media--transparent media-{{ media_aspect_ratio }}  ratio ">
+      {% if block.settings.video != blank %}
+        {{
+          block.settings.video
+          | video_tag:
+            autoplay: autoplay_muted,
+            loop: autoplay_muted,
+            controls: false,
+            muted: muted,
+            class: 'w-full',
+            poster: video_thumbnail_url
+        }}
+
+        <div class="dbtfy-tiktok-slider__video-play video-play_button  {% if play_icon == true %}hidden{% endif %}">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            focusable="false"
+            class="icon icon-play"
+            fill="none"
+            viewBox="0 0 10 14"
+          >
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.48177 0.814643C0.81532 0.448245 0 0.930414 0 1.69094V12.2081C0 12.991 0.858787 13.4702 1.52503 13.0592L10.5398 7.49813C11.1918 7.09588 11.1679 6.13985 10.4965 5.77075L1.48177 0.814643Z" fill="currentColor"/>
+          </svg>
+        </div>
+      {% else %}
+        {% render 'random_placeholder', placeholder: 'product-' %}
+      {% endif %}
+    </div>
+  </div>
+  {% if block.settings.title != blank %}
+    <{{ size }}
+      class="
+        title inline-richtext m-0 {{ size }} absolute dbtfy-tiktok_video_title {{ block.settings.alignment }}
+        {% if block.settings.title_one_line %}
+           truncate
+        {% endif %}
+      "
+    >
+      {{ block.settings.title }}
+    </{{ size }}>
+  {% endif %}
+</li>
+
+{% stylesheet %}
+  .truncate-2-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:general.settings.video.label",
+  "tag": null,
+  "settings": [
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:general.settings.video.label"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:general.settings.title",
+      "info": "t:sections.tiktok_slider.blocks.info"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:general.settings.alignment.label",
+      "default": "text-center",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "text-left",
+          "label": "t:general.settings.alignment.option__4"
+        },
+        {
+          "value": "text-center",
+          "label": "t:general.settings.alignment.option__5"
+        },
+        {
+          "value": "text-right",
+          "label": "t:general.settings.alignment.option__6"
+        },
+        {
+          "value": "text-justify",
+          "label": "t:general.settings.alignment.option__7"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "alignment_mobile",
+      "label": "t:general.settings.alignment.label_mobile",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "left",
+          "label": "t:general.settings.alignment.option__4"
+        },
+        {
+          "value": "center",
+          "label": "t:general.settings.alignment.option__5"
+        },
+        {
+          "value": "right",
+          "label": "t:general.settings.alignment.option__6"
+        },
+        {
+          "value": "justify",
+          "label": "t:general.settings.alignment.option__7"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "size",
+      "label": "t:general.settings.size.label",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "h1",
+          "label": "t:general.settings.heading_tag.h1"
+        },
+        {
+          "value": "h2",
+          "label": "t:general.settings.heading_tag.h2"
+        },
+        {
+          "value": "h3",
+          "label": "t:general.settings.heading_tag.h3"
+        },
+        {
+          "value": "h4",
+          "label": "t:general.settings.heading_tag.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:general.settings.heading_tag.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:general.settings.heading_tag.h6"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "title_one_line",
+      "label": "t:sections.tiktok_slider.blocks.truncate_title_for_one_line",
+      "default": true,
+      "info": "t:sections.tiktok_slider.blocks.info_1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.video.label"
+    }
+  ]
+}
+{% endschema %}

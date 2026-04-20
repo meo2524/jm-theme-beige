@@ -1,0 +1,19 @@
+{% if as_a != 'block' %}
+  {% if section.settings.arrow_color == 'custom' %}
+    {% style %}
+      #shopify-section-{{ section.id }}{
+        --arrow-color: {{ section.settings.custom_arrow_color }};
+        --arrow-background-color: {{ section.settings.custom_arrow_background_color  }};
+      }
+    {% endstyle %}
+  {% endif %}
+{% else %}
+  {% if block.settings.arrow_color == 'custom' %}
+    {% style %}
+      #{{ id }}{
+        --arrow-color: {{ block.settings.custom_arrow_color }};
+        --arrow-background-color: {{ block.settings.custom_arrow_background_color }};
+      }
+    {% endstyle %}
+  {% endif %}
+{% endif %}

@@ -1,0 +1,50 @@
+{% liquid
+  assign reviews_metafield = product.metafields.reviews.overall_rating.value.data
+  assign star_breakdown = reviews_metafield.star_breakdown
+  assign star_size = '1.5rem'
+
+  assign star_active_color = 'rgba(var(--color-button))'
+  assign star_disable_color = 'rgba(var(--color-button), .5)'
+%}
+
+<div class="rating-progress-col grid--5-col-desktop grid--5-col-tablet grid--12-col" {{ block.shopify_attributes }}>
+  {% assign star_ratings = '5,4,3,2,1' | split: ',' %}
+  {% for i in star_ratings %}
+    {% assign i_number = i | plus: 0 %}
+    {% if i_number == 1 %}
+      {% assign key = '1_star' %}
+    {% else %}
+      {% assign key = i | append: '_stars' %}
+    {% endif %}
+    {% assign total_reviews = reviews_metafield.total_reviews | default: 1 %}
+    {% assign star_count = star_breakdown[key] | default: 0 %}
+    {% assign star_percent = 0 %}
+
+    {% if total_reviews > 0 %}
+      {% assign star_percent = star_count | times: 100 | divided_by: total_reviews | round %}
+    {% endif %}
+
+    <div class="progress-section d-grid" data-rating="{{ i_number }}">
+      <!-- Star Display -->
+      <div class="stars empty-{{ settings.empty_star_style }}">
+        <i data-star="{{ i_number }}"></i>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-main">
+        <progress
+          class="verified-progress"
+          max="100"
+          value="{{ star_percent }}"
+        ></progress>
+        <span class="star_count" data-review=""></span>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% schema %}
+{
+  "name": "t:sections.dbtfy-review.rating-progress.name",
+  "tag": null
+}
+{% endschema %}

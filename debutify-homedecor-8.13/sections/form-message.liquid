@@ -1,0 +1,19 @@
+<div hidden>
+  <div class="contact-form__success-message-wrapper">
+    <h3 class="form__message inner-spacing">
+      <span class="svg-wrapper">
+        {{- 'icon-success.svg' | inline_asset_content -}}
+      </span>
+      <span class="form__message_show">{{- 'newsletter.success' | t }}</span>
+    </h3>
+  </div>
+
+  <div class="contact-form__error-message-wrapper">
+    <h3 class="form__message inner-spacing">
+      <span class="svg-wrapper">
+        {{- 'icon-error.svg' | inline_asset_content -}}
+      </span>
+      <span class="form__message_show">{{- 'newsletter.error' | t }}</span>
+    </h3>
+  </div>
+</div>

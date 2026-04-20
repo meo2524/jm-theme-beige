@@ -1,0 +1,167 @@
+{%- liquid
+  unless block.settings.select_product == blank
+    assign product = block.settings.select_product
+  endunless
+  render 'dbtfy-size-chart', block: block, product: product
+-%}
+
+{% schema %}
+{
+  "name": "Product Size Chart",
+  "settings": [
+    {
+      "type": "product",
+      "id": "select_product",
+      "label": "t:sections.main-product.settings.product.label"
+    },
+    {
+      "type": "text",
+      "id": "icon",
+      "label": "t:sections.main-product.blocks.size_chart.settings.icon.label",
+      "info": "t:sections.all.icon.info",
+      "default": "straighten"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:settings_schema.dbfty_infinite_scroll.settings.button.label",
+      "default": "t:sections.main-product.blocks.size_chart.settings.button_label.default"
+    },
+    {
+      "type": "select",
+      "id": "popup_size",
+      "label": "t:sections.main-product.blocks.size_chart.settings.popup_size.label",
+      "default": "large",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "size_guide_title",
+      "label": "t:general.settings.heading",
+      "default": "Title"
+    },
+    {
+      "type": "page",
+      "id": "size_guide_page_content",
+      "label": "t:general.settings.content"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.visibility.header.content",
+      "info": "t:general.settings.visibility.header.info"
+    },
+    {
+      "type": "radio",
+      "id": "visibility",
+      "label": "t:general.settings.visibility.visibility.label",
+      "info": "t:general.settings.visibility.visibility.info",
+      "default": "all",
+      "options": [
+        {
+          "value": "all",
+          "label": "t:general.settings.visibility.visibility.options__1"
+        },
+        {
+          "value": "collection",
+          "label": "t:general.settings.visibility.visibility.options__2"
+        },
+        {
+          "value": "type",
+          "label": "t:general.settings.visibility.visibility.options__3"
+        },
+        {
+          "value": "tag",
+          "label": "t:general.settings.visibility.visibility.options__4"
+        },
+        {
+          "value": "product",
+          "label": "t:general.settings.visibility.visibility.options__5"
+        }
+      ]
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:general.settings.visibility.collection.label"
+    },
+    {
+      "type": "text",
+      "id": "types",
+      "label": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.label",
+      "info": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.info"
+    },
+    {
+      "type": "text",
+      "id": "tags",
+      "label": "t:general.settings.visibility.tags.label",
+      "info": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.info"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:general.settings.visibility.product.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.colors.content"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Size Chart"
+    }
+  ]
+}
+{% endschema %}

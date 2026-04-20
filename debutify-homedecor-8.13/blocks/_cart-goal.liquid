@@ -1,0 +1,68 @@
+{%- if block.settings.goal_amount > 0 -%}
+  <script>
+    cart_goal_blocks.push({{ block.settings | json}});
+  </script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.cart-goal.name",
+  "tag": null,
+  "class": "cart-goal",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.cart-goal.settings.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.cart-goal.settings.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "cart_goal_text",
+      "label": "t:blocks.cart-goal.settings.text.label",
+      "default": "t:blocks.cart-goal.settings.text.default",
+      "info": "t:blocks.minimum_order.settings.dbtfy_minimum_order_message.info"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "cart_goal_success_text",
+      "label": "t:blocks.cart-goal.settings.success.label",
+      "default": "t:blocks.cart-goal.settings.success.default"
+    },
+    {
+      "type": "number",
+      "id": "goal_amount",
+      "label": "t:blocks.minimum_order.settings.dbtfy_minimum_order_amount.label",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "goal_reached_before_color",
+      "label": "t:blocks.cart-goal.settings.color.before.label",
+      "default": "#F6F62A",
+      "info": "t:blocks.cart-goal.settings.color.before.info"
+    },
+    {
+      "type": "color",
+      "id": "goal_reached_after_color",
+      "label": "t:blocks.cart-goal.settings.color.after.label",
+      "default": "#0C6D0C",
+      "info": "t:blocks.cart-goal.settings.color.after.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.cart-goal.name"
+    }
+  ]
+}
+{%- endschema -%}

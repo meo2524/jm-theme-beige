@@ -1,0 +1,150 @@
+{% assign skip_card_product_styles = false %}
+{%- assign placeholder_image_index = forloop.index0 | modulo: 4 | plus: 1 -%}
+
+<link rel="stylesheet" href="{{ 'component-modal-video.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<link
+  rel="stylesheet"
+  href="{{ 'component-deferred-media.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+>
+
+<div
+  class="cc-video relative w-full {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {{ block.shopify_attributes }}
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+    style="--animation-order: {{ forloop.index }};"
+  {% endif %}
+>
+  <div class="global-media-settings contains-card--product  color-{{ settings.card_custom_color_scheme }} dbtfy-color-{{ settings.card_color_scheme }}">
+    {% if block.settings.video == blank %}
+      <modal-opener data-modal="#PopupModal-{{ block.id }}">
+        <button
+          class="cc-video__button"
+          type="button"
+          aria-label="{{ 'sections.video.load_video' | t: description: block.settings.description | escape }}"
+          aria-haspopup="dialog"
+          data-media-id="{{ block.settings.video_url.id }}"
+        >
+          <span class="svg-wrapper">
+            {{- 'icon-play.svg' | inline_asset_content -}}
+          </span>
+
+          {%- if block.settings.cover_image != blank -%}
+            {%- capture sizes -%}
+                  (min-width: {{ settings.page_width }}px)
+                  {% if section.blocks.size == 1 -%}
+                    calc({{ settings.page_width }}px - 100px)
+                  {%- else -%}
+                    {{- settings.page_width | minus: 100 | times: 0.67 | round }}px
+                  {%- endif -%}
+                  , (min-width: 750px)
+                  {%- if section.blocks.size == 1 %} calc(100vw - 100px){% else %} 500px{% endif -%}
+                  , calc(100vw - 30px)
+                {%- endcapture -%}
+            {{
+              block.settings.cover_image
+              | image_url: width: 3000
+              | image_tag: sizes: sizes, widths: '550, 720, 990, 1100, 1500, 2200, 3000'
+            }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+          {%- endif -%}
+        </button>
+      </modal-opener>
+      <modal-dialog
+        id="PopupModal-{{ block.id }}"
+        class="modal-video media-modal dbtfy-color-{{ settings.color_schemes | first }}"
+      >
+        <div
+          class="modal-video__content"
+          role="dialog"
+          aria-label="{{ block.settings.description | escape }}"
+          aria-modal="true"
+          tabindex="-1"
+        >
+          <button
+            id="ModalClose-{{ block.id }}"
+            type="button"
+            class="modal-video__toggle"
+            aria-label="{{ 'accessibility.close' | t }}"
+          >
+            <span class="svg-wrapper">
+              {{- 'icon-close.svg' | inline_asset_content -}}
+            </span>
+          </button>
+          <div class="modal-video__content-info">
+            <deferred-media class="modal-video__video template-popup">
+              <template>
+                {%- if block.settings.video_url.type == 'youtube' -%}
+                  <iframe
+                    src="https://www.youtube.com/embed/{{ block.settings.video_url.id }}?enablejsapi=1"
+                    class="js-youtube"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen
+                    title="{{ block.settings.description | escape }}"
+                  ></iframe>
+                {%- else -%}
+                  <iframe
+                    src="https://player.vimeo.com/video/{{ block.settings.video_url.id }}"
+                    class="js-vimeo"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen
+                    title="{{ block.settings.description | escape }}"
+                  ></iframe>
+                {%- endif -%}
+              </template>
+            </deferred-media>
+          </div>
+        </div>
+      </modal-dialog>
+    {% else %}
+      {{
+        block.settings.video
+        | video_tag: image_size: '1100x', autoplay: true, loop: true, controls: false, class: 'w-full'
+      }}
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:general.settings.video.label",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "cover_image",
+      "label": "t:sections.video.settings.cover_image.label"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "accept": ["youtube", "vimeo"],
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+      "label": "t:sections.collage.blocks.video.settings.video_url.label",
+      "placeholder": "t:sections.dbtfy-image-video-testimonial.settings.info_1",
+      "info": "t:sections.collage.blocks.video.settings.video_url.info"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:general.settings.video.label"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "default": "t:sections.collage.blocks.video.settings.description.default",
+      "label": "t:sections.video.settings.description.label",
+      "info": "t:sections.collage.blocks.video.settings.description.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.video.label"
+    }
+  ]
+}
+{% endschema %}

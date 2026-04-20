@@ -1,0 +1,180 @@
+<script>
+  Debutify.widgets['qty-breaks']['product_break'].push({{ block.settings | json }});
+</script>
+{%- content_for 'blocks' -%}
+{%- schema -%}
+{
+  "name": "t:blocks.quantity_breaks.blocks.product_break.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "product_break_layout_type",
+      "label": "t:sections.main-product.blocks.text.settings.layout_type",
+      "default": "layout-1",
+      "options": [
+        {
+          "value": "layout-1",
+          "label": "t:sections.dbtfy-scrolling-banner.layout_1"
+        },
+        {
+          "value": "layout-2",
+          "label": "t:sections.dbtfy-scrolling-banner.layout_2"
+        },
+        {
+          "value": "layout-3",
+          "label": "t:sections.dbtfy-scrolling-banner.layout_3"
+        },
+        {
+          "value": "layout-4",
+          "label": "t:sections.dbtfy-scrolling-banner.layout_4"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "product_break_enable_grid",
+      "info": "t:sections.main-product.blocks.text.settings.layout_3_info",
+      "label": "Enable Grid",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "product_break_grid_columns",
+      "label": "Grid Columns (Desktop)",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 2,
+      "visible_if": "{{ block.settings.product_break_enable_grid }}"
+    },
+    {
+      "type": "range",
+      "id": "product_break_grid_columns_mobile",
+      "label": "Grid Columns (Mobile)",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1,
+      "visible_if": "{{ block.settings.product_break_enable_grid }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "product_break_active_background_color",
+      "label": "t:blocks.quantity_breaks.settings.active_background_color",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "product_break_active_border_color",
+      "label": "t:blocks.quantity_breaks.settings.active_border_color",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_quantity_badge",
+      "label": "t:blocks.quantity_breaks.settings.show_quantity_badge",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "badge_custom_color",
+      "label": "t:blocks.quantity_breaks.settings.badge_color",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "range_badge_color",
+      "label": "t:blocks.quantity_breaks.settings.badge_background_color",
+      "default": "#000000",
+      "visible_if": "{{ block.settings.badge_custom_color == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "range_badge_text_color",
+      "label": "t:blocks.quantity_breaks.settings.badge_text_color",
+      "default": "#ffffff",
+      "visible_if": "{{ block.settings.badge_custom_color == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.visibility.header.content",
+      "info": "t:general.settings.visibility.header.info"
+    },
+    {
+      "type": "radio",
+      "id": "product_break_visibility",
+      "label": "t:general.settings.visibility.visibility.label",
+      "info": "t:general.settings.visibility.visibility.info",
+      "default": "all",
+      "options": [
+        {
+          "value": "all",
+          "label": "t:general.settings.visibility.visibility.options__1"
+        },
+        {
+          "value": "collection",
+          "label": "t:general.settings.visibility.visibility.options__2"
+        },
+        {
+          "value": "type",
+          "label": "t:general.settings.visibility.visibility.options__3"
+        },
+        {
+          "value": "tag",
+          "label": "t:general.settings.visibility.visibility.options__4"
+        },
+        {
+          "value": "product",
+          "label": "t:general.settings.visibility.visibility.options__5"
+        }
+      ]
+    },
+    {
+      "type": "collection",
+      "id": "product_break_collection",
+      "label": "t:general.settings.visibility.collection.label"
+    },
+    {
+      "type": "text",
+      "id": "product_break_types",
+      "label": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.label",
+      "info": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.info"
+    },
+    {
+      "type": "text",
+      "id": "product_break_tags",
+      "label": "t:general.settings.visibility.tags.label",
+      "info": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.info"
+    },
+    {
+      "type": "product",
+      "id": "product_break_product",
+      "label": "t:general.settings.visibility.product.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_dbtfy-product-qty-break"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.quantity_breaks.blocks.product_break.name"
+    }
+  ]
+}
+{%- endschema -%}

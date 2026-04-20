@@ -1,0 +1,27 @@
+{%- if id == 1 -%}
+  :root,
+{%- endif -%} .dbtfy-color-scheme-{{ id }} { --color-background: {{ background.red }}, {{ background.green }},{{ background.blue }};
+{%- if background_gradient != empty -%} --gradient-background: {{ background_gradient }};
+{%- else -%} --gradient-background: {{ background }};
+{%- endif -%}{%- liquid
+  assign background_color = background
+  assign background_color_brightness = background_color | color_brightness
+  if background_color_brightness <= 26
+	assign background_color_contrast = background_color | color_lighten: 50
+  elsif background_color_brightness <= 65
+	assign background_color_contrast = background_color | color_lighten: 5
+  else
+	assign background_color_contrast = background_color | color_darken: 25
+  endif
+-%} --color-foreground: {{ text.red }}, {{ text.green }},{{ text.blue }}; --color-background-contrast: {{ background_color_contrast.red }}, {{ background_color_contrast.green }},{{ background_color_contrast.blue }}; --color-shadow: {{ shadow.red }}, {{ shadow.green }},{{ shadow.blue }}; --color-button: {{ button.red }}, {{ button.green }},{{ button.blue }}; --color-button-text: {{ button_label.red }}, {{ button_label.green }},{{ button_label.blue }}; --color-secondary-button: {{ background.red }}, {{ background.green }},{{ background.blue }}; --color-secondary-button-text: {{ secondary_button_label.red }}, {{ secondary_button_label.green }},{{ secondary_button_label.blue }}; --color-link: {{ secondary_button_label.red }}, {{ secondary_button_label.green }},{{ secondary_button_label.blue }}; --color-badge-foreground: {{ text.red }}, {{ text.green }},{{ text.blue }}; --color-badge-background: {{ background.red }}, {{ background.green }},{{ background.blue }}; --color-badge-border: {{ text.red }}, {{ text.green }},{{ text.blue }}; --payment-terms-background-color: rgb({{ background.rgb }});
+{%- liquid
+  assign background_color = button
+  assign background_color_brightness = background_color | color_brightness
+  if background_color_brightness <= 30
+	assign background_color_contrast = background_color | color_lighten: 10
+  elsif background_color_brightness <= 60
+	assign background_color_contrast = background_color | color_lighten: 5
+  else
+	assign background_color_contrast = background_color | color_darken: 5
+  endif
+-%} --color-button-hover: {{ background_color_contrast }}; --color-button-hover--brightness: {{ background_color_brightness }}; }

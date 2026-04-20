@@ -1,0 +1,16 @@
+{%- if request.page_type != 'product' and section.settings.product != blank -%}
+  {%- assign selected_product = section.settings.product -%}
+{%- endif -%}
+<dbtfy-product-tab-horizontal>
+  <div class="dbtfy-product-tabs dbtfy-product-tab--horizontal hidden" data-product="{{ selected_product.id }}"></div>
+</dbtfy-product-tab-horizontal>
+{%- schema -%}
+{
+  "name": "t:blocks.dbtfy-product-tabs.name",
+  "presets": [
+    {
+      "name": "t:blocks.dbtfy-product-tabs.name"
+    }
+  ]
+}
+{%- endschema -%}

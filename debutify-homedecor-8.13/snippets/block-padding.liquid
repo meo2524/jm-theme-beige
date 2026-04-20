@@ -1,0 +1,78 @@
+{% style %}
+  {%- liquid
+    if block.settings.padding___top == "inherit"
+      assign top = "_default_spacing_top" | prepend: label
+    endif
+    assign padding_top_selected = block.settings.padding___top
+
+    if block.settings.padding___bottom == "inherit"
+      assign bottom = "_default_spacing_bottom" | prepend: label
+    endif
+    assign padding_bottom_selected = block.settings.padding___bottom
+
+    case block.settings.padding___top
+      when "inherit"
+        assign padding_top = settings[top] | prepend: "spacing_"
+        assign padding_top = settings[padding_top]
+        assign padding_top_selected = settings[top]
+      when "none"
+        assign padding_top = "0"
+      when "custom"
+        assign padding_top = block.settings.custom_padding_top
+      else
+        assign padding_top = block.settings.padding___top | prepend: "spacing_"
+        assign padding_top = settings[padding_top]
+    endcase
+
+    case block.settings.padding___bottom
+      when "inherit"
+        assign padding_bottom = settings[bottom] | prepend: "spacing_"
+        assign padding_bottom = settings[padding_bottom]
+        assign padding_bottom_selected = settings[bottom]
+      when "none"
+        assign padding_bottom = "0"
+      when "custom"
+        assign padding_bottom = block.settings.custom_padding_bottom
+      else
+        assign padding_bottom = block.settings.padding___bottom | prepend: "spacing_"
+        assign padding_bottom = settings[padding_bottom]
+    endcase
+  -%}
+
+
+  .block-{{ block.id }}-padding {
+      padding-top: {{ padding_top }}px;
+      padding-bottom: {{ padding_bottom }}px;
+  }
+
+  {%- if padding_top_selected == "custom" -%}
+    {% assign padding_top_selected = 2 %}
+  {%- else -%}
+    {% assign padding_top_selected = padding_top_selected | append: "_mobile" | prepend: 'spacing_' %}
+    {% assign padding_top_selected = settings[padding_top_selected] | plus: 0 %}
+    {%- if padding_top_selected <= 0 -%}
+      {% assign padding_top_selected = 1 %}
+    {% endif %}
+  {%- endif -%}
+
+    @media screen and (max-width: 749px) {
+        .block-{{ block.id }}-padding {
+        padding-top: {{ padding_top | divided_by: padding_top_selected }}px;
+        }
+    }
+
+  {%- if padding_bottom_selected == "custom" -%}
+    {% assign padding_bottom_selected = 2 %}
+  {%- else -%}
+    {% assign padding_bottom_selected = padding_bottom_selected | append: "_mobile" | prepend: 'spacing_' %}
+    {% assign padding_bottom_selected = settings[padding_bottom_selected] | plus: 0 %}
+    {%- if padding_bottom_selected <= 0 -%}
+      {% assign padding_bottom_selected = 1 %}
+    {% endif %}
+  {%- endif -%}
+      @media screen and (max-width: 749px) {
+          .block-{{ block.id }}-padding {
+          padding-bottom: {{ padding_bottom | divided_by: padding_bottom_selected }}px;
+          }
+      }
+{% endstyle %}

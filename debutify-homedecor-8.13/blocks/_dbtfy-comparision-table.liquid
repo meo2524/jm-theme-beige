@@ -1,0 +1,203 @@
+<comparison-table-rows>
+  {% liquid
+    assign title = block.settings.title
+    assign table_title_size = section.settings.table_title_size
+
+    assign subtitle = block.settings.subtitle
+    assign table_subtitle_size = section.settings.table_subtitle_size
+
+    assign display_type = block.settings.display_type
+
+    assign show_shop = block.settings.shop
+    assign show_competitor = block.settings.competitor
+
+    assign image_1 = block.settings.image_1
+    assign image_2 = block.settings.image_2
+
+    assign text_1 = block.settings.text_1
+    assign text_2 = block.settings.text_2
+  %}
+
+  {% style %}
+     {% if block.settings.icon1_color != blank %}
+       .dbtfy-comparison-table-table tbody tr#block__{{ block.id }} td:not(:last-child) .material-icon {
+         color: {{ block.settings.icon1_color }};
+       }
+       {% endif %}
+    {% if block.settings.icon2_color != blank %}
+        .dbtfy-comparison-table-table tbody tr#block__{{ block.id }} td:last-child .material-icon {
+          color: {{ block.settings.icon2_color }};
+        }
+       {% endif %}
+  {% endstyle %}
+
+  <tr class="table-second-row" {{ block.shopify_attributes }} id="block__{{ block.id }}">
+    <th {{ block.shopify_attributes }}>
+      {% if title != blank %}
+        <h3 class="m-0 title_color {{ table_title_size }}">
+          {{ title }}
+        </h3>
+      {% endif %}
+      {% if subtitle != blank %}
+        <div>
+          <div class="m-0 title_color {{ table_subtitle_size }}">{{ subtitle }}</div>
+        </div>
+      {% endif %}
+    </th>
+
+    {% if show_shop %}
+      <td>
+        {% if display_type == 'image' %}
+          {% if image_1 == blank %}
+            {% render 'material-icon', icon: block.settings.icon1 %}
+          {% else %}
+            {{ image_1 | image_url: width: 50, height: 40 | image_tag }}
+          {% endif %}
+        {% elsif text_1 != blank %}
+          {{ text_1 }}
+        {% endif %}
+      </td>
+    {% else %}
+      <td></td>
+    {% endif %}
+    {% if show_competitor %}
+      <td>
+        {% if display_type == 'image' %}
+          {% if image_2 == blank %}
+            {% render 'material-icon', icon: block.settings.icon2 %}
+          {% else %}
+            {{ image_2 | image_url: width: 50, height: 40 | image_tag }}
+          {% endif %}
+        {% else %}
+          {{ text_2 }}
+        {% endif %}
+      </td>
+    {% else %}
+      <td></td>
+    {% endif %}
+  </tr>
+</comparison-table-rows>
+{% schema %}
+{
+  "name": "t:sections.comparison-table.blocks.name",
+  "tag": "null",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:general.settings.title",
+      "default": "t:sections.comparison-table.settings.shop_title_default"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "t:general.settings.style.subtitle",
+      "default": "t:sections.comparison-table.settings.subtitle_default",
+      "info": "t:sections.comparison-table.blocks.settings.subtitle_info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.comparison-table.blocks.settings.content"
+    },
+    {
+      "type": "select",
+      "id": "display_type",
+      "label": "t:sections.comparison-table.blocks.settings.display_type_label.label",
+      "default": "text",
+      "options": [
+        {
+          "value": "image",
+          "label": "t:general.settings.image"
+        },
+        {
+          "value": "text",
+          "label": "t:general.settings.text"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.comparison-table.settings.content_2"
+    },
+    {
+      "type": "checkbox",
+      "id": "shop",
+      "label": "t:sections.comparison-table.blocks.settings.shop",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "icon1",
+      "label": "t:sections.comparison-table.settings.icon_1",
+      "default": "check",
+      "info": "t:sections.all.icon.info",
+      "visible_if": "{{ block.settings.display_type == 'image' }}"
+    },
+    {
+      "type": "color",
+      "id": "icon1_color",
+      "label": "t:sections.comparison-table.settings.custom_color_icon1",
+      "visible_if": "{{ block.settings.display_type == 'image' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "t:sections.comparison-table.blocks.settings.shop_image_label.label",
+      "info": "t:sections.comparison-table.blocks.settings.shop_image_label.info",
+      "visible_if": "{{ block.settings.display_type == 'image' }}"
+    },
+    {
+      "type": "text",
+      "id": "text_1",
+      "label": "t:sections.comparison-table.blocks.settings.shop_text_label.label",
+      "default": "Yes",
+      "info": "t:sections.comparison-table.blocks.settings.shop_text_label.info",
+      "visible_if": "{{ block.settings.display_type == 'text' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.comparison-table.settings.content_3"
+    },
+    {
+      "type": "checkbox",
+      "id": "competitor",
+      "label": "t:sections.comparison-table.blocks.settings.competitor",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "icon2",
+      "label": "t:sections.comparison-table.settings.icon_2",
+      "default": "close",
+      "info": "t:sections.all.icon.info",
+      "visible_if": "{{ block.settings.display_type == 'image' }}"
+    },
+    {
+      "type": "color",
+      "id": "icon2_color",
+      "label": "t:sections.comparison-table.settings.custom_color_icon2",
+      "visible_if": "{{ block.settings.display_type == 'image' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "t:sections.comparison-table.blocks.settings.competitor_image_label.label",
+      "info": "t:sections.comparison-table.blocks.settings.competitor_image_label.info",
+      "visible_if": "{{ block.settings.display_type == 'image' }}"
+    },
+    {
+      "type": "text",
+      "id": "text_2",
+      "label": "t:sections.comparison-table.blocks.settings.competitor_text_label.label",
+      "default": "No",
+      "info": "t:sections.comparison-table.blocks.settings.competitor_text_label.info",
+      "visible_if": "{{ block.settings.display_type == 'text' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Table"
+    }
+  ]
+}
+{% endschema %}

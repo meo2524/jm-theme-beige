@@ -1,0 +1,47 @@
+<div class="cart__ctas" {{ block.shopify_attributes }}>
+  <button
+    type="submit"
+    class=" cart__checkout-button button button--primary"
+    name="checkout"
+    form="CartDrawer-Form"
+    {% if cart == empty %}
+      disabled
+    {% endif %}
+  >
+    {%- render 'loading-spinner' -%}
+    {% if block.settings.dbtfy_checkout_icon != blank %}
+      {% render 'material-icon', icon: block.settings.dbtfy_checkout_icon, class: 'dbtfy_checkout_icon' %}
+    {% endif %}
+
+    <span>{{ 'sections.cart.checkout' | t }}{%- unless block.settings.hide_price -%} - {{ cart.total_price | money_with_currency }}{%- endunless -%}</span>
+  </button>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.cart-drawer.blocks.cart-checkout.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-drawer.blocks.cart-checkout.info"
+    },
+    {
+      "type": "text",
+      "id": "dbtfy_checkout_icon",
+      "label": "t:general.settings.icon_label",
+      "info": "t:sections.all.icon.info"
+    },
+    {
+      "type" : "checkbox",
+      "id" : "hide_price",
+      "label": "t:general.settings.hide_price",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.cart-drawer.blocks.cart-checkout.name"
+    }
+  ]
+}
+{% endschema %}

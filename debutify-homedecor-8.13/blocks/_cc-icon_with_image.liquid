@@ -1,0 +1,277 @@
+{% liquid
+  assign heading = block.settings.size
+  if heading == 'inherit'
+    assign heading = settings.title_size
+  endif
+
+  assign font_size = heading | append: '_font_size'
+  assign font_size_mobile = heading | append: '_font_size_mobile'
+  assign line_height = heading | append: '_line_height'
+  assign line_height_mobile = heading | append: '_line_height_mobile'
+  assign letter_spacing = heading | append: '_letter_spacing'
+  assign letter_spacing_mobile = heading | append: '_letter_spacing_mobile'
+%}
+
+{% if settings[font_size_mobile] == blank %}
+  {% assign font_size_mobile = font_size %}
+{% endif %}
+
+{% style %}
+  #{{ block.id }}.layout-1 figure,
+  #{{ block.id }}.layout-2 figure{
+      max-width:{{ block.settings.width }}px;
+      margin-bottom: 1rem;
+  }
+
+  #{{ block.id }}.layout-3 figure{
+    max-width: 30px;
+  }
+
+  #{{ block.id }} figure img{
+    width: 100%;
+    max-width: 100%;
+    max-height: 20rem;
+    object-fit: cover;
+    object-position: center;
+    height: auto;
+  }
+  @media (max-width:768px){
+    #{{ block.id }} .inline-richtext{
+      font-size: calc(var(--font-heading-scale)* {{ settings[font_size_mobile] }}px);
+    }
+
+    #{{ block.id }} .inline-richtext{
+      line-height: {{ settings[line_height_mobile] }}px;
+      letter-spacing:{{ settings[letter_spacing_mobile] }}px;
+    }
+  }
+
+  @media (min-width:768px){
+    #{{ block.id }} .inline-richtext{
+      font-size: calc(var(--font-heading-scale)* {{ settings[font_size] }}px);
+    }
+
+    #{{ block.id }} .inline-richtext{
+      line-height: {{ settings[line_height] }}px;
+      letter-spacing:{{ settings[letter_spacing] }}px;
+    }
+  }
+  #{{ block.id }}.layout-2 h3{
+    align-self: end;
+  }
+  #{{ block.id }}.layout-2 p{
+    align-self: start;
+  }
+
+  .cc-icon-with-image .layout-2 {
+    display: inline-flex;
+    width: 100%;
+    gap: 1rem;
+  }
+{% endstyle %}
+<li class="cc-icon-with-image" {{ block.shopify_attributes }}>
+  <div
+    id="{{ block.id }}"
+    class="{{ block.settings.layout }}{% if block.settings.color_scheme != 'none' %} color-{{ block.settings.custom_color_scheme }} dbtfy-color-{{ block.settings.color_scheme }} gradient{% endif %}"
+    style="
+      {% if block.settings.color_scheme != 'none' %}
+        padding: 1.5rem;
+        border-radius: var(--text-boxes-radius);
+      {% endif %}
+    "
+  >
+    {% if block.settings.layout == 'layout-3' %}
+      <div class="cc-icon-with-image-layout-3">
+    {% endif %}
+    {%- if block.settings.image != blank -%}
+      <figure class="dbtfy-image--block">
+        {{ block.settings.image | image_url: width: 1206 | image_tag: widths: '246, 493, 600, 713, 823, 990, 1100, 1206' }}
+      </figure>
+    {%- endif -%}
+    {% if block.settings.title != blank or block.settings.description != blank %}
+      {% if block.settings.layout == 'layout-2' %}
+        <div>
+      {% endif %}
+      {% if block.settings.title != blank %}
+        <{{ heading }}
+          class="m-0 inline-richtext  block-{{ block.id }}-padding {% if block.settings.style == "inherit" %}{{ settings.title_style }}{% else %}{{ block.settings.style }}{% endif %}"
+        >
+          {{ block.settings.title }}
+        </{{ heading }}>
+      {% endif %}
+      {% if block.settings.layout == 'layout-3' %}
+        </div>
+      {% endif %}
+
+      {{ block.settings.description }}
+      {% if block.settings.layout == 'layout-2' %}
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</li>
+
+{% schema %}
+{
+  "name": "Image with text",
+  "class": "icon-with-text",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:general.settings.image"
+    },
+    {
+      "type": "range",
+      "id": "width",
+      "label": "t:general.settings.width",
+      "default": 100,
+      "min": 30,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "visible_if": "{{ block.settings.layout != 'layout-3' }}"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:general.settings.title",
+      "default": "t:blocks.title.default"
+    },
+    {
+      "type": "select",
+      "id": "size",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "h1",
+          "label": "t:general.settings.heading_tag.h1"
+        },
+        {
+          "value": "h2",
+          "label": "t:general.settings.heading_tag.h2"
+        },
+        {
+          "value": "h3",
+          "label": "t:general.settings.heading_tag.h3"
+        },
+        {
+          "value": "h4",
+          "label": "t:general.settings.heading_tag.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:general.settings.heading_tag.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:general.settings.heading_tag.h6"
+        }
+      ],
+      "default": "h3",
+      "label": "t:general.settings.size.label"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "t:general.settings.style.lable",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "uppercase",
+          "label": "t:general.settings.style.uppercase"
+        },
+        {
+          "value": "lowercase",
+          "label": "t:general.settings.style.lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "t:general.settings.style.capitalize"
+        }
+      ]
+    },
+    {
+      "id": "layout",
+      "label": "t:settings_schema.layout.name",
+      "type": "select",
+      "options": [
+        {
+          "value": "layout-1",
+          "label": "t:sections.dbtfy-scrolling-banner.layout_1"
+        },
+        {
+          "value": "layout-2",
+          "label": "t:sections.dbtfy-scrolling-banner.layout_2"
+        },
+        {
+          "value": "layout-3",
+          "label": "t:sections.dbtfy-scrolling-banner.layout_3"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "t:blocks.description.default"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon with Image"
+    }
+  ]
+}
+{% endschema %}

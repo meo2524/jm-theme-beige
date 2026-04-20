@@ -1,0 +1,26 @@
+<p
+  class="dbtfy-vertical-ticker__item {% if section.settings.bold %}bold{% endif %} {% if section.settings.uppercase %}uppercase{% endif %} {% if section.settings.italic %}italic{% endif %}"
+  {{ block.shopify_attributes }}
+>
+  {{ block.settings.text }}
+</p>
+
+{% schema %}
+{
+  "name": "Ticker",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "t:general.settings.text",
+      "default": "t:sections.vertical-ticker.settings.ticker"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.vertical-ticker.settings.ticker"
+    }
+  ]
+}
+{% endschema %}

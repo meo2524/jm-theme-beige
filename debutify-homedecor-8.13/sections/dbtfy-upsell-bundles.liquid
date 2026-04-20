@@ -1,0 +1,414 @@
+{%- render 'widget-blocker',
+  enabled: settings.dbtfy_upsell_bundles,
+  section: section,
+  name: 'Upsell bundles',
+  type: '⚡ Paid Sections'
+-%}
+{%- if request.design_mode or settings.dbtfy_upsell_bundles -%}
+  <link
+    rel="stylesheet"
+    href="{{ 'component-product-variant-picker.css' | asset_url }}"
+    media="print"
+    onload="this.media='all'"
+  >
+  <link rel="stylesheet" href="{{ 'component-swatch-input.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'component-swatch.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'dbtfy-upsell-bundles.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  {% if section.settings.product != blank %}
+    {% assign product = all_products[section.settings.product] %}
+  {% endif %}
+
+  {% render 'section-padding', section: section %}
+
+  {% liquid
+    assign product_form_id = 'dbtfy-upsell-bundles__form-' | append: section.id
+
+    assign target_discount_name = section.settings.discount_code
+    if section.settings.discount_type == '$'
+      assign target_discount_amount = section.settings.discount_amount | times: 100
+    else
+      assign target_discount_amount = section.settings.discount_amount
+    endif
+    assign target_discount_type = section.settings.discount_type
+
+    assign current_currency = localization.country.currency.symbol
+    if current_currency == blank
+      assign current_currency = shop.currency.symbol
+    endif
+  %}
+
+  <dbtfy-upsell-bundles
+    data-url="{{ routes.product_recommendations_url }}?limit={{ section.settings.count_in_bundle }}"
+    data-product-handler="{{ product.handle }}"
+    data-section-id="{{ section.id }}"
+    data-product-id="{{ product.id }}"
+    data-discount-name="{{ target_discount_name }}"
+    data-discount-amount="{{ target_discount_amount }}"
+    data-specific-bundle="{{ section.settings.enable_automatic_bundles }}"
+    data-discount-type="{{ target_discount_type }}"
+    data-currency="{{ current_currency }}"
+    data-form-id="{{ product_form_id }}"
+    data-mobile-mode="false"
+    hidden
+    data-save-text="{{ 'general.save' | t }}"
+  >
+    <div class="dbtfy-upsell-bundles show-on--{{section.settings.show_on}} color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+      <div class="{{ section.settings.container_size }}">
+        {% content_for 'block', type: '_heading', id: 'heading' %}
+        {% render 'dbtfy-upsell-bundle-block',
+          section: section,
+          product_form_id: product_form_id,
+          product: product,
+          recommendations: recommendations,
+          mobile_view: false,
+          current_product_label: section.settings.current_product_label,
+          show_rating: section.settings.enable_rating,
+          button_icon: section.settings.button_icon,
+          button_size: section.settings.button_size
+        %}
+      </div>
+    </div>
+  </dbtfy-upsell-bundles>
+  <script src="{{ 'dbtfy-upsell-bundles.js' | asset_url }}" defer></script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-upsell-bundles.name",
+  "disabled_on": { "groups": ["aside"] },
+  "class": "dbtfy-upsell-bundles",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-upsell-bundles.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-upsell-bundles.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.professional_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.main-product.settings.product.label"
+    },
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "t:sections.all.show_on.label",
+      "default": "both",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "container_size",
+      "label": "t:sections.all.container_size.label",
+      "default": "page-width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:general.settings.style.default"
+        },
+        {
+          "value": "",
+          "label": "t:sections.all.container_size.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "default": "button button--primary",
+      "label": "t:general.settings.style.lable",
+      "options": [
+        {
+          "value": "link underlined-link button--link",
+          "label": "t:sections.all.button.option_1_label"
+        },
+        { "value": "button button--tertiary", "label": "t:general.settings.style.default" },
+        { "value": "button button--primary", "label": "t:sections.all.button.options__3.label" },
+        { "value": "button button--secondary", "label": "t:sections.all.button.options__4.label" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "default": "inherit",
+      "label": "t:general.settings.size.label",
+      "options": [
+        { "value": "inherit", "label": "t:general.settings.size.option__1" },
+        {
+          "value": "button--small",
+          "label": "t:general.settings.small"
+        },
+        { "value": "button--medium", "label": "t:sections.all.animation.image_behavior.parallax_speed.medium" },
+        { "value": "", "label": "t:general.settings.size.option__10" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "total_price_label",
+      "label": "t:sections.dbtfy-upsell-bundles.settings.total_price_label.label",
+      "default": "t:sections.dbtfy-upsell-bundles.settings.total_price_label.default"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:settings_schema.dbfty_infinite_scroll.settings.button.label",
+      "default": "t:sections.dbtfy-upsell-bundles.settings.button_label.default"
+    },
+    {
+      "type": "text",
+      "id": "button_icon",
+      "label": "t:blocks.news-letter.settings.modal.button_icon.label",
+      "info": "t:general.settings.icon_info",
+      "default": "library_add_check"
+    },
+    {
+      "type": "text",
+      "id": "current_product_label",
+      "label": "t:sections.dbtfy-upsell-bundles.settings.current_product_label",
+      "default": "t:sections.dbtfy-upsell-bundles.settings.current_product_default"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_rating",
+      "label": "t:sections.dbtfy-upsell-bundles.settings.enable_rating",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-upsell-bundles.settings.header__1.content",
+      "info": "t:sections.dbtfy-upsell-bundles.settings.header__1.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_automatic_bundles",
+      "label": "t:sections.dbtfy-upsell-bundles.settings.enable_automatic_bundles.label",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "count_in_bundle",
+      "label": "t:sections.dbtfy-upsell-bundles.settings.count_in_bundle.label",
+      "default": "3",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.discount.header.content",
+      "info": "t:general.settings.discount.header.info_1"
+    },
+    {
+      "type": "text",
+      "id": "discount_code",
+      "label": "t:general.settings.discount.name.label"
+    },
+    {
+      "type": "select",
+      "id": "discount_type",
+      "label": "t:general.settings.discount.type.label",
+      "default": "%",
+      "options": [
+        {
+          "value": "%",
+          "label": "t:general.settings.discount.type.options__1.label"
+        },
+        {
+          "value": "$",
+          "label": "t:general.settings.discount.type.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "number",
+      "id": "discount_amount",
+      "label": "t:general.settings.discount.amount.label",
+      "info": "t:general.settings.discount.type.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.layout.settings.spacing.section_desktop.label"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.top",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.bottom",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-upsell-bundles.name",
+      "blocks": [
+        {
+          "type": "_heading",
+          "static": true,
+          "id": "heading",
+          "blocks": [
+            {
+              "type": "_title",
+              "settings": { "title": "Frequently bought together" }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

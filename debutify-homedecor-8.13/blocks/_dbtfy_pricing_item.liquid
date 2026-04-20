@@ -1,0 +1,148 @@
+<div
+  id="Slide-{{ section.id }}-{{ block.id }}"
+  class="grid__item {% if settings.animations_reveal_on_scroll and section.settings.slider_on != 'none' %} scroll-trigger animate--slide-in {% endif %}"
+>
+  <div
+    class="dbtfy-pricing-table-block color-{{ block.settings.custom_color_scheme }} dbtfy-color-{{ block.settings.color_scheme }} gradient"
+    {{ block.shopify_attributes }}
+  >
+    <div class="dbtfy-pricing-table--tag-top-heading text-center">
+      {%- if block.settings.badge_text != blank -%}
+        <small class="badge price__badge-sale dbtfy-sale-badge">{{ block.settings.badge_text }}</small>
+      {%- endif -%}
+    </div>
+
+    {%- if block.settings.title != blank -%}
+      <h2 class="h2 dbtfy-pricing-table__block-main--title">{{ block.settings.title }}</h2>
+    {%- endif -%}
+
+    <hr>
+
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.dbfty-pricing-table.blocks.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "t:blocks.dbtfy-sales-popup.settigns.badge_text.label",
+      "default": "Most popular"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "t:general.settings.title",
+      "default": "Title"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "_icon"
+    },
+    {
+      "type": "_title"
+    },
+    {
+      "type": "_price"
+    },
+    {
+      "type": "_subtitle"
+    },
+    {
+      "type": "_description"
+    },
+    {
+      "type": "_single_button"
+    },
+    {
+      "type": "_image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbfty-pricing-table.blocks.name",
+      "blocks": [
+        {
+          "type": "_icon",
+          "settings": {
+            "icon": "local_offert",
+            "padding___top": "extra_small"
+          }
+        },
+        {
+          "type": "_price",
+          "settings": {
+            "price": "19.99",
+            "alignment": "text-center",
+            "size": "h3"
+          }
+        },
+        {
+          "type": "_description",
+          "settings": {
+            "description": "<ul><li>point 1</li><li>point 2</li><li>point 3</li></ul>",
+            "custom_bullet_icon": "check_circle",
+            "alignment": "text-center"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

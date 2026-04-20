@@ -1,0 +1,21 @@
+{%- liquid
+  assign prev_class = prev_class | default: 'hidden'
+  assign next_class = next_class | default: 'hidden'
+-%}
+<div class="slider-buttons {{ class }}">
+  {%- render 'dbtfy-arrow-prev',
+    class: prev_class,
+    arrow: settings.arrow_icon,
+    custom_icon: settings.custom_arrow_icon
+  -%}
+
+  <div class="slider-counter slider-counter--dots hidden">
+    <div class="slideshow__control-wrapper"></div>
+  </div>
+
+  {%- render 'dbtfy-arrow-next',
+    class: next_class,
+    arrow: settings.arrow_icon,
+    custom_icon: settings.custom_arrow_icon
+  -%}
+</div>

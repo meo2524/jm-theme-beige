@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "layout": "collage",
+        "show_image": true,
+        "image_ratio": "56.25%",
+        "show_date": true,
+        "show_author": false,
+        "show_comments": false,
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

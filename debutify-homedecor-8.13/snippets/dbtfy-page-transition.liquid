@@ -1,0 +1,12 @@
+<page-logo-transition>
+  <div class="page-transition hidden">
+    {% if settings.dbtfy_page_transition_logo %}
+      <img
+        src="{{ settings.dbtfy_page_transition_logo | image_url}}"
+        width="{{ settings.dbtfy_page_transition_width }}"
+        height="100%"
+        alt="{{ settings.dbtfy_page_transition_logo.alt | escape }}"
+      >
+    {% endif %}
+  </div>
+</page-logo-transition>

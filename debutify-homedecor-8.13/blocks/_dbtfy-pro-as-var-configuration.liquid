@@ -1,0 +1,44 @@
+<script>
+  Debutify.widgets['product_as_variant_configurations']['{{ block.settings.title }}'] =
+    '{%- if block.settings.image -%}{{ block.settings.image | image_url }}{%- elsif block.settings.gradient != blank -%}{{ block.settings.gradient }}{% else %}{{ block.settings.color }}{%- endif -%}';
+</script>
+{%- schema -%}
+{
+  "name": "t:blocks.dbtfy-product-swatches.config_label",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:blocks.dbtfy-variant-swatches.blocks.color-swatch.settings.color_name.label"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "t:settings_schema.widgets.color_swatches.option_name.default"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:general.settings.or"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient",
+      "label": "t:blocks.dbtfy-product-swatches.gradient_color"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:general.settings.or"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:blocks.dbtfy-variant-swatches.blocks.color-swatch.settings.image.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.dbtfy-product-swatches.config_label"
+    }
+  ]
+}
+{%- endschema -%}

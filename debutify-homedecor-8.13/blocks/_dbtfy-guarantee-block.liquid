@@ -1,0 +1,83 @@
+{%- liquid
+  assign border = false
+  assign color_scheme_block = 'dbtfy-color-' | append: section.settings.color_scheme_block | append: ' color-' | append: section.settings.custom_color_scheme_block | append: ' gradient'
+  if settings.text_boxes_border_thickness <= 0
+    if section.settings.color_scheme == section.settings.color_scheme_block
+      if section.settings.color_scheme == 'custom'
+        if section.settings.custom_color_scheme == section.settings.custom_color_scheme_block
+          assign border = true
+        endif
+      else
+        assign border = true
+      endif
+    endif
+  endif
+-%}
+
+<div
+  class="dbtfy-guarantee__box dbtfy-guarantee__box--{{ section.settings.text_alignment }} dbtfy-guarantee__box--{{ section.settings.text_alignment_mobile }} grid__item scroll-trigger animate--slide-in"
+  {{ block.shopify_attributes }}
+>
+  <div
+    class="h-full {% if section.settings.center %}align-content-center{% endif %} dbtfy-guarantee--card__info {% if section.settings.block_color == 'custom' %} {{ color_scheme_block }} {% if border %} dbtfy-guarantee-card-border {% endif %} {% endif %}"
+  >
+    <div class="dbtfy-guarantee--card__info--inner">
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.guarantee.name",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "_icon"
+    },
+    {
+      "type": "_title"
+    },
+    {
+      "type": "_subtitle"
+    },
+    {
+      "type": "_description"
+    },
+    {
+      "type": "_single_button"
+    },
+    {
+      "type": "_image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.guarantee.name",
+      "blocks": [
+        {
+          "type": "_icon",
+          "settings": { "icon": "lock", "size": "medium", "alignment": "text-center" }
+        },
+        {
+          "type": "_title",
+          "settings": { "title": "Our guarantee", "size": "h5", "alignment": "text-center" }
+        },
+        {
+          "type": "_description",
+          "settings": {
+            "description": "<p>Share your guarantees with your customers.</p>",
+            "alignment": "text-center"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

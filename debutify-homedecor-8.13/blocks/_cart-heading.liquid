@@ -1,0 +1,89 @@
+{% assign count_string = '{count}' %}
+<div class="drawer__header" {{ block.shopify_attributes }}>
+  <h2
+    class=" drawer__heading {% unless block.settings.heading_alignment == 'flex-start' %} drawer-center {% endunless %}"
+  >
+    {% if block.settings.heading_text contains count_string %}
+      {% liquid
+        assign non_upsell_count = cart.item_count
+        for item in cart.items
+          if item.product.tags contains 'cart-hidden' or item.product.tags contains 'conditional-gift'
+            assign non_upsell_count = non_upsell_count | minus: 1
+          endif
+
+          if item.properties._showProduct == 'false'
+            assign non_upsell_count = non_upsell_count | minus: 1
+          endif
+
+          if item.properties._shipping_priority == 'true'
+            assign non_upsell_count = non_upsell_count | minus: 1
+          endif
+        endfor
+      %}
+      {{ block.settings.heading_text | replace: count_string, non_upsell_count }}
+    {% else %}
+      {{ block.settings.heading_text }}
+    {% endif %}
+  </h2>
+  <button
+    class="drawer__close"
+    type="button"
+    onclick="this.closest('cart-drawer').close()"
+    aria-label="{{ 'accessibility.close' | t }}"
+  >
+    {% if block.settings.close_icon != blank %}
+      {% render 'material-icon', icon: block.settings.close_icon %}
+    {% else %}
+      <span class="svg-wrapper">
+        {{- 'icon-close.svg' | inline_asset_content -}}
+      </span>
+    {% endif %}
+  </button>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.cart-drawer.blocks.cart-heading.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.heading"
+    },
+    {
+      "type": "text",
+      "id": "heading_text",
+      "label": "t:general.settings.text",
+      "default": "t:sections.cart-drawer.blocks.cart-heading.settings.heading_text.default",
+      "info": "t:sections.cart-drawer.blocks.cart-heading.settings.heading_text.info"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:general.settings.alignment.label",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "t:general.settings.alignment.option__4"
+        },
+        {
+          "value": "center",
+          "label": "t:general.settings.alignment.option__5"
+        }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "text",
+      "id": "close_icon",
+      "label": "t:blocks.cart-notification.settings.close_icon.label",
+      "default": "close",
+      "info": "t:sections.all.icon.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.cart-drawer.blocks.cart-heading.name"
+    }
+  ]
+}
+{% endschema %}

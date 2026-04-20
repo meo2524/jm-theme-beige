@@ -1,0 +1,102 @@
+<li
+  id="Slide-{{ section.id }}-{{ block.id }}"
+  class="collection-list__item grid__item {% if block.settings.collection.featured_image == nil %} collection-list__item--no-media{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {{ block.shopify_attributes }}
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  {% assign min = 1 %}
+  {% assign max = 6 %}
+  {% assign diff = max | minus: min %}
+  {% assign randomNumber = 'now' | date: '%N' | modulo: diff | plus: min %}
+  {% assign placeholder_image = 'collection-' | append: randomNumber %}
+  {% render 'extended-card-collection',
+    card_collection: block.settings.collection,
+    media_aspect_ratio: section.settings.image_ratio,
+    columns: 2,
+    custom_title: block.settings.title,
+    custom_image: block.settings.image,
+    inside_box: section.settings.inside_box,
+    image_position: block.settings.image_position,
+    size: section.settings.title_size,
+    placeholder_image: placeholder_image
+  %}
+</li>
+{% schema %}
+{
+  "name": "t:general.settings.visibility.collection.label",
+  "tag": null,
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:general.settings.visibility.collection.label"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "t:sections.header.blocks.collections.settings.collection_image_alignment.label",
+      "default": "center center",
+      "options": [
+        {
+          "value": "top left",
+          "label": "t:general.settings.position.option__1"
+        },
+        {
+          "value": "top center",
+          "label": "t:general.settings.position.option__2"
+        },
+        {
+          "value": "top right",
+          "label": "t:general.settings.position.option__3"
+        },
+        {
+          "value": "center left",
+          "label": "t:general.settings.position.option__4"
+        },
+        {
+          "value": "center center",
+          "label": "t:general.settings.position.option__5"
+        },
+        {
+          "value": "center right",
+          "label": "t:general.settings.position.option__6"
+        },
+        {
+          "value": "bottom left",
+          "label": "t:general.settings.position.option__7"
+        },
+        {
+          "value": "bottom center",
+          "label": "t:general.settings.position.option__8"
+        },
+        {
+          "value": "bottom right",
+          "label": "t:general.settings.position.option__9"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.override.collection.label",
+      "info": "t:sections.all.override.collection.info"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.all.override.collection.details.title"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.all.override.collection.details.image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.visibility.collection.label"
+    }
+  ]
+}
+{% endschema %}

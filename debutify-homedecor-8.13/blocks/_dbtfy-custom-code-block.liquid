@@ -1,0 +1,135 @@
+<li
+  class="
+    dbtfy-custom-code__box
+    text-{{ block.settings.text_alignment }}
+    mobile-text-{{ block.settings.text_alignment_mobile }}
+    scroll-trigger animate--slide-in
+    color-{{ block.settings.custom_color_scheme }}
+    dbtfy-color-{{ block.settings.color_scheme }}
+    gradient
+    grid--{{ block.settings.desktop_col_width }}-col-desktop
+    grid--{{ block.settings.tablet_col_width }}-col-tablet
+    grid--{{ block.settings.mobile_col_width }}-col
+  "
+  {{ block.shopify_attributes }}
+>
+  <div class="dbtfy-custom-code__code">
+    {{ block.settings.code }}
+  </div>
+</li>
+
+{% schema %}
+{
+  "name": "t:settings_schema.integrations.settings.review_widget_code.label",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:settings_schema.integrations.settings.review_widget_code.label",
+      "info": "t:general.settings.block-name.info"
+    },
+    {
+      "type": "liquid",
+      "id": "code",
+      "label": "t:sections.custom-code.blocks.settings.html.label",
+      "default": "t:sections.custom-code.blocks.settings.html.default"
+    },
+    {
+      "type": "range",
+      "id": "desktop_col_width",
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "label": "t:sections.custom-code.blocks.settings.desktop_col_width.label",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "tablet_col_width",
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "label": "t:sections.custom-code.blocks.settings.tablet_col_width.label",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "mobile_col_width",
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "label": "t:sections.custom-code.blocks.settings.mobile_col_width.label",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "t:general.settings.alignment.desktop",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "t:general.settings.alignment.option__4" },
+        { "value": "center", "label": "t:general.settings.alignment.option__5" },
+        { "value": "right", "label": "t:general.settings.alignment.option__6" },
+        { "value": "justify", "label": "t:general.settings.alignment.option__7" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_alignment_mobile",
+      "label": "t:general.settings.alignment.mobile",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "t:general.settings.alignment.option__4" },
+        { "value": "center", "label": "t:general.settings.alignment.option__5" },
+        { "value": "right", "label": "t:general.settings.alignment.option__6" },
+        { "value": "justify", "label": "t:general.settings.alignment.option__7" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:settings_schema.integrations.settings.review_widget_code.label"
+    }
+  ]
+}
+{% endschema %}

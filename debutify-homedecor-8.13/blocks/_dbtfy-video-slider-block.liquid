@@ -1,0 +1,128 @@
+{%- if block.settings.video != blank -%}
+  {%- assign media_aspect_ratio = section.settings.image_ratio -%}
+  {%- assign image_crop_position = section.settings.image_crop_position -%}
+
+  {%- if media_aspect_ratio and media_aspect_ratio != 'inherit' -%}
+    {%- assign image_aspect_ratio = media_aspect_ratio -%}
+    {%- if media_aspect_ratio == 'circle' -%}
+      {%- assign image_aspect_ratio = '100%' -%}
+    {%- endif -%}
+    {% style %}
+      #shopify-section-{{ section.id }}{
+        --dbtfy-image-crop-ratio: {{ image_aspect_ratio }};
+      }
+    {% endstyle %}
+  {%- else -%}
+    {%- assign media_aspect_ratio = settings.dbtfy_product_image_crop_ratio -%}
+  {%- endif -%}
+
+  {%- if image_crop_position and image_crop_position != 'inherit' -%}
+    {% style %}
+      #shopify-section-{{ section.id }}{
+        --dbtfy-image-crop-position: {{ image_crop_position }};
+      }
+    {% endstyle %}
+  {%- endif -%}
+
+  <li class="splide__slide">
+    <div class="global-media-settings">
+      <div
+        class="image-slide"
+        {{ block.shopify_attributes }}
+      >
+        {%- liquid
+          assign action_on_inactive = 'none'
+
+          if block.settings.muted_autoplay == false
+            assign action_on_inactive = 'pause'
+          elsif block.settings.muted_autoplay and block.settings.display_sound_btn and block.settings.display_play_btn
+            assign action_on_inactive = 'pause'
+          elsif block.settings.muted_autoplay and block.settings.display_sound_btn and block.settings.display_play_btn == false
+            assign action_on_inactive = 'mute'
+          endif
+        -%}
+        {% render 'dbtfy-video-player',
+          block: block,
+          action_on_inactive: action_on_inactive,
+          media_aspect_ratio: media_aspect_ratio
+        %}
+        {% if block.settings.description != blank %}
+          <div
+            class="dbtfy-image-video-content rte text-{{ block.settings.text_alignment }} w-full"
+          >
+            {{ block.settings.description }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </li>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:general.settings.video.label",
+  "tag": null,
+  "settings": [
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:general.settings.video.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "t:sections.dbtfy-content-tabs.blocks.video_looping",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "muted_autoplay",
+      "label": "t:sections.dbtfy-content-tabs.blocks.muted_autoplay",
+      "default": true,
+      "info": "t:general.settings.video.muted_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_play_btn",
+      "label": "t:general.settings.video.play_pause",
+      "info": "t:general.settings.video.play_pause_info",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "btn_animation",
+      "label": "t:sections.dbtfy-content-tabs.blocks.enable_button_rippele_animation",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "display_sound_btn",
+      "label": "t:general.settings.video.sound_button",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "display_timeline",
+      "label": "t:general.settings.video.timeline",
+      "default": false
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:general.settings.description",
+      "default": "<p>Description</p>"
+    },
+    {
+      "type": "text_alignment",
+      "id": "text_alignment",
+      "label": "t:general.settings.alignment.text_alignment",
+      "default": "center"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.video.label"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,47 @@
+{%- if block.blocks.size > 0 -%}
+  {%- render 'widget-blocker',
+    enabled: settings.dbtfy_upsell_bundles,
+    section: section,
+    name: 'Upsell Bundles',
+    type: '⚡ Paid widget'
+  -%}
+{%- endif -%}
+<script>
+  Debutify.widgets['upsell_bundles'] = {
+    blocks: [],
+  };
+</script>
+{%- content_for 'blocks' -%}
+{%- schema -%}
+{
+  "name": "t:sections.dbtfy-upsell-bundles.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-upsell-bundles.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-upsell-bundles.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.professional_info"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_dbtfy-upsell-bundle"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-upsell-bundles.name"
+    }
+  ]
+}
+{%- endschema -%}

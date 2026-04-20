@@ -1,0 +1,45 @@
+{%- if block.blocks.size > 0 -%}
+  {%- render 'widget-blocker',
+    enabled: settings.dbtfy_cart_upsell,
+    section: section,
+    name: 'Cart Upsell',
+    type: '⚡ Paid widget'
+  -%}
+{%- endif -%}
+<script>
+  Debutify.widgets['cart_upsell'] = [];
+  Debutify.widgets['cart_upsell']['global'] = [];
+  Debutify.widgets['cart_upsell']['specific'] = [];
+</script>
+{%- content_for 'blocks' -%}
+{% schema %}
+{
+  "name": "Cart Upsells",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-upsell.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-upsell.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_cart-upsell-general"
+    },
+    {
+      "type": "_cart-upsell-specific"
+    }
+  ]
+}
+{% endschema %}

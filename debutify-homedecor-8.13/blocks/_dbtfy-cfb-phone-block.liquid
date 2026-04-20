@@ -1,0 +1,87 @@
+<div
+  class=" {% if block.settings.width_phone == 'full-width' %}grid--12-col{% else %}grid--6-col{% endif %} "
+  {{ block.shopify_attributes }}
+>
+  <div class="field">
+    <input
+      class="field__input"
+      type="tel"
+      pattern="[0-9\-]*"
+      autocomplete="tel"
+      id="ContactForm-{{ block.settings.label | handleize }}"
+      name="contact[{{ block.settings.label | handleize }}]"
+      placeholder="{{ block.settings.label }}"
+      {% if block.settings.required %}
+        required
+      {% endif %}
+    >
+    <label class="field__label" for="ContactForm-{{ block.settings.label | handleize }}">
+      {{ block.settings.label }}
+      {% if block.settings.required %}
+        <span aria-hidden="true">*</span>
+      {% endif %}
+    </label>
+  </div>
+  {% if block.settings.required %}
+    <small class="error-message w-100 hidden">
+      <span class="svg-wrapper">
+        {{- 'icon-error.svg' | inline_asset_content -}}
+      </span>
+      <span class="error-message-text"> {{ block.settings.error_message }} </span>
+    </small>
+  {% endif %}
+</div>
+{% schema %}
+{
+  "name": "Phone",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:general.settings.label",
+      "default": "Phone number"
+    },
+    {
+      "type": "checkbox",
+      "id": "required",
+      "label": "t:general.settings.require",
+      "default": true,
+      "info": "t:sections.dbtfy-contact-form-builder.blocks.input.settings.required.info"
+    },
+    {
+      "type": "select",
+      "id": "width_phone",
+      "label": "t:sections.dbtfy-contact-form-builder.blocks.phone.settings.width_phone.label",
+      "default": "full-width",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "t:sections.dbtfy-content-tabs.settings.full_width"
+        },
+        {
+          "value": "half-width",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.checkbox.settings.width_checkbox.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "error_message",
+      "label": "t:sections.dbtfy-contact-form-builder.blocks.error_label",
+      "default": "t:sections.dbtfy-contact-form-builder.blocks.phone.settings.error_default"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Phone"
+    }
+  ]
+}
+{% endschema %}

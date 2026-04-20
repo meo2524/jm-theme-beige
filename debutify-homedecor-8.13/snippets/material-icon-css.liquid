@@ -1,0 +1,31 @@
+{%- if settings.icon_style == 'rounded' -%}
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,{{ settings.icon_weight }},0..1,-50..200"
+  >
+{%- elsif settings.icon_style == 'sharp' -%}
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@24,{{ settings.icon_weight }},0..1,-50..200"
+  >
+{%- elsif settings.icon_style == 'outlined' -%}
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,{{ settings.icon_weight }},0..1,-50..200"
+  >
+{%- endif -%}
+
+<style>
+  .material-icon::before { content: attr(data-icon); }
+  .material-icon { font-weight: normal; font-style: normal; font-size: 24px; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; word-wrap: normal; direction: ltr; -webkit-font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased; max-width: 1em; overflow: hidden; flex-shrink: 0; vertical-align: bottom; font-variation-settings: 'FILL' 0, 'wght'{{ settings.icon_weight | 100 }}; text-decoration: none; }
+  .material-icon.fillable { font-variation-settings: 'FILL' 1; }
+  .dbtfy-wishlist-badge .material-icon.fillable { font-variation-settings: 'FILL' 0; }
+  .dbtfy-wishlist-badge.active .material-icon { font-variation-settings: 'FILL' 1; }
+  .material-icon.outlined { font-family: 'Material Symbols Outlined'; }
+  .material-icon.rounded { font-family: 'Material Symbols Rounded'; }
+  .material-icon.sharp { font-family: 'Material Symbols Sharp'; }
+  .material-icon.small { font-size: 25px; }
+  .material-icon.medium { font-size: 50px; }
+  .material-icon.large { font-size: 75px; }
+  .material-icon.xlarge { font-size: 100px; }
+</style>

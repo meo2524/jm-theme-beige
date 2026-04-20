@@ -9,24 +9,24 @@
 
 :root {
 
-  /* Colour palette — Ocean Glass */
-  --color-espresso:       #0B2E3C;
-  --color-mahogany:       #0B7285;
-  --color-amber:          #0B7285;
-  --color-amber-hover:    #085E6F;
-  --color-gold:           #74C0FC;
-  --color-linen:          #E3FAFC;
+  /* Colour palette — Soft Repair */
+  --color-espresso:       #2B2B2B;  /* Matte Black — all text, dark sections */
+  --color-mahogany:       #A68966;  /* Warm Clay — muted text, accents */
+  --color-amber:          #A68966;  /* Warm Clay — CTA buttons */
+  --color-amber-hover:    #8C7254;  /* Warm Clay dark — hover */
+  --color-gold:           #D7C4A3;  /* Sandstone — borders, alt surfaces */
+  --color-linen:          #F2E8D5;  /* Unbleached Cotton — primary bg */
   --color-linen-alt:      #FFFFFF;
-  --color-sage:           #74C0FC;
-  --color-sage-deep:      #0B7285;
+  --color-sage:           #D7C4A3;  /* Sandstone */
+  --color-sage-deep:      #A68966;  /* Warm Clay */
 
   /* Semantic tokens */
   --color-bg:             var(--color-linen);
   --color-bg-alt:         var(--color-linen-alt);
-  --color-bg-dark:        var(--color-mahogany);
+  --color-bg-dark:        var(--color-espresso);
   --color-text:           var(--color-espresso);
-  --color-text-muted:     var(--color-gold);
-  --color-text-on-dark:   #FFFFFF;
+  --color-text-muted:     var(--color-mahogany);
+  --color-text-on-dark:   #F2E8D5;
   --color-border:         var(--color-gold);
   --color-rule:           var(--color-gold);
   --color-cta:            var(--color-amber);
@@ -181,7 +181,7 @@ p {
 
 ::selection {
   background-color: var(--color-amber);
-  color: var(--color-linen);
+  color: var(--color-espresso);
 }
 
 
@@ -400,7 +400,7 @@ p {
 /* Primary — amber clay fill */
 .btn--primary {
   background-color: var(--color-cta);
-  color: var(--color-linen);
+  color: var(--color-espresso);
   border: 1.5px solid var(--color-cta);
 }
 
@@ -420,7 +420,7 @@ p {
 .btn--secondary:hover,
 .btn--secondary:focus-visible {
   background-color: var(--color-espresso);
-  color: var(--color-linen);
+  color: var(--color-espresso);
 }
 
 /* Ghost on dark — for dark sections */
@@ -470,12 +470,12 @@ p {
   text-transform: uppercase;
   border-radius: var(--radius-sm);
   background-color: var(--color-sage);
-  color: var(--color-linen);
+  color: var(--color-espresso);
 }
 
 .badge--amber {
   background-color: var(--color-amber);
-  color: var(--color-linen);
+  color: var(--color-espresso);
 }
 
 .badge--outline {
@@ -571,7 +571,7 @@ p {
 
 .quantity__btn:hover {
   background-color: var(--color-espresso);
-  color: var(--color-linen);
+  color: var(--color-espresso);
 }
 
 .quantity__input {

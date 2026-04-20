@@ -1,0 +1,671 @@
+{% if settings.dbtfy_newsletter_popup %}
+  {{ 'dbtfy-newsletter-popup.css' | asset_url | stylesheet_tag: preload: true }}
+
+  <style>
+    .dbtfy-newsletter-popup-sidebar.dbtfy-newsletter-popup-sidebar {
+      top: {{ block.settings.sidebar_vertical_position }}% !important;
+    }
+  </style>
+
+  {% liquid
+    assign customer_tag = block.settings.customer_tag
+    assign form_classes = 'newsletter-modal-form '
+
+    assign newsletterId = 'newsletter_id_' | append: block.id
+
+    if settings.newsletter_app == 'omnisend'
+      assign form_classes = form_classes | append: 'omnisend-subscribe-form no-loading-state'
+    endif
+
+    if settings.newsletter_app == 'klaviyo'
+      assign customer_tag_list = customer_tag | split: ','
+      assign is_tag_present = false
+
+      for tag in customer_tag_list
+        assign current_tag = tag | lstrip | rstrip | downcase
+
+        if current_tag == 'newsletter'
+          assign is_tag_present = true
+          break
+        endif
+      else
+        assign customer_tag = customer_tag | prepend: 'newsletter'
+        assign is_tag_present = true
+      endfor
+
+      unless is_tag_present
+        assign customer_tag = customer_tag | prepend: 'newsletter, '
+      endunless
+    endif
+
+    assign overlay_image = ''
+    if block.settings.overlay_image
+      assign overlay_image = block.settings.overlay_image | image_url: width: 3840
+    endif
+
+    assign full_image = block.settings.full_image
+  %}
+
+  {% if block.settings.discount_type == 'percentage' %}
+    {% assign discount_type = '%' %}
+  {% elsif block.settings.discount_type == 'fixed_amount' %}
+    {% assign discount_amount = block.settings.discount_amount %}
+    {% assign discount_type = '$' %}
+    {% assign discount_amount = discount_amount | times: 100 | money %}
+  {% endif %}
+
+  {% if full_image == false %}
+    {% style %}
+      .dbtfy-newsletter-popup-overlay {
+        background-image: url('{{ overlay_image }}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    {% endstyle %}
+  {% endif %}
+  <dbtfy-newsletter-popup-sidebar
+    data-selector="#dbtfy-newsletter-popup-{{ section.id }}"
+    data-activate-modal="{{ block.settings.activate_modal }}"
+    data-activate-modal-secondary="{{ block.settings.activate_modal_secondary }}"
+    data-time="{{ block.settings.time }}"
+    data-scroll-width="{{ block.settings.scroll_depth }}"
+    data-modal-width="{{ block.settings.modal_width }}"
+    data-close-button-selector=".dbtfy-newsletter-popup__modal--close"
+    data-copy-button-selector=".dbtfy-newsletter-popup__copy--button"
+    data-copy-button-value="{{ block.settings.discount_name }}"
+    data-sidebar-enabled="{{ block.settings.sidebar_enabled }}"
+    data-close-icon-hide="{{ block.settings.close_icon_hide }}"
+  >
+    {% assign amount_string = '{amount}' %}
+    {% assign discount_string = '{discount}' %}
+    {% if block.settings.sidebar_enabled %}
+      <div class="dbtfy-newsletter dbtfy-newsletter-popup-sidebar fixed {{ block.settings.sidebar_position }}-0">
+        <button class="button color-{{ block.settings.custom_color_scheme }} dbtfy-color-{{ block.settings.color_scheme }}">
+          {% if block.settings.sidebar_text contains amount_string
+            or block.settings.sidebar_text contains discount_string
+          %}
+            {% if discount_type == '%' %}
+              {{
+                block.settings.sidebar_text
+                | replace: amount_string, block.settings.discount_amount
+                | replace: discount_string, discount_type
+              }}
+              {% render 'material-icon', icon: block.settings.sidebar_icon %}
+            {% elsif discount_type == '$' %}
+              {{ block.settings.sidebar_text | replace: amount_string, discount_amount | replace: discount_string, '' }}
+              {% render 'material-icon', icon: block.settings.sidebar_icon %}
+            {% endif %}
+          {% else %}
+            {{ block.settings.sidebar_text }}
+            {% render 'material-icon', icon: block.settings.sidebar_icon %}
+          {% endif %}
+        </button>
+      </div>
+    {% endif %}
+  </dbtfy-newsletter-popup-sidebar>
+
+  <dbtfy-newsletter-popup class="hidden">
+    <div
+      class="{% if full_image and block.settings.image != blank  %} dbfty-newsletter-popup--full-image {% endif %} dbtfy-newsletter-popup color-{{ block.settings.custom_color_scheme }} dbtfy-color-{{ block.settings.color_scheme }} gradient background-position--{{ block.settings.image_position }} inner-spacing"
+      style="
+          {% if full_image == false %}
+          {% if block.settings.image != blank and block.settings.image_as_background == true %}
+            background: linear-gradient(#00000073, #00000073),url('{{ block.settings.image | image_url: width: 2000 }}') no-repeat;
+            background-size: cover;
+          {% endif %}
+        {% endif %}
+      "
+    >
+      <div class="d-grid">
+        {%- if block.settings.image != blank -%}
+          {%- if block.settings.image_as_background == false or full_image -%}
+            <div
+              class="
+                {%- if full_image -%}
+                {%- if block.settings.full_image_width == 'medium' -%}
+                grid--6-col-tablet grid--12-col
+                {%- else -%}
+                grid--4-col-tablet grid--12-col
+                {%- endif -%}
+                {%- else -%}
+                grid--4-col-tablet grid--12-col
+                {%- endif -%}
+              "
+            >
+              <img
+                src="{{ block.settings.image | image_url: width: 500, height: 500 }}"
+                alt="{{ block.settings.image.alt }}"
+                width="500"
+                height="400"
+                style="
+                  width: 100%;
+                  vertical-align: middle;
+                  object-fit: cover;
+                "
+              >
+            </div>
+          {% endif %}
+        {% endif %}
+        <div
+          class="
+            dbtfy-newsletter-popup--content rte
+            {% if block.settings.image != blank %}
+            {% if block.settings.image_as_background == false or full_image %}
+            {% if full_image %}
+            {% if block.settings.full_image_width == 'medium' %}
+            grid--6-col-tablet grid--12-col
+            {% else %}
+            grid--8-col-tablet grid--12-col
+            {% endif %}
+            {% else %}
+            grid--8-col-tablet grid--12-col
+            {% endif %}
+            {% else %}
+            grid--12-col
+            {% endif %}
+              {% else %}
+              grid--12-col
+              {% endif %}
+          "
+        >
+          <form-block
+            data-id="{{ newsletterId }}"
+            data-success-message="{{- 'newsletter.success' | t }}"
+          >
+            {% form 'customer', class: form_classes, id: newsletterId %}
+              {%- if form.posted_successfully? -%}
+                <h2 class="dbtfy-newsletter-popup__heading dbtfy-newsletter-popup__success">
+                  {{ block.settings.thank_you_heading }}
+                </h2>
+                <p class="dbtfy-newsletter-popup__content">{{ block.settings.thank_you_subheading }}</p>
+                <button
+                  type="button"
+                  class="button dbtfy-newsletter-popup__copy--button"
+                  aria-label="{{ block.settings.thank_you_button }}"
+                  data-value="{{block.settings.discount_name}}"
+                >
+                  {{ block.settings.thank_you_button }}
+                </button>
+                {% if request.design_mode == false %}
+                  {{ 'dbtfy-newsletter--popup.js' | asset_url | script_tag }}
+                {% endif %}
+              {% else %}
+                <div>
+                  <h2 class="dbtfy-newsletter-popup__heading">{{ block.settings.modal_heading }}</h2>
+                  <p class="dbtfy-newsletter-popup__content">
+                    {% if block.settings.modal_subheading contains amount_string
+                      or block.settings.modal_subheading contains discount_string
+                    %}
+                      {% if discount_type == '%' %}
+                        {{
+                          block.settings.modal_subheading
+                          | replace: amount_string, block.settings.discount_amount
+                          | replace: discount_string, discount_type
+                        }}
+                      {% elsif discount_type == '$' %}
+                        {{
+                          block.settings.modal_subheading
+                          | replace: amount_string, discount_amount
+                          | replace: discount_string, ''
+                        }}
+                      {% endif %}
+                    {% else %}
+                      {{ block.settings.modal_subheading }}
+                    {% endif %}
+                  </p>
+                  <input type="hidden" name="contact[tags]" value="{{ customer_tag }}">
+                  <div class="newsletter-modal-form__field-wrapper">
+                    <div class="field">
+                      <input
+                        id="NewsletterModalForm--{{ section.id }}"
+                        type="email"
+                        name="contact[email]"
+                        class="field__input"
+                        value="{{ form.email }}"
+                        aria-required="true"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        autocomplete="email"
+                        {% if form.errors %}
+                          autofocus
+                          aria-invalid="true"
+                          aria-describedby="Newsletter-modal-error--{{ section.id }}"
+                        {% elsif form.posted_successfully? %}
+                          aria-describedby="Newsletter-modal-success--{{ section.id }}"
+                        {% endif %}
+                        placeholder="{{ 'newsletter.label' | t }}"
+                        required
+                      >
+                      <button
+                        type="submit"
+                        class="newsletter-modal-form__button field__button"
+                        name="commit"
+                        id="Subscribe"
+                        aria-label="{{ 'newsletter.button_label' | t }}"
+                      >
+                        {% render 'material-icon', icon: block.settings.icon_mail %}
+                      </button>
+                    </div>
+
+                    {%- if form.errors -%}
+                      <form-error hidden>
+                        {{- form.errors.translated_fields.email | capitalize }}
+                        {{ form.errors.messages.email -}}
+                      </form-error>
+                    {%- endif -%}
+                  </div>
+                  <span
+                    class="link underlined-link button--link dbtfy-newsletter-popup__modal--close"
+                  >
+                    <span>
+                      {{ block.settings.modal_text }}
+                    </span>
+                  </span>
+                </div>
+              {%- endif -%}
+            {% endform %}
+          </form-block>
+        </div>
+      </div>
+    </div>
+  </dbtfy-newsletter-popup>
+  <script src="{{ 'dbtfy-newsletter-popup.js' | asset_url }}" defer></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.news-letter.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.news-letter.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.news-letter.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.professional_info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.news-letter.settings.sidebar.header"
+    },
+    {
+      "type": "checkbox",
+      "id": "sidebar_enabled",
+      "label": "t:blocks.news-letter.settings.enabled",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "sidebar_position",
+      "label": "t:settings_schema.wish_list.settings.icon_position_product_page.options.label",
+      "default": "right",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:general.settings.alignment.option__4"
+        },
+        {
+          "value": "right",
+          "label": "t:general.settings.alignment.option__6"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "sidebar_vertical_position",
+      "label": "t:blocks.news-letter.settings.sidebar.vertical_position.label",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "text",
+      "id": "sidebar_icon",
+      "label": "t:general.settings.icon_label",
+      "default": "arrow_drop_up",
+      "info": "t:sections.all.icon.info"
+    },
+    {
+      "type": "text",
+      "id": "sidebar_text",
+      "label": "t:general.settings.heading",
+      "default": "t:blocks.news-letter.settings.sidebar.text.default",
+      "info": "t:blocks.news-letter.settings.sidebar.text.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.news-letter.settings.modal.header"
+    },
+    {
+      "type": "select",
+      "id": "modal_width",
+      "label": "t:general.settings.width",
+      "default": "medium",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "overlay_image",
+      "label": "t:blocks.news-letter.settings.modal.overlay_image.label",
+      "visible_if": "{{ block.settings.full_image == false }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:general.settings.image"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_image",
+      "label": "t:blocks.news-letter.settings.modal.full_image",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "full_image_width",
+      "label": "t:blocks.news-letter.settings.modal.full_image_width",
+      "default": "medium",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "image_as_background",
+      "label": "t:blocks.news-letter.settings.modal.image.label_2",
+      "visible_if": "{{ block.settings.full_image == false }}"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "t:blocks.news-letter.settings.modal.image_position.label",
+      "default": "center-center",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "t:general.settings.position.option__1"
+        },
+        {
+          "value": "top-center",
+          "label": "t:general.settings.position.option__2"
+        },
+        {
+          "value": "top-right",
+          "label": "t:general.settings.position.option__3"
+        },
+        {
+          "value": "center-left",
+          "label": "t:general.settings.position.option__4"
+        },
+        {
+          "value": "center-center",
+          "label": "t:general.settings.position.option__5"
+        },
+        {
+          "value": "center-right",
+          "label": "t:general.settings.position.option__6"
+        },
+        {
+          "value": "bottom-left",
+          "label": "t:general.settings.position.option__7"
+        },
+        {
+          "value": "bottom-center",
+          "label": "t:general.settings.position.option__8"
+        },
+        {
+          "value": "bottom-right",
+          "label": "t:general.settings.position.option__9"
+        }
+      ],
+      "visible_if": "{{ block.settings.full_image == false }}"
+    },
+    {
+      "type": "text",
+      "id": "icon_mail",
+      "label": "t:blocks.news-letter.settings.modal.button_icon.label",
+      "default": "mail",
+      "info": "t:sections.all.icon.info"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "modal_heading",
+      "label": "t:general.settings.heading",
+      "default": "t:blocks.news-letter.settings.modal.heading.default"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "modal_subheading",
+      "label": "t:general.settings.subheading",
+      "default": "t:blocks.news-letter.settings.modal.subheading.default"
+    },
+    {
+      "type": "text",
+      "id": "modal_text",
+      "label": "t:blocks.news-letter.settings.modal.close_button_text.label",
+      "default": "t:blocks.news-letter.settings.modal.close_button_text.default"
+    },
+    {
+      "type": "checkbox",
+      "id": "close_icon_hide",
+      "label": "t:blocks.news-letter.settings.modal.close_button_text.close_icon",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.news-letter.settings.thank_you_modal.header"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "thank_you_heading",
+      "label": "t:general.settings.heading",
+      "default": "t:blocks.news-letter.settings.thank_you_modal.heading.default"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "thank_you_subheading",
+      "label": "t:general.settings.subheading",
+      "default": "t:blocks.news-letter.settings.thank_you_modal.subheading.default"
+    },
+    {
+      "type": "text",
+      "id": "thank_you_button",
+      "label": "t:blocks.news-letter.settings.thank_you_modal.button_text.label",
+      "default": "t:blocks.news-letter.settings.thank_you_modal.button_text.default"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.news-letter.settings.modal_trigger.header"
+    },
+    {
+      "type": "select",
+      "id": "activate_modal",
+      "label": "t:blocks.news-letter.settings.modal_trigger.activate_time_trigger.label",
+      "default": "page_load",
+      "options": [
+        {
+          "value": "page_load",
+          "label": "t:blocks.news-letter.settings.modal_trigger.activate_time_trigger.options__1.label"
+        },
+        {
+          "value": "after_x_sec",
+          "label": "t:blocks.news-letter.settings.modal_trigger.activate_time_trigger.options__2.label"
+        },
+        {
+          "value": "leaving_store",
+          "label": "t:blocks.news-letter.settings.modal_trigger.activate_time_trigger.options__3.label"
+        },
+        {
+          "value": "scroll_depth",
+          "label": "t:blocks.news-letter.settings.modal_trigger.activate_time_trigger.options__4.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "activate_modal_secondary",
+      "label": "t:blocks.news-letter.settings.modal_trigger.activate_time_trigger.label_secondary",
+      "default": "",
+      "options": [
+        {
+          "value": "",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "page_load",
+          "label": "t:blocks.news-letter.settings.modal_trigger.activate_time_trigger.options__1.label"
+        },
+        {
+          "value": "after_x_sec",
+          "label": "t:blocks.news-letter.settings.modal_trigger.activate_time_trigger.options__2.label"
+        },
+        {
+          "value": "leaving_store",
+          "label": "t:blocks.news-letter.settings.modal_trigger.activate_time_trigger.options__3.label"
+        },
+        {
+          "value": "scroll_depth",
+          "label": "t:blocks.news-letter.settings.modal_trigger.activate_time_trigger.options__4.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "time",
+      "label": "t:blocks.news-letter.settings.modal_trigger.time.label",
+      "min": 5,
+      "max": 60,
+      "step": 1,
+      "default": 5,
+      "unit": "s",
+      "info": "t:blocks.news-letter.settings.modal_trigger.time.info"
+    },
+    {
+      "type": "range",
+      "id": "scroll_depth",
+      "label": "t:blocks.news-letter.settings.modal_trigger.scroll_depth.label",
+      "min": 5,
+      "max": 60,
+      "step": 1,
+      "default": 15,
+      "unit": "%",
+      "info": "t:blocks.news-letter.settings.modal_trigger.scroll_depth.info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.discount.header.content",
+      "info": "t:general.settings.discount.header.info_1"
+    },
+    {
+      "type": "text",
+      "id": "discount_name",
+      "label": "t:general.settings.discount.name.label",
+      "default": "t:sections.all.discount_code.name.default"
+    },
+    {
+      "type": "select",
+      "id": "discount_type",
+      "label": "t:general.settings.discount.type.label",
+      "default": "percentage",
+      "options": [
+        {
+          "value": "percentage",
+          "label": "t:general.settings.discount.type.options__1.label"
+        },
+        {
+          "value": "fixed_amount",
+          "label": "t:general.settings.discount.type.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "discount_amount",
+      "label": "t:general.settings.discount.amount.label",
+      "info": "t:general.settings.discount.type.info",
+      "default": "40"
+    },
+
+    {
+      "type": "inline_richtext",
+      "id": "customer_tag",
+      "label": "t:blocks.news-letter.settings.customer_tag.label",
+      "default": "t:settings_schema.integrations.settings.header__1.content",
+      "info": "t:blocks.news-letter.settings.customer_tag.info"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.news-letter.settings.customer_tag.paragraph"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    }
+  ]
+}
+{%- endschema -%}

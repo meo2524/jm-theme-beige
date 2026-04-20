@@ -1,0 +1,29 @@
+{% if request.design_mode or settings.dbtfy_product_as_variant %}
+  {% render 'widget-blocker',
+    enabled: settings.dbtfy_product_as_variant,
+    section: section,
+    name: 'Product as Variant',
+    type: '⚡ Paid widget'
+  %}
+
+  <product-as-variant
+    data-current-product="{{ product.handle }}"
+    class="product_as_variant"
+  >
+  </product-as-variant>
+{% endif %}
+
+{{ 'product-as-variant.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-as-variant.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "t:sections.main-product.blocks.product_as_variants.name",
+  "settings": [],
+  "presets": [
+    {
+      "name": "t:sections.main-product.blocks.product_as_variants.name"
+    }
+  ]
+}
+{% endschema %}

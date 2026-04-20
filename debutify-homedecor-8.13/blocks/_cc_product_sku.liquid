@@ -1,0 +1,53 @@
+{%- liquid
+  unless block.settings.product == blank
+    assign product = block.settings.product
+  endunless
+-%}
+
+<p
+  class="product__sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
+  id="Sku-{{ section.id }}"
+  role="status"
+  {{ block.shopify_attributes }}
+>
+  <span class="visually-hidden">{{ 'products.product.sku' | t }}:</span>
+  {{- product.selected_or_first_available_variant.sku -}}
+</p>
+
+{% schema %}
+{
+  "name": "Product SKU",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.main-product.settings.product.label"
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "options": [
+        {
+          "value": "body",
+          "label": "t:general.settings.style.body"
+        },
+        {
+          "value": "subtitle",
+          "label": "t:general.settings.style.subtitle"
+        },
+        {
+          "value": "uppercase",
+          "label": "t:general.settings.style.uppercase"
+        }
+      ],
+      "default": "body",
+      "label": "t:general.settings.style.text_style"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product SKU"
+    }
+  ]
+}
+{% endschema %}

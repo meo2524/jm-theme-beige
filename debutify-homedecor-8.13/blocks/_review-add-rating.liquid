@@ -1,0 +1,60 @@
+<div class="grid--4-col-desktop grid--4-col-tablet grid--12-col review-rating-btn" {{ block.shopify_attributes }}>
+  <div class="review-actions">
+    <button
+      class="write-review-button button button--primary"
+      data-write-text="{{ block.settings.button_text }}"
+      data-cancel-text="{{ block.settings.cancel_button_text }}"
+    >
+      {{ block.settings.button_text }}
+    </button>
+  </div>
+
+  <review-form-modal class="hidden">
+    {% if block.settings.thank_you_message != blank %}
+      <div class="review-thank-you-message-wrapper text-center hidden">
+        <div class="review-thank-you-message">
+          {% render 'material-icon', icon: 'check_circle' %}
+          <h2 class="thank-you-message">{{ block.settings.thank_you_message }}</h2>
+        </div>
+      </div>
+    {% endif %}
+    <div class="review-wrapper">
+      {% content_for 'blocks' %}
+    </div>
+  </review-form-modal>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-review.rating.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:blocks.news-letter.settings.thank_you_modal.button_text.label",
+      "default": "t:sections.dbtfy-review.rating.settings.write_button.default"
+    },
+    {
+      "type": "text",
+      "id": "cancel_button_text",
+      "label": "t:sections.dbtfy-review.rating.settings.cancel_button.label",
+      "default": "t:sections.dbtfy-review.rating.settings.cancel_button.default"
+    },
+    {
+      "type": "text",
+      "id": "thank_you_message",
+      "label": "t:sections.dbtfy-review.rating.settings.thank_you_message.label",
+      "default": "t:sections.dbtfy-review.rating.settings.thank_you_message.default"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_heading"
+    },
+    {
+      "type": "_review-form-settings"
+    }
+  ]
+}
+{% endschema %}

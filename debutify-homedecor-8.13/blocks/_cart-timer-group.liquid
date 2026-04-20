@@ -1,0 +1,40 @@
+{%- if block.blocks.size > 0 -%}
+  {%- render 'widget-blocker',
+    enabled: settings.dbtfy_cart_countdown_timer,
+    section: section,
+    name: 'Cart Countdown Timer',
+    type: '⚡ Paid widget'
+  -%}
+{%- endif -%}
+<script>
+  Debutify.widgets['cart_countdown_timer'] = [];
+</script>
+{%- content_for 'blocks' -%}
+{%- schema -%}
+{
+  "name": "t:blocks.cart-countdown-timer.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.cart-countdown-timer.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.cart-countdown-timer.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.professional_info"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_cart-timer"
+    }
+  ]
+}
+{%- endschema -%}

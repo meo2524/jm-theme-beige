@@ -1,0 +1,14 @@
+{% if request.page_type != 'product' and section.settings.product != blank %}
+  {% assign selected_product = section.settings.product %}
+{% endif %}
+<div class="dbtfy-product-bullet-points hidden" data-product="{{ selected_product.id }}"></div>
+{% schema %}
+{
+  "name": "Product bullet point",
+  "presets": [
+    {
+      "name": "Product bullet point"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,13 @@
+{%- if request.design_mode and enabled == false -%}
+  <div class="shopify-section section-inactive-notice">
+    <p style="margin:0;padding:5px;background: brown;display: flex;align-items: center;color: white;justify-content: center;">
+      ⚠️ "{{ name }}" is not activated. Please active here:&nbsp;<strong>Theme Settings</strong>
+      {%- comment -%}
+        {% if type %}
+          &nbsp;&gt;&nbsp;<strong>{{ type }}</strong>
+        {% endif %}
+        &nbsp;&gt;&nbsp;<strong>{{ name }}</strong>
+      {%- endcomment -%}
+    </p>
+  </div>
+{%- endif -%}

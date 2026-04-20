@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "cart_details_NEetAd": {
+      "type": "cart-details",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 36
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "frontpage",
+        "products_to_show": 6,
+        "columns_desktop": 4,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "image_shape": "default",
+        "show_secondary_image": "inherit",
+        "show_vendor": false,
+        "show_rating": false,
+        "show_description": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "cart_details_NEetAd",
+    "featured-collection"
+  ]
+}

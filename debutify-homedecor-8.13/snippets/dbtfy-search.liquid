@@ -1,0 +1,23 @@
+{% comment %}
+  {% render 'dbtfy-search',
+    show_search ---- Show search bar
+    search_display_type ---- Search display type (minimal, standard)
+    block ---- Block value for the block.shopify_attributes
+
+  %}
+{% endcomment %}
+{% if show_search %}
+  <div
+    class="dbtfy-search grid--{{desktop-width}}-col-desktop grid--{{tablet-width}}-col-tablet grid--12-col"
+    {{ block }}
+  >
+    {% render 'dbtfy-html', heading: heading, subheading: subheading, html_area: html_area %}
+    {% if search_display_type == 'minimal' %}
+      {% render 'dbtfy-search-bar-minimal' %}
+    {% elsif search_display_type == 'standard' %}
+      <div class="dbtfy-search-bar-standard">
+        {% render 'dbtfy-search-bar-standard' %}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

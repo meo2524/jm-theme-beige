@@ -1,0 +1,128 @@
+{% assign media_aspect_ratio = section.settings.image_ratio %}
+{% assign image_crop_position = section.settings.image_crop_position %}
+
+{% if media_aspect_ratio and media_aspect_ratio != 'inherit' %}
+  {% assign image_aspect_ratio = media_aspect_ratio %}
+  {% if media_aspect_ratio == 'circle' %}
+    {% assign image_aspect_ratio = '100%' %}
+  {% endif %}
+  {% style %}
+    #shopify-section-{{ section.id }}{
+      --dbtfy-image-crop-ratio: {{ image_aspect_ratio }};
+    }
+  {% endstyle %}
+{% else %}
+  {% assign media_aspect_ratio = settings.dbtfy_product_image_crop_ratio %}
+{% endif %}
+
+{% if image_crop_position and image_crop_position != 'inherit' %}
+  {% style %}
+    #shopify-section-{{ section.id }}{
+      --dbtfy-image-crop-position: {{ image_crop_position }};
+    }
+  {% endstyle %}
+{% endif %}
+
+<li
+  id="Slide-{{ section.id }}-{{ block.id }}"
+  class="multicolumn-list__item grid__item {% if section.settings.column_alignment == 'center' %} center{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {{ block.shopify_attributes }}
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+    style="--animation-order: {{ block.id }};"
+  {% endif %}
+>
+  <div class="multicolumn-card content-container">
+    {%- if block.settings.image != blank -%}
+      <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--{{ section.settings.image_width }}-width multicolumn-card-spacing image--ratio">
+        <div
+          class="media media--transparent media-{{ media_aspect_ratio }} {%- unless media_aspect_ratio == 'circle' -%} ratio{%-endunless-%}"
+        >
+          {%- liquid
+            assign number_of_columns = section.settings.columns_desktop
+            assign number_of_columns_mobile = section.settings.columns_mobile
+            assign grid_space_desktop = number_of_columns | minus: 1 | times: settings.spacing_grid_horizontal | plus: 100 | append: 'px'
+            assign grid_space_tablet = number_of_columns_mobile | minus: 1 | times: settings.spacing_grid_horizontal | plus: 100 | append: 'px'
+            assign grid_space_mobile = number_of_columns_mobile | minus: 1 | times: settings.spacing_grid_horizontal | divided_by: 2 | plus: 30 | append: 'px'
+            if section.settings.image_width == 'half'
+              assign image_width = 0.5
+            elsif section.settings.image_width == 'third'
+              assign image_width = 0.33
+            else
+              assign image_width = 1
+            endif
+          -%}
+          {% capture sizes %}
+              (min-width: {{ settings.page_width }}px) calc(({{ settings.page_width }}px - {{ grid_space_desktop }}) * {{ image_width }} /  {{ number_of_columns }}),
+              (min-width: 990px) calc((100vw - {{ grid_space_desktop }}) * {{ image_width }} / {{ number_of_columns }}),
+              (min-width: 750px) calc((100vw - {{ grid_space_tablet }}) * {{ image_width }} / {{ number_of_columns_mobile }}),
+              calc((100vw - {{ grid_space_mobile }}) * {{ image_width }} / {{ number_of_columns_mobile }})
+            {% endcapture %}
+          {{
+            block.settings.image
+            | image_url: width: 3200
+            | image_tag:
+              widths: '50, 75, 100, 150, 200, 300, 400, 500, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3200',
+              sizes: sizes,
+              class: 'multicolumn-card__image'
+          }}
+        </div>
+      </div>
+    {%- endif -%}
+    <div class="multicolumn-card__info">
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</li>
+
+{% schema %}
+{
+  "name": "t:general.settings.column",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:general.settings.image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "_title"
+    },
+    {
+      "type": "_description"
+    },
+    {
+      "type": "_single_button"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.column",
+      "blocks": [
+        {
+          "type": "_title",
+          "settings": { "title": "Column", "size": "h5" }
+        },
+        {
+          "type": "_description",
+          "settings": {
+            "description": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "padding___top": "custom",
+            "custom_padding_top": 0,
+            "padding___bottom": "custom",
+            "custom_padding_bottom": 0
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

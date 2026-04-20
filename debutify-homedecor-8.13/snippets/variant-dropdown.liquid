@@ -1,0 +1,69 @@
+{% liquid
+  assign variant_size = product.options_with_values.size
+  if variant_size == 1
+    assign hasClass = 'has-one'
+  elsif variant_size == 2
+    assign hasClass = 'has-two'
+  elsif variant_size >= 3
+    assign hasClass = 'has-three'
+  endif
+%}
+<custom-variant-option
+  data-item="{{ item }}"
+  data-old-variant-id="{{ item.id }}"
+  data-add-to-cart="{{ add_to_cart }}"
+  class="{{ hasClass }}"
+>
+  {%- for option in product.options_with_values -%}
+    <div
+      class="product-form__input product-form__input--dropdown custom_variant_option"
+      data-option-name="{{ option.name | handleize }}"
+    >
+      <div class="select">
+        <select
+          class="select__select"
+          data-option-name="{{ option.name }}"
+          data-ignore-validity="true"
+        >
+          {%- for value in option.values -%}
+            {% if variant %}
+              {% assign items = variant.options_with_values %}
+            {% else %}
+              {% assign items = item.options_with_values %}
+            {% endif %}
+
+            <option
+              value="{{ value | escape }}"
+              class="{% if option_disabled %}dropdown_disabled{% endif %}"
+              {% for i in items %}
+                {% if i.name == option.name and i.value == value %}
+                  selected="selected"
+                {% endif %}
+              {% endfor %}
+            >
+              {% if option_disabled -%}
+                {{- 'products.product.value_unavailable' | t: option_value: value -}}
+              {%- else -%}
+                {{- value -}}
+              {%- endif %}
+            </option>
+          {% endfor %}
+        </select>
+        <span class="svg-wrapper">
+          {{- 'icon-caret.svg' | inline_asset_content -}}
+        </span>
+      </div>
+    </div>
+  {%- endfor -%}
+
+  <div class="custom_variant_option__select hidden">
+    {%- for option in product.variants -%}
+      <div
+        value="{{ option.id }}"
+        data-option-name="{{ option.title | escape }}"
+      >
+        {{- option.title -}}
+      </div>
+    {%- endfor -%}
+  </div>
+</custom-variant-option>

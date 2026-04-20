@@ -1,0 +1,152 @@
+{%- style -%}
+  .dbtfy-background-pattern-{{ section.id }} {
+      position: relative;
+
+      &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-repeat: repeat;
+      background-position: 0 0;
+      opacity: {{ setting.pattern_opacity | divided_by: 100.0 }};
+      pointer-events: none;
+      z-index: 0;
+
+      {%- case setting.pattern_bg -%}
+
+          {%- when 'curved-grid' -%}
+          --cg-size: {{ setting.pattern_size | times: 5 }}px;
+          --cg-color: {{ setting.pattern_color }};
+          --cg-shape: transparent 52%, var(--cg-color) 54% 57%, transparent 59%;
+
+          background:
+              radial-gradient(farthest-side at -33.33% 50%, var(--cg-shape)) 0 calc(var(--cg-size) / 2),
+              radial-gradient(farthest-side at 50% 133.33%, var(--cg-shape)) calc(var(--cg-size) / 2) 0,
+              radial-gradient(farthest-side at 133.33% 50%, var(--cg-shape)),
+              radial-gradient(farthest-side at 50% -33.33%, var(--cg-shape));
+
+          background-size:
+              calc(var(--cg-size) / 4.667) var(--cg-size),
+              var(--cg-size) calc(var(--cg-size) / 4.667);
+          background-repeat: repeat;
+
+          {%- when 'radial-rings' -%}
+          background-image: repeating-radial-gradient(
+              circle at center,
+              {{ setting.pattern_color }} 0,
+              {{ setting.pattern_color }}
+              {{ setting.pattern_size_thickness }}px,
+              transparent
+              {{ setting.pattern_size_thickness }}px,
+              transparent
+              {{ setting.pattern_size }}px
+          );
+
+          {%- when 'diamond-grid' -%}
+          background-image:
+              linear-gradient(
+              135deg,
+              transparent 25%,
+              {{ setting.pattern_color }} 25%,
+              {{ setting.pattern_color }} 50%,
+              transparent 50%,
+              transparent 75%,
+              {{ setting.pattern_color }} 75%,
+              {{ setting.pattern_color }} 100%
+              ),
+              linear-gradient(
+              225deg,
+              transparent 25%,
+              {{ setting.pattern_color }} 25%,
+              {{ setting.pattern_color }} 50%,
+              transparent 50%,
+              transparent 75%,
+              {{ setting.pattern_color }} 75%,
+              {{ setting.pattern_color }} 100%
+              );
+          background-size: {{ setting.pattern_size }}px {{ setting.pattern_size }}px;
+          background-position:
+              0 0,
+              {{ setting.pattern_size | divided_by: 2 }}px
+              {{ setting.pattern_size | divided_by: 2 }}px;
+
+          {%- when 'quatrefoils' -%}
+          --qf-size: {{ setting.pattern_size | times: 1.2 }}px;
+          --qf-color: {{ setting.pattern_color }};
+
+          --qf-shape:
+              transparent 83%,
+              var(--qf-color) 85% 99%,
+              transparent 101%;
+
+          background:
+              radial-gradient(27% 29% at right ,  var(--qf-shape)) calc(var(--qf-size) /  2)  var(--qf-size),
+              radial-gradient(27% 29% at left  ,  var(--qf-shape)) calc(var(--qf-size) / -2)  var(--qf-size),
+              radial-gradient(29% 27% at top   ,  var(--qf-shape)) 0                       calc(var(--qf-size) /  2),
+              radial-gradient(29% 27% at bottom,  var(--qf-shape)) 0                       calc(var(--qf-size) / -2);
+
+          background-size: calc(2 * var(--qf-size)) calc(2 * var(--qf-size));
+          background-repeat: repeat;
+
+          {%- when 'hexagons' -%}
+          --hx-size: {{ setting.pattern_size }}px;
+          --hx-color: {{ setting.pattern_color }};
+
+          --hx-c: transparent,
+                  var(--hx-color) .5deg 119.5deg,
+                  transparent 120deg;
+
+          --hx-g1: conic-gradient(from  60deg at 56.25% calc(425% / 6), var(--hx-c));
+          --hx-g2: conic-gradient(from 180deg at 43.75% calc(425% / 6), var(--hx-c));
+          --hx-g3: conic-gradient(from -60deg at 50%   calc(175% / 12), var(--hx-c));
+
+          background:
+              var(--hx-g1),
+              var(--hx-g1) var(--hx-size) calc(1.73 * var(--hx-size)),
+              var(--hx-g2),
+              var(--hx-g2) var(--hx-size) calc(1.73 * var(--hx-size)),
+              var(--hx-g3) var(--hx-size) 0,
+              var(--hx-g3) 0 calc(1.73 * var(--hx-size));
+
+          background-size: calc(2 * var(--hx-size)) calc(3.46 * var(--hx-size));
+          background-repeat: repeat;
+
+          {%- when 'intersecting-circles' -%}
+
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 0C6.716 0 0 6.716 0 15c8.284 0 15-6.716 15-15zM0 15c0 8.284 6.716 15 15 15 0-8.284-6.716-15-15-15zm30 0c0-8.284-6.716-15-15-15 0 8.284 6.716 15 15 15zm0 0c0 8.284-6.716 15-15 15 0-8.284 6.716-15 15-15z' fill='{{ setting.pattern_color | replace: "#", "%23" }}' fill-rule='evenodd'/%3E%3C/svg%3E");
+          background-size: {{ setting.pattern_size }}px {{ setting.pattern_size }}px;
+
+          {%- when 'brick-wall' -%}
+
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='{{ setting.pattern_color | replace: '#', '%23' }}'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+          background-size: {{ setting.pattern_size }}px {{ setting.pattern_size }}px;
+
+          {%- when 'formal-invitation' -%}
+
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 18'%3E%3Cpath fill='{{ setting.pattern_color | replace: '#', '%23' }}' fill-opacity='0.4' d='M61.82 18c3.47-1.45 6.86-3.78 11.3-7.34C78 6.76 80.34 5.1 83.87 3.42 88.56 1.16 93.75 0 100 0v6.16C98.76 6.05 97.43 6 96 6c-9.59 0-14.23 2.23-23.13 9.34-1.28 1.03-2.39 1.9-3.4 2.66h-7.65zm-23.64 0H22.52c-1-.76-2.1-1.63-3.4-2.66C11.57 9.3 7.08 6.78 0 6.16V0c6.25 0 11.44 1.16 16.14 3.42 3.53 1.7 5.87 3.35 10.73 7.24 4.45 3.56 7.84 5.9 11.31 7.34zM61.82 0h7.66a39.57 39.57 0 0 1-7.34 4.58C57.44 6.84 52.25 8 46 8S34.56 6.84 29.86 4.58A39.57 39.57 0 0 1 22.52 0h15.66C41.65 1.44 45.21 2 50 2c4.8 0 8.35-.56 11.82-2z'%3E%3C/path%3E%3C/svg%3E");
+          background-size: {{ setting.pattern_size_thickness | times: 25 }}px {{ setting.pattern_size_thickness | times: 4.5 }}px;
+
+          {%- when 'jupiter' -%}
+
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cpath fill='{{ setting.pattern_color | replace: '#', '%23' }}' fill-opacity='0.4' d='M0 17.83V0h17.83a3 3 0 0 1-5.66 2H5.9A5 5 0 0 1 2 5.9v6.27a3 3 0 0 1-2 5.66zm0 18.34a3 3 0 0 1 2 5.66v6.27A5 5 0 0 1 5.9 52h6.27a3 3 0 0 1 5.66 0H0V36.17zM36.17 52a3 3 0 0 1 5.66 0h6.27a5 5 0 0 1 3.9-3.9v-6.27a3 3 0 0 1 0-5.66V52H36.17zM0 31.93v-9.78a5 5 0 0 1 3.8.72l4.43-4.43a3 3 0 1 1 1.42 1.41L5.2 24.28a5 5 0 0 1 0 5.52l4.44 4.43a3 3 0 1 1-1.42 1.42L3.8 31.2a5 5 0 0 1-3.8.72zm52-14.1a3 3 0 0 1 0-5.66V5.9A5 5 0 0 1 48.1 2h-6.27a3 3 0 0 1-5.66-2H52v17.83zm0 14.1a4.97 4.97 0 0 1-1.72-.72l-4.43 4.44a3 3 0 1 1-1.41-1.42l4.43-4.43a5 5 0 0 1 0-5.52l-4.43-4.43a3 3 0 1 1 1.41-1.41l4.43 4.43c.53-.35 1.12-.6 1.72-.72v9.78zM22.15 0h9.78a5 5 0 0 1-.72 3.8l4.44 4.43a3 3 0 1 1-1.42 1.42L29.8 5.2a5 5 0 0 1-5.52 0l-4.43 4.44a3 3 0 1 1-1.41-1.42l4.43-4.43a5 5 0 0 1-.72-3.8zm0 52c.13-.6.37-1.19.72-1.72l-4.43-4.43a3 3 0 1 1 1.41-1.41l4.43 4.43a5 5 0 0 1 5.52 0l4.43-4.43a3 3 0 1 1 1.42 1.41l-4.44 4.43c.36.53.6 1.12.72 1.72h-9.78zm9.75-24a5 5 0 0 1-3.9 3.9v6.27a3 3 0 1 1-2 0V31.9a5 5 0 0 1-3.9-3.9h-6.27a3 3 0 1 1 0-2h6.27a5 5 0 0 1 3.9-3.9v-6.27a3 3 0 1 1 2 0v6.27a5 5 0 0 1 3.9 3.9h6.27a3 3 0 1 1 0 2H31.9z'%3E%3C/path%3E%3C/svg%3E");
+          background-size: {{ setting.pattern_size }}px {{ setting.pattern_size }}px;
+
+          {%- when 'yyy' -%}
+
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 96'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='{{ setting.pattern_color | replace: '#', '%23' }}' fill-opacity='0.4'%3E%3Cpath d='M36 10a6 6 0 0 1 12 0v12a6 6 0 0 1-6 6 6 6 0 0 0-6 6 6 6 0 0 1-12 0 6 6 0 0 0-6-6 6 6 0 0 1-6-6V10a6 6 0 1 1 12 0 6 6 0 0 0 12 0zm24 78a6 6 0 0 1-6-6 6 6 0 0 0-6-6 6 6 0 0 1-6-6V58a6 6 0 1 1 12 0 6 6 0 0 0 6 6v24zM0 88V64a6 6 0 0 0 6-6 6 6 0 0 1 12 0v12a6 6 0 0 1-6 6 6 6 0 0 0-6 6 6 6 0 0 1-6 6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+          background-size: {{ setting.pattern_size }}px {{ setting.pattern_size | times: 1.6 }}px;
+
+          {%- when 'temple' -%}
+
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 152 152'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='temple' fill='{{ setting.pattern_color | replace: '#', '%23' }}' fill-opacity='0.4'%3E%3Cpath d='M152 150v2H0v-2h28v-8H8v-20H0v-2h8V80h42v20h20v42H30v8h90v-8H80v-42h20V80h42v40h8V30h-8v40h-42V50H80V8h40V0h2v8h20v20h8V0h2v150zm-2 0v-28h-8v20h-20v8h28zM82 30v18h18V30H82zm20 18h20v20h18V30h-20V10H82v18h20v20zm0 2v18h18V50h-18zm20-22h18V10h-18v18zm-54 92v-18H50v18h18zm-20-18H28V82H10v38h20v20h38v-18H48v-20zm0-2V82H30v18h18zm-20 22H10v18h18v-18zm54 0v18h38v-20h20V82h-18v20h-20v20H82zm18-20H82v18h18v-18zm2-2h18V82h-18v18zm20 40v-18h18v18h-18zM30 0h-2v8H8v20H0v2h8v40h42V50h20V8H30V0zm20 48h18V30H50v18zm18-20H48v20H28v20H10V30h20V10h38v18zM30 50h18v18H30V50zm-2-40H10v18h18V10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+          background-size: {{ setting.pattern_size | times: 3 }}px {{ setting.pattern_size | times: 3 }}px;
+
+          {%- when 'lips' -%}
+
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='92' viewBox='0 0 112 92'%3E%3Cg fill='{{ setting.pattern_color | replace: '#', '%23' }}' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M72 10H40L16 20H0v8h16l24-14h32l24 14h16v-8H96L72 10zm0-8H40L16 4H0v8h16l24-6h32l24 6h16V4H96L72 2zm0 84H40l-24-6H0v8h16l24 2h32l24-2h16v-8H96l-24 6zm0-8H40L16 64H0v8h16l24 10h32l24-10h16v-8H96L72 78zm0-12H40L16 56H0v4h16l24 14h32l24-14h16v-4H96L72 66zm0-16H40l-24-2H0v4h16l24 6h32l24-6h16v-4H96l-24 2zm0-16H40l-24 6H0v4h16l24-2h32l24 2h16v-4H96l-24-6zm0-16H40L16 32H0v4h16l24-10h32l24 10h16v-4H96L72 18z'/%3E%3C/g%3E%3C/svg%3E");
+          background-size: {{ setting.pattern_size | times: 1.2174 }}px {{ setting.pattern_size }}px;
+
+      {%- endcase -%}
+      }
+  }
+{%- endstyle -%}

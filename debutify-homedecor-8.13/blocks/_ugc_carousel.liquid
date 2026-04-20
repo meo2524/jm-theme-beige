@@ -1,0 +1,60 @@
+{% liquid
+  assign slider_on = ''
+  if section.settings.slider_on == 'none'
+    assign slider_on = 'grid--{{ mobile }}-col grid--{{ desktop }}-col-desktop'
+  elsif section.settings.slider_on == 'desktop'
+    assign slider_on = 'grid--{{ mobile }}-col'
+  elsif section.settings.slider_on == 'mobile'
+    assign slider_on = 'grid--{{ desktop }}-col-desktop grid--{{ mobile }}-col'
+  endif
+
+  assign columnsDesktop = section.settings.columns_desktop | default: columns_desktop
+
+  assign slider_on = slider_on | replace: '{{ mobile }}', 1
+  assign slider_on = slider_on | replace: '{{ desktop }}', columnsDesktop
+%}
+
+<div class="splide dbtfy_ugc_slider">
+  <div class="splide__slider">
+    <div class="splide__track ">
+      <ul class="splide__list grid {{ slider_on }}">
+        {% content_for 'blocks' %}
+      </ul>
+      <div class="splide__dots-and-arrows">
+        <ul
+          class="splide__pagination {% unless section.settings.enable_dots or dots %} hidden {% endunless %}"
+        ></ul>
+        <div
+          class="splide__arrows {% unless section.settings.enable_arrows or arrows %} hidden {% endunless %}"
+        ></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "t:blocks.name",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "_ugc_carousel-block"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.video.label",
+      "blocks": [
+        {
+          "type": "_ugc_carousel-block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

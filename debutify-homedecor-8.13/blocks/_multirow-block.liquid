@@ -1,0 +1,121 @@
+{%- liquid
+  if section.settings.image_layout contains 'right'
+    assign odd_class = ' image-with-text__grid--reverse'
+  endif
+  if section.settings.row_color_scheme == 'custom' and section.settings.section_color_scheme == 'custom' and section.settings.custom_row_color_scheme == section.settings.custom_section_color_scheme
+    assign no_content_background = true
+  elsif section.settings.row_color_scheme == section.settings.section_color_scheme
+    assign no_content_background = true
+  endif
+
+  if settings.text_boxes_shadow_opacity == 0 and settings.text_boxes_border_thickness == 0 or settings.text_boxes_border_opacity == 0
+    assign no_content_styles = true
+  endif
+
+  if settings.text_boxes_border_thickness > 0 and settings.text_boxes_border_opacity > 0 and settings.media_border_thickness > 0 and settings.media_border_opacity > 0
+    assign borders_class = ' collapse-borders'
+  endif
+
+  if no_content_background and no_content_styles
+    assign padding_class = ' collapse-padding'
+  else
+    assign padding_class = ' collapse-padding-overlay'
+  endif
+
+  unless no_content_background and no_content_styles
+    assign corners_class = ' collapse-corners'
+  endunless
+-%}
+
+<div
+  class="image-with-text {{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {{ block.shopify_attributes }}
+>
+  <div class="image-with-text__grid grid grid--gapless grid--1-col grid--{% if section.settings.desktop_image_width == 'medium' %}2-col-tablet{% else %}3-col-tablet{% endif %}{% unless section.settings.image_layout contains 'alternate' %}{{ odd_class }}{% endunless %}">
+    <div class="image-with-text__media-item image-with-text__media-item--{{ section.settings.desktop_image_width }} image-with-text__media-item--{{ section.settings.desktop_content_position }} grid__item">
+      <div
+        class="image-with-text__media image-with-text__media--{{ section.settings.image_height }} gradient color-{{ section.settings.custom_row_color_scheme }} dbtfy-color-{{ section.settings.row_color_scheme }} global-media-settings{% if block.settings.image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
+        {% if section.settings.image_height == 'adapt' and block.settings.image != blank %}
+          style="padding-bottom: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;"
+        {% endif %}
+      >
+        {%- if block.settings.image != blank -%}
+          {%- capture sizes -%}
+            (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
+            (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
+          {%- endcapture -%}
+          {{
+            block.settings.image
+            | image_url: width: 1500
+            | image_tag: sizes: sizes, widths: '165, 360, 535, 750, 1070, 1500'
+          }}
+        {%- else -%}
+          {{ 'collection-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="image-with-text__text-item grid__item">
+      <div class="image-with-text__content image-with-text__content--{{ section.settings.desktop_content_position }} image-with-text__content--{{ section.settings.image_height }} content-container{% unless no_content_background and no_content_styles %} gradient color-{{ section.settings.custom_row_color_scheme }} dbtfy-color-{{ section.settings.row_color_scheme }}{% else %} background-transparent{% endunless %}">
+        {% content_for 'blocks' %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.multirow.blocks.row.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:general.settings.image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    },
+    { "type": "_caption" },
+    { "type": "_single_button" },
+    { "type": "_title" },
+    { "type": "_description" }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.multirow.blocks.row.name",
+      "blocks": [
+        {
+          "type": "_caption",
+          "settings": {
+            "caption": "Caption",
+            "text_style": "caption-with-letter-spacing",
+            "padding___top": "custom",
+            "custom_padding_top": 0,
+            "padding___bottom": "custom",
+            "custom_padding_bottom": 0
+          }
+        },
+        {
+          "type": "_title",
+          "settings": { "title": "Row", "size": "h2" }
+        },
+        {
+          "type": "_description",
+          "settings": {
+            "description": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+          }
+        },
+        {
+          "type": "_single_button",
+          "settings": { "button_label": "Button Label", "button_style": "button button--secondary" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

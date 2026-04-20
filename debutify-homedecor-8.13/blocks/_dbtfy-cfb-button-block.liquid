@@ -1,0 +1,68 @@
+<div class="field-other grid--12-col {{ block.settings.alignment }}" {{ block.shopify_attributes }}>
+  <button type="submit" class="{{ block.settings.btn_style }}">
+    <span class="grid align-items-center">
+      {{ 'templates.contact.form.send' | t }}
+      {% if block.settings.icon != blank %}{%- render 'material-icon', icon: block.settings.icon %}{% endif %}
+    </span>
+  </button>
+</div>
+{% schema %}
+{
+  "name": "Button",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info"
+    },
+    {
+      "type": "text",
+      "id": "icon",
+      "label": "t:blocks.news-letter.settings.modal.button_icon.label",
+      "info": "t:sections.all.icon.info"
+    },
+    {
+      "type": "select",
+      "id": "btn_style",
+      "label": "t:sections.dbfty-shipping-calculator.settings.btn_style.label",
+      "options": [
+        {
+          "value": "link underlined-link button--link",
+          "label": "t:sections.all.button.option_1_label"
+        },
+        {
+          "value": "button button--tertiary",
+          "label": "t:general.settings.style.default"
+        },
+        {
+          "value": "button button--primary",
+          "label": "t:sections.all.button.options__3.label"
+        },
+        {
+          "value": "button button--secondary",
+          "label": "t:sections.all.button.options__4.label"
+        }
+      ],
+      "default": "button button--primary"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:general.settings.alignment.label",
+      "default": "text-left",
+      "options": [
+        { "value": "text-left", "label": "t:general.settings.alignment.option__4" },
+        { "value": "text-center", "label": "t:general.settings.alignment.option__5" },
+        { "value": "text-right", "label": "t:general.settings.alignment.option__6" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Button"
+    }
+  ]
+}
+{% endschema %}

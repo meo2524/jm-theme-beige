@@ -1,0 +1,16 @@
+{% style %}
+  .button--primary, .button--secondary, .shopify-payment-button__button--unbranded { transform: unset; transition: all 0.3s ease; z-index: 1; }
+  .button--primary::before, .button--secondary::before, .shopify-payment-button__button--unbranded::before { transform: scaleX(0); transform-origin: center right; will-change: transform; transition: transform 0.4s cubic-bezier(0.26, 0.54, 0.32, 1), opacity 0.3s cubic-bezier(0.26, 0.54, 0.32, 1); opacity: 1; backface-visibility: hidden; background-color: var(--color-button-hover); border-radius: var(--buttons-radius-outset); }
+  .button--secondary:hover { color: rgba(var(--color-background)); }
+  .button--primary:hover::before, .button--secondary:hover::before, .shopify-payment-button__button--unbranded:hover::before { transform-origin: center left; transform: none; transition-delay: 0s; opacity: 1; z-index: -1; }
+  .button--link { text-decoration: none; width: fit-content; }
+  .link.button--link { text-decoration: none; }
+  .button--link > span { position: relative; width: fit-content; margin: 0 auto; }
+  .button > span { display: flex; align-items: center; }
+  .button--link > span:before, .button--link > span:after { content: ''; position: absolute; left: 0; height: 1px; bottom: 0; pointer-events: none; transition: transform 300ms cubic-bezier(0.26, 0.54, 0.32, 1); background-color: rgba(var(--color-link)); width: 100%; }
+  .button--link > span:hover:before { transform: scale3d(0, 1, 1); transition-delay: 0s; }
+  .button--link > span:hover:after { transform: scaleZ(1); transition-delay: 0.1s; }
+  .button--link > span:before { transform-origin: 100% 50%; transform: scaleZ(1); transition-delay: 0.1s; }
+  .button--link > span:after { transform-origin: 0% 50%; transform: scale3d(0, 1, 1); transition-delay: 0s; }
+  .button--secondary:hover.loading, .button--primarry:hover.loading { color: transparent; }
+{% endstyle %}

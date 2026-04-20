@@ -1,0 +1,19 @@
+<button
+  type="button"
+  class="slider-button slider-button--next {{class}}"
+  {% if custom_selector %}
+    name="next-{{ custom_selector }}"
+  {% else %}
+    name="next"
+  {% endif %}
+  aria-label="{{ 'general.slider.next_slide' | t }}"
+>
+  {% if custom_icon != blank %}
+    <img
+      src="{{ custom_icon |  image_url: width: settings.desktop_arrowsize, height: settings.desktop_arrowsize }}"
+      alt="{{ custom_icon.alt }}"
+    >
+  {% else %}
+    {% render 'material-icon', icon: arrow %}
+  {% endif -%}
+</button>

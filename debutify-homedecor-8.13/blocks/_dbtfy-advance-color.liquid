@@ -1,0 +1,31 @@
+{%- if block.settings.widget_enable -%}
+  {%- content_for 'blocks' -%}
+{%- endif -%}
+{% schema %}
+{
+  "name": "t:blocks.advanced_color.label",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "widget_enable",
+      "label": "t:blocks.advanced_color.widget_enable",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_dbtfy-color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.advanced_color.label",
+      "blocks": [
+        {
+          "type": "_dbtfy-color"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

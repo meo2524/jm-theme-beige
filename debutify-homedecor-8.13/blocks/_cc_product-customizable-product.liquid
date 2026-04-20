@@ -1,0 +1,38 @@
+{%- if request.design_mode -%}
+  {%- render 'widget-blocker-warning',
+    enabled: settings.dbtfy_customizable_products,
+    type: 'widget',
+    as: 'block',
+    name: 'Customizable Products',
+    id: block
+  -%}
+{%- endif -%}
+{%- if request.design_mode or settings.dbtfy_customizable_products -%}
+  <div class="customizable_products">
+    {% content_for 'blocks' %}
+  </div>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.customizable_products.name",
+  "class": "dbtfy-customizable-products",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.main-product.settings.product.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_dbtfy_cust_prod_text"
+    },
+    {
+      "type": "_dbtfy_cust_prod_checkbox"
+    },
+    {
+      "type": "_dbtfy_cust_prod_group"
+    }
+  ]
+}
+{%- endschema -%}

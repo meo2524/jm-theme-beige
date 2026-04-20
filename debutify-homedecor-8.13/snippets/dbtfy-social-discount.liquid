@@ -1,0 +1,192 @@
+{%- render 'widget-blocker',
+  enabled: settings.dbtfy_social_discount,
+  section: section,
+  name: 'Social Discount',
+  type: '⚡ Paid Sections'
+-%}
+{%- if request.design_mode or settings.dbtfy_social_discount -%}
+  {{ 'dbtfy-social-discount.css' | asset_url | stylesheet_tag: preload: true }}
+
+  {%- liquid
+    assign discount_name = block.settings.discount_name
+    assign discount_amount = block.settings.discount_amount
+    assign discount_type = block.settings.discount_type
+
+    assign button_label = block.settings.button_label
+    assign modal_title = block.settings.modal_title
+    assign modal_content = block.settings.modal_content
+    assign modal_thank_you = block.settings.modal_thank_you_title
+    assign modal_thank_you_content = block.settings.modal_thank_you_content
+    assign modal_discount_label = block.settings.modal_discount_label
+
+    assign social_share_title = block.settings.social_share_title
+
+    if block.settings.enable_facebook == true
+      assign facebook = true
+    endif
+    if block.settings.enable_twitter == true
+      assign twitter = true
+    endif
+    if block.settings.enable_pinterest == true
+      assign pinterest = true
+    endif
+    if block.settings.enable_reddit == true
+      assign reddit = true
+    endif
+    if block.settings.enable_linkedin == true
+      assign linkedin = true
+    endif
+    if block.settings.enable_whatsapp == true
+      assign whatsapp = true
+    endif
+    if block.settings.enable_email == true
+      assign email = true
+    endif
+
+    assign amount_string = '{amount}'
+    assign discount_string = '{discount}'
+  -%}
+  {% if discount_type == '$' %}
+    {% assign discount_amount = discount_amount %}
+    {% assign discount_amount = discount_amount | times: 100 | money %}
+  {% endif %}
+
+  <div {{ block.shopify_attributes }} class="dbtfy-social-discount-modal">
+    <dbtfy-social-discount
+      data-discount-name="{{ discount_name }}"
+    >
+      <div class="dbtfy-social-discount">
+        <div class="dbtfy-social-discount-sharing-modal flex {{ block.settings.alignment }} {{ block.settings.alignment_mobile }}">
+          <button class="{{ block.settings.button_style }}" type="button">
+            {% render 'material-icon', icon: block.settings.button_icon %}
+            <span class="dbtfy-social-discount-btn-title">
+              {% if button_label contains amount_string or button_label contains discount_string %}
+                {% if discount_type == '%' %}
+                  {{ button_label | replace: amount_string, discount_amount | replace: discount_string, discount_type }}
+                {%- elsif discount_type == '$' %}
+                  {{ button_label | replace: amount_string, discount_amount | replace: discount_string, '' }}
+                {% endif %}
+              {% else %}
+                {{ button_label }}
+              {% endif %}
+            </span>
+          </button>
+        </div>
+
+        <div class="dbtfy-social-discount-modal-social-sharing hidden">
+          {%- render 'social-sharing',
+            product: product,
+            facebook: facebook,
+            twitter: twitter,
+            pinterest: pinterest,
+            linkedin: linkedin,
+            whatsapp: whatsapp,
+            reddit: reddit,
+            email: email,
+            title: social_share_title
+          -%}
+        </div>
+      </div>
+    </dbtfy-social-discount>
+
+    <dbtfy-social-discount-modal class="hidden">
+      <div class="color-{{ block.settings.custom_color_scheme }} dbtfy-color-{{ block.settings.color_scheme }} gradient dbtfy-social-discount inner-spacing">
+        <div class="d-grid">
+          <div class="grid--12-col">
+            <div class="dbtfy-social-discount-modal__header">
+              <h3 class="dbtfy-social-discount-modal__header-title">
+                {% if modal_title contains amount_string or modal_title contains discount_string %}
+                  {% if discount_type == '%' %}
+                    {{
+                      modal_title
+                      | replace: amount_string, discount_amount
+                      | replace: discount_string, discount_type
+                    }}
+                  {%- elsif discount_type == '$' %}
+                    {{ modal_title | replace: amount_string, discount_amount | replace: discount_string, '' }}
+                  {% endif %}
+                {% else %}
+                  {{ modal_title }}
+                {% endif %}
+              </h3>
+            </div>
+            <hr class="dbrfy-social-discount-modal_hr">
+            <div class="dbtfy-social-discount-modal__body">
+              <div class="dbtfy-social-discount-modal-content text-center">
+                <div class="rte">
+                  <p>
+                    {% if modal_content contains amount_string or modal_content contains discount_string %}
+                      {% if discount_type == '%' %}
+                        {{
+                          modal_content
+                          | replace: amount_string, discount_amount
+                          | replace: discount_string, discount_type
+                        }}
+                      {%- elsif discount_type == '$' %}
+                        {{ modal_content | replace: amount_string, discount_amount | replace: discount_string, '' }}
+                      {% endif %}
+                    {% else %}
+                      {{ modal_content }}
+                    {% endif %}
+                  </p>
+                </div>
+                <div class="dbtfy-social-discount-modal-social-sharing">
+                  {%- render 'social-sharing',
+                    facebook: facebook,
+                    twitter: twitter,
+                    pinterest: pinterest,
+                    linkedin: linkedin,
+                    reddit: reddit,
+                    whatsapp: whatsapp,
+                    email: email,
+                    title: social_share_title
+                  -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </dbtfy-social-discount-modal>
+
+    <dbtfy-social-discount-thank-you-modal class="hidden">
+      <div class="color-{{ block.settings.custom_color_scheme }} dbtfy-color-{{ block.settings.color_scheme }} gradient dbtfy-social-discount inner-spacing">
+        <div class="d-grid">
+          <div class="grid--12-col">
+            <div class="dbtfy-social-discount-modal__header">
+              <h3 class="dbtfy-social-discount-modal__header-title">
+                {% if modal_thank_you contains amount_string or modal_thank_you contains discount_string %}
+                  {% if discount_type == '%' %}
+                    {{
+                      modal_thank_you
+                      | replace: amount_string, discount_amount
+                      | replace: discount_string, discount_type
+                    }}
+                  {%- elsif discount_type == '$' %}
+                    {{ modal_thank_you | replace: amount_string, discount_amount | replace: discount_string, '' }}
+                  {% endif %}
+                {% else %}
+                  {{ modal_thank_you }}
+                {% endif %}
+              </h3>
+            </div>
+            <hr class="dbrfy-social-discount-modal_hr">
+            <div class="dbtfy-social-discount-modal__body">
+              <div class="dbtfy-social-discount-modal-content text-center">
+                <div class="rte">
+                  <p>{{ modal_thank_you_content }}</p>
+                </div>
+                <div class="dbtfy-social-copy-info">
+                  {{ discount_name }}
+                </div>
+                <button class="button dbtfy-close-thankyou" type="button">{{ modal_discount_label }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </dbtfy-social-discount-thank-you-modal>
+  </div>
+
+  <script src="{{ 'dbtfy-social-discount.js' | asset_url }}" defer></script>
+{% endif %}

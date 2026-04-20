@@ -1,0 +1,474 @@
+{%- render 'widget-blocker',
+  enabled: settings.dbtfy_before_after_image,
+  section: section,
+  name: 'before-and-after',
+  type: '⚡ Paid Sections'
+-%}
+
+{%- if request.design_mode or settings.dbtfy_before_after_image -%}
+  {%- liquid
+    capture slider_parameters
+      echo ' data-autoplay="' | append: block.settings.enable_autoplay | append: '"'
+      echo ' data-speed="' | append: block.settings.autoplay_speed | append: '"'
+      echo ' data-loop="' | append: block.settings.enable_loop | append: '"'
+      echo ' data-dots="' | append: block.settings.enable_dots | append: '"'
+      echo ' data-arrows="' | append: block.settings.enable_arrows | append: '"'
+      echo ' data-controls-position="' | append: block.settings.control_position | append: '"'
+    endcapture
+
+    assign slider_on = 'slider slider--everywhere'
+    if block.settings.slider_on == 'none'
+      assign slider_on = ''
+      assign slider_parameters = ''
+    elsif block.settings.slider_on != 'both'
+      assign slider_on = 'slider slider--' | append: block.settings.slider_on
+    endif
+
+    assign arrow_class = ''
+    if block.settings.arrow_position == 'middle'
+      assign arrow_class = 'slideshow__controls slideshow__controls--top'
+    endif
+
+    assign block_id = 'before-after-' | append: block.id
+
+    render 'custom-arrow-style', as_a: 'block', id: block_id
+
+    assign initial_direction = block.settings.initial_direction
+    assign initial_position = block.settings.initial_position
+    assign icon = block.settings.bullet_icon
+
+    if initial_direction == 'vertical'
+      assign initial_position = 100 | minus: initial_position
+    endif
+  %}
+  <style>
+    .section-{{ section.id }}-padding .dbtfy-before-after {
+      height: {{ block.settings.image_height | times: 0.75 | round: 0 }}px;
+    }
+
+    .section-{{ section.id }}-padding .before-after--handle-icon {
+      {% if block.settings.enable_background_transparent %}
+        background-color: rgba(var(--color-background), 0.15);
+        border: 2px solid rgb(var(--color-background));
+        backdrop-filter: blur(5px);
+      {% else %}
+        color: {{ block.settings.handle_color }};
+        background-color: {{ block.settings.handle_background_color }};
+      {% endif %}
+    }
+
+    .section-{{ section.id }}-padding .before-after--handle {
+      background-color: {{ block.settings.handle_background_color }};
+    }
+
+    .section-{{ section.id }}-padding [data-layout="horizontal"] .before-after--handle-icon {
+      top: {{ block.settings.bullet_position }}% !important;
+    }
+
+    .section-{{ section.id }}-padding [data-layout="vertical"] .before-after--handle-icon {
+      left: {{ block.settings.bullet_position }}% !important;
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding .dbtfy-before-after {
+        height: {{ block.settings.image_height }}px;
+      }
+    }
+  </style>
+
+  {%- render 'block-padding', block: block -%}
+
+  <link rel="stylesheet" href="{{ 'dbtfy-before-and-after.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  <dbtfy-before-after
+    class="h-full {% if block.settings.vertical_center %}flex flex-column justify-content-center{% endif %} block-{{ block.id }}-padding"
+    id="{{ block_id }}"
+    data-direction="{{ initial_direction }}"
+    data-position="{{ initial_position }}"
+    data-icon="{{ icon }}"
+    data-layout="{{ initial_direction }}"
+  >
+    <div
+      class="dbtfy-before-and-after__header {% if section.settings.text_alignment == 'center' %}page-width--narrow{% endif %} {{ section.settings.text_alignment }}"
+    >
+      {% content_for 'block', type: '_heading', id: 'heading' %}
+    </div>
+    <dbtfy-slider-component
+      {{ slider_parameters }}
+    >
+      <ul
+        class="width-auto-adjusted contains-content-container grid grid--1-col {{slider_on}} grid--1-col-desktop"
+        id="Slider-{{ section.id }}"
+        role="list"
+        style="overflow: hidden;"
+      >
+        {% content_for 'block', type: '_dbtfy-before-after', id: 'before-after' %}
+      </ul>
+      {% render 'dbtfy-arrow', class: arrow_class %}
+    </dbtfy-slider-component>
+  </dbtfy-before-after>
+
+  <script src="{{ 'dbtfy-before-and-after.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-before-and-after.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-before-and-after.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-before-and-after.help.link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.professional_info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.scrollbar_cursor.settings.cursor.label"
+    },
+    {
+      "type": "select",
+      "id": "initial_direction",
+      "label": "t:sections.dbtfy-before-and-after.settings.initial_direction.label",
+      "default": "horizontal",
+      "options": [
+        {
+          "value": "horizontal",
+          "label": "t:general.settings.alignment.option__10"
+        },
+        {
+          "value": "vertical",
+          "label": "t:general.settings.alignment.option__11"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "initial_position",
+      "label": "t:sections.dbtfy-before-and-after.settings.initial_position.label",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "t:sections.dbtfy-before-and-after.settings.image_height.label",
+      "default": 500,
+      "min": 0,
+      "max": 1000,
+      "step": 10,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "vertical_center",
+      "default": false,
+      "label": "t:general.settings.center_title"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-before-and-after.settings.header__2.content"
+    },
+    {
+      "type": "text",
+      "id": "bullet_icon",
+      "label": "t:general.settings.icon_label",
+      "default": "code",
+      "info": "t:sections.all.icon.info"
+    },
+    {
+      "type": "color",
+      "label": "t:sections.dbtfy-before-and-after.settings.handle_color.label",
+      "id": "handle_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "t:sections.dbtfy-before-and-after.settings.handle_background_color.label",
+      "id": "handle_background_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_background_transparent",
+      "label": "t:sections.dbtfy-before-and-after.settings.background_transparent",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "bullet_position",
+      "label": "t:settings_schema.wish_list.settings.icon_position_product_page.options.label",
+      "default": "50",
+      "options": [
+        {
+          "value": "25",
+          "label": "t:general.settings.alignment.option__1"
+        },
+        {
+          "value": "50",
+          "label": "t:general.settings.alignment.option__2"
+        },
+        {
+          "value": "75",
+          "label": "t:general.settings.alignment.option__3"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.slider.slider_settings"
+    },
+    {
+      "type": "select",
+      "id": "slider_on",
+      "default": "both",
+      "label": "t:general.settings.slider.Enable_slider",
+      "options": [
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        },
+        {
+          "value": "desktop",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "default": false,
+      "label": "t:general.settings.slider.enable_autoplay"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "t:general.settings.slider.autoplay_speed",
+      "default": 5,
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_loop",
+      "default": true,
+      "label": "Loop",
+      "info": "Continue from the last slide to the first slide"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_dots",
+      "default": true,
+      "label": "t:general.settings.slider.show_dots"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_arrows",
+      "default": false,
+      "label": "t:general.settings.slider.show_arrows"
+    },
+    {
+      "type": "select",
+      "id": "arrow_color",
+      "default": "inherit",
+      "label": "t:general.settings.slider.arrow_color",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "custom_arrow_color",
+      "label": "t:general.settings.slider.custom-arrow-color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "custom_arrow_background_color",
+      "label": "t:general.settings.slider.custom-arrow-bg-color",
+      "default": "#7559ff"
+    },
+    {
+      "type": "select",
+      "id": "arrow_position",
+      "default": "bottom",
+      "label": "t:sections.dbtfy-before-and-after.settings.arrow_position.label",
+      "options": [
+        {
+          "value": "middle",
+          "label": "t:general.settings.alignment.option__2"
+        },
+        {
+          "value": "bottom",
+          "label": "t:general.settings.alignment.option__3"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "control_position",
+      "default": "inside",
+      "label": "Control Position",
+      "options": [
+        {
+          "value": "outside",
+          "label": "Outside"
+        },
+        {
+          "value": "inside",
+          "label": "Inside"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding_section.block_padding"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.top",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "extra_small",
+          "label": "t:general.settings.size.option__4"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "extra_large",
+          "label": "t:general.settings.size.option__7"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.bottom",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "extra_small",
+          "label": "t:general.settings.size.option__4"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "extra_large",
+          "label": "t:general.settings.size.option__7"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@theme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-before-and-after.name",
+      "blocks": [
+        {
+          "type": "_dbtfy-before-after",
+          "static": true,
+          "id": "before-after",
+          "blocks": [
+            { "type": "_dbtfy-before-after-block", "settings": {} },
+            { "type": "_dbtfy-before-after-block", "settings": {} },
+            { "type": "_dbtfy-before-after-block", "settings": {} }
+          ],
+          "settings": {}
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,65 @@
+{% style %}
+  {% if block.settings.text_animation == 'glacier' %}
+
+    .block-{{ block.id }}.dbtfy-text-glacier-active{
+      background: linear-gradient(
+        110deg,
+        currentColor 45%,
+        rgba(255, 255, 255, 0.8) 50%,
+        currentColor 55%
+      );
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glacier-text-{{ block.id }} {{ block.settings.glacier_speed }}s linear infinite;
+      animation-play-state: paused;
+    }
+
+    .block-{{ block.id }}.dbtfy-text-glacier-active.dbtfy-text-glacier-visible {
+      animation-play-state: running;
+    }
+
+    .block-{{ block.id }}.dbtfy-text-glacier-active.disabled {
+      animation: none;
+      background: none;
+      -webkit-text-fill-color: inherit;
+    }
+
+    @keyframes glacier-text-{{ block.id }} {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 200% 50%;
+      }
+    }
+
+  {% endif %}
+
+  {% if block.settings.text_animation == 'typing' %}
+    .block-{{ block.id }}.typing-text {
+      display: inline-block;
+    }
+
+    .block-{{ block.id }} .typing-cursor {
+      display: inline-block;
+      {% if block.settings.typing_show_cursor %}
+        opacity: 1;
+        animation: cursor-blink-{{ block.id }} {{ block.settings.typing_cursor_blink_duration | divided_by: 1000.0 }}s ease-in-out infinite;
+      {% else %}
+        display: none;
+      {% endif %}
+    }
+
+    .block-{{ block.id }} .typing-cursor.cursor-hidden {
+      opacity: 0 !important;
+      animation: none !important;
+    }
+
+    @keyframes cursor-blink-{{ block.id }} {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  {% endif %}
+{% endstyle %}

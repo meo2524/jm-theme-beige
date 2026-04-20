@@ -1,0 +1,35 @@
+<script>
+  var cart_goal_blocks = [];
+  if (!Debutify.widgets['cart_goals']['{{block.settings.heading}}']) {
+    Debutify.widgets['cart_goals']['{{block.settings.heading}}'] = [];
+  }
+</script>
+{% content_for 'blocks' %}
+<script>
+  for (var i = 0; i < cart_goal_blocks.length; i++) {
+    Debutify.widgets['cart_goals']['{{block.settings.heading}}'].push(cart_goal_blocks[i]);
+  }
+</script>
+{% schema %}
+{
+  "name": "By Country",
+  "settings": [
+    {
+      "type": "text",
+      "label": "Country",
+      "id": "heading",
+      "info": "Use Alpha-2 code to target to specific country from the [country codes](https://www.iban.com/country-codes) list."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_cart-goal"
+    }
+  ],
+  "presets": [
+    {
+      "name": "By Country"
+    }
+  ]
+}
+{% endschema %}

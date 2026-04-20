@@ -1,0 +1,222 @@
+{% if block.settings.title != blank and block.settings.description != blank %}
+  {% if block.settings.use_default_point_color == false %}
+    {% style %}
+      .block_{{ block.id }}{
+        --bullet-point-color:{{ block.settings.custom_point_color }};
+      }
+    {% endstyle %}
+  {% endif %}
+  <div
+    class="dbtfy-features-image-point-list-item bullet-point-list-item bullet-point block_{{ block.id }}"
+    role="listitem"
+
+    data-direction="{{ block.settings.desktop_direction }}"
+    data-line-bend="{{ block.settings.desktop_line_bend }}"
+    {% if block.settings.mobile_pos_enabled %}
+      data-mobile-direction="{{ block.settings.mobile_direction }}"
+      data-mobile-line-bend="{{ block.settings.mobile_line_bend }}"
+    {% else %}
+      data-mobile-direction="{{ block.settings.desktop_direction }}"
+      data-mobile-line-bend="{{ block.settings.desktop_line_bend }}"
+    {% endif %}
+
+    style="
+      --offset-x:{{ block.settings.desktop_pos_left }}%;
+      --offset-y:{{ block.settings.desktop_pos_top }}%;
+      {% if block.settings.mobile_pos_enabled  %}
+        --mobile-offset-x:{{ block.settings.mobile_pos_left }}%;
+        --mobile-offset-y:{{ block.settings.mobile_pos_top }}%;
+        {% else %}
+        --mobile-offset-x:{{ block.settings.desktop_pos_left }}%;
+        --mobile-offset-y:{{ block.settings.desktop_pos_top }}%;
+        {% endif %}
+
+        --desktop-width:{{ section.settings.bullet_point_desktop_width | divided_by: 10.0 }}rem;
+        --mobile-width:100%;
+    "
+  >
+    <div class="bullet-point__line-end"></div>
+    {% if block.settings.title != blank %}
+      <h3 class="bullet-point__title title m-0">
+        {{ block.settings.title }}
+      </h3>
+    {% endif %}
+    {% if block.settings.description != blank %}
+      <div class="bullet-point__text description rte">
+        {{ block.settings.description }}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Bullet Point",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info",
+      "default": "t:sections.dbtfy-product-features.settings.bullet_points.name"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-product-features.settings.bullet_points.desktop_position"
+    },
+    {
+      "type": "range",
+      "id": "desktop_pos_left",
+      "label": "t:settings_schema.global.settings.horizontal_offset.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "desktop_pos_top",
+      "label": "t:settings_schema.global.settings.vertical_offset.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 25
+    },
+    {
+      "type": "select",
+      "id": "desktop_direction",
+      "label": "Direction",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:general.settings.alignment.option__4"
+        },
+        {
+          "value": "right",
+          "label": "t:general.settings.alignment.option__6"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "desktop_line_bend",
+      "label": "Line bend",
+      "default": "bottom",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:general.settings.alignment.option__1"
+        },
+        {
+          "value": "bottom",
+          "label": "t:general.settings.alignment.option__3"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-product-features.settings.bullet_points.mobile_position"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_pos_enabled",
+      "label": "t:sections.dbtfy-product-features.settings.mobile_position_enable",
+      "info": "t:sections.dbtfy-product-features.settings.mobile_position_info",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "mobile_pos_left",
+      "label": "t:settings_schema.global.settings.horizontal_offset.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "mobile_pos_top",
+      "label": "t:settings_schema.global.settings.vertical_offset.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 25
+    },
+    {
+      "type": "select",
+      "id": "mobile_direction",
+      "label": "Direction",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:general.settings.alignment.option__4"
+        },
+        {
+          "value": "right",
+          "label": "t:general.settings.alignment.option__6"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_line_bend",
+      "label": "Line bend",
+      "default": "bottom",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:general.settings.alignment.option__1"
+        },
+        {
+          "value": "bottom",
+          "label": "t:general.settings.alignment.option__3"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:general.settings.title",
+      "default": "t:sections.dbtfy-product-features.settings.block_title"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "description",
+      "label": "t:general.settings.description",
+      "default": "t:blocks.dbtfy-lookbook-point.settings.description.default"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_default_point_color",
+      "label": "t:blocks.dbtfy-lookbook-point.settings.use_default_point_color.label",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "custom_point_color",
+      "label": "t:blocks.dbtfy-lookbook-point.settings.custom_point_color.label",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-product-features.settings.bullet_points.name"
+    }
+  ]
+}
+{% endschema %}

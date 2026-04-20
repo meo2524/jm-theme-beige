@@ -1,0 +1,364 @@
+{%- if request.design_mode -%}
+  {%- render 'widget-blocker-warning',
+    enabled: settings.dbtfy_welcome_video,
+    type: 'widget',
+    as: 'block',
+    name: 'Welcome Video',
+    id: block
+  -%}
+{%- endif -%}
+
+{%- liquid
+  assign visibility = block.settings.visibility
+  assign is_visible = false
+  if visibility == 'all'
+    assign is_visible = true
+  else
+    if visibility == 'index'
+      if request.page_type == 'index'
+        assign is_visible = true
+      endif
+    elsif visibility == 'specific'
+      assign title = page.title | handle
+      assign page = block.settings.specific_page | handle
+      if title == page
+        assign is_visible = true
+      endif
+    endif
+  endif
+
+  if block.settings.autoplay == true
+    assign playicon = 'hidden'
+  endif
+-%}
+
+{%- if is_visible and settings.dbtfy_welcome_video -%}
+  {{ 'dbtfy-welcome-video.css' | asset_url | stylesheet_tag }}
+
+  {%- style -%}
+    .dbtfy-welcome-video__content:before {
+      background: rgb(var(--color-background), {{block.settings.overlay_opacity | times: 1 | divided_by: 100}});
+    }
+  {%- endstyle -%}
+  <dbtfy-welcome-video
+    data-trigger-type="{{ block.settings.video_trigger }}"
+    data-trigger-scrolling="{{ block.settings.trigger_after_scrolling }}"
+    data-trigger-seconds="{{ block.settings.trigger_after_seconds }}"
+    data-autoplay="{{ block.settings.autoplay }}"
+    data-loop="{{ block.settings.enable_video_looping }}"
+    data-position="{{ block.settings.content_position }}"
+    data-video="{{ block.settings.video }}"
+  >
+    <div
+      class="hidden dbtfy-welcome-video w-full position_mobile_{{ block.settings.mobile_position }} position_desktop_{{ block.settings.desktop_position }} color-{{ block.settings.custom_color_scheme }} dbtfy-color-{{ block.settings.color_scheme }} gradient block-{{ block.id }}-padding show-on--{{ block.settings.show_on }}"
+      {{ block.shopify_attribute }}
+    >
+      <div class="global-media-settings dbtfy-welcome-video-container content_{{ block.settings.content_position }}">
+        <div class="dbtfy-welcome-video__media">
+          {%- assign video_poster = block.settings.video_poster | image_url: width: 2048 -%}
+          {{
+            block.settings.video
+            | video_tag:
+              autoplay: block.settings.autoplay,
+              loop: block.settings.enable_video_looping,
+              poster: video_poster,
+              class: 'w-full h-full'
+          }}
+          <div class="dbtfy-welcome-video__play-icon video_poster_button {{ playicon }}">
+            {{- 'icon-play.svg' | inline_asset_content -}}
+          </div>
+        </div>
+        <div class="dbtfy-welcome-video__content position_{{ block.settings.content_position }}">
+          {%- content_for 'blocks' -%}
+        </div>
+        <div class="dbtfy-welcome-video__close-button">
+          {%- render 'material-icon', icon: 'close' -%}
+        </div>
+      </div>
+    </div>
+  </dbtfy-welcome-video>
+  {{ 'dbtfy-welcome-video.js' | asset_url | script_tag }}
+{%- endif -%}
+{% schema %}
+{
+  "name": "t:blocks.welcome-video.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.welcome-video.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.welcome-video.help.link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.enterprise_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "t:sections.all.show_on.label",
+      "default": "both",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:general.settings.video.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_poster",
+      "label": "t:general.settings.video.video_thumbnail",
+      "info": "t:general.settings.video.video_thumbnail_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "t:sections.dbtfy-content-tabs.blocks.muted_autoplay",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_looping",
+      "label": "t:sections.video.settings.enable_video_looping.label",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "desktop_position",
+      "label": "t:blocks.welcome-video.settings.desktop_position",
+      "default": "bottom-left",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "t:general.settings.position.option__1"
+        },
+        {
+          "value": "top-center",
+          "label": "t:general.settings.position.option__2"
+        },
+        {
+          "value": "top-right",
+          "label": "t:general.settings.position.option__3"
+        },
+        {
+          "value": "bottom-left",
+          "label": "t:general.settings.position.option__7"
+        },
+        {
+          "value": "bottom-center",
+          "label": "t:general.settings.position.option__8"
+        },
+        {
+          "value": "bottom-right",
+          "label": "t:general.settings.position.option__9"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_position",
+      "label": "t:blocks.welcome-video.settings.mobile_position",
+      "default": "top",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:general.settings.alignment.option__1"
+        },
+        {
+          "value": "bottom",
+          "label": "t:general.settings.alignment.option__3"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.welcome-video.settings.display"
+    },
+    {
+      "type": "select",
+      "id": "video_trigger",
+      "label": "t:blocks.welcome-video.settings.video_trigger",
+      "default": "upon-page-load",
+      "options": [
+        {
+          "value": "upon-page-load",
+          "label": "t:blocks.welcome-video.settings.upon_page_load"
+        },
+        {
+          "value": "delay-seconds",
+          "label": "t:blocks.welcome-video.settings.delay_seconds"
+        },
+        {
+          "value": "display-after-scrolling",
+          "label": "t:blocks.welcome-video.settings.display_after_scrolling"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "trigger_after_seconds",
+      "label": "t:blocks.welcome-video.settings.trigger_after_seconds",
+      "default": 5,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "s",
+      "visible_if": "{{ block.settings.video_trigger == 'delay-seconds' }}"
+    },
+    {
+      "type": "range",
+      "id": "trigger_after_scrolling",
+      "label": "t:blocks.welcome-video.settings.trigger_after_scrolling",
+      "default": 10,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "visible_if": "{{ block.settings.video_trigger == 'display-after-scrolling' }}"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "t:sections.dbtfy-before-and-after.blocks.before_and_after.settings.content_position.label",
+      "default": "below",
+      "options": [
+        {
+          "value": "below",
+          "label": "t:blocks.welcome-video.settings.below_the_video"
+        },
+        {
+          "value": "above",
+          "label": "t:blocks.welcome-video.settings.above_the_video"
+        },
+        {
+          "value": "over",
+          "label": "t:blocks.welcome-video.settings.over_the_video"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "t:sections.dbtfy-footer.blocks.newsletter.settings.media_setting.overlay_opacity.label",
+      "default": 80,
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "visible_if": "{{ block.settings.content_position == 'over' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.visibility.visibility.label"
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "label": "t:general.settings.visibility.visibility.label",
+      "default": "all",
+      "options": [
+        {
+          "value": "all",
+          "label": "t:blocks.welcome-video.settings.all_page"
+        },
+        {
+          "value": "index",
+          "label": "t:blocks.welcome-video.settings.home_page"
+        },
+        {
+          "value": "specific",
+          "label": "t:blocks.welcome-video.settings.specific_page"
+        }
+      ]
+    },
+    {
+      "type": "page",
+      "id": "specific_page",
+      "label": "t:blocks.welcome-video.settings.specific_page",
+      "info": "This selection only works when Visibilty is Specific"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_title"
+    },
+    {
+      "type": "_subtitle"
+    },
+    {
+      "type": "_description"
+    },
+    {
+      "type": "_single_button"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Welcome Video"
+    }
+  ]
+}
+{% endschema %}

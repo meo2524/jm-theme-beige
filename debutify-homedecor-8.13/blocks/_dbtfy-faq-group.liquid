@@ -1,0 +1,53 @@
+<div class="dbtfy-faq-group-block">
+  {%- if block.settings.title != blank -%}
+    <h3 class="dbtfy-faq-heading-block" {{ block.shopify_attributes }}>
+      {% render 'material-icon', icon: block.settings.icon %}
+      {{ block.settings.title }}
+    </h3>
+  {%- endif -%}
+  <div class="d-grid faq-question-answer-group">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blocks",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-faq.blocks.dbtfy-faq.name"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "t:general.settings.heading",
+      "default": "t:sections.dbtfy-faq.blocks.dbtfy-faq.name"
+    },
+    {
+      "type": "text",
+      "id": "icon",
+      "label": "t:general.settings.icon_label",
+      "info": "t:sections.all.icon.info",
+      "default": "support"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_dbtfy-faq-question"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Faq Category"
+    }
+  ]
+}
+{% endschema %}

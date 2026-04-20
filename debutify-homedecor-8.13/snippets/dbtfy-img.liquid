@@ -1,0 +1,13 @@
+{%- capture sizes -%}
+    (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px)
+    calc(100vw - 10rem), 100vw
+{%- endcapture -%}
+{{
+  img
+  | image_url: width: 1946
+  | image_tag:
+    class: image_class,
+    loading: lazy,
+    sizes: sizes,
+    widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
+}}

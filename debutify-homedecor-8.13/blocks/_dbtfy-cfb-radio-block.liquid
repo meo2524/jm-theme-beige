@@ -1,0 +1,68 @@
+<div class="field-other {% if block.settings.width_radio == 'full-width' %}grid--12-col{% else %}grid--6-col{% endif %}">
+  {% assign options = block.settings.options | split: ',' %}
+  <p class="" style="margin: 0 0 .25rem;">
+    {{ block.settings.label }}
+  </p>
+  {% for option in options %}
+    <div class="">
+      <input
+        id="input-{{ block.id }}-{{ forloop.index }}"
+        class=""
+        type="radio"
+        value="{{ option }}"
+        name="contact[{{ block.settings.label | handleize }}]"
+      >
+      <label for="input-{{ block.id }}-{{ forloop.index }}" class="">
+        {{ option }}
+      </label>
+    </div>
+  {% endfor %}
+</div>
+{% schema %}
+{
+  "name": "Radio",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:general.settings.label",
+      "default": "Gender"
+    },
+    {
+      "type": "html",
+      "id": "options",
+      "label": "t:blocks.customizable_products.blocks.group.settings.options.label",
+      "default": "t:sections.dbtfy-contact-form-builder.blocks.radio.settings.options.default",
+      "info": "t:sections.dbtfy-contact-form-builder.blocks.radio.settings.options.info"
+    },
+    {
+      "type": "select",
+      "id": "width_radio",
+      "label": "t:sections.dbtfy-contact-form-builder.blocks.radio.settings.width_radio.label",
+      "default": "half-width",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "t:sections.dbtfy-content-tabs.settings.full_width"
+        },
+        {
+          "value": "half-width",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.radio.settings.width_radio.options__2.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Radio"
+    }
+  ]
+}
+{% endschema %}

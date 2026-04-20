@@ -1,0 +1,28 @@
+{%- liquid
+  unless block.settings.product == blank
+    assign product = all_products[block.settings.product]
+  endunless
+
+  render 'dbtfy-product-quantity-breaks', product: product
+-%}
+
+{% schema %}
+{
+  "name": "t:blocks.quantity_breaks.name",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.main-product.settings.product.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.quantity_breaks.name",
+      "settings": {
+        "product": "{{ closest.product }}"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,42 @@
+{% liquid
+  assign result_columns = section.settings.result_columns
+  assign block_width = 'grid--' | append: result_columns | append: '-col'
+  if section.blocks.size == 1
+    assign block_width = 'grid--1-col'
+  elsif section.blocks.size == 2 and result_columns > 2
+    assign block_width = 'grid--2-col'
+  elsif section.blocks.size == 3 and result_columns == 4
+    assign block_width = 'grid--3-col'
+  endif
+  assign result_placement = section.settings.result_placement
+%}
+
+<div
+  class="dbtfy-result-rows {% if result_placement == 'result-bottom' %}grid grid--2-col {{ block_width }}-tablet{% endif %}"
+>
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "t:blocks.name",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "_result-section-block"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Result Section",
+      "blocks": [{ "type": "_result-section-block" }]
+    }
+  ]
+}
+{% endschema %}

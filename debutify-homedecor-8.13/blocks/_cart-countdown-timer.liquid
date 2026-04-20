@@ -1,0 +1,63 @@
+{%- if request.design_mode -%}
+  {%- render 'widget-blocker-warning',
+    enabled: settings.dbtfy_cart_countdown_timer,
+    type: 'widget',
+    as: 'block',
+    name: 'Cart Countdown Timer',
+    id: block
+  -%}
+{% endif %}
+
+{%- if settings.dbtfy_cart_countdown_timer -%}
+  <link
+    rel="stylesheet"
+    href="{{ 'dbtfy-cart-countdown-timer.css' | asset_url }}"
+    media="print"
+    onload="this.media='all'"
+  >
+  <dbtfy-cart-countdown-timer
+    class="cart-block hidden show-on--{{ block.settings.show_on }}"
+    {{ block.shopify_attributes }}
+  >
+    <div class="dbtfy-cart-countdown">
+      <div class="dbtfy-cart-countdown__container {alignment}">
+        <div class="dbtfy-cart-countdown__start-content">
+          <span class="dbtfy-cart-countdown__icon material_icon">
+            {% render 'material-icon', icon: '{icon}' %}
+          </span>
+          <span class="dbtfy-cart-countdown__icon custom_icon"> {custom_icon} </span>
+
+          <div class="dbtfy-cart-countdown__message">
+            <div class="dbtfy-cart-countdown__text">
+              <span class="message-before">{message}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dbtfy-cart-countdown-timer>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:blocks.cart-countdown-timer.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.cart-countdown-timer.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.cart-countdown-timer.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.professional_info"
+    }
+  ]
+}
+{% endschema %}

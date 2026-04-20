@@ -1,0 +1,248 @@
+{%- layout none -%}
+
+<dbtfy-product-quantity-single-break-template>
+  <div class="dbtfy-product-quantity-break dbtfy-product-quantity-single-break">
+    <div class="dbtfy-product-quantity-break__wrapper">
+      <div class="product-quantity-break__quantity">
+        <div
+          class="product-quantity-break__quantity__text custom-badge-style"
+          style="--qb-badge-bg: {range_badge_color}; --qb-badge-text: {range_badge_text_color};"
+        >
+          x{range}
+        </div>
+      </div>
+      <input
+        class="dbtfy-product-quantity-break__radio hidden"
+        type="radio"
+        id="Quantity-break-{block_id}"
+        value="1"
+        name="qty-breaks-{{ product.id }}"
+        checked
+      >
+      <label for="Quantity-break-{block_id}" class="dbtfy-product-quantity-break__label">
+        {% render 'material-icon', icon: 'radio_button_unchecked', class: 'icon-radio_button_unchecked icon-radio' %}
+        {% render 'material-icon', icon: 'radio_button_checked', class: 'icon-radio_button_checked icon-radio' %}
+
+        <div class="dbtfy-product-quantity-break__image">
+          <img src="{product_image}" alt="{{ product.title }}">
+        </div>
+
+        <div class="dbtfy-product-quantity-break__left-wrapper">
+          <div class="dbtfy-product-quantity-break__left-label single_break_text">
+            <h3 class="dbtfy-product-quantity-break__left-heading inline-richtext textcontent">{item_heading}</h3>
+          </div>
+
+          <div class="dbtfy-product-quantity-break__right-wrapper">
+            <div class="prices">
+              <h3 class="dbtfy-product-quantity-break__right-price">{original_price}</h3>
+              <span class="dbtfy-product-quantity-break__right-original-price"></span>
+            </div>
+
+            <span
+              class="dbtfy-product-quantity-break__left-text"
+            >
+              {single_break_subtext}
+            </span>
+          </div>
+
+          <div
+            class="dbtfy-product-quantity-break--quantity hidden {% if product.has_only_default_variant %} has-only-variant{% endif %}"
+          >
+            <div
+              class="select dbtfy-product-quantity-break--quantity__group"
+            >
+              <select
+                class="select__select"
+                name="id"
+                data-type=""
+                data-amount=""
+              >
+                {% for variant in product.variants %}
+                  <option
+                    value="{{ variant.title | escape }}"
+                    id="{{ variant.id }}"
+                    data-price="{{ variant.price }}"
+                    {% unless variant.available %}
+                      disabled
+                      class="disabled"
+                    {% endunless %}
+                    {% if variant.id == product.first_available_variant.id %}
+                      selected
+                    {% endif %}
+                  >
+                    {{ variant.title }}
+                  </option>
+                {% endfor %}
+              </select>
+              <span class="svg-wrapper">
+                {% render 'material-icon', icon: 'keyboard_arrow_down' %}
+              </span>
+            </div>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+</dbtfy-product-quantity-single-break-template>
+
+<dbtfy-product-quantity-break-template>
+  <div class="dbtfy-product-quantity-break">
+    <div class="dbtfy-product-quantity-break__wrapper">
+      <div class="product-quantity-break__wrapper">
+        <div
+          class="product-quantity-break__tag custom-badge-style"
+          style="--qb-badge-bg: {range_badge_color}; --qb-badge-text: {range_badge_text_color};"
+        >
+          {badge_title}
+        </div>
+      </div>
+      <div class="product-quantity-break__quantity">
+        <div
+          class="product-quantity-break__quantity__text"
+          style="background: {range_badge_color}; color: {range_badge_text_color};"
+        >
+          x{range}
+        </div>
+      </div>
+      <div
+        class="product-quantity-break__most-popular__wrapper mostpopular_conditionable"
+        style="--badge-fill-color: {range_badge_color}; --badge-text-color: {range_badge_text_color};"
+      >
+        {% render 'most-popular' %}
+      </div>
+      <input
+        class="dbtfy-product-quantity-break__radio hidden"
+        type="radio"
+        id="Quantity-break-{{ product.id }}-{random_number}"
+        value="{range}"
+        name="qty-breaks-{{ product.id }}"
+        data-discount-code="{discount_code}"
+      >
+      <label for="Quantity-break-{{ product.id }}-{random_number}" class="dbtfy-product-quantity-break__label">
+        {% render 'material-icon',
+          icon: 'radio_button_unchecked',
+          class: 'icon-radio_button_unchecked icon-radio hidden'
+        %}
+        {% render 'material-icon', icon: 'radio_button_checked', class: 'icon-radio_button_checked icon-radio hidden' %}
+
+        <div class="dbtfy-product-quantity-break__image">
+          <img src="{product_break_image}" alt="{{ product.title }}">
+        </div>
+        <div class="dbtfy-product-quantity-break__left-wrapper">
+          <div class="dbtfy-product-quantity-break__left-label single_break_text">
+            <h3 class="dbtfy-product-quantity-break__left-heading inline-richtext textcontent">{item_heading}</h3>
+
+            <div class="dbtfy-product-quantity-break__tag1 dbtfy-product-quantity-break__tag tag1_conditionable">
+              <span style="border: 1px solid {tag_1_border_color};background-color: {tag_1_background_color};color: {tag_1_text_color}">
+                {tag_1_breaks}
+              </span>
+            </div>
+          </div>
+
+          <div class="dbtfy-product-quantity-break__right-wrapper">
+            <div class="prices">
+              <h3 class="dbtfy-product-quantity-break__right-price">{discounted_price}</h3>
+              <span class="dbtfy-product-quantity-break__right-original-price">{original_price}</span>
+            </div>
+
+            <span
+              class="dbtfy-product-quantity-break__left-text"
+            >
+              {single_break_subtext_breaks}
+            </span>
+          </div>
+
+          <div
+            class="dbtfy-product-quantity-break--quantity hidden {% if product.has_only_default_variant %} has-only-variant{% endif %}"
+          >
+            <div
+              class="select dbtfy-product-quantity-break--quantity__group"
+            >
+              <select
+                class="select__select"
+                name="id"
+                data-type="{product_break_discount_type__variant}"
+                data-amount="{product_break_discount_amount__variant}"
+              >
+                {% for variant in product.variants %}
+                  <option
+                    value="{{ variant.title | escape }}"
+                    id="{{ variant.id }}"
+                    data-price="{{ variant.price }}"
+                    {% unless variant.available %}
+                      disabled
+                      class="disabled"
+                    {% endunless %}
+                    {% if variant.id == product.first_available_variant.id %}
+                      selected
+                    {% endif %}
+                  >
+                    {{ variant.title }}
+                  </option>
+                {% endfor %}
+              </select>
+              <span class="svg-wrapper">
+                {% render 'material-icon', icon: 'keyboard_arrow_down' %}
+              </span>
+            </div>
+          </div>
+        </div>
+      </label>
+    </div>
+
+    <div
+      class="product-quantity-break__gift {free_product_available}"
+      data-free-product-id="{free_product_id}"
+      data-free-product-quantity="{free_product_quantity}"
+    >
+      <div class="product-quantity-break__gift--col">
+        <img src="{free_product_img}">
+        <div class="dbtfy-product-quantity-break__gift--col__text">+ FREE {free_product_title}</div>
+      </div>
+    </div>
+    <div
+      class="product-quantity-break__money-guarantee {money_guarantee_available}"
+      data-money-guarantee-id="{money_guarantee_id}"
+      data-money-guarantee-quantity="{money_guarantee_quantity}"
+    >
+      <div class="product-quantity-break__gift--col">
+        <div class="checkbox_wraper {money_guarantee_checkbox_class}">
+          <input
+            type="checkbox"
+            class="dbtfy-product-quantity-break__money-guarantee-checkbox"
+            value="{money_guarantee_id}"
+            {money_guarantee_checkbox_checked}
+          >
+          <span class="svg-wrapper">
+            {% render 'material-icon', icon: 'done' %}
+          </span>
+        </div>
+        <img src="{money_guarantee_img}">
+        <div class="dbtfy-product-quantity-break__gift--col__text">+ {money_guarantee_title}</div>
+        <div class="dbtfy-product-quantity-break__gift--col__price">{money_guarantee_price}</div>
+      </div>
+    </div>
+    <div
+      class="product-quantity-break__shipping-protection {shipping_protection_available}"
+      data-shipping-protection-id="{shipping_protection_id}"
+      data-shipping-protection-quantity="{shipping_protection_quantity}"
+    >
+      <div class="product-quantity-break__gift--col">
+        <div class="checkbox_wraper {shipping_protection_checkbox_class}">
+          <input
+            type="checkbox"
+            class="dbtfy-product-quantity-break__shipping-protection-checkbox"
+            value="{shipping_protection_id}"
+            {shipping_protection_checkbox_checked}
+          >
+          <span class="svg-wrapper">
+            {% render 'material-icon', icon: 'done' %}
+          </span>
+        </div>
+        <img src="{shipping_protection_img}">
+        <div class="dbtfy-product-quantity-break__gift--col__text">+ {shipping_protection_title}</div>
+        <div class="dbtfy-product-quantity-break__gift--col__price">{shipping_protection_price}</div>
+      </div>
+    </div>
+  </div>
+</dbtfy-product-quantity-break-template>

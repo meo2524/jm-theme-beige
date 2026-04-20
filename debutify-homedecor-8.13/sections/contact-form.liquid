@@ -1,0 +1,452 @@
+{%- render 'widget-blocker',
+  enabled: settings.dbtfy_contact_form,
+  section: section,
+  name: 'Contact form',
+  type: '⚡ Paid Sections'
+-%}
+{%- if request.design_mode or settings.dbtfy_contact_form -%}
+  <link rel="stylesheet" href="{{ 'section-contact-form.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  {% render 'section-padding', section: section %}
+
+  {% if section.settings.pattern_bg != 'none' %}
+    {% render 'dbtfy-background-pattern', setting: section.settings %}
+  {% endif %}
+
+  <dbtfy-contact-form>
+    <div
+      class="color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding dbtfy-background-pattern-{{ section.id }}"
+      id="section-{{ section.id }}"
+    >
+      <div
+        class="contact {{ section.settings.container_size }}"
+        style="max-width: {{ section.settings.max_width }}rem;"
+      >
+        {% content_for 'block', type: '_heading', id: 'heading' %}
+
+        {%- liquid
+          assign contact_form_class = ''
+          if settings.animations_reveal_on_scroll
+            assign contact_form_class = 'scroll-trigger animate--slide-in'
+          endif
+        -%}
+        {% capture contact_form %}
+            <div class="form__error-message form__message hidden">
+              <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
+                {{- 'icon-error.svg' | inline_asset_content -}}
+                <span class="error"></span>
+              </h2>
+            </div>
+            {% content_for 'block', type: '_dbtfy-contact-form', id: 'dbtfy-contact-form' %}
+        {% endcapture %}
+        <dbtfy-form-validator
+          data-one-email-error="{{ 'templates.contact.form.one_email_error' | t }}"
+          data-email-error="{{ 'templates.contact.form.email_error' | t }}"
+          data-get-message="{{ section.settings.get_message }}"
+          data-after-submission="true"
+        >
+          {% if section.settings.get_message == 'email' %}
+            {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
+              {%- if form.posted_successfully? -%}
+                <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
+                  {{- 'icon-success.svg' | inline_asset_content -}}
+                  {{ 'templates.contact.form.post_success' | t }}
+                </h2>
+              {%- elsif form.errors -%}
+                <div class="form__message">
+                  <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
+                    {{- 'icon-error.svg' | inline_asset_content -}}
+                    {{ 'templates.contact.form.error_heading' | t }}
+                  </h2>
+                </div>
+                <ul class="form-status-list caption-large" role="list">
+                  <li>
+                    <a href="#ContactForm-email" class="link">
+                      {{ form.errors.translated_fields.email | capitalize }}
+                      {{ form.errors.messages.email }}
+                    </a>
+                  </li>
+                </ul>
+              {%- endif -%}
+              {{ contact_form }}
+            {%- endform -%}
+          {% else %}
+            {%- form 'customer', id: 'CustomerForm', class: contact_form_class -%}
+              {% assign default_tag = 'customer.customer_tag' | t %}
+              <input
+                type="hidden"
+                name="contact[tags]"
+                value="{{ section.settings.customer_tag | default: default_tag }}"
+              >
+              <input type="hidden" name="contact[note]" value="">
+              {%- if form.posted_successfully? -%}
+                <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
+                  {{- 'icon-success.svg' | inline_asset_content -}}
+                  {{ 'templates.contact.form.post_success' | t }}
+                </h2>
+              {%- elsif form.errors -%}
+                <div class="form__message">
+                  <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
+                    {{- 'icon-error.svg' | inline_asset_content -}}
+                    {{ 'templates.contact.form.error_heading' | t }}
+                  </h2>
+                </div>
+                <ul class="form-status-list caption-large" role="list">
+                  <li>
+                    <a href="#ContactForm-email" class="link">
+                      {{ form.errors.translated_fields.email | capitalize }}
+                      {{ form.errors.messages.email }}
+                    </a>
+                  </li>
+                </ul>
+              {%- endif -%}
+              {{ contact_form }}
+            {%- endform -%}
+          {% endif %}
+        </dbtfy-form-validator>
+      </div>
+    </div>
+
+    <script src="{{ 'dbtfy-form-validator.js' | asset_url }}" defer></script>
+    <script src="{{ 'dbtfy-contact-form.js' | asset_url }}" defer></script>
+  </dbtfy-contact-form>
+{% endif %}
+{% schema %}
+{
+  "name": "t:sections.contact-form.name",
+  "tag": "section",
+  "disabled_on": { "groups": ["aside"] },
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.contact-form.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.contact-form.link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.free_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "container_size",
+      "label": "t:sections.all.container_size.label",
+      "default": "page-width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:general.settings.style.default"
+        },
+        {
+          "value": "page-full",
+          "label": "t:sections.all.container_size.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "t:sections.dbtfy-contact-form-builder.settings.max_width.label",
+      "default": 65,
+      "min": 40,
+      "max": 100,
+      "unit": "rem"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.back_in_stock.settings.submission"
+    },
+    {
+      "type": "select",
+      "id": "get_message",
+      "label": "t:blocks.back_in_stock.settings.after_form_submission",
+      "default": "email",
+      "info": "t:blocks.back_in_stock.settings.get_message_info",
+      "options": [
+        {
+          "value": "customer",
+          "label": "t:blocks.back_in_stock.settings.customer_list"
+        },
+        {
+          "value": "email",
+          "label": "t:sections.announcement-bar.blocks.contact_info.email"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "customer_tag",
+      "label": "t:blocks.news-letter.settings.customer_tag.label",
+      "default": "t:sections.announcement-bar.blocks.contact_info.customer",
+      "visible_if": "{{ section.settings.get_message == 'customer' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.global.settings.bubble.background_pattern_settings.label"
+    },
+    {
+      "type": "select",
+      "id": "pattern_bg",
+      "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.pattern",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "curved-grid",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__1"
+        },
+        {
+          "value": "radial-rings",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__2"
+        },
+        {
+          "value": "diamond-grid",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__3"
+        },
+        {
+          "value": "quatrefoils",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__4"
+        },
+        {
+          "value": "hexagons",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__5"
+        },
+        {
+          "value": "intersecting-circles",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__6"
+        },
+        {
+          "value": "brick-wall",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__7"
+        },
+        {
+          "value": "formal-invitation",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__8"
+        },
+        {
+          "value": "jupiter",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__9"
+        },
+        {
+          "value": "yyy",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__10"
+        },
+        {
+          "value": "temple",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__11"
+        },
+        {
+          "value": "lips",
+          "label": "t:settings_schema.global.settings.bubble.background_pattern_settings.option__12"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "pattern_color",
+      "label": "t:settings_schema.widgets.color_swatches.option_name.default",
+      "default": "#A52A2A",
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_size",
+      "min": 4,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "t:general.settings.size.label",
+      "default": 20,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_bg != 'formal-invitation' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_size_thickness",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings_schema.global.settings.dimension.label",
+      "default": 1,
+      "visible_if": "{{ section.settings.pattern_bg == 'formal-invitation' or section.settings.pattern_bg == 'radial-rings' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "t:settings_schema.global.settings.bubble.opacity",
+      "default": 50,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.layout.settings.spacing.section_desktop.label"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.top",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.bottom",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.contact-form.name",
+      "blocks": [
+        {
+          "type": "_heading",
+          "static": true,
+          "id": "heading",
+          "blocks": [{ "type": "_title", "settings": { "title": "Contact form" } }]
+        },
+        {
+          "type": "_dbtfy-contact-form",
+          "static": true,
+          "id": "dbtfy-contact-form",
+          "blocks": [
+            { "type": "_dbtfy-cfb-input-block" },
+            { "type": "_dbtfy-cfb-email-block" },
+            { "type": "_dbtfy-cfb-phone-block" },
+            { "type": "_dbtfy-cfb-message-block" },
+            { "type": "_dbtfy-cfb-button-block" }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

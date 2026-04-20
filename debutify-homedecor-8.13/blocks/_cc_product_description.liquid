@@ -1,0 +1,42 @@
+{%- liquid
+  unless block.settings.product == blank
+    assign product = block.settings.product
+  endunless
+-%}
+{%- if product.description != blank -%}
+  <div
+    class="product__description rte quick-add-hidden"
+    {{ block.shopify_attributes }}
+    data-show-as-separate-section="{{ block.settings.show_as_separate_section }}"
+  >
+    {{ product.description }}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product Description",
+  "class": "product__description_block",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.main-product.settings.product.label"
+    },
+    {
+      "type": "checkbox",
+      "label": "Show as separate section",
+      "id": "show_as_separate_section",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Description",
+      "settings": {
+        "product": "{{ closest.product }}"
+      }
+    }
+  ]
+}
+{% endschema %}

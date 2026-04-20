@@ -1,0 +1,199 @@
+{%- if request.design_mode -%}
+  {%- render 'widget-blocker-warning',
+    enabled: settings.dbtfy_cookie_box,
+    type: 'widget',
+    as: 'block',
+    name: 'Cookie Box',
+    id: block
+  -%}
+{%- endif -%}
+{%- if settings.dbtfy_cookie_box -%}
+  <link rel="stylesheet" href="{{ 'dbtfy-cookie-box.css' | asset_url }}" media="print" onload="this.media='all'">
+  <dbtfy-cookie-box
+    data-block-id="{{ block.id }}"
+    data-check-country-eu="{{ block.settings.eu_only }}"
+    data-close-icon="{{ block.settings.close_icon }}"
+    data-color-scheme="{{ block.settings.color_scheme }}"
+    data-custom-color-scheme="{{ block.settings.custom_color_scheme }}"
+    data-showon="{{ block.settings.show_on }}"
+    class="hidden show-on--{{ block.settings.show_on }}"
+    {{ block.shopify_attributes }}
+  >
+    <div class="dbtfy-cookie-box grid inner-spacing">
+      <div class="grid--9-col-tablet grid--12-col-mobile dbtfy-cookie-box--text">
+        {%- if block.settings.title != blank -%}{{ block.settings.title }}{%- endif -%}
+        {%- if block.settings.subheading != blank -%}{{ block.settings.subheading }}{%- endif -%}
+      </div>
+      <div class="grid--3-col-tablet grid--12-col-mobile dbtfy-cookie-box--button-wrapper">
+        {%- if block.settings.button_text != blank -%}
+          {%- assign button_size = block.settings.button_size -%}
+          {%- if button_size == 'inherit' -%}
+            {%- assign button_size = settings.button_size -%}
+          {%- endif -%}
+          <span
+            class="dbtfy-cookie-box--button {{ block.settings.button_style }} w-full {{ button_size }}"
+          >
+            <span>
+              {{- block.settings.button_text -}}
+            </span>
+          </span>
+        {%- endif -%}
+      </div>
+    </div>
+  </dbtfy-cookie-box>
+  <script src="{{ 'dbtfy-cookie-box.js' | asset_url }}" defer></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.dbtfy-cookie-box.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-cookie-box.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-cookie-box.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.free_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "t:sections.all.show_on.label",
+      "default": "both",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.heading",
+      "info": "t:general.settings.block-name.info",
+      "default": "t:blocks.dbtfy-cookie-box.name"
+    },
+    {
+      "type": "checkbox",
+      "id": "eu_only",
+      "label": "t:blocks.dbtfy-cookie-box.settings.eu_only.label",
+      "default": false
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "t:general.settings.heading",
+      "default": "t:blocks.dbtfy-cookie-box.settings.heading.default"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "t:general.settings.subheading",
+      "default": "t:blocks.dbtfy-cookie-box.settings.subheading.default"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:blocks.dbtfy-cookie-box.settings.button_text.label",
+      "default": "t:blocks.dbtfy-cookie-box.settings.button_text.default"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "default": "button button--primary",
+      "label": "t:blocks.dbtfy-cookie-box.settings.button_text.style",
+      "options": [
+        {
+          "value": "link underlined-link button--link",
+          "label": "t:sections.all.button.option_1_label"
+        },
+        { "value": "button button--tertiary", "label": "t:general.settings.style.default" },
+        { "value": "button button--primary", "label": "t:sections.all.button.options__3.label" },
+        { "value": "button button--secondary", "label": "t:sections.all.button.options__4.label" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "default": "inherit",
+      "label": "t:general.settings.size.label",
+      "options": [
+        { "value": "inherit", "label": "t:general.settings.size.option__1" },
+        {
+          "value": "button--small",
+          "label": "t:general.settings.small"
+        },
+        { "value": "button--medium", "label": "t:sections.all.animation.image_behavior.parallax_speed.medium" },
+        { "value": "", "label": "t:general.settings.size.option__10" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "close_icon",
+      "label": "t:blocks.dbtfy-cookie-box.settings.close_icon.label",
+      "default": "close",
+      "info": "t:sections.all.icon.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    }
+  ]
+}
+{%- endschema -%}

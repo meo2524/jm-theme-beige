@@ -1,0 +1,191 @@
+{%- if block.blocks.size > 0 -%}
+  {%- render 'widget-blocker',
+    enabled: settings.dbtfy_upsell_popup,
+    section: section,
+    name: 'Upsell Popup',
+    type: '⚡ Paid widget'
+  -%}
+{%- endif -%}
+
+{% if settings.dbtfy_upsell_popup %}
+  {% style %}
+    .dbtfy-upsell-popup-overlay {
+      {% if block.settings.overlay_image != blank %}
+      background-image: url('{{ block.settings.overlay_image | image_url: width: 3840 }}');
+      {% endif %}
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  {% endstyle %}
+  <link rel="stylesheet" href="{{ 'dbtfy-upsell-popup.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'dbtfy-dropdown.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'dbtfy-upsell-view.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  {% liquid
+    assign current_currency = localization.country.currency.symbol
+    if current_currency == blank
+      assign current_currency = shop.currency.symbol
+    endif
+  %}
+  <dbtfy-upsell-popup
+    data-modal-width="{{ block.settings.modal_width }}"
+    data-close-button-selector=".dbtfy-upsell-popup__close"
+    data-currency="{{ current_currency }}"
+    data-decline-text="{{ block.settings.decline_text }}"
+    data-checkout-text="{{ block.settings.checkout_text }}"
+    data-alignment="{{ block.settings.alignment }}"
+    data-color-scheme="{{ block.settings.color_scheme }}"
+    data-custom-color-scheme="{{ block.settings.custom_color_scheme }}"
+    data-upsell-title="{{ block.settings.upsell_title }}"
+    class="hidden "
+  >
+    {% content_for 'blocks' %}
+
+    <div class="dbtfy-upsell-popup___quick-view-wrapper">
+      <div
+        class="dbtfy-upsell-popup___quick-view color-{{ block.settings.custom_color_scheme }} dbtfy-color-{{ block.settings.color_scheme  }} gradient"
+      ></div>
+    </div>
+  </dbtfy-upsell-popup>
+  <script src="{{ 'dbtfy-dropdown.js' | asset_url }}" defer></script>
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'dbtfy-upsell-popup.js' | asset_url }}" defer></script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:blocks.dbtfy-upsell-popup.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-upsell-popup.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-upsell-popup.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.professional_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "text",
+      "id": "upsell_title",
+      "label": "t:general.settings.title",
+      "default": "t:blocks.dbtfy-upsell-popup.settings.upsell_title.default",
+      "info": "t:blocks.dbtfy-cart-reminder.settings.text.info"
+    },
+    {
+      "type": "select",
+      "id": "modal_width",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        }
+      ],
+      "default": "large",
+      "label": "t:general.settings.width"
+    },
+    {
+      "type": "text",
+      "id": "decline_text",
+      "label": "t:blocks.dbtfy-upsell-popup.settings.decline_offer.label",
+      "default": "t:blocks.dbtfy-upsell-popup.settings.decline_offer.default"
+    },
+    {
+      "type": "text",
+      "id": "checkout_text",
+      "label": "t:blocks.dbtfy-upsell-popup.settings.checkout_button.label",
+      "default": "t:blocks.dbtfy-upsell-popup.settings.checkout_button.default"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:general.settings.alignment.label",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        { "value": "text-left", "label": "t:general.settings.alignment.option__4" },
+        { "value": "text-center", "label": "t:general.settings.alignment.option__5" },
+        { "value": "text-right", "label": "t:general.settings.alignment.option__6" },
+        { "value": "text-justify", "label": "t:general.settings.alignment.option__7" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_dbtfy-upsell-product"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.dbtfy-upsell-popup.name",
+      "blocks": [
+        {
+          "type": "_dbtfy-upsell-product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

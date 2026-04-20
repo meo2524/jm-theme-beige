@@ -1,0 +1,155 @@
+{% assign primary_color = settings.primary_color %}
+
+{% assign difference = primary_color | brightness_difference: settings.light_color %}
+{% assign inverse = false %}
+
+{% if difference < 125 %}
+  {% assign light_color = settings.dark_color %}
+  {% assign dark_color = settings.light_color %}
+  {% assign inverse = true %}
+{% else %}
+  {% assign light_color = settings.light_color %}
+  {% assign dark_color = settings.dark_color %}
+{% endif %}
+
+{% if inverse %}
+  {% render 'single-color-scheme',
+    id: 1,
+    name: 'Dark Scheme',
+    background: dark_color,
+    background_gradient: empty,
+    text: light_color,
+    button: light_color,
+    button_label: primary_color,
+    secondary_button_label: light_color,
+    shadow: dark_color
+  %}
+
+  {% assign primary_dark_mix = dark_color | color_mix: primary_color, 50 %}
+
+  {% render 'single-color-scheme',
+    id: 2,
+    name: 'Primary Dark Scheme',
+    background: primary_dark_mix,
+    background_gradient: empty,
+    text: light_color,
+    button: light_color,
+    button_label: primary_color,
+    secondary_button_label: light_color,
+    shadow: dark_color
+  %}
+
+  {% render 'single-color-scheme',
+    id: 3,
+    name: 'Primary Scheme',
+    background: primary_color,
+    background_gradient: empty,
+    text: light_color,
+    button: light_color,
+    button_label: primary_color,
+    secondary_button_label: light_color,
+    shadow: dark_color
+  %}
+
+  {% assign primary_light_mix = light_color | color_mix: primary_color, 30 %}
+
+  {% render 'single-color-scheme',
+    id: 4,
+    name: 'Primary Light Scheme',
+    background: primary_light_mix,
+    background_gradient: empty,
+    text: dark_color,
+    button: light_color,
+    button_label: primary_color,
+    secondary_button_label: light_color,
+    shadow: dark_color
+  %}
+
+  {% render 'single-color-scheme',
+    id: 5,
+    name: 'Light Scheme',
+    background: light_color,
+    background_gradient: empty,
+    text: dark_color,
+    button: primary_color,
+    button_label: light_color,
+    secondary_button_label: primary_color,
+    shadow: primary_color
+  %}
+{% else %}
+  {% render 'single-color-scheme',
+    id: 1,
+    name: 'Light Scheme',
+    background: light_color,
+    background_gradient: empty,
+    text: dark_color,
+    button: primary_color,
+    button_label: light_color,
+    secondary_button_label: primary_color,
+    shadow: primary_color
+  %}
+
+  {% assign primary_light_mix = light_color | color_mix: primary_color, 30 %}
+
+  {% render 'single-color-scheme',
+    id: 2,
+    name: 'Primary Light Scheme',
+    background: primary_light_mix,
+    background_gradient: empty,
+    text: dark_color,
+    button: light_color,
+    button_label: primary_color,
+    secondary_button_label: light_color,
+    shadow: dark_color
+  %}
+
+  {% render 'single-color-scheme',
+    id: 3,
+    name: 'Primary Scheme',
+    background: primary_color,
+    background_gradient: empty,
+    text: light_color,
+    button: light_color,
+    button_label: primary_color,
+    secondary_button_label: light_color,
+    shadow: dark_color
+  %}
+
+  {% assign primary_dark_mix = dark_color | color_mix: primary_color, 50 %}
+
+  {% render 'single-color-scheme',
+    id: 4,
+    name: 'Primary Dark Scheme',
+    background: primary_dark_mix,
+    background_gradient: empty,
+    text: light_color,
+    button: light_color,
+    button_label: primary_color,
+    secondary_button_label: light_color,
+    shadow: dark_color
+  %}
+
+  {% render 'single-color-scheme',
+    id: 5,
+    name: 'Dark Scheme',
+    background: dark_color,
+    background_gradient: empty,
+    text: light_color,
+    button: light_color,
+    button_label: primary_color,
+    secondary_button_label: light_color,
+    shadow: dark_color
+  %}
+{% endif %}
+
+<style>
+  body,
+  .color-scheme-1,
+  .color-scheme-2,
+  .color-scheme-3,
+  .color-scheme-4,
+  .color-scheme-5 {
+    color: rgba(var(--color-foreground), 0.75);
+    background-color: rgb(var(--color-background));
+  }
+</style>

@@ -1,0 +1,25 @@
+Debutify.widgets['inactive-tab-message'].blocks.push({{ block.settings | json }});
+Debutify.widgets['inactive-tab-message'].blocks.push({message:document.title});
+
+{% schema %}
+{
+  "name": "t:blocks.inactive-tab-message.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "message",
+      "label": "t:blocks.minimum_order.settings.dbtfy_minimum_order_message.label",
+      "default": "🔥 Don't forget this..."
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.inactive-tab-message.name",
+      "settings": {
+        "message": "🔥 Don't forget this..."
+      }
+    }
+  ]
+}
+{% endschema %}

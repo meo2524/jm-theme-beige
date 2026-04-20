@@ -1,0 +1,128 @@
+{%- if request.design_mode -%}
+  {%- render 'widget-blocker-warning',
+    enabled: settings.dbtfy_shipping_checkpoint,
+    type: 'widget',
+    as: 'block',
+    name: 'Shipping Checkpoints',
+    id: block
+  -%}
+{%- endif -%}
+{% if request.design_mode or settings.dbtfy_shipping_checkpoint %}
+  <link rel="stylesheet" href="{{ 'dbtfy-shipping-checkpoints.css' | asset_url }}">
+  <script src="{{ 'dbtfy-shipping-checkpoints.js' | asset_url }}" defer></script>
+  <dbtfy-shipping-checkpoints
+    data-order-ready-date="{{ block.settings.order_ready_date }}"
+    data-delivery-date="{{ block.settings.delivery_date }}"
+    hidden
+  >
+    <div class="dbtfy-shipping-checkpoints-wrapper">
+      <div class="dbtfy-shipping-checkpoints-box">
+        <div class="dbtfy-checkpoint">
+          <div class="dbtfy-circle">
+            {%- render 'material-icon', icon: 'add_shopping_cart' -%}
+          </div>
+          <div class="dbtfy-date current-date"></div>
+          {%- if block.settings.current_label != blank -%}
+            <div class="dbtfy-label">{{ block.settings.current_label }}</div>
+          {%- endif -%}
+        </div>
+        <div class="dbtfy-checkpoint">
+          <div class="dbtfy-circle">
+            {%- render 'material-icon', icon: 'delivery_truck_speed' -%}
+          </div>
+          <div class="dbtfy-date order-ready-date"></div>
+          {%- if block.settings.order_ready_label != blank -%}
+            <div class="dbtfy-label">{{ block.settings.order_ready_label }}</div>
+          {%- endif -%}
+        </div>
+        <div class="dbtfy-checkpoint">
+          <div class="dbtfy-circle">
+            {%- render 'material-icon', icon: 'orders' -%}
+          </div>
+          <div class="dbtfy-date delivery-date"></div>
+          {%- if block.settings.delivery_label != blank -%}
+            <div class="dbtfy-label">{{ block.settings.delivery_label }}</div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </dbtfy-shipping-checkpoints>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:sections.dbtfy-shipping-checkpoints.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-shipping-checkpoints.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-shipping-checkpoints.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.enterprise_info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-shipping-checkpoints.order"
+    },
+    {
+      "type": "text",
+      "id": "current_label",
+      "label": "t:general.settings.label",
+      "default": "t:sections.dbtfy-shipping-checkpoints.order"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-shipping-checkpoints.order_ready"
+    },
+    {
+      "type": "range",
+      "id": "order_ready_date",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.date.label",
+      "default": 2,
+      "min": 1,
+      "max": 31,
+      "step": 1,
+      "unit": "day"
+    },
+    {
+      "type": "text",
+      "id": "order_ready_label",
+      "label": "t:general.settings.label",
+      "default": "t:sections.dbtfy-shipping-checkpoints.order_ready"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-shipping-checkpoints.delivery"
+    },
+    {
+      "type": "range",
+      "id": "delivery_date",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.date.label",
+      "default": 3,
+      "min": 1,
+      "max": 31,
+      "step": 1,
+      "unit": "day"
+    },
+    {
+      "type": "text",
+      "id": "delivery_label",
+      "label": "t:general.settings.label",
+      "default": "t:sections.dbtfy-shipping-checkpoints.delivery"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-shipping-checkpoints.name"
+    }
+  ]
+}
+{%- endschema -%}

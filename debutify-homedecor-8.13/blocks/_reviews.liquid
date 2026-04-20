@@ -1,0 +1,29 @@
+{% content_for 'blocks' %}
+
+{% schema %}
+{
+  "name": "Reviews",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_review-filter"
+    },
+    {
+      "type": "_review-listing"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Listing",
+      "blocks": [
+        {
+          "type": "_review-filter"
+        },
+        {
+          "type": "_review-listing"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,22 @@
+{%- assign selected_product = block.settings.product -%}
+<div class="dbtfy-product-bullet-points hidden" data-product="{{ selected_product.id }}"></div>
+{% schema %}
+{
+  "name": "Product bullet point",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.main-product.settings.product.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product bullet point",
+      "settings": {
+        "product": "{{ closest.product }}"
+      }
+    }
+  ]
+}
+{% endschema %}

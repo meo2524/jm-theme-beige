@@ -1,0 +1,290 @@
+{%- render 'widget-blocker',
+  enabled: settings.dbtfy_instagram_story,
+  section: section,
+  name: 'Instagram Stories',
+  type: '⚡ Paid Sections'
+-%}
+{%- if request.design_mode or settings.dbtfy_instagram_story -%}
+  {% render 'block-padding', block: block %}
+  {{ 'dbtfy-insta-story.css' | asset_url | stylesheet_tag }}
+  <div
+    class="show-on--{{ block.settings.show_on }} block-{{ block.id }}-padding h-full {% if block.settings.vertical_center %}align-content-center{% endif %}"
+    id="block-{{ block.id }}"
+  >
+    <dbtfy-insta-story
+      class="dbtfy-insta-stories"
+      data-last-index="0"
+      data-block="{{ block.id }}"
+      data-duration="{{ block.settings.autoplay_speed }}"
+    >
+      <div class="dbtfy-insta-stories__open-buttons-and-arrows-container">
+        <div class="dbtfy-insta-stories__open-buttons-container max-w-none">
+          {% render 'splide-slider-component',
+            setting: block.settings,
+            auto_width: true,
+            overflow: true,
+            spacing_grid_horizontal_desktop: 15,
+            spacing_grid_horizontal_mobile: 15,
+            arrow_position: 'middle',
+            center: block.settings.show_center,
+            custom_icon: settings.custom_arrow_icon,
+            icon: settings.arrow_icon
+          %}
+        </div>
+        <button class="dbtfy-insta-story__arrow dbtfy-insta-story__arrow--prev dbtfy-insta-stories-active-content dbtfy-insta-stories__open-btns-prev">
+          {% render 'material-icon', icon: 'chevron_left' %}
+        </button>
+        <button class="dbtfy-insta-story__arrow dbtfy-insta-story__arrow--next dbtfy-insta-stories-active-content dbtfy-insta-stories__open-btns-next">
+          {% render 'material-icon', icon: 'chevron_right' %}
+        </button>
+      </div>
+
+      <div
+        class="dbtfy-insta-stories__modal color-inverse"
+        data-open="false"
+      >
+        <button class="dbtfy-insta-stories__modal__close dbtfy-insta-stories__close-button mobile-hidden">
+          {% render 'material-icon', icon: 'close' %}
+        </button>
+        <div class="dbtfy-insta-stories__slider-container">
+          <div class="dbtfy-insta-stories__slider">
+            {% content_for 'block', type: '_dbtfy-instagram-story', id: 'dbtfy-instagram-story' %}
+          </div>
+        </div>
+      </div>
+    </dbtfy-insta-story>
+  </div>
+
+  <script src="{{ 'dbtfy-insta-story.js' | asset_url }}" defer></script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-instastory.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-instastory.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy-instastory.help.link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.professional_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "t:sections.all.show_on.label",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ],
+      "default": "both"
+    },
+    {
+      "type": "checkbox",
+      "id": "vertical_center",
+      "default": false,
+      "label": "t:general.settings.center_title"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.slider.slider_settings"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "t:general.settings.slider.autoplay_speed",
+      "default": 5,
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_dots",
+      "default": false,
+      "label": "t:general.settings.slider.show_dots"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_arrows",
+      "default": false,
+      "label": "t:general.settings.slider.show_arrows"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_center",
+      "default": false,
+      "label": "t:sections.dbtfy-instastory.user_story.show_story_center"
+    },
+    {
+      "type": "select",
+      "id": "arrow_color",
+      "default": "inherit",
+      "label": "t:general.settings.slider.arrow_color",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "visible_if": "{{ block.settings.enable_arrows == true }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_arrow_color",
+      "label": "t:general.settings.slider.custom-arrow-color",
+      "default": "#ffffff",
+      "visible_if": "{{ block.settings.arrow_color == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_arrow_background_color",
+      "label": "t:general.settings.slider.custom-arrow-bg-color",
+      "default": "#7559ff",
+      "visible_if": "{{ block.settings.arrow_color == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.layout.settings.spacing.section_desktop.label"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.top",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.bottom",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram Stories",
+      "blocks": [
+        {
+          "type": "_dbtfy-instagram-story",
+          "static": true,
+          "id": "dbtfy-instagram-story",
+          "blocks": [
+            {
+              "type": "_dbtfy-instagram-user-post",
+              "blocks": [{ "type": "_dbtfy-instagram-user-story", "settings": {} }]
+            },
+            {
+              "type": "_dbtfy-instagram-user-post",
+              "blocks": [{ "type": "_dbtfy-instagram-user-story", "settings": {} }]
+            },
+            {
+              "type": "_dbtfy-instagram-user-post",
+              "blocks": [{ "type": "_dbtfy-instagram-user-story", "settings": {} }]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

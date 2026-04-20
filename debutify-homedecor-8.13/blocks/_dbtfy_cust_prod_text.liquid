@@ -1,0 +1,139 @@
+{%- liquid
+  assign label = block.settings.label
+  assign label_handleized = label | handleize
+  assign placeholder = block.settings.placeholder
+  assign is_required = block.settings.required
+  assign show_at_checkout = block.settings.show_at_checkout
+  assign property_value = label
+
+  unless show_at_checkout
+    assign property_value = label | prepend: '_'
+  endunless
+-%}
+
+{%- capture enable_products -%}
+{%- render 'visibility-check' -%}
+{%- endcapture -%}
+
+{% if enable_products == 'true' %}
+  <customizable-product
+    class="dbtfy-customizable-products__block customer hidden"
+    {{ block.shopify_attributes }}
+  >
+    {%- if label != blank -%}
+      <div class="field">
+        <input
+          class="dbtfy-customizable-product__input field__input{% if is_required %} required{% endif %}"
+          id="{{ label_handleized }}-{{ block.id }}"
+          type="text"
+          name="properties[{{ property_value }}]"
+          placeholder="{{ placeholder }}"
+          {% if is_required %}
+            required
+          {% endif %}
+        >
+        <label for="{{ label_handleized }}-{{ block.id }}">
+          {{ label }}
+        </label>
+      </div>
+      <small class="error-message w-100">
+        <span class="svg-wrapper">
+          {{- 'icon-error.svg' | inline_asset_content -}}
+        </span>
+        This field is required
+      </small>
+    {%- endif -%}
+  </customizable-product>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:blocks.customizable_products.blocks.text.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:general.settings.label",
+      "info": "t:general.settings.label_required"
+    },
+    {
+      "type": "checkbox",
+      "id": "required",
+      "label": "t:general.settings.require",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_at_checkout",
+      "label": "t:blocks.customizable_products.blocks.text.settings.show_at_checkout.label",
+      "info": "t:blocks.customizable_products.blocks.text.settings.show_at_checkout.info",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.visibility.header.content",
+      "info": "t:general.settings.visibility.header.info"
+    },
+    {
+      "type": "radio",
+      "id": "visibility",
+      "label": "t:general.settings.visibility.visibility.label",
+      "info": "t:general.settings.visibility.visibility.info",
+      "default": "all",
+      "options": [
+        {
+          "value": "all",
+          "label": "t:general.settings.visibility.visibility.options__1"
+        },
+        {
+          "value": "collection",
+          "label": "t:general.settings.visibility.visibility.options__2"
+        },
+        {
+          "value": "type",
+          "label": "t:general.settings.visibility.visibility.options__3"
+        },
+        {
+          "value": "tag",
+          "label": "t:general.settings.visibility.visibility.options__4"
+        },
+        {
+          "value": "product",
+          "label": "t:general.settings.visibility.visibility.options__5"
+        }
+      ]
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:general.settings.visibility.collection.label"
+    },
+    {
+      "type": "text",
+      "id": "types",
+      "label": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.label",
+      "info": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.info"
+    },
+    {
+      "type": "text",
+      "id": "tags",
+      "label": "t:general.settings.visibility.tags.label",
+      "info": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.info"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:general.settings.visibility.product.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.customizable_products.blocks.text.name"
+    }
+  ]
+}
+{% endschema %}

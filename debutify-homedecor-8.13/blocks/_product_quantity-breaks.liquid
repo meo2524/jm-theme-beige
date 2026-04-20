@@ -1,0 +1,18 @@
+{%- liquid
+  unless section.settings.product == blank
+    assign product = section.settings.product
+  endunless
+
+  render 'dbtfy-product-quantity-breaks', product: product
+-%}
+
+{% schema %}
+{
+  "name": "t:blocks.quantity_breaks.name",
+  "presets": [
+    {
+      "name": "t:blocks.quantity_breaks.name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,53 @@
+<li class="{{ block.id }}" {{ block.shopify_attributes }}>
+  {% style %}
+    .{{ block.id }} i{
+      font-size: {{ block.settings.icon_height_on_mobile }}px;
+    }
+    @media (min-width: 768px) {
+      .{{ block.id }} i{
+        font-size: {{ block.settings.icon_height_on_desktop }}px;
+      }
+    }
+  {% endstyle %}
+  {%- render 'material-icon', icon: block.settings.icon %}
+</li>
+{% schema %}
+{
+  "name": "t:general.settings.icon_label",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "label": "t:general.settings.icon_label",
+      "id": "icon",
+      "default": "local_shipping",
+      "info": "t:sections.all.icon.info"
+    },
+    {
+      "type": "range",
+      "label": "t:sections.dbtfy-scrolling-banner.block.icon.desktop_size",
+      "id": "icon_height_on_desktop",
+      "default": 30,
+      "min": 16,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "label": "t:sections.dbtfy-scrolling-banner.block.icon.mobile_size",
+      "id": "icon_height_on_mobile",
+      "default": 30,
+      "min": 16,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.icon_label"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,168 @@
+{%- render 'widget-blocker-warning',
+  enabled: settings.dbtfy_whatsapp_chat,
+  type: 'widget',
+  as: 'block',
+  name: 'Whatsapp Chat',
+  id: block
+-%}
+{%- if settings.dbtfy_whatsapp_chat -%}
+  {%- if block.settings.whatsapp_number != blank -%}
+    {{ 'dbtfy-whatsapp-chat.css' | asset_url | stylesheet_tag }}
+    <dbtfy-whatsapp-chat
+      id="dbtfy-whatsapp-chat"
+      data-position="right"
+      data-whatsapp-number="{{ block.settings.whatsapp_number | remove: '+' | split: ' ' | last }}"
+      data-has-dialog="true"
+      data-dialog-open="false"
+      {{ block.shopify_attributes }}
+    >
+      <button id="dbtfy-whatsapp-chat-btn" aria-label="{{ block.settings.title }}">
+        <svg
+          class="dbtfy-icon-whatsapp"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="M24 11.7c0 6.45-5.27 11.68-11.78 11.68-2.07 0-4-.53-5.7-1.45L0 24l2.13-6.27a11.57 11.57 0 0 1-1.7-6.04C.44 5.23 5.72 0 12.23 0 18.72 0 24 5.23 24 11.7M12.22 1.85c-5.46 0-9.9 4.41-9.9 9.83 0 2.15.7 4.14 1.88 5.76L2.96 21.1l3.8-1.2a9.9 9.9 0 0 0 5.46 1.62c5.46 0 9.9-4.4 9.9-9.83a9.88 9.88 0 0 0-9.9-9.83m5.95 12.52c-.08-.12-.27-.19-.56-.33-.28-.14-1.7-.84-1.97-.93-.26-.1-.46-.15-.65.14-.2.29-.75.93-.91 1.12-.17.2-.34.22-.63.08-.29-.15-1.22-.45-2.32-1.43a8.64 8.64 0 0 1-1.6-1.98c-.18-.29-.03-.44.12-.58.13-.13.29-.34.43-.5.15-.17.2-.3.29-.48.1-.2.05-.36-.02-.5-.08-.15-.65-1.56-.9-2.13-.24-.58-.48-.48-.64-.48-.17 0-.37-.03-.56-.03-.2 0-.5.08-.77.36-.26.29-1 .98-1 2.4 0 1.4 1.03 2.76 1.17 2.96.14.19 2 3.17 4.93 4.32 2.94 1.15 2.94.77 3.47.72.53-.05 1.7-.7 1.95-1.36.24-.67.24-1.25.17-1.37"></path>
+        </svg>
+        {% render 'material-icon', icon: 'close', class: 'close-icon' %}
+        <span class="dbtfy-whatsapp-loading-spinner" aria-label="Loading"></span>
+        {% if block.settings.title != blank %}
+          <span id="dbtfy-whatsapp-chat-btn-text">{{ block.settings.title }}</span>
+        {% endif %}
+      </button>
+      <div
+        id="dbtfy-whatsapp-chat-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="dbtfy-whatsapp-chat-dialog-title"
+      >
+        <div id="dbtfy-whatsapp-chat-dialog-header">
+          {%- if block.settings.profile_image != blank -%}
+            <div class="dbtfy-whatsapp-chat-img-wrapper">
+              {{ block.settings.profile_image | image_url: width: 56, height: 56 | image_tag }}
+            </div>
+          {%- endif -%}
+          <div class="">
+            {%- if block.settings.profile_name != blank -%}
+              <h3 id="dbtfy-whatsapp-chat-dialog-title">{{ block.settings.profile_name }}</h3>
+            {%- endif -%}
+            {%- if block.settings.profile_subtitle != blank -%}
+              <p id="dbtfy-whatsapp-chat-dialog-subtitle">{{ block.settings.profile_subtitle }}</p>
+            {%- endif -%}
+          </div>
+          <button id="dbtfy-whatsapp-chat-dialog-close" aria-label="Close dialog">
+            {% render 'material-icon', icon: 'close' %}
+          </button>
+        </div>
+        {%- if block.settings.question != blank -%}
+          <div id="dbtfy-whatsapp-chat-dialog-body">
+            <div id="dbtfy-whatsapp-chat-dialog-msg">
+              <div id="dbtfy-whatsapp-chat-dialog-msg-typing" aria-label="Typing indicator"></div>
+              <div id="dbtfy-whatsapp-chat-dialog-msg-text" style="display: none;">
+                {{ block.settings.question }}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+        <div id="dbtfy-whatsapp-chat-dialog-footer">
+          <div id="dbtfy-whatsapp-chat-dialog-user-form">
+            <input
+              id="dbtfy-whatsapp-chat-dialog-user-input"
+              type="text"
+              aria-label="{{ 'widgets.whatsapp_chat.title' | t }}"
+              placeholder="{{ 'widgets.whatsapp_chat.title' | t }}"
+            >
+            <a
+              id="dbtfy-whatsapp-chat-dialog-btn"
+              aria-label="Open WhatsApp"
+              data-whatsapp-number="{{ block.settings.whatsapp_number }}"
+              href="https://wa.me/{{ block.settings.whatsapp_number | remove: '+' | split: ' ' | last | replace: '-', '' }}"
+              target="_blank"
+            >
+              {% render 'material-icon', icon: 'send' %}
+              <span class="dbtfy-whatsapp-loading-spinner" aria-label="Loading"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </dbtfy-whatsapp-chat>
+    {{ 'dbtfy-whatsapp-chat.js' | asset_url | script_tag }}
+  {%- endif -%}
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.dbtfy-whatsapp-chat.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-whatsapp-chat.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-whatsapp-chat.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.enterprise_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info",
+      "default": "t:blocks.dbtfy-whatsapp-chat.name"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:general.settings.title",
+      "default": "t:blocks.dbtfy-whatsapp-chat.settings.title_default"
+    },
+    {
+      "type": "image_picker",
+      "id": "profile_image",
+      "label": "t:blocks.dbtfy-whatsapp-chat.settings.profile_image"
+    },
+    {
+      "type": "text",
+      "id": "profile_name",
+      "label": "t:blocks.dbtfy-whatsapp-chat.settings.profile_name",
+      "default": "t:blocks.dbtfy-whatsapp-chat.settings.profile_name_default"
+    },
+    {
+      "type": "text",
+      "id": "profile_subtitle",
+      "label": "t:blocks.dbtfy-whatsapp-chat.settings.profile_subtitle",
+      "default": "t:blocks.dbtfy-whatsapp-chat.settings.profile_subtitle_default"
+    },
+    {
+      "type": "richtext",
+      "id": "question",
+      "label": "t:sections.dbtfy-faq.blocks.dbtfy-faq.settings.question.label",
+      "default": "t:blocks.dbtfy-whatsapp-chat.settings.question_default"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_number",
+      "label": "t:blocks.dbtfy-whatsapp-chat.settings.whatsapp_number",
+      "placeholder": "+x x-xx-xxx-xxxx"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.dbtfy-whatsapp-chat.name"
+    }
+  ]
+}
+{%- endschema -%}

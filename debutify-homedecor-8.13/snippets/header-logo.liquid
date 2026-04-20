@@ -1,0 +1,77 @@
+<a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
+  {%- if settings.logo != blank -%}
+    <div class="header__heading-logo-wrapper {% if settings.transparent_logo == blank and settings.transparent_mobile_logo == blank %} header-transparent-none {% endif %}">
+      {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+      {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+      {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
+      {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+      {{
+        settings.logo
+        | image_url: width: 600
+        | image_tag:
+          class: 'header__heading-logo motion-reduce header-logo header-desktop-logo',
+          widths: widths,
+          height: logo_height,
+          width: settings.logo_width,
+          alt: logo_alt,
+          sizes: sizes,
+          preload: true
+      }}
+
+      {%- assign mobile_logo_alt = settings.mobile_logo.alt | default: shop.name | escape -%}
+      {%- assign mobile_logo_height = settings.mobile_logo_width | divided_by: settings.mobile_logo.aspect_ratio -%}
+      {% capture mobile_sizes %}(max-width: {{ settings.mobile_logo_width | times: 2 }}px) 50vw, {{ settings.mobile_logo_width }}px{% endcapture %}
+      {% capture mobile_widths %}{{ settings.mobile_logo_width }}, {{ settings.mobile_logo_width | times: 1.5 | round }}, {{ settings.mobile_logo_width | times: 2 }}{% endcapture %}
+
+      {% if settings.mobile_logo != blank %}
+        {{
+          settings.mobile_logo
+          | image_url: width: 600
+          | image_tag:
+            class: 'header__heading-logo motion-reduce header-logo header-mobile-logo',
+            widths: mobile_widths,
+            height: mobile_logo_height,
+            width: settings.mobile_logo_width,
+            alt: mobile_logo_alt,
+            sizes: mobile_sizes,
+            preload: true
+        }}
+      {% endif %}
+      {% liquid
+        if section.settings.header_transparent or section.settings.collection_header_transparent
+          assign transparent_logo = true
+        endif
+      %}
+      {% if settings.transparent_logo != blank and transparent_logo %}
+        {{
+          settings.transparent_logo
+          | image_url: width: 600
+          | image_tag:
+            class: 'header__heading-logo motion-reduce header-transparent-logo header-transparent-desktop-logo',
+            widths: widths,
+            height: logo_height,
+            width: settings.logo_width,
+            alt: logo_alt,
+            sizes: sizes,
+            preload: true
+        }}
+        {% if settings.transparent_mobile_logo != blank %}
+          {{
+            settings.transparent_mobile_logo
+            | image_url: width: 600
+            | image_tag:
+              class: 'header__heading-logo motion-reduce header-transparent-logo header-transparent-mobile-logo',
+              widths: mobile_widths,
+              height: mobile_logo_height,
+              width: settings.mobile_logo_width,
+              alt: mobile_logo_alt,
+              sizes: mobile_sizes,
+              preload: true
+          }}
+        {% endif %}
+      {% endif %}
+    </div>
+  {%- else -%}
+    <span class="h2">{{ shop.name }}</span>
+  {%- endif -%}
+</a>

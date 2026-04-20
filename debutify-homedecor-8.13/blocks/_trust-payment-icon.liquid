@@ -1,0 +1,29 @@
+{% if block.settings.trust_badges_payment_icon != blank %}
+  <div class="dbtfy-payment-icon-block">
+    <img
+      src="{{block.settings.trust_badges_payment_icon | image_url }}"
+      alt="{{ block.settings.trust_badges_payment_icon.alt }}"
+      width="50"
+      height="50"
+    >
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:general.settings.custom_icon",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "trust_badges_payment_icon",
+      "label": "t:general.settings.custom_icon"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.custom_icon"
+    }
+  ]
+}
+{% endschema %}

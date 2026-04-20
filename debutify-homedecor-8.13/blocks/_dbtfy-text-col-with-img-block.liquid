@@ -1,0 +1,158 @@
+{%- assign assign highest_ratio = block.settings.image.aspect_ratio -%}
+
+{%- assign empty_column = '' -%}
+{%- if block.settings.image == blank
+  and block.settings.title == blank
+  and block.settings.text == blank
+  and block.settings.link_label == blank
+-%}
+  {%- assign empty_column = ' dbtfy-text-col-with-img-list__item--empty' -%}
+{%- endif -%}
+
+<li
+  id="Slide-{{ section.id }}-{{ forloop.index }}"
+  class="dbtfy-text-col-with-img-list__item grid__item {% if section.settings.column_alignment == 'center' %} center{% endif %}{{ empty_column }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {{ block.shopify_attributes }}
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+    style="--animation-order: {{ forloop.index }};"
+  {% endif %}
+>
+  <div class="dbtfy-text-col-with-img-card content-container">
+    {% if section.settings.image_ratio == 'adapt'
+      or section.settings.image_ratio == 'circle'
+      and block.settings.image != blank
+    %}
+      {% assign spaced_image = true %}
+    {% endif %}
+    <div class="dbtfy-text-col-with-img-card__image-wrapper dbtfy-text-col-with-img-card__image-wrapper--{{ section.settings.image_width }}-width{% if section.settings.image_width != 'full' or spaced_image %} dbtfy-text-col-with-img-card-spacing{% endif %}">
+      {% if block.settings.image != blank %}
+        {%- assign image_link = block.settings.image_link -%}
+        {% assign subheading = block.settings.subheading %}
+        {%- if image_link != blank -%}
+          <a href="{{ image_link }}" aria-label="Click to open {{ image_link }} link">
+        {%- endif -%}
+        <div
+          class="media media--transparent media--{{ section.settings.image_ratio }}"
+          {% if section.settings.image_ratio == 'adapt' %}
+            style="padding-bottom: {{ 1 | divided_by: highest_ratio | times: 100 }}%;"
+          {% endif %}
+        >
+          {%- liquid
+            assign number_of_columns = section.settings.columns_desktop
+            assign number_of_columns_mobile = section.settings.columns_mobile
+            assign grid_space_desktop = number_of_columns | minus: 1 | times: settings.spacing_grid_horizontal | plus: 100 | append: 'px'
+            assign grid_space_tablet = number_of_columns_mobile | minus: 1 | times: settings.spacing_grid_horizontal | plus: 100 | append: 'px'
+            assign grid_space_mobile = number_of_columns_mobile | minus: 1 | times: settings.spacing_grid_horizontal | divided_by: 2 | plus: 30 | append: 'px'
+            if section.settings.image_width == 'half'
+              assign image_width = 0.5
+            elsif section.settings.image_width == 'third'
+              assign image_width = 0.33
+            else
+              assign image_width = 1
+            endif
+          -%}
+
+          {%- capture sizes -%}
+              (min-width: {{ settings.page_width }}px) calc(({{ settings.page_width }}px - {{ grid_space_desktop }}) * {{ image_width }} /  {{ number_of_columns }}),
+              (min-width: 990px) calc((100vw - {{ grid_space_desktop }}) * {{ image_width }} / {{ number_of_columns }}),
+              (min-width: 750px) calc((100vw - {{ grid_space_tablet }}) * {{ image_width }} / {{ number_of_columns_mobile }}),
+              calc((100vw - {{ grid_space_mobile }}) * {{ image_width }} / {{ number_of_columns_mobile }})
+            {%- endcapture -%}
+
+          {{
+            block.settings.image
+            | image_url: width: 3200
+            | image_tag:
+              widths: '50, 75, 100, 150, 200, 300, 400, 500, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3200',
+              sizes: sizes,
+              class: 'dbtfy-text-col-with-img-card__image'
+          }}
+        </div>
+        {%- if image_link != blank -%}
+          </a>
+        {%- endif -%}
+      {% else %}
+        {{- 'image' | placeholder_svg_tag: 'media placeholder-svg' -}}
+      {%- endif -%}
+    </div>
+
+    <div class="dbtfy-text-col-with-img-card__info">
+      {%- if block.settings.title != blank -%}
+        <h3 class="inline-richtext">{{ block.settings.title }}</h3>
+      {%- endif -%}
+      {% if subheading != blank %}
+        <h4 class="dbtfy-block__subheading inline-richtext">{{ subheading }}</h4>
+      {% endif %}
+      {%- if block.settings.text != blank -%}
+        <div class="rte">{{ block.settings.text }}</div>
+      {%- endif -%}
+      {%- if block.settings.link_label != blank -%}
+        <a
+          class="link animate-arrow"
+          {% if block.settings.link == blank %}
+            role="link" aria-disabled="true"
+          {% else %}
+            href="{{ block.settings.link }}"
+          {% endif %}
+        >
+          {{- block.settings.link_label | escape -}}
+          <span class="svg-wrapper"
+            ><span class="icon-wrap">&nbsp;{{ 'icon-arrow.svg' | inline_asset_content }}</span></span
+          >
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</li>
+
+{% schema %}
+{
+  "name": "t:general.settings.column",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:general.settings.image"
+    },
+    {
+      "type": "url",
+      "id": "image_link",
+      "label": "t:blocks.dbtfy-product-tabs.block.settings.image_link"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "t:general.settings.column",
+      "label": "t:general.settings.heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "t:general.settings.subheading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "t:sections.dbtfy_text_col_with_img.blocks.column.settings.text.default",
+      "label": "t:general.settings.description"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "t:sections.dbtfy_text_col_with_img.blocks.column.settings.link_label.label"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.all.button.option_1_label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.column"
+    }
+  ]
+}
+{% endschema %}

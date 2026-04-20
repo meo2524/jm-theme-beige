@@ -1,0 +1,106 @@
+{% liquid
+  assign placeholder = false
+  assign heading = block.settings.size
+  assign desktop_size = block.settings.custom_size_desktop
+  assign mobile_size = block.settings.custom_size_mobile
+  unless section.settings.product == blank
+    assign product = section.settings.product
+  endunless
+  if product == null
+    assign placeholder = true
+  endif
+-%}
+
+{%- if heading == 'custom' -%}
+  {%- style -%}
+    .product__title.{{ block.id }} .custom{
+        @media (min-width: 576px) {
+          font-size:{{ desktop_size }}px;
+        }
+        @media (max-width: 575px) {
+          font-size:{{ mobile_size }}px;
+        }
+      }
+  {%- endstyle -%}
+{%- endif -%}
+
+<div class="product__title {{ block.id }}" {{ block.shopify_attributes }}>
+  {%- if product and template.name != 'product' -%}
+    <a href="{{ product.url }}" class="product__title">
+      <h2 class="{{ heading }}">
+        {%- unless placeholder -%}
+          {{ product.title | escape }}
+        {%- else -%}
+          {{ 'onboarding.product_title' | t }}
+        {%- endunless -%}
+      </h2>
+    </a>
+  {% else %}
+    <h1 class="product-title {{ heading }}">
+      {%- unless placeholder -%}
+        {{ product.title | escape }}
+      {%- else -%}
+        {{ 'onboarding.product_title' | t }}
+      {%- endunless -%}
+    </h1>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "t:general.settings.title",
+  "settings": [
+    {
+      "type": "select",
+      "id": "size",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:general.settings.heading_tag.h1"
+        },
+        {
+          "value": "h2",
+          "label": "t:general.settings.heading_tag.h2"
+        },
+        {
+          "value": "h3",
+          "label": "t:general.settings.heading_tag.h3"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "h1",
+      "label": "t:general.settings.size.label"
+    },
+    {
+      "type": "range",
+      "id": "custom_size_desktop",
+      "min": 1,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Custom Size (Desktop)",
+      "default": 40,
+      "visible_if": "{{ block.settings.size == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "custom_size_mobile",
+      "min": 1,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Custom Size (Mobile)",
+      "default": 15,
+      "visible_if": "{{ block.settings.size == 'custom' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.title"
+    }
+  ]
+}
+{% endschema %}

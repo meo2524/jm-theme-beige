@@ -1,0 +1,51 @@
+{%- if request.design_mode -%}
+  {%- render 'widget-blocker-warning',
+    enabled: settings.dbtfy_customizable_products,
+    type: 'widget',
+    as: 'block',
+    name: 'Customizable Products',
+    id: block
+  -%}
+{% endif %}
+
+{%- if settings.dbtfy_customizable_products -%}
+  <div class="customizable_products">
+    {% content_for 'blocks' %}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:blocks.customizable_products.name",
+  "class": "dbtfy-customizable-products",
+  "blocks": [
+    {
+      "type": "_dbtfy_cust_prod_text"
+    },
+    {
+      "type": "_dbtfy_cust_prod_checkbox"
+    },
+    {
+      "type": "_dbtfy_cust_prod_group"
+    }
+  ],
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.customizable_products.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.customizable_products.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.enterprise_info"
+    }
+  ]
+}
+{% endschema %}

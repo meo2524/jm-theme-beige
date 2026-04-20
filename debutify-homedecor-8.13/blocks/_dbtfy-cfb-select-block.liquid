@@ -1,0 +1,102 @@
+<div class="{% if block.settings.width_select == 'full-width' %}grid--12-col{% else %}grid--6-col{% endif %}">
+  <dbtfy-contact-form-dropdown>
+    <div class="field-other">
+      {% assign options = block.settings.options | split: ',' %}
+      <div class="dbtfy-dropdown">
+        <div class="select field">
+          <select
+            id="dbtfy-shipping-calculator-province"
+            class="select__select field__select"
+            autocomplete="address-level1"
+            name="contact[{{ block.settings.label | handleize }}]"
+            {% if block.settings.required %}
+              required
+            {% endif %}
+          >
+            <option value="">
+              Select {{ block.settings.label }}
+              {% if block.settings.required %}
+                <span aria-hidden="true">*</span>
+              {% endif %}
+            </option>
+            {% for option in options %}
+              <option value="{{ option }}">{{ option }}</option>
+            {% endfor %}
+          </select>
+          <svg class="icon icon-caret" viewBox="0 0 10 6">
+            <path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        {% if block.settings.required %}
+          <small class="error-message w-100 hidden">
+            <span class="svg-wrapper">
+              {{- 'icon-error.svg' | inline_asset_content -}}
+            </span>
+            <span class="error-message-text"> {{ block.settings.error_message }} </span>
+          </small>
+        {% endif %}
+      </div>
+    </div>
+  </dbtfy-contact-form-dropdown>
+</div>
+{% schema %}
+{
+  "name": "Select",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:general.settings.label",
+      "default": "t:sections.dbtfy-contact-form-builder.blocks.select.settings.label.default"
+    },
+    {
+      "type": "checkbox",
+      "id": "required",
+      "label": "t:general.settings.require",
+      "default": false,
+      "info": "t:sections.dbtfy-contact-form-builder.blocks.input.settings.required.info"
+    },
+    {
+      "type": "html",
+      "id": "options",
+      "label": "t:blocks.customizable_products.blocks.group.settings.options.label",
+      "default": "t:sections.dbtfy-contact-form-builder.blocks.select.settings.options.default",
+      "info": "t:sections.dbtfy-contact-form-builder.blocks.select.settings.options.info"
+    },
+    {
+      "type": "select",
+      "id": "width_select",
+      "label": "t:sections.dbtfy-contact-form-builder.blocks.select.settings.width_select.label",
+      "default": "half-width",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "t:sections.dbtfy-content-tabs.settings.full_width"
+        },
+        {
+          "value": "half-width",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.select.settings.width_select.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "error_message",
+      "label": "t:sections.dbtfy-contact-form-builder.blocks.error_label",
+      "default": "t:sections.dbtfy-contact-form-builder.blocks.select.settings.select_error"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Select"
+    }
+  ]
+}
+{% endschema %}

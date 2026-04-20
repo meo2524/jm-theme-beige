@@ -1,0 +1,23 @@
+{% if section.settings.show_compare_text_icon == 'text' %}
+  {{ 'widgets.quick_compare.name' | t }}
+{% elsif section.settings.show_compare_text_icon == 'icon' %}
+  {% render 'material-icon', icon: 'compare_arrows' %}
+{% endif %}
+{% if settings.dbtfy_quick_compare_show_count %}
+  <dbtfy-quick-compare-count class="dbtfy-quick-compare-bubble">
+    <element-animator
+      data-enabled="{{settings.dbtfy_quick_compare_bubble_animation_enabled}}"
+      data-animation="dbtfy-element-animation-{{settings.dbtfy_quick_compare_bubble_animation_type}}"
+      data-interval="{{ settings.dbtfy_quick_compare_bubble_animation_interval }}"
+      data-duration="{{ settings.dbtfy_quick_compare_bubble_animation_duration }}"
+      data-selector=".dbtfy-quick-compare-count"
+      data-dependency="compare"
+    >
+      {% if section.settings.show_compare_text_icon == 'icon' %}
+        <div class="dbtfy-quick-compare-count dbtfy-bubble dbtfy-bubble--{{ settings.dbtfy_quick_compare_bubble_position }} dbtfy-bubble--{{ settings.dbtfy_quick_compare_bubble_size }}">
+          <span>0</span>
+        </div>
+      {% endif %}
+    </element-animator>
+  </dbtfy-quick-compare-count>
+{% endif %}

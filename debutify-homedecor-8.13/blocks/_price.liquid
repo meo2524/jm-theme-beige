@@ -1,0 +1,158 @@
+{% render 'block-padding', block: block %}
+
+{% liquid
+  assign heading = block.settings.size
+  if heading == 'inherit'
+    assign heading = settings.title_size
+  endif
+
+  assign font_size = heading | append: '_font_size'
+  assign font_size_mobile = heading | append: '_font_size_mobile'
+%}
+
+{% style %}
+  @media (max-width:768px){
+    #{{ block.id }}.inline-richtext{
+      font-size: calc(var(--font-heading-scale)* {{ settings[font_size_mobile] }}px);
+    }
+  }
+
+  @media (min-width:768px){
+    #{{ block.id }}.inline-richtext{
+      font-size: calc(var(--font-heading-scale)* {{ settings[font_size] }}px);
+    }
+  }
+{% endstyle %}
+
+{%- if block.settings.price != blank -%}
+  <{{ heading }}
+    id="{{ block.id }}"
+    class="title inline-richtext m-0 {% if block.settings.alignment == "inherit" %} {{ settings.title_alignment }} {% else %} {{ block.settings.alignment }} {% endif %} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} block-{{ block.id }}-padding {% if block.settings.style == "inherit" %}{{ settings.title_style }}{% else %}{{ block.settings.style }}{% endif %}"
+    {{ block.shopify_attributes }}
+  >
+    {{ block.settings.price | times: 100 | money }}
+  </{{ heading }}>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.dbfty-pricing-table.blocks.price.label",
+  "settings": [
+    {
+      "type": "text",
+      "id": "price",
+      "label": "t:sections.dbfty-pricing-table.blocks.price.label",
+      "default": "t:sections.dbfty-pricing-table.blocks.price.default"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:general.settings.alignment.label",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        { "value": "text-left", "label": "t:general.settings.alignment.option__4" },
+        { "value": "text-center", "label": "t:general.settings.alignment.option__5" },
+        { "value": "text-right", "label": "t:general.settings.alignment.option__6" },
+        { "value": "text-justify", "label": "t:general.settings.alignment.option__7" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "size",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "h1",
+          "label": "t:general.settings.heading_tag.h1"
+        },
+        {
+          "value": "h2",
+          "label": "t:general.settings.heading_tag.h2"
+        },
+        {
+          "value": "h3",
+          "label": "t:general.settings.heading_tag.h3"
+        },
+        {
+          "value": "h4",
+          "label": "t:general.settings.heading_tag.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:general.settings.heading_tag.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:general.settings.heading_tag.h6"
+        }
+      ],
+      "default": "inherit",
+      "label": "t:general.settings.size.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding_section.block_padding"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.top",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.bottom",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [{ "name": "t:sections.dbfty-pricing-table.blocks.price.label" }]
+}
+{% endschema %}

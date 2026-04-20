@@ -1,0 +1,464 @@
+{% comment %}
+  Renders product buy-buttons.
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} passing the block information.
+  - product_form_id: {String} product form id.
+  - section_id: {String} id of section to which this snippet belongs.
+  - show_pickup_availability: {Boolean} for the pickup availability. If true the pickup availability is rendered, false - not rendered (optional).
+
+  Usage:
+  {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
+{% endcomment %}
+
+{%- liquid
+  if block.settings.custom_add_to_cart_buttons == 'custom'
+    assign block_settings = block.settings
+  else
+    assign block_settings = settings
+  endif
+-%}
+{% if block.settings.display_icon_in_add_to_cart %}
+  {% capture button_icon %}
+    {% render 'material-icon', icon: block.settings.button_icon %}
+  {% endcapture %}
+{% endif %}
+
+{%- if product.selected_or_first_available_variant == null -%}
+{%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+{% else %}
+  {% assign add_to_cart_button_icon = true %}
+{% endif %}
+
+<div {{ block.shopify_attributes }} class="product-form-buy-button">
+  {%- if product != blank -%}
+    {%- liquid
+      assign gift_card_recipient_feature_active = false
+      if block.settings.show_gift_card_recipient and product.gift_card?
+        assign gift_card_recipient_feature_active = true
+      endif
+
+      assign show_dynamic_checkout = false
+      if settings.show_dynamic_checkout and gift_card_recipient_feature_active == false
+        assign show_dynamic_checkout = true
+      endif
+
+      if show_dynamic_checkout
+        assign add_to_cart_class = 'button button--secondary'
+      else
+        assign add_to_cart_class = 'button button--primary'
+      endif
+
+      assign buy_it_now_class = ''
+      if block_settings.custom_add_to_cart_buttons or block_settings.custom_add_to_cart_buttons == 'custom'
+        assign add_to_cart_class = block_settings.add_to_cart_style
+        assign buy_it_now_class = block_settings.buy_it_now_style
+      endif
+    -%}
+    {% if block_settings.custom_add_to_cart_buttons or block_settings.custom_add_to_cart_buttons == 'custom' %}
+      {% style %}
+        {% if block_settings.add_to_cart_color == "custom_color" %}
+          {% assign add_to_cart_color = block_settings.add_to_cart__custom_background_color %}
+        {% else %}
+          {% assign add_to_cart_color = settings[block_settings.add_to_cart_color] %}
+        {% endif %}
+
+        {% if block_settings.buy_it_now_color == "custom_color" %}
+            {% assign buy_it_now_color = block_settings.custom_buy_it_now_background_color%}
+        {% else %}
+            {% assign buy_it_now_color = settings[block_settings.buy_it_now_color] %}
+        {% endif %}
+
+        {% liquid
+          assign background_color = add_to_cart_color
+          assign background_color_brightness = background_color | color_brightness
+          if background_color_brightness <= 30
+            assign background_color_contrast = background_color | color_lighten: 10
+          elsif background_color_brightness <= 60
+            assign background_color_contrast = background_color | color_lighten: 5
+          else
+            assign background_color_contrast = background_color | color_darken: 5
+          endif
+        %}
+        {% if block_settings.add_to_cart_style != "button button--secondary" %}
+          #MainProduct-{{ section.id }} #ProductSubmitButton-{{ section_id }} {
+            --color-button: {{ add_to_cart_color.red }},{{ add_to_cart_color.green }},{{ add_to_cart_color.blue }};
+            --color-button-hover: {{ background_color_contrast }};
+            --color-button-hover--brightness: {{  background_color_brightness }};
+          }
+          {% endif %}
+
+          {% if block_settings.add_to_cart_color == "custom_color" %}
+            #MainProduct-{{ section.id }} #ProductSubmitButton-{{ section_id }} {
+            --color-button-hover: {{ background_color_contrast }};
+            --color-button-hover--brightness: {{  background_color_brightness }};
+            --color-background: {{ block_settings.add_to_cart__custom_text_color.red }},{{ block_settings.add_to_cart__custom_text_color.green }},{{ block_settings.add_to_cart__custom_text_color.blue }};
+          }
+          {% endif %}
+
+          #MainProduct-{{ section.id }} #ProductSubmitButton-{{ section_id }}.button{
+
+            {% if block_settings.add_to_cart_color == "custom_color"  %}
+              --color-button-text: {{ block_settings.add_to_cart__custom_text_color.red }},{{ block_settings.add_to_cart__custom_text_color.green }},{{ block_settings.add_to_cart__custom_text_color.blue }};
+              {% elsif block_settings.add_to_cart_style != "button button--primary"  %}
+                {% unless block_settings.add_to_cart_style == "button button--tertiary" and block_settings.add_to_cart_color == "light_color" %}
+                  --color-button-text: {{ add_to_cart_color.red }},{{ add_to_cart_color.green }},{{ add_to_cart_color.blue }};
+                  {% endunless %}
+            {% endif %}
+            }
+
+
+        {% liquid
+          assign background_color = buy_it_now_color
+          assign background_color_brightness = background_color | color_brightness
+          if background_color_brightness <= 30
+            assign background_color_contrast = background_color | color_lighten: 10
+          elsif background_color_brightness <= 60
+            assign background_color_contrast = background_color | color_lighten: 5
+          else
+            assign background_color_contrast = background_color | color_darken: 5
+          endif
+        %}
+
+          #MainProduct-{{ section.id }} .btn-checkout{
+            {% if block_settings.buy_it_now_color == "custom_color" %}
+                  --color-button-text: {{ block_settings.custom_buy_it_now_text_color.red }},{{ block_settings.custom_buy_it_now_text_color.green }},{{ block_settings.custom_buy_it_now_text_color.blue }};
+                  {% if block_settings.buy_it_now_style == "button button--primary"  %}
+                  --color-button: {{ block_settings.custom_buy_it_now_background_color.red }},{{ block_settings.custom_buy_it_now_background_color.green }},{{ block_settings.custom_buy_it_now_background_color.blue }};
+                  {% endif %}
+                {% else %}
+
+                  {% if block_settings.buy_it_now_style == "button button--primary"  %}
+                    --color-button: {{ buy_it_now_color.red }},{{ buy_it_now_color.green }},{{ buy_it_now_color.blue }};
+                    {% else %}
+                      {% unless block_settings.buy_it_now_style == "button button--tertiary" and block_settings.buy_it_now_color == "light_color" %}
+                        --color-button-text: {{ buy_it_now_color.red }},{{ buy_it_now_color.green }},{{ buy_it_now_color.blue }};
+                      {% endunless %}
+                      {% endif %}
+                {% endif %}
+
+            --color-button-hover: {{ background_color_contrast }};
+            --color-button-hover--brightness: {{  background_color_brightness }};
+            padding: 0;
+            background: unset;
+            color: unset;
+            border: unset;
+          }
+
+          .btn-checkout::after{
+            display: none;
+          }
+
+          #MainProduct-{{ section.id }} .btn-checkout.button:before{
+            background-color: unset;
+          }
+
+        shopify-accelerated-checkout,
+        .shopify-payment-button{
+            background:transparent!important;
+            color: unset!important;
+            width: 100%;
+          }
+
+          shopify-buy-it-now-button button::before {
+              transform: scaleX(0);
+              transform-origin: center right;
+              will-change: transform;
+              transition: transform 0.4s cubic-bezier(0.26, 0.54, 0.32, 1), opacity 0.3s cubic-bezier(0.26, 0.54, 0.32, 1);
+              opacity: 1;
+              backface-visibility: hidden;
+              background-color: var(--color-button-hover);
+              border-radius: var(--buttons-radius-outset);
+              content: "";
+              position: absolute;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+              z-index: -1;
+              border-radius: var(--buttons-radius-outset);
+              box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset) var(--shadow-blur-radius) rgba(var(--color-shadow),var(--shadow-opacity));
+          }
+
+          shopify-buy-it-now-button button:hover:before {
+            transform-origin: center left;
+            transform: none;
+            transition-delay: 0s;
+            opacity: 1;
+            z-index: -1;
+          }
+
+          shopify-buy-it-now-button button:hover{
+            {% if block_settings.buy_it_now_style == "button button--primary" or block_settings.buy_it_now_style == "button button--tertiary" %}
+              color: rgb(var(--color-button-text));
+            {% else %}
+              color: rgb(var(--color-button));
+            {% endif %}
+          }
+
+          {% if block_settings.buy_it_now_style == "button button--tertiary"  %}
+            shopify-buy-it-now-button button{
+              background-color: transparent !important;
+              &:hover {
+
+                &::after {
+                  --border-opacity: calc(1 - var(--buttons-border-opacity));
+                  box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text),var(--border-opacity)),0 0 0 calc(var(--buttons-border-width) + 1px) rgba(var(--color-button),var(--alpha-button-background))!important;
+
+                }
+                &::before {
+                  content: unset !important;
+
+                }
+              }
+            }
+          {% endif %}
+
+          shopify-buy-it-now-button button::after {
+            {% if block_settings.buy_it_now_style == "button button--tertiary"  %}
+             --border-opacity : 0;
+            {% endif %}
+            content: "";
+            position: absolute;
+            top: var(--buttons-border-width);
+            right: var(--buttons-border-width);
+            bottom: var(--buttons-border-width);
+            left: var(--buttons-border-width);
+            z-index: 1;
+            box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)), 0 0 0 var(--buttons-border-width) rgba(var(--color-button), var(--alpha-button-background));
+            border-radius: var(--buttons-radius);
+            transition: box-shadow var(--duration-short) ease;
+          }
+
+          shopify-buy-it-now-button button {
+              color: rgb(var(--color-button-text));
+              appearance: none;
+              background-color: rgba(var(--color-button), var(--alpha-button-background));
+          }
+      {% endstyle %}
+    {% endif %}
+
+    {%- liquid
+      assign product_variant_media = product.selected_or_first_available_variant.featured_media.preview_image | image_url: width: 100
+      if product.selected_or_first_available_variant.featured_media.preview_image == blank
+        assign product_variant_media = product.featured_media.preview_image | image_url: width: 100
+      endif
+    -%}
+
+    <product-form
+      class="product-form"
+      data-hide-errors="{{ gift_card_recipient_feature_active }}"
+      data-section-id="{{ section.id }}"
+      data-product-variant-media="{{ product_variant_media }}"
+    >
+      <div class="product-form__error-message-wrapper" role="alert" hidden>
+        <span class="svg-wrapper">
+          {{- 'icon-error.svg' | inline_asset_content -}}
+        </span>
+        <span class="product-form__error-message"></span>
+      </div>
+
+      {%- form 'product',
+        product,
+        id: product_form_id,
+        class: 'form',
+        novalidate: 'novalidate',
+        data-type: 'add-to-cart-form'
+      -%}
+        <input
+          type="hidden"
+          name="id"
+          value="{{ product.selected_or_first_available_variant.id }}"
+          {% if product.selected_or_first_available_variant.available == false
+            or quantity_rule_soldout
+            or product.selected_or_first_available_variant == null
+          %}
+            disabled
+          {% endif %}
+          class="product-variant-id"
+        >
+
+        {%- if gift_card_recipient_feature_active -%}
+          {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
+        {%- endif -%}
+
+        <div class="product-form__buttons">
+          {%- liquid
+            assign check_against_inventory = true
+            if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
+              assign check_against_inventory = false
+            endif
+            if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
+              assign quantity_rule_soldout = true
+            endif
+          -%}
+          <div class="{% if section.settings.add_to_cart_position %} addtocart_and_selector_wrapper {% endif %}">
+            {% if section.settings.add_to_cart_position %}
+              {% render 'product_quantity-selector' %}
+            {% endif %}
+
+            <element-animator
+              class="{% if section.settings.add_to_cart_position %} w-full {% endif %}"
+              {% if product.selected_or_first_available_variant.available == false
+                or quantity_rule_soldout
+                or product.selected_or_first_available_variant == null
+              %}
+                {% assign product_sold_out = false %}
+              {% else %}
+                {% assign product_sold_out = true %}
+              {% endif %}
+
+              {% if block.settings.dbtfy_addtocart_animation_enable == true and settings.dbtfy_addtocart_animation %}
+                {% assign block_settings = true %}
+                {% assign enabled = true %}
+              {% else %}
+                {% assign block_settings = false %}
+                {% assign enabled = false %}
+              {% endif %}
+              data-enabled="{{ enabled }}"
+              data-animation="dbtfy-element-animation-{{- block.settings.dbtfy_addtocart_animation_type -}}"
+              data-interval="{{ block.settings.dbtfy_addtocart_animation_interval }}"
+              data-duration="{{ block.settings.dbtfy_addtocart_animation_duration }}"
+              data-selector=".product-form__submit"
+            >
+              <button
+                id="ProductSubmitButton-{{ section_id }}"
+                type="submit"
+                name="add"
+                class="product-form__submit button--full-width {{ add_to_cart_class }} w-100 button-label-size"
+                {% if product.selected_or_first_available_variant.available == false
+                  or quantity_rule_soldout
+                  or product.selected_or_first_available_variant == null
+                %}
+                  disabled
+                {% endif %}
+              >
+                {% if block.settings.icon_position == 'before-label' and add_to_cart_button_icon %}
+                  {{ button_icon }}
+                {% endif %}
+                &nbsp;
+
+                {% if block.settings.display_price_in_add_to_cart
+                  and block.settings.price_position == 'before-button'
+                %}
+                  <add-to-cart-price id="add-to-cart-price-{{section.id}}">
+                    {%- if settings.currency_code_enabled -%}
+                      {{ product.selected_or_first_available_variant.price | money_with_currency }}
+                    {%- else -%}
+                      {{ product.selected_or_first_available_variant.price | money }}
+                    {%- endif -%}
+                    —&nbsp;
+                  </add-to-cart-price>
+                {% endif %}
+                <span class="button-label-size">
+                  {%- if product.selected_or_first_available_variant == null -%}
+                    {{ 'products.product.unavailable' | t }}
+                  {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+                    {{ 'products.product.sold_out' | t }}
+                  {%- else -%}
+                    {{ 'products.product.add_to_cart' | t }}
+                  {%- endif -%}
+                </span>
+                {%- if block.settings.display_price_in_add_to_cart
+                  and block.settings.price_position == 'after-button'
+                -%}
+                  <add-to-cart-price id="add-to-cart-price-{{section.id}}"
+                    >&nbsp;—
+                    {% if settings.currency_code_enabled %}
+                      {{ product.selected_or_first_available_variant.price | money_with_currency }}
+                    {% else %}
+                      {{ product.selected_or_first_available_variant.price | money }}
+                    {% endif %}
+                  </add-to-cart-price>
+                {%- endif -%}
+
+                &nbsp;
+                {% if block.settings.icon_position == 'after-label' and add_to_cart_button_icon %}
+                  {{ button_icon }}
+                {% endif %}
+
+                {%- if product.selected_or_first_available_variant.available -%}
+                  {%- liquid
+                    assign effect = block.settings.add_to_cart_overlay_effect
+                    if effect == 'inherit'
+                      assign effect = settings.add_to_cart_animation_effect
+                    endif
+                  -%}
+                  {%- if effect == 'glacier' -%}
+                    <span class="glacier_animation"></span>
+                  {%- endif -%}
+                {%- endif -%}
+                {%- render 'loading-spinner' -%}
+              </button>
+            </element-animator>
+          </div>
+          {%- if show_dynamic_checkout -%}
+            <div class="{{ buy_it_now_class }} w-100 btn-checkout">
+              {{ form | payment_button }}
+            </div>
+            <button
+              type="button"
+              class="hidden dbtfy__buy-now product-form__submit button button--full-width button--primary"
+            >
+              <span> Buy Now </span>
+              {%- render 'loading-spinner' -%}
+            </button>
+          {%- endif -%}
+        </div>
+      {%- endform -%}
+    </product-form>
+  {%- else -%}
+    <div class="product-form">
+      <div class="product-form__buttons form">
+        <button
+          type="submit"
+          name="add"
+          class="product-form__submit button button--full-width button--primary"
+          disabled
+        >
+          {{ 'products.product.sold_out' | t }}
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if show_pickup_availability -%}
+    <link
+      rel="stylesheet"
+      href="{{ 'component-pickup-availability.css' | asset_url }}"
+      media="print"
+      onload="this.media='all'"
+    >
+
+    {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities
+      | where: 'pick_up_enabled', true
+    -%}
+
+    <pickup-availability
+      class="product__pickup-availabilities quick-add-hidden"
+      {% if product.selected_or_first_available_variant.available and pick_up_availabilities.size > 0 %}
+        available
+      {% endif %}
+      data-root-url="{{ routes.root_url }}"
+      data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+      data-has-only-default-variant="{{ product.has_only_default_variant }}"
+      data-product-page-color-scheme="gradient color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }}"
+    >
+      <template>
+        <pickup-availability-preview class="pickup-availability-preview">
+          <span class="svg-wrapper">
+            {{- 'icon-unavailable.svg' | inline_asset_content -}}
+          </span>
+          <div class="pickup-availability-info">
+            <p class="caption-large">{{ 'products.product.pickup_availability.unavailable' | t }}</p>
+            <button class="pickup-availability-button link link--text underlined-link">
+              {{ 'products.product.pickup_availability.refresh' | t }}
+            </button>
+          </div>
+        </pickup-availability-preview>
+      </template>
+    </pickup-availability>
+
+    <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+</div>

@@ -1,0 +1,195 @@
+{%- if settings.dbtfy_cart_upsell -%}
+  {%- liquid
+    assign slider_on = 'slider slider--everywhere'
+    capture slider_parameters
+      echo ' data-autoplay="' | append: block.settings.enable_autoplay | append: '"'
+      echo ' data-speed="' | append: block.settings.autoplay_speed | append: '"'
+      echo ' data-loop="' | append: block.settings.enable_loop | append: '"'
+      echo ' data-arrows="' | append: block.settings.enable_arrows | append: '"'
+    endcapture
+
+    assign block_id = 'cart-upsell-' | append: block.id
+    render 'custom-arrow-style', as_a: 'block', id: block_id
+  -%}
+  {%- if block.settings.product_alignment and block.settings.upsell_direction == 'vertical' -%}
+    {%- assign alignment = true -%}
+  {%- endif -%}
+  {%- unless block.settings.show_rating -%}
+    {% style %}
+      #{{ block_id }} .review-badge{
+        display:none;
+      }
+    {% endstyle %}
+  {%- endunless -%}
+  <cart-upsell
+    {{ block.shopify_attributes }}
+    data-alignment="{{ alignment }}"
+    id="{{ block_id }}"
+    data-hide-in-cart="{{ block.settings.hide_product }}"
+  >
+    <script type="text/template" id="slider_template">
+      <dbtfy-slider-component {{ slider_parameters }} class="card-product-vertical slider-mobile-gutter {% if block.settings.title == blank %} cart-upsell_arrow {% endif %}">
+        {%- if block.settings.title != blank -%}
+          <h3
+            class="{{ block.settings.heading_alignment }} title inline-richtext m-0 h3 {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          >
+            {{ block.settings.title }}
+          </h3>
+        {%- endif -%}
+        <ul
+          id="Slider-{{ block.id }}"
+          class="contains-card contains-card--product grid {{ slider_on }} card-upsell-slider {% if block.settings.upsell_direction == "vertical" %} card-vertical grid--3-col{% else %} card-horizontal grid--1-col{% endif %}"
+          role="list"
+        >{slides}</ul>
+        {% render 'dbtfy-arrow' %}
+      </dbtfy-slider-component>
+    </script>
+    <div class="upsell-slider"></div>
+  </cart-upsell>
+  <script src="{{ 'product-form-upsell.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'dbtfy-cart-upsell.js' | asset_url }}" defer></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:sections.cart-upsell.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-upsell.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-upsell.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:general.settings.heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.collapsible_content.settings.heading_alignment.label",
+      "default": "text-left",
+      "options": [
+        { "value": "text-left", "label": "t:general.settings.alignment.option__4" },
+        { "value": "text-center", "label": "t:general.settings.alignment.option__5" },
+        { "value": "text-right", "label": "t:general.settings.alignment.option__6" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "product_alignment",
+      "label": "t:sections.cart-upsell.product_alignment",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "upsell_direction",
+      "label": "t:sections.cart-upsell.upsell_direction",
+      "default": "vertical",
+      "options": [
+        {
+          "value": "horizontal",
+          "label": "t:general.settings.alignment.option__10"
+        },
+        {
+          "value": "vertical",
+          "label": "t:general.settings.alignment.option__11"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "t:sections.dbtfy-review.listing.settigns.show_rating",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_product",
+      "label": "t:sections.cart-upsell.hide_product",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.slider.slider_settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "default": false,
+      "label": "t:general.settings.slider.enable_autoplay"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "t:general.settings.slider.autoplay_speed",
+      "default": 5,
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_loop",
+      "default": true,
+      "label": "Loop",
+      "info": "Continue from the last slide to the first slide"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_arrows",
+      "default": true,
+      "label": "t:general.settings.slider.show_arrows"
+    },
+    {
+      "type": "select",
+      "id": "arrow_color",
+      "default": "inherit",
+      "label": "t:general.settings.slider.arrow_color",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "custom_arrow_color",
+      "label": "t:general.settings.slider.custom-arrow-color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "custom_arrow_background_color",
+      "label": "t:general.settings.slider.custom-arrow-bg-color",
+      "default": "#7559ff"
+    }
+  ]
+}
+{%- endschema -%}

@@ -1,0 +1,24 @@
+{%- if block.settings.description != blank -%}
+  <div
+    class="rte {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} block-{{ block.id }}-padding"
+    {{ block.shopify_attributes }}
+  >
+    {{ block.settings.description }}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:general.settings.description",
+  "tag": null,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:general.settings.text",
+      "default": "t:blocks.description.default"
+    }
+  ],
+  "presets": [{ "name": "t:general.settings.description" }]
+}
+{% endschema %}

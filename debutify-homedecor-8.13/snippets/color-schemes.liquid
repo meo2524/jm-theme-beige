@@ -1,0 +1,92 @@
+<style>
+  {%- for scheme in settings.color_schemes -%}
+  {%- render 'custom-color-scheme',
+   id: scheme.id,
+   background: scheme.settings.background,
+   background_gradient: scheme.settings.background_gradient,
+   text: scheme.settings.text,
+   button: scheme.settings.button,
+   button_label: scheme.settings.button_label,
+   secondary_button_label: scheme.settings.secondary_button_label,
+   shadow: scheme.settings.shadow
+  -%}
+  {%- endfor -%}
+
+  {% capture schema %}
+   {% for scheme in settings.color_schemes offset: 4 %}
+     .dbtfy-color-custom.color-{{ scheme.id }}{% unless forloop.last %},{% endunless %}
+   {% endfor %}
+  {% endcapture %}
+
+  {%- assign primary_color = settings.primary_color -%}
+  {%- assign inverse_light_and_dark_for_primary_color = settings.inverse_light_and_dark_for_primary_color -%}
+  {%- assign secondary_color = settings.secondary_color -%}
+  {%- assign inverse_light_and_dark_for_secondary_color = settings.inverse_light_and_dark_for_secondary_color -%}
+  {%- assign dark_color = settings.dark_color -%}
+  {%- assign light_color = settings.light_color -%}
+  {%- assign light_primary_color = primary_color -%}
+  {%- if inverse_light_and_dark_for_primary_color -%}
+  {%- assign light_primary_color = dark_color -%}
+  {%- endif -%}
+  {%- render 'single-color-scheme',
+   id: 1,
+   name: 'Light Scheme',
+   background: light_color,
+   background_gradient: empty,
+   text: dark_color,
+   button: light_primary_color,
+   button_label: light_color,
+   secondary_button_label: light_primary_color,
+   shadow: light_primary_color
+  %}
+  {%- assign primary_light_color = light_color -%}
+  {%- assign primary_dark_color = dark_color -%}
+  {%- if inverse_light_and_dark_for_primary_color -%}
+  {%- assign primary_light_color = dark_color -%}
+  {%- assign primary_dark_color = light_color -%}
+  {%- endif -%}
+  {%- render 'single-color-scheme',
+   id: 2,
+   name: 'Primary Scheme',
+   background: primary_color,
+   background_gradient: empty,
+   text: primary_light_color,
+   button: primary_light_color,
+   button_label: primary_color,
+   secondary_button_label: primary_light_color,
+   shadow: primary_dark_color
+  -%}
+  {%- assign secondary_light_color = light_color -%}
+  {%- assign secondary_dark_color = dark_color -%}
+  {%- if inverse_light_and_dark_for_secondary_color -%}
+  {%- assign secondary_light_color = dark_color -%}
+  {%- assign secondary_dark_color = light_color -%}
+  {%- endif -%}
+  {%- render 'single-color-scheme',
+   id: 3,
+   name: 'Secondary Scheme',
+   background: secondary_color,
+   background_gradient: empty,
+   text: secondary_light_color,
+   button: secondary_light_color,
+   button_label: secondary_color,
+   secondary_button_label: secondary_light_color,
+   shadow: secondary_dark_color
+  %}
+  {%- assign dark_primary_color = primary_color -%}
+  {%- if inverse_light_and_dark_for_primary_color -%}
+  {%- assign dark_primary_color = dark_color -%}
+  {%- endif -%}
+  {%- render 'single-color-scheme',
+   id: 4,
+   name: 'Dark Scheme',
+   background: dark_color,
+   background_gradient: empty,
+   text: light_color,
+   button: light_color,
+   button_label: dark_primary_color,
+   secondary_button_label: light_color,
+   shadow: dark_color
+  %}
+    .color-scheme-1, .color-scheme-2, .color-scheme-3, .color-scheme-4,{{ schema | strip }} { color: rgba(var(--color-foreground), 0.75); background-color: rgb(var(--color-background)); }
+</style>

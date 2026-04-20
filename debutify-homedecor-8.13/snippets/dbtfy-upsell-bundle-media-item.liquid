@@ -1,0 +1,23 @@
+{% if image_ratio %}
+  {% if image_ratio != 'inherit' %}
+    {% assign image_aspect_ratio = image_ratio %}
+    {% if image_ratio == 'circle' %}
+      {% assign image_aspect_ratio = '100%' %}
+    {% endif %}
+    {% style %}
+      #shopify-section-{{ section.id }}{
+        --dbtfy-image-crop-ratio: {{ image_aspect_ratio }};
+      }
+    {% endstyle %}
+  {% else %}
+    {% assign image_ratio = settings.dbtfy_product_image_crop_ratio %}
+  {% endif %}
+{% endif %}
+
+<a
+  href="{{ product.url }}"
+  class="dbtfy-upsell-bundle__media global-media-settings ratio image--ratio media media--transparent media-{{ image_ratio }}"
+  data-product-id="{{ product.id }}"
+>
+  {% render 'dbtfy-img', img: product.featured_image %}
+</a>

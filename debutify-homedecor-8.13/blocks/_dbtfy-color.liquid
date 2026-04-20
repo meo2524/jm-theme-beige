@@ -1,0 +1,146 @@
+{%- liquid
+  assign background_color = block.settings.background
+  assign background_color_brightness = background_color | color_brightness
+  if background_color_brightness <= 26
+    assign background_color_contrast = background_color | color_lighten: 50
+  elsif background_color_brightness <= 65
+    assign background_color_contrast = background_color | color_lighten: 5
+  else
+    assign background_color_contrast = background_color | color_darken: 25
+  endif
+
+  assign background_color = block.settings.color_button
+  assign background_color_brightness = background_color | color_brightness
+  if background_color_brightness <= 30
+    assign background_color_contrast = background_color | color_lighten: 10
+  elsif background_color_brightness <= 60
+    assign background_color_contrast = background_color | color_lighten: 5
+  else
+    assign background_color_contrast = background_color | color_darken: 5
+  endif
+-%}
+<style>
+  .dbtfy-color-{{  block.settings.color_scheme }} {
+    --color-background: {{ block.settings.background.red }}, {{ block.settings.background.green}}, {{block.settings.background.blue }};
+    --gradient-background: {{ block.settings.gradient_background }};
+    --color-foreground: {{ block.settings.color_foreground.red }}, {{ block.settings.color_foreground.green }}, {{ block.settings.color_foreground.blue }};
+    --color-background-contrast: {{ block.settings.color_background_contrast.red }}, {{ block.settings.color_background_contrast.green }}, {{ block.settings.color_background_contrast.blue }};
+    --color-shadow: {{ block.settings.color_shadow.red }}, {{ block.settings.color_shadow.green }}, {{ block.settings.color_shadow.blue }};
+    --color-button: {{ block.settings.color_button.red }}, {{ block.settings.color_button.green }}, {{ block.settings.color_button.blue }};
+    --color-button-text: {{ block.settings.color_button_text.red }}, {{ block.settings.color_button_text.green }}, {{ block.settings.color_button_text.blue }};
+    --color-secondary-button: {{ block.settings.color_secondary_button.red }}, {{ block.settings.color_secondary_button.green }}, {{ block.settings.color_secondary_button.blue }};
+    --color-secondary-button-text: {{ block.settings.color_secondary_button_text.red }}, {{ block.settings.color_secondary_button_text.green }}, {{ block.settings.color_secondary_button_text.blue }};
+    --color-link: {{ block.settings.color_link.red }}, {{ block.settings.color_link.green }}, {{ block.settings.color_link.blue }};
+    --color-badge-foreground: {{ block.settings.color_badge_foreground.red }}, {{ block.settings.color_badge_foreground.green }}, {{ block.settings.color_badge_foreground.blue }};
+    --color-badge-background: {{ block.settings.color_badge_background.red }}, {{ block.settings.color_badge_background.green }}, {{ block.settings.color_badge_background.blue }};
+    --color-badge-border: {{ block.settings.color_badge_border.red }}, {{ block.settings.color_badge_border.green }}, {{ block.settings.color_badge_border.blue }};
+    --payment-terms-background-color: rgb({{ block.settings.payment_terms_background_color.red }}, {{ block.settings.payment_terms_background_color.green }}, {{ block.settings.payment_terms_background_color.blue }});
+    --color-button-hover: {{ background_color_contrast }};
+    --color-button-hover--brightness: {{ background_color_brightness }};
+  }
+</style>
+{% schema %}
+{
+  "name": "Color",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.advanced_color.note"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "t:sections.dbfty-pricing-table.blocks.color_background.label"
+    },
+    {
+      "type": "color",
+      "id": "gradient_background",
+      "label": "t:blocks.advanced_color.gradient_background"
+    },
+    {
+      "type": "color",
+      "id": "color_foreground",
+      "label": "t:blocks.advanced_color.color_foreground"
+    },
+    {
+      "type": "color",
+      "id": "color_shadow",
+      "label": "t:blocks.advanced_color.color_shadow"
+    },
+    {
+      "type": "color",
+      "id": "color_button",
+      "label": "t:blocks.advanced_color.color_button"
+    },
+    {
+      "type": "color",
+      "id": "color_button_text",
+      "label": "t:blocks.advanced_color.color_button_text"
+    },
+    {
+      "type": "color",
+      "id": "color_secondary_button",
+      "label": "t:blocks.advanced_color.color_secondary_button"
+    },
+    {
+      "type": "color",
+      "id": "color_secondary_button_text",
+      "label": "t:blocks.advanced_color.color_secondary_button_text"
+    },
+    {
+      "type": "color",
+      "id": "color_link",
+      "label": "t:blocks.advanced_color.color_link"
+    },
+    {
+      "type": "color",
+      "id": "color_badge_foreground",
+      "label": "t:blocks.advanced_color.color_badge_foreground"
+    },
+    {
+      "type": "color",
+      "id": "color_badge_background",
+      "label": "t:blocks.advanced_color.color_badge_background"
+    },
+    {
+      "type": "color",
+      "id": "color_badge_border",
+      "label": "t:blocks.advanced_color.color_badge_border"
+    },
+    {
+      "type": "color",
+      "id": "payment_terms_background_color",
+      "label": "t:blocks.advanced_color.payment_terms_background_color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Color"
+    }
+  ]
+}
+{% endschema %}

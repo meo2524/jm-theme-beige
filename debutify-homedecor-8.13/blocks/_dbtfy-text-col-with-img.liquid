@@ -1,0 +1,19 @@
+{% content_for 'blocks' %}
+
+{% schema %}
+{
+  "name": "t:blocks.name",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_dbtfy-text-col-with-img-block"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.text_col_with_img.presets.name",
+      "blocks": [{ "type": "_dbtfy-text-col-with-img-block" }]
+    }
+  ]
+}
+{% endschema %}

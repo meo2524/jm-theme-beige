@@ -1,0 +1,28 @@
+<div block.shopify_attributes>
+  {% render 'article-card',
+    article: block.settings.article,
+    media_aspect_ratio: 'inherit',
+    show_image: true,
+    show_date: true,
+    show_author: true,
+    show_excerpt: true
+  %}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-footer.blocks.featured_article.name",
+  "settings": [
+    {
+      "type": "article",
+      "id": "article",
+      "label": "t:sections.dbtfy-footer.blocks.featured_article.settings.article.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-footer.blocks.featured_article.name"
+    }
+  ]
+}
+{% endschema %}

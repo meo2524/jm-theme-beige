@@ -1,0 +1,225 @@
+<div
+  class="slideshow__slide grid__item grid--1-col align-self-center dbtfy-announcement-bar-timer-slide"
+  id="Slide-{{ section.id }}"
+  {{ block.shopify_attributes }}
+  role="group"
+  aria-roledescription="{{ 'sections.announcements.announcement' | t }}"
+  aria-label="{{ 'general.slider.of' | t }}"
+  tabindex="-1"
+>
+  {% style %}
+    .dbtfy-announcement-timer span {
+      border-radius: {{ block.settings.border_radius }}px;
+    }
+
+    .dbtfy-announcement-bar-timer {
+      {%- if block.settings.timer_layout == 'layout1' -%}
+        padding: 10px 0;
+
+        dbtfy-timer {
+          padding-top: 1px;
+        }
+      {%- else -%}
+        padding: 5px 0;
+      {%- endif -%}
+    }
+  {% endstyle %}
+
+  {%- liquid
+    assign heading = block.settings.size
+    if heading == 'inherit'
+      assign heading = settings.title_size
+    endif
+
+    assign font_size = heading | append: '_font_size'
+    assign font_size_mobile = heading | append: '_font_size_mobile'
+    assign line_height = heading | append: '_line_height'
+    assign line_height_mobile = heading | append: '_line_height_mobile'
+    assign letter_spacing = heading | append: '_letter_spacing'
+    assign letter_spacing_mobile = heading | append: '_letter_spacing_mobile'
+
+    if settings[font_size_mobile] == blank
+      assign font_size_mobile = font_size
+    endif
+  -%}
+
+  {% style %}
+    @media (max-width:768px){
+      #{{ block.id }} .inline-richtext{
+        font-size: calc(var(--font-heading-scale)* {{ settings[font_size_mobile] }}px);
+      }
+      #{{ block.id }} .inline-richtext{
+        line-height: {{ settings[line_height_mobile] }}px;
+        letter-spacing:{{ settings[letter_spacing_mobile] }}px;
+      }
+    }
+    @media (min-width:768px){
+      #{{ block.id }}.inline-richtext{
+        font-size: calc(var(--font-heading-scale)* {{ settings[font_size] }}px);
+      }
+      #{{ block.id }}.inline-richtext{
+        line-height: {{ settings[line_height] }}px;
+        letter-spacing:{{ settings[letter_spacing] }}px;
+      }
+    }
+  {% endstyle %}
+  <link rel="stylesheet" href="{{ 'announcement-bar-timer.css' | asset_url }}">
+
+  <div class="dbtfy-announcement-bar-timer content-padding" {{ block.shopify_attributes }}>
+    <div id="{{ block.id }}" class="align-content-center text-padding">
+      <{{ heading }}
+        id="{{ block.id }}"
+        class="title inline-richtext m-0"
+      >
+        {{- block.settings.title_text -}}
+      </{{ heading }}>
+    </div>
+    <dbtfy-announcement-timer
+      class="dbtfy-announcement-timer {{ block.settings.timer_layout }} {% if block.settings.fillable == true %}fillable{% endif %} text-padding"
+      data-time="{{ block.settings.time }}"
+      data-text-expired="{{ block.settings.text_expired }}"
+      role="timer"
+      data-section-id="#shopify-section-{{ section.id }}"
+      data-infinite-minute="{{ block.settings.infinite_minutes }}"
+      data-hide-on-expired="{{ block.settings.hide_on_expired }}"
+    >
+      <span data-days class="hidden"></span>
+      <strong class="hidden">:</strong>
+      <span data-hours class="hidden"></span>
+      <strong class="hidden">:</strong> <span data-min class="hidden"></span>
+      <strong class="hidden">:</strong>
+      <span data-sec class="hidden"></span>
+    </dbtfy-announcement-timer>
+  </div>
+</div>
+<script src="{{ "announcement-bar-timer.js" | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "t:sections.announcement-bar.settings.countdown_name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.announcement-bar.blocks.timer_content"
+    },
+    {
+      "type": "text",
+      "id": "time",
+      "label": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.time.label",
+      "info": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.time.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.announcement-bar.blocks.infinite_settings"
+    },
+    {
+      "type": "number",
+      "id": "infinite_minutes",
+      "label": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.infinite_minute_label",
+      "default": 30,
+      "info": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.infinite_minute_info"
+    },
+    {
+      "type": "select",
+      "id": "timer_layout",
+      "label": "t:sections.announcement-bar.blocks.timer_layout",
+      "default": "layout1",
+      "options": [
+        {
+          "value": "layout1",
+          "label": "t:sections.dbtfy-scrolling-banner.layout_1"
+        },
+        {
+          "value": "layout2",
+          "label": "t:sections.dbtfy-scrolling-banner.layout_2"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "fillable",
+      "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label",
+      "default": false,
+      "visible_if": "{{ block.settings.timer_layout == 'layout2' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "t:blocks.back-to-top.settings.border_radius.label",
+      "max": 15,
+      "min": 1,
+      "unit": "px",
+      "default": 6,
+      "visible_if": "{{ block.settings.timer_layout == 'layout2' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.text_expired.setting"
+    },
+    {
+      "type": "text",
+      "id": "text_expired",
+      "label": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.text_expired.label",
+      "default": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.text_expired.default"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_expired",
+      "label": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.text_expired.hide_on_expired",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.content"
+    },
+    {
+      "type": "text",
+      "id": "title_text",
+      "label": "t:general.settings.text",
+      "default": "t:sections.announcement-bar.blocks.title_text"
+    },
+    {
+      "type": "select",
+      "id": "size",
+      "options": [
+        {
+          "value": "p",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "h1",
+          "label": "t:general.settings.heading_tag.h1"
+        },
+        {
+          "value": "h2",
+          "label": "t:general.settings.heading_tag.h2"
+        },
+        {
+          "value": "h3",
+          "label": "t:general.settings.heading_tag.h3"
+        },
+        {
+          "value": "h4",
+          "label": "t:general.settings.heading_tag.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:general.settings.heading_tag.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:general.settings.heading_tag.h6"
+        }
+      ],
+      "default": "h5",
+      "label": "t:general.settings.size.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-countdown-sale.blocks.countdown.name"
+    }
+  ]
+}
+{% endschema %}

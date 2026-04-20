@@ -1,0 +1,243 @@
+{%- render 'widget-blocker',
+  enabled: settings.dbtfy_upsell_bundles,
+  section: section,
+  name: 'Upsell bundles',
+  type: '⚡ Paid Sections'
+-%}
+{%- if request.design_mode or settings.dbtfy_upsell_bundles -%}
+  {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag: preload: true }}
+  {{ 'component-swatch-input.css' | asset_url | stylesheet_tag: preload: true }}
+  {{ 'component-swatch.css' | asset_url | stylesheet_tag: preload: true }}
+  {{ 'dbtfy-upsell-bundles.css' | asset_url | stylesheet_tag: preload: true }}
+
+  {% if block.settings.product != blank %}
+    {% assign product = all_products[block.settings.product] %}
+  {% endif %}
+
+  {% liquid
+    assign product_form_id = 'dbtfy-upsell-bundles__form-' | append: section.id
+
+    assign target_discount_name = block.settings.discount_code
+    if block.settings.discount_type == '$'
+      assign target_discount_amount = block.settings.discount_amount | times: 100
+    else
+      assign target_discount_amount = block.settings.discount_amount
+    endif
+    assign target_discount_type = block.settings.discount_type
+
+    assign current_currency = localization.country.currency.symbol
+    if current_currency == blank
+      assign current_currency = shop.currency.symbol
+    endif
+  %}
+
+  <dbtfy-upsell-bundles
+    data-url="{{ routes.product_recommendations_url }}?limit={{ block.settings.count_in_bundle }}"
+    data-product-handler="{{ product.handle }}"
+    data-section-id="{{ section.id }}"
+    data-product-id="{{ product.id }}"
+    data-discount-name="{{ target_discount_name }}"
+    data-discount-amount="{{ target_discount_amount }}"
+    data-specific-bundle="{{ block.settings.enable_automatic_bundles }}"
+    data-discount-type="{{ target_discount_type }}"
+    data-currency="{{ current_currency }}"
+    data-form-id="{{ product_form_id }}"
+    data-mobile-mode="true"
+    hidden
+    data-save-text="{{ 'general.save' | t }}"
+  >
+    <div class="dbtfy-upsell-bundles show-on--{{block.settings.show_on}}">
+      {% content_for 'block', type: '_heading', id: 'heading' %}
+      {% render 'dbtfy-upsell-bundle-block',
+        section: block,
+        product_form_id: product_form_id,
+        product: product,
+        recommendations: recommendations,
+        mobile_view: true,
+        current_product_label: block.settings.current_product_label,
+        show_rating: block.settings.enable_rating,
+        button_icon: block.settings.button_icon,
+        button_size: block.settings.button_size
+      %}
+    </div>
+  </dbtfy-upsell-bundles>
+  <script src="{{ 'dbtfy-upsell-bundles.js' | asset_url }}" defer></script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.main-product.blocks.upsell-bundles.name",
+  "class": "dbtfy-upsell-bundles",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.main-product.settings.product.label"
+    },
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "t:sections.all.show_on.label",
+      "default": "both",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "default": "button button--primary",
+      "label": "t:general.settings.style.lable",
+      "options": [
+        {
+          "value": "link underlined-link button--link",
+          "label": "t:sections.all.button.option_1_label"
+        },
+        { "value": "button button--tertiary", "label": "t:general.settings.style.default" },
+        { "value": "button button--primary", "label": "t:sections.all.button.options__3.label" },
+        { "value": "button button--secondary", "label": "t:sections.all.button.options__4.label" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "default": "inherit",
+      "label": "t:general.settings.size.label",
+      "options": [
+        { "value": "inherit", "label": "t:general.settings.size.option__1" },
+        {
+          "value": "button--small",
+          "label": "t:general.settings.small"
+        },
+        { "value": "button--medium", "label": "t:sections.all.animation.image_behavior.parallax_speed.medium" },
+        { "value": "", "label": "t:general.settings.size.option__10" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "total_price_label",
+      "label": "t:sections.dbtfy-upsell-bundles.settings.total_price_label.label",
+      "default": "t:sections.dbtfy-upsell-bundles.settings.total_price_label.default"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:settings_schema.dbfty_infinite_scroll.settings.button.label",
+      "default": "t:sections.dbtfy-upsell-bundles.settings.button_label.default"
+    },
+    {
+      "type": "text",
+      "id": "button_icon",
+      "label": "t:blocks.news-letter.settings.modal.button_icon.label",
+      "info": "t:general.settings.icon_info",
+      "default": "library_add_check"
+    },
+    {
+      "type": "text",
+      "id": "current_product_label",
+      "label": "t:sections.dbtfy-upsell-bundles.settings.current_product_label",
+      "default": "t:sections.dbtfy-upsell-bundles.settings.current_product_default"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_rating",
+      "label": "t:sections.dbtfy-upsell-bundles.settings.enable_rating",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-upsell-bundles.settings.header__1.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_automatic_bundles",
+      "label": "t:sections.dbtfy-upsell-bundles.settings.enable_automatic_bundles.label",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "count_in_bundle",
+      "label": "t:sections.dbtfy-upsell-bundles.settings.count_in_bundle.label",
+      "default": "3",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.discount.header.content",
+      "info": "t:general.settings.discount.header.info_1"
+    },
+    {
+      "type": "text",
+      "id": "discount_code",
+      "label": "t:general.settings.discount.name.label"
+    },
+    {
+      "type": "select",
+      "id": "discount_type",
+      "label": "t:general.settings.discount.type.label",
+      "default": "%",
+      "options": [
+        {
+          "value": "%",
+          "label": "t:general.settings.discount.type.options__1.label"
+        },
+        {
+          "value": "$",
+          "label": "t:general.settings.discount.type.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "number",
+      "id": "discount_amount",
+      "label": "t:general.settings.discount.amount.label",
+      "info": "t:general.settings.discount.type.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main-product.blocks.upsell-bundles.name",
+      "settings": {
+        "product": "{{ closest.product }}"
+      },
+      "blocks": [
+        {
+          "type": "_heading",
+          "static": true,
+          "id": "heading",
+          "blocks": [
+            {
+              "type": "_title",
+              "settings": { "title": "Frequently bought together", "size": "h2" }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

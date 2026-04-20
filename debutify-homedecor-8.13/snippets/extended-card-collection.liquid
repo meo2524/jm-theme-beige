@@ -1,0 +1,150 @@
+{% comment %}
+  Renders a collection card
+
+  Accepts:
+  - card_collection: {Object} Collection Liquid object
+  - media_aspect_ratio: {String} Size of the product image card. Values are "square" and "portrait". Default is "square" (optional)
+  - columns: {Number}
+  - extend_height: {Boolean} Card height extends to available container space. Default: false (optional)
+  - wrapper_class: {String} Wrapper class for card (optional)
+  - placeholder_image: {String} Placeholder image when collection is empty (optional)
+  - custom_title: {String} Custom title for the card (optional): This will override the collection title
+  - custom_image: {String} Custom image for the card (optional): This will override the collection image
+
+  Usage:
+  {% render 'card-collection' %}
+{% endcomment %}
+{%- liquid
+  assign collection_image = card_collection.featured_image
+  if custom_image != blank
+    assign collection_image = custom_image
+  endif
+
+  assign collection_title = card_collection.title
+  if custom_title != blank
+    assign collection_title = custom_title
+  endif
+
+  assign ratio = 1
+  if collection_image and media_aspect_ratio == 'portrait'
+    assign ratio = 0.8
+  elsif collection_image and media_aspect_ratio == 'adapt'
+    assign ratio = collection_image.aspect_ratio
+  endif
+  if ratio == 0 or ratio == null
+    assign ratio = 1
+  endif
+  assign card_color_scheme = settings.collection_card_color_scheme
+  assign card_custom_color_scheme = settings.custom_collection_card_color_scheme
+
+  if wrapper_class == null or wrapper_class == 'none'
+    assign card_color_scheme = settings.collection_card_color_scheme
+    assign card_custom_color_scheme = settings.custom_collection_card_color_scheme
+  endif
+-%}
+{% style %}
+  .extended-collection-card:hover .placeholder-svg,
+  .extended-collection-card:hover .media-img {
+    {% if section.settings.enable_animation_on_hover %} transform: scale(1.2);{% endif %}
+  }
+{% endstyle %}
+{% capture collection_content %}
+    <div class="card__content extended-collection-card--{{section.settings.collection_content_alignment | default: collection_content_alignment}}">
+      <div class="card__information">
+        <{{size}} class="card__heading ">
+          {% if section.settings.show_collection_title or show_collection_title %}
+            {% if collection_title != blank %}
+              {{ collection_title }}
+            {% else %}
+              {{ 'onboarding.collection_title' | t }}
+            {% endif %}
+          {% endif %}
+          {% unless section.settings.show_collection_button -%}
+            {% if card_collection != blank %}
+              <a
+                href="{{ card_collection.url }}"
+              >
+              </a>
+            {% endif %}
+          {% endunless %}
+        </{{size}}>
+
+        {% if section.settings.show_collection_product_count or show_collection_product_count %}
+          <p class="card__count">
+            <small>
+              {% if card_collection != blank %}
+                {{ card_collection.all_products_count }} Products
+              {% else %}
+                0 Products
+              {% endif %}
+            </small>
+          </p>
+        {% endif %}
+        {% assign button_size = section.settings.button_size | default: button_size %}
+        {% if button_size == 'inherit' %}
+          {% assign button_size = settings.button_size %}
+        {% endif %}
+        {% if section.settings.show_collection_button or show_collection_button -%}
+          {% if card_collection != blank %}
+            <a
+              class="{{ section.settings.button_style }} {{ button_size }}"
+              href="{{ card_collection.url }}"
+            >
+              <span> Shop now </span>
+            </a>
+          {% else %}
+            <a href="javascript:void(0);" class="{{ section.settings.button_style }} {{ button_size }}">
+              <span> Shop now </span>
+            </a>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+{% endcapture %}
+<div
+  class="
+    card
+    card--card
+     card--media color-{{ card_custom_color_scheme }} card--card dbtfy-color-{{ card_color_scheme }} gradient extended-collection-card {% if inside_box == false %} extended-collection-card-inside {% endif %} card-wrapper animate-arrow {% if wrapper_class and wrapper_class != 'none' %}{{ wrapper_class }}{% else %}collection-card-wrapper{% endif %}
+  "
+>
+  <div
+    class="
+       ratio{% if inside_box %} overlay {% endif %} card card--media
+      {% if collection_image %} card--media{% else %} card--text{% endif %}
+      {% if extend_height %} card--extend-height{% endif %}
+    "
+    style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+  >
+    {%- if collection_image == null -%}
+      {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- else -%}
+      <img
+        srcset="
+          {%- if collection_image.width >= 165 -%}{{ collection_image | image_url: width: 165 }} 165w,{%- endif -%}
+          {%- if collection_image.width >= 330 -%}{{ collection_image | image_url: width: 330 }} 330w,{%- endif -%}
+          {%- if collection_image.width >= 535 -%}{{ collection_image | image_url: width: 535 }} 535w,{%- endif -%}
+          {%- if collection_image.width >= 750 -%}{{ collection_image | image_url: width: 750 }} 750w,{%- endif -%}
+          {%- if collection_image.width >= 1000 -%}{{ collection_image | image_url: width: 1000 }} 1000w,{%- endif -%}
+          {%- if collection_image.width >= 1500 -%}{{ collection_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+          {%- if collection_image.width >= 3000 -%}{{ collection_image | image_url: width: 3000 }} 3000w,{%- endif -%}
+          {{ collection_image | image_url }} {{ collection_image.width }}w
+        "
+        src="{{ collection_image | image_url: width: 1500 }}"
+        sizes="
+          (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: columns }}px,
+          (min-width: 750px) {% if columns > 1 %}calc((100vw - 10rem) / 2){% else %}calc(100vw - 10rem){% endif %},
+          calc(100vw - 3rem)
+        "
+        alt="{{ collection_image.alt | escape }}"
+        height="{{ collection_image.height }}"
+        width="{{ collection_image.width }}"
+        loading="lazy"
+        class="motion-reduce media-img"
+        style="object-position: {{ image_position }};"
+      >
+    {%- endif -%}
+    {% if inside_box %}{{ collection_content }}{% endif %}
+  </div>
+  {% unless inside_box %}{{ collection_content }}{% endunless %}
+</div>

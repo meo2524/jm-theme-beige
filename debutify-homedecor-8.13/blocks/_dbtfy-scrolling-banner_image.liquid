@@ -1,0 +1,54 @@
+{% if block.settings.image %}
+  <li class="{{ block.id }}" {{ block.shopify_attributes }}>
+    {% style %}
+      .{{ block.id }} img{
+        height: {{ block.settings.image_height_on_mobile }}px;
+      }
+      @media (min-width: 768px) {
+        .{{ block.id }} img{
+          height: {{ block.settings.image_height_on_desktop }}px;
+        }
+      }
+    {% endstyle %}
+    <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}">
+  </li>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:general.settings.image",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "label": "Image",
+      "id": "image"
+    },
+    {
+      "type": "range",
+      "label": "t:sections.dbtfy-scrolling-banner.block.image.desktop_height_label",
+      "id": "image_height_on_desktop",
+      "default": 30,
+      "min": 16,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "label": "t:sections.dbtfy-scrolling-banner.block.image.mobile_height_label",
+      "id": "image_height_on_mobile",
+      "default": 30,
+      "min": 16,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.image"
+    }
+  ]
+}
+{% endschema %}

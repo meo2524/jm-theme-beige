@@ -1,0 +1,109 @@
+{% assign custom_email = block.settings.custom_email %}
+{% if custom_email == blank %}
+  {% assign custom_email = shop.email %}
+{% endif %}
+
+{% assign custom_phone = block.settings.custom_phone %}
+{% if custom_phone == blank %}
+  {% assign custom_phone = shop.phone %}
+{% endif %}
+
+<div class="dbtfy-block__store-info-list">
+  {{ block.settings.custom_html }}
+  <div class="list-unstyled">
+    {%- if block.settings.show_email and shop.email != blank -%}
+      <a class="link" href="mailto:{{ custom_email | escape }}">
+        {% render 'material-icon', icon: 'mail' %}
+        {{ custom_email }}
+      </a>
+    {%- endif -%}
+    {%- if block.settings.show_phone and shop.phone != blank -%}
+      <a class="link" href="tel:{{ custom_phone | remove: '-' | replace: ' ', '' }}">
+        {% render 'material-icon', icon: 'call' %}
+        {{ custom_phone }}
+      </a>
+    {%- endif -%}
+    {%- if block.settings.show_fax and block.settings.fax != blank -%}
+      <a class="link" href="fax:{{ block.settings.fax | remove: '-' | replace: ' ', '' }}">
+        {% render 'material-icon', icon: 'print' %}
+        {{ block.settings.fax }}
+      </a>
+    {%- endif -%}
+    {%- if block.settings.show_location and shop.address.summary != blank -%}
+      <a class="link" href="https://maps.google.com?daddr={{ shop.address.summary | escape }}">
+        {% render 'material-icon', icon: 'location_on' %}
+        {% if block.settings.custom_location != blank %}
+          {{ block.settings.custom_location }}
+        {% else %}
+          {{ shop.address.summary }}
+        {% endif %}
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "t:sections.dbtfy-footer.settings.store_settings",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_email",
+      "label": "t:sections.dbtfy-footer.blocks.text.settings.show_email.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "custom_email",
+      "label": "t:sections.dbtfy-contact-form-builder.blocks.email.settings.label.default",
+      "visible_if": "{{ block.settings.show_email == true }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_phone",
+      "label": "t:sections.dbtfy-footer.blocks.text.settings.show_phone.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "custom_phone",
+      "label": "t:sections.announcement-bar.blocks.contact_info.phone",
+      "visible_if": "{{ block.settings.show_phone == true }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_location",
+      "label": "t:sections.dbtfy-footer.blocks.text.settings.show_location.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "custom_location",
+      "label": "t:sections.dbtfy-footer.blocks.text.settings.show_location.custom_location",
+      "visible_if": "{{ block.settings.show_location == true }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_fax",
+      "label": "t:sections.dbtfy-footer.blocks.text.settings.show_fax.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "fax",
+      "label": "t:sections.dbtfy-footer.blocks.text.settings.fax_number.label",
+      "visible_if": "{{ block.settings.show_fax == true }}"
+    },
+    {
+      "type": "html",
+      "id": "custom_html",
+      "label": "t:blocks.dbtfy-product-tabs.block.settings.html_code",
+      "info": "t:sections.dbtfy-footer.blocks.html.settings.html_area.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-footer.settings.store_settings"
+    }
+  ]
+}
+{% endschema %}

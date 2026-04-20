@@ -1,0 +1,29 @@
+{% comment %}
+  {% render 'dbtfy-html',
+    block ---- Block value for the block.shopify_attributes
+    heading  ---- Heading value for the heading
+    subheading  ----  Subheading value for the subheading
+    html_area ---- HTML area value for the HTML code like <h1>text</h1>
+  %}
+{% endcomment %}
+
+<div
+  class="grid--{{desktop-width}}-col-desktop grid--{{tablet-width}}-col-tablet grid--12-col"
+  {{ block }}
+>
+  <div>
+    {% if heading != blank or subheading != blank %}
+      <div class="dbtfy-footer-heading">
+        {% if heading != blank %}
+          <h2 class="dbtfy-block__heading inline-richtext">{{ heading }}</h2>
+        {% endif %}
+        {% if subheading != blank %}
+          <h4 class="dbtfy-block__subheading inline-richtext">{{ subheading }}</h4>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if html_area != blank %}
+      <div>{{ html_area }}</div>
+    {% endif %}
+  </div>
+</div>

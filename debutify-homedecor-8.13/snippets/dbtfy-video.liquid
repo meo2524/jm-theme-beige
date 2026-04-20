@@ -1,0 +1,128 @@
+{%- liquid
+  assign video_id = settings.video.id | default: settings.video_url.id
+  assign video_alt = settings.video.alt | default: settings.description
+  assign alt = 'sections.video.load_video' | t: description: video_alt | escape
+  assign cover_image = settings.cover_image | image_url: width: 1920, height: 720
+  assign poster = cover_image | default: settings.video.preview_image
+
+  if settings.video != null
+    assign ratio_diff = settings.video.aspect_ratio | minus: poster.aspect_ratio | abs
+    if ratio_diff < 0.01 and ratio_diff > 0
+      assign fix_ratio = true
+    endif
+  endif
+
+  assign loop = ''
+  if settings.enable_video_looping
+    assign loop = '&loop=1&playlist=' | append: video_id
+  endif
+  assign autoplay = 0
+  if settings.autoplay
+    assign autoplay = 1
+  endif
+
+  if settings.video != blank
+    if settings.video_height == 'adapt'
+      assign video_height = 1 | divided_by: settings.video.aspect_ratio | times: 100
+    else
+      assign video_height = 100
+      assign video_height_class = 'video-height--' | append: settings.video_height
+    endif
+  endif
+-%}
+
+<deferred-media
+  class="dbtfy-video w-full video-section__media deferred-media gradient global-media-settings {% if fix_ratio %} media-fit-cover{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} {{ video_height_class }}"
+  data-media-id="{{ video_id }}"
+  {% if settings.video != blank %}
+    style="--ratio-percent: {{ video_height }}%;"
+  {% endif %}
+  data-autoplay="{{ settings.autoplay }}"
+  data-controls="{{ settings.controls }}"
+>
+  {% if settings.autoplay %}
+    {%- if settings.video == null and settings.video_url != null -%}
+      {%- if settings.video_url.type == 'youtube' -%}
+        <iframe
+          src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay={{ autoplay }}&mute={{ autoplay }}&{{ loop }}&controls={{ settings.controls }}"
+          class="js-youtube"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+          title="{{ settings.description | escape }}"
+        ></iframe>
+      {%- else -%}
+        <iframe
+          src="https://player.vimeo.com/video/{{ video_id }}?autoplay={{ autoplay }}{{ loop }}&controls={{ settings.controls }}"
+          class="js-vimeo"
+          allow="{% if autoplay == 1 %}autoplay{% endif %}; encrypted-media"
+          allowfullscreen
+          title="{{ settings.description | escape }}"
+        ></iframe>
+      {%- endif -%}
+    {%- else -%}
+      {{
+        settings.video
+        | video_tag:
+          image_size: '1100x',
+          autoplay: settings.autoplay,
+          loop: settings.enable_video_looping,
+          controls: settings.controls,
+          poster: poster
+      }}
+    {%- endif -%}
+  {% else %}
+    <button
+      id="Deferred-Poster-Modal-{{ video_id }}"
+      class="video-section__poster media deferred-media__poster media--landscape"
+      type="button"
+      aria-label="{{ alt }}"
+    >
+      {%- if poster != null -%}
+        {{
+          poster
+          | image_url: width: 3840
+          | image_tag: sizes: sizes, widths: '375, 750, 1100, 1500, 1780, 2000, 3000, 3840', alt: alt
+        }}
+      {%- else -%}
+        {{ 'product-5' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+      {%- endif -%}
+      {% if settings.video_url != null or settings.video != null %}
+        <span class="deferred-media__poster-button motion-reduce">
+          <span class="svg-wrapper">
+            {{- 'icon-play.svg' | inline_asset_content -}}
+          </span>
+        </span>
+      {% endif %}
+    </button>
+    <template>
+      {%- if settings.video == null and settings.video_url != null -%}
+        {%- if settings.video_url.type == 'youtube' -%}
+          <iframe
+            src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay={{ autoplay }}{{ loop }}&controls={{ settings.controls }}"
+            class="js-youtube"
+            allow="{% if autoplay == 1 %}autoplay{% endif %}; encrypted-media"
+            allowfullscreen
+            title="{{ settings.description | escape }}"
+          ></iframe>
+        {%- else -%}
+          <iframe
+            src="https://player.vimeo.com/video/{{ video_id }}?autoplay={{ autoplay }}{{ loop }}&controls={{ settings.controls }}"
+            class="js-vimeo"
+            allow="{% if autoplay == 1 %}autoplay{% endif %}; encrypted-media"
+            allowfullscreen
+            title="{{ settings.description | escape }}"
+          ></iframe>
+        {%- endif -%}
+      {%- else -%}
+        {{
+          settings.video
+          | video_tag:
+            image_size: '1100x',
+            autoplay: settings.autoplay,
+            loop: settings.enable_video_looping,
+            controls: settings.controls
+        }}
+      {%- endif -%}
+    </template>
+  {% endif %}
+</deferred-media>

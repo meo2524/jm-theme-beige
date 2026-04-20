@@ -1,0 +1,76 @@
+{% assign skip_card_product_styles = false %}
+{% assign min = 1 %}
+{% assign max = 6 %}
+{% assign diff = max | minus: min %}
+{% assign randomNumber = 'now' | date: '%N' | modulo: diff | plus: min %}
+{% assign placeholder_image = 'collection-' | append: randomNumber %}
+<div
+  class="collage__item collage__item--{{ block.type }} collage__item--{{ section.settings.desktop_layout }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {{ block.shopify_attributes }}
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+    style="--animation-order: {{ forloop.index }};"
+  {% endif %}
+>
+  {% render 'card-product',
+    card_product: block.settings.product,
+    media_aspect_ratio: '100%',
+    show_secondary_image: block.settings.show_secondary_image,
+    show_carousel: block.settings.show_carousel,
+    extend_height: true,
+    placeholder_image: placeholder_image,
+    skip_styles: skip_card_product_styles
+  %}
+  {% assign skip_card_product_styles = true %}
+</div>
+
+{% schema %}
+{
+  "name": "t:general.settings.visibility.product.label",
+  "tag": null,
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:general.settings.visibility.product.label"
+    },
+    {
+      "type": "select",
+      "default": "inherit",
+      "id": "show_secondary_image",
+      "label": "t:sections.all.show_secondary_image.label",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "disabled",
+          "label": "t:sections.all.options.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "default": "inherit",
+      "id": "show_carousel",
+      "label": "t:sections.all.show_carousel.label",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "disabled",
+          "label": "t:sections.all.options.options__2.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.visibility.product.label"
+    }
+  ]
+}
+{% endschema %}

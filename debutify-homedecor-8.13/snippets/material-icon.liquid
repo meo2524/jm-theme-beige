@@ -1,0 +1,11 @@
+{% capture icon_classes %}
+    material-icon
+    {% if settings.icon_style == 'outlined' %} outlined{% endif %}
+    {% if settings.icon_style == 'sharp' %} sharp{% endif %}
+    {% if settings.icon_style == 'rounded' %} rounded{% endif %}
+    {% if custom_color != blank %} material-icon--custom-color color-icon-{{ custom_color }}{% endif %}
+    {% if settings.fillable %} fillable{% endif %}
+    {{ class }}
+{% endcapture %}
+
+<i class="{{ icon_classes | strip }}" translate="no" aria-hidden="true" data-icon="{{ icon | strip | downcase | replace: ' ', '_' }}"></i>

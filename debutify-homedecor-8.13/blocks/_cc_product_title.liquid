@@ -1,0 +1,39 @@
+{%- liquid
+  assign placeholder = false
+  assign product = block.settings.product
+  if product == null
+    assign placeholder = true
+  endif
+-%}
+<div class="product__title" {{ block.shopify_attributes }}>
+  <a href="{{ product.url }}" class="product__title">
+    <h2 class="h1">
+      {%- unless placeholder -%}
+        {{ product.title | escape }}
+      {%- else -%}
+        {{ 'onboarding.product_title' | t }}
+      {%- endunless -%}
+    </h2>
+  </a>
+</div>
+
+{% schema %}
+{
+  "name": "Product Title",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.main-product.settings.product.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Title",
+      "settings": {
+        "product": "{{ closest.product }}"
+      }
+    }
+  ]
+}
+{% endschema %}

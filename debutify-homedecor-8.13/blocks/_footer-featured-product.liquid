@@ -1,0 +1,27 @@
+{% assign product = all_products[block.settings.product] %}
+{% render 'card-product',
+  card_product: product,
+  media_aspect_ratio: '100%',
+  image_shape: 'default',
+  show_secondary_image: true,
+  quick_add: 'standard',
+  section_id: block.id,
+  horizontal_quick_add: true
+%}
+{% schema %}
+{
+  "name": "t:sections.dbtfy-footer.blocks.product.name",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:general.settings.visibility.product.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-footer.blocks.product.name"
+    }
+  ]
+}
+{% endschema %}

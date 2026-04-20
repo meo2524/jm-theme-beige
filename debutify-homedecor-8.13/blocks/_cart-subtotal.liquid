@@ -1,0 +1,38 @@
+<div class="cart-drawer__footer" {{ block.shopify_attributes }}>
+  <div>
+    {%- if cart.cart_level_discount_applications.size > 0 -%}
+      <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+        {%- for discount in cart.cart_level_discount_applications -%}
+          <li class="discounts__discount discounts__discount--end">
+            {{- 'icon-discount.svg' | inline_asset_content -}}
+            {{ discount.title | escape }}
+            ({{ discount.total_allocated_amount | money }})
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+  <div class="totals" role="status">
+    <h2 class="totals__total">{{ 'sections.cart.estimated_total' | t }}</h2>
+    <p class="totals__total-value">{{ cart.total_price | money_with_currency }}</p>
+  </div>
+  {%- if settings.dbtfy_cart_savings and cart.total_discount > 0 -%}
+    {%- render 'dbtfy-cart-saving' -%}
+  {%- endif -%}
+</div>
+{%- schema -%}
+{
+  "name": "t:sections.cart-drawer.blocks.cart-subtotal.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-drawer.blocks.cart-subtotal.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.cart-drawer.blocks.cart-subtotal.name"
+    }
+  ]
+}
+{%- endschema -%}

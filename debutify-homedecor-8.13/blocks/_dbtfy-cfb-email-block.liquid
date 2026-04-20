@@ -1,0 +1,79 @@
+<div
+  class="{% if block.settings.width_email == 'full-width' %}grid--12-col{% else %}grid--6-col{% endif %}  error"
+  {{ block.shopify_attributes }}
+>
+  <div class="field">
+    <input
+      class="field__input"
+      type="email"
+      spellcheck="false"
+      autocapitalize="off"
+      id="ContactForm-{{ block.settings.label | handleize }}"
+      name="contact[email]"
+      placeholder="{{ block.settings.label }}"
+      required
+    >
+    <label class="field__label" for="ContactForm-{{ block.settings.label | handleize }}">
+      {{ block.settings.label }}
+      <span aria-hidden="true">*</span>
+    </label>
+  </div>
+  <small class="error-message w-100 hidden">
+    <span class="svg-wrapper">
+      {{- 'icon-error.svg' | inline_asset_content -}}
+    </span>
+    <span class="error-message-text"> {{ block.settings.error_message }} </span>
+  </small>
+</div>
+
+{% schema %}
+{
+  "name": "Email",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-drawer.blocks.block-info"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:general.settings.label",
+      "default": "Email"
+    },
+    {
+      "type": "select",
+      "id": "width_email",
+      "label": "t:sections.dbtfy-contact-form-builder.blocks.email.settings.email_width.label",
+      "default": "half-width",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "t:sections.dbtfy-content-tabs.settings.full_width"
+        },
+        {
+          "value": "half-width",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.email.settings.email_width.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "error_message",
+      "label": "t:sections.dbtfy-contact-form-builder.blocks.error_label",
+      "default": "t:sections.dbtfy-contact-form-builder.blocks.email.error_default"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Email"
+    }
+  ]
+}
+{% endschema %}

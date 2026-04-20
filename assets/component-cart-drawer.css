@@ -20,7 +20,7 @@
 .cart-drawer__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(11, 46, 60, 0.45);
+  background: rgba(43, 43, 43, 0.45);
   opacity: 0;
   transition: opacity 0.3s ease;
   cursor: pointer;
@@ -37,12 +37,12 @@
   right: 0;
   width: min(400px, 92vw);
   height: 100dvh;
-  background: var(--color-linen, #E3FAFC);
+  background: var(--color-linen, #F2E8D5);
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
   transition: transform 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  border-left: 1px solid rgba(11, 46, 60, 0.08);
+  border-left: 1px solid rgba(43, 43, 43, 0.08);
 }
 
 .cart-drawer[aria-hidden="false"] .cart-drawer__panel {
@@ -57,7 +57,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 1.75rem;
-  border-bottom: 1.5px solid var(--color-amber, #1098AD);
+  border-bottom: 1.5px solid var(--color-amber, #A68966);
   flex-shrink: 0;
 }
 
@@ -82,7 +82,7 @@
   height: 20px;
   padding: 0 0.3125rem;
   background: var(--color-espresso);
-  color: var(--color-linen, #E3FAFC);
+  color: var(--color-linen, #F2E8D5);
   font-size: 0.625rem;
   font-weight: 700;
   border-radius: 99px;
@@ -109,11 +109,11 @@
 }
 
 .cart-drawer__close:hover {
-  background: rgba(11, 46, 60, 0.06);
+  background: rgba(43, 43, 43, 0.06);
 }
 
 .cart-drawer__close:focus-visible {
-  outline: 1.5px solid var(--color-amber, #1098AD);
+  outline: 1.5px solid var(--color-amber, #A68966);
   outline-offset: 2px;
 }
 
@@ -127,7 +127,7 @@
   padding: 0 1.75rem;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
-  scrollbar-color: rgba(11, 46, 60, 0.15) transparent;
+  scrollbar-color: rgba(43, 43, 43, 0.15) transparent;
 }
 
 .cart-drawer__body::-webkit-scrollbar {
@@ -139,7 +139,7 @@
 }
 
 .cart-drawer__body::-webkit-scrollbar-thumb {
-  background: rgba(11, 46, 60, 0.15);
+  background: rgba(43, 43, 43, 0.15);
   border-radius: 2px;
 }
 
@@ -155,7 +155,7 @@
 .cart-drawer__empty-rule {
   width: 2.5rem;
   height: 1.5px;
-  background: var(--color-amber, #1098AD);
+  background: var(--color-amber, #A68966);
   margin-bottom: 1.5rem;
 }
 
@@ -176,7 +176,7 @@
   color: var(--color-mahogany);
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: rgba(11, 113, 133, 0.35);
+  text-decoration-color: rgba(166, 137, 102, 0.35);
   transition: text-decoration-color 0.15s ease;
 }
 
@@ -192,13 +192,13 @@
   grid-template-columns: 80px 1fr;
   gap: 1rem;
   padding: 1.25rem 0;
-  border-bottom: 1px solid rgba(11, 46, 60, 0.07);
+  border-bottom: 1px solid rgba(43, 43, 43, 0.07);
 }
 
 .cart-item--drawer .cart-item__img-wrap {
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: #E3FAFC;
+  background: #F2E8D5;
   border-radius: var(--radius-base, 4px);
 }
 
@@ -251,7 +251,7 @@
 .cart-item--drawer .cart-item__qty.qty-stepper {
   display: inline-flex;
   align-items: center;
-  border: 1.5px solid rgba(11, 46, 60, 0.16);
+  border: 1.5px solid rgba(43, 43, 43, 0.16);
   border-radius: var(--radius-sm, 2px);
   overflow: hidden;
 }
@@ -273,15 +273,15 @@
 }
 
 .cart-item--drawer .qty-btn:hover {
-  background: rgba(11, 46, 60, 0.05);
+  background: rgba(43, 43, 43, 0.05);
 }
 
 .cart-item--drawer .qty-input {
   width: 36px;
   height: 28px;
   border: none;
-  border-left: 1px solid rgba(11, 46, 60, 0.1);
-  border-right: 1px solid rgba(11, 46, 60, 0.1);
+  border-left: 1px solid rgba(43, 43, 43, 0.1);
+  border-right: 1px solid rgba(43, 43, 43, 0.1);
   background: transparent;
   font-family: var(--font-label);
   font-size: 0.8125rem;
@@ -347,7 +347,7 @@
 
 .cart-drawer__footer {
   padding: 1.25rem 1.75rem 1.75rem;
-  border-top: 1px solid rgba(11, 46, 60, 0.08);
+  border-top: 1px solid rgba(43, 43, 43, 0.08);
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -389,7 +389,7 @@
   align-items: center;
   justify-content: center;
   height: 50px;
-  background: var(--color-amber, #1098AD);
+  background: var(--color-amber, #A68966);
   color: var(--color-espresso);
   border-radius: var(--radius-sm, 2px);
   font-family: var(--font-label);
@@ -423,7 +423,7 @@
   color: var(--color-mahogany);
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-color: rgba(11, 113, 133, 0.35);
+  text-decoration-color: rgba(166, 137, 102, 0.35);
   transition: text-decoration-color 0.15s ease;
 }
 

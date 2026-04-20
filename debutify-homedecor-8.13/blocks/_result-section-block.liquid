@@ -1,0 +1,115 @@
+{% liquid
+  assign percentage = block.settings.percentage
+  assign result = block.settings.result
+  assign enable_icon = block.settings.enable_icon
+  assign icon = block.settings.icon
+  assign custom_icon = block.settings.custom_icon
+
+  assign result_type = section.settings.result_type
+  assign result_placement = section.settings.result_placement
+%}
+
+<div
+  class="dbtfy-result-row dbtfy-result-row-spacing {% if result_placement == 'result-bottom' %} grid__item{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  data-cascade
+  data-chart-type="{{ result_type }}"
+>
+  <progress-bar
+    class="dbtfy-progress-bar"
+    data-type="{{ result_type }}"
+  >
+    <div class="bar-chart hidden w-100">
+      <strong class="dbtfy-progress-bar__label">{{ percentage }}%</strong>
+      <div class="bar-chart__inner  ">
+        <div class="bar-chart__progress-bar h-100" style="width: {{ percentage }}%"></div>
+      </div>
+    </div>
+
+    <div class="pie-wrapper hidden">
+      <span class="label">
+        <span class="num">{{ percentage | default: 0 }}</span><span class="smaller">%</span>
+      </span>
+      <div class="pie">
+        <div class="left-side half-circle"></div>
+        <div class="right-side half-circle"></div>
+      </div>
+      <div class="shadow"></div>
+    </div>
+  </progress-bar>
+  <div>
+    <div class="pie-chart hidden">
+      <strong>{{ percentage }}%</strong>
+    </div>
+    <div class="dbtfy-result-row__rte">
+      {% capture icon_content %}
+        <span class="dbtfy-result-row__icon">{% render 'material-icon', icon: icon %}</span>
+      {% endcapture %}
+      {% capture custom_icon_content %}
+        <span class="dbtfy-result-row__icon">
+          {{ custom_icon | image_url: width: 50 | image_tag: loading: 'eager', sizes: '100vw', widths: '300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600' }}
+        </span>
+      {% endcapture %}
+      {% liquid
+        if enable_icon
+          if custom_icon != blank
+            echo custom_icon_content
+          elsif icon != blank
+            echo icon_content
+          endif
+        endif
+      %}
+      <div class="rte">
+        {{ result }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy_result_section.blocks.result_row.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "range",
+      "id": "percentage",
+      "label": "t:general.settings.discount.type.options__1.label",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%"
+    },
+    {
+      "type": "richtext",
+      "id": "result",
+      "label": "t:sections.dbtfy_result_section.blocks.result_row.settings.result.label",
+      "default": "<p>Noticed that this product has significantly improved their</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_icon",
+      "label": "t:sections.dbtfy_result_section.blocks.result_row.settings.enable_icon.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "icon",
+      "label": "t:general.settings.icon_label",
+      "info": "t:general.settings.icon_info",
+      "placeholder": "Select icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_icon",
+      "label": "t:general.settings.custom_icon",
+      "info": "t:blocks.double_button.custom_icon.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy_result_section.blocks.result_row.name"
+    }
+  ]
+}
+{% endschema %}

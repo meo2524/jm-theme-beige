@@ -1,0 +1,99 @@
+{%- if settings.dbtfy_variant_swatches -%}
+  {%- style -%}
+    .dropdown-swatch.empty-swatch {
+      display: none;
+    }
+    .dropdown-swatch.empty-swatch + .select__select {
+      padding: 0 calc(var(--inputs-border-width) + 3rem) 0 2rem;
+    }
+  {%- endstyle -%}
+  {%- content_for 'blocks' -%}
+  {%- style -%}
+    variant-selects input[type='radio'].empty-swatch + label {
+      border: var(--variant-pills-border-width) solid rgba(var(--color-foreground), var(--variant-pills-border-opacity));
+      background-color: rgb(var(--color-background));
+      color: rgba(var(--color-foreground));
+      border-radius: var(--variant-pills-radius);
+      color: rgb(var(--color-foreground));
+      display: inline-block;
+      margin: 0.7rem 0.5rem 0.2rem 0;
+      padding: 1rem 2rem;
+      font-size: 1.4rem;
+      letter-spacing: 0.1rem;
+      line-height: 1;
+      text-align: center;
+      transition: border var(--duration-short) ease;
+      cursor: pointer;
+      position: relative;
+      outline: unset !important;
+    }
+    variant-selects input[type='radio'].empty-swatch + label::before {
+      content: '';
+      position: absolute;
+      top: calc(var(--variant-pills-border-width) * -1);
+      right: calc(var(--variant-pills-border-width) * -1);
+      bottom: calc(var(--variant-pills-border-width) * -1);
+      left: calc(var(--variant-pills-border-width) * -1);
+      z-index: -1;
+      border-radius: var(--variant-pills-radius);
+      box-shadow: var(--variant-pills-shadow-horizontal-offset) var(--variant-pills-shadow-vertical-offset)
+        var(--variant-pills-shadow-blur-radius) rgba(var(--color-shadow), var(--variant-pills-shadow-opacity));
+    }
+    variant-selects input[type='radio'].empty-swatch:checked + label {
+      background-color: rgb(var(--color-foreground));
+      color: rgb(var(--color-background));
+      outline: unset !important;
+    }
+    variant-selects input[type='radio'].empty-swatch + label .swatch {
+      display: none;
+    }
+    variant-selects input[type='radio'].empty-swatch + label .swatch + span {
+      position: relative !important;
+      overflow: visible;
+      width: auto;
+      height: auto;
+      margin: 0;
+      padding: 0;
+      clip: unset;
+      word-wrap: unset;
+    }
+  {%- endstyle -%}
+{%- endif -%}
+{%- schema %}
+{
+  "name": "t:settings_schema.widgets.color_swatches.color_swatches.label",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-variant-swatches.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-variant-swatches.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_dbtfy-variant-swatch"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:settings_schema.widgets.color_swatches.color_swatches.label",
+      "blocks": [
+        {
+          "type": "_dbtfy-variant-swatch"
+        }
+      ]
+    }
+  ]
+}
+{%- endschema %}

@@ -1,0 +1,128 @@
+{% layout none %}
+
+{%- liquid
+  assign placeholder = false
+  if product == null
+    assign placeholder = true
+  endif
+-%}
+
+<div class="dbtfy-upsell-quick-view">
+  <div class="dbtfy-upsell-quick-view-content global-settings-popup gradient">
+    <product-info
+      id="MainProduct-{{ section.id }}"
+      class="section-{{ section.id }}-padding"
+      data-section="{section_id}"
+      data-product-id="{{ product.id }}"
+      data-update-url="{{ settings.product_grid_enable_history_state }}"
+      data-url="{{ product.url }}"
+    >
+      {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+      {{ 'component-accordion.css' | asset_url | stylesheet_tag: preload: true }}
+      {{ 'component-price.css' | asset_url | stylesheet_tag: preload: true }}
+      {{ 'component-slider.css' | asset_url | stylesheet_tag: preload: true }}
+      {{ 'component-rating.css' | asset_url | stylesheet_tag: preload: true }}
+      {{ 'component-deferred-media.css' | asset_url | stylesheet_tag: preload: true }}
+
+      {% unless product.has_only_default_variant %}
+        {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag: preload: true }}
+        {{ 'component-swatch-input.css' | asset_url | stylesheet_tag: preload: true }}
+        {{ 'component-swatch.css' | asset_url | stylesheet_tag: preload: true }}
+      {% endunless %}
+      {%- if product.quantity_price_breaks_configured? -%}
+        {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag: preload: true }}
+      {%- endif -%}
+
+      {% render 'section-padding', section: section %}
+
+      <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+      {%- if product.quantity_price_breaks_configured? -%}
+        <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
+        <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
+      {%- endif -%}
+
+      {%- if request.design_mode -%}
+        <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
+      {%- endif -%}
+
+      {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
+      {%- if first_3d_model -%}
+        {{ 'component-product-model.css' | asset_url | stylesheet_tag: preload: true }}
+        <link
+          id="ModelViewerStyle"
+          rel="stylesheet"
+          href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css"
+          media="print"
+          onload="this.media='all'"
+        >
+        <link
+          id="ModelViewerOverride"
+          rel="stylesheet"
+          href="{{ 'component-model-viewer-ui.css' | asset_url }}"
+          media="print"
+          onload="this.media='all'"
+        >
+      {%- endif -%}
+
+      {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
+      <div class="dbtfy-upsell-quick-view-header">
+        <h2 classs="upsell-product-title" data-title="{{ product.title | escape }}">{product_title}</h2>
+      </div>
+      <div class="product product--small product--left product--thumbnail_slider product--mobile-show grid grid--1-col {% if product.media.size > 0 or placeholder %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+        <div class="grid__item product__media-wrapper relative">
+          {%- unless placeholder -%}
+            {% render 'product-media-gallery', variant_images: variant_images, product: product %}
+          {%- else -%}
+            <div
+              class="product-media-container global-media-settings gradient{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}"
+              style="--ratio: 1.0; --preview-ratio: 1.0;"
+            >
+              {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          {%- endunless -%}
+        </div>
+        <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          <section
+            id="ProductInfo-{{ section.id }}"
+            class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
+          >
+            <h2 class="mb-0">{special_offer_label}</h2>
+            <p class="mt-0">{description_label}</p>
+            {% assign product_form_id = 'product-form-upsell' %}
+            <customizable-product-block data-form-id="{{ product_form_id }}"></customizable-product-block>
+            <dbtfy-upsell-popup-variant id="product-form-{section_id}">
+              {%- liquid
+                render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id
+                render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true
+              -%}
+            </dbtfy-upsell-popup-variant>
+          </section>
+        </div>
+      </div>
+
+      <div class="dbtfy-upsell-quick-view-footer">
+        <div class="dbtfy-upsell-quick-view-close">{close_label}</div>
+        <a href="/checkout">{checkout_label}</a>
+      </div>
+
+      {% render 'product-media-modal', variant_images: variant_images, product: product %}
+
+      {%- if product.media.size > 0 -%}
+        <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
+        <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
+      {%- endif -%}
+
+      {%- if first_3d_model -%}
+        <script type="application/json" id="ProductJSON-{{ product.id }}">
+          {{ product.media | where: 'media_type', 'model' | json }}
+        </script>
+        <script src="{{ 'product-model.js' | asset_url }}" defer></script>
+      {%- endif -%}
+
+      <script type="application/ld+json">
+        {{ product | structured_data }}
+      </script>
+    </product-info>
+  </div>
+</div>

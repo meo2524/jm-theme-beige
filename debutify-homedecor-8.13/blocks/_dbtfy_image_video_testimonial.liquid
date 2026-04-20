@@ -1,0 +1,113 @@
+<div class="dbtfy_image_video_testimonial-review-block w-full global-settings-popup" {{ block.shopify_attributes }}>
+  <div class="dbtfy_image_video_testimonial-review">
+    <div class="dbtfy_image_video_testimonial-review-stars flex">
+      {%- for i in (1..5) -%}
+        {%- if i <= block.settings.star_rating -%}
+          {%- render 'icon-star' -%}
+        {%- else -%}
+          {%- render 'icon-empty-star' -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="dbtfy_image_video_testimonial-review-quote w-full">
+      {% if block.settings.custom_quote_icon != blank %}
+        {% render 'dbtfy-img', img: block.settings.custom_quote_icon %}
+      {% elsif block.settings.quote_mark != blank %}
+        {% render 'material-icon', icon: block.settings.quote_mark %}
+      {% endif %}
+    </div>
+  </div>
+  {% if block.settings.text != blank %}
+    <div class="dbtfy_image_video_testimonial-review-text">
+      {{ block.settings.text }}
+    </div>
+  {% endif %}
+  {% if block.settings.date != blank %}
+    <div class="dbtfy_image_video_testimonial-review-date">{{ block.settings.date }}</div>
+  {% endif %}
+  <div class="dbtfy_image_video_testimonial-review-author flex">
+    {% if block.settings.author_image != blank %}
+      <div class="dbtfy_image_video_testimonial-review-author-image">
+        {% render 'dbtfy-img', img: block.settings.author_image, image_class: 'w-full' %}
+      </div>
+    {% endif %}
+    <div class="dbtfy_image_video_testimonial-review-author-info">
+      {% if block.settings.author != blank %}
+        <h5 class="dbtfy_image_video_testimonial-review-author-name m-0">
+          {{ block.settings.author }}
+        </h5>
+      {% endif %}
+      {% if block.settings.profession != blank %}
+        <h5 class="dbtfy_image_video_testimonial-review-author-profession m-0">
+          {{ block.settings.profession }}
+        </h5>
+      {% endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-image-video-testimonial.name_3",
+  "tag": null,
+  "settings": [
+    {
+      "type": "range",
+      "id": "star_rating",
+      "label": "t:blocks.star_rating.name",
+      "default": 5,
+      "min": 1,
+      "max": 5,
+      "step": 1
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "t:general.settings.text",
+      "default": "t:sections.dbtfy-image-video-testimonial.blocks.text"
+    },
+    {
+      "type": "text",
+      "id": "date",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.date.label",
+      "default": "2025-05-26",
+      "info": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.date.info"
+    },
+    {
+      "type": "text",
+      "id": "profession",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.profession.label",
+      "default": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.profession.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "author_image",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.author_image.label"
+    },
+    {
+      "type": "text",
+      "id": "author",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.author.label",
+      "default": "Author's name"
+    },
+    {
+      "type": "text",
+      "id": "quote_mark",
+      "label": "t:sections.dbtfy-image-video-testimonial.blocks.quote_mark",
+      "default": "format_quote",
+      "info": "t:general.settings.icon_info"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_quote_icon",
+      "label": "t:sections.dbtfy-image-video-testimonial.blocks.custom_quote_icon",
+      "info": "t:sections.dbtfy-image-video-testimonial.blocks.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-image-video-testimonial.name_3"
+    }
+  ]
+}
+{% endschema %}

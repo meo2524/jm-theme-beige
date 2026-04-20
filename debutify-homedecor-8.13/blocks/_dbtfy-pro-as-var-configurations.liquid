@@ -1,0 +1,27 @@
+<script>
+  if (typeof Debutify.widgets['product_as_variant_configurations'] === 'undefined') {
+    Debutify.widgets['product_as_variant_configurations'] = [];
+  }
+</script>
+{%- content_for 'blocks' -%}
+{%- schema -%}
+{
+  "name": "t:blocks.dbtfy-product-swatches.product_config",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "_dbtfy-pro-as-var-configuration"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.dbtfy-product-swatches.product_config",
+      "blocks": [
+        {
+          "type": "_dbtfy-pro-as-var-configuration"
+        }
+      ]
+    }
+  ]
+}
+{%- endschema -%}

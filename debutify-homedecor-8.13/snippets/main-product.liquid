@@ -1,0 +1,164 @@
+{% unless section.settings.constrain_to_viewport %}
+  {% assign media_aspect_ratio = section.settings.image_ratio %}
+  {% assign image_crop_position = section.settings.image_crop_position %}
+
+  {% if media_aspect_ratio and media_aspect_ratio != 'inherit' %}
+    {% assign image_aspect_ratio = media_aspect_ratio %}
+    {% if media_aspect_ratio == 'circle' %}
+      {% assign image_aspect_ratio = '100%' %}
+    {% endif %}
+    {% style %}
+      #MainProduct-{{ section.id }}{
+          --dbtfy-image-crop-ratio: {{ image_aspect_ratio }};
+        }
+    {% endstyle %}
+  {% else %}
+    {% assign media_aspect_ratio = settings.dbtfy_product_image_crop_ratio %}
+  {% endif %}
+
+  {% if image_crop_position and image_crop_position != 'inherit' %}
+    {% style %}
+      #MainProduct-{{ section.id }}{
+        --dbtfy-image-crop-position: {{ image_crop_position }};
+      }
+    {% endstyle %}
+  {% endif %}
+
+  {% capture image_ratio_position %}
+    media media-{{ media_aspect_ratio }}
+  {% endcapture %}
+{% endunless %}
+
+{%- liquid
+  assign placeholder = false
+  if product == null
+    assign placeholder = true
+  endif
+-%}
+{% liquid
+  render 'custom-arrow-style'
+%}
+<product-info
+  id="MainProduct-{{ section.id }}"
+  class="section-{{ section.id }}-padding gradient color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} show-on--{{ section.settings.show_on }}"
+  data-section="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-update-url="{{ url_should_update }}"
+  data-url="{{ product.url }}"
+  {% if settings.dbtfy_product_zooming and settings.dbtfy_product_zoom == 'hover' %}
+    data-zoom-on-hover
+  {% endif %}
+  data-gallery-type="{{ section.settings.gallery_layout }}"
+  data-hide-other-variant="{{ section.settings.hide_variants }}"
+>
+  {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+  <link rel="stylesheet" href="{{ 'component-accordion.css' | asset_url }}" media="print" onload="this.media='all'">
+  {{ 'component-price.css' | asset_url | stylesheet_tag: preload: true }}
+  {{ 'component-slider.css' | asset_url | stylesheet_tag: preload: true }}
+  {{ 'component-rating.css' | asset_url | stylesheet_tag: preload: true }}
+  {{ 'component-deferred-media.css' | asset_url | stylesheet_tag: preload: true }}
+
+  {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag: preload: true }}
+  {{ 'component-swatch-input.css' | asset_url | stylesheet_tag: preload: true }}
+  {{ 'component-swatch.css' | asset_url | stylesheet_tag: preload: true }}
+
+  {%- if product.quantity_price_breaks_configured? -%}
+    {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag: preload: true }}
+  {%- endif -%}
+
+  {% render 'section-padding', section: section %}
+
+  <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
+
+  {%- if product.quantity_price_breaks_configured? -%}
+    <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+
+  {% if settings.dbtfy_product_zooming and settings.dbtfy_product_zoom == 'hover' %}
+    <script id="EnableZoomOnHover-main" src="{{ 'magnify.js' | asset_url }}" defer="defer"></script>
+  {% endif %}
+  {%- if request.design_mode -%}
+    <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+
+  {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
+  {%- if first_3d_model -%}
+    {{ 'component-product-model.css' | asset_url | stylesheet_tag: preload: true }}
+    <link
+      id="ModelViewerStyle"
+      rel="stylesheet"
+      href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css"
+      media="print"
+      onload="this.media='all'"
+    >
+    <link
+      id="ModelViewerOverride"
+      rel="stylesheet"
+      href="{{ 'component-model-viewer-ui.css' | asset_url }}"
+      media="print"
+      onload="this.media='all'"
+    >
+  {%- endif -%}
+
+  {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
+  <div class="{% unless section.settings.container_size %}page-width {%else%} {{ section.settings.container_size }} {% endunless %}">
+    <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 or placeholder %}grid--2-col-tablet{% else %}product--no-media{% endif %} {% unless section.settings.enable_arrows %}product-arrow-hide{% endunless %}">
+      <div class="grid__item product__media-wrapper relative">
+        {%- unless placeholder -%}
+          {% render 'product-media-splide',
+            variant_images: variant_images,
+            product: product,
+            image_ratio_position: image_ratio_position,
+            media_aspect_ratio: media_aspect_ratio,
+            desktop_layout: section.settings.gallery_layout,
+            mobile_layout: section.settings.mobile_thumbnails,
+            thumbnail_position: section.settings.thumbnail_position,
+            product_enable_arrows: section.settings.product_enable_arrows,
+            enable_progress_bar: section.settings.enable_progress_bar,
+            enable_arrows: section.settings.enable_arrows
+          %}
+        {%- else -%}
+          <div
+            class="product-media-container global-media-settings gradient{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}"
+            style="--ratio: 1.0; --preview-ratio: 1.0;"
+          >
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {%- endunless -%}
+      </div>
+      <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <section
+          id="ProductInfo-{{ section.id }}"
+          class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
+        >
+          {{ block_content }}
+          <a href="{{ product.url }}" class="link product__view-details animate-arrow button--link">
+            <span>
+              {{ 'products.product.view_full_details' | t }}
+            </span>
+            {{- 'icon-arrow.svg' | inline_asset_content -}}
+          </a>
+        </section>
+      </div>
+    </div>
+
+    {% render 'product-media-modal', variant_images: variant_images, product: product %}
+
+    {%- if product.media.size > 0 -%}
+      <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- if first_3d_model -%}
+      <script type="application/json" id="ProductJSON-{{ product.id }}">
+        {{ product.media | where: 'media_type', 'model' | json }}
+      </script>
+      <script src="{{ 'product-model.js' | asset_url }}" defer></script>
+    {%- endif -%}
+
+    <script type="application/ld+json">
+      {{ product | structured_data }}
+    </script>
+  </div>
+</product-info>

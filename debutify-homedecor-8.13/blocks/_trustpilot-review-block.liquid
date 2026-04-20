@@ -1,0 +1,113 @@
+{%- liquid
+  assign review_color = '#00b67a'
+
+  if block.settings.star_rating == 1
+    assign review_color = '#FF0000'
+  elsif block.settings.star_rating <= 3
+    assign review_color = '#FFA500'
+  endif
+-%}
+
+<li
+  class="splide__slide trustpilot-review custom-border-radius global-settings-popup center"
+  {{ block.shopify_attributes }}
+>
+  <div
+    class="rating-stars__container rating-stars__container--underlay relative"
+    style="--rating: {{ block.settings.star_rating }};--star-color:{{ review_color }};--bg-star-color:#c8c8c8;"
+  >
+    <svg
+      height="469"
+      width="2500"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 96"
+      class="trustpilot-stars-svg"
+    >
+      <path fill="#c8c8c8" d="M0 0h96v96H0zM104 0h96v96h-96zM208 0h96v96h-96zM312 0h96v96h-96zM416 0h96v96h-96z"></path>
+      <path fill="#ffffff" d="M48 64.7L62.6 61l6.1 18.8zm33.6-24.3H55.9L48 16.2l-7.9 24.2H14.4l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM152 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L152 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM256 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L256 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM360 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L360 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM464 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L464 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2z"></path>
+    </svg>
+    <div class="rating-stars__container rating-stars__container--overlay">
+      <svg
+        height="469"
+        width="2500"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 512 96"
+        class="trustpilot-stars-svg"
+      >
+        <path fill="var(--star-color)" d="M0 0h96v96H0zM104 0h96v96h-96zM208 0h96v96h-96zM312 0h96v96h-96zM416 0h96v96h-96z"></path>
+        <path fill="#ffffff" d="M48 64.7L62.6 61l6.1 18.8zm33.6-24.3H55.9L48 16.2l-7.9 24.2H14.4l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM152 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L152 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM256 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L256 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM360 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L360 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM464 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L464 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2z"></path>
+      </svg>
+    </div>
+  </div>
+  {%- if block.settings.heding != blank -%}
+    <h3 class="h4">{{ block.settings.heding }}</h3>
+  {%- endif -%}
+  {%- if block.settings.description != blank -%}
+    <div class="rte">{{ block.settings.description }}</div>
+  {%- endif -%}
+
+  <div class="testimonial-card__author-container">
+    <p class="testimonial-card__author m-0">
+      {%- if block.settings.author_avatar != blank -%}
+        <img
+          src="{{ block.settings.author_avatar | img_url: '100x100' }}"
+          alt="{{ block.settings.author_name }}"
+          class="avatar"
+          height="40"
+          width="40"
+        >
+      {%- else -%}
+        {%- render 'material-icon', icon: 'Person', class: block.settings.size -%}
+      {%- endif -%}
+      {%- if block.settings.author_avatar == blank -%}
+        <span class="visually-hidden">{{ block.settings.author_name }}</span>
+      {%- endif -%}
+      <strong>{{ block.settings.author_name }}</strong>
+    </p>
+  </div>
+</li>
+{% schema %}
+{
+  "name": "t:sections.dbtfy-shipping-checkpoints.review",
+  "tag": null,
+  "settings": [
+    {
+      "type": "range",
+      "id": "star_rating",
+      "label": "t:blocks.star_rating.name",
+      "min": 1,
+      "max": 5,
+      "step": 0.1,
+      "default": 4
+    },
+    {
+      "type": "text",
+      "id": "heding",
+      "label": "t:general.settings.heading",
+      "default": "t:sections.dbtfy-trustpilot.blocks.heading_default"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "t:sections.dbtfy-trustpilot.blocks.description_default"
+    },
+    {
+      "type": "text",
+      "id": "author_name",
+      "label": "t:sections.facebook_tesimonial.settings.author.name",
+      "default": "t:sections.dbtfy-trustpilot.blocks.author_name_default"
+    },
+    {
+      "type": "image_picker",
+      "id": "author_avatar",
+      "label": "t:sections.dbtfy-trustpilot.blocks.author_avatar_default"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-trustpilot.add_a_review"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,137 @@
+{%- if request.design_mode -%}
+  {%- render 'widget-blocker-warning',
+    enabled: settings.dbtfy_scroll_indicator,
+    type: 'widget',
+    as: 'block',
+    name: 'Scroll Indicator',
+    id: block
+  -%}
+{% endif %}
+
+{% if settings.dbtfy_scroll_indicator %}
+  <style>
+      #{{ block.id }} .dbtfy-scroll-indicator-container .dbtfy-scroll-indicator-bar {
+        height: {{ block.settings.progressbar_height }}px;
+        {% if block.settings.progressbar_edge_shape == 'rounded' %}
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        {% endif %}
+      transition: width {{ block.settings.animation_speed }}s;
+    }
+  </style>
+  <link rel="stylesheet" href="{{ 'dbtfy-scroll-indicator.css' | asset_url }}">
+  <dbtfy-scroll-indicator id="{{ block.id }}">
+    <div class="dbtfy-scroll-indicator-container">
+      <div
+        class="dbtfy-scroll-indicator-bar color-{{ block.settings.custom_color_scheme }} dbtfy-color-{{ block.settings.color_scheme }} gradient"
+      ></div>
+    </div>
+  </dbtfy-scroll-indicator>
+  <script src="{{ 'dbtfy-scroll-indicator.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.scroll-indicator.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.scroll-indicator.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.scroll-indicator.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "range",
+      "id": "progressbar_height",
+      "label": "t:blocks.scroll-indicator.progress_bar_height",
+      "min": 5,
+      "max": 20,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "label": "t:blocks.scroll-indicator.progress_bar_speed",
+      "min": 0.1,
+      "max": 1,
+      "default": 0.2,
+      "unit": "s",
+      "step": 0.1
+    },
+    {
+      "type": "select",
+      "id": "progressbar_edge_shape",
+      "label": "t:blocks.scroll-indicator.progress_bar_edge_shape",
+      "options": [
+        {
+          "value": "square",
+          "label": "t:general.settings.style.square"
+        },
+        {
+          "value": "rounded",
+          "label": "t:general.settings.style.rounded"
+        }
+      ],
+      "default": "square"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.scroll-indicator.name"
+    }
+  ]
+}
+{%- endschema -%}

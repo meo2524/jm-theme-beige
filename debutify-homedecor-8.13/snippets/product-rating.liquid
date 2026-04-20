@@ -1,0 +1,278 @@
+{%- unless settings.review_app == '' -%}
+  <div class="review-badge" {{ block.shopify_attributes }}>
+    {%- if position == 'product_page' -%}
+      {% if settings.review_app == 'other_app' %}
+        {%- case settings.review_app_other -%}
+          {%- when 'debutify' -%}
+            <div
+              id="starRating"
+              data-productId="{{ product.id }}"
+              data-storeName="{{ shop.permanent_domain | split: '.myshopify.com' | first }}"
+            ></div>
+
+          {%- when 'debutify-dtm' -%}
+            {% render 'dtm-star-rating', product: product %}
+
+          {%- when 'judge_me' -%}
+            <div class="jdgm-widget jdgm-preview-badge" data-id="{{ product.id }}">
+              {{ product.metafields.judgeme.badge }}
+            </div>
+
+          {%- when 'loox' -%}
+            <div
+              class="loox-rating"
+              data-id="{{ product.id }}"
+              data-rating="{{ product.metafields.loox.avg_rating }}"
+              data-raters="{{ product.metafields.loox.num_reviews }}"
+            ></div>
+
+          {%- when 'ryviu' -%}
+            <div class="review-widget">
+              <ryviu-widget-total
+                reviews_data="{{ product.metafields.ryviu.product_reviews_info | escape }}"
+                product_id="{{ product.id }}"
+                handle="{{ product.handle }}"
+              >
+              </ryviu-widget-total>
+            </div>
+
+          {%- when 'kudosi' -%}
+            <div
+              class="alireviews-review-star-rating"
+              producthandle="{{product.handle}}"
+              product-id="{{product.id}}"
+            ></div>
+
+          {%- when 'stamped_io' -%}
+            <span
+              class="stamped-product-reviews-badge stamped-main-badge"
+              data-id="{{ product.id }}"
+              data-product-sku="{{ product.handle }}"
+              data-product-type="{{ product.type }}"
+              data-product-title="{{ product.title }}"
+              style="display: inline-block;"
+            >
+              {{ product.metafields.stamped.badge }}
+            </span>
+
+          {%- when 'ali_reviews' -%}
+            <div
+              product-id="{{ product.id }}"
+              class="alr-display-review-badge"
+              onclick="scroll_to_ali()"
+            ></div>
+
+          {%- when 'rivyo' -%}
+            <div
+              class="wc_product_review_badge"
+              data-handle="{{ product.handle }}"
+              data-product_id="{{ product.id }}"
+            ></div>
+
+          {%- when 'growave' -%}
+            {%- capture the_snippet_review_avg -%}
+                {% # theme-check-disable %}
+            {%- render 'ssw-widget-avg-rate-profile' -%}
+            {% # theme-check-enable %}
+          {%- endcapture -%}
+            {%- unless the_snippet_review_avg contains 'Liquid error' -%}
+              {{ the_snippet_review_avg }}
+            {%- endunless -%}
+
+          {%- when 'opinew' -%}
+            {%- capture the_snippet_review_avg -%}
+            {% # theme-check-disable %}
+            {%- render 'opinew_review_stars_product' -%}
+            {% # theme-check-enable %}
+          {%- endcapture -%}
+            {%- unless the_snippet_review_avg contains 'Liquid error' -%}
+              <div id="opinew-stars-plugin-product">
+                {{ the_snippet_review_avg }}
+              </div>
+            {%- endunless -%}
+
+          {%- when 'automizely' -%}
+            {%- capture the_snippet_review_avg -%}
+            {% # theme-check-disable %}
+            {%- render 'asrv-star-widget', product: product -%}
+            {% # theme-check-enable %}
+          {%- endcapture -%}
+            {%- unless the_snippet_review_avg contains 'Liquid error' -%}
+              {{ the_snippet_review_avg }}
+            {%- endunless -%}
+
+          {%- when 'fera' -%}
+            <div data-fera-container="425221" data-product_id="{{ product.id }}"></div>
+          {%- when 'custom_review' -%}
+            {%- if settings.review_star_rating_code != blank -%}
+              <div class="custom-review-stars">
+                {{ settings.review_star_rating_code }}
+              </div>
+            {%- endif -%}
+        {%- endcase -%}
+      {% elsif settings.review_app == 'trustoo' %}
+        {% case settings.review_app %}
+          {%- when 'trustoo' -%}
+            <div
+              id="seal-star-rating-widget"
+              data-app="trustoo"
+              style="justify-content:left;margin-top: 10px;"
+              data-text-color="#585858"
+              data-star-size="20"
+              data-font-size="16"
+            ></div>
+
+            <script id="seal_product_id" type="application/json">
+              {{ product.id }}
+            </script>
+
+            <script id="tt-rating-page-type" type="application/json">
+              product
+            </script>
+
+            <script
+              src="https://cdn.shopify.com/extensions/b0f5f6bb-433e-4950-867e-b1263d4499b3/trustoo-io-reviews-213/assets/star-rating-widget.min.js"
+              defer
+            ></script>
+        {% endcase %}
+      {% endif %}
+    {%- elsif position == 'product_grid' -%}
+      {% if settings.review_app == 'other_app' %}
+        {%- case settings.review_app_other -%}
+          {%- when 'debutify' -%}
+            <div
+              id="starRating"
+              data-productId="{{ product.id }}"
+              data-storeName="{{ shop.permanent_domain | split: '.myshopify.com' | first }}"
+            ></div>
+
+          {%- when 'debutify-dtm' -%}
+            {% render 'dtm-star-rating', product: product %}
+
+          {%- when 'judge_me' -%}
+            <div class="jdgm-widget jdgm-preview-badge" data-id="{{ product.id }}" data-handle="{{ product.handle }}">
+              {{ product.metafields.judgeme.badge }}
+            </div>
+
+          {%- when 'loox' -%}
+            <div
+              class="loox-rating"
+              data-id="{{ product.id }}"
+              data-rating="{{ product.metafields.loox.avg_rating }}"
+              data-raters="{{ product.metafields.loox.num_reviews }}"
+            ></div>
+
+          {%- when 'ryviu' -%}
+            <div class="ryviu-collection">
+              <ryviu-widget-total
+                collection="1"
+                reviews_data="{{ product.metafields.ryviu.product_reviews_info | escape }}"
+                product_id="{{ product.id }}"
+                handle="{{ product.handle }}"
+              >
+              </ryviu-widget-total>
+            </div>
+
+          {%- when 'kudosi' -%}
+            <div
+              class="alireviews-review-star-rating"
+              producthandle="{{product.handle}}"
+              product-id="{{product.id}}"
+            ></div>
+
+          {%- when 'stamped_io' -%}
+            <span
+              class="stamped-product-reviews-badge"
+              data-product-sku="{{ product.handle }}"
+              data-id="{{ product.id }}"
+              data-product-type="{{ product.type }}"
+              data-product-title="{{ product.title }}"
+              style="display: block;"
+            >
+              {{ product.metafields.stamped.badge }}
+            </span>
+
+          {%- when 'ali_reviews' -%}
+            <div
+              product-id="{{ product.id }}"
+              product-handle="{{ product.handle }}"
+              class="alireviews-review-star-rating"
+            ></div>
+
+          {%- when 'rivyo' -%}
+            <div
+              class="wc_product_review_badge"
+              data-handle="{{ product.handle }}"
+              data-product_id="{{ product.id }}"
+            ></div>
+
+          {%- when 'growave' -%}
+            {%- capture the_snippet_review_avg -%}
+            {% # theme-check-disable %}
+            {%- render 'ssw-widget-avg-rate-profile' -%}
+            {% # theme-check-enable %}
+          {%- endcapture -%}
+            {%- unless the_snippet_review_avg contains 'Liquid error' -%}
+              {{ the_snippet_review_avg }}
+            {%- endunless -%}
+
+          {%- when 'automizely' -%}
+            {%- capture the_snippet_review_avg -%}
+            {% # theme-check-disable %}
+            {%- render 'asrv-star-widget', product: product, size: 14, anchor: false -%}
+            {% # theme-check-enable %}
+          {%- endcapture -%}
+            {%- unless the_snippet_review_avg contains 'Liquid error' -%}
+              {{ the_snippet_review_avg }}
+            {%- endunless -%}
+
+          {%- when 'opinew' -%}
+            {%- capture the_snippet_review_avg -%}
+            {% # theme-check-disable %}
+            {%- render 'opinew_review_stars_product' -%}
+            {% # theme-check-enable %}
+          {%- endcapture -%}
+            {%- unless the_snippet_review_avg contains 'Liquid error' -%}
+              <div id="opinew-stars-plugin-product">
+                {{ the_snippet_review_avg }}
+              </div>
+            {%- endunless -%}
+
+          {%- when 'fera' -%}
+            <div data-fera-container="425221" data-product_id="{{ product.id }}"></div>
+          {%- when 'custom_review' -%}
+            {%- if settings.review_star_rating_code != blank -%}
+              <div class="custom-review-stars">
+                {{ settings.review_star_rating_code }}
+              </div>
+            {%- endif -%}
+        {%- endcase -%}
+      {% else %}
+        {% case settings.review_app %}
+          {%- when 'trustoo' -%}
+            <div
+              id="seal-star-rating-widget"
+              data-app="trustoo"
+              style="justify-content:left;margin-top: 10px;"
+              data-text-color="#585858"
+              data-star-size="20"
+              data-font-size="16"
+            ></div>
+
+            <script id="seal_product_id" type="application/json">
+              {{ product.id }}
+            </script>
+
+            <script id="tt-rating-page-type" type="application/json">
+              product
+            </script>
+
+            <script
+              src="https://cdn.shopify.com/extensions/b0f5f6bb-433e-4950-867e-b1263d4499b3/trustoo-io-reviews-213/assets/star-rating-widget.min.js"
+              defer
+            ></script>
+        {% endcase %}
+      {% endif %}
+    {%- endif -%}
+  </div>
+{%- endunless -%}

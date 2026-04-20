@@ -1,0 +1,308 @@
+{%- liquid
+  unless section.settings.product == blank
+    assign product = section.settings.product
+  endunless
+
+  if product != null
+    assign product_form_id = 'product-form-' | append: section.id
+
+    if settings.dbtfy_back_in_stock
+      render 'dbtfy-back-in-stock', product: product
+    endif
+
+    render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true
+  endif
+-%}
+
+{% schema %}
+{
+  "name": "t:sections.main-product.blocks.buy_buttons.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout_notice"
+    },
+    {
+      "type": "select",
+      "id": "custom_add_to_cart_buttons",
+      "label": "t:settings_schema.global_settings.settings.button_settings.label",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "t:settings_schema.global_settings.settings.button_settings.inherit_message",
+      "visible_if": "{{ block.settings.custom_add_to_cart_buttons != 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "add_to_cart_style",
+      "default": "button button--secondary",
+      "label": "t:settings_schema.global_settings.settings.button_style.add-to-cart-style.label",
+      "options": [
+        { "value": "button button--tertiary", "label": "t:general.settings.style.default" },
+        { "value": "button button--primary", "label": "t:sections.all.button.options__3.label" },
+        { "value": "button button--secondary", "label": "t:sections.all.button.options__4.label" }
+      ],
+      "visible_if": "{{ block.settings.custom_add_to_cart_buttons == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "add_to_cart_color",
+      "default": "primary_color",
+      "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.label",
+      "options": [
+        {
+          "value": "primary_color",
+          "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.primary"
+        },
+        {
+          "value": "secondary_color",
+          "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.secondary"
+        },
+        {
+          "value": "light_color",
+          "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.light"
+        },
+        {
+          "value": "dark_color",
+          "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.dark"
+        },
+        { "value": "custom_color", "label": "Custom color" }
+      ],
+      "visible_if": "{{ block.settings.custom_add_to_cart_buttons == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "add_to_cart__custom_background_color",
+      "label": "Primary Color",
+      "visible_if": "{{ block.settings.custom_add_to_cart_buttons == 'custom' and block.settings.add_to_cart_color == 'custom_color' }}"
+    },
+    {
+      "type": "color",
+      "id": "add_to_cart__custom_text_color",
+      "label": "Secondary color",
+      "visible_if": "{{ block.settings.custom_add_to_cart_buttons == 'custom' and block.settings.add_to_cart_color == 'custom_color' }}"
+    },
+    {
+      "type": "select",
+      "id": "buy_it_now_style",
+      "default": "button button--primary",
+      "label": "t:settings_schema.global_settings.settings.button_style.buy-it-now-style.label",
+      "options": [
+        { "value": "button button--tertiary", "label": "t:general.settings.style.default" },
+        { "value": "button button--primary", "label": "t:sections.all.button.options__3.label" },
+        { "value": "button button--secondary", "label": "t:sections.all.button.options__4.label" }
+      ],
+      "visible_if": "{{ block.settings.custom_add_to_cart_buttons == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "buy_it_now_color",
+      "default": "secondary_color",
+      "label": "Buy it now Color",
+      "options": [
+        {
+          "value": "primary_color",
+          "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.primary"
+        },
+        {
+          "value": "secondary_color",
+          "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.secondary"
+        },
+        {
+          "value": "light_color",
+          "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.light"
+        },
+        {
+          "value": "dark_color",
+          "label": "t:settings_schema.global_settings.settings.button_style.add_to_cart_color.dark"
+        },
+        { "value": "custom_color", "label": "Custom color" }
+      ],
+      "visible_if": "{{ block.settings.custom_add_to_cart_buttons == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_buy_it_now_background_color",
+      "label": "Primary Color",
+      "visible_if": "{{ block.settings.custom_add_to_cart_buttons == 'custom' and block.settings.buy_it_now_color == 'custom_color' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_buy_it_now_text_color",
+      "label": "Secondary color",
+      "visible_if": "{{ block.settings.custom_add_to_cart_buttons == 'custom' and block.settings.buy_it_now_color == 'custom_color' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_gift_card_recipient",
+      "default": true,
+      "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
+      "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-product.blocks.buy_buttons.settings.add_to_cart"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_price_in_add_to_cart",
+      "label": "t:sections.main-product.blocks.buy_buttons.settings.display_price_inside",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "price_position",
+      "label": "t:sections.main-product.blocks.buy_buttons.settings.price_position",
+      "default": "after-button",
+      "options": [
+        {
+          "value": "before-button",
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.before_add_to_cart"
+        },
+        {
+          "value": "after-button",
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.after_add_to_cart"
+        }
+      ],
+      "visible_if": "{{ block.settings.display_price_in_add_to_cart }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_icon_in_add_to_cart",
+      "label": "t:sections.main-product.blocks.buy_buttons.settings.show_icon",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "button_icon",
+      "label": "t:sections.dbtfy_result_section.settings.button_icon.label",
+      "info": "t:general.settings.icon_info",
+      "default": "add_shopping_cart",
+      "visible_if": "{{ block.settings.display_icon_in_add_to_cart == true }}"
+    },
+    {
+      "type": "select",
+      "id": "icon_position",
+      "label": "t:blocks.button.icon_position_label",
+      "default": "after-label",
+      "options": [
+        {
+          "value": "before-label",
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.before_add_to_cart"
+        },
+        {
+          "value": "after-label",
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.after_add_to_cart"
+        }
+      ],
+      "visible_if": "{{ block.settings.display_icon_in_add_to_cart }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-product.blocks.buy_buttons.settings.add_to_cart_animation.name"
+    },
+    {
+      "type": "checkbox",
+      "id": "dbtfy_addtocart_animation_enable",
+      "label": "t:sections.main-product.blocks.buy_buttons.settings.add_to_cart_animation.enabled",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info",
+      "visible_if": "{{ block.settings.dbtfy_addtocart_animation_enable }}"
+    },
+    {
+      "type": "select",
+      "id": "dbtfy_addtocart_animation_type",
+      "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.label",
+      "default": "tada",
+      "options": [
+        {
+          "value": "bounce",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__1.label"
+        },
+        {
+          "value": "flash",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__2.label"
+        },
+        {
+          "value": "pulse",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__3.label"
+        },
+        {
+          "value": "shakeX",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__4.label"
+        },
+        {
+          "value": "shakeY",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__5.label"
+        },
+        {
+          "value": "tada",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__6.label"
+        },
+        {
+          "value": "heartBeat",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__7.label"
+        }
+      ],
+      "visible_if": "{{ block.settings.dbtfy_addtocart_animation_enable }}"
+    },
+    {
+      "type": "range",
+      "id": "dbtfy_addtocart_animation_interval",
+      "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_elment_animation_interval",
+      "min": 3,
+      "max": 20,
+      "unit": "s",
+      "step": 1,
+      "default": 5,
+      "visible_if": "{{ block.settings.dbtfy_addtocart_animation_enable }}"
+    },
+    {
+      "type": "range",
+      "id": "dbtfy_addtocart_animation_duration",
+      "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_elment_animation_duration.label",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1,
+      "visible_if": "{{ block.settings.dbtfy_addtocart_animation_enable }}"
+    },
+    {
+      "type": "select",
+      "id": "add_to_cart_overlay_effect",
+      "default": "inherit",
+      "label": "Overlay Effect",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "glacier",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__2"
+        },
+        { "value": "", "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main-product.blocks.buy_buttons.name"
+    }
+  ]
+}
+{% endschema %}

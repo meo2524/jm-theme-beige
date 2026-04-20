@@ -1,0 +1,217 @@
+{%- if request.design_mode -%}
+  {%- render 'widget-blocker-warning',
+    enabled: settings.dbtfy_cart_reminder,
+    type: 'widget',
+    as: 'block',
+    name: 'Cart Reminder',
+    id: block
+  -%}
+{%- endif -%}
+{%- if settings.dbtfy_cart_reminder -%}
+  {%- render 'widget-settings', key: 'cart-reminder', settings: block.settings -%}
+  <link rel="stylesheet" href="{{ 'dbtfy-cart-reminder.css' | asset_url }}" media="print" onload="this.media='all'">
+  <dbtfy-cart-reminder
+    class="hidden"
+    data-block-id="{{ block.id }}"
+    data-display-time="{{ block.settings.display_time }}"
+    data-interval-time="{{ block.settings.interval_time }}"
+    data-show-on-device="{{ block.settings.show_on }}"
+    data-color-scheme="{{ block.settings.color_scheme }}"
+    data-custom-color-scheme="{{ block.settings.custom_color_scheme }}"
+    data-position="{{ block.settings.position }}"
+    data-close-icon="{{ block.settings.close_icon }}"
+    {{ block.shopify_attributes }}
+  >
+    <div class="d-grid dbtfy-cart-reminder inner-spacing">
+      <div class="dbtfy-cart-reminder__block global-media-settings">
+        {%- if request.design_mode -%}
+          <div class="img-placeholder">
+            {{ 'placeholder.svg' | inline_asset_content }}
+          </div>
+        {%- else -%}
+          <img
+            class="dbtfy-cart-reminder__img"
+            src=""
+            width="75"
+            height="75"
+          >
+        {%- endif -%}
+      </div>
+      <div class="dbtfy-cart-reminder__block dbtfy-cart-reminder__block--right">
+        {%- if block.settings.text != blank -%}
+          <div class="dbtfy-cart-reminder__text title h5">{{ block.settings.text }}</div>
+        {%- endif -%}
+        {%- if block.settings.button_text != blank -%}
+          <a href="/checkout" class="button button--primary button--small">{{ block.settings.button_text }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </dbtfy-cart-reminder>
+  <script src="{{ 'dbtfy-cart-reminder.js' | asset_url }}" defer></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:blocks.dbtfy-cart-reminder.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-cart-reminder.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-cart-reminder.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.heading",
+      "info": "t:general.settings.block-name.info",
+      "default": "t:blocks.dbtfy-cart-reminder.name"
+    },
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "t:sections.all.show_on.label",
+      "default": "desktop-only",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "display_time",
+      "label": "t:blocks.dbtfy-cart-reminder.settings.display_time.label",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "default": 10,
+      "info": "t:blocks.dbtfy-cart-reminder.settings.display_time.info"
+    },
+    {
+      "type": "range",
+      "id": "interval_time",
+      "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_elment_animation_interval",
+      "min": 3,
+      "max": 20,
+      "unit": "s",
+      "step": 1,
+      "default": 20,
+      "info": "t:blocks.dbtfy-cart-reminder.settings.interval_time.info"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "t:settings_schema.wish_list.settings.icon_position_product_page.options.label",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "t:general.settings.position.option__1"
+        },
+        {
+          "value": "top-center",
+          "label": "t:general.settings.position.option__2"
+        },
+        {
+          "value": "top-right",
+          "label": "t:general.settings.position.option__3"
+        },
+        {
+          "value": "bottom-left",
+          "label": "t:general.settings.position.option__7"
+        },
+        {
+          "value": "bottom-center",
+          "label": "t:general.settings.position.option__8"
+        },
+        {
+          "value": "bottom-right",
+          "label": "t:general.settings.position.option__9"
+        }
+      ],
+      "default": "bottom-left"
+    },
+    {
+      "type": "text",
+      "id": "close_icon",
+      "label": "t:blocks.cart-notification.settings.close_icon.label",
+      "default": "close",
+      "info": "t:sections.all.icon.info"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "t:general.settings.text",
+      "default": "t:blocks.dbtfy-cart-reminder.settings.text.default",
+      "info": "t:blocks.dbtfy-cart-reminder.settings.text.info"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:blocks.dbtfy-cart-reminder.settings.button.label",
+      "default": "t:blocks.dbtfy-cart-reminder.settings.button.default"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-3"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    }
+  ]
+}
+{%- endschema -%}

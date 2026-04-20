@@ -1,0 +1,194 @@
+{%- unless settings.review_app == '' or settings.review_app_other == 'debutify-dtm' -%}
+  <div
+    class="
+      common-reviews-widget
+      {% unless section.settings.full_width %}page-width{% endunless %}
+      {% if section.settings.enable_color_scheme %}
+       color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }}
+      {% endif %}
+    "
+  >
+    <div class="review-widget">
+      {% if settings.review_app == 'other_app' %}
+        {%- case settings.review_app_other -%}
+          {%- when 'debutify' -%}
+            <div
+              id="productReview"
+              data-productId="{{ product.id }}"
+              data-storeName="{{ shop.permanent_domain | split: '.myshopify.com' | first }}"
+            ></div>
+
+          {%- when 'judge_me' -%}
+            <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget" data-id="{{ product.id }}">
+              {{ product.metafields.judgeme.widget }}
+            </div>
+
+          {%- when 'loox' -%}
+            <div id="looxReviews" data-product-id="{{ product.id }}" class="loox-reviews-default"></div>
+
+          {%- when 'ryviu' -%}
+            <div class="lt-block-reviews">
+              <ryviu-widget
+                handle="{{ product.handle }}"
+                product_id="{{ product.id }}"
+                title_product="{{ product.title }}"
+                total_meta="{{ product.metafields.ryviu.r_count }}"
+                image_product="{{ product.featured_image.src | image_url: '100x' }}"
+              >
+              </ryviu-widget>
+            </div>
+
+          {%- when 'stamped_io' -%}
+            <div
+              id="stamped-main-widget"
+              data-widget-style="standard"
+              data-product-id="{{ product.id }}"
+              data-name="{{ product.title | escape }}"
+              data-url="{{ shop.url }}{{ product.url }}"
+              data-image-url="{{ product.featured_image | image_url: 'large' | replace: '?', '%3F' | replace: '&', '%26' }}"
+              data-description="{{ product.description | escape }}"
+              data-product-sku="{{ product.handle }}"
+              data-product-type="{{ product.type }}"
+            >
+              {{ product.metafields.stamped.reviews }}
+            </div>
+
+          {%- when 'ali_reviews' -%}
+            <div class="alireviews-review-box"></div>
+
+          {%- when 'rivyo' -%}
+            <div
+              id="wc_review_section"
+              class="wc_review_main_content"
+              data-url="{{ shop.url }}"
+              data-handle="{{ product.handle }}"
+              data-product_id="{{ product.id }}"
+              data-limit="0"
+            ></div>
+
+          {%- when 'kudosi' -%}
+            <div class="alireviews-review-box"></div>
+
+          {%- when 'growave' -%}
+            {% capture the_snippet_reviews %}{% render 'socialshopwave-widget-recommends' with 1 %}{% endcapture %}
+            {% unless the_snippet_reviews contains 'Liquid error' %}
+              {{ the_snippet_reviews }}
+            {% endunless %}
+
+          {%- when 'automizely' -%}
+            {%- if content_for_header contains '/reviews\/v1\/sdk.js' -%}
+              <div
+                id="automizely_reviews_carousel_v2_production"
+                data-pid="{{ product.id }}"
+                data-oid="{{ shop.metafields.automizely_reviews.oid }}"
+                data-sprw="{{ shop.metafields.automizely_reviews.sprw }}"
+              ></div>
+
+              <script src="{{ 'am_reviews_main_widget.js' | asset_url }}" async></script>
+            {%- endif -%}
+
+            <div id="automizely_reviews_carousel" style="display: none"></div>
+
+          {%- when 'opinew' -%}
+            <div id="opinew-reviews-product-page-code">
+              <span
+                id="opinew-plugin"
+                data-server-address="https://api.opinew.com"
+                data-opw-prodreviews="{{ product.metafields.opinew_metafields['product_plugin'] }}"
+                data-opinew-shop-id="{{ shop.id }}"
+                data-shop-url="{{ shop.domain }}"
+                data-platform-product-id="{{ product.id }}"
+              >
+                <span id="opinew_product_plugin_app"></span>
+              </span>
+            </div>
+
+          {%- when 'fera' -%}
+            <div data-fera-container="424140" data-product_id="{{ product.id }}"></div>
+          {%- when 'custom_review' -%}
+            {%- if settings.review_widget_code != blank -%}
+              <div class="custom-review-widget">
+                {{ settings.review_widget_code }}
+              </div>
+            {%- endif -%}
+        {%- endcase -%}
+      {% else %}
+        {% case settings.review_app %}
+          {%- when 'trustoo' -%}
+            <script id="seal_product" type="application/json">
+              {
+                "id": {{ product.id }},
+                "title": "{{ product.title | escape }}",
+                "image_url": "{{ product.featured_image | image_url: 'large' }}"
+              }
+            </script>
+            <div id="seal-review-widget" data-app="trustoo"></div>
+        {% endcase %}
+      {% endif %}
+    </div>
+  </div>
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "t:sections.common_reviews_widget.name",
+  "settings": [
+    {
+      "type": "checkbox",
+      "label": "t:sections.common_reviews_widget.settings.full_width.label",
+      "id": "full_width",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.common_reviews_widget.settings.note.content"
+    },
+    {
+      "type": "checkbox",
+      "label": "t:sections.common_reviews_widget.settings.color_scheme.enable",
+      "id": "enable_color_scheme",
+      "default": false,
+      "info": "t:sections.common_reviews_widget.settings.color_scheme.info"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    }
+  ]
+}
+{% endschema %}

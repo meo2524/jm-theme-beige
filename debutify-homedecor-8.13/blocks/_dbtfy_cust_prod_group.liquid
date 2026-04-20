@@ -1,0 +1,223 @@
+{%- liquid
+  assign label = block.settings.label
+  assign options = block.settings.options | split: ','
+  assign show_at_checkout = block.settings.show_at_checkout
+  assign group_type = block.settings.type
+  assign property_value = label
+
+  unless show_at_checkout
+    assign property_value = label | prepend: '_'
+  endunless
+-%}
+
+{%- capture enable_products -%}
+{%- render 'visibility-check' -%}
+{%- endcapture -%}
+
+{% if enable_products == 'true' %}
+  <customizable-product
+    class="dbtfy-customizable-products__block customer hidden"
+    {{ block.shopify_attributes }}
+  >
+    {%- case group_type -%}
+      {%- when 'dropdown' -%}
+        {% if label != blank %}
+          {% if label != blank %}
+            <legend class="form__label">{{ label }}</legend>
+          {%- endif -%}
+          <dbtfy-dropdown>
+            <button
+              class="dbtfy-dropdown__button select__select button button--tertiary left"
+              aria-expanded="false"
+            >
+              <span>{{ options[0] }}</span>
+              {{ 'icon-caret.svg' | inline_asset_content }}
+            </button>
+            <div class="dbtfy-dropdown__list" hidden>
+              <ul class="list-unstyled">
+                {% for option in options %}
+                  {%- liquid
+                    assign option_name = option | strip
+                    assign option_label = option_name
+
+                    unless show_at_checkout
+                      assign option_name = option_name | prepend: '_'
+                    endunless
+                  -%}
+                  <li class="dbtfy-dropdown__item">
+                    <input
+                      type="radio"
+                      class="dbtfy-dropdown__input"
+                      id="dbtfy-radio-{{ forloop.index }}--{{ block.id }}"
+                      name="properties[{{ property_value }}]"
+                      value="{{ option_name }}"
+                    >
+                    <label class="dbtfy-dropdown__label" for="dbtfy-radio-{{ forloop.index }}--{{ block.id }}">
+                      {{- option_label -}}
+                    </label>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </dbtfy-dropdown>
+        {%- endif -%}
+
+      {%- when 'radio_buttons' -%}
+        {%- if label != blank -%}
+          <fieldset class="js product-form__input product-form__input--pill">
+            <legend class="form__label">{{ label }}</legend>
+            {%- for option in options -%}
+              {%- assign option_name = option | strip -%}
+              <input
+                type="radio"
+                id="radio-{{ forloop.index }}-{{ block.id }}"
+                {% if forloop.first %}
+                  checked
+                {% endif %}
+                name="properties[{{ property_value }}]"
+                value="{{ option_name }}"
+                class="dbtfy-customizable-product__input"
+              >
+              <label for="radio-{{ forloop.index }}-{{ block.id }}">
+                {{ option_name }}
+              </label>
+            {%- endfor -%}
+          </fieldset>
+        {%- endif -%}
+
+      {%- when 'checkbox_group' -%}
+        <fieldset class="js product-form__input product-form__input--pill">
+          <legend class="form__label">{{ label }}</legend>
+          {%- for option in options -%}
+            {%- assign option_name = option | strip -%}
+            <input
+              type="checkbox"
+              id="checkbox-{{ forloop.index }}-{{ block.id }}"
+              value="{{ option_name }}"
+              class="dbtfy-customizable-product__checkbox"
+            >
+            <label for="checkbox-{{ forloop.index }}-{{ block.id }}">
+              {{ option_name }}
+            </label>
+          {%- endfor -%}
+          <input
+            class="dbtfy-customizable-product__checkbox-group"
+            type="hidden"
+            name="properties[{{ property_value }}]"
+          >
+        </fieldset>
+    {%- endcase -%}
+  </customizable-product>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:blocks.customizable_products.blocks.group.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:general.settings.label",
+      "info": "t:general.settings.label_required"
+    },
+    {
+      "type": "textarea",
+      "id": "options",
+      "label": "t:blocks.customizable_products.blocks.group.settings.options.label",
+      "info": "t:blocks.customizable_products.blocks.group.settings.options.info",
+      "default": "Option 1, Option 2, Option 3"
+    },
+    {
+      "type": "select",
+      "id": "type",
+      "label": "t:settings_schema.dbfty_infinite_scroll.settings.type_select.label",
+      "options": [
+        {
+          "value": "dropdown",
+          "label": "t:blocks.customizable_products.blocks.group.settings.type.options__1.label"
+        },
+        {
+          "value": "radio_buttons",
+          "label": "t:blocks.customizable_products.blocks.group.settings.type.options__2.label"
+        },
+        {
+          "value": "checkbox_group",
+          "label": "t:blocks.customizable_products.blocks.group.settings.type.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_at_checkout",
+      "label": "t:blocks.customizable_products.blocks.text.settings.show_at_checkout.label",
+      "info": "t:blocks.customizable_products.blocks.text.settings.show_at_checkout.info",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.visibility.header.content",
+      "info": "t:general.settings.visibility.header.info"
+    },
+    {
+      "type": "radio",
+      "id": "visibility",
+      "label": "t:general.settings.visibility.visibility.label",
+      "info": "t:general.settings.visibility.visibility.info",
+      "default": "all",
+      "options": [
+        {
+          "value": "all",
+          "label": "t:general.settings.visibility.visibility.options__1"
+        },
+        {
+          "value": "collection",
+          "label": "t:general.settings.visibility.visibility.options__2"
+        },
+        {
+          "value": "type",
+          "label": "t:general.settings.visibility.visibility.options__3"
+        },
+        {
+          "value": "tag",
+          "label": "t:general.settings.visibility.visibility.options__4"
+        },
+        {
+          "value": "product",
+          "label": "t:general.settings.visibility.visibility.options__5"
+        }
+      ]
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:general.settings.visibility.collection.label"
+    },
+    {
+      "type": "text",
+      "id": "types",
+      "label": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.label",
+      "info": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.info"
+    },
+    {
+      "type": "text",
+      "id": "tags",
+      "label": "t:general.settings.visibility.tags.label",
+      "info": "t:blocks.dbtfy-product-bullet-points.block.settings.contact_2.info"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:general.settings.visibility.product.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.customizable_products.blocks.group.name"
+    }
+  ]
+}
+{% endschema %}

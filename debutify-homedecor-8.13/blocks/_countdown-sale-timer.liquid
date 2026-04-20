@@ -1,0 +1,97 @@
+<div class="dbtfy-countdown-sale-countdown" {{ block.shopify_attributes }}>
+  <dbtfy-countdown
+    class="dbtfy-countdown "
+    data-time="{{ block.settings.time }}"
+    data-text-days="{{ block.settings.text_days }}"
+    data-text-hours="{{ block.settings.text_hours }}"
+    data-text-min="{{ block.settings.text_minutes }}"
+    data-text-sec="{{ block.settings.text_seconds }}"
+    data-text-expired="{{ block.settings.text_expired }}"
+    role="timer"
+    data-hide-on-expired="{{ block.settings.hide_on_expired }}"
+    data-section-id="#shopify-section-{{ section.id }}"
+    data-infinite-minute="{{ block.settings.infinite_minutes }}"
+  >
+    <span data-days>0</span>
+    <span data-hours>0</span>
+    <span data-min>0</span>
+    <span data-sec>0</span>
+  </dbtfy-countdown>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-countdown-sale.blocks.countdown.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "When you add Infinite Minutes, On expire time it will be re-started from the beginning. And Fix Time will be ignored."
+    },
+    {
+      "type": "text",
+      "id": "time",
+      "label": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.time.label",
+      "info": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.time.info"
+    },
+    {
+      "type": "header",
+      "content": "Infinite Settings"
+    },
+    {
+      "type": "number",
+      "id": "infinite_minutes",
+      "label": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.infinite_minute_label",
+      "info": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.infinite_minute_info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.translastion"
+    },
+    {
+      "type": "text",
+      "id": "text_days",
+      "label": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.text_days.label",
+      "default": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.text_days.label"
+    },
+    {
+      "type": "text",
+      "id": "text_minutes",
+      "label": "t:blocks.cart-countdown-timer.settings.minutes_label",
+      "default": "t:blocks.cart-countdown-timer.settings.minutes_label"
+    },
+    {
+      "type": "text",
+      "id": "text_hours",
+      "label": "t:blocks.cart-countdown-timer.settings.hours_label",
+      "default": "t:blocks.cart-countdown-timer.settings.hours_label"
+    },
+    {
+      "type": "text",
+      "id": "text_seconds",
+      "label": "t:blocks.cart-countdown-timer.settings.seconds_label",
+      "default": "t:blocks.cart-countdown-timer.settings.seconds_label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.text_expired.setting"
+    },
+    {
+      "type": "text",
+      "id": "text_expired",
+      "label": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.text_expired.label",
+      "default": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.text_expired.default"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_expired",
+      "label": "t:sections.dbtfy-countdown-sale.blocks.countdown.settings.text_expired.hide_on_expired"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-countdown-sale.blocks.countdown.name"
+    }
+  ]
+}
+{% endschema %}

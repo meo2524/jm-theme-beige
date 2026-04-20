@@ -1,0 +1,18 @@
+{% layout none %}
+
+<li
+  id="Slide-{{ product.id }}"
+  class="add-as-{{ adding_type }} grid__item"
+  data-handle="{{ product.handle }}"
+  data-product-id="{{ product.id }}"
+>
+  {% render 'card-product',
+    card_product: product,
+    media_aspect_ratio: 'inherit',
+    show_secondary_image: 'inherit',
+    quick_add: 'standard',
+    replace_product: replace_product,
+    show_rating: true,
+    image_shape: 'default'
+  %}
+</li>

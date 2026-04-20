@@ -1,0 +1,112 @@
+{%- liquid
+  unless block.settings.product == blank
+    assign product = block.settings.product
+  endunless
+
+  if product != null
+    assign product_form_id = 'product-form-' | append: section.id
+
+    if settings.dbtfy_back_in_stock
+      render 'dbtfy-back-in-stock', product: product
+    endif
+
+    render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true
+  endif
+-%}
+
+{% schema %}
+{
+  "name": "Product Buy Buttons",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.main-product.settings.product.label"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout_notice"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_gift_card_recipient",
+      "default": true,
+      "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
+      "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-product.blocks.buy_buttons.settings.add_to_cart_animation.name"
+    },
+    {
+      "type": "checkbox",
+      "id": "dbtfy_addtocart_animation_enable",
+      "label": "t:sections.main-product.blocks.buy_buttons.settings.add_to_cart_animation.enabled",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "dbtfy_addtocart_animation_type",
+      "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.label",
+      "default": "tada",
+      "options": [
+        {
+          "value": "bounce",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__1.label"
+        },
+        {
+          "value": "flash",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__2.label"
+        },
+        {
+          "value": "pulse",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__3.label"
+        },
+        {
+          "value": "shakeX",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__4.label"
+        },
+        {
+          "value": "shakeY",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__5.label"
+        },
+        {
+          "value": "tada",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__6.label"
+        },
+        {
+          "value": "heartBeat",
+          "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_element_animation_type.options__7.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "dbtfy_addtocart_animation_interval",
+      "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_elment_animation_interval",
+      "min": 3,
+      "max": 20,
+      "unit": "s",
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "dbtfy_addtocart_animation_duration",
+      "label": "t:settings_schema.global.settings.element-animation.settings.dbtfy_elment_animation_duration.label",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Buy Buttons",
+      "settings": {
+        "product": "{{ closest.product }}"
+      }
+    }
+  ]
+}
+{% endschema %}

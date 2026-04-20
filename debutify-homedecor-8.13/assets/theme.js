@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){subscribe(PUB_SUB_EVENTS.cartUpdate,function(t){"cart-items"===t.source?Debutify.cart=t.cartData:"product-form"===t.source&&(Debutify.settings.dbtfy_skip_cart?window.location.href="/checkout":fetch(`${routes.cart_url}.js`).then(t=>t.json()).then(t=>{Debutify.cart=t}).catch(t=>{console.error(t)}))})});

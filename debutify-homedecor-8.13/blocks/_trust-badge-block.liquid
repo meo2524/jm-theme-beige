@@ -1,0 +1,65 @@
+{%- if block.settings.trust_badges_image != blank
+  or block.settings.trust_badges_title != blank
+  or block.settings.trust_badges_text != blank
+-%}
+  <div
+    id="Slide-{{ section.id }}-{{ block.id }}"
+    class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} dbtfy-trust-badge-images--columns inner-spacing {enable_card} dbtfy-trust-badge-images--rows-items"
+    {{ block.shopify_attributes }}
+  >
+    {%- if block.settings.trust_badges_image != blank -%}
+      <div class="{enable_gray_logos} trust_badge_image image--ratio ratio">
+        <img
+          src="{{block.settings.trust_badges_image | image_url }}"
+          alt="{{ block.settings.trust_badges_image.alt }}"
+          width="100%"
+          height="100%"
+        >
+      </div>
+    {%- endif -%}
+    <div>
+      {%- if block.settings.trust_badges_title != blank -%}
+        <div class="dbtfy-trust-badge__heading {logo_heading_size}">
+          {{ block.settings.trust_badges_title }}
+        </div>
+      {%- endif -%}
+      {%- if block.settings.trust_badges_text != blank -%}
+        <div class="dbtfy-trust-badge__heading {logo_text_size}">
+          {{ block.settings.trust_badges_text }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:general.settings.icon_label",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_badges_image",
+      "label": "t:general.settings.image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "trust_badges_title",
+      "label": "t:general.settings.title"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "trust_badges_text",
+      "label": "t:general.settings.text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.icon_label"
+    }
+  ]
+}
+{%- endschema -%}

@@ -1,0 +1,76 @@
+<div class="dbtfy-plan-modal hidden">
+  <div
+    class="dbtfy-plan-modal__wrapper global-settings-popup dbtfy-modal__width--center-center color-schme-2 gradient"
+    data-show-details-text="{{ 'widget_limit.show_details' | t }}"
+    data-hide-details-text="{{ 'widget_limit.hide_details' | t }}"
+  >
+    <div class="dbtfy-plan-modal__header inner-spacing">
+      <svg
+        width="5rem"
+        class="icon icon--svg"
+        viewBox="0 0 26 18"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M25.8925 6.19593C25.5975 7.68481 24.7157 9.04785 23.4099 10.0336C23.3559 10.0743 23.3045 10.1117 23.2547 10.1473C23.524 10.8118 23.6605 11.5144 23.6605 12.2373C23.6605 15.4148 20.9711 18 17.6652 18C16.3588 18 15.0919 17.5889 14.0547 16.8347C14.1303 16.7483 14.2037 16.6597 14.275 16.5698C14.7546 15.9633 15.1286 15.2923 15.3862 14.5755C16.0024 15.1309 16.814 15.4436 17.6649 15.4436C19.5045 15.4436 21.0011 14.0053 21.0011 12.2373C21.0011 11.5784 20.795 10.9458 20.4054 10.4081L19.5056 9.16658L20.9295 8.52133C21.2234 8.38802 21.505 8.22045 21.7673 8.02272C23.3644 6.81744 23.8221 4.80545 22.7875 3.5378C22.2701 2.90513 21.4659 2.55641 20.5226 2.55641C18.894 2.55641 17.6769 3.51811 16.8133 4.63552C16.4806 5.06565 16.2003 5.51888 15.9688 5.94901C15.5831 6.6668 15.251 7.47316 14.9822 8.34529C14.5675 9.68929 14.3297 11.1079 14.3297 12.2373C14.3297 12.8764 14.221 13.5049 14.0064 14.1047C13.7993 14.6844 13.4972 15.2272 13.1094 15.718C12.8592 16.0342 12.5755 16.3256 12.2663 16.5841C11.1759 17.4973 9.77949 18 8.33439 18C7.77999 18 7.24253 17.9274 6.73258 17.791C4.202 17.116 2.33908 14.8818 2.33908 12.2373C2.33908 11.5144 2.47565 10.8118 2.74526 10.1473C2.69127 10.109 2.6401 10.0713 2.58999 10.0333C1.28393 9.04785 0.402407 7.68481 0.107389 6.19564C-0.200686 4.64164 0.159265 3.13718 1.12055 1.95971C2.13793 0.714411 3.72595 0 5.477 0C7.02161 0 8.44445 0.495267 9.70642 1.47156C10.6416 2.19479 11.4702 3.1728 12.1735 4.38214C11.9325 4.85059 11.7073 5.34825 11.5034 5.86384C11.2514 6.49993 11.0326 7.158 10.8495 7.83135C10.6144 7.15565 10.3402 6.52432 10.0307 5.94866C9.19861 4.40112 7.73303 2.55605 5.477 2.55605C4.53372 2.55605 3.72913 2.90478 3.21214 3.5378C2.17781 4.80515 2.63551 6.81709 4.2327 8.02237C4.49455 8.2201 4.77651 8.38773 5.07047 8.52103L6.49442 9.16623L5.59452 10.4078C5.20492 10.9458 4.99883 11.5781 4.99883 12.2369C4.99883 13.4473 5.70038 14.5033 6.73294 15.0487C7.20865 15.3001 7.75455 15.4433 8.33476 15.4433C9.31363 15.4433 10.2403 15.0298 10.8773 14.3092C11.389 13.7301 11.6706 12.9941 11.6706 12.2369C11.6706 11.6894 11.7183 10.7857 11.9445 9.5879C12.1552 8.47084 12.4675 7.38664 12.8722 6.36492C13.0748 5.85403 13.2992 5.36248 13.5395 4.90484L13.5494 4.88585C13.5685 4.84888 13.5879 4.81227 13.6077 4.77529C13.8631 4.30002 14.1366 3.85802 14.4274 3.44958C14.9885 2.66091 15.6131 1.99872 16.2945 1.47156C17.5562 0.494926 18.9791 0 20.524 0C22.2751 0 23.8631 0.71407 24.8805 1.95937L24.9097 1.996C25.8484 3.16804 26.1975 4.65756 25.8925 6.19593Z" fill="#765aff"/>
+      </svg>
+      <h4 class="m-0">{{ 'widget_limit.title' | t: type: 'Widget/Sections' }}</h4>
+    </div>
+    <div class="dbtfy-plan-modal__content inner-spacing">
+      <div class="dbtfy-plan-modal__content-warning">
+        <span>
+          {%- render 'icon', icon: 'alarm' -%}
+        </span>
+        <p class="m-0">{{ 'widget_limit.message' | t: type: 'widgets/sections' }}</p>
+      </div>
+      <hr>
+      <div>
+        <p class="m-0 dbtfy-plan-modal__current_plan">
+          {{ 'widget_limit.current_plan' | t }}
+          <strong></strong>.
+        </p>
+        <div class="dbtfy-plan-modal__widget-paid hidden">
+          <p class="widget-limit-reached">
+            <span class="dbtfy-plan-modal__view-details">{{ 'widget_limit.show_details' | t }}</span>
+          </p>
+          <p>
+            {{ 'widget_limit.upgrade_prompt' | t: type: 'widgets/sections' }}
+          </p>
+          <p>{{ 'widget_limit.contact_support' | t }}</p>
+        </div>
+        <div class="dbtfy-plan-modal__widget-free hidden">
+          <p class="widget-limit-reached">
+            <span class="dbtfy-plan-modal__view-details">{{ 'widget_limit.show_details' | t }}</span>
+          </p>
+          <p>
+            {{ 'widget_limit.free_plan_only' | t: type: 'widgets/sections' }}
+          </p>
+          <p>{{ 'widget_limit.contact_support' | t }}</p>
+        </div>
+        <a
+          href="https://theme.debutify.com/"
+          target="_blank"
+          class="button button--primary dbtfy-plan-modal__upgrade-button"
+        >
+          {{- 'widget_limit.upgrade_button' | t -}}
+        </a>
+        <a
+          href="https://help.debutify.com/en/articles/11494317-what-to-do-when-you-see-the-widget-and-section-limit-reached-popup-in-the-debutify-theme"
+          target="_blank"
+          class="link underlined-link button--link dbtfy-plan-modal__upgrade-button w-100"
+        >
+          {{- 'widget_limit.learn_how' | t -}}
+        </a>
+        <div class="dbtfy-plan-modal__content-text hidden">
+          <div class="dbtfy-plan-modal__widget-list dbtfy-plan-modal__column hidden">
+            <h4 class="dbtfy-plan-modal__widget-list-heading">
+              {{ 'widget_limit.enabled_widget_list' | t }}
+              <hr>
+            </h4>
+            <ul class="grid grid--3-col grid--3-col-tablet grid--1-col-mobile text-left "></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

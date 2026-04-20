@@ -1,0 +1,97 @@
+{% render 'widget-blocker-warning',
+  enabled: settings.dbtfy_country_blocker,
+  type: 'widget',
+  as: 'block',
+  name: 'Country Blocker',
+  id: block
+-%}
+
+{% if request.design_mode == false %}
+  {% if block.settings.inline_error_message != blank and settings.dbtfy_country_blocker %}
+    {% assign country_codes_list = block.settings.country_codes_list %}
+    {% assign country_list_function = block.settings.country_list_function %}
+    <dbtfy-country-blocker
+      class="hidden"
+      data-country-code-list="{{ country_codes_list }}"
+      data-country-list-function="{{ country_list_function }}"
+    >
+      <div class="inner-spacing">
+        <div class="rte text-{{ block.settings.inline_error_message_alignment }}">
+          {{ block.settings.inline_error_message }}
+        </div>
+      </div>
+    </dbtfy-country-blocker>
+
+    {{ 'dbtfy-country-blocker.js' | asset_url | script_tag }}
+  {% endif %}
+{% endif %}
+{% schema %}
+{
+  "name": "t:blocks.dbtfy-country-blocker.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-country-blocker.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-country-blocker.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.professional_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "country_list_function",
+      "label": "t:blocks.dbtfy-country-blocker.settings.country_list_function.label",
+      "options": [
+        {
+          "value": "block",
+          "label": "t:blocks.dbtfy-country-blocker.settings.country_list_function.options__1"
+        },
+        {
+          "value": "whitelist",
+          "label": "t:blocks.dbtfy-country-blocker.settings.country_list_function.options__2"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "country_codes_list",
+      "label": "t:blocks.dbtfy-country-blocker.settings.country_codes_list.label",
+      "info": "t:blocks.dbtfy-country-blocker.settings.country_codes_list.info",
+      "default": "IN"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.content"
+    },
+    {
+      "type": "richtext",
+      "id": "inline_error_message",
+      "label": "t:blocks.dbtfy-country-blocker.settings.inline_error_message.label",
+      "default": "t:blocks.dbtfy-country-blocker.settings.inline_error_message.default"
+    },
+    {
+      "type": "text_alignment",
+      "id": "inline_error_message_alignment",
+      "label": "t:general.settings.alignment.label",
+      "default": "center"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Country Blocker"
+    }
+  ]
+}
+{% endschema %}

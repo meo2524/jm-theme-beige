@@ -1,0 +1,40 @@
+<script>
+  Debutify.widgets['product_as_variants']['blocks'].push({{ block.settings | json }})
+</script>
+{%- content_for 'blocks' -%}
+{%- schema -%}
+{
+  "name": "t:blocks.dbtfy-product-swatches.product_as_variant",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info",
+      "default": "t:blocks.dbtfy-product-swatches.heading_default"
+    },
+    {
+      "type": "text",
+      "id": "option_names",
+      "label": "t:blocks.dbtfy-product-swatches.option_names",
+      "default": "t:blocks.dbtfy-product-swatches.option_default",
+      "info": "t:blocks.dbtfy-product-swatches.option_by_separted"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_dbtfy-product-as-variant"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product as Variant Group",
+      "blocks": [
+        {
+          "type": "_dbtfy-product-as-variant"
+        }
+      ]
+    }
+  ]
+}
+{%- endschema -%}

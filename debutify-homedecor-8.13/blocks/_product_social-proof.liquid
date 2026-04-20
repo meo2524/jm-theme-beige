@@ -1,0 +1,175 @@
+{{ 'product_social-proof.css' | asset_url | stylesheet_tag }}
+
+<div
+  class="social-proof social-proof--left {{ block.settings.alignment }} color-{{ block.settings.custom_color_scheme }} dbtfy-color-{{ block.settings.color_scheme }} gradient"
+>
+  <div class="social-proof__avatars-container flex">
+    {% if block.settings.avatar_1 != blank or request.design_mode %}
+      <div class="social-proof__avatar">
+        {% if block.settings.avatar_1 != blank %}
+          {{ block.settings.avatar_1 | image_url: width: 500, height: 500 | image_tag }}
+        {% else %}
+          {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg w-full h-full object-cover' }}
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if block.settings.avatar_2 != blank or request.design_mode %}
+      <div class="social-proof__avatar">
+        {% if block.settings.avatar_2 != blank %}
+          {{ block.settings.avatar_2 | image_url: width: 500, height: 500 | image_tag }}
+        {% else %}
+          {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg w-full h-full object-cover' }}
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if block.settings.avatar_3 != blank or request.design_mode %}
+      <div class="social-proof__avatar">
+        {% if block.settings.avatar_3 != blank %}
+          {{ block.settings.avatar_3 | image_url: width: 500, height: 500 | image_tag }}
+        {% else %}
+          {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg w-full h-full object-cover' }}
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+  {% if block.settings.stat_1_value != blank or block.settings.stat_1_label != blank %}
+    <div
+      class="social-proof__text statistic1 social-proof__text-1 social-proof__text--stretch"
+    >
+      {% if block.settings.stat_1_value != blank %}
+        <div class="text-color">
+          <strong>{{ block.settings.stat_1_value }}</strong>
+        </div>
+      {% endif %}
+      {% if block.settings.stat_1_label != blank %}
+        <div class="text-color">{{ block.settings.stat_1_label }}</div>
+      {% endif %}
+    </div>
+  {% endif %}
+  {% if block.settings.stat_2_value != blank or block.settings.stat_2_label != blank %}
+    <div class="social-proof__text statistic2 social-proof__text-2">
+      {% if block.settings.stat_2_value != blank %}
+        <div class="text-color">
+          <strong>{{ block.settings.stat_2_value }}</strong>
+        </div>
+      {% endif %}
+      {% if block.settings.stat_2_label != blank %}
+        <div class="text-color">{{ block.settings.stat_2_label }}</div>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-product.blocks.product_social_proof.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.main-product.blocks.product_social_proof.settings.avatar_image.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "avatar_1",
+      "label": "t:sections.header.blocks.mega.settings.image_1.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "avatar_2",
+      "label": "t:sections.header.blocks.mega.settings.image_2.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "avatar_3",
+      "label": "t:sections.header.blocks.mega.settings.image_3.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-product.blocks.product_social_proof.settings.stat_1.state_label"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_value",
+      "label": "t:general.settings.title",
+      "default": "t:sections.main-product.blocks.product_social_proof.settings.stat_1.value"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "t:sections.dbtfy-parallax-image.settings.subtitle.label",
+      "default": "t:sections.main-product.blocks.product_social_proof.settings.stat_1.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-product.blocks.product_social_proof.settings.stat_2.state_label"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_value",
+      "label": "t:general.settings.title",
+      "default": "t:sections.main-product.blocks.product_social_proof.settings.stat_2.value"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "t:sections.dbtfy-parallax-image.settings.subtitle.label",
+      "default": "t:sections.main-product.blocks.product_social_proof.settings.stat_2.label"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:general.settings.alignment.label",
+      "default": "justify-content-left",
+      "options": [
+        { "value": "justify-content-left", "label": "t:general.settings.alignment.option__4" },
+        { "value": "justify-content-center", "label": "t:general.settings.alignment.option__5" },
+        { "value": "justify-content-right", "label": "t:general.settings.alignment.option__6" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main-product.blocks.product_social_proof.name"
+    }
+  ]
+}
+{% endschema %}

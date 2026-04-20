@@ -1,0 +1,218 @@
+{%- if settings.dbtfy_shipping_calculator -%}
+  {%- render 'widget-settings', key: 'dbtfy-shipping-calculator', settings: block.settings -%}
+  <link
+    rel="stylesheet"
+    href="{{ 'dbtfy-shipping-calculator.css' | asset_url }}"
+    media="print"
+    onload="this.media='all'"
+  >
+  <div class="cart-block" {{ block.shopify_attributes }}>
+    <dbtfy-shipping-calculator
+      id="dbtfy-shipping-calculator"
+      data-shopify-common-js="{{ 'shopify_common.js' | shopify_asset_url }}"
+      data-customer-country="{{ customer.addresses.first.country }}"
+      data-customer-province="{{ customer.addresses.first.province }}"
+      data-customer-zip="{{ customer.addresses.first.zip }}"
+      data-country-id="dbtfy-shipping-calculator-country"
+      data-province-id="dbtfy-shipping-calculator-province"
+      data-province-wrapper="dbtfy-shipping-calculator-province-wrapper"
+    >
+      <div class="dbtfy-shipping-calculator" {{ block.shopify_attributes }}>
+        <details id="Details-{{block.id}}">
+          <summary>
+            <div class="dbtfy-gap-5 flex flex-row">
+              <span class="feedback-label-icon">
+                {%- render 'material-icon', icon: block.settings.shipping_calculator_label_icon -%}
+              </span>
+              <span class="summary__title">
+                <span>{{- block.settings.title -}}</span>
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </span>
+            </div>
+          </summary>
+          <div class="dbtfy-shipping_calculator">
+            <div id="dbtfy-shipping-calculator-country-wrapper" class="field-wrapper">
+              <label class="form__label" for="dbtfy-shipping-calculator-country">
+                {{- block.settings.text_country -}}
+              </label>
+              <div class="select">
+                <select
+                  id="dbtfy-shipping-calculator-country"
+                  class="select__select"
+                  autocomplete="country"
+                >
+                  {{ all_country_option_tags }}
+                </select>
+                <svg class="icon icon-caret" viewBox="0 0 10 6">
+                  <path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+            </div>
+            <div id="dbtfy-shipping-calculator-province-wrapper" class="field-wrapper" style="display: none;">
+              <label class="form__label" for="dbtfy-shipping-calculator-province">
+                {{- block.settings.text_province -}}
+              </label>
+              <div class="select">
+                <select
+                  id="dbtfy-shipping-calculator-province"
+                  class="select__select"
+                  autocomplete="address-level1"
+                ></select>
+                <svg class="icon icon-caret" viewBox="0 0 10 6">
+                  <path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="field-wrapper">
+              <label class="form__label" for="dbtfy-shipping-calculator-zip">
+                {{- block.settings.text_zip -}}
+              </label>
+              <div class="field">
+                <input
+                  id="dbtfy-shipping-calculator-zip"
+                  class="field__input"
+                  type="text"
+                  autocomplete="postal-code"
+                  placeholder="{{ block.settings.text_zip }}"
+                >
+              </div>
+            </div>
+            {%- assign button_size = block.settings.button_size -%}
+            {%- if button_size == 'inherit' -%}
+              {%- assign button_size = settings.button_size -%}
+            {%- endif -%}
+            <div class="field-wrapper">
+              <button
+                id="dbtfy-shipping-calculator-btn"
+                class="button {{ block.settings.btn_style }} {{ button_size }}"
+                type="button"
+              >
+                <span>{{ block.settings.btn_label }}</span>
+                {%- render 'loading-spinner' -%}
+              </button>
+            </div>
+          </div>
+        </details>
+        <div id="dbtfy-shipping-calculator-alert" role="alert" aria-atomic="true" hidden></div>
+      </div>
+    </dbtfy-shipping-calculator>
+  </div>
+  <script src="{{ 'dbtfy-shipping-calculator.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:sections.cart-drawer.blocks.cart-shipping-calculator.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbfty-shipping-calculator.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbfty-shipping-calculator.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.enterprise_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "text",
+      "id": "shipping_calculator_label_icon",
+      "label": "t:general.settings.icon",
+      "default": "location_on",
+      "info": "t:general.settings.icon_info"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:general.settings.title",
+      "default": "t:sections.dbfty-shipping-calculator.settings.title.default"
+    },
+    {
+      "type": "text",
+      "id": "text_no_results",
+      "label": "t:sections.dbfty-shipping-calculator.settings.text_no_results.label",
+      "default": "t:sections.dbfty-shipping-calculator.settings.text_no_results.default"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbfty-shipping-calculator.settings.header__1.content"
+    },
+    {
+      "type": "text",
+      "id": "text_country",
+      "label": "t:sections.dbfty-shipping-calculator.settings.text_country.label",
+      "default": "t:sections.dbfty-shipping-calculator.settings.text_country.default"
+    },
+    {
+      "type": "text",
+      "id": "text_province",
+      "label": "t:sections.dbfty-shipping-calculator.settings.text_province.label",
+      "default": "t:sections.dbfty-shipping-calculator.settings.text_province.label"
+    },
+    {
+      "type": "text",
+      "id": "text_zip",
+      "label": "t:sections.dbfty-shipping-calculator.settings.text_zip.label",
+      "default": "t:sections.dbfty-shipping-calculator.settings.text_zip.default"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbfty-shipping-calculator.settings.header__2.content"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "t:settings_schema.dbfty_infinite_scroll.settings.button.label",
+      "default": "t:sections.dbfty-shipping-calculator.settings.btn_label.default"
+    },
+    {
+      "type": "select",
+      "id": "btn_style",
+      "label": "t:sections.dbfty-shipping-calculator.settings.btn_style.label",
+      "options": [
+        {
+          "value": "link underlined-link button--link",
+          "label": "t:sections.all.button.option_1_label"
+        },
+        {
+          "value": "button button--tertiary",
+          "label": "t:general.settings.style.default"
+        },
+        {
+          "value": "button button--primary",
+          "label": "t:sections.all.button.options__3.label"
+        },
+        {
+          "value": "button button--secondary",
+          "label": "t:sections.all.button.options__4.label"
+        }
+      ],
+      "default": "button button--primary"
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "default": "inherit",
+      "label": "t:general.settings.size.label",
+      "options": [
+        { "value": "inherit", "label": "t:general.settings.size.option__1" },
+        {
+          "value": "button--small",
+          "label": "t:general.settings.small"
+        },
+        { "value": "button--medium", "label": "t:sections.all.animation.image_behavior.parallax_speed.medium" },
+        { "value": "", "label": "t:general.settings.size.option__10" }
+      ]
+    }
+  ]
+}
+{%- endschema -%}

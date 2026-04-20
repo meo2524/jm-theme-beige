@@ -1,0 +1,16 @@
+<select
+  class="select__select"
+  id="ContactForm-{{ block.settings.label | handleize }}"
+  name="contact[{{ block.settings.label | handleize }}]"
+  {% if block.settings.required %}
+    required
+  {% endif %}
+>
+  {% assign options = block.settings.options | split: ',' %}
+
+  {% for option in options %}
+    <option value="{{ option | strip }}">
+      {{ option | strip }}
+    </option>
+  {% endfor %}
+</select>

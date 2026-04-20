@@ -1,0 +1,86 @@
+{% comment %}
+  Renders product variant-picker
+  Accepts:
+  - product: {Object} product object.
+  Usage:
+  {% render 'product-card-variant-picker', product: product %}
+{% endcomment %}
+{%- assign picker_type_option = 'swatch' -%}
+{%- assign swatch_shape_option = settings.swatch_shape -%}
+{%- assign swatches_priority = settings.swatches_priority -%}
+
+{%- unless product.has_only_default_variant -%}
+  {%- liquid
+    assign color_option_names = settings.color_option_names | split: ','
+    assign color_options_array = ''
+    for color_name in color_option_names
+      assign color_name_handle = color_name | handleize
+      if forloop.first
+        assign color_options_array = color_name_handle
+      else
+        assign color_options_array = color_options_array | append: ',' | append: color_name_handle
+      endif
+    endfor
+    assign color_options_array = color_options_array | split: ','
+  -%}
+  <variant-selects
+    id="variant-selects-{{ section.id }}"
+    data-section="{{ section.id }}"
+  >
+    <card-product-variant-selects>
+      {%- for option in product.options_with_values -%}
+        {%- assign option_name = option.name | handleize -%}
+        {%- assign option_names = settings.color_option_names | handleize -%}
+        {% unless option_names contains option_name %}
+          {% continue %}
+        {% endunless %}
+        {%- liquid
+          assign swatch_count = option.values | map: 'swatch' | compact | size
+          assign picker_type = picker_type_option
+
+          if swatch_count > 0 and swatch_shape_option != 'none'
+            if picker_type_option == 'dropdown'
+              assign picker_type = 'swatch_dropdown'
+            else
+              assign picker_type = 'swatch'
+            endif
+          endif
+
+          assign option_name = option.name | handleize
+          assign option_names = settings.color_option_names | handleize
+
+          if settings.dbtfy_variant_swatches and option_names contains option_name
+            if picker_type_option == 'dropdown'
+              assign picker_type = 'swatch_dropdown'
+            else
+              assign picker_type = 'swatch'
+            endif
+          endif
+
+          assign option_name = option.name | handleize
+          assign option_names = settings.color_option_names | handleize
+        -%}
+
+        <div
+          class="js product-form__input product-form__input--swatch"
+          data-option-name="{{ option.name | handleize }}"
+          data-swatch-count="{{ swatch_count }}"
+          {% if settings.dbtfy_variant_swatches and option_names contains option_name %}
+            data-color-option="{{ swatches_priority }}"
+          {% endif %}
+        >
+          {%- render 'product-variant-options',
+            product: product,
+            option: option,
+            block: block,
+            picker_type: picker_type
+          -%}
+        </div>
+      {%- endfor -%}
+
+      <script type="application/json" data-selected-variant>
+        {{ product.selected_or_first_available_variant | json }}
+      </script>
+    </card-product-variant-selects>
+  </variant-selects>
+{%- endunless -%}

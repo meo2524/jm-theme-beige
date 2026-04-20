@@ -1,0 +1,35 @@
+<dbtfy-faq>
+  <div class="dbtfy-faq custom-block">
+    <div class="dbtfy-faq-group-block">
+      <link rel="stylesheet" href="{{ 'dbtfy-faq.css' | asset_url }}" media="print" onload="this.media='all'">
+      {%- if block.settings.title != blank -%}
+        <h3 class="dbtfy-faq-heading-block" {{ block.shopify_attributes }}>
+          {% render 'material-icon', icon: block.settings.icon %}
+          {{ block.settings.title }}
+        </h3>
+      {%- endif -%}
+      <div class="d-grid faq-question-answer-group">
+        {% content_for 'blocks' %}
+      </div>
+      <script src="{{ "dbtfy-faq.js" | asset_url }}" defer></script>
+    </div>
+  </div>
+</dbtfy-faq>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "tag": null,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "_dbtfy-faq-question"
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ"
+    }
+  ]
+}
+{% endschema %}

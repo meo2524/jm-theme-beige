@@ -1,0 +1,16 @@
+{%- if request.design_mode and type == 'widget' and as == 'block' -%}
+  <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          subscribe(PUB_SUB_EVENTS.shopifyEventBlockSelect, (e) => {
+              if (e.detail.blockId === "{{ block.id }}" && !{{ enabled }}) {
+                  document.getElementsByTagName('block-activation-info')[0].innerHTML = '"{{ name }}" widget is not activated in Theme Setting';
+              }
+          });
+          subscribe(PUB_SUB_EVENTS.shopifyEventBlockDeselect, (e) => {
+              if (e.detail.blockId === "{{ block.id }}") {
+                  document.getElementsByTagName('block-activation-info')[0].innerHTML = '';
+              }
+          });
+      });
+  </script>
+{%- endif -%}

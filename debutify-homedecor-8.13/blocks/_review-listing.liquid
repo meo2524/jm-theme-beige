@@ -1,0 +1,448 @@
+{% liquid
+  assign star_active_color = 'rgba(var(--color-button)'
+  assign star_disable_color = 'rgba(var(--color-button),.5)'
+
+  assign slider_on = ''
+  if block.settings.slider_on == 'none'
+    assign slider_on = 'grid--{{ mobile }}-col grid--{{ desktop }}-col-desktop'
+  elsif block.settings.slider_on == 'desktop'
+    assign slider_on = 'grid--{{ mobile }}-col'
+  elsif block.settings.slider_on == 'mobile'
+    assign slider_on = 'grid--{{ desktop }}-col-desktop'
+  endif
+
+  assign slider_on = slider_on | replace: '{{ mobile }}', block.settings.mobile_col_width
+  assign slider_on = slider_on | replace: '{{ desktop }}', block.settings.desktop_col_width
+
+  assign arrow_class = ''
+  if block.settings.arrow_position == 'middle'
+    assign arrow_class = 'slideshow__controls slideshow__controls--top'
+  endif
+
+  assign slider_on_media = 'grid--2-col'
+%}
+{% assign media_aspect_ratio = block.settings.media_aspect_ratio %}
+{% if media_aspect_ratio %}
+  {% if media_aspect_ratio != 'inherit' %}
+    {% assign image_aspect_ratio = media_aspect_ratio %}
+    {% if media_aspect_ratio == 'circle' %}
+      {% assign image_aspect_ratio = '100%' %}
+    {% endif %}
+    {% style %}
+      #shopify-section-{{ section.id }}{
+        --dbtfy-image-crop-ratio: {{ image_aspect_ratio }};
+      }
+    {% endstyle %}
+  {% else %}
+    {% assign media_aspect_ratio = settings.dbtfy_product_image_crop_ratio %}
+  {% endif %}
+{% endif %}
+
+<div class="reviewsData"></div>
+<div class="reviewNotFound"></div>
+
+<template
+  id="review-item-template"
+  data-reviewer-photo="{{block.settings.show_reviewer_photo_if_available }}"
+  data-date-format="{{block.settings.date_format }}"
+  data-show-attached-images="{{ block.settings.show_attached_images }}"
+  data-show-attached-videos="{{ block.settings.show_attached_videos }}"
+  data-aspect-ratio="{{ media_aspect_ratio }}"
+  data-slider-enabled="{{ block.settings.slider_on }}"
+  data-slider-desktop-col="{{ block.settings.desktop_col_width }}"
+  data-slider-mobile-col="{{ block.settings.mobile_col_width }}"
+  data-slider-style="{{ block.settings.style }}"
+>
+  <li
+    id="Slide-{id}"
+    class="splide__slide grid__item {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} review_item"
+    {% if settings.animations_reveal_on_scroll %}
+      data-cascade
+      style="--animation-order: {id};"
+    {% endif %}
+    data-review-id="{review_id}"
+  >
+    <div class="contains-card--product">
+      <div class="review-item card card--card card--text">
+        <div class="card__content">
+          <div class="card__content-inner">
+            <div class="avatar">{avatar}</div>
+            <div class="card__content-right text-left">
+              {% if block.settings.show_reviewer_name %}
+                <h3 class="m-0">{reviewerName}</h3>
+              {% endif %}
+              {% if block.settings.show_date %}
+                <span class="review_date">{reviewDate}</span>
+              {% endif %}
+
+              <star-rating
+                class="stars star-svg empty-{{ settings.empty_star_style }}"
+                data-rating="{rating}"
+              >
+                <i data-star="{rating}"></i>
+              </star-rating>
+            </div>
+          </div>
+          <div class="content text-left">
+            <div>
+              {% if block.settings.show_review_title %}
+                <h4 class="review-title m-0">{title}</h4>
+              {% endif %}
+              <div class="review-desc">
+                <dbtfy-rte class="dbtfy-tesimonial__rte">
+                  <div class="short-description">{body}</div>
+                  <a class="link underlined-link button--link rte-toggle-button">
+                    <span class="read-more-text button-show">{{ 'products.facets.show_more' | t }} </span>
+                    <span class="read-less-text button-show">{{ 'products.facets.show_less' | t }} </span>
+                  </a>
+                </dbtfy-rte>
+                {% if block.settings.show_attached_images or block.settings.show_attached_videos %}
+                  <dbtfy-slider-component>
+                    <div class="splide review-media-slider">
+                      <div class="splide__track">
+                        <ul
+                          id="Slider-{{ section.id }}"
+                          class="splide__list grid {{ slider_on_media }}"
+                        >
+                          {image_video}
+                        </ul>
+                      </div>
+                    </div>
+                  </dbtfy-slider-component>
+                {% endif %}
+              </div>
+            </div>
+            {%- if block.settings.show_thumbsup_and_thumbsdown_icons -%}
+              <review-updownvote>
+                <p>{{ block.settings.was_this_review_helpful_text }}</p>
+                <review-upvote>
+                  <span class="counter">{upvote_counter}</span>
+                  {% render 'material-icon', icon: 'thumb_up' %}
+                </review-upvote>
+                <review-downvote>
+                  <span class="counter">{downvote_counter}</span>
+                  {% render 'material-icon', icon: 'thumb_down' %}
+                </review-downvote>
+              </review-updownvote>
+            {%- endif -%}
+          </div>
+          <div class="card__content-inner reply-message {replier_block}">
+            <div class="avatar">{replier_avatar}</div>
+            <div class="card__content-right text-left">
+              <h5 class="review-title m-0"><b>{replier_name}</b> replied</h5>
+              <div class="review-desc">
+                <dbtfy-rte class="dbtfy-tesimonial__rte">
+                  <div class="short-description">{replier_message}</div>
+                  <a class="link underlined-link button--link rte-toggle-button" style="display: none;">
+                    <span class="read-more-text button-show">Show more </span>
+                    <span class="read-less-text button-show">Show less </span>
+                  </a>
+                </dbtfy-rte>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+</template>
+
+<template
+  id="review-wrapper-template"
+>
+  <div
+    {{ block.shopify_attributes }}
+    class="splide"
+    id="review-slider"
+  >
+    <div class="splide__track">
+      <ul
+        class="splide__list contains-card--product grid {% if block.settings.style == "grid" %} {{ slider_on }} {% else %} grid grid--1-col {% endif %} review-container"
+        id="Slider-{{ section.id }}"
+        role="list"
+      ></ul>
+    </div>
+    {% render 'dbtfy-arrow', class: arrow_class %}
+  </div>
+</template>
+
+<template
+  id="review-not-found"
+>
+  <div class="review-not-found-wrapper">
+    <h2 class="review-not-found">{{ block.settings.label_not_found }}</h2>
+  </div>
+</template>
+
+<button
+  id="dbtfy-review-scroll"
+  class="button button--primary hidden"
+  data-current-page="1"
+>
+  <span>{{ 'products.product.review.load_more' | t }}</span>
+  {%- render 'loading-spinner' -%}
+</button>
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-review.listing.name",
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "t:general.settings.style.lable",
+      "options": [
+        {
+          "value": "list",
+          "label": "t:sections.featured-collection.settings.display-type.options__3"
+        },
+        {
+          "value": "grid",
+          "label": "t:sections.featured-collection.settings.display-type.options__1"
+        }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "range",
+      "id": "desktop_col_width",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "label": "t:sections.custom-code.blocks.settings.desktop_col_width.label",
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "mobile_col_width",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:general.settings.col.mobile.options__1"
+        },
+        {
+          "value": "2",
+          "label": "t:general.settings.col.mobile.options__2"
+        }
+      ],
+      "default": "1",
+      "label": "t:sections.custom-code.blocks.settings.mobile_col_width.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_review_title",
+      "label": "t:sections.dbtfy-review.listing.settigns.review_title",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_attached_images",
+      "label": "t:sections.dbtfy-review.listing.settigns.attached_images",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_attached_videos",
+      "label": "t:sections.dbtfy-review.listing.settigns.attached_videos",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "t:sections.dbtfy-review.listing.settigns.show_rating",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviewer_name",
+      "label": "t:sections.dbtfy-review.listing.settigns.show_reviewer_name",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviewer_photo_if_available",
+      "label": "t:sections.dbtfy-review.listing.settigns.show_reviewer_photo",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "t:sections.dbtfy-review.listing.settigns.show_date",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "date_format",
+      "label": "t:sections.dbtfy-review.listing.settigns.date_format.label",
+      "default": "dd/mm/yyyy",
+      "options": [
+        {
+          "value": "mm/dd/yyyy",
+          "label": "t:sections.dbtfy-review.listing.settigns.date_format.options__1"
+        },
+        {
+          "value": "dd/mm/yyyy",
+          "label": "t:sections.dbtfy-review.listing.settigns.date_format.options__2"
+        },
+        {
+          "value": "yyyy/mm/dd",
+          "label": "t:sections.dbtfy-review.listing.settigns.date_format.options__3"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_thumbsup_and_thumbsdown_icons",
+      "label": "t:sections.dbtfy-review.listing.settigns.show_thumbsup_thumbsdown_icons",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "media_aspect_ratio",
+      "default": "inherit",
+      "label": "t:sections.dbtfy-review.listing.settigns.media_aspect_ratio",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "56.25%",
+          "label": "t:settings_schema.image_crop.ratio.options.option_1"
+        },
+        {
+          "value": "66.666%",
+          "label": "t:settings_schema.image_crop.ratio.options.option_2"
+        },
+        {
+          "value": "75%",
+          "label": "t:settings_schema.image_crop.ratio.options.option_3"
+        },
+        {
+          "value": "100%",
+          "label": "t:settings_schema.image_crop.ratio.options.option_4"
+        },
+        {
+          "value": "133.33%",
+          "label": "t:settings_schema.image_crop.ratio.options.option_5"
+        },
+        {
+          "value": "150%",
+          "label": "t:settings_schema.image_crop.ratio.options.option_6"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "was_this_review_helpful_text",
+      "label": "t:sections.dbtfy-review.listing.settigns.was_this_review_helpful.label",
+      "default": "t:sections.dbtfy-review.listing.settigns.was_this_review_helpful.default"
+    },
+    {
+      "type": "text",
+      "id": "label_not_found",
+      "label": "t:sections.dbtfy-review.review.no_review.label",
+      "default": "t:sections.dbtfy-review.review.no_review.default"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.slider.slider_settings"
+    },
+    {
+      "type": "select",
+      "id": "slider_on",
+      "default": "both",
+      "label": "t:general.settings.slider.Enable_slider",
+      "options": [
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        },
+        {
+          "value": "desktop",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "default": false,
+      "label": "t:general.settings.slider.enable_autoplay"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "t:general.settings.slider.autoplay_speed",
+      "default": 5,
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_loop",
+      "default": true,
+      "label": "Loop",
+      "info": "Continue from the last slide to the first slide"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_dots",
+      "default": true,
+      "label": "t:general.settings.slider.show_dots"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_arrows",
+      "default": true,
+      "label": "t:general.settings.slider.show_arrows"
+    },
+    {
+      "type": "select",
+      "id": "arrow_position",
+      "default": "bottom",
+      "label": "t:sections.dbtfy-before-and-after.settings.arrow_position.label",
+      "options": [
+        {
+          "value": "middle",
+          "label": "t:general.settings.alignment.option__2"
+        },
+        {
+          "value": "bottom",
+          "label": "t:general.settings.alignment.option__3"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-product.blocks.complementary_products.settings.pagination_style.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pagination",
+      "label": "t:sections.dbtfy-review.listing.settigns.pagination.pagination",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "pagination_text",
+      "label": "t:sections.dbtfy-review.listing.settigns.pagination.pagination_label",
+      "default": "t:settings_schema.dbfty_infinite_scroll.settings.button.default"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-review.listing.settigns.form_submission"
+    }
+  ]
+}
+{% endschema %}

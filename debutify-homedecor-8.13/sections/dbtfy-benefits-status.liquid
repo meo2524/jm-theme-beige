@@ -1,0 +1,356 @@
+{%- render 'widget-blocker',
+  enabled: settings.dbtfy_benefits_status,
+  section: section,
+  name: 'Benefits status',
+  type: '👑 Enterprise sections'
+-%}
+
+{%- if request.design_mode or settings.dbtfy_benefits_status -%}
+  {%- render 'section-padding', section: section -%}
+  {{ 'dbtfy-benefits-status.css' | asset_url | stylesheet_tag }}
+  <dbtfy-benefits-status>
+    <div class="dbtfy-benefits-status dbtfy-benefits-status--{{ section.settings.container_size }} section-{{ section.id }}-padding color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} gradient show-on--{{ section.settings.show_on }}">
+      <div class="page-width">
+        <div class="dbfty-benefits-status-card dbfty-benefits-status-card--{{ section.settings.image_position }} dbfty-benefits-status-card-mobile--{{ section.settings.image_position_mobile }} color-{{ section.settings.block_custom_color_scheme }} dbtfy-color-{{ section.settings.block_color_scheme }} gradient">
+          <div class="dbfty-benefits-status-content">
+            <header class="dbfty-benefits-status-header text-center {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+              {% content_for 'block', type: '_title', id: 'title' %}
+              <div class="dbfty-benefits-status-description">
+                {% content_for 'block', type: '_description', id: 'description' %}
+              </div>
+            </header>
+
+            <div class="dbfty-benefits-status-grid dbfty-benefits-status-grid--horizontal grid grid--2-col-desktop grid--1-col-tablet-down {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+              {% content_for 'block', type: '_cc-icon_with_text', id: 'benefit_1' %}
+              {% content_for 'block', type: '_cc-icon_with_text', id: 'benefit_2' %}
+            </div>
+
+            <footer class="dbfty-benefits-status-footer text-center {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+              {% content_for 'block', type: '_single_button', id: 'button' %}
+              <div class="dbfty-benefits-status-popups">
+                {% content_for 'block', type: '_product_popup', id: 'popup_1' %}
+                {% content_for 'block', type: '_product_popup', id: 'popup_2' %}
+              </div>
+            </footer>
+          </div>
+
+          <div class="dbfty-benefits-status-image-wrapper">
+            {% content_for 'block', type: '_image', id: 'image' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </dbtfy-benefits-status>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "benefits_status",
+  "disabled_on": { "groups": ["aside"] },
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:help.enterprise_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "t:sections.all.show_on.label",
+      "default": "both",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "container_size",
+      "label": "Container size",
+      "default": "default",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "full", "label": "Full" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_position_mobile",
+      "label": "Image position (mobile)",
+      "default": "top",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Block color scheme",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "block_color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "block_custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section color scheme",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.layout.settings.spacing.section_desktop.label"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.top",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "t:general.settings.size.option__1" },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:settings_schema.layout.settings.spacing.block_padding.bottom",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "t:general.settings.size.option__1" },
+        {
+          "value": "none",
+          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
+        },
+        { "value": "small", "label": "t:general.settings.small" },
+        { "value": "medium", "label": "t:sections.all.animation.image_behavior.parallax_speed.medium" },
+        { "value": "large", "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label" },
+        { "value": "custom", "label": "t:general.settings.size.option__9" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@theme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefits status",
+      "settings": {
+        "image_position": "left"
+      },
+      "blocks": [
+        {
+          "type": "_image",
+          "static": true,
+          "id": "image"
+        },
+        {
+          "type": "_title",
+          "static": true,
+          "id": "title",
+          "settings": {
+            "title": "t:blocks.title.default",
+            "alignment": "text-center",
+            "padding___top": "custom",
+            "custom_padding_top": 0,
+            "padding___bottom": "custom",
+            "custom_padding_bottom": 0
+          }
+        },
+        {
+          "type": "_description",
+          "static": true,
+          "id": "description",
+          "settings": {
+            "description": "t:blocks.description.default",
+            "alignment": "text-center",
+            "padding___top": "custom",
+            "custom_padding_top": 0,
+            "padding___bottom": "custom",
+            "custom_padding_bottom": 0
+          }
+        },
+        {
+          "type": "_cc-icon_with_text",
+          "static": true,
+          "id": "benefit_1",
+          "settings": {
+            "icon": "",
+            "title": "90%",
+            "size": "h1",
+            "description": "t:sections.rich-text.blocks.text.settings.text.default",
+            "layout": "layout-1"
+          }
+        },
+        {
+          "type": "_cc-icon_with_text",
+          "static": true,
+          "id": "benefit_2",
+          "settings": {
+            "icon": "",
+            "title": "61%",
+            "size": "h1",
+            "description": "t:sections.rich-text.blocks.text.settings.text.default",
+            "layout": "layout-1"
+          }
+        },
+        {
+          "type": "_single_button",
+          "static": true,
+          "id": "button",
+          "settings": {
+            "button_label": "Button Label",
+            "alignment": "justify-content-center"
+          }
+        },
+        {
+          "type": "_product_popup",
+          "static": true,
+          "id": "popup_1",
+          "settings": {
+            "text": "Link"
+          }
+        },
+        {
+          "type": "_product_popup",
+          "static": true,
+          "id": "popup_2",
+          "settings": {
+            "text": "Link"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

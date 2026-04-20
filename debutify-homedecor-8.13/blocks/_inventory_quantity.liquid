@@ -1,0 +1,109 @@
+{% if settings.dbtfy_inventory_quantity %}
+  {% style %}
+    .dbtfy-inventory-quantity {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: rgb(var(--color-foreground));
+    }
+    .dbtfy-inventory-quantity h4 {
+      margin: 0;
+    }
+  {% endstyle %}
+  <inventory-threshold id="inv-thres-{{ section.id }}">
+    {% liquid
+      assign inventory_allow = false
+      if product.selected_or_first_available_variant.inventory_management == 'shopify' or product.selected_or_first_available_variant.inventory_management == null
+        assign inventory_allow = true
+      elsif product.selected_or_first_available_variant.inventory_quantity > 0 and product.selected_or_first_available_variant.inventory_management == 'shopify'
+        assign inventory_allow = true
+      endif
+    %}
+
+    {% if inventory_allow and block.settings.instock != blank and block.settings.threshold != blank %}
+      {% assign stock_string = '{STOCK}' %}
+      <div class="dbtfy-inventory-quantity">
+        {%- if block.settings.icon != blank -%}
+          {% capture "button_icon" %}
+          {% render 'material-icon', icon: block.settings.icon %}
+          {% endcapture %}
+        {%- endif -%}
+        {% if product.selected_or_first_available_variant.inventory_management == null
+          or product.selected_or_first_available_variant.inventory_quantity > block.settings.inventory_threshold
+        -%}
+          {{- button_icon }}
+          <h4>
+            {% assign label = block.settings.instock %}
+            {{ label }}
+          </h4>
+        {% elsif product.selected_or_first_available_variant.inventory_quantity > 0 %}
+          {{ button_icon }}
+          <h4>
+            {% assign label = block.settings.threshold
+              | replace: stock_string, product.selected_or_first_available_variant.inventory_quantity
+            %}
+            {{ label }}
+          </h4>
+        {% endif %}
+      </div>
+    {%- endif -%}
+  </inventory-threshold>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.main-product.blocks.inventory_quantity.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-product.blocks.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-product.blocks.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.growth_info"
+    },
+    {
+      "type": "text",
+      "id": "icon",
+      "label": "t:general.settings.icon",
+      "info": "t:general.settings.icon_info",
+      "default": "history"
+    },
+    {
+      "type": "text",
+      "id": "threshold",
+      "label": "t:sections.main-product.blocks.inventory_quantity.threshold_label",
+      "default": "t:blocks.dbtfy-sales-popup.settigns.text_for_low_stock_bar.default"
+    },
+    {
+      "type": "text",
+      "id": "instock",
+      "label": "t:sections.main-product.blocks.inventory_quantity.instock_label",
+      "default": "t:sections.main-product.blocks.inventory_quantity.instock_default"
+    },
+    {
+      "type": "range",
+      "id": "inventory_threshold",
+      "label": "t:sections.main-product.blocks.inventory_quantity.label",
+      "min": 0,
+      "max": 99,
+      "step": 1,
+      "info": "t:sections.main-product.blocks.inventory_quantity.info",
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main-product.blocks.inventory_quantity.name"
+    }
+  ]
+}
+{% endschema %}

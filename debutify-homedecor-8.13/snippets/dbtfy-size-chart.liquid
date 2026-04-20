@@ -1,0 +1,44 @@
+{% if settings.dbtfy_size_chart %}
+  {{ 'dbtfy-size-chart.css' | asset_url | stylesheet_tag: preload: true }}
+  {% if block.settings.size_guide_title != blank %}
+    {%- capture enable_products -%}
+    {%- render 'visibility-check', product: product -%}
+    {%- endcapture -%}
+
+    {% if enable_products == 'true' %}
+      <div {{ block.shopify_attributes }}>
+        <dbtfy-size-chart>
+          <div class="dbtfy-size-chart__label--wrapper">
+            <div id="open-size-chart" class="dbtfy-size-chart__label">
+              {% if block.settings.icon != blank %}
+                {% render 'material-icon', icon: block.settings.icon %}
+              {% endif %}
+              <span>{{ block.settings.button_label }}</span>
+            </div>
+          </div>
+          <div
+            class="dbtfy-size-chart hidden"
+            data-popup-size="{{ block.settings.popup_size }}"
+          >
+            <div class="dbtfy-size-chart-modal global-settings-popup dbtfy-modal__width--center-center dbtfy-modal-box--{{ block.settings.popup_size }} color-{{ block.settings.custom_color_scheme }} dbtfy-color-{{ block.settings.color_scheme }} gradient">
+              <div class="dbtfy-modal-header text-center">
+                {% if block.settings.icon != blank %}
+                  {% render 'material-icon', icon: block.settings.icon %}
+                {% endif %}
+                {% if block.settings.size_guide_title != blank %}
+                  <h1 class="dbtfy-modal-title h2">{{ block.settings.size_guide_title }}</h1>
+                {% endif %}
+              </div>
+              <!-- Modal content -->
+              <div class="dbtfy-modal-content">
+                {{ block.settings.size_guide_page_content.content }}
+              </div>
+            </div>
+          </div>
+        </dbtfy-size-chart>
+      </div>
+    {% endif %}
+  {% endif %}
+
+  <script src="{{ 'dbtfy-size-chart.js' | asset_url }}" defer></script>
+{% endif %}

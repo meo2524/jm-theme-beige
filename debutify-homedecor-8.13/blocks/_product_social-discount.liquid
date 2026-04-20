@@ -1,0 +1,263 @@
+{%- liquid
+  unless section.settings.product == blank
+    assign product = section.settings.product
+  endunless
+  render 'dbtfy-social-discount', block: block, product: product
+-%}
+
+{% schema %}
+{
+  "name": "t:sections.main-product.blocks.social_discount.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-product.blocks.social_discount.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-product.blocks.social_discount.help.link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.professional_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "default": "link underlined-link button--link",
+      "label": "t:general.settings.style.lable",
+      "options": [
+        {
+          "value": "link underlined-link button--link",
+          "label": "t:sections.all.button.option_1_label"
+        },
+        { "value": "button button--tertiary", "label": "t:general.settings.style.default" },
+        { "value": "button button--primary", "label": "t:sections.all.button.options__3.label" },
+        { "value": "button button--secondary", "label": "t:sections.all.button.options__4.label" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:general.settings.alignment.label",
+      "default": "justify-content-left",
+      "options": [
+        {
+          "value": "justify-content-left",
+          "label": "t:general.settings.alignment.option__4"
+        },
+        {
+          "value": "justify-content-center",
+          "label": "t:general.settings.alignment.option__5"
+        },
+        {
+          "value": "justify-content-right",
+          "label": "t:general.settings.alignment.option__6"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "alignment_mobile",
+      "label": "t:general.settings.alignment.label_mobile",
+      "default": "",
+      "options": [
+        {
+          "value": "",
+          "label": "t:general.settings.alignment.option__12"
+        },
+        { "value": "mobile-justify-content-left", "label": "t:general.settings.alignment.option__4" },
+        { "value": "mobile-justify-content-center", "label": "t:general.settings.alignment.option__5" },
+        { "value": "mobile-justify-content-right", "label": "t:general.settings.alignment.option__6" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:settings_schema.dbfty_infinite_scroll.settings.button.label",
+      "default": "t:sections.main-product.blocks.social_discount.settings.button.default",
+      "info": "t:sections.main-product.blocks.social_discount.info"
+    },
+    {
+      "type": "text",
+      "id": "button_icon",
+      "label": "t:blocks.news-letter.settings.modal.button_icon.label",
+      "default": "share",
+      "info": "t:sections.all.icon.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-product.blocks.social_discount.settings.modal_sharing.header"
+    },
+    {
+      "type": "text",
+      "id": "modal_title",
+      "label": "t:sections.main-product.blocks.social_discount.settings.modal_sharing.modal_sharing_title.label",
+      "default": "t:sections.main-product.blocks.social_discount.settings.modal_sharing.modal_sharing_title.default",
+      "info": "t:sections.main-product.blocks.social_discount.info"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "modal_content",
+      "label": "t:sections.main-product.blocks.social_discount.settings.modal_sharing.modal_sharing_content.label",
+      "default": "t:sections.main-product.blocks.social_discount.settings.modal_sharing.modal_sharing_content.default",
+      "info": "t:sections.main-product.blocks.social_discount.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-product.blocks.social_discount.settings.modal_thank_you.header"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "modal_thank_you_title",
+      "label": "t:sections.main-product.blocks.social_discount.settings.modal_thank_you.modal_thank_you_title.label",
+      "default": "t:sections.main-product.blocks.social_discount.settings.modal_thank_you.modal_thank_you_title.default",
+      "info": "t:sections.main-product.blocks.social_discount.info"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "modal_thank_you_content",
+      "label": "t:sections.main-product.blocks.social_discount.settings.modal_thank_you.modal_thank_you_content.label",
+      "default": "t:sections.main-product.blocks.social_discount.settings.modal_thank_you.modal_thank_you_content.default"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "modal_discount_label",
+      "label": "t:sections.main-product.blocks.social_discount.settings.discount_button.label",
+      "default": "t:blocks.news-letter.settings.thank_you_modal.button_text.default"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.discount.header.content",
+      "info": "t:general.settings.discount.header.info_1"
+    },
+    {
+      "type": "text",
+      "id": "discount_name",
+      "label": "t:general.settings.discount.name.label",
+      "default": "t:general.settings.discount.name.label"
+    },
+    {
+      "type": "select",
+      "id": "discount_type",
+      "label": "t:general.settings.discount.type.label",
+      "default": "%",
+      "options": [
+        {
+          "value": "%",
+          "label": "t:general.settings.discount.type.options__1.label"
+        },
+        {
+          "value": "$",
+          "label": "t:general.settings.discount.type.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "discount_amount",
+      "label": "t:general.settings.discount.amount.label",
+      "info": "t:general.settings.discount.type.info",
+      "default": "30"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.social-media.settings.header_2"
+    },
+    {
+      "type": "text",
+      "id": "social_share_title",
+      "label": "t:general.settings.title",
+      "default": "t:settings_schema.social-media.settings.header_3"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_facebook",
+      "label": "t:settings_schema.social-media.settings.social_facebook_link.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_twitter",
+      "label": "t:settings_schema.social-media.settings.social_twitter_link.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_pinterest",
+      "label": "t:settings_schema.social-media.settings.social_pinterest_link.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_linkedin",
+      "label": "t:settings_schema.social-media.settings.social_linkedin_link.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_whatsapp",
+      "label": "t:settings_schema.social-media.settings.social_whatsapp_link.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_email",
+      "label": "t:settings_schema.social-media.settings.social_email_link.label",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main-product.blocks.social_discount.name"
+    }
+  ]
+}
+{% endschema %}

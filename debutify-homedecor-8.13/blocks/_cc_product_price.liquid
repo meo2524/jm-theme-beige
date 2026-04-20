@@ -1,0 +1,94 @@
+{%- liquid
+  assign placeholder = false
+  unless block.settings.product == blank
+    assign product = block.settings.product
+  endunless
+  if product == null
+    assign placeholder = true
+  endif
+-%}
+
+<div
+  id="price-{{ section.id }}"
+  role="status"
+  {{ block.shopify_attributes }}
+  class="price-wrapper"
+>
+  {%- render 'price',
+    product: product,
+    placeholder: placeholder,
+    use_variant: true,
+    show_badges: true,
+    price_class: 'price--large',
+    show_compare_at_price: true
+  -%}
+  {% if settings.dbtfy_wish_list or settings.dbtfy_quick_compare %}
+    <div>
+      {% if settings.dbtfy_wish_list and settings.dbtfy_wish_list_product_page_position == 'inside-pricing-block' %}
+        {% render 'dbtfy-wishlist-badge', product_url: product.url, dbtfy_wish_list_hover: false %}
+      {% endif %}
+      {% if settings.dbtfy_quick_compare
+        and settings.dbtfy_quick_compare_product_page_position == 'inside-pricing-block'
+      %}
+        {% render 'dbtfy-compare-badge', product_url: product.url, dbtfy_compare_hover: false %}
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+{%- if product.quantity_price_breaks_configured? -%}
+  <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
+    <span>{{ 'products.product.volume_pricing.note' | t }}</span>
+  </div>
+{%- endif -%}
+{% unless block.settings.hide_shipping_policy %}
+  {%- if cart.taxes_included or cart.duties_included or shop.shipping_policy.body != blank -%}
+    <div class="product__tax caption rte">
+      {%- if cart.duties_included and cart.taxes_included -%}
+        {{ 'products.product.duties_and_taxes_included' | t }}
+      {%- elsif cart.taxes_included -%}
+        {{ 'products.product.taxes_included' | t }}
+      {%- elsif cart.duties_included -%}
+        {{ 'products.product.duties_included' | t }}
+      {%- endif -%}
+      {%- if shop.shipping_policy.body != blank -%}
+        {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+{%- endunless -%}
+{%- unless placeholder -%}
+  <div {{ block.shopify_attributes }}>
+    {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
+    {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      {{ form | payment_terms }}
+    {%- endform -%}
+  </div>
+{% endunless %}
+
+{% schema %}
+{
+  "name": "Product Price",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "hide_shipping_policy",
+      "label": "t:sections.main-product.blocks.price.hide_shipping_policy.label",
+      "default": true
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.main-product.settings.product.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Price",
+      "settings": {
+        "product": "{{ closest.product }}"
+      }
+    }
+  ]
+}
+{% endschema %}

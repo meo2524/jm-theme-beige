@@ -1,0 +1,56 @@
+<p
+  class="product__text inline-richtext {{ block.settings.alignment }} {% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
+  {{ block.shopify_attributes }}
+>
+  {{- block.settings.text -}}
+</p>
+
+{% schema %}
+{
+  "name": "t:general.settings.text",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "default": "t:sections.main-product.blocks.text.settings.text.default",
+      "label": "t:general.settings.text"
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "options": [
+        {
+          "value": "body",
+          "label": "t:general.settings.style.body"
+        },
+        {
+          "value": "subtitle",
+          "label": "t:general.settings.style.subtitle"
+        },
+        {
+          "value": "uppercase",
+          "label": "t:general.settings.style.uppercase"
+        }
+      ],
+      "default": "body",
+      "label": "t:general.settings.style.text_style"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:general.settings.alignment.label",
+      "default": "text-left",
+      "options": [
+        { "value": "text-left", "label": "t:general.settings.alignment.option__4" },
+        { "value": "text-center", "label": "t:general.settings.alignment.option__5" },
+        { "value": "text-right", "label": "t:general.settings.alignment.option__6" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.text"
+    }
+  ]
+}
+{% endschema %}

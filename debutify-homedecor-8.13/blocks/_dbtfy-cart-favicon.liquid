@@ -1,0 +1,139 @@
+{%- if request.design_mode -%}
+  {%- render 'widget-blocker-warning',
+    enabled: settings.dbtfy_cart_favicon,
+    type: 'widget',
+    as: 'block',
+    name: 'Cart Favicon',
+    id: block
+  -%}
+{%- endif -%}
+
+{%- if settings.dbtfy_cart_favicon -%}
+  {%- liquid
+    if block.settings.dbtfy_cart_error_favicon_icon == blank
+      assign error_favicon_icon = ''
+    else
+      assign error_favicon_icon = block.settings.dbtfy_cart_error_favicon_icon | image_url: width: 32, height: 32
+    endif
+
+    assign error_favicon_icon_duration = block.settings.dbtfy_cart_error_favicon_icon_duration
+    assign badge_counter_style = block.settings.dbtfy_badge_counter_style
+    assign badge_counter_position = block.settings.dbtfy_badge_counter_position
+    assign badge_background_color = block.settings.dbtfy_badge_background_color
+    assign badge_text_color = block.settings.dbtfy_badge_text_color
+  -%}
+
+  {%- if block.settings.dbtfy_cart_favicon_icon -%}
+    <dbtfy-cart-favicon
+      data-cart-favicon="{{ block.settings.dbtfy_cart_favicon_icon | image_url: width: 32, height: 32 }}"
+      data-error-favicon="{{ error_favicon_icon }}"
+      data-error-duration="{{ error_favicon_icon_duration }}"
+      data-badge-style="{{ badge_counter_style }}"
+      data-badge-position="{{ badge_counter_position }}"
+      data-badge-bg-color="{{ badge_background_color }}"
+      data-badge-text-color="{{ badge_text_color }}"
+    >
+    </dbtfy-cart-favicon>
+
+    <script src="{{ 'dbtfy-cart-favicon.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+{%- endif -%}
+{% schema %}
+{
+  "name": "t:blocks.dbtfy-cart-favicon.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-cart-favicon.help.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.help.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.dbtfy-cart-favicon.help.youtube_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:help.free_info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.settigns"
+    },
+    {
+      "type": "image_picker",
+      "id": "dbtfy_cart_favicon_icon",
+      "label": "t:blocks.dbtfy-cart-favicon.name",
+      "info": "t:blocks.dbtfy-cart-favicon.settings.cart_favicon.info"
+    },
+    {
+      "type": "image_picker",
+      "id": "dbtfy_cart_error_favicon_icon",
+      "label": "t:blocks.dbtfy-cart-favicon.settings.cart_error_favicon.label"
+    },
+    {
+      "type": "range",
+      "id": "dbtfy_cart_error_favicon_icon_duration",
+      "min": 1,
+      "default": 7,
+      "max": 10,
+      "unit": "s",
+      "label": "t:blocks.dbtfy-cart-favicon.settings.cart_error_favicon_duration.label"
+    },
+    {
+      "type": "select",
+      "id": "dbtfy_badge_counter_style",
+      "label": "t:blocks.dbtfy-cart-favicon.settings.badge_counter_style.label",
+      "default": "circle",
+      "options": [
+        {
+          "value": "square",
+          "label": "t:general.settings.style.circle"
+        },
+        {
+          "value": "circle",
+          "label": "t:general.settings.style.square"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "dbtfy_badge_counter_position",
+      "label": "t:blocks.dbtfy-cart-favicon.settings.badge_counter_position.label",
+      "default": "bottom-left",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "t:general.settings.position.option__7"
+        },
+        {
+          "value": "top-right",
+          "label": "t:general.settings.position.option__9"
+        },
+        {
+          "value": "bottom-left",
+          "label": "t:general.settings.position.option__1"
+        },
+        {
+          "value": "bottom-right",
+          "label": "t:general.settings.position.option__3"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "dbtfy_badge_background_color",
+      "label": "t:blocks.dbtfy-cart-favicon.settings.badge_background_color.label",
+      "default": "#eb361e"
+    },
+    {
+      "type": "color",
+      "id": "dbtfy_badge_text_color",
+      "label": "t:blocks.dbtfy-cart-favicon.settings.badge_text_color.label",
+      "default": "#ffffff"
+    }
+  ]
+}
+{% endschema %}

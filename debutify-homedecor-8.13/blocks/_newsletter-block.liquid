@@ -1,0 +1,126 @@
+<div {{ block.shopify_attributes }}>
+  {% render 'dbtfy-newsletter',
+    show_newsletter_first_name: true,
+    enable_newsletter_opt_in_checkbox: true,
+    customer_tag: block.settings.customer_tag,
+    block: block.shopify_attributes,
+    block_settings: block.settings,
+    button_settings: block.settings,
+    label_name: block.settings.label_name,
+    label_email: block.settings.label_email,
+    label_opt_checkbox: block.settings.label_opt_checkbox,
+    block_id: block.id
+  %}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.newsletter.blocks.email_form.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "customer_tag",
+      "label": "t:blocks.news-letter.settings.customer_tag.label",
+      "info": "t:blocks.news-letter.settings.customer_tag.info",
+      "default": "t:settings_schema.integrations.settings.header__1.content"
+    },
+    {
+      "type": "text",
+      "id": "already_subscribed_message",
+      "label": "t:sections.dbtfy-footer.blocks.newsletter.settings.media_setting.already_subscribed_message.label",
+      "info": "t:sections.dbtfy-footer.blocks.newsletter.settings.media_setting.already_subscribed_message.info",
+      "default": "t:sections.dbtfy-footer.blocks.newsletter.settings.media_setting.already_subscribed_message.default"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:blocks.news-letter.settings.customer_tag.paragraph"
+    },
+    {
+      "type": "text",
+      "id": "label_name",
+      "label": "t:sections.dbtfy-footer.settings.newsletter.name.label",
+      "default": "t:sections.dbtfy-footer.settings.newsletter.name.default"
+    },
+    {
+      "type": "text",
+      "id": "label_email",
+      "label": "t:sections.dbtfy-footer.settings.newsletter.email.label",
+      "default": "t:sections.dbtfy-footer.settings.newsletter.email.default"
+    },
+    {
+      "type": "text",
+      "id": "label_opt_checkbox",
+      "label": "t:sections.newsletter.settings.label_opt_checkbox.label",
+      "default": "t:sections.newsletter.settings.label_opt_checkbox.default"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.global_settings.settings.button_settings.label"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:settings_schema.dbfty_infinite_scroll.settings.button.label",
+      "default": "t:sections.newsletter.blocks.email_form.settings.button_label.default"
+    },
+    {
+      "type": "text",
+      "id": "button_icon",
+      "label": "t:sections.newsletter.blocks.email_form.settings.button_icon.label",
+      "info": "t:general.settings.icon_info",
+      "default": "mail"
+    },
+    {
+      "type": "image_picker",
+      "id": "button_custom_icon",
+      "label": "t:general.settings.custom_icon",
+      "info": "t:blocks.double_button.custom_icon.info"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:sections.newsletter.blocks.email_form.settings.button_style.label",
+      "default": "button button--primary",
+      "options": [
+        {
+          "value": "link underlined-link button--link",
+          "label": "t:sections.all.button.option_1_label"
+        },
+        {
+          "value": "button button--tertiary",
+          "label": "t:general.settings.style.default"
+        },
+        {
+          "value": "button button--primary",
+          "label": "t:sections.all.button.options__3.label"
+        },
+        {
+          "value": "button button--secondary",
+          "label": "t:sections.all.button.options__4.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "default": "inherit",
+      "label": "t:general.settings.size.label",
+      "options": [
+        { "value": "inherit", "label": "t:general.settings.size.option__1" },
+        {
+          "value": "button--small",
+          "label": "t:general.settings.small"
+        },
+        { "value": "button--medium", "label": "t:sections.all.animation.image_behavior.parallax_speed.medium" },
+        { "value": "", "label": "t:general.settings.size.option__10" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.newsletter.blocks.email_form.name"
+    }
+  ]
+}
+{% endschema %}

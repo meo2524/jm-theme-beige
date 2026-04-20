@@ -1,0 +1,68 @@
+{%- assign quote_icon = block.settings.custom_quote_icon | default: block.settings.quote_mark -%}
+
+<div class="testimonial-block" {{ block.shopify_attributes }}>
+  <div class="testimonial-content">
+    {%- if quote_icon != blank -%}
+      <div class="testimonial-quote-icon">
+        {%- if block.settings.custom_quote_icon != blank -%}
+          <div class="quote-icon">
+            {%- render 'dbtfy-img', img: block.settings.custom_quote_icon, sizes: '32px', lazy: true -%}
+          </div>
+        {%- else -%}
+          <span class="material-icons quote-mark">{{ quote_icon }}</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if block.settings.text != blank -%}
+      <div class="testimonial-text rte">{{ block.settings.text }}</div>
+    {%- endif -%}
+
+    {%- if block.settings.star_rating > 0 -%}
+      <div class="testimonial-rating" role="img" aria-label="{{ block.settings.star_rating }} of 5 stars">
+        {%- for i in (1..5) -%}
+          <span class="star-icon">
+            {%- if i <= block.settings.star_rating -%}
+              {% render 'icon-star' %}
+            {%- else -%}
+              {% render 'icon-empty-star' %}
+            {%- endif -%}
+          </span>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if block.settings.author != blank
+    or block.settings.profession != blank
+    or block.settings.date != blank
+    or block.settings.author_image != blank
+  -%}
+    <div class="testimonial-author">
+      {%- if block.settings.author_image != blank -%}
+        <div class="testimonial-author-image">
+          {%- render 'dbtfy-img',
+            img: block.settings.author_image,
+            sizes: '60px',
+            class: 'testimonial-image',
+            lazy: true
+          -%}
+        </div>
+      {%- endif -%}
+
+      {%- if block.settings.author != blank or block.settings.profession != blank or block.settings.date != blank -%}
+        <div class="testimonial-author-info">
+          {%- if block.settings.author != blank -%}
+            <div class="testimonial-author-name">{{ block.settings.author }}</div>
+          {%- endif -%}
+          {%- if block.settings.profession != blank -%}
+            <div class="testimonial-author-title">{{ block.settings.profession }}</div>
+          {%- endif -%}
+          {%- if block.settings.date != blank -%}
+            <div class="testimonial-date">{{ block.settings.date }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>

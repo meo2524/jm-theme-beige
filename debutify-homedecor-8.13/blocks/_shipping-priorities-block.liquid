@@ -1,0 +1,96 @@
+{%- if block.settings.product != blank and block.settings.product.first_available_variant.id != blank -%}
+  {%- liquid
+    assign product_is_in_cart = cart.items | where: 'id', block.settings.product.first_available_variant.id
+
+    assign shipping = false
+    for cart in cart.items
+      if cart.properties._shipping_priority
+        assign shipping = cart.properties._shipping_priority
+      endif
+    endfor
+
+    assign productInCart = ''
+
+    if product_is_in_cart.size > 0 and shipping
+      assign productInCart = 'checked'
+    endif
+  -%}
+  <div
+    class="dbtfy-shipping-priorities__col {% if block.settings.checked_priority %}checked{% endif %}"
+  >
+    <input
+      type="radio"
+      id="shipping-priorities__cart-drawer"
+      name="shipping-priorities-cart-drawer"
+      value="{{ block.settings.product.first_available_variant.id }}"
+      {{ productInCart }}
+    >
+    {%- if block.settings.custom_icon != blank -%}
+      <img
+        src="{{ block.settings.custom_icon | image_url: width: 200, height: 200 }}"
+        alt="{{ block.settings.custom_icon.alt }}"
+        class="dbtfy-shipping-priorities__col__icon"
+        width="200"
+        height="200"
+      >
+    {%- elsif block.settings.icon != blank -%}
+      {%- render 'material-icon', icon: block.settings.icon -%}
+    {%- endif -%}
+    <div class="dbtfy-shipping-priorities__col__content">
+      <span class="m-0 dbtfy-shipping-priority__name">{{ block.settings.shipping_title }}</span>
+      <span class="m-0 dbtfy-shipping-priority__days">{{ block.settings.shipping_transit_time }}</span>
+      <span class="m-0 dbtfy-shipping-priority__money">
+        {%- render 'price', product: block.settings.product, show_compare_at_price: false -%}
+      </span>
+    </div>
+  </div>
+{%- endif -%}
+{%- schema -%}
+{
+  "name": "t:sections.dbtfy-shipping-priorities.singular_name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:general.settings.visibility.product.label"
+    },
+    {
+      "type": "text",
+      "id": "shipping_title",
+      "label": "t:sections.dbtfy-shipping-priorities.shipping_title",
+      "default": "t:sections.dbtfy-shipping-priorities.name"
+    },
+    {
+      "type": "text",
+      "id": "icon",
+      "label": "t:general.settings.icon_label",
+      "info": "t:sections.all.icon.info",
+      "default": "delivery_truck_bolt"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_icon",
+      "label": "t:general.settings.custom_icon",
+      "info": "t:blocks.double_button.custom_icon.info"
+    },
+    {
+      "type": "text",
+      "id": "shipping_transit_time",
+      "label": "t:sections.dbtfy-shipping-priorities.transit_time",
+      "default": "t:sections.dbtfy-shipping-priorities.transit_time_default"
+    },
+    {
+      "type": "checkbox",
+      "id": "checked_priority",
+      "label": "t:sections.dbtfy-shipping-priorities.default_checked",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-shipping-priorities.singular_name"
+    }
+  ]
+}
+{%- endschema -%}

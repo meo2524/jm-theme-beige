@@ -1,0 +1,25 @@
+{% liquid
+  assign tickerDisaply = section.settings.number_of_tickers_display | default: ticker
+  assign unique_blocks_total = block.blocks.size
+  assign unique_blocks_total_float = unique_blocks_total | times: 1.0
+  assign target_multiply = tickerDisaply | divided_by: unique_blocks_total_float | ceil
+  assign target_total = unique_blocks_total | times: target_multiply | times: 3
+  if target_total > unique_blocks_total
+    assign total = target_total | divided_by: unique_blocks_total
+  endif
+%}
+{% for i in (1..total) %}
+  {% content_for 'blocks' %}
+{% endfor %}
+
+{% schema %}
+{
+  "name": "Tickers",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_dbtfy-vertical-ticker"
+    }
+  ]
+}
+{% endschema %}
