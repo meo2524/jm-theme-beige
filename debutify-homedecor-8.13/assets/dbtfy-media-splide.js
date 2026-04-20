@@ -1,1 +1,0 @@
-document.addEventListener("DOMContentLoaded",function(){new SimpleLightbox({elements:"#main-carousel a",videoRegex:new RegExp(/(youtube\.com|vimeo\.com|\.mp4)/)})});

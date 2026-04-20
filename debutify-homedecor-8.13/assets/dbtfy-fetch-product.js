@@ -1,1 +1,0 @@
-fetchProductMarkup=async function(t,e){let{template:n,productHandles:r}=t;if(!n||!r)return;"string"==typeof r&&(r=[r]);const a=Array.from([...new Set(r)]),c=await Promise.all(a.map(t=>fetch(`/products/${t}?view=${n}`).then(t=>t.text()).then(e=>({handle:t,template:e})))).then(t=>t.reduce((t,e)=>({...t,[e.handle]:e.template}),{}));return"function"==typeof e&&e(c),c};
