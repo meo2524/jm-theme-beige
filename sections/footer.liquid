@@ -1,13 +1,11 @@
-<!-- ============================================================
-     footer.liquid
-     Mend & Co - site footer.
-     Dark espresso bg, 3-col grid, newsletter inline form, social icons, payment badges.
-     ============================================================ -->
+<!-- footer.liquid - Mend & Co -->
 
-{%- assign footer_menu  = section.settings.footer_menu  | default: 'footer' -%}
-{%- assign legal_menu   = section.settings.legal_menu   | default: 'footer-legal' -%}
-{%- assign nl_form_id   = 'footer-nl-' | append: section.id -%}
-{%- assign nl_btn_label = section.settings.newsletter_btn | default: 'Subscribe' -%}
+{%- liquid
+  assign footer_menu  = section.settings.footer_menu | default: 'footer'
+  assign legal_menu   = section.settings.legal_menu  | default: 'footer-legal'
+  assign nl_form_id   = 'footer-nl-' | append: section.id
+  assign nl_btn_label = section.settings.newsletter_btn | default: 'Subscribe'
+-%}
 
 <footer class="site-footer" role="contentinfo">
 
@@ -17,10 +15,9 @@
     <div class="container">
       <div class="footer__grid">
 
-        <!-- COL 1: BRAND -->
+        <!-- Brand column -->
         <div class="footer__col footer__col--brand">
-
-          <a href="{{ routes.root_url }}" class="footer__logo-link" aria-label="{{ shop.name }} - home">
+          <a href="{{ routes.root_url }}" class="footer__logo-link" aria-label="{{ shop.name }}">
             {%- if section.settings.logo != blank -%}
               <img
                 src="{{ section.settings.logo | image_url: width: 160 }}"
@@ -78,22 +75,19 @@
               {%- endif -%}
             </nav>
           {%- endif -%}
-
         </div>
 
-        <!-- COL 2: NAVIGATION -->
+        <!-- Navigation column -->
         <div class="footer__col footer__col--nav">
           <p class="footer__col-heading">Explore</p>
           <ul class="footer__nav-list" role="list">
             {%- for link in linklists[footer_menu].links -%}
-              <li>
-                <a href="{{ link.url }}" class="footer__nav-link">{{ link.title }}</a>
-              </li>
+              <li><a href="{{ link.url }}" class="footer__nav-link">{{ link.title }}</a></li>
             {%- endfor -%}
           </ul>
         </div>
 
-        <!-- COL 3: NEWSLETTER -->
+        <!-- Newsletter column -->
         <div class="footer__col footer__col--newsletter">
           <p class="footer__col-heading">{{ section.settings.newsletter_heading | default: 'Stay in the loop' }}</p>
           <p class="footer__nl-subtext">{{ section.settings.newsletter_subtext | default: 'Water quality guides, launch updates, and no noise.' }}</p>
@@ -102,17 +96,15 @@
             <input type="hidden" name="contact[tags]" value="newsletter">
 
             {%- if form.posted_successfully? -%}
-              <p class="footer__nl-success" role="status">You&rsquo;re in.</p>
+              <p class="footer__nl-success" role="status">You&#8217;re in.</p>
             {%- else -%}
-
               {%- if form.errors -%}
                 <p class="footer__nl-error" role="alert">
-                  {%- for message in form.errors.messages -%}
-                    {{ message[1] }}{% unless forloop.last %}, {% endunless %}
+                  {%- for field in form.errors -%}
+                    {{ form.errors.messages[field] }}{% unless forloop.last %}, {% endunless %}
                   {%- endfor -%}
                 </p>
               {%- endif -%}
-
               <div class="footer__nl-row">
                 <label for="FooterEmail-{{ section.id }}" class="visually-hidden">Email address</label>
                 <input
@@ -126,11 +118,8 @@
                   autocapitalize="off"
                   required
                 >
-                <button type="submit" class="footer__nl-btn" aria-label="{{ nl_btn_label }}">
-                  {{ nl_btn_label }}
-                </button>
+                <button type="submit" class="footer__nl-btn" aria-label="{{ nl_btn_label }}">{{ nl_btn_label }}</button>
               </div>
-
             {%- endif -%}
           {%- endform -%}
         </div>
@@ -139,24 +128,18 @@
     </div>
   </div>
 
-  <!-- BOTTOM BAR -->
+  <!-- Bottom bar -->
   <div class="footer__bottom">
     <div class="container">
       <div class="footer__bottom-inner">
-
-        <nav class="footer__legal-nav" aria-label="Legal">
+        <nav aria-label="Legal">
           <ul class="footer__legal-list" role="list">
-            <li>
-              <span class="footer__copyright">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
-            </li>
+            <li><span class="footer__copyright">&#169; {{ 'now' | date: '%Y' }} {{ shop.name }}</span></li>
             {%- for link in linklists[legal_menu].links -%}
-              <li>
-                <a href="{{ link.url }}" class="footer__legal-link">{{ link.title }}</a>
-              </li>
+              <li><a href="{{ link.url }}" class="footer__legal-link">{{ link.title }}</a></li>
             {%- endfor -%}
           </ul>
         </nav>
-
         {%- if section.settings.show_payment and shop.enabled_payment_types != empty -%}
           <div class="footer__payment" aria-label="Accepted payment methods">
             {%- for type in shop.enabled_payment_types -%}
@@ -164,7 +147,6 @@
             {%- endfor -%}
           </div>
         {%- endif -%}
-
       </div>
     </div>
   </div>
@@ -172,79 +154,67 @@
 </footer>
 
 <style>
-/* ── FOOTER ─────────────────────────────────────────────── */
-
 .site-footer {
   background-color: var(--color-espresso, #2C1A0E);
 }
 
-/* Amber top rule — decorative, no contrast requirement */
 .footer__rule {
   height: 1.5px;
   background-color: var(--color-amber, #C8874A);
   opacity: 0.5;
 }
 
-/* ── MAIN GRID ─────────────────────────────────────────── */
-
 .footer__main {
-  padding-block: var(--space-16, 5rem) var(--space-12, 4rem);
+  padding: 5rem 0 4rem;
 }
 
 .footer__grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr 1.4fr;
-  gap: var(--space-12, 4rem);
+  gap: 4rem;
   align-items: start;
 }
 
-/* ── BRAND COL ─────────────────────────────────────────── */
-
 .footer__logo-link {
   display: inline-block;
-  margin-bottom: var(--space-5, 1.25rem);
+  margin-bottom: 1.25rem;
 }
 
 .footer__logo-img {
   height: 32px;
   width: auto;
-  /* Tint logo to soft gold */
   filter: brightness(0) saturate(100%) invert(80%) sepia(30%) saturate(400%) hue-rotate(5deg);
 }
 
-/* Logo text fallback — soft gold on espresso 10.51:1 ✅ */
 .footer__logo-text {
   font-family: var(--font-heading);
-  font-size: var(--font-size-lg, 1.25rem);
-  font-weight: var(--font-weight-normal, 400);
-  color: var(--color-gold, #E8C99A);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #E8C99A;
 }
 
-/* Tagline — amber on espresso 5.57:1 ✅ */
 .footer__tagline {
   font-family: var(--font-label);
-  font-size: var(--font-size-xs, 0.6875rem);
-  font-weight: var(--font-weight-medium, 500);
-  letter-spacing: var(--letter-spacing-label, 3px);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--color-amber, #C8874A);
-  margin-bottom: var(--space-4, 1rem);
+  margin-bottom: 1rem;
 }
 
-/* Brand statement — blended gold@0.65 on espresso = #A68C69, 5.21:1 ✅ */
 .footer__brand-statement {
-  font-family: var(--font-body, var(--font-label));
-  font-size: var(--font-size-sm, 0.875rem);
-  line-height: var(--line-height-body, 1.65);
+  font-family: var(--font-label);
+  font-size: 0.875rem;
+  line-height: 1.65;
   color: #A68C69;
   max-width: 30ch;
-  margin-bottom: var(--space-6, 1.5rem);
+  margin-bottom: 1.5rem;
 }
 
-/* Social icons — 44×44px touch targets */
 .footer__social {
   display: flex;
-  gap: var(--space-2, 0.5rem);
+  gap: 0.5rem;
 }
 
 .footer__social-link {
@@ -253,10 +223,9 @@
   justify-content: center;
   width: 44px;
   height: 44px;
-  /* blended gold@0.6 on espresso = #9D8362, 4.64:1 ✅ */
   color: #9D8362;
   border: 1px solid rgba(232, 201, 154, 0.2);
-  border-radius: var(--radius-base, 4px);
+  border-radius: 4px;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
@@ -270,33 +239,28 @@
   outline-offset: 2px;
 }
 
-/* ── COL HEADING ───────────────────────────────────────── */
-/* amber on espresso 5.57:1 ✅ */
 .footer__col-heading {
   font-family: var(--font-label);
-  font-size: var(--font-size-xs, 0.6875rem);
-  font-weight: var(--font-weight-medium, 500);
-  letter-spacing: var(--letter-spacing-label, 3px);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--color-amber, #C8874A);
-  margin-bottom: var(--space-5, 1.25rem);
+  margin-bottom: 1.25rem;
 }
-
-/* ── NAV COL ───────────────────────────────────────────── */
 
 .footer__nav-list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3, 0.75rem);
+  gap: 0.75rem;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* blended gold@0.7 on espresso = #B09470, 5.80:1 ✅ */
 .footer__nav-link {
-  font-family: var(--font-body, var(--font-label));
-  font-size: var(--font-size-sm, 0.875rem);
+  font-family: var(--font-label);
+  font-size: 0.875rem;
   color: #B09470;
   text-decoration: none;
   transition: color 0.15s ease;
@@ -312,28 +276,25 @@
   border-radius: 1px;
 }
 
-/* ── NEWSLETTER COL ────────────────────────────────────── */
-
-/* blended gold@0.6 on espresso = #9D8362, 4.64:1 ✅ */
 .footer__nl-subtext {
-  font-family: var(--font-body, var(--font-label));
-  font-size: var(--font-size-sm, 0.875rem);
-  line-height: var(--line-height-body, 1.65);
+  font-family: var(--font-label);
+  font-size: 0.875rem;
+  line-height: 1.65;
   color: #9D8362;
   max-width: 28ch;
-  margin-bottom: var(--space-5, 1.25rem);
+  margin-bottom: 1.25rem;
 }
 
 .footer__nl-form {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3, 0.75rem);
+  gap: 0.75rem;
 }
 
 .footer__nl-row {
   display: flex;
   border: 1px solid rgba(232, 201, 154, 0.2);
-  border-radius: var(--radius-sm, 2px);
+  border-radius: 2px;
   overflow: hidden;
 }
 
@@ -343,7 +304,6 @@
   border-color: transparent;
 }
 
-/* Input — gold text on near-espresso bg — #E8C99A on ~#3B2819, 8.4:1 ✅ */
 .footer__nl-input {
   flex: 1;
   min-width: 0;
@@ -352,17 +312,15 @@
   background: rgba(232, 201, 154, 0.07);
   border: none;
   font-family: var(--font-label);
-  font-size: var(--font-size-sm, 0.875rem);
-  color: var(--color-gold, #E8C99A);
+  font-size: 0.875rem;
+  color: #E8C99A;
   outline: none;
 }
 
 .footer__nl-input::placeholder {
-  /* #9A7B6A on ~#3B2819 input bg — passes 3:1 ✅ */
   color: #9A7B6A;
 }
 
-/* Subscribe button — amber bg, espresso text 5.57:1 ✅ (no .btn--primary which uses linen) */
 .footer__nl-btn {
   height: 44px;
   padding: 0 1.125rem;
@@ -381,29 +339,24 @@
 }
 
 .footer__nl-btn:hover {
-  background: var(--color-amber-hover, #B57840);
+  background: #B57840;
 }
 
-/* Success — amber on espresso 5.57:1 ✅ */
 .footer__nl-success {
   font-family: var(--font-label);
-  font-size: var(--font-size-sm, 0.875rem);
+  font-size: 0.875rem;
   color: var(--color-amber, #C8874A);
-  letter-spacing: var(--letter-spacing-wide, 2px);
 }
 
-/* Error — #E8A87C on espresso 8.19:1 ✅ */
 .footer__nl-error {
   font-family: var(--font-label);
   font-size: 0.75rem;
   color: #E8A87C;
 }
 
-/* ── BOTTOM BAR ────────────────────────────────────────── */
-
 .footer__bottom {
   border-top: 1px solid rgba(232, 201, 154, 0.1);
-  padding-block: var(--space-5, 1.25rem);
+  padding: 1.25rem 0;
 }
 
 .footer__bottom-inner {
@@ -411,24 +364,23 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: var(--space-4, 1rem);
+  gap: 1rem;
 }
 
 .footer__legal-list {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--space-2, 0.5rem) var(--space-6, 1.5rem);
+  gap: 0.5rem 1.5rem;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* copyright + legal links — #C89A78 on espresso 6.62:1 ✅ (was gold@0.45 = 3.22:1 ❌) */
 .footer__copyright,
 .footer__legal-link {
-  font-family: var(--font-body, var(--font-label));
-  font-size: var(--font-size-xs, 0.6875rem);
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
   color: #C89A78;
   text-decoration: none;
 }
@@ -438,7 +390,7 @@
 }
 
 .footer__legal-link:hover {
-  color: var(--color-gold, #E8C99A);
+  color: #E8C99A;
 }
 
 .footer__legal-link:focus-visible {
@@ -447,11 +399,10 @@
   border-radius: 1px;
 }
 
-/* Payment icons */
 .footer__payment {
   display: flex;
   align-items: center;
-  gap: var(--space-2, 0.5rem);
+  gap: 0.5rem;
   flex-wrap: wrap;
 }
 
@@ -462,18 +413,14 @@
   opacity: 0.55;
 }
 
-/* ── RESPONSIVE ─────────────────────────────────────────── */
-
 @media (max-width: 1023px) {
   .footer__grid {
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-10, 3rem);
+    gap: 3rem;
   }
-
   .footer__col--newsletter {
     grid-column: 1 / -1;
   }
-
   .footer__nl-row {
     max-width: 400px;
   }
@@ -482,45 +429,37 @@
 @media (max-width: 767px) {
   .footer__grid {
     grid-template-columns: 1fr;
-    gap: var(--space-8, 2.5rem);
+    gap: 2.5rem;
   }
-
   .footer__col--newsletter {
     grid-column: auto;
   }
-
   .footer__nl-row {
     max-width: none;
     flex-direction: column;
     border: none;
     gap: 0.5rem;
   }
-
   .footer__nl-row:focus-within {
     outline: none;
   }
-
   .footer__nl-input {
     border: 1px solid rgba(232, 201, 154, 0.2);
-    border-radius: var(--radius-sm, 2px);
+    border-radius: 2px;
     width: 100%;
   }
-
   .footer__nl-input:focus {
     outline: 2px solid var(--color-amber, #C8874A);
     outline-offset: 2px;
   }
-
   .footer__nl-btn {
-    border-radius: var(--radius-sm, 2px);
+    border-radius: 2px;
     width: 100%;
-    justify-content: center;
   }
-
   .footer__bottom-inner {
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--space-3, 0.75rem);
+    gap: 0.75rem;
   }
 }
 
@@ -540,8 +479,7 @@
     {
       "type": "image_picker",
       "id": "logo",
-      "label": "Logo (footer)",
-      "info": "Light version of your logo \u2014 displayed against dark background."
+      "label": "Logo (footer)"
     },
     {
       "type": "text",
@@ -553,7 +491,7 @@
       "type": "textarea",
       "id": "brand_statement",
       "label": "Brand statement",
-      "default": "Most skin and hair problems start in the shower. Mend fixes the step the beauty industry won\u2019t talk about."
+      "default": "Most skin and hair problems start in the shower. Mend fixes the step the beauty industry won't talk about."
     },
     {
       "type": "header",
@@ -568,7 +506,7 @@
     {
       "type": "link_list",
       "id": "legal_menu",
-      "label": "Legal menu (bottom bar)",
+      "label": "Legal menu",
       "default": "footer-legal"
     },
     {
