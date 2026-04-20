@@ -1,0 +1,389 @@
+<!-- main-contact.liquid - Mend & Co -->
+
+{%- liquid
+  assign heading_text = section.settings.heading | default: 'Get in touch'
+  assign subtext      = section.settings.subtext | default: 'Questions about your order, the filter, or the science behind it - we read every message.'
+  assign btn_label    = section.settings.btn_label | default: 'Send message'
+-%}
+
+<section class="contact" data-section-id="{{ section.id }}">
+  <div class="container">
+
+    <div class="contact__grid">
+
+      <!-- Left: brand copy -->
+      <div class="contact__brand">
+        <p class="contact__eyebrow">Contact</p>
+        <h1 class="contact__heading">{{ heading_text }}</h1>
+        <p class="contact__subtext">{{ subtext }}</p>
+
+        {%- if section.settings.show_details -%}
+          <ul class="contact__details" role="list">
+            {%- if section.settings.email != blank -%}
+              <li class="contact__detail-item">
+                <span class="contact__detail-label">Email</span>
+                <a href="mailto:{{ section.settings.email }}" class="contact__detail-value">{{ section.settings.email }}</a>
+              </li>
+            {%- endif -%}
+            {%- if section.settings.response_time != blank -%}
+              <li class="contact__detail-item">
+                <span class="contact__detail-label">Response time</span>
+                <span class="contact__detail-value">{{ section.settings.response_time }}</span>
+              </li>
+            {%- endif -%}
+          </ul>
+        {%- endif -%}
+
+        <div class="contact__rule" aria-hidden="true"></div>
+
+        <p class="contact__note">{{ section.settings.note | default: 'We respond within 1-2 business days.' }}</p>
+      </div>
+
+      <!-- Right: form -->
+      <div class="contact__form-wrap">
+        {%- form 'contact', id: 'ContactForm', class: 'contact__form' -%}
+
+          {%- if form.posted_successfully? -%}
+            <div class="contact__success" role="status">
+              <p class="contact__success-heading">Message received.</p>
+              <p class="contact__success-body">We'll be in touch within 1-2 business days.</p>
+            </div>
+          {%- else -%}
+
+            {%- if form.errors -%}
+              <div class="contact__errors" role="alert">
+                {{ form.errors | default_errors }}
+              </div>
+            {%- endif -%}
+
+            <div class="contact__row contact__row--two">
+              <div class="contact__field">
+                <label class="contact__label" for="ContactName">Name</label>
+                <input
+                  class="contact__input"
+                  type="text"
+                  id="ContactName"
+                  name="contact[name]"
+                  value="{{ form.name }}"
+                  autocomplete="name"
+                  required
+                >
+              </div>
+              <div class="contact__field">
+                <label class="contact__label" for="ContactEmail">Email</label>
+                <input
+                  class="contact__input"
+                  type="email"
+                  id="ContactEmail"
+                  name="contact[email]"
+                  value="{{ form.email }}"
+                  autocomplete="email"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="contact__field">
+              <label class="contact__label" for="ContactPhone">Phone (optional)</label>
+              <input
+                class="contact__input"
+                type="tel"
+                id="ContactPhone"
+                name="contact[phone]"
+                value="{{ form.phone }}"
+                autocomplete="tel"
+              >
+            </div>
+
+            <div class="contact__field">
+              <label class="contact__label" for="ContactSubject">Subject</label>
+              <select class="contact__input contact__select" id="ContactSubject" name="contact[subject]">
+                <option value="">Select a topic</option>
+                <option value="Order enquiry">Order enquiry</option>
+                <option value="Product question">Product question</option>
+                <option value="Returns and refunds">Returns and refunds</option>
+                <option value="The science">The science</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="contact__field">
+              <label class="contact__label" for="ContactMessage">Message</label>
+              <textarea
+                class="contact__input contact__textarea"
+                id="ContactMessage"
+                name="contact[body]"
+                rows="5"
+                required
+              >{{ form.body }}</textarea>
+            </div>
+
+            <button type="submit" class="contact__btn">{{ btn_label }}</button>
+
+          {%- endif -%}
+
+        {%- endform -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.contact {
+  padding: 6rem 0 7rem;
+  background-color: var(--color-linen, #F5ECD9);
+}
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 6rem;
+  align-items: start;
+}
+.contact__eyebrow {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-amber, #C8874A);
+  margin-bottom: 1rem;
+}
+.contact__heading {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  color: var(--color-espresso, #2C1A0E);
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+.contact__subtext {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #6B3F1F;
+  max-width: 36ch;
+  margin-bottom: 2.5rem;
+}
+.contact__details {
+  list-style: none;
+  margin: 0 0 2rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.contact__detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.contact__detail-label {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-amber, #C8874A);
+}
+.contact__detail-value {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.9375rem;
+  color: var(--color-espresso, #2C1A0E);
+  text-decoration: none;
+}
+a.contact__detail-value:hover { text-decoration: underline; }
+.contact__rule {
+  height: 1px;
+  background-color: var(--color-amber, #C8874A);
+  opacity: 0.3;
+  margin-bottom: 1.5rem;
+}
+.contact__note {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.8125rem;
+  color: #9D8362;
+  line-height: 1.6;
+}
+
+/* Form */
+.contact__form-wrap {
+  background-color: #FAF6EE;
+  border: 1px solid rgba(200, 135, 74, 0.18);
+  border-radius: 4px;
+  padding: 3rem;
+}
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.contact__row--two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.contact__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.contact__label {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-espresso, #2C1A0E);
+}
+.contact__input {
+  height: 48px;
+  padding: 0 1rem;
+  background-color: #fff;
+  border: 1px solid rgba(44, 26, 14, 0.18);
+  border-radius: 2px;
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.9375rem;
+  color: var(--color-espresso, #2C1A0E);
+  outline: none;
+  transition: border-color 0.15s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+.contact__input::placeholder { color: #9A7B6A; }
+.contact__input:focus { border-color: var(--color-amber, #C8874A); }
+.contact__input:focus-visible { outline: 2px solid var(--color-amber, #C8874A); outline-offset: 2px; }
+.contact__select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%232C1A0E' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+.contact__textarea {
+  height: auto;
+  padding: 0.875rem 1rem;
+  resize: vertical;
+  min-height: 140px;
+  line-height: 1.6;
+}
+.contact__btn {
+  align-self: flex-start;
+  height: 52px;
+  padding: 0 2.5rem;
+  background-color: var(--color-espresso, #2C1A0E);
+  color: var(--color-linen, #F5ECD9);
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.contact__btn:hover { background-color: #6B3F1F; }
+.contact__btn:focus-visible { outline: 2px solid var(--color-amber, #C8874A); outline-offset: 3px; }
+
+/* Success state */
+.contact__success {
+  padding: 2rem;
+  border: 1px solid rgba(200, 135, 74, 0.3);
+  border-radius: 4px;
+  background-color: rgba(200, 135, 74, 0.06);
+}
+.contact__success-heading {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--color-espresso, #2C1A0E);
+  margin-bottom: 0.5rem;
+}
+.contact__success-body {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.9375rem;
+  color: #6B3F1F;
+}
+
+/* Errors */
+.contact__errors {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.875rem;
+  color: #9B2626;
+  padding: 0.875rem 1rem;
+  border: 1px solid rgba(155, 38, 38, 0.3);
+  border-radius: 2px;
+  background-color: rgba(155, 38, 38, 0.05);
+}
+
+@media (max-width: 1023px) {
+  .contact__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .contact__subtext { max-width: none; }
+  .contact__form-wrap { padding: 2rem; }
+}
+@media (max-width: 599px) {
+  .contact__row--two { grid-template-columns: 1fr; }
+  .contact__form-wrap { padding: 1.5rem; }
+  .contact__btn { width: 100%; align-self: stretch; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact__input,
+  .contact__btn { transition: none; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Contact",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get in touch"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Questions about your order, the filter, or the science behind it - we read every message."
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Response time note",
+      "default": "We respond within 1-2 business days."
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button label",
+      "default": "Send message"
+    },
+    {
+      "type": "header",
+      "content": "Contact details"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_details",
+      "label": "Show contact details",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email address",
+      "default": "hello@mendandco.com"
+    },
+    {
+      "type": "text",
+      "id": "response_time",
+      "label": "Response time",
+      "default": "Within 1-2 business days"
+    }
+  ]
+}
+{% endschema %}
