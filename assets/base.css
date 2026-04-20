@@ -9,16 +9,16 @@
 
 :root {
 
-  /* Colour palette — Garoa-inspired warm parchment minimalism */
-  --color-espresso:       #2A2320;
-  --color-mahogany:       #7A6459;
-  --color-amber:          #C4937A;
-  --color-amber-hover:    #AE7E67;
-  --color-gold:           #A89080;
-  --color-linen:          #F1EBE7;
-  --color-linen-alt:      #FAF7F5;
-  --color-sage:           #8A9E96;
-  --color-sage-deep:      #5C7A72;
+  /* Colour palette — Ocean Glass */
+  --color-espresso:       #0B2E3C;
+  --color-mahogany:       #0B7285;
+  --color-amber:          #0B7285;
+  --color-amber-hover:    #085E6F;
+  --color-gold:           #74C0FC;
+  --color-linen:          #E3FAFC;
+  --color-linen-alt:      #FFFFFF;
+  --color-sage:           #74C0FC;
+  --color-sage-deep:      #0B7285;
 
   /* Semantic tokens */
   --color-bg:             var(--color-linen);
