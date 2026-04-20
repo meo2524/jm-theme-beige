@@ -47,14 +47,12 @@
     "1776676250439efddc": {
       "type": "apps",
       "blocks": {
-        "judge_me_reviews_cards_carousel_g86GPm": {
+        "judge_me_reviews_cards_carousel_md6aLW": {
           "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
             "show_sample_reviews": true,
             "reviews_selection": "all",
-            "products": [
-              "filter-shower-head"
-            ],
+            "products": [],
             "star_rating": "all",
             "show_review_media": true,
             "display_order": "media_first",
@@ -65,9 +63,9 @@
             "image_ratio": "1",
             "reviews_shown": 4,
             "show_reviewer_name": true,
-            "show_product_name": false,
+            "show_product_name": true,
             "hide_arrows_mobile": true,
-            "arrows_position": "bottom",
+            "arrows_position": "sides",
             "max_width": 1100,
             "corner_styling": "soft",
             "header_text_color": "#000000",
@@ -76,13 +74,13 @@
             "stars_color": "",
             "arrows_color": "#000000",
             "transition_speed": 5,
-            "header_text": "What Our Menders Say",
+            "header_text": "Customers are saying",
             "show_average_rating": true
           }
         }
       },
       "block_order": [
-        "judge_me_reviews_cards_carousel_g86GPm"
+        "judge_me_reviews_cards_carousel_md6aLW"
       ],
       "settings": {}
     },
