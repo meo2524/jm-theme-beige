@@ -1,10 +1,12 @@
 <!-- footer.liquid - Mend & Co -->
 
 {%- liquid
-  assign footer_menu  = section.settings.footer_menu | default: 'footer'
-  assign legal_menu   = section.settings.legal_menu  | default: 'footer-legal'
-  assign nl_form_id   = 'footer-nl-' | append: section.id
-  assign nl_btn_label = section.settings.newsletter_btn | default: 'Subscribe'
+  assign footer_menu    = section.settings.footer_menu | default: 'footer'
+  assign legal_menu     = section.settings.legal_menu  | default: 'footer-legal'
+  assign nl_form_id     = 'footer-nl-' | append: section.id
+  assign nl_btn_label   = section.settings.newsletter_btn | default: 'Subscribe'
+  assign tagline_text   = section.settings.tagline | default: 'The routine before your routine.'
+  assign brand_text     = section.settings.brand_statement | default: 'Most skin and hair problems start in the shower. Mend fixes the step the beauty industry ignores.'
 -%}
 
 <footer class="site-footer" role="contentinfo">
@@ -29,17 +31,12 @@
                 class="footer__logo-img"
               >
             {%- else -%}
-              <span class="footer__logo-text">{{ shop.name }}</span>
+              <span class="footer__logo-text">{{ shop.name | default: 'Mend &amp; Co' }}</span>
             {%- endif -%}
           </a>
 
-          {%- if section.settings.tagline != blank -%}
-            <p class="footer__tagline">{{ section.settings.tagline }}</p>
-          {%- endif -%}
-
-          {%- if section.settings.brand_statement != blank -%}
-            <p class="footer__brand-statement">{{ section.settings.brand_statement }}</p>
-          {%- endif -%}
+          <p class="footer__tagline">{{ tagline_text }}</p>
+          <p class="footer__brand-statement">{{ brand_text }}</p>
 
           {%- if section.settings.show_social -%}
             <nav class="footer__social" aria-label="Social media links">
