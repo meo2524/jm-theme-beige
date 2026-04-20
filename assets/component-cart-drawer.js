@@ -45,7 +45,7 @@
     var imgUrl   = item.featured_image && item.featured_image.url
       ? item.featured_image.url.replace(/(\.\w+)$/, '_' + imgWidth + 'x' + imgWidth + '$1')
       : null;
-    var imgAlt   = (item.featured_image && item.featured_image.alt) || escHtml(item.title);
+    var imgAlt   = escHtml((item.featured_image && item.featured_image.alt) || item.title);
 
     var imgTag = imgUrl
       ? '<img src="' + imgUrl + '" alt="' + imgAlt + '" width="' + imgWidth + '" height="' + imgWidth + '" loading="lazy" class="cart-item__img">'

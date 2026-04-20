@@ -1,27 +1,26 @@
-<!-- ============================================================
-     MEND & CO — FOOTER
-     Dark espresso bg, 3-col layout, newsletter, social links
-     ============================================================ -->
+{% comment %}
+  footer.liquid
+  Mend & Co — site footer.
+  Dark espresso bg, 3-col grid, newsletter inline form, social icons, payment badges.
+{% endcomment %}
 
-{%- liquid
-  assign footer_menu   = section.settings.footer_menu   | default: 'footer'
-  assign legal_menu    = section.settings.legal_menu    | default: 'footer-legal'
-  assign show_social   = section.settings.show_social
-  assign show_payment  = section.settings.show_payment
--%}
+{%- assign footer_menu  = section.settings.footer_menu  | default: 'footer' -%}
+{%- assign legal_menu   = section.settings.legal_menu   | default: 'footer-legal' -%}
+{%- assign nl_form_id   = 'footer-nl-' | append: section.id -%}
+{%- assign nl_btn_label = section.settings.newsletter_btn | default: 'Subscribe' -%}
 
 <footer class="site-footer" role="contentinfo">
 
-  <!-- Amber rule at top -->
-  <div class="footer__rule"></div>
+  <div class="footer__rule" aria-hidden="true"></div>
 
   <div class="footer__main">
     <div class="container">
       <div class="footer__grid">
 
-        <!-- Col 1 — Brand -->
+        {%- comment -%} ── COL 1 : BRAND ──────────────────── {%- endcomment -%}
         <div class="footer__col footer__col--brand">
-          <a href="{{ routes.root_url }}" class="footer__logo" aria-label="{{ shop.name }}">
+
+          <a href="{{ routes.root_url }}" class="footer__logo-link" aria-label="{{ shop.name }} — home">
             {%- if section.settings.logo != blank -%}
               <img
                 src="{{ section.settings.logo | image_url: width: 160 }}"
@@ -29,6 +28,7 @@
                 height="auto"
                 alt="{{ shop.name }}"
                 loading="lazy"
+                class="footer__logo-img"
               >
             {%- else -%}
               <span class="footer__logo-text">{{ shop.name }}</span>
@@ -43,11 +43,10 @@
             <p class="footer__brand-statement">{{ section.settings.brand_statement }}</p>
           {%- endif -%}
 
-          <!-- Social links -->
-          {%- if show_social -%}
-            <div class="footer__social">
+          {%- if section.settings.show_social -%}
+            <nav class="footer__social" aria-label="Social media links">
               {%- if settings.social_instagram_link != blank -%}
-                <a href="{{ settings.social_instagram_link }}" class="footer__social-link" aria-label="Instagram" target="_blank" rel="noopener">
+                <a href="{{ settings.social_instagram_link }}" class="footer__social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
                     <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
@@ -56,24 +55,33 @@
                 </a>
               {%- endif -%}
               {%- if settings.social_tiktok_link != blank -%}
-                <a href="{{ settings.social_tiktok_link }}" class="footer__social-link" aria-label="TikTok" target="_blank" rel="noopener">
+                <a href="{{ settings.social_tiktok_link }}" class="footer__social-link" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </a>
               {%- endif -%}
               {%- if settings.social_facebook_link != blank -%}
-                <a href="{{ settings.social_facebook_link }}" class="footer__social-link" aria-label="Facebook" target="_blank" rel="noopener">
+                <a href="{{ settings.social_facebook_link }}" class="footer__social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </a>
               {%- endif -%}
-            </div>
+              {%- if settings.social_youtube_link != blank -%}
+                <a href="{{ settings.social_youtube_link }}" class="footer__social-link" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" stroke="currentColor" stroke-width="1.5"/>
+                    <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              {%- endif -%}
+            </nav>
           {%- endif -%}
+
         </div>
 
-        <!-- Col 2 — Navigation -->
+        {%- comment -%} ── COL 2 : NAVIGATION ─────────────── {%- endcomment -%}
         <div class="footer__col footer__col--nav">
           <p class="footer__col-heading">Explore</p>
           <ul class="footer__nav-list" role="list">
@@ -85,58 +93,61 @@
           </ul>
         </div>
 
-        <!-- Col 3 — Newsletter -->
+        {%- comment -%} ── COL 3 : NEWSLETTER ─────────────── {%- endcomment -%}
         <div class="footer__col footer__col--newsletter">
           <p class="footer__col-heading">{{ section.settings.newsletter_heading | default: 'Stay in the loop' }}</p>
-          <p class="footer__newsletter-subtext">
-            {{ section.settings.newsletter_subtext | default: 'Water quality guides, launch updates, and no noise.' }}
-          </p>
+          <p class="footer__nl-subtext">{{ section.settings.newsletter_subtext | default: 'Water quality guides, launch updates, and no noise.' }}</p>
 
-          {%- form 'customer', class: 'footer__newsletter-form' -%}
+          {%- form 'customer', id: nl_form_id, class: 'footer__nl-form' -%}
             <input type="hidden" name="contact[tags]" value="newsletter">
 
-            <div class="footer__newsletter-row">
-              <label for="footer-email" class="visually-hidden">Email address</label>
-              <input
-                type="email"
-                id="footer-email"
-                name="contact[email]"
-                class="footer__newsletter-input"
-                placeholder="your@email.com"
-                required
-                autocomplete="email"
-                aria-required="true"
-              >
-              <button type="submit" class="btn btn--primary btn--sm">
-                Subscribe
-              </button>
-            </div>
-
             {%- if form.posted_successfully? -%}
-              <p class="footer__newsletter-success" role="status">You're in.</p>
-            {%- endif -%}
+              <p class="footer__nl-success" role="status">You&rsquo;re in.</p>
+            {%- else -%}
 
+              {%- if form.errors -%}
+                <p class="footer__nl-error" role="alert">
+                  {%- for message in form.errors.messages -%}
+                    {{ message[1] }}{% unless forloop.last %}, {% endunless %}
+                  {%- endfor -%}
+                </p>
+              {%- endif -%}
+
+              <div class="footer__nl-row">
+                <label for="FooterEmail-{{ section.id }}" class="visually-hidden">Email address</label>
+                <input
+                  id="FooterEmail-{{ section.id }}"
+                  class="footer__nl-input"
+                  type="email"
+                  name="contact[email]"
+                  value="{{ form.email }}"
+                  placeholder="your@email.com"
+                  autocomplete="email"
+                  autocapitalize="off"
+                  required
+                >
+                <button type="submit" class="footer__nl-btn" aria-label="{{ nl_btn_label }}">
+                  {{ nl_btn_label }}
+                </button>
+              </div>
+
+            {%- endif -%}
           {%- endform -%}
         </div>
 
       </div>
-      <!-- /footer__grid -->
     </div>
   </div>
-  <!-- /footer__main -->
 
-  <!-- Footer bottom bar -->
+  {%- comment -%} ── BOTTOM BAR ─────────────────────────── {%- endcomment -%}
   <div class="footer__bottom">
     <div class="container">
       <div class="footer__bottom-inner">
 
-        <!-- Legal nav -->
-        <nav class="footer__legal-nav" aria-label="Legal navigation">
+        <nav class="footer__legal-nav" aria-label="Legal">
           <ul class="footer__legal-list" role="list">
             <li>
-              <span class="footer__copyright">
-                &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}
-              </span>
+              <span class="footer__copyright">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
             </li>
             {%- for link in linklists[legal_menu].links -%}
               <li>
@@ -146,9 +157,8 @@
           </ul>
         </nav>
 
-        <!-- Payment icons -->
-        {%- if show_payment and shop.enabled_payment_types != empty -%}
-          <div class="footer__payment">
+        {%- if section.settings.show_payment and shop.enabled_payment_types != empty -%}
+          <div class="footer__payment" aria-label="Accepted payment methods">
             {%- for type in shop.enabled_payment_types -%}
               {{ type | payment_type_svg_tag: class: 'footer__payment-icon' }}
             {%- endfor -%}
@@ -158,281 +168,370 @@
       </div>
     </div>
   </div>
-  <!-- /footer__bottom -->
 
 </footer>
 
-
-<!-- ============================================================
-     STYLES
-     ============================================================ -->
 <style>
-  /* ---- Footer shell ---- */
-  .site-footer {
-    background-color: var(--color-espresso);
-    color: var(--color-gold);
-  }
+/* ── FOOTER ─────────────────────────────────────────────── */
 
-  /* Amber rule at very top */
-  .footer__rule {
-    height: 1.5px;
-    background-color: var(--color-amber);
-    opacity: 0.5;
-  }
+.site-footer {
+  background-color: var(--color-espresso, #2C1A0E);
+}
 
-  /* ---- Main section ---- */
-  .footer__main {
-    padding-block: var(--space-16) var(--space-12);
-  }
+/* Amber top rule — decorative, no contrast requirement */
+.footer__rule {
+  height: 1.5px;
+  background-color: var(--color-amber, #C8874A);
+  opacity: 0.5;
+}
 
+/* ── MAIN GRID ─────────────────────────────────────────── */
+
+.footer__main {
+  padding-block: var(--space-16, 5rem) var(--space-12, 4rem);
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.4fr;
+  gap: var(--space-12, 4rem);
+  align-items: start;
+}
+
+/* ── BRAND COL ─────────────────────────────────────────── */
+
+.footer__logo-link {
+  display: inline-block;
+  margin-bottom: var(--space-5, 1.25rem);
+}
+
+.footer__logo-img {
+  height: 32px;
+  width: auto;
+  /* Tint logo to soft gold */
+  filter: brightness(0) saturate(100%) invert(80%) sepia(30%) saturate(400%) hue-rotate(5deg);
+}
+
+/* Logo text fallback — soft gold on espresso 10.51:1 ✅ */
+.footer__logo-text {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-lg, 1.25rem);
+  font-weight: var(--font-weight-normal, 400);
+  color: var(--color-gold, #E8C99A);
+}
+
+/* Tagline — amber on espresso 5.57:1 ✅ */
+.footer__tagline {
+  font-family: var(--font-label);
+  font-size: var(--font-size-xs, 0.6875rem);
+  font-weight: var(--font-weight-medium, 500);
+  letter-spacing: var(--letter-spacing-label, 3px);
+  text-transform: uppercase;
+  color: var(--color-amber, #C8874A);
+  margin-bottom: var(--space-4, 1rem);
+}
+
+/* Brand statement — blended gold@0.65 on espresso = #A68C69, 5.21:1 ✅ */
+.footer__brand-statement {
+  font-family: var(--font-body, var(--font-label));
+  font-size: var(--font-size-sm, 0.875rem);
+  line-height: var(--line-height-body, 1.65);
+  color: #A68C69;
+  max-width: 30ch;
+  margin-bottom: var(--space-6, 1.5rem);
+}
+
+/* Social icons — 44×44px touch targets */
+.footer__social {
+  display: flex;
+  gap: var(--space-2, 0.5rem);
+}
+
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  /* blended gold@0.6 on espresso = #9D8362, 4.64:1 ✅ */
+  color: #9D8362;
+  border: 1px solid rgba(232, 201, 154, 0.2);
+  border-radius: var(--radius-base, 4px);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.footer__social-link:hover {
+  color: var(--color-amber, #C8874A);
+  border-color: rgba(200, 135, 74, 0.5);
+}
+
+.footer__social-link:focus-visible {
+  outline: 2px solid var(--color-amber, #C8874A);
+  outline-offset: 2px;
+}
+
+/* ── COL HEADING ───────────────────────────────────────── */
+/* amber on espresso 5.57:1 ✅ */
+.footer__col-heading {
+  font-family: var(--font-label);
+  font-size: var(--font-size-xs, 0.6875rem);
+  font-weight: var(--font-weight-medium, 500);
+  letter-spacing: var(--letter-spacing-label, 3px);
+  text-transform: uppercase;
+  color: var(--color-amber, #C8874A);
+  margin-bottom: var(--space-5, 1.25rem);
+}
+
+/* ── NAV COL ───────────────────────────────────────────── */
+
+.footer__nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3, 0.75rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* blended gold@0.7 on espresso = #B09470, 5.80:1 ✅ */
+.footer__nav-link {
+  font-family: var(--font-body, var(--font-label));
+  font-size: var(--font-size-sm, 0.875rem);
+  color: #B09470;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.footer__nav-link:hover {
+  color: var(--color-amber, #C8874A);
+}
+
+.footer__nav-link:focus-visible {
+  outline: 2px solid var(--color-amber, #C8874A);
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+/* ── NEWSLETTER COL ────────────────────────────────────── */
+
+/* blended gold@0.6 on espresso = #9D8362, 4.64:1 ✅ */
+.footer__nl-subtext {
+  font-family: var(--font-body, var(--font-label));
+  font-size: var(--font-size-sm, 0.875rem);
+  line-height: var(--line-height-body, 1.65);
+  color: #9D8362;
+  max-width: 28ch;
+  margin-bottom: var(--space-5, 1.25rem);
+}
+
+.footer__nl-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3, 0.75rem);
+}
+
+.footer__nl-row {
+  display: flex;
+  border: 1px solid rgba(232, 201, 154, 0.2);
+  border-radius: var(--radius-sm, 2px);
+  overflow: hidden;
+}
+
+.footer__nl-row:focus-within {
+  outline: 2px solid var(--color-amber, #C8874A);
+  outline-offset: 2px;
+  border-color: transparent;
+}
+
+/* Input — gold text on near-espresso bg — #E8C99A on ~#3B2819, 8.4:1 ✅ */
+.footer__nl-input {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  padding: 0 0.875rem;
+  background: rgba(232, 201, 154, 0.07);
+  border: none;
+  font-family: var(--font-label);
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--color-gold, #E8C99A);
+  outline: none;
+}
+
+.footer__nl-input::placeholder {
+  /* #9A7B6A on ~#3B2819 input bg — passes 3:1 ✅ */
+  color: #9A7B6A;
+}
+
+/* Subscribe button — amber bg, espresso text 5.57:1 ✅ (no .btn--primary which uses linen) */
+.footer__nl-btn {
+  height: 44px;
+  padding: 0 1.125rem;
+  background: var(--color-amber, #C8874A);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-label);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-espresso, #2C1A0E);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+
+.footer__nl-btn:hover {
+  background: var(--color-amber-hover, #B57840);
+}
+
+/* Success — amber on espresso 5.57:1 ✅ */
+.footer__nl-success {
+  font-family: var(--font-label);
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--color-amber, #C8874A);
+  letter-spacing: var(--letter-spacing-wide, 2px);
+}
+
+/* Error — #E8A87C on espresso 8.19:1 ✅ */
+.footer__nl-error {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  color: #E8A87C;
+}
+
+/* ── BOTTOM BAR ────────────────────────────────────────── */
+
+.footer__bottom {
+  border-top: 1px solid rgba(232, 201, 154, 0.1);
+  padding-block: var(--space-5, 1.25rem);
+}
+
+.footer__bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4, 1rem);
+}
+
+.footer__legal-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2, 0.5rem) var(--space-6, 1.5rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* copyright + legal links — #C89A78 on espresso 6.62:1 ✅ (was gold@0.45 = 3.22:1 ❌) */
+.footer__copyright,
+.footer__legal-link {
+  font-family: var(--font-body, var(--font-label));
+  font-size: var(--font-size-xs, 0.6875rem);
+  color: #C89A78;
+  text-decoration: none;
+}
+
+.footer__legal-link {
+  transition: color 0.15s ease;
+}
+
+.footer__legal-link:hover {
+  color: var(--color-gold, #E8C99A);
+}
+
+.footer__legal-link:focus-visible {
+  outline: 2px solid var(--color-amber, #C8874A);
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+/* Payment icons */
+.footer__payment {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2, 0.5rem);
+  flex-wrap: wrap;
+}
+
+.footer__payment-icon {
+  height: 22px;
+  width: auto;
+  border-radius: 3px;
+  opacity: 0.55;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+
+@media (max-width: 1023px) {
   .footer__grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1.4fr;
-    gap: var(--space-12);
-    align-items: start;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-10, 3rem);
   }
 
-  /* ---- Brand col ---- */
-  .footer__logo {
-    display: inline-block;
-    margin-bottom: var(--space-5);
+  .footer__col--newsletter {
+    grid-column: 1 / -1;
   }
 
-  .footer__logo img {
-    height: 32px;
-    width: auto;
-    filter: brightness(0) saturate(100%) invert(80%) sepia(30%) saturate(400%) hue-rotate(5deg);
-    /* approximates --color-gold tint on logo */
+  .footer__nl-row {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8, 2.5rem);
   }
 
-  .footer__logo-text {
-    font-family: var(--font-heading);
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-normal);
-    color: var(--color-gold);
+  .footer__col--newsletter {
+    grid-column: auto;
   }
 
-  .footer__tagline {
-    font-family: var(--font-label);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: var(--letter-spacing-label);
-    text-transform: uppercase;
-    color: var(--color-amber);
-    margin-bottom: var(--space-4);
-  }
-
-  .footer__brand-statement {
-    font-family: var(--font-body);
-    font-size: var(--font-size-sm);
-    line-height: var(--line-height-body);
-    color: var(--color-gold);
-    opacity: 0.65;
-    max-width: 30ch;
-    margin-bottom: var(--space-6);
-  }
-
-  /* Social */
-  .footer__social {
-    display: flex;
-    gap: var(--space-3);
-  }
-
-  .footer__social-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    color: var(--color-gold);
-    opacity: 0.6;
-    border: 1px solid rgba(232, 201, 154, 0.25);
-    border-radius: var(--radius-base);
-    transition: opacity var(--transition-fast),
-                border-color var(--transition-fast),
-                color var(--transition-fast);
-  }
-
-  .footer__social-link:hover {
-    opacity: 1;
-    color: var(--color-amber);
-    border-color: var(--color-amber);
-  }
-
-  .footer__social-link:focus-visible {
-    outline: 2px solid var(--color-amber);
-    outline-offset: 2px;
-  }
-
-  /* ---- Nav col ---- */
-  .footer__col-heading {
-    font-family: var(--font-label);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: var(--letter-spacing-label);
-    text-transform: uppercase;
-    color: var(--color-amber);
-    margin-bottom: var(--space-5);
-  }
-
-  .footer__nav-list {
-    display: flex;
+  .footer__nl-row {
+    max-width: none;
     flex-direction: column;
-    gap: var(--space-3);
+    border: none;
+    gap: 0.5rem;
   }
 
-  .footer__nav-link {
-    font-family: var(--font-body);
-    font-size: var(--font-size-sm);
-    color: var(--color-gold);
-    opacity: 0.7;
-    transition: opacity var(--transition-fast),
-                color var(--transition-fast);
-  }
-
-  .footer__nav-link:hover {
-    opacity: 1;
-    color: var(--color-amber);
-  }
-
-  /* ---- Newsletter col ---- */
-  .footer__newsletter-subtext {
-    font-size: var(--font-size-sm);
-    color: var(--color-gold);
-    opacity: 0.6;
-    margin-bottom: var(--space-5);
-    max-width: 28ch;
-    line-height: var(--line-height-body);
-  }
-
-  .footer__newsletter-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-
-  .footer__newsletter-row {
-    display: flex;
-    gap: var(--space-2);
-  }
-
-  .footer__newsletter-input {
-    flex: 1;
-    min-width: 0;
-    padding: var(--space-3) var(--space-4);
-    background-color: rgba(232, 201, 154, 0.08);
-    border: 1px solid rgba(232, 201, 154, 0.2);
-    border-radius: var(--radius-base);
-    color: var(--color-gold);
-    font-size: var(--font-size-sm);
-    transition: border-color var(--transition-fast);
-    min-height: 44px;
-  }
-
-  .footer__newsletter-input::placeholder {
-    color: var(--color-gold);
-    opacity: 0.35;
-  }
-
-  .footer__newsletter-input:focus {
-    border-color: var(--color-amber);
+  .footer__nl-row:focus-within {
     outline: none;
   }
 
-  .footer__newsletter-success {
-    font-size: var(--font-size-sm);
-    color: var(--color-amber);
-    letter-spacing: var(--letter-spacing-wide);
+  .footer__nl-input {
+    border: 1px solid rgba(232, 201, 154, 0.2);
+    border-radius: var(--radius-sm, 2px);
+    width: 100%;
   }
 
-  /* ---- Bottom bar ---- */
-  .footer__bottom {
-    border-top: 1px solid rgba(232, 201, 154, 0.1);
-    padding-block: var(--space-5);
+  .footer__nl-input:focus {
+    outline: 2px solid var(--color-amber, #C8874A);
+    outline-offset: 2px;
+  }
+
+  .footer__nl-btn {
+    border-radius: var(--radius-sm, 2px);
+    width: 100%;
+    justify-content: center;
   }
 
   .footer__bottom-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: var(--space-4);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3, 0.75rem);
   }
+}
 
-  .footer__legal-list {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-6);
-  }
-
-  .footer__copyright,
-  .footer__legal-link {
-    font-family: var(--font-body);
-    font-size: var(--font-size-xs);
-    color: var(--color-gold);
-    opacity: 0.45;
-  }
-
-  .footer__legal-link {
-    transition: opacity var(--transition-fast);
-  }
-
-  .footer__legal-link:hover {
-    opacity: 0.9;
-  }
-
-  /* Payment icons */
-  .footer__payment {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    flex-wrap: wrap;
-  }
-
-  .footer__payment-icon {
-    height: 22px;
-    width: auto;
-    border-radius: 3px;
-    opacity: 0.5;
-  }
-
-  /* ---- Responsive ---- */
-  @media (max-width: 1023px) {
-    .footer__grid {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-10);
-    }
-
-    .footer__col--newsletter {
-      grid-column: 1 / -1;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .footer__grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-10);
-    }
-
-    .footer__col--newsletter {
-      grid-column: auto;
-    }
-
-    .footer__newsletter-row {
-      flex-direction: column;
-    }
-
-    .footer__newsletter-input {
-      width: 100%;
-    }
-  }
+@media (prefers-reduced-motion: reduce) {
+  .footer__social-link,
+  .footer__nav-link,
+  .footer__legal-link,
+  .footer__nl-btn { transition: none; }
+}
 </style>
 
-
-<!-- ============================================================
-     SCHEMA
-     ============================================================ -->
 {% schema %}
 {
   "name": "Footer",
@@ -441,7 +540,8 @@
     {
       "type": "image_picker",
       "id": "logo",
-      "label": "Logo image (footer)"
+      "label": "Logo (footer)",
+      "info": "Light version of your logo — displayed against dark background."
     },
     {
       "type": "text",
@@ -453,7 +553,7 @@
       "type": "textarea",
       "id": "brand_statement",
       "label": "Brand statement",
-      "default": "Most skin and hair problems start in the shower. Mend fixes the step the beauty industry won't talk about."
+      "default": "Most skin and hair problems start in the shower. Mend fixes the step the beauty industry won\u2019t talk about."
     },
     {
       "type": "header",
@@ -468,7 +568,7 @@
     {
       "type": "link_list",
       "id": "legal_menu",
-      "label": "Legal menu",
+      "label": "Legal menu (bottom bar)",
       "default": "footer-legal"
     },
     {
@@ -478,18 +578,24 @@
     {
       "type": "text",
       "id": "newsletter_heading",
-      "label": "Newsletter heading",
+      "label": "Heading",
       "default": "Stay in the loop"
     },
     {
       "type": "text",
       "id": "newsletter_subtext",
-      "label": "Newsletter subtext",
+      "label": "Subtext",
       "default": "Water quality guides, launch updates, and no noise."
     },
     {
+      "type": "text",
+      "id": "newsletter_btn",
+      "label": "Button label",
+      "default": "Subscribe"
+    },
+    {
       "type": "header",
-      "content": "Options"
+      "content": "Display"
     },
     {
       "type": "checkbox",
