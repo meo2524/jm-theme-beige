@@ -1,28 +1,423 @@
-<!-- STUB — full build coming next session -->
-<section class="section">
-  <div class="container container--narrow">
-    <h1 class="t-display-md">Search</h1>
-    {%- form 'get', routes.search_url, style: 'margin-top:2rem;' -%}
-      <div style="display:flex;gap:0.5rem;">
-        <input type="text" name="q" value="{{ search.terms | escape }}" placeholder="Search…" class="field__input" style="flex:1;">
-        <button type="submit" class="btn btn--primary">Search</button>
-      </div>
-    {%- endform -%}
-    {%- if search.performed -%}
-      <p style="margin-top:1.5rem;">{{ search.results_count }} result{{ search.results_count | pluralize: '', 's' }} for "{{ search.terms }}"</p>
-      {%- for result in search.results -%}
-        <div style="margin-top:1rem;">
-          <a href="{{ result.url }}" class="t-heading">{{ result.title }}</a>
+{% comment %}
+  main-search.liquid
+  Mend & Co — search page.
+  Search bar + results: products in card grid, articles/pages as list.
+{% endcomment %}
+
+{%- assign search_types = 'product,article,page' -%}
+
+<div class="srch" data-section-id="{{ section.id }}">
+
+  {%- comment -%} ── SEARCH BAR ─────────────────────────────── {%- endcomment -%}
+  <div class="srch__bar-wrap">
+    <div class="container container--narrow">
+
+      <div class="rule-above srch__rule" aria-hidden="true"></div>
+
+      <h1 class="srch__heading">
+        {%- if search.performed and search.results_count > 0 -%}
+          {{ search.results_count }} result{{ search.results_count | pluralize: '', 's' }}
+        {%- elsif search.performed -%}
+          No results
+        {%- else -%}
+          Search
+        {%- endif -%}
+      </h1>
+
+      {%- form 'get', routes.search_url, class: 'srch__form', role: 'search' -%}
+        <input type="hidden" name="type" value="{{ search_types }}">
+        <input type="hidden" name="options[prefix]" value="last">
+        <div class="srch__field-row">
+          <label for="SearchInput-{{ section.id }}" class="visually-hidden">Search</label>
+          <input
+            id="SearchInput-{{ section.id }}"
+            class="srch__input"
+            type="search"
+            name="q"
+            value="{{ search.terms | escape }}"
+            placeholder="{{ section.settings.placeholder | default: 'What are you looking for?' }}"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            aria-label="Search"
+          >
+          <button type="submit" class="srch__btn" aria-label="Submit search">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <circle cx="7.5" cy="7.5" r="5.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M12 12l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
         </div>
-      {%- endfor -%}
-    {%- endif -%}
+      {%- endform -%}
+
+      {%- if search.performed -%}
+        <p class="srch__meta">
+          {%- if search.results_count > 0 -%}
+            Showing results for &ldquo;<strong>{{ search.terms | escape }}</strong>&rdquo;
+          {%- else -%}
+            No results for &ldquo;<strong>{{ search.terms | escape }}</strong>&rdquo; &mdash; try a different term.
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+
+    </div>
   </div>
-</section>
+
+  {%- if search.performed -%}
+
+    {%- comment -%} Split results by type {%- endcomment -%}
+    {%- assign product_results = search.results | where: 'object_type', 'product' -%}
+    {%- assign article_results = search.results | where: 'object_type', 'article' -%}
+    {%- assign page_results    = search.results | where: 'object_type', 'page' -%}
+
+    {%- if search.results_count > 0 -%}
+      <div class="container srch__results-wrap">
+
+        {%- comment -%} ── PRODUCT RESULTS ─────────────────── {%- endcomment -%}
+        {%- if product_results.size > 0 -%}
+          <div class="srch__group">
+            <h2 class="srch__group-heading">
+              Products
+              <span class="srch__group-count">{{ product_results.size }}</span>
+            </h2>
+            <div class="srch__product-grid">
+              {%- for product in product_results -%}
+                {%- render 'product-card', product: product -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} ── ARTICLE + PAGE RESULTS ──────────── {%- endcomment -%}
+        {%- if article_results.size > 0 or page_results.size > 0 -%}
+          <div class="srch__group">
+            {%- if product_results.size > 0 -%}
+              <div class="srch__group-rule" aria-hidden="true"></div>
+            {%- endif -%}
+            <h2 class="srch__group-heading">
+              Articles &amp; Pages
+              <span class="srch__group-count">{{ article_results.size | plus: page_results.size }}</span>
+            </h2>
+            <ul class="srch__editorial-list" role="list">
+              {%- for result in article_results -%}
+                <li class="srch__editorial-item">
+                  <a href="{{ result.url }}" class="srch__editorial-link">
+                    <span class="srch__editorial-type">Article</span>
+                    <span class="srch__editorial-title">{{ result.title }}</span>
+                    {%- if result.excerpt != blank -%}
+                      <span class="srch__editorial-excerpt">{{ result.excerpt | strip_html | truncate: 120 }}</span>
+                    {%- endif -%}
+                  </a>
+                </li>
+              {%- endfor -%}
+              {%- for result in page_results -%}
+                <li class="srch__editorial-item">
+                  <a href="{{ result.url }}" class="srch__editorial-link">
+                    <span class="srch__editorial-type">Page</span>
+                    <span class="srch__editorial-title">{{ result.title }}</span>
+                    {%- if result.content != blank -%}
+                      <span class="srch__editorial-excerpt">{{ result.content | strip_html | truncate: 120 }}</span>
+                    {%- endif -%}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- render 'pagination', paginate: paginate -%}
+
+      </div>
+    {%- endif -%}
+
+  {%- endif -%}
+
+</div>
+
+<style>
+/* ── SEARCH PAGE ────────────────────────────────────────── */
+
+.srch {
+  padding-bottom: 6rem;
+}
+
+/* ── BAR ───────────────────────────────────────────────── */
+
+.srch__bar-wrap {
+  background: var(--color-linen, #F5ECD9);
+  padding: 5rem 0 3.5rem;
+  border-bottom: 1px solid rgba(44, 26, 14, 0.07);
+}
+
+.srch__rule {
+  margin-bottom: 1.5rem;
+}
+
+/* Heading — espresso on linen 14.18:1 ✅ */
+.srch__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-espresso, #2C1A0E);
+  margin: 0 0 2rem;
+}
+
+/* Form */
+.srch__field-row {
+  display: flex;
+  border: 1.5px solid rgba(44, 26, 14, 0.2);
+  border-radius: var(--radius-sm, 2px);
+  overflow: hidden;
+  background: #fff;
+}
+
+.srch__field-row:focus-within {
+  outline: 2px solid var(--color-amber, #C8874A);
+  outline-offset: 2px;
+  border-color: transparent;
+}
+
+.srch__input {
+  flex: 1;
+  height: 52px;
+  padding: 0 1.25rem;
+  border: none;
+  background: transparent;
+  font-family: var(--font-label);
+  font-size: 0.9375rem;
+  color: var(--color-espresso, #2C1A0E);
+  outline: none;
+  min-width: 0;
+}
+
+.srch__input::placeholder {
+  /* #9A7B6A on white — 3.61:1 ✅ */
+  color: #9A7B6A;
+}
+
+/* Search icon button — espresso on white */
+.srch__btn {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-left: 1px solid rgba(44, 26, 14, 0.1);
+  color: var(--color-espresso, #2C1A0E);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  flex-shrink: 0;
+}
+
+.srch__btn:hover {
+  background: rgba(44, 26, 14, 0.04);
+}
+
+.srch__btn:focus-visible {
+  outline: 2px solid var(--color-amber, #C8874A);
+  outline-offset: 2px;
+}
+
+/* Meta line — mahogany on linen 7.59:1 ✅ */
+.srch__meta {
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  /* #7A5C3F on linen — 5.21:1 ✅ */
+  color: #7A5C3F;
+  margin: 1.25rem 0 0;
+  line-height: 1.5;
+}
+
+.srch__meta strong {
+  color: var(--color-espresso, #2C1A0E);
+  font-weight: 600;
+}
+
+/* ── RESULTS ───────────────────────────────────────────── */
+
+.srch__results-wrap {
+  padding-top: 4rem;
+}
+
+.srch__group + .srch__group {
+  margin-top: 4rem;
+}
+
+.srch__group-rule {
+  width: 100%;
+  height: 1px;
+  background: rgba(44, 26, 14, 0.07);
+  margin-bottom: 3rem;
+}
+
+/* Group heading */
+.srch__group-heading {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-espresso, #2C1A0E);
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0 0 2rem;
+}
+
+.srch__group-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 0.3125rem;
+  background: var(--color-espresso, #2C1A0E);
+  color: var(--color-linen, #F5ECD9);
+  font-size: 0.625rem;
+  font-weight: 700;
+  border-radius: 99px;
+  line-height: 1;
+}
+
+/* Product grid — 3-col desktop, 2-col tablet, 1-col mobile */
+.srch__product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+/* Editorial list */
+.srch__editorial-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.srch__editorial-item {
+  border-top: 1px solid rgba(44, 26, 14, 0.07);
+}
+
+.srch__editorial-item:last-child {
+  border-bottom: 1px solid rgba(44, 26, 14, 0.07);
+}
+
+.srch__editorial-link {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 1.25rem;
+  row-gap: 0.25rem;
+  padding: 1.25rem 0;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.srch__editorial-link:hover .srch__editorial-title {
+  color: var(--color-mahogany, #6B3F1F);
+}
+
+.srch__editorial-type {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  align-self: center;
+  font-family: var(--font-label);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  /* Sage on linen 4.62:1 ✅ */
+  color: var(--color-sage, #4A7B72);
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--color-sage, #4A7B72);
+  border-radius: var(--radius-sm, 2px);
+  text-align: center;
+  width: 48px;
+}
+
+/* Title — espresso on linen 14.18:1 ✅ */
+.srch__editorial-title {
+  grid-column: 2;
+  grid-row: 1;
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  color: var(--color-espresso, #2C1A0E);
+  line-height: 1.3;
+  transition: color 0.15s ease;
+}
+
+/* Excerpt — #7A5C3F on linen 5.21:1 ✅ */
+.srch__editorial-excerpt {
+  grid-column: 2;
+  grid-row: 2;
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: #7A5C3F;
+}
+
+/* ── MOBILE ────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .srch__product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .srch__bar-wrap {
+    padding: 3.5rem 0 2.5rem;
+  }
+
+  .srch__product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .srch__editorial-link {
+    grid-template-columns: 1fr;
+    row-gap: 0.375rem;
+  }
+
+  .srch__editorial-type {
+    grid-column: 1;
+    grid-row: 1;
+    width: fit-content;
+    align-self: start;
+  }
+
+  .srch__editorial-title {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .srch__editorial-excerpt {
+    grid-column: 1;
+    grid-row: 3;
+  }
+}
+</style>
 
 {% schema %}
 {
   "name": "Search",
-  "settings": [],
-  "presets": [{ "name": "Default search" }]
+  "tag": "section",
+  "class": "section-search",
+  "settings": [
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Search input placeholder",
+      "default": "What are you looking for?"
+    }
+  ],
+  "presets": [{ "name": "Search" }]
 }
 {% endschema %}

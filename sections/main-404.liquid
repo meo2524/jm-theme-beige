@@ -1,17 +1,202 @@
-<!-- STUB — full build coming next session -->
-<section class="section" style="min-height:50vh;display:flex;align-items:center;">
-  <div class="container" style="text-align:center;">
-    <span class="rule-above" style="margin-inline:auto;"></span>
-    <h1 class="t-display-lg">Page not found.</h1>
-    <p class="t-subheading" style="margin-top:1rem;">The page you're looking for doesn't exist.</p>
-    <a href="{{ routes.root_url }}" class="btn btn--primary" style="margin-top:2rem;">Back to home</a>
+{% comment %}
+  main-404.liquid
+  Mend & Co — 404 not-found page.
+  Dark espresso canvas, brand-reframe copy, two CTAs.
+{% endcomment %}
+
+<div class="e404" data-section-id="{{ section.id }}">
+
+  <div class="e404__inner">
+
+    <div class="rule-above e404__rule" aria-hidden="true"></div>
+
+    <p class="e404__eyebrow">404</p>
+
+    <h1 class="e404__heading">
+      {{ section.settings.heading | default: 'This page doesn\u2019t exist.' }}
+    </h1>
+
+    <p class="e404__subtext">
+      {{ section.settings.subtext | default: 'Neither did the idea that your shower was fine. Start at the real source \u2014 your water.' }}
+    </p>
+
+    <div class="e404__actions">
+      <a href="{{ routes.root_url }}" class="e404__btn e404__btn--primary">
+        {{ section.settings.cta_home | default: 'Back to home' }}
+      </a>
+      <a href="{{ routes.all_products_collection_url }}" class="e404__btn e404__btn--ghost">
+        {{ section.settings.cta_shop | default: 'Shop the filter' }}
+      </a>
+    </div>
+
   </div>
-</section>
+
+</div>
+
+<style>
+/* ── 404 PAGE ───────────────────────────────────────────── */
+
+.e404 {
+  min-height: 100dvh;
+  background: var(--color-espresso, #2C1A0E);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem;
+}
+
+.e404__inner {
+  max-width: 600px;
+  text-align: center;
+}
+
+/* Inherit .rule-above from base.css; center it */
+.e404__rule {
+  margin-inline: auto;
+  margin-bottom: 2rem;
+}
+
+/* 404 eyebrow — amber clay as decorative label (not text) */
+.e404__eyebrow {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  /* #C89A78 on espresso — 6.62:1 ✅ */
+  color: #C89A78;
+  margin: 0 0 1.25rem;
+}
+
+/* Heading — linen on espresso 14.18:1 ✅ */
+.e404__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-linen, #F5ECD9);
+  margin: 0 0 1.5rem;
+}
+
+/* Subtext — soft gold on espresso 10.51:1 ✅ */
+.e404__subtext {
+  font-family: var(--font-label);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #E8C99A;
+  margin: 0 0 3rem;
+  max-width: 460px;
+  margin-inline: auto;
+  margin-bottom: 3rem;
+}
+
+/* ── CTAs ──────────────────────────────────────────────── */
+
+.e404__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.e404__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding: 0 2rem;
+  border-radius: var(--radius-sm, 2px);
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Primary — amber bg, espresso text — 5.57:1 ✅ */
+.e404__btn--primary {
+  background: var(--color-amber, #C8874A);
+  color: var(--color-espresso, #2C1A0E);
+  border: 1.5px solid var(--color-amber, #C8874A);
+}
+
+.e404__btn--primary:hover {
+  background: var(--color-amber-hover, #B57840);
+  border-color: var(--color-amber-hover, #B57840);
+}
+
+/* Ghost — linen outline on dark — linen on espresso 14.18:1 ✅ */
+.e404__btn--ghost {
+  background: transparent;
+  /* #C89A78 on espresso — 6.62:1 ✅ */
+  color: #C89A78;
+  border: 1.5px solid rgba(200, 135, 74, 0.4);
+}
+
+.e404__btn--ghost:hover {
+  color: var(--color-linen, #F5ECD9);
+  border-color: rgba(245, 236, 217, 0.5);
+}
+
+.e404__btn:focus-visible {
+  outline: 2px solid var(--color-amber, #C8874A);
+  outline-offset: 3px;
+}
+
+/* ── MOBILE ────────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+  .e404__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .e404__btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .e404__btn { transition: none; }
+}
+</style>
 
 {% schema %}
 {
-  "name": "404",
-  "settings": [],
-  "presets": [{ "name": "404" }]
+  "name": "404 page",
+  "tag": "section",
+  "class": "section-404",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "This page doesn\u2019t exist."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Neither did the idea that your shower was fine. Start at the real source \u2014 your water."
+    },
+    {
+      "type": "text",
+      "id": "cta_home",
+      "label": "Primary CTA label",
+      "default": "Back to home"
+    },
+    {
+      "type": "text",
+      "id": "cta_shop",
+      "label": "Secondary CTA label",
+      "default": "Shop the filter"
+    }
+  ],
+  "presets": [{ "name": "404 page" }]
 }
 {% endschema %}

@@ -1,15 +1,328 @@
-<!-- STUB — full build coming next session -->
-<section class="section">
-  <div class="container container--narrow">
-    <h1 class="t-display-md">{{ page.title }}</h1>
-    <div class="page__content" style="margin-top:2rem;">{{ page.content }}</div>
+{% comment %}
+  main-page.liquid
+  Mend & Co — generic page template (About, FAQ, Privacy, etc.)
+  Breadcrumbs, Playfair title, optional hero image, rich text content.
+{% endcomment %}
+
+<div class="pg" data-section-id="{{ section.id }}">
+
+  {%- comment -%} ── HERO IMAGE (optional) ──────────────── {%- endcomment -%}
+  {%- if section.settings.hero_image != blank -%}
+    <div class="pg__hero">
+      {{
+        section.settings.hero_image
+        | image_url: width: 1440
+        | image_tag:
+          loading: 'eager',
+          fetchpriority: 'high',
+          class: 'pg__hero-img',
+          alt: section.settings.hero_image.alt | default: page.title | escape,
+          widths: '480, 768, 1024, 1440',
+          sizes: '100vw'
+      }}
+      <div class="pg__hero-overlay" aria-hidden="true"></div>
+      <div class="pg__hero-title-wrap">
+        <div class="rule-above pg__hero-rule" aria-hidden="true"></div>
+        <h1 class="pg__hero-title">{{ page.title }}</h1>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ── HEADER (no hero image) ─────────────── {%- endcomment -%}
+  {%- if section.settings.hero_image == blank -%}
+    <div class="pg__header">
+      <div class="container container--narrow">
+        {%- if section.settings.show_breadcrumbs -%}
+          {%- render 'breadcrumbs' -%}
+        {%- endif -%}
+        <div class="rule-above pg__rule" aria-hidden="true"></div>
+        <h1 class="pg__title">{{ page.title }}</h1>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ── CONTENT ───────────────────────────── {%- endcomment -%}
+  <div class="pg__body">
+    <div class="container {%- if section.settings.content_width == 'narrow' %} container--narrow{%- elsif section.settings.content_width == 'wide' %} container--wide{%- endif -%}">
+
+      {%- if section.settings.hero_image != blank and section.settings.show_breadcrumbs -%}
+        {%- render 'breadcrumbs' -%}
+      {%- endif -%}
+
+      <div class="pg__rte rte">
+        {{ page.content }}
+      </div>
+
+    </div>
   </div>
-</section>
+
+</div>
+
+<style>
+/* ── PAGE TEMPLATE ──────────────────────────────────────── */
+
+/* ── HERO IMAGE ────────────────────────────────────────── */
+
+.pg__hero {
+  position: relative;
+  height: clamp(260px, 38vw, 480px);
+  overflow: hidden;
+}
+
+.pg__hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Espresso overlay for text legibility */
+.pg__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 26, 14, 0.52);
+}
+
+.pg__hero-title-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 2rem 3rem;
+  text-align: center;
+}
+
+.pg__hero-rule {
+  /* Override rule-above margin-bottom so it sits snugly above the title */
+  margin-bottom: 1.25rem;
+  /* Ensure it's centred */
+  margin-inline: auto;
+}
+
+/* Hero title — linen on overlaid espresso ✅ */
+.pg__hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-linen, #F5ECD9);
+  margin: 0;
+  text-shadow: none;
+}
+
+/* ── HEADER (no hero) ──────────────────────────────────── */
+
+.pg__header {
+  background: var(--color-linen, #F5ECD9);
+  padding: 4.5rem 0 3rem;
+  border-bottom: 1px solid rgba(44, 26, 14, 0.07);
+}
+
+.pg__rule {
+  /* Centre the base .rule-above element */
+  margin-bottom: 1.5rem;
+}
+
+/* Title — espresso on linen 14.18:1 ✅ */
+.pg__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-espresso, #2C1A0E);
+  margin: 0;
+}
+
+/* ── BODY ──────────────────────────────────────────────── */
+
+.pg__body {
+  padding: 4rem 0 7rem;
+}
+
+/* ── RICH TEXT ─────────────────────────────────────────── */
+
+.pg__rte {
+  /* Typography */
+  font-family: var(--font-label);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-espresso, #2C1A0E);
+}
+
+.pg__rte h1,
+.pg__rte h2,
+.pg__rte h3,
+.pg__rte h4 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-espresso, #2C1A0E);
+  margin: 2.5rem 0 0.875rem;
+}
+
+.pg__rte h1 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); }
+.pg__rte h2 { font-size: clamp(1.375rem, 2.5vw, 1.875rem); }
+.pg__rte h3 { font-size: 1.25rem; }
+.pg__rte h4 { font-size: 1.0625rem; }
+
+.pg__rte p {
+  margin: 0 0 1.375rem;
+}
+
+.pg__rte p:last-child {
+  margin-bottom: 0;
+}
+
+/* Links — mahogany on linen 7.59:1 ✅ */
+.pg__rte a {
+  color: var(--color-mahogany, #6B3F1F);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(107, 63, 31, 0.4);
+  transition: text-decoration-color 0.15s ease;
+}
+
+.pg__rte a:hover {
+  text-decoration-color: var(--color-mahogany, #6B3F1F);
+}
+
+/* Lists */
+.pg__rte ul,
+.pg__rte ol {
+  padding-left: 1.5rem;
+  margin: 0 0 1.375rem;
+}
+
+.pg__rte li {
+  margin-bottom: 0.5rem;
+}
+
+/* Blockquote — Playfair italic, amber left border */
+.pg__rte blockquote {
+  margin: 2rem 0;
+  padding: 0.25rem 0 0.25rem 1.75rem;
+  border-left: 2px solid var(--color-amber, #C8874A);
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-style: italic;
+  /* #7A5C3F on linen 5.21:1 ✅ */
+  color: #7A5C3F;
+}
+
+.pg__rte blockquote p {
+  margin: 0;
+}
+
+/* Horizontal rule — amber thin line */
+.pg__rte hr {
+  border: none;
+  border-top: 1.5px solid var(--color-amber, #C8874A);
+  margin: 2.5rem 0;
+  opacity: 0.35;
+}
+
+/* Tables */
+.pg__rte table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  margin: 1.75rem 0;
+}
+
+.pg__rte th {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-espresso, #2C1A0E);
+  padding: 0.75rem 1rem;
+  border-bottom: 1.5px solid var(--color-amber, #C8874A);
+  text-align: left;
+}
+
+.pg__rte td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid rgba(44, 26, 14, 0.07);
+  vertical-align: top;
+}
+
+.pg__rte tr:last-child td {
+  border-bottom: none;
+}
+
+/* Images */
+.pg__rte img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-base, 4px);
+  display: block;
+  margin: 1.75rem 0;
+}
+
+/* ── MOBILE ────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .pg__header {
+    padding: 3rem 0 2rem;
+  }
+
+  .pg__body {
+    padding: 2.5rem 0 5rem;
+  }
+
+  .pg__rte blockquote {
+    font-size: 1.0625rem;
+    padding-left: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pg__rte table {
+    font-size: 0.875rem;
+  }
+
+  .pg__rte th,
+  .pg__rte td {
+    padding: 0.625rem 0.75rem;
+  }
+}
+</style>
 
 {% schema %}
 {
   "name": "Page",
-  "settings": [],
-  "presets": [{ "name": "Default page" }]
+  "tag": "section",
+  "class": "section-page",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image",
+      "info": "Optional. When set, the page title is overlaid on the image. Recommended 1440 \u00d7 480px."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "Show breadcrumbs",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "Content width",
+      "options": [
+        { "value": "narrow", "label": "Narrow (760px) \u2014 best for long-form text" },
+        { "value": "standard", "label": "Standard (1280px)" },
+        { "value": "wide", "label": "Wide (1440px)" }
+      ],
+      "default": "narrow"
+    }
+  ],
+  "presets": [{ "name": "Page" }]
 }
 {% endschema %}
