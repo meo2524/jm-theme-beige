@@ -1,220 +1,317 @@
+<!-- testimonials.liquid - Mend & Co -->
+
 {%- liquid
-  assign eyebrow = section.settings.eyebrow | default: 'Results'
-  assign heading = section.settings.heading | default: 'From people who stopped guessing.'
+  assign eyebrow       = section.settings.eyebrow | default: 'Real results'
+  assign heading       = section.settings.heading | default: 'From people who stopped guessing.'
+  assign reviews_count = section.settings.reviews_count | default: 6
 -%}
 
-<section class="testimonials section--lg" aria-label="Customer testimonials">
-  <div class="testimonials__inner container">
+<section class="testimonials" aria-label="Customer reviews" data-section-id="{{ section.id }}">
+  <div class="container">
 
-    <!-- Header -->
     <div class="testimonials__header">
-      <span class="rule-above" style="background-color: var(--color-amber); opacity: 0.5;" aria-hidden="true"></span>
-      <p class="testimonials__eyebrow t-label">{{ eyebrow }}</p>
-      <h2 class="testimonials__heading t-display-md t-on-dark">{{ heading }}</h2>
+      <div class="testimonials__rule" aria-hidden="true"></div>
+      <p class="testimonials__eyebrow">{{ eyebrow }}</p>
+      <h2 class="testimonials__heading">{{ heading }}</h2>
     </div>
 
-    <!-- Testimonials -->
-    {%- if section.blocks.size > 0 -%}
-      <div class="testimonials__grid" role="list">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'testimonial' -%}
-            <blockquote
-              class="testimonials__item"
-              role="listitem"
-              {{ block.shopify_attributes }}
-            >
-              <!-- Stars -->
-              {%- assign stars = block.settings.stars | default: 5 -%}
-              <div class="testimonials__stars" aria-label="{{ stars }} out of 5 stars">
-                {%- for i in (1..5) -%}
-                  <span class="testimonials__star{% if i > stars %} testimonials__star--empty{% endif %}" aria-hidden="true">★</span>
-                {%- endfor -%}
-              </div>
-
-              <!-- Quote -->
-              <p class="testimonials__quote">&ldquo;{{ block.settings.quote }}&rdquo;</p>
-
-              <!-- Author -->
-              <footer class="testimonials__author">
-                {%- if block.settings.author_image != blank -%}
-                  <img
-                    src="{{ block.settings.author_image | image_url: width: 48 }}"
-                    width="48"
-                    height="48"
-                    alt="{{ block.settings.author | escape }}"
-                    loading="lazy"
-                    class="testimonials__author-img"
-                  >
-                {%- endif -%}
-                <div>
-                  <cite class="testimonials__author-name">{{ block.settings.author }}</cite>
-                  {%- if block.settings.author_detail != blank -%}
-                    <p class="testimonials__author-detail">{{ block.settings.author_detail }}</p>
-                  {%- endif -%}
-                </div>
-              </footer>
-
-            </blockquote>
-          {%- endif -%}
-        {%- endfor -%}
+    <div
+      class="testimonials__grid"
+      id="TestimonialsGrid-{{ section.id }}"
+      data-shop="{{ shop.permanent_domain }}"
+      data-count="{{ reviews_count }}"
+      role="list"
+      aria-live="polite"
+      aria-busy="true"
+    >
+      <div class="testimonials__skeleton" aria-hidden="true">
+        <div class="t-skeleton-card"></div>
+        <div class="t-skeleton-card"></div>
+        <div class="t-skeleton-card"></div>
       </div>
-    {%- else -%}
-      <!-- Default placeholder quotes -->
-      <div class="testimonials__grid" role="list">
-        {%- assign default_quotes = "My skin stopped breaking out two weeks after installing it. I'd spent $300 on new products thinking it was my routine.,My hair stopped being brittle after a month. The difference was faster than I expected.,I was sceptical, but my dermatologist actually recommended filtering shower water. Wish I'd done this earlier." | split: ',' -%}
-        {%- assign default_authors = "Sarah M., 34,James K., 29,Priya D., 41" | split: ',' -%}
-        {%- for quote in default_quotes -%}
-          {%- assign ai = forloop.index0 | times: 2 -%}
-          <blockquote class="testimonials__item" role="listitem">
-            <div class="testimonials__stars" aria-label="5 out of 5 stars">
-              {%- for i in (1..5) -%}<span class="testimonials__star" aria-hidden="true">★</span>{%- endfor -%}
-            </div>
-            <p class="testimonials__quote">&ldquo;{{ quote }}&rdquo;</p>
-            <footer class="testimonials__author">
-              <cite class="testimonials__author-name">{{ default_authors[ai] }}</cite>
-              <p class="testimonials__author-detail">{{ default_authors[ai | plus: 1] }}</p>
-            </footer>
-          </blockquote>
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
+    </div>
 
   </div>
 </section>
 
+<!-- Fallback schema blocks (read by JS if API unavailable) -->
+{%- if section.blocks.size > 0 -%}
+  <template id="TestimonialsFallback-{{ section.id }}">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'testimonial' -%}
+        {%- assign stars = block.settings.stars | default: 5 -%}
+        <blockquote class="t-card" role="listitem" {{ block.shopify_attributes }}>
+          <div class="t-stars" aria-label="{{ stars }} out of 5 stars">
+            {%- for i in (1..5) -%}
+              <span class="t-star{% if i > stars %} t-star--empty{% endif %}" aria-hidden="true">&#9733;</span>
+            {%- endfor -%}
+          </div>
+          <p class="t-card__body">{{ block.settings.quote | escape }}</p>
+          <footer class="t-card__footer">
+            <div class="t-card__author-wrap">
+              <span class="t-card__name">{{ block.settings.author | escape }}</span>
+              {%- if block.settings.verified -%}
+                <span class="t-card__badge">Verified</span>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.author_detail != blank -%}
+              <span class="t-card__date">{{ block.settings.author_detail | escape }}</span>
+            {%- endif -%}
+          </footer>
+        </blockquote>
+      {%- endif -%}
+    {%- endfor -%}
+  </template>
+{%- endif -%}
+
+<script>
+(function () {
+  var grid = document.getElementById('TestimonialsGrid-{{ section.id }}');
+  if (!grid) return;
+
+  var shop  = grid.dataset.shop;
+  var count = parseInt(grid.dataset.count, 10) || 6;
+
+  function esc(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function stars(rating) {
+    var s = '<div class="t-stars" aria-label="' + rating + ' out of 5 stars">';
+    for (var i = 1; i <= 5; i++) {
+      s += '<span class="t-star' + (i > rating ? ' t-star--empty' : '') + '" aria-hidden="true">&#9733;</span>';
+    }
+    return s + '</div>';
+  }
+
+  function formatDate(str) {
+    try {
+      return new Date(str).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    } catch (e) { return ''; }
+  }
+
+  function buildCard(r) {
+    var name     = (r.reviewer && r.reviewer.name) ? esc(r.reviewer.name) : 'Verified customer';
+    var verified = r.reviewer && r.reviewer.verified_buyer;
+    var title    = r.title ? esc(r.title) : '';
+    var body     = r.body  ? esc(r.body)  : '';
+    var date     = r.created_at ? formatDate(r.created_at) : '';
+
+    return '<blockquote class="t-card" role="listitem">'
+      + stars(r.rating || 5)
+      + (title ? '<p class="t-card__title">' + title + '</p>' : '')
+      + '<p class="t-card__body">' + body + '</p>'
+      + '<footer class="t-card__footer">'
+      +   '<div class="t-card__author-wrap">'
+      +     '<span class="t-card__name">' + name + '</span>'
+      +     (verified ? '<span class="t-card__badge">Verified</span>' : '')
+      +   '</div>'
+      +   (date ? '<time class="t-card__date">' + date + '</time>' : '')
+      + '</footer>'
+      + '</blockquote>';
+  }
+
+  function render(reviews) {
+    grid.setAttribute('aria-busy', 'false');
+    if (!reviews || !reviews.length) { fallback(); return; }
+    grid.innerHTML = reviews.slice(0, count).map(buildCard).join('');
+  }
+
+  function fallback() {
+    grid.setAttribute('aria-busy', 'false');
+    var tpl = document.getElementById('TestimonialsFallback-{{ section.id }}');
+    if (tpl && tpl.content && tpl.content.children.length) {
+      var clone = document.importNode(tpl.content, true);
+      grid.innerHTML = '';
+      grid.appendChild(clone);
+    } else {
+      grid.closest('.testimonials').style.display = 'none';
+    }
+  }
+
+  fetch('/a/judgeme/reviews?shop_domain=' + encodeURIComponent(shop) + '&per_page=' + count + '&page=1')
+    .then(function (res) { if (!res.ok) throw new Error(); return res.json(); })
+    .then(function (data) { render(data && data.reviews); })
+    .catch(fallback);
+})();
+</script>
+
 <style>
-  .testimonials {
-    background-color: var(--color-espresso);
-    padding-block: var(--space-24);
-  }
+/* ---- Section shell ---- */
+.testimonials {
+  background-color: var(--color-espresso, #2C1A0E);
+  padding: 6rem 0 7rem;
+}
 
-  .testimonials__inner {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-12);
-  }
+/* ---- Header ---- */
+.testimonials__rule {
+  width: 40px;
+  height: 1.5px;
+  background-color: var(--color-amber, #C8874A);
+  opacity: 0.6;
+  margin-bottom: 1.25rem;
+}
+.testimonials__eyebrow {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-amber, #C8874A);
+  margin-bottom: 0.875rem;
+}
+.testimonials__heading {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 400;
+  color: #E8C99A;
+  max-width: 26ch;
+  line-height: 1.2;
+  margin-bottom: 3.5rem;
+}
 
-  /* ---- Header ---- */
-  .testimonials__eyebrow {
-    color: var(--color-amber);
-    margin-bottom: var(--space-4);
-  }
+/* ---- Grid ---- */
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5px;
+}
 
-  .testimonials__heading {
-    max-width: 22ch;
-    color: var(--color-gold);
-  }
+/* ---- Cards ---- */
+.t-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2.25rem 2rem;
+  background-color: rgba(232, 201, 154, 0.04);
+  border: 1px solid rgba(232, 201, 154, 0.07);
+  border-radius: 3px;
+  margin: 0;
+  quotes: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.t-card:hover {
+  background-color: rgba(232, 201, 154, 0.08);
+  border-color: rgba(200, 135, 74, 0.18);
+}
 
-  /* ---- Grid ---- */
-  .testimonials__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-1);
-  }
+/* ---- Stars ---- */
+.t-stars {
+  display: flex;
+  gap: 3px;
+}
+.t-star {
+  font-size: 13px;
+  color: var(--color-amber, #C8874A);
+  line-height: 1;
+}
+.t-star--empty {
+  opacity: 0.2;
+}
 
-  /* ---- Item ---- */
-  .testimonials__item {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-5);
-    padding: var(--space-8);
-    background-color: rgba(232, 201, 154, 0.04);
-    border: 1px solid rgba(232, 201, 154, 0.08);
-    border-radius: var(--radius-base);
-    quotes: none;
-    margin: 0;
-    transition: background-color var(--transition-base),
-                border-color var(--transition-base);
-  }
+/* ---- Text ---- */
+.t-card__title {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #E8C99A;
+  line-height: 1.4;
+}
+.t-card__body {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.65;
+  color: #C8A87A;
+  flex: 1;
+}
 
-  .testimonials__item:hover {
-    background-color: rgba(232, 201, 154, 0.07);
-    border-color: rgba(200, 135, 74, 0.2);
-  }
+/* ---- Footer ---- */
+.t-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(232, 201, 154, 0.08);
+  flex-wrap: wrap;
+}
+.t-card__author-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.t-card__name {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #E8C99A;
+  font-style: normal;
+}
+.t-card__badge {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-espresso, #2C1A0E);
+  background-color: rgba(74, 123, 114, 0.85);
+  color: #C8F0EC;
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+.t-card__date {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.75rem;
+  color: #6B4F34;
+  white-space: nowrap;
+}
 
-  /* ---- Stars ---- */
-  .testimonials__stars {
-    display: flex;
-    gap: 2px;
-  }
+/* ---- Loading skeleton ---- */
+.testimonials__skeleton {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5px;
+  width: 100%;
+  grid-column: 1 / -1;
+}
+.t-skeleton-card {
+  height: 220px;
+  background: linear-gradient(
+    90deg,
+    rgba(232, 201, 154, 0.04) 0%,
+    rgba(232, 201, 154, 0.08) 50%,
+    rgba(232, 201, 154, 0.04) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+  border-radius: 3px;
+  border: 1px solid rgba(232, 201, 154, 0.07);
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 
-  .testimonials__star {
-    font-size: 14px;
-    color: var(--color-amber);
-    line-height: 1;
-  }
-
-  .testimonials__star--empty {
-    opacity: 0.2;
-  }
-
-  /* ---- Quote ---- */
-  .testimonials__quote {
-    font-family: var(--font-heading);
-    font-size: var(--font-size-md);
-    font-weight: 400;
-    font-style: italic;
-    line-height: 1.55;
-    color: var(--color-gold);
-    flex: 1;
-    max-width: none;
-  }
-
-  /* ---- Author ---- */
-  .testimonials__author {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    padding-top: var(--space-5);
-    border-top: 1px solid rgba(232, 201, 154, 0.1);
-  }
-
-  .testimonials__author-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
-    opacity: 0.85;
-  }
-
-  .testimonials__author-name {
-    display: block;
-    font-family: var(--font-body);
-    font-size: var(--font-size-sm);
-    font-style: normal;
-    font-weight: 500;
-    color: var(--color-gold);
-  }
-
-  .testimonials__author-detail {
-    font-size: var(--font-size-xs);
-    color: var(--color-gold);
-    opacity: 0.45;
-    margin-top: 2px;
-    max-width: none;
-  }
-
-  /* ---- Responsive ---- */
-  @media (max-width: 1023px) {
-    .testimonials__grid {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .testimonials__item:last-child {
-      grid-column: 1 / -1;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .testimonials__grid {
-      grid-template-columns: 1fr;
-    }
-
-    .testimonials__item:last-child {
-      grid-column: auto;
-    }
-  }
+/* ---- Responsive ---- */
+@media (max-width: 1023px) {
+  .testimonials__grid,
+  .testimonials__skeleton { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 599px) {
+  .testimonials__grid,
+  .testimonials__skeleton { grid-template-columns: 1fr; }
+  .t-card { padding: 1.75rem 1.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .t-skeleton-card { animation: none; }
+  .t-card { transition: none; }
+}
 </style>
 
 {% schema %}
@@ -224,20 +321,29 @@
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "Results"
+      "label": "Eyebrow label",
+      "default": "Real results"
     },
     {
       "type": "textarea",
       "id": "heading",
       "label": "Heading",
       "default": "From people who stopped guessing."
+    },
+    {
+      "type": "range",
+      "id": "reviews_count",
+      "label": "Number of reviews to show",
+      "min": 3,
+      "max": 12,
+      "step": 3,
+      "default": 6
     }
   ],
   "blocks": [
     {
       "type": "testimonial",
-      "name": "Testimonial",
+      "name": "Testimonial (fallback)",
       "settings": [
         {
           "type": "textarea",
@@ -254,13 +360,14 @@
         {
           "type": "text",
           "id": "author_detail",
-          "label": "Author detail (age, location, etc.)",
+          "label": "Detail (age, location, etc.)",
           "default": "Verified customer"
         },
         {
-          "type": "image_picker",
-          "id": "author_image",
-          "label": "Author photo (optional)"
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Show verified badge",
+          "default": true
         },
         {
           "type": "range",
