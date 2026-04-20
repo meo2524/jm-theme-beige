@@ -84,13 +84,11 @@
 
   {{ 'base.css' | asset_url | stylesheet_tag }}
 
-  {%- if template.name == 'index' or template.name == 'collection' or template.name == 'product' -%}
+  {%- if template.name == 'index' or template.name == 'collection' or template.name == 'product' or template.name == 'search' -%}
     {{ 'component-card.css' | asset_url | stylesheet_tag }}
   {%- endif -%}
 
-  {%- if template.name == 'product' or template.name == 'cart' -%}
-    {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
-  {%- endif -%}
+  {{- 'component-cart-drawer.css' | asset_url | stylesheet_tag -}}
 
   {{ content_for_header }}
 
