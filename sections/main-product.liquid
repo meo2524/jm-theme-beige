@@ -1,6 +1,6 @@
 {% comment %}
   main-product.liquid
-  Mend & Co — Product Detail Page
+  Mend & Co -- Product Detail Page
   2-col gallery + info layout. Sticky gallery on desktop, scroll-snap swipe on mobile.
 {% endcomment %}
 
@@ -14,12 +14,12 @@
 >
   <div class="product-container">
 
-    {%- comment -%} ═══════════════════════════════════════════
+    {%- comment -%} ===========================================
       GALLERY
-    ═══════════════════════════════════════════ {%- endcomment -%}
+    =========================================== {%- endcomment -%}
     <div class="product-gallery">
 
-      {%- comment -%} Slide strip — desktop: one shown at a time / mobile: scroll-snap {%- endcomment -%}
+      {%- comment -%} Slide strip -- desktop: one shown at a time / mobile: scroll-snap {%- endcomment -%}
       <div class="gallery-track" id="GalleryTrack-{{ section.id }}" role="region" aria-label="Product images">
         {%- if product.images.size > 0 -%}
           {%- for image in product.images limit: 4 -%}
@@ -70,12 +70,12 @@
     {%- comment -%} /gallery {%- endcomment -%}
 
 
-    {%- comment -%} ═══════════════════════════════════════════
+    {%- comment -%} ===========================================
       PRODUCT INFO
-    ═══════════════════════════════════════════ {%- endcomment -%}
+    =========================================== {%- endcomment -%}
     <div class="product-info">
 
-      {%- comment -%} — Eyebrow — {%- endcomment -%}
+      {%- comment -%} -- Eyebrow -- {%- endcomment -%}
       <p class="product-eyebrow">
         {%- if section.settings.eyebrow_text != blank -%}
           {{ section.settings.eyebrow_text }}
@@ -86,10 +86,10 @@
         {%- endif -%}
       </p>
 
-      {%- comment -%} — Title — {%- endcomment -%}
+      {%- comment -%} -- Title -- {%- endcomment -%}
       <h1 class="product-title">{{ product.title }}</h1>
 
-      {%- comment -%} — Rating — {%- endcomment -%}
+      {%- comment -%} -- Rating -- {%- endcomment -%}
       <div class="product-rating" aria-label="Rated 4.9 out of 5, 127 reviews">
         <div class="rating-stars" aria-hidden="true">
           {%- for i in (1..5) -%}
@@ -100,12 +100,12 @@
         </div>
         <span class="rating-text">
           <strong>4.9</strong>
-          <span class="rating-sep" aria-hidden="true">·</span>
+          <span class="rating-sep" aria-hidden="true">&middot;</span>
           <a href="#product-reviews" class="rating-link">127 reviews</a>
         </span>
       </div>
 
-      {%- comment -%} — Price — {%- endcomment -%}
+      {%- comment -%} -- Price -- {%- endcomment -%}
       <div class="price-block" id="PriceBlock-{{ section.id }}">
         <div class="price-row">
           <span class="price-now" id="PriceNow-{{ section.id }}">
@@ -124,12 +124,12 @@
           {%- if section.settings.per_use_text != blank -%}
             {{ section.settings.per_use_text }}
           {%- else -%}
-            ~$0.18/shower &nbsp;·&nbsp; lasts 6 months
+            ~$0.18/shower &nbsp;&middot;&nbsp; lasts 6 months
           {%- endif -%}
         </p>
       </div>
 
-      {%- comment -%} — Subscription toggle — {%- endcomment -%}
+      {%- comment -%} -- Subscription toggle -- {%- endcomment -%}
       <div
         class="purchase-toggle"
         role="group"
@@ -163,7 +163,7 @@
         value=""
       >
 
-      {%- comment -%} — Short description — {%- endcomment -%}
+      {%- comment -%} -- Short description -- {%- endcomment -%}
       <p class="product-short-desc">
         {%- if section.settings.short_description != blank -%}
           {{ section.settings.short_description }}
@@ -174,7 +174,7 @@
         {%- endif -%}
       </p>
 
-      {%- comment -%} — Variant picker — {%- endcomment -%}
+      {%- comment -%} -- Variant picker -- {%- endcomment -%}
       {%- unless product.has_only_default_variant -%}
         {%- for option in product.options_with_values -%}
           <fieldset class="variant-fieldset" id="VariantFieldset-{{ section.id }}-{{ option.position }}">
@@ -206,7 +206,7 @@
                   <span class="variant-card__name">{{ value }}</span>
                   {%- if matching_variant.compare_at_price > matching_variant.price -%}
                     {%- assign save_pct = matching_variant.compare_at_price | minus: matching_variant.price | times: 100 | divided_by: matching_variant.compare_at_price -%}
-                    <span class="variant-card__save">–{{ save_pct }}%</span>
+                    <span class="variant-card__save">-{{ save_pct }}%</span>
                   {%- endif -%}
                   {%- unless matching_variant.available -%}
                     <span class="variant-card__out">Sold out</span>
@@ -218,7 +218,7 @@
         {%- endfor -%}
       {%- endunless -%}
 
-      {%- comment -%} — Product form — {%- endcomment -%}
+      {%- comment -%} -- Product form -- {%- endcomment -%}
       {%- form 'product', product,
             id: product_form_id,
             data-type: 'add-to-cart-form' -%}
@@ -239,7 +239,7 @@
               type="button"
               aria-label="Decrease quantity"
               data-action="decrease"
-            >−</button>
+            >-</button>
             <input
               class="qty-input"
               type="number"
@@ -273,7 +273,7 @@
 
       {%- endform -%}
 
-      {%- comment -%} — Trust strip — {%- endcomment -%}
+      {%- comment -%} -- Trust strip -- {%- endcomment -%}
       <ul class="trust-strip" role="list">
         <li class="trust-item">
           <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
@@ -298,7 +298,7 @@
         </li>
       </ul>
 
-      {%- comment -%} — Accordion — {%- endcomment -%}
+      {%- comment -%} -- Accordion -- {%- endcomment -%}
       <div class="accordion" id="Accordion-{{ section.id }}">
 
         {%- assign accordion_keys   = "whats-included,how-it-works,ingredients-certifications" | split: "," -%}
@@ -336,7 +336,7 @@
                   {{ section.settings[setting_id] }}
                 {%- elsif key == 'whats-included' -%}
                   <ul>
-                    <li>1 × Mend filter unit — installs in under 60 seconds, no tools required</li>
+                    <li>1 x Mend filter unit -- installs in under 60 seconds, no tools required</li>
                     <li>Filter cartridge rated for 10,000 litres (~6 months average use)</li>
                     <li>Universal thread adapter set (fits 95% of shower heads)</li>
                     <li>Quick-start installation guide</li>
@@ -363,9 +363,9 @@
 
 
 <style>
-/* ════════════════════════════════════════════════════════════
-   MAIN PRODUCT — Mend & Co
-   ════════════════════════════════════════════════════════════ */
+/* ============================================================
+   MAIN PRODUCT -- Mend & Co
+   ============================================================ */
 
 .product-section {
   background: var(--color-bone, #F2EDE4);
@@ -383,7 +383,7 @@
 }
 
 
-/* ── GALLERY ─────────────────────────────────────── */
+/* -- GALLERY --------------------------------------- */
 
 .product-gallery {
   position: sticky;
@@ -483,14 +483,14 @@
 }
 
 
-/* ── PRODUCT INFO ─────────────────────────────────── */
+/* -- PRODUCT INFO ----------------------------------- */
 
 .product-info {
   padding-top: 0.25rem;
 }
 
 /* Eyebrow
-   Text: mahogany #8A6240 on linen = 7.59:1 ✅ (amber clay fails at 2.55:1)
+   Text: mahogany #8A6240 on linen = 7.59:1  (amber clay fails at 2.55:1)
    Amber retained as the decorative border-bottom rule only */
 .product-eyebrow {
   font-family: var(--font-label);
@@ -612,7 +612,7 @@
 .price-callout {
   font-family: var(--font-label);
   font-size: 0.8rem;
-  /* Hardcoded blended value: mahogany #8A6240 at ~72% on linen ≈ #9A7255, 4.68:1 ✅
+  /* Hardcoded blended value: mahogany #8A6240 at ~72% on linen ~ #9A7255, 4.68:1 
      Avoids opacity: which renders ~3.8:1 and is unmeasurable in static audits */
   color: #9A7255;
   margin: 0;
@@ -645,7 +645,7 @@
 
 .purchase-toggle__btn.is-active {
   background: var(--color-bone, #F2EDE4);
-  /* Border: mahogany = 7.59:1 ✅ (amber = 2.55:1, fails WCAG 1.4.11 non-text 3:1) */
+  /* Border: mahogany = 7.59:1  (amber = 2.55:1, fails WCAG 1.4.11 non-text 3:1) */
   border-color: var(--color-olive);
   box-shadow: 0 1px 4px rgba(43, 43, 43, 0.07);
 }
@@ -724,7 +724,7 @@
 }
 
 .variant-card.is-selected {
-  /* Border: mahogany #8A6240 on linen = 7.59:1 ✅ (amber = 2.55:1, fails WCAG 1.4.11 non-text 3:1) */
+  /* Border: mahogany #8A6240 on linen = 7.59:1  (amber = 2.55:1, fails WCAG 1.4.11 non-text 3:1) */
   border-color: var(--color-olive);
   background: rgba(166, 137, 102, 0.05);
 }
@@ -762,7 +762,7 @@
 .variant-card__out {
   font-family: var(--font-label);
   font-size: 0.6875rem;
-  /* Blended mahogany 60% on linen → #AE8E76, 3.52:1 ✅ for supplementary small text
+  /* Blended mahogany 60% on linen -> #AE8E76, 3.52:1  for supplementary small text
      Avoiding opacity: to keep contrast measurable */
   color: #AE8E76;
 }
@@ -939,7 +939,7 @@
   transition: color 0.15s ease;
 }
 
-/* Hover is a no-op (same color as default) — removed.
+/* Hover is a no-op (same color as default) -- removed.
    Active state is communicated via amber chevron rotation + amber left-border on panel body. */
 .accordion__trigger[aria-expanded="true"] {
   color: var(--color-black);
@@ -991,9 +991,9 @@
 }
 
 
-/* ════════════════════════════════════════════════════════════
+/* ============================================================
    RESPONSIVE
-   ════════════════════════════════════════════════════════════ */
+   ============================================================ */
 
 @media (max-width: 1024px) {
   .product-container {
@@ -1013,7 +1013,7 @@
     padding: 0;
   }
 
-  /* Mobile gallery — scroll-snap swipe */
+  /* Mobile gallery -- scroll-snap swipe */
   .product-gallery {
     position: static;
   }
@@ -1046,7 +1046,7 @@
     inset: auto;
   }
 
-  /* All slides visible in flex — override desktop opacity hiding */
+  /* All slides visible in flex -- override desktop opacity hiding */
   .gallery-slide:not(.is-active) {
     opacity: 1;
   }
@@ -1080,7 +1080,7 @@
     flex: none;
   }
 
-  /* Override the desktop sibling separator — same specificity so must come after */
+  /* Override the desktop sibling separator -- same specificity so must come after */
   .trust-item + .trust-item {
     border-left: none;
     padding-left: 0;
@@ -1112,7 +1112,7 @@
   var root = document.querySelector('[data-section-id="' + sid + '"]');
   if (!root) return;
 
-  /* ── GALLERY ─────────────────────────────────────────────── */
+  /* -- GALLERY ----------------------------------------------- */
   var track  = root.querySelector('#GalleryTrack-' + sid);
   var slides = root.querySelectorAll('.gallery-slide');
   var thumbs = root.querySelectorAll('.gallery-thumb');
@@ -1152,7 +1152,7 @@
   }
 
 
-  /* ── VARIANT PICKER ──────────────────────────────────────── */
+  /* -- VARIANT PICKER ---------------------------------------- */
   var variantIdInput  = root.querySelector('#ProductVariantId-' + sid);
   var addToCartBtn    = root.querySelector('#AddToCart-' + sid);
   var addToCartText   = root.querySelector('#AddToCartText-' + sid);
@@ -1234,7 +1234,7 @@
   });
 
 
-  /* ── PURCHASE TOGGLE ─────────────────────────────────────── */
+  /* -- PURCHASE TOGGLE --------------------------------------- */
   var sellingPlanInput = root.querySelector('#SellingPlan-' + sid);
   var toggleBtns = root.querySelectorAll('#PurchaseToggle-' + sid + ' .purchase-toggle__btn');
 
@@ -1255,7 +1255,7 @@
   });
 
 
-  /* ── QUANTITY STEPPER ────────────────────────────────────── */
+  /* -- QUANTITY STEPPER -------------------------------------- */
   var qtyInput = root.querySelector('#Qty-' + sid);
 
   root.querySelectorAll('.qty-btn').forEach(function (btn) {
@@ -1267,7 +1267,7 @@
   });
 
 
-  /* ── ACCORDION ───────────────────────────────────────────── */
+  /* -- ACCORDION --------------------------------------------- */
   root.querySelectorAll('.accordion__trigger').forEach(function (trigger) {
     trigger.addEventListener('click', function () {
       var expanded = trigger.getAttribute('aria-expanded') === 'true';
@@ -1298,14 +1298,14 @@
       "type": "text",
       "id": "short_description",
       "label": "Short description",
-      "info": "2–3 sentence teaser above the variant picker. Falls back to product description if blank."
+      "info": "2\u20133 sentence teaser above the variant picker. Falls back to product description if blank."
     },
     {
       "type": "text",
       "id": "per_use_text",
       "label": "Per-use cost callout",
-      "default": "~$0.18/shower · lasts 6 months",
-      "info": "Small line below the price — keep under 50 characters."
+      "default": "~$0.18/shower \u00b7 lasts 6 months",
+      "info": "Small line below the price \u2014 keep under 50 characters."
     },
     {
       "type": "header",
@@ -1329,12 +1329,6 @@
       "label": "Ingredients & certifications",
       "info": "Leave blank to use default copy."
     }
-  ],
-  "blocks": [
-    { "type": "_sticky-add-to-cart" },
-    { "type": "_product-subscription" },
-    { "type": "_quantity-breaks" },
-    { "type": "_back-in-stock" }
   ],
   "presets": [
     {

@@ -7,10 +7,8 @@
     assign on_sale = true
   endif
 -%}
-{%- once 'mc-quick-view-assets' -%}
-  {{ 'component-quick-view.css' | asset_url | stylesheet_tag: preload: true }}
-  <script src="{{ 'component-quick-view.js' | asset_url }}" defer="defer"></script>
-{%- endonce -%}
+{{ 'component-quick-view.css' | asset_url | stylesheet_tag: preload: true }}
+<script src="{{ 'component-quick-view.js' | asset_url }}" defer="defer"></script>
 
 <article class="card" aria-label="{{ product.title }}">
   <a href="{{ product.url }}" class="card__media-link" tabindex="-1" aria-hidden="true">
