@@ -1,0 +1,87 @@
+{{ 'component-quantity-breaks.css' | asset_url | stylesheet_tag: preload: true }}
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+<mc-quantity-breaks
+  data-section-id="{{ section.id }}"
+  {{ block.shopify_attributes }}
+>
+  {%- if block.settings.heading != blank -%}
+    <p class="mc-qty-breaks__heading">{{ block.settings.heading }}</p>
+  {%- endif -%}
+
+  {%- if block.settings.enable_single_quantity -%}
+    <div
+      class="mc-qty-break"
+      data-range="1"
+      data-discount-type=""
+      data-discount-amount="0"
+    >
+      <input
+        type="radio"
+        class="mc-qty-break__radio visually-hidden"
+        name="mc-qty-break-{{ section.id }}"
+        id="mc-qty-break-{{ section.id }}-single"
+        value="1"
+      >
+      <label class="mc-qty-break__label" for="mc-qty-break-{{ section.id }}-single">
+        <span class="mc-qty-break__left">
+          <span class="mc-qty-break__title">{{ block.settings.single_quantity_text }}</span>
+          {%- if block.settings.single_quantity_subtext != blank -%}
+            <span class="mc-qty-break__subtitle">{{ block.settings.single_quantity_subtext }}</span>
+          {%- endif -%}
+        </span>
+        <span class="mc-qty-break__right">
+          <span class="mc-qty-break__price" data-base-price="{{ current_variant.price }}">
+            {{- current_variant.price | money -}}
+          </span>
+        </span>
+      </label>
+    </div>
+  {%- endif -%}
+
+  {%- content_for 'blocks' -%}
+  <script type="application/json">
+    {
+      {%- for variant in product.variants -%}
+        "{{ variant.id }}": {{ variant.price }}
+        {%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    }
+  </script>
+</mc-quantity-breaks>
+<script src="{{ 'component-quantity-breaks.js' | asset_url }}" defer="defer"></script>
+{%- schema -%}
+{
+  "name": "Quantity Breaks",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Buy more, save more"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_single_quantity",
+      "label": "Show single quantity row",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "single_quantity_text",
+      "label": "Single quantity label",
+      "default": "1 item"
+    },
+    {
+      "type": "text",
+      "id": "single_quantity_subtext",
+      "label": "Single quantity sub-label",
+      "default": "Regular price"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_quantity-break-item"
+    }
+  ]
+}
+{%- endschema -%}

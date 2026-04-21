@@ -1,0 +1,129 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign base_price = current_variant.price -%}
+{%- assign discount_amount = block.settings.discount_amount | times: 1 -%}
+
+{%- if block.settings.discount_type == '%' and discount_amount > 0 -%}
+  {%- assign discount_value = base_price | times: discount_amount | divided_by: 100 -%}
+  {%- assign discounted_price = base_price | minus: discount_value | at_least: 0 -%}
+{%- elsif block.settings.discount_type == '$' and discount_amount > 0 -%}
+  {%- assign discount_cents = discount_amount | times: 100 | round -%}
+  {%- assign discounted_price = base_price | minus: discount_cents | at_least: 0 -%}
+{%- else -%}
+  {%- assign discounted_price = base_price -%}
+{%- endif -%}
+
+{%- assign range = block.settings.range -%}
+{%- if block.settings.title != blank -%}
+  {%- assign row_title = block.settings.title -%}
+{%- else -%}
+  {%- assign row_title = range | append: ' items' -%}
+{%- endif -%}
+
+<div
+  class="mc-qty-break"
+  data-range="{{ range }}"
+  data-discount-type="{{ block.settings.discount_type | escape }}"
+  data-discount-amount="{{ discount_amount }}"
+  data-discount-code="{{ block.settings.discount_code | escape }}"
+  {{ block.shopify_attributes }}
+>
+  <input
+    type="radio"
+    class="mc-qty-break__radio visually-hidden"
+    name="mc-qty-break-{{ section.id }}"
+    id="mc-qty-break-{{ section.id }}-{{ block.id }}"
+    value="{{ range }}"
+  >
+  <label class="mc-qty-break__label" for="mc-qty-break-{{ section.id }}-{{ block.id }}">
+    <span class="mc-qty-break__left">
+      <span class="mc-qty-break__title">{{ row_title }}</span>
+      {%- if block.settings.subtitle != blank -%}
+        <span class="mc-qty-break__subtitle">{{ block.settings.subtitle }}</span>
+      {%- elsif discount_amount > 0 -%}
+        {%- if block.settings.discount_type == '%' -%}
+          <span class="mc-qty-break__subtitle">Save {{ discount_amount }}%</span>
+        {%- else -%}
+          <span class="mc-qty-break__subtitle">Save {{ discount_amount | times: 100 | money }}</span>
+        {%- endif -%}
+      {%- endif -%}
+    </span>
+    <span class="mc-qty-break__right">
+      <span
+        class="mc-qty-break__price"
+        data-base-price="{{ base_price }}"
+      >{{- discounted_price | money -}}</span>
+      {%- if discounted_price < base_price -%}
+        <span class="mc-qty-break__original-price">{{ base_price | money }}</span>
+      {%- endif -%}
+    </span>
+  </label>
+  {%- if block.settings.badge_text != blank -%}
+    <span class="mc-qty-break__badge" aria-hidden="true">{{ block.settings.badge_text }}</span>
+  {%- endif -%}
+</div>
+{%- schema -%}
+{
+  "name": "Qty Break Tier",
+  "settings": [
+    {
+      "type": "range",
+      "id": "range",
+      "label": "Quantity",
+      "min": 2,
+      "max": 20,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Label",
+      "info": "Leave blank to auto-generate, e.g. '2 items'"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Sub-label",
+      "info": "Leave blank to auto-generate from discount"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "info": "Optional highlight, e.g. 'Best Value'"
+    },
+    {
+      "type": "header",
+      "content": "Discount"
+    },
+    {
+      "type": "text",
+      "id": "discount_code",
+      "label": "Discount code",
+      "placeholder": "SAVE10"
+    },
+    {
+      "type": "select",
+      "id": "discount_type",
+      "label": "Discount type",
+      "default": "%",
+      "options": [
+        { "value": "%", "label": "Percentage" },
+        { "value": "$", "label": "Fixed amount" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "discount_amount",
+      "label": "Discount amount",
+      "placeholder": "10",
+      "info": "Number only, e.g. 10 for 10% or $10 off"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Qty Break Tier"
+    }
+  ]
+}
+{%- endschema -%}

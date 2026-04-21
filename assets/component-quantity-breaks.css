@@ -1,0 +1,153 @@
+/* ================================================================
+   QUANTITY BREAKS -- Mend & Co
+   Japandi Bone palette, Playfair Display headings.
+   ================================================================ */
+
+mc-quantity-breaks {
+  display: block;
+  margin-bottom: 2rem;
+}
+
+.mc-qty-breaks__heading {
+  font-family: var(--font-heading-family);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-black);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 1.2rem;
+}
+
+.mc-qty-break {
+  border: 1px solid var(--color-taupe);
+  border-radius: 3px;
+  margin-bottom: 0.7rem;
+  position: relative;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background-color 0.18s ease;
+  background: transparent;
+}
+
+.mc-qty-break:last-child {
+  margin-bottom: 0;
+}
+
+.mc-qty-break.is-selected {
+  border-width: 2px;
+  border-color: var(--color-walnut);
+  background: rgba(138, 98, 64, 0.055);
+}
+
+.mc-qty-break__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.2rem 1rem 3.4rem;
+  position: relative;
+  min-height: 5.2rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ::before/::after build the custom radio ring + fill dot */
+.mc-qty-break__label::before {
+  content: '';
+  position: absolute;
+  left: 1.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--color-stone);
+  border-radius: 50%;
+  background: transparent;
+  box-sizing: border-box;
+  transition: border-color 0.18s ease;
+}
+
+.mc-qty-break.is-selected .mc-qty-break__label::before {
+  border-color: var(--color-walnut);
+  border-width: 2px;
+}
+
+.mc-qty-break__label::after {
+  content: '';
+  position: absolute;
+  left: calc(1.1rem + 4px);
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  width: 8px;
+  height: 8px;
+  background: var(--color-walnut);
+  border-radius: 50%;
+  transition: transform 0.14s ease;
+}
+
+.mc-qty-break.is-selected .mc-qty-break__label::after {
+  transform: translateY(-50%) scale(1);
+}
+
+.mc-qty-break__left {
+  flex: 1;
+  min-width: 0;
+}
+
+.mc-qty-break__title {
+  display: block;
+  font-family: var(--font-heading-family);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-black);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.mc-qty-break__subtitle {
+  display: block;
+  font-size: 1.15rem;
+  color: var(--color-olive);
+  margin-top: 0.25rem;
+  line-height: 1.3;
+}
+
+.mc-qty-break__right {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.mc-qty-break__price {
+  display: block;
+  font-family: var(--font-heading-family);
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--color-black);
+  line-height: 1.2;
+}
+
+.mc-qty-break__original-price {
+  display: block;
+  font-size: 1.15rem;
+  color: var(--color-stone);
+  text-decoration: line-through;
+  margin-top: 0.2rem;
+}
+
+.mc-qty-break__badge {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  transform: translateY(-50%);
+  background: var(--color-walnut);
+  color: var(--color-bone);
+  font-family: var(--font-heading-family);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.75rem;
+  border-radius: 3rem;
+  white-space: nowrap;
+  pointer-events: none;
+  line-height: 1.6;
+}
