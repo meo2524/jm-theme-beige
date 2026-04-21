@@ -10,12 +10,13 @@
 :root {
 
   /* Colour palette — Japandi Bone */
-  --color-black:          #2D2D2D;  /* Matte Black — all text, dark sections */
-  --color-walnut:         #8A6240;  /* Deep Walnut — CTA buttons, key accents */
-  --color-walnut-hover:   #6B4F32;  /* Deep Walnut dark — hover */
+  --color-black:          #2D2D2D;  /* Matte Black — text, CTAs, dark sections */
+  --color-black-hover:    #1A1A1A;  /* Matte Black dark — button hover */
+  --color-walnut:         #8A6240;  /* Deep Walnut — decorative rules, underlines, accents */
+  --color-walnut-hover:   #6B4F32;  /* Deep Walnut dark — hover on walnut elements */
   --color-taupe:          #D9C5B2;  /* Sandy Taupe — borders, cards, alt surfaces */
   --color-stone:          #BEBDB8;  /* Stone Grey — dividers, inactive UI */
-  --color-olive:          #7A8471;  /* Olive Green — secondary labels, trust badges */
+  --color-olive:          #4F5947;  /* Olive Green — secondary labels, trust badges */
   --color-bone:           #F2EDE4;  /* Bone White — primary background */
   --color-bone-alt:       #FFFFFF;
 
@@ -28,8 +29,8 @@
   --color-text-on-dark:   #F2EDE4;
   --color-border:         var(--color-taupe);
   --color-rule:           var(--color-taupe);
-  --color-cta:            var(--color-walnut);
-  --color-cta-hover:      var(--color-walnut-hover);
+  --color-cta:            var(--color-black);
+  --color-cta-hover:      var(--color-black-hover);
   --color-badge:          var(--color-taupe);
 
   /* Typography */
@@ -396,7 +397,7 @@ p {
   white-space: nowrap;
 }
 
-/* Primary — deep walnut fill */
+/* Primary — matte black fill */
 .btn--primary {
   background-color: var(--color-cta);
   color: var(--color-bone);

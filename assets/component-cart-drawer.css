@@ -155,7 +155,7 @@
 .cart-drawer__empty-rule {
   width: 2.5rem;
   height: 1.5px;
-  background: var(--color-walnut, #8A6240);
+  background: var(--color-cta, #2D2D2D);
   margin-bottom: 1.5rem;
 }
 
@@ -389,7 +389,7 @@
   align-items: center;
   justify-content: center;
   height: 50px;
-  background: var(--color-walnut, #8A6240);
+  background: var(--color-cta, #2D2D2D);
   color: var(--color-black);
   border-radius: var(--radius-sm, 2px);
   font-family: var(--font-label);
