@@ -230,20 +230,10 @@
     animation: hero-fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.78s forwards;
   }
 
-  /* Override btn defaults for dark context */
+  /* Typography override only — bg/color inherits from .btn--primary */
   .hero__cta .btn--primary {
-    background-color: var(--color-bone);
-    color: var(--color-black);
-    border-color: var(--color-bone);
     font-size: 11px;
     letter-spacing: 0.18em;
-  }
-
-  .hero__cta .btn--primary:hover,
-  .hero__cta .btn--primary:focus-visible {
-    background-color: var(--color-taupe);
-    border-color: var(--color-taupe);
-    color: var(--color-black);
   }
 
   /* ---- Scroll cue ---- */
