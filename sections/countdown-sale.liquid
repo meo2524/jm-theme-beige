@@ -1,0 +1,132 @@
+<link rel="stylesheet" href="{{ 'component-countdown-sale.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- render 'section-padding', section: section -%}
+
+<div class="countdown-sale section-{{ section.id }}-padding" {{ section.shopify_attributes }}>
+  <div class="container">
+    <div class="countdown-sale__inner">
+
+      <div class="countdown-sale__text">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="countdown-sale__title">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <div class="countdown-sale__subtitle">{{ section.settings.subheading }}</div>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a
+            class="countdown-sale__cta"
+            {% if section.settings.button_link != blank %}
+              href="{{ section.settings.button_link }}"
+            {% else %}
+              aria-disabled="true"
+            {% endif %}
+          >
+            {{ section.settings.button_label | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      <div class="countdown-sale__timer-wrap">
+        {%- content_for 'blocks' -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="{{ 'component-countdown-sale.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Countdown Sale",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["aside"] },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Limited Time Offer"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Description",
+      "default": "<p>Use this section to showcase offers that require a sense of urgency.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "Top padding",
+      "default": "large",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "label": "Custom top padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "Bottom padding",
+      "default": "large",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "label": "Custom bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    { "type": "_countdown-sale-timer" }
+  ],
+  "presets": [
+    {
+      "name": "Countdown Sale",
+      "blocks": [
+        { "type": "_countdown-sale-timer" }
+      ]
+    }
+  ]
+}
+{% endschema %}

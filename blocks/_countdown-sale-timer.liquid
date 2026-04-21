@@ -1,0 +1,99 @@
+<div class="countdown-sale-timer" {{ block.shopify_attributes }}>
+  <mc-countdown
+    class="mc-countdown"
+    data-time="{{ block.settings.time }}"
+    data-text-days="{{ block.settings.text_days }}"
+    data-text-hours="{{ block.settings.text_hours }}"
+    data-text-min="{{ block.settings.text_minutes }}"
+    data-text-sec="{{ block.settings.text_seconds }}"
+    data-text-expired="{{ block.settings.text_expired }}"
+    data-hide-on-expired="{{ block.settings.hide_on_expired }}"
+    data-section-id="#shopify-section-{{ section.id }}"
+    data-infinite-minute="{{ block.settings.infinite_minutes }}"
+    role="timer"
+    aria-label="Countdown timer"
+  >
+    <span data-days><em>Days</em></span>
+    <span data-hours><em>Hrs</em></span>
+    <span data-min><em>Min</em></span>
+    <span data-sec><em>Sec</em></span>
+  </mc-countdown>
+</div>
+
+{% schema %}
+{
+  "name": "Countdown timer",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Enter a Unix timestamp for the end date. When Infinite Minutes is set the timer restarts on expiry."
+    },
+    {
+      "type": "text",
+      "id": "time",
+      "label": "End date (Unix timestamp)",
+      "info": "Convert a date at unixtimestamp.com"
+    },
+    {
+      "type": "header",
+      "content": "Infinite mode"
+    },
+    {
+      "type": "number",
+      "id": "infinite_minutes",
+      "label": "Restart every N minutes",
+      "info": "Overrides the fixed end date."
+    },
+    {
+      "type": "header",
+      "content": "Labels"
+    },
+    {
+      "type": "text",
+      "id": "text_days",
+      "label": "Days label",
+      "default": "Days"
+    },
+    {
+      "type": "text",
+      "id": "text_hours",
+      "label": "Hours label",
+      "default": "Hrs"
+    },
+    {
+      "type": "text",
+      "id": "text_minutes",
+      "label": "Minutes label",
+      "default": "Min"
+    },
+    {
+      "type": "text",
+      "id": "text_seconds",
+      "label": "Seconds label",
+      "default": "Sec"
+    },
+    {
+      "type": "header",
+      "content": "Expired state"
+    },
+    {
+      "type": "text",
+      "id": "text_expired",
+      "label": "Expired message",
+      "default": "This offer has ended."
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_expired",
+      "label": "Hide section when expired",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Countdown timer"
+    }
+  ]
+}
+{% endschema %}
