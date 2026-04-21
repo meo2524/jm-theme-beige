@@ -1,0 +1,55 @@
+{%- liquid
+  case section.settings.padding___top
+    when 'none'
+      assign pt = 0
+      assign pt_mob = 0
+    when 'small'
+      assign pt = 24
+      assign pt_mob = 16
+    when 'medium'
+      assign pt = 48
+      assign pt_mob = 32
+    when 'large'
+      assign pt = 72
+      assign pt_mob = 48
+    when 'custom'
+      assign pt = section.settings.custom_padding_top
+      assign pt_mob = pt
+    else
+      assign pt = 48
+      assign pt_mob = 32
+  endcase
+
+  case section.settings.padding___bottom
+    when 'none'
+      assign pb = 0
+      assign pb_mob = 0
+    when 'small'
+      assign pb = 24
+      assign pb_mob = 16
+    when 'medium'
+      assign pb = 48
+      assign pb_mob = 32
+    when 'large'
+      assign pb = 72
+      assign pb_mob = 48
+    when 'custom'
+      assign pb = section.settings.custom_padding_bottom
+      assign pb_mob = pb
+    else
+      assign pb = 48
+      assign pb_mob = 32
+  endcase
+-%}
+<style>
+  .section-{{ section.id }}-padding {
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+  }
+  @media screen and (max-width: 749px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ pt_mob }}px;
+      padding-bottom: {{ pb_mob }}px;
+    }
+  }
+</style>

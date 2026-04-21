@@ -1,0 +1,111 @@
+{%- liquid
+  assign initial_position = section.settings.initial_position | default: 50
+  assign initial_direction = section.settings.initial_direction | default: 'horizontal'
+  assign img_height = section.settings.image_height | default: 500
+  if initial_direction == 'vertical'
+    assign initial_position = 100 | minus: initial_position
+  endif
+-%}
+<li class="before-after-item" {{ block.shopify_attributes }}>
+  <mc-before-after
+    data-layout="{{ initial_direction }}"
+    data-height="{{ img_height }}"
+  >
+    <div
+      class="before-after"
+      style="--position: {{ initial_position }}%; height: {{ img_height }}px;"
+    >
+      <div class="before-after-img background-img">
+        {%- if block.settings.text_before != blank -%}
+          <span class="before-after__label before-after__label--before">{{ block.settings.text_before | escape }}</span>
+        {%- endif -%}
+        <div class="before-after-img__inner">
+          {%- if block.settings.image_before != blank -%}
+            {{
+              block.settings.image_before
+              | image_url: width: 1200
+              | image_tag:
+                loading: 'lazy',
+                widths: '375, 600, 900, 1200',
+                class: 'before-after-img__photo'
+            }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg before-after-img__photo' }}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="before-after-img foreground-img">
+        {%- if block.settings.text_after != blank -%}
+          <span class="before-after__label before-after__label--after">{{ block.settings.text_after | escape }}</span>
+        {%- endif -%}
+        <div class="before-after-img__inner">
+          {%- if block.settings.image_after != blank -%}
+            {{
+              block.settings.image_after
+              | image_url: width: 1200
+              | image_tag:
+                loading: 'lazy',
+                widths: '375, 600, 900, 1200',
+                class: 'before-after-img__photo'
+            }}
+          {%- else -%}
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg before-after-img__photo' }}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <span class="before-after__handle" aria-hidden="true">
+        <svg class="before-after__handle-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="16,12 8,20 16,28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="24,12 32,20 24,28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+
+    </div>
+  </mc-before-after>
+</li>
+
+{% schema %}
+{
+  "name": "Before and after image",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Before image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_before",
+      "label": "Before image"
+    },
+    {
+      "type": "text",
+      "id": "text_before",
+      "label": "Before label",
+      "default": "Before"
+    },
+    {
+      "type": "header",
+      "content": "After image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_after",
+      "label": "After image"
+    },
+    {
+      "type": "text",
+      "id": "text_after",
+      "label": "After label",
+      "default": "After"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Before and after image"
+    }
+  ]
+}
+{% endschema %}
