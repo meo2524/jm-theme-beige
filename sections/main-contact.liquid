@@ -208,7 +208,7 @@ a.contact__detail-value:hover { text-decoration: underline; }
 
 /* Form */
 .contact__form-wrap {
-  background-color: #2D2D2D;
+  background-color: #383530;
   border-top: 3px solid var(--color-walnut, #8A6240);
   border-radius: 0 0 4px 4px;
   padding: 3rem;
@@ -234,35 +234,35 @@ a.contact__detail-value:hover { text-decoration: underline; }
   font-weight: 600;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: rgba(242, 237, 228, 0.5);
+  color: rgba(242, 237, 228, 0.75);
 }
 .contact__input {
   height: 48px;
   padding: 0 1rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(242, 237, 228, 0.14);
+  background-color: #F2EDE4;
+  border: 1.5px solid transparent;
   border-radius: 2px;
   font-family: var(--font-label, 'Inter', sans-serif);
   font-size: 0.9375rem;
-  color: var(--color-bone, #F2EDE4);
+  color: #2D2D2D;
   outline: none;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
   width: 100%;
   box-sizing: border-box;
 }
-.contact__input::placeholder { color: rgba(242, 237, 228, 0.28); }
+.contact__input::placeholder { color: #BEBDB8; }
 .contact__input:focus {
   border-color: var(--color-walnut, #8A6240);
-  background-color: rgba(138, 98, 64, 0.08);
+  box-shadow: 0 0 0 3px rgba(138, 98, 64, 0.15);
 }
 .contact__input:focus-visible {
   outline: none;
   border-color: var(--color-walnut, #8A6240);
-  background-color: rgba(138, 98, 64, 0.08);
+  box-shadow: 0 0 0 3px rgba(138, 98, 64, 0.15);
 }
 .contact__select {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23F2EDE4' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%232D2D2D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 1rem center;
   padding-right: 2.5rem;
