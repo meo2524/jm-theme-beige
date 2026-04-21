@@ -9,29 +9,28 @@
 
 :root {
 
-  /* Colour palette — Soft Repair */
-  --color-espresso:       #2B2B2B;  /* Matte Black — all text, dark sections */
-  --color-mahogany:       #A68966;  /* Warm Clay — muted text, accents */
-  --color-amber:          #A68966;  /* Warm Clay — CTA buttons */
-  --color-amber-hover:    #8C7254;  /* Warm Clay dark — hover */
-  --color-gold:           #D7C4A3;  /* Sandstone — borders, alt surfaces */
-  --color-linen:          #F2E8D5;  /* Unbleached Cotton — primary bg */
-  --color-linen-alt:      #FFFFFF;
-  --color-sage:           #D7C4A3;  /* Sandstone */
-  --color-sage-deep:      #A68966;  /* Warm Clay */
+  /* Colour palette — Japandi Bone */
+  --color-black:          #2D2D2D;  /* Matte Black — all text, dark sections */
+  --color-walnut:         #8A6240;  /* Deep Walnut — CTA buttons, key accents */
+  --color-walnut-hover:   #6B4F32;  /* Deep Walnut dark — hover */
+  --color-taupe:          #D9C5B2;  /* Sandy Taupe — borders, cards, alt surfaces */
+  --color-stone:          #BEBDB8;  /* Stone Grey — dividers, inactive UI */
+  --color-olive:          #7A8471;  /* Olive Green — secondary labels, trust badges */
+  --color-bone:           #F2EDE4;  /* Bone White — primary background */
+  --color-bone-alt:       #FFFFFF;
 
   /* Semantic tokens */
-  --color-bg:             var(--color-linen);
-  --color-bg-alt:         var(--color-linen-alt);
-  --color-bg-dark:        var(--color-espresso);
-  --color-text:           var(--color-espresso);
-  --color-text-muted:     var(--color-mahogany);
-  --color-text-on-dark:   #F2E8D5;
-  --color-border:         var(--color-gold);
-  --color-rule:           var(--color-gold);
-  --color-cta:            var(--color-amber);
-  --color-cta-hover:      var(--color-amber-hover);
-  --color-badge:          var(--color-gold);
+  --color-bg:             var(--color-bone);
+  --color-bg-alt:         var(--color-bone-alt);
+  --color-bg-dark:        var(--color-black);
+  --color-text:           var(--color-black);
+  --color-text-muted:     var(--color-olive);
+  --color-text-on-dark:   #F2EDE4;
+  --color-border:         var(--color-taupe);
+  --color-rule:           var(--color-taupe);
+  --color-cta:            var(--color-walnut);
+  --color-cta-hover:      var(--color-walnut-hover);
+  --color-badge:          var(--color-taupe);
 
   /* Typography */
   --font-heading:         'Playfair Display', Georgia, serif;
@@ -180,8 +179,8 @@ p {
 }
 
 ::selection {
-  background-color: var(--color-amber);
-  color: var(--color-espresso);
+  background-color: var(--color-walnut);
+  color: var(--color-black);
 }
 
 
@@ -273,7 +272,7 @@ p {
 }
 
 .t-on-dark-muted {
-  color: var(--color-gold);
+  color: var(--color-taupe);
   opacity: 0.65;
 }
 
@@ -350,7 +349,7 @@ p {
   display: block;
   width: 100%;
   height: 1px;
-  background-color: var(--color-amber);
+  background-color: var(--color-walnut);
   border: none;
   opacity: 0.4;
 }
@@ -368,7 +367,7 @@ p {
   display: block;
   width: 2.5rem;
   height: 1.5px;
-  background-color: var(--color-amber);
+  background-color: var(--color-walnut);
   margin-bottom: var(--space-4);
 }
 
@@ -397,10 +396,10 @@ p {
   white-space: nowrap;
 }
 
-/* Primary — amber clay fill */
+/* Primary — deep walnut fill */
 .btn--primary {
   background-color: var(--color-cta);
-  color: var(--color-espresso);
+  color: var(--color-bone);
   border: 1.5px solid var(--color-cta);
 }
 
@@ -413,27 +412,27 @@ p {
 /* Secondary — outline */
 .btn--secondary {
   background-color: transparent;
-  color: var(--color-espresso);
-  border: 1.5px solid var(--color-espresso);
+  color: var(--color-black);
+  border: 1.5px solid var(--color-black);
 }
 
 .btn--secondary:hover,
 .btn--secondary:focus-visible {
-  background-color: var(--color-espresso);
-  color: var(--color-espresso);
+  background-color: var(--color-black);
+  color: var(--color-bone);
 }
 
 /* Ghost on dark — for dark sections */
 .btn--ghost-dark {
   background-color: transparent;
-  color: var(--color-gold);
-  border: 1.5px solid var(--color-gold);
+  color: var(--color-taupe);
+  border: 1.5px solid var(--color-taupe);
 }
 
 .btn--ghost-dark:hover,
 .btn--ghost-dark:focus-visible {
-  background-color: var(--color-gold);
-  color: var(--color-espresso);
+  background-color: var(--color-taupe);
+  color: var(--color-black);
 }
 
 /* Sizes */
@@ -450,7 +449,7 @@ p {
 
 /* Focus ring */
 .btn:focus-visible {
-  outline: 2px solid var(--color-amber);
+  outline: 2px solid var(--color-walnut);
   outline-offset: 3px;
 }
 
@@ -469,19 +468,19 @@ p {
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
   border-radius: var(--radius-sm);
-  background-color: var(--color-sage);
-  color: var(--color-espresso);
+  background-color: var(--color-taupe);
+  color: var(--color-black);
 }
 
-.badge--amber {
-  background-color: var(--color-amber);
-  color: var(--color-espresso);
+.badge--walnut {
+  background-color: var(--color-walnut);
+  color: var(--color-bone);
 }
 
 .badge--outline {
   background-color: transparent;
-  color: var(--color-espresso);
-  border: 1px solid var(--color-espresso);
+  color: var(--color-black);
+  border: 1px solid var(--color-black);
 }
 
 
@@ -522,13 +521,13 @@ p {
 .field__input:focus,
 .field__select:focus,
 .field__textarea:focus {
-  border-color: var(--color-amber);
+  border-color: var(--color-walnut);
   outline: none;
 }
 
 .field__input::placeholder,
 .field__textarea::placeholder {
-  color: var(--color-mahogany);
+  color: var(--color-olive);
   opacity: 0.5;
 }
 
@@ -562,7 +561,7 @@ p {
   width: 44px;
   height: 44px;
   font-size: var(--font-size-lg);
-  color: var(--color-espresso);
+  color: var(--color-black);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -570,8 +569,8 @@ p {
 }
 
 .quantity__btn:hover {
-  background-color: var(--color-espresso);
-  color: var(--color-espresso);
+  background-color: var(--color-black);
+  color: var(--color-black);
 }
 
 .quantity__input {
@@ -580,7 +579,7 @@ p {
   text-align: center;
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-medium);
-  color: var(--color-espresso);
+  color: var(--color-black);
   border-left: 1px solid var(--color-border);
   border-right: 1px solid var(--color-border);
   border-radius: 0;
@@ -600,7 +599,7 @@ p {
   font-family: var(--font-body);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-medium);
-  color: var(--color-espresso);
+  color: var(--color-black);
 }
 
 .price--large {
@@ -609,13 +608,13 @@ p {
 
 .price--compare {
   font-size: var(--font-size-sm);
-  color: var(--color-mahogany);
+  color: var(--color-olive);
   text-decoration: line-through;
   opacity: 0.6;
 }
 
 .price--sale {
-  color: var(--color-amber);
+  color: var(--color-walnut);
 }
 
 
@@ -629,7 +628,7 @@ p {
 }
 
 .skeleton {
-  background-color: var(--color-mahogany);
+  background-color: var(--color-olive);
   opacity: 0.12;
   border-radius: var(--radius-base);
   animation: skeleton-pulse 1.6s ease-in-out infinite;
@@ -673,8 +672,8 @@ p {
   left: var(--space-4);
   z-index: var(--z-toast);
   padding: var(--space-3) var(--space-6);
-  background-color: var(--color-espresso);
-  color: var(--color-gold);
+  background-color: var(--color-black);
+  color: var(--color-taupe);
   font-family: var(--font-label);
   font-size: var(--font-size-sm);
   letter-spacing: var(--letter-spacing-wide);
@@ -689,7 +688,7 @@ p {
 
 /* Focus visible — global */
 :focus-visible {
-  outline: 2px solid var(--color-amber);
+  outline: 2px solid var(--color-walnut);
   outline-offset: 3px;
 }
 

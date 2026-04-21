@@ -14,37 +14,37 @@
       {
         "type": "color",
         "id": "color_espresso",
-        "label": "Deep navy",
-        "default": "#2B2B2B",
+        "label": "Matte Black",
+        "default": "#2D2D2D",
         "info": "Primary text, headings, dark backgrounds"
       },
       {
         "type": "color",
         "id": "color_mahogany",
-        "label": "Deep teal",
-        "default": "#A68966",
-        "info": "Secondary text, muted UI, borders"
+        "label": "Olive Green",
+        "default": "#7A8471",
+        "info": "Secondary text, muted labels, trust badges"
       },
       {
         "type": "color",
         "id": "color_amber",
-        "label": "Ocean teal",
-        "default": "#A68966",
+        "label": "Deep Walnut",
+        "default": "#8A6240",
         "info": "CTA buttons, structural accents. Use sparingly."
       },
       {
         "type": "color",
         "id": "color_linen",
-        "label": "Pale aqua",
-        "default": "#F2E8D5",
+        "label": "Bone White",
+        "default": "#F2EDE4",
         "info": "Page background, cards, light surfaces"
       },
       {
         "type": "color",
         "id": "color_sage",
-        "label": "Light blue",
-        "default": "#D7C4A3",
-        "info": "Badges, tags, secondary accents"
+        "label": "Sandy Taupe",
+        "default": "#D9C5B2",
+        "info": "Borders, alt surfaces, secondary accents"
       }
     ]
   },
@@ -86,13 +86,13 @@
         "type": "image_picker",
         "id": "logo",
         "label": "Logo (light bg)",
-        "info": "Shown on linen/white backgrounds. SVG or PNG, max 300px wide."
+        "info": "Shown on bone/white backgrounds. SVG or PNG, max 300px wide."
       },
       {
         "type": "image_picker",
         "id": "logo_inverted",
         "label": "Logo (dark bg)",
-        "info": "Shown on espresso dark sections. Use a light-coloured version."
+        "info": "Shown on dark sections. Use a light-coloured version."
       },
       {
         "type": "range",
