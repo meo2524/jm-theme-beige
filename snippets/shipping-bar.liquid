@@ -1,0 +1,38 @@
+{%- if settings.free_shipping_goal > 0 -%}
+  {%- liquid
+    assign goal_cents    = settings.free_shipping_goal | times: 100
+    assign pct           = cart.total_price | times: 100 | divided_by: goal_cents | at_most: 100
+    assign remaining     = goal_cents | minus: cart.total_price | at_least: 0
+    assign remaining_fmt = remaining | money
+    if cart.total_price >= goal_cents
+      assign bar_msg = settings.free_shipping_msg_after
+    else
+      assign bar_msg = settings.free_shipping_msg_before | replace: '{amount}', remaining_fmt
+    endif
+  -%}
+  {%- once 'mc-shipping-bar-css' -%}
+    {{ 'component-shipping-bar.css' | asset_url | stylesheet_tag: preload: true }}
+  {%- endonce -%}
+  <mc-shipping-bar
+    class="mc-ship-bar{% if cart.total_price >= goal_cents %} mc-ship-bar--complete{% endif %}"
+    data-goal="{{ goal_cents }}"
+    data-total="{{ cart.total_price }}"
+    data-msg-before="{{ settings.free_shipping_msg_before | escape }}"
+    data-msg-after="{{ settings.free_shipping_msg_after | escape }}"
+  >
+    <p class="mc-ship-bar__msg">{{ bar_msg }}</p>
+    <div
+      class="mc-ship-bar__track"
+      role="progressbar"
+      aria-valuenow="{{ pct }}"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-label="Free shipping progress"
+    >
+      <span class="mc-ship-bar__fill" data-pct="{{ pct }}"></span>
+    </div>
+  </mc-shipping-bar>
+  {%- once 'mc-shipping-bar-js' -%}
+    <script src="{{ 'component-shipping-bar.js' | asset_url }}" defer="defer"></script>
+  {%- endonce -%}
+{%- endif -%}

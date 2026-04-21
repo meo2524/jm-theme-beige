@@ -336,7 +336,7 @@
     _refreshCart: function () {
       var self = this;
       return cartGet().then(function (cart) {
-        self._updateCounts(cart.item_count);
+        self._updateCounts(cart.item_count, cart.total_price);
         self._updateTotals(cart.total_price);
         self._updateItems(cart);
         self._updateFooter(cart);
@@ -345,12 +345,12 @@
       });
     },
 
-    _updateCounts: function (count) {
+    _updateCounts: function (count, total) {
       this.counts.forEach(function (el) {
         el.textContent = count > 0 ? count : '';
       });
       /* theme.js handles .is-hidden toggle + bump animation */
-      document.dispatchEvent(new CustomEvent('cart:updated', { detail: { count: count } }));
+      document.dispatchEvent(new CustomEvent('cart:updated', { detail: { count: count, total: total || 0 } }));
     },
 
     _updateTotals: function (cents) {

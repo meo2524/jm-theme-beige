@@ -252,6 +252,32 @@
   },
 
   {
+    "name": "Free shipping bar",
+    "settings": [
+      {
+        "type": "number",
+        "id": "free_shipping_goal",
+        "label": "Free shipping threshold ($)",
+        "default": 50,
+        "info": "Set to 0 to hide the bar."
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_msg_before",
+        "label": "Message before goal",
+        "default": "Spend {amount} more for free shipping",
+        "info": "Use {amount} as placeholder for the remaining amount."
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_msg_after",
+        "label": "Message when goal reached",
+        "default": "You have unlocked free shipping!"
+      }
+    ]
+  },
+
+  {
     "name": "SEO & analytics",
     "settings": [
       {

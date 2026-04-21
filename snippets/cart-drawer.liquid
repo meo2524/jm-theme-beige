@@ -1,6 +1,6 @@
 {% comment %}
   cart-drawer.liquid
-  Mend & Co — slide-in cart drawer rendered in theme.liquid.
+  Mend & Co -- slide-in cart drawer rendered in theme.liquid.
   Opens from the right. Managed by component-cart-drawer.js.
 {% endcomment %}
 
@@ -61,6 +61,13 @@
         </div>
       {%- endif -%}
     </div>
+
+    {%- comment -%} Shipping progress bar (sibling of footer, not inside it) {%- endcomment -%}
+    {%- if settings.free_shipping_goal > 0 and cart.item_count > 0 -%}
+      <div class="cart-drawer__shipping-bar">
+        {%- render 'shipping-bar' -%}
+      </div>
+    {%- endif -%}
 
     {%- comment -%} Footer {%- endcomment -%}
     <div class="cart-drawer__footer" data-cart-footer>
