@@ -16,7 +16,7 @@
         "heading": "Your shower is",
         "heading_em": "undoing",
         "heading_2": "everything.",
-        "subtext": "Chlorine, heavy metals, sediment — every product you apply after is working against a contaminated baseline.",
+        "subtext": "Chlorine, heavy metals, sediment -- every product you apply after is working against a contaminated baseline.",
         "cta_label": "Shop the filter",
         "cta_url": "",
         "show_scroll_cue": true
@@ -44,6 +44,14 @@
         "reverse": false
       }
     },
+    "before-after": {
+      "type": "before-after",
+      "settings": {
+        "heading": "See the Difference",
+        "subheading": "Filtered water. Visibly healthier skin and hair.",
+        "initial_position": 50
+      }
+    },
     "product-grid": {
       "type": "product-grid",
       "settings": {
@@ -53,9 +61,15 @@
         "product_limit": 3
       }
     },
+    "countdown": {
+      "type": "countdown-sale",
+      "settings": {
+        "heading": "Limited Time Offer",
+        "button_label": "Shop Now"
+      }
+    },
     "testimonials": {
       "type": "testimonials",
-      "custom_css": [],
       "settings": {
         "eyebrow": "Real results",
         "heading": "What people are saying.",
@@ -68,7 +82,7 @@
         "heading": "Skin starts in the shower.",
         "subtext": "Join the list for the science, the rituals, and the offers worth opening.",
         "btn_label": "Subscribe",
-        "success_message": "You’re in. We’ll be in touch."
+        "success_message": "You're in. We'll be in touch."
       }
     }
   },
@@ -76,7 +90,9 @@
     "hero",
     "stats-strip",
     "product-feature",
+    "before-after",
     "product-grid",
+    "countdown",
     "testimonials",
     "newsletter"
   ]

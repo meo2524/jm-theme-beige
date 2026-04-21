@@ -2,8 +2,73 @@
   "sections": {
     "main": {
       "type": "main-product",
-      "settings": {}
+      "blocks": {
+        "sticky_atc": {
+          "type": "_sticky-add-to-cart",
+          "settings": {
+            "show_on": "both",
+            "position": "bottom"
+          }
+        },
+        "subscription": {
+          "type": "_product-subscription",
+          "settings": {
+            "preselected_option": "one_time",
+            "first_displayed_option": "one_time"
+          }
+        },
+        "qty_breaks": {
+          "type": "_quantity-breaks",
+          "blocks": {
+            "tier_2": {
+              "type": "_quantity-break-item",
+              "settings": {
+                "range": 2,
+                "badge_text": "Popular"
+              }
+            },
+            "tier_3": {
+              "type": "_quantity-break-item",
+              "settings": {
+                "range": 3,
+                "badge_text": "Best Value"
+              }
+            }
+          },
+          "block_order": ["tier_2", "tier_3"],
+          "settings": {
+            "heading": "Buy more, save more",
+            "enable_single_quantity": true,
+            "single_quantity_text": "1 filter",
+            "single_quantity_subtext": "Regular price"
+          }
+        },
+        "back_in_stock": {
+          "type": "_back-in-stock",
+          "settings": {}
+        }
+      },
+      "block_order": ["sticky_atc", "subscription", "qty_breaks", "back_in_stock"],
+      "settings": {
+        "eyebrow_text": "Shower Filtration",
+        "per_use_text": "~$0.18/shower  lasts 6 months"
+      }
+    },
+    "before_after": {
+      "type": "before-after",
+      "settings": {
+        "heading": "See the Difference",
+        "subheading": "Filtered water. Visibly healthier skin and hair.",
+        "initial_position": 50
+      }
+    },
+    "countdown": {
+      "type": "countdown-sale",
+      "settings": {
+        "heading": "Limited Time Offer",
+        "button_label": "Shop Now"
+      }
     }
   },
-  "order": ["main"]
+  "order": ["main", "before_after", "countdown"]
 }
