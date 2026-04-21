@@ -1,0 +1,113 @@
+/* ================================================================
+   BACK IN STOCK -- Mend & Co
+   ================================================================ */
+
+mc-back-in-stock {
+  display: block;
+}
+
+mc-back-in-stock.mc-back-in-stock--hidden {
+  display: none;
+}
+
+@keyframes mc-bis-reveal {
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.mc-bis__form {
+  border-top: 1px solid var(--color-taupe);
+  padding-top: 1.6rem;
+  margin-top: 0.4rem;
+  animation: mc-bis-reveal 0.28s ease both;
+}
+
+.mc-bis__heading {
+  font-family: var(--font-heading-family);
+  font-size: 1.3rem;
+  letter-spacing: 0.03em;
+  color: var(--color-black);
+  margin: 0 0 1rem;
+  line-height: 1.4;
+}
+
+.mc-bis__row {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.mc-bis__input {
+  flex: 1;
+  min-width: 0;
+  height: 4.4rem;
+  padding: 0 1.1rem;
+  border: 1px solid var(--color-taupe);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--color-black);
+  font-size: 1.3rem;
+  outline: none;
+  transition: border-color 0.18s ease;
+  -webkit-appearance: none;
+}
+
+.mc-bis__input::placeholder {
+  color: var(--color-stone);
+}
+
+.mc-bis__input:focus {
+  border-color: var(--color-walnut);
+}
+
+.mc-bis__btn {
+  flex-shrink: 0;
+  height: 4.4rem;
+  padding: 0 1.8rem;
+  background: var(--color-black);
+  color: var(--color-bone);
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-heading-family);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.18s ease;
+  white-space: nowrap;
+}
+
+.mc-bis__btn:hover,
+.mc-bis__btn:focus-visible {
+  background: var(--color-walnut);
+}
+
+.mc-bis__error {
+  font-size: 1.2rem;
+  color: #b94040;
+  margin: 0.7rem 0 0;
+  line-height: 1.4;
+}
+
+/* Success replaces the form content; same top border, fades in */
+.mc-bis__success {
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--color-olive);
+  border-top: 1px solid var(--color-taupe);
+  padding-top: 1.6rem;
+  margin-top: 0.4rem;
+  line-height: 1.5;
+  animation: mc-bis-reveal 0.28s ease both;
+}
+
+@media (max-width: 480px) {
+  .mc-bis__row {
+    flex-direction: column;
+  }
+  .mc-bis__input,
+  .mc-bis__btn {
+    width: 100%;
+  }
+}

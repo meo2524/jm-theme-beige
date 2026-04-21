@@ -1,0 +1,83 @@
+{{ 'component-back-in-stock.css' | asset_url | stylesheet_tag: preload: true }}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign initial_message = block.settings.message | replace: '{product_title}', current_variant.name
+-%}
+
+<mc-back-in-stock
+  class="mc-back-in-stock{% if current_variant.available %} mc-back-in-stock--hidden{% endif %}"
+  data-message-template="{{ block.settings.message | escape }}"
+  {{ block.shopify_attributes }}
+>
+  {%- form 'customer',
+    id: 'mc-bis-form-{{ section.id }}',
+    class: 'mc-bis__form',
+    return_to: product.url
+  -%}
+    <input type="hidden" name="contact[tags]" value="back-in-stock--{{ product.handle }}">
+    <input type="hidden" name="contact[body]" class="mc-bis__body" value="{{ initial_message | escape }}">
+
+    {%- if form.posted_successfully? -%}
+      <p class="mc-bis__success">{{ block.settings.success_message }}</p>
+    {%- else -%}
+      <p class="mc-bis__heading">{{ initial_message }}</p>
+      <div class="mc-bis__row">
+        <input
+          type="email"
+          name="contact[email]"
+          id="mc-bis-email-{{ section.id }}"
+          class="mc-bis__input"
+          placeholder="your@email.com"
+          autocomplete="email"
+          required
+          value="{{ customer.email }}"
+          aria-label="Email address"
+        >
+        <button type="submit" class="mc-bis__btn">{{ block.settings.button_text }}</button>
+      </div>
+      {%- if form.errors -%}
+        <p class="mc-bis__error" role="alert">
+          {{- form.errors.translated_fields.email | capitalize }}
+          {{ form.errors.messages.email -}}
+        </p>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endform -%}
+
+  <script type="application/json">
+    {
+      {%- for variant in product.variants -%}
+        "{{ variant.id }}": { "available": {{ variant.available }}, "name": {{ variant.name | json }} }
+        {%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    }
+  </script>
+</mc-back-in-stock>
+<script src="{{ 'component-back-in-stock.js' | asset_url }}" defer="defer"></script>
+{%- schema -%}
+{
+  "name": "Back in Stock",
+  "settings": [
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Form heading",
+      "default": "Notify me when {product_title} is back",
+      "info": "Use {product_title} as a placeholder for the variant name"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button label",
+      "default": "Notify me"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "You are on the list. We will be in touch soon."
+    }
+  ]
+}
+{%- endschema -%}
