@@ -195,8 +195,8 @@
 a.contact__detail-value:hover { text-decoration: underline; }
 .contact__rule {
   height: 1px;
-  background-color: var(--color-cta, #2D2D2D);
-  opacity: 0.3;
+  background-color: var(--color-walnut, #8A6240);
+  opacity: 0.35;
   margin-bottom: 1.5rem;
 }
 .contact__note {
@@ -209,14 +209,14 @@ a.contact__detail-value:hover { text-decoration: underline; }
 /* Form */
 .contact__form-wrap {
   background-color: #2D2D2D;
-  border: 1px solid rgba(166, 137, 102, 0.18);
-  border-radius: 4px;
+  border-top: 3px solid var(--color-walnut, #8A6240);
+  border-radius: 0 0 4px 4px;
   padding: 3rem;
 }
 .contact__form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 .contact__row--two {
   display: grid;
@@ -226,36 +226,43 @@ a.contact__detail-value:hover { text-decoration: underline; }
 .contact__field {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
 .contact__label {
   font-family: var(--font-label, 'Inter', sans-serif);
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--color-bone);
+  color: rgba(242, 237, 228, 0.5);
 }
 .contact__input {
   height: 48px;
   padding: 0 1rem;
-  background-color: #fff;
-  border: 1px solid rgba(43, 43, 43, 0.18);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(242, 237, 228, 0.14);
   border-radius: 2px;
   font-family: var(--font-label, 'Inter', sans-serif);
   font-size: 0.9375rem;
-  color: var(--color-black);
+  color: var(--color-bone, #F2EDE4);
   outline: none;
-  transition: border-color 0.15s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
   width: 100%;
   box-sizing: border-box;
 }
-.contact__input::placeholder { color: #8A6240; }
-.contact__input:focus { border-color: var(--color-walnut, #8A6240); }
-.contact__input:focus-visible { outline: 2px solid var(--color-walnut, #8A6240); outline-offset: 2px; }
+.contact__input::placeholder { color: rgba(242, 237, 228, 0.28); }
+.contact__input:focus {
+  border-color: var(--color-walnut, #8A6240);
+  background-color: rgba(138, 98, 64, 0.08);
+}
+.contact__input:focus-visible {
+  outline: none;
+  border-color: var(--color-walnut, #8A6240);
+  background-color: rgba(138, 98, 64, 0.08);
+}
 .contact__select {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%232C1A0E' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23F2EDE4' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 1rem center;
   padding-right: 2.5rem;
@@ -272,8 +279,8 @@ a.contact__detail-value:hover { text-decoration: underline; }
   align-self: flex-start;
   height: 52px;
   padding: 0 2.5rem;
-  background-color: var(--color-cta);
-  color: var(--color-bone);
+  background-color: var(--color-walnut, #8A6240);
+  color: var(--color-bone, #F2EDE4);
   border: none;
   border-radius: 2px;
   font-family: var(--font-label, 'Inter', sans-serif);
@@ -282,29 +289,29 @@ a.contact__detail-value:hover { text-decoration: underline; }
   letter-spacing: 2.5px;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.2s ease;
 }
-.contact__btn:hover { background-color: var(--color-cta-hover); }
+.contact__btn:hover { background-color: var(--color-walnut-hover, #6B4F32); }
 .contact__btn:focus-visible { outline: 2px solid var(--color-walnut, #8A6240); outline-offset: 3px; }
 
 /* Success state */
 .contact__success {
   padding: 2rem;
-  border: 1px solid rgba(166, 137, 102, 0.3);
-  border-radius: 4px;
-  background-color: rgba(166, 137, 102, 0.06);
+  border-top: 3px solid var(--color-walnut, #8A6240);
+  border-radius: 0 0 4px 4px;
+  background-color: rgba(138, 98, 64, 0.08);
 }
 .contact__success-heading {
   font-family: var(--font-heading, 'Playfair Display', serif);
   font-size: 1.5rem;
   font-weight: 400;
-  color: var(--color-black);
+  color: var(--color-bone, #F2EDE4);
   margin-bottom: 0.5rem;
 }
 .contact__success-body {
   font-family: var(--font-label, 'Inter', sans-serif);
   font-size: 0.9375rem;
-  color: #8A6240;
+  color: rgba(242, 237, 228, 0.65);
 }
 
 /* Errors */
