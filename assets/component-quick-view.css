@@ -1,0 +1,368 @@
+/* ================================================================
+   QUICK VIEW MODAL -- Mend & Co
+   Native <dialog>, two-column layout, Japandi Bone palette.
+   ================================================================ */
+
+/* ---- Dialog backdrop ------------------------------------------ */
+
+.mc-qv-dialog::backdrop {
+  background: rgba(45, 45, 45, 0.55);
+  animation: mc-qv-backdrop-in 0.22s ease both;
+}
+
+@keyframes mc-qv-backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ---- Dialog shell --------------------------------------------- */
+
+.mc-qv-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  padding: 0;
+  width: min(860px, calc(100vw - 3.2rem));
+  max-height: calc(100vh - 4rem);
+  border: 1px solid var(--color-taupe);
+  border-radius: 3px;
+  background: var(--color-bone);
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(45, 45, 45, 0.18);
+  animation: mc-qv-enter 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes mc-qv-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---- Close button --------------------------------------------- */
+
+.mc-qv-close {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  z-index: 10;
+  width: 3.2rem;
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--color-taupe);
+  border-radius: 2px;
+  cursor: pointer;
+  color: var(--color-black);
+  font-size: 1.8rem;
+  line-height: 1;
+  padding: 0;
+  transition: background-color 0.16s ease, border-color 0.16s ease;
+}
+
+.mc-qv-close:hover {
+  background: var(--color-black);
+  border-color: var(--color-black);
+  color: var(--color-bone);
+}
+
+/* ---- Loading state -------------------------------------------- */
+
+.mc-qv-body {
+  overflow-y: auto;
+  max-height: calc(100vh - 4rem);
+}
+
+.mc-qv-body.is-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36rem;
+}
+
+.mc-qv-spinner {
+  width: 3.2rem;
+  height: 3.2rem;
+  border: 2px solid var(--color-taupe);
+  border-top-color: var(--color-walnut);
+  border-radius: 50%;
+  animation: mc-qv-spin 0.7s linear infinite;
+}
+
+@keyframes mc-qv-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- Content two-column layout -------------------------------- */
+
+.mc-qv-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 36rem;
+}
+
+.mc-qv-media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--color-taupe);
+  opacity: 0.92;
+}
+
+.mc-qv-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.mc-qv-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mc-qv-img-placeholder .placeholder-svg {
+  width: 60%;
+  height: 60%;
+  fill: var(--color-stone);
+  opacity: 0.4;
+}
+
+/* ---- Info panel ----------------------------------------------- */
+
+.mc-qv-info {
+  padding: 3.2rem 3.2rem 3.2rem 2.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  overflow-y: auto;
+}
+
+.mc-qv-vendor {
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-olive);
+  margin: 0;
+}
+
+.mc-qv-title {
+  font-family: var(--font-heading-family);
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--color-black);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.mc-qv-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+
+.mc-qv-price {
+  font-family: var(--font-heading-family);
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.mc-qv-compare-price {
+  font-size: 1.4rem;
+  color: var(--color-stone);
+  text-decoration: line-through;
+}
+
+/* ---- Variant select ------------------------------------------- */
+
+.mc-qv-variants {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.mc-qv-label {
+  font-size: 1.1rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-olive);
+}
+
+.mc-qv-select-wrap {
+  position: relative;
+}
+
+.mc-qv-select-wrap::after {
+  content: '';
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid var(--color-black);
+  pointer-events: none;
+}
+
+.mc-qv-select {
+  width: 100%;
+  height: 4.4rem;
+  padding: 0 3.2rem 0 1.1rem;
+  border: 1px solid var(--color-taupe);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--color-black);
+  font-size: 1.3rem;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.18s ease;
+}
+
+.mc-qv-select:focus {
+  border-color: var(--color-walnut);
+}
+
+/* ---- Add to cart button --------------------------------------- */
+
+.mc-qv-atc {
+  width: 100%;
+  height: 4.8rem;
+  background: var(--color-walnut);
+  color: var(--color-bone);
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-heading-family);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.18s ease;
+  margin-top: auto;
+}
+
+.mc-qv-atc:hover:not(:disabled) {
+  background: var(--color-walnut-hover);
+}
+
+.mc-qv-atc:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.mc-qv-atc[data-state="adding"] {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.mc-qv-atc[data-state="added"] {
+  background: var(--color-olive);
+}
+
+/* ---- View full link ------------------------------------------- */
+
+.mc-qv-full-link {
+  display: inline-block;
+  font-size: 1.2rem;
+  color: var(--color-olive);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  padding-bottom: 1px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.16s ease;
+  align-self: flex-start;
+}
+
+.mc-qv-full-link:hover {
+  border-bottom-color: var(--color-olive);
+}
+
+/* ---- Quick View trigger button on card ----------------------- */
+
+.card__quick-view {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  opacity: 0;
+  background: var(--color-bone);
+  color: var(--color-black);
+  border: 1px solid var(--color-taupe);
+  border-radius: 2px;
+  font-family: var(--font-heading-family);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.4rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.16s ease;
+  z-index: 3;
+}
+
+.card:hover .card__quick-view,
+.card:focus-within .card__quick-view {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.card__quick-view:hover {
+  background: var(--color-black);
+  color: var(--color-bone);
+  border-color: var(--color-black);
+}
+
+/* ---- Mobile --------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .mc-qv-dialog {
+    width: 100vw;
+    max-height: 92vh;
+    margin: auto auto 0;
+    border-radius: 3px 3px 0 0;
+    animation: mc-qv-enter-mobile 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes mc-qv-enter-mobile {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .mc-qv-content {
+    grid-template-columns: 1fr;
+  }
+
+  .mc-qv-media {
+    aspect-ratio: 3 / 2;
+  }
+
+  .mc-qv-info {
+    padding: 2rem 1.6rem 2.4rem;
+  }
+
+  .mc-qv-title {
+    font-size: 1.8rem;
+  }
+}

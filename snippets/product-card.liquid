@@ -7,6 +7,10 @@
     assign on_sale = true
   endif
 -%}
+{%- once 'mc-quick-view-assets' -%}
+  {{ 'component-quick-view.css' | asset_url | stylesheet_tag: preload: true }}
+  <script src="{{ 'component-quick-view.js' | asset_url }}" defer="defer"></script>
+{%- endonce -%}
 
 <article class="card" aria-label="{{ product.title }}">
   <a href="{{ product.url }}" class="card__media-link" tabindex="-1" aria-hidden="true">
@@ -34,6 +38,15 @@
       {%- elsif product.tags contains 'new' -%}
         <span class="card__badge badge">New</span>
       {%- endif -%}
+
+      <button
+        class="card__quick-view"
+        type="button"
+        data-quick-view="{{ product.handle }}"
+        aria-label="Quick view {{ product.title | escape }}"
+      >
+        Quick view
+      </button>
     </div>
   </a>
 

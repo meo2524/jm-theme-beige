@@ -1,0 +1,89 @@
+{%- layout none -%}
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+-%}
+<div class="mc-qv-content">
+  <div class="mc-qv-media">
+    {%- if product.featured_media != blank -%}
+      {{
+        product.featured_media
+        | image_url: width: 800
+        | image_tag:
+          class: 'mc-qv-img',
+          loading: 'eager',
+          widths: '400, 600, 800',
+          sizes: '(max-width: 767px) 100vw, 45vw',
+          alt: product.featured_media.alt | default: product.title | escape,
+          width: 800,
+          height: 1000
+      }}
+    {%- else -%}
+      <div class="mc-qv-img-placeholder">
+        {{ product.title | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="mc-qv-info">
+    <p class="mc-qv-vendor">{{ product.vendor }}</p>
+    <h2 class="mc-qv-title">{{ product.title }}</h2>
+
+    <div class="mc-qv-price-row">
+      <span class="mc-qv-price" id="mc-qv-price-{{ product.id }}">
+        {{- current_variant.price | money -}}
+      </span>
+      {%- if current_variant.compare_at_price > current_variant.price -%}
+        <span class="mc-qv-compare-price">{{ current_variant.compare_at_price | money }}</span>
+      {%- endif -%}
+    </div>
+
+    {%- form 'product', product, class: 'mc-qv-form', novalidate: 'novalidate' -%}
+      <input type="hidden" name="id" class="mc-qv-variant-id" value="{{ current_variant.id }}">
+
+      {%- unless product.has_only_default_variant -%}
+        <div class="mc-qv-variants">
+          <label class="mc-qv-label" for="mc-qv-select-{{ product.id }}">
+            {{- 'products.product.choose_variant' | t | default: 'Variant' -}}
+          </label>
+          <div class="mc-qv-select-wrap">
+            <select
+              id="mc-qv-select-{{ product.id }}"
+              class="mc-qv-select"
+              aria-label="Select variant"
+            >
+              {%- for variant in product.variants -%}
+                <option
+                  value="{{ variant.id }}"
+                  data-price="{{ variant.price | money }}"
+                  data-compare="{{ variant.compare_at_price | money }}"
+                  data-available="{{ variant.available }}"
+                  {%- if variant == current_variant %} selected{%- endif -%}
+                  {%- unless variant.available %} disabled{%- endunless -%}
+                >
+                  {{- variant.title -}}
+                  {%- unless variant.available %} - Sold out{%- endunless -%}
+                </option>
+              {%- endfor -%}
+            </select>
+          </div>
+        </div>
+      {%- endunless -%}
+
+      <button
+        type="submit"
+        class="mc-qv-atc"
+        {%- unless current_variant.available %} disabled{%- endunless -%}
+      >
+        <span class="mc-qv-atc-text">
+          {%- if current_variant.available -%}
+            Add to cart
+          {%- else -%}
+            Sold out
+          {%- endif -%}
+        </span>
+      </button>
+    {%- endform -%}
+
+    <a href="{{ product.url }}" class="mc-qv-full-link">View full details</a>
+  </div>
+</div>
