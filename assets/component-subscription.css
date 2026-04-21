@@ -1,0 +1,257 @@
+/* Subscription Toggle -- Mend & Co Japandi Bone */
+
+mc-subscription-widget {
+  display: block;
+}
+
+/* Variant sections -- show only active */
+
+.mc-subscription-variant {
+  display: block;
+}
+
+.mc-subscription-variant--hidden {
+  display: none;
+}
+
+/* Wrapper */
+
+.mc-subscription__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.mc-subscription__wrapper--sub-first {
+  flex-direction: column-reverse;
+}
+
+/* Box */
+
+.mc-subscription__box {
+  position: relative;
+  background-color: var(--color-bone);
+  border: 1.5px solid var(--color-taupe);
+  padding: var(--space-4) var(--space-5);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  user-select: none;
+}
+
+.mc-subscription__box--selected {
+  border: 2px solid var(--color-walnut);
+  background-color: rgba(138, 98, 64, 0.12);
+}
+
+/* Badge */
+
+.mc-subscription__badge {
+  position: absolute;
+  top: -1px;
+  right: var(--space-4);
+  transform: translateY(-50%);
+  display: inline-block;
+  background-color: var(--color-walnut);
+  color: var(--color-bone);
+  font-family: var(--font-label);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  padding: 2px var(--space-3);
+}
+
+/* Content row */
+
+.mc-subscription__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.mc-subscription__content-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 1;
+  min-width: 0;
+}
+
+.mc-subscription__content-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+/* Radio label */
+
+.mc-subscription__frequency-radio {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Custom indicator (replaces hidden native input) */
+
+.mc-subscription__indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-taupe);
+  background-color: transparent;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease;
+}
+
+.mc-subscription__indicator.is-checked {
+  border-color: var(--color-walnut);
+  background-color: var(--color-walnut);
+  box-shadow: inset 0 0 0 3px var(--color-bone);
+}
+
+/* Label */
+
+.mc-subscription__label {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: var(--color-black);
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Price */
+
+.mc-subscription__price {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-black);
+  white-space: nowrap;
+}
+
+.mc-subscription__compare-price {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-taupe);
+  text-decoration: line-through;
+  white-space: nowrap;
+}
+
+/* Frequency panel -- hidden until subscription box is selected */
+
+.mc-subscription-frequency__show {
+  display: none;
+  margin-top: var(--space-4);
+}
+
+.mc-subscription__box--selected .mc-subscription-frequency__show {
+  display: block;
+}
+
+.mc-subscription__separator {
+  border: none;
+  border-top: 1px solid var(--color-taupe);
+  margin: var(--space-4) 0;
+}
+
+/* Benefits richtext */
+
+.mc-subscription__benefits {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-black);
+  line-height: 1.6;
+}
+
+/* Frequency label */
+
+.mc-subscription__frequency {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.mc-subscription__frequency-label {
+  font-family: var(--font-label);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-black);
+}
+
+/* Dropdown */
+
+.mc-subscription__select-wrap {
+  position: relative;
+}
+
+.mc-subscription__frequency-select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  background-color: var(--color-bone);
+  border: 1px solid var(--color-taupe);
+  color: var(--color-black);
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  padding: var(--space-3) var(--space-8) var(--space-3) var(--space-4);
+  cursor: pointer;
+}
+
+.mc-subscription__frequency-select option {
+  background-color: var(--color-bone);
+  color: var(--color-black);
+}
+
+.mc-subscription__frequency-select:focus-visible {
+  outline: 2px solid var(--color-walnut);
+  outline-offset: 2px;
+}
+
+.mc-subscription__caret {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--color-black);
+  pointer-events: none;
+}
+
+/* Radio plan list */
+
+.mc-subscription__plan-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.mc-subscription__plan-list li {
+  display: flex;
+}
+
+.mc-subscription__plan-name {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-black);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mc-subscription__box,
+  .mc-subscription__indicator {
+    transition: none;
+  }
+}

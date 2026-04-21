@@ -1,0 +1,387 @@
+{%- if product.selling_plan_groups.size > 0 -%}
+  <link rel="stylesheet" href="{{ 'component-subscription.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  {%- liquid
+    assign current_variant    = product.selected_or_first_available_variant | default: product.variants.first
+    assign preselected        = block.settings.preselected_option | default: 'one_time'
+    assign show_sub_first     = false
+    if block.settings.first_displayed_option == 'subscription'
+      assign show_sub_first = true
+    endif
+  -%}
+
+  <mc-subscription-widget
+    class="mc-subscription-widget"
+    data-section-id="{{ section.id }}"
+    data-preselected="{{ preselected }}"
+    data-badge-template="{{ block.settings.subscription_badge_text | escape }}"
+    {{ block.shopify_attributes }}
+  >
+
+    {%- for variant in product.variants -%}
+      {%- liquid
+        assign variant_price         = variant.price | money | escape
+        assign variant_compare_price = variant.compare_at_price | money | escape
+
+        assign one_time_price_display = block.settings.one_time_price_text | replace: '{price}', variant_price
+        assign one_time_compare_display = block.settings.one_time_compare_price_text | replace: '{compare_price}', variant_compare_price
+
+        if preselected == 'one_time' and product.requires_selling_plan == false
+          assign one_time_checked = true
+        else
+          assign one_time_checked = false
+        endif
+      -%}
+
+      {%- if variant.selling_plan_allocations.size > 0 -%}
+        <section
+          class="mc-subscription-variant{% if variant.id != current_variant.id %} mc-subscription-variant--hidden{% endif %}"
+          data-variant-id="{{ variant.id }}"
+        >
+          <div class="mc-subscription__wrapper{% if show_sub_first %} mc-subscription__wrapper--sub-first{% endif %}">
+
+            {%- unless product.requires_selling_plan -%}
+              <div
+                class="mc-subscription__box mc-subscription__box--one-time{% if one_time_checked %} mc-subscription__box--selected{% endif %}"
+                data-box-type="one_time_purchase"
+              >
+                <div class="mc-subscription__content">
+                  <div class="mc-subscription__content-left">
+                    <label
+                      class="mc-subscription__frequency-radio"
+                      for="{{ section.id }}_one_time_{{ variant.id }}"
+                    >
+                      <input
+                        type="radio"
+                        id="{{ section.id }}_one_time_{{ variant.id }}"
+                        name="purchaseOption_{{ section.id }}_{{ variant.id }}"
+                        data-radio-type="one_time_purchase"
+                        data-variant-id="{{ variant.id }}"
+                        data-variant-price="{{ variant_price }}"
+                        data-variant-compare-at-price="{{ variant_compare_price }}"
+                        {%- if variant.available == false %} disabled{%- endif -%}
+                        {%- if one_time_checked %} checked{%- endif -%}
+                        style="display:none;"
+                        aria-label="{{ block.settings.one_time_label }}. Price {{ variant_price }}"
+                      >
+                      <span class="mc-subscription__indicator{% if one_time_checked %} is-checked{% endif %}"></span>
+                      <h3 class="mc-subscription__label">{{ block.settings.one_time_label }}</h3>
+                    </label>
+                  </div>
+                  <div class="mc-subscription__content-right">
+                    <span class="mc-subscription__price">{{ one_time_price_display }}</span>
+                    {%- if variant.compare_at_price and variant.compare_at_price != variant.price and block.settings.one_time_compare_price_text != blank -%}
+                      <span class="mc-subscription__compare-price">{{ one_time_compare_display }}</span>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            {%- endunless -%}
+
+            {%- assign group_ids = variant.selling_plan_allocations | map: 'selling_plan_group_id' | uniq -%}
+            {%- for group_id in group_ids -%}
+              {%- liquid
+                assign group       = product | map: 'selling_plan_groups' | where: 'id', group_id | first
+                assign allocations = variant | map: 'selling_plan_allocations' | where: 'selling_plan_group_id', group_id
+                assign first_alloc = allocations | first
+
+                assign first_alloc_price   = first_alloc.price | money | escape
+                assign first_alloc_compare = first_alloc.compare_at_price | money | escape
+
+                assign save_pct_str = null
+                if first_alloc.compare_at_price and first_alloc.compare_at_price > first_alloc.price
+                  assign save_amt = first_alloc.compare_at_price | minus: first_alloc.price
+                  assign save_pct = save_amt | times: 100 | divided_by: first_alloc.compare_at_price
+                  assign save_pct_str = save_pct | append: '%'
+                endif
+
+                if save_pct_str
+                  assign badge_text = block.settings.subscription_badge_text | replace: '{percentage_saved}', save_pct_str
+                else
+                  assign badge_text = null
+                endif
+
+                assign sub_price_display   = block.settings.subscription_price_text | replace: '{price}', first_alloc_price
+                assign sub_compare_display = block.settings.subscription_compare_price_text | replace: '{compare_price}', first_alloc_compare
+
+                if block.settings.subscription_label != blank
+                  assign sub_label = block.settings.subscription_label
+                else
+                  assign sub_label = group.name
+                endif
+
+                if forloop.first and product.requires_selling_plan
+                  assign sub_preselected = true
+                elsif forloop.first and preselected == 'subscription'
+                  assign sub_preselected = true
+                else
+                  assign sub_preselected = false
+                endif
+              -%}
+
+              <div
+                class="mc-subscription__box mc-subscription__box--subscription{% if sub_preselected %} mc-subscription__box--selected{% endif %}"
+                data-box-type="selling_plan"
+                data-group-id="{{ section.id }}_{{ group_id }}_{{ variant.id }}"
+              >
+                {%- if badge_text != blank -%}
+                  <span class="mc-subscription__badge">{{ badge_text }}</span>
+                {%- endif -%}
+
+                <div class="mc-subscription__content">
+                  <div class="mc-subscription__content-left">
+                    <label class="mc-subscription__frequency-radio" for="{{ section.id }}_sub_{{ group_id }}_{{ variant.id }}">
+                      <span class="mc-subscription__indicator{% if sub_preselected %} is-checked{% endif %}"></span>
+                      <h3 class="mc-subscription__label">{{ sub_label }}</h3>
+                    </label>
+                  </div>
+                  <div class="mc-subscription__content-right">
+                    <span
+                      class="mc-subscription__price"
+                      data-group-price="{{ section.id }}_{{ group_id }}_{{ variant.id }}"
+                    >{{ sub_price_display }}</span>
+                    {%- if first_alloc.compare_at_price and first_alloc.compare_at_price != first_alloc.price and block.settings.subscription_compare_price_text != blank -%}
+                      <span
+                        class="mc-subscription__compare-price"
+                        data-group-compare-price="{{ section.id }}_{{ group_id }}_{{ variant.id }}"
+                      >{{ sub_compare_display }}</span>
+                    {%- endif -%}
+                  </div>
+                </div>
+
+                {%- if group.options.size > 0 or block.settings.subscription_description_text != blank -%}
+                  <div class="mc-subscription-frequency__show">
+                    {%- if block.settings.subscription_description_text != blank -%}
+                      <div class="mc-subscription__benefits rte">
+                        {{ block.settings.subscription_description_text }}
+                      </div>
+                    {%- endif -%}
+
+                    {%- if allocations.size > 0 -%}
+                      <hr class="mc-subscription__separator">
+                      <div class="mc-subscription__frequency">
+                        {%- if block.settings.frequency_label != blank -%}
+                          <span class="mc-subscription__frequency-label">{{ block.settings.frequency_label }}</span>
+                        {%- endif -%}
+
+                        {%- if block.settings.frequency_layout == 'dropdown' -%}
+                          <div class="mc-subscription__select-wrap">
+                            <select class="mc-subscription__frequency-select">
+                              {%- for alloc in allocations -%}
+                                {%- liquid
+                                  assign alloc_price   = alloc.price | money | escape
+                                  assign alloc_compare = alloc.compare_at_price | money | escape
+                                  assign alloc_price_display   = block.settings.subscription_price_text | replace: '{price}', alloc_price
+                                  assign alloc_compare_display = block.settings.subscription_compare_price_text | replace: '{compare_price}', alloc_compare
+                                  assign alloc_save_str = null
+                                  if alloc.compare_at_price and alloc.compare_at_price > alloc.price
+                                    assign alloc_save_amt = alloc.compare_at_price | minus: alloc.price
+                                    assign alloc_save_pct = alloc_save_amt | times: 100 | divided_by: alloc.compare_at_price
+                                    assign alloc_save_str = alloc_save_pct | append: '%'
+                                  endif
+                                -%}
+                                <option
+                                  value="{{ alloc.selling_plan.id }}"
+                                  data-radio-type="selling_plan"
+                                  data-selling-plan-id="{{ alloc.selling_plan.id }}"
+                                  data-selling-plan-group-id="{{ section.id }}_{{ group_id }}_{{ variant.id }}"
+                                  data-selling-plan-adjustment="{{ alloc.selling_plan.price_adjustments.size }}"
+                                  data-variant-price="{{ alloc_price_display | default: alloc_price }}"
+                                  data-variant-compare-at-price="{{ alloc_compare_display | default: alloc_compare }}"
+                                  data-variant-raw-price="{{ alloc_price }}"
+                                  data-variant-raw-compare="{{ alloc_compare }}"
+                                  {%- if alloc_save_str %} data-save-percent="{{ alloc_save_str }}"{%- endif -%}
+                                  {%- if sub_preselected and forloop.first %} selected{%- endif -%}
+                                >
+                                  {{ alloc.selling_plan.name }}
+                                </option>
+                              {%- endfor -%}
+                            </select>
+                            <svg class="mc-subscription__caret" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                              <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          </div>
+                        {%- else -%}
+                          <ul class="mc-subscription__plan-list">
+                            {%- for alloc in allocations -%}
+                              {%- liquid
+                                assign alloc_price   = alloc.price | money | escape
+                                assign alloc_compare = alloc.compare_at_price | money | escape
+                                assign alloc_price_display   = block.settings.subscription_price_text | replace: '{price}', alloc_price
+                                assign alloc_compare_display = block.settings.subscription_compare_price_text | replace: '{compare_price}', alloc_compare
+                                assign alloc_save_str = null
+                                if alloc.compare_at_price and alloc.compare_at_price > alloc.price
+                                  assign alloc_save_amt = alloc.compare_at_price | minus: alloc.price
+                                  assign alloc_save_pct = alloc_save_amt | times: 100 | divided_by: alloc.compare_at_price
+                                  assign alloc_save_str = alloc_save_pct | append: '%'
+                                endif
+                              -%}
+                              <li>
+                                <label
+                                  class="mc-subscription__frequency-radio"
+                                  for="{{ section.id }}_{{ group_id }}_{{ variant.id }}_{{ alloc.selling_plan.id }}"
+                                >
+                                  <input
+                                    type="radio"
+                                    id="{{ section.id }}_{{ group_id }}_{{ variant.id }}_{{ alloc.selling_plan.id }}"
+                                    name="purchaseOption_{{ section.id }}_{{ variant.id }}"
+                                    data-radio-type="selling_plan"
+                                    data-selling-plan-id="{{ alloc.selling_plan.id }}"
+                                    data-selling-plan-group-id="{{ section.id }}_{{ group_id }}_{{ variant.id }}"
+                                    data-selling-plan-adjustment="{{ alloc.selling_plan.price_adjustments.size }}"
+                                    data-variant-price="{{ alloc_price_display | default: alloc_price }}"
+                                    data-variant-compare-at-price="{{ alloc_compare_display | default: alloc_compare }}"
+                                    data-variant-raw-price="{{ alloc_price }}"
+                                    data-variant-raw-compare="{{ alloc_compare }}"
+                                    {%- if alloc_save_str %} data-save-percent="{{ alloc_save_str }}"{%- endif -%}
+                                    {%- if variant.available == false %} disabled{%- endif -%}
+                                    {%- if sub_preselected and forloop.first %} checked{%- endif -%}
+                                    style="display:none;"
+                                    aria-label="{{ alloc.selling_plan.name }}. Price {{ alloc_price }}"
+                                  >
+                                  <span class="mc-subscription__indicator{% if sub_preselected and forloop.first %} is-checked{% endif %}"></span>
+                                  <span class="mc-subscription__plan-name">{{ alloc.selling_plan.name }}</span>
+                                </label>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+
+              </div>
+            {%- endfor -%}
+
+          </div>
+        </section>
+      {%- endif -%}
+    {%- endfor -%}
+
+    <input type="hidden" name="selling_plan" class="mc-selected-selling-plan-id">
+
+  </mc-subscription-widget>
+
+  <script src="{{ 'component-subscription.js' | asset_url }}" defer></script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Subscription toggle",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Purchase options"
+    },
+    {
+      "type": "select",
+      "id": "preselected_option",
+      "label": "Pre-selected option",
+      "default": "one_time",
+      "options": [
+        { "value": "one_time", "label": "One-time purchase" },
+        { "value": "subscription", "label": "Subscribe" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "first_displayed_option",
+      "label": "Show first",
+      "default": "one_time",
+      "options": [
+        { "value": "one_time", "label": "One-time purchase" },
+        { "value": "subscription", "label": "Subscribe" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "One-time purchase box"
+    },
+    {
+      "type": "text",
+      "id": "one_time_label",
+      "label": "Label",
+      "default": "One-time purchase"
+    },
+    {
+      "type": "text",
+      "id": "one_time_price_text",
+      "label": "Price template",
+      "default": "{price}",
+      "info": "Use {price} as placeholder for the product price."
+    },
+    {
+      "type": "text",
+      "id": "one_time_compare_price_text",
+      "label": "Compare price template",
+      "default": "{compare_price}",
+      "info": "Leave blank to hide compare price."
+    },
+    {
+      "type": "header",
+      "content": "Subscription box"
+    },
+    {
+      "type": "text",
+      "id": "subscription_label",
+      "label": "Label",
+      "default": "Subscribe & Save",
+      "info": "Leave blank to use the selling plan group name."
+    },
+    {
+      "type": "text",
+      "id": "subscription_price_text",
+      "label": "Price template",
+      "default": "{price}",
+      "info": "Use {price} as placeholder."
+    },
+    {
+      "type": "text",
+      "id": "subscription_compare_price_text",
+      "label": "Compare price template",
+      "default": "{compare_price}",
+      "info": "Leave blank to hide compare price."
+    },
+    {
+      "type": "text",
+      "id": "subscription_badge_text",
+      "label": "Save badge text",
+      "default": "Save {percentage_saved}",
+      "info": "Use {percentage_saved} as placeholder. Leave blank to hide badge."
+    },
+    {
+      "type": "richtext",
+      "id": "subscription_description_text",
+      "label": "Benefits description",
+      "info": "Shown inside the subscription box when selected."
+    },
+    {
+      "type": "header",
+      "content": "Delivery frequency"
+    },
+    {
+      "type": "text",
+      "id": "frequency_label",
+      "label": "Frequency heading",
+      "default": "Delivery frequency"
+    },
+    {
+      "type": "select",
+      "id": "frequency_layout",
+      "label": "Frequency selector style",
+      "default": "radio",
+      "options": [
+        { "value": "radio", "label": "Radio buttons" },
+        { "value": "dropdown", "label": "Dropdown" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Subscription toggle"
+    }
+  ]
+}
+{% endschema %}
