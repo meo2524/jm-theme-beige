@@ -1,0 +1,233 @@
+/* Sticky Add to Cart Bar - Mend & Co */
+
+mc-sticky-atc {
+  display: block;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  pointer-events: none;
+}
+
+mc-sticky-atc[data-position="top"] {
+  bottom: auto;
+  top: 0;
+}
+
+/* Visibility states */
+
+.sticky-atc__bar {
+  background-color: var(--color-black);
+  border-top: 1px solid var(--color-walnut);
+  transform: translateY(100%);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  will-change: transform;
+}
+
+mc-sticky-atc[data-position="top"] .sticky-atc__bar {
+  border-top: none;
+  border-bottom: 1px solid var(--color-walnut);
+  transform: translateY(-100%);
+}
+
+mc-sticky-atc.is-visible .sticky-atc__bar {
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticky-atc__bar {
+    transition: none;
+  }
+}
+
+/* Visibility filters for show_on */
+
+@media screen and (min-width: 750px) {
+  mc-sticky-atc[data-show-on="mobile-only"] {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  mc-sticky-atc[data-show-on="desktop-only"] {
+    display: none;
+  }
+}
+
+/* Inner layout */
+
+.sticky-atc__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
+}
+
+/* Left: thumbnail + info */
+
+.sticky-atc__left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex: 1;
+  min-width: 0;
+}
+
+.sticky-atc__img {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+}
+
+.sticky-atc__info {
+  min-width: 0;
+}
+
+.sticky-atc__title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: var(--color-bone);
+  margin: 0 0 var(--space-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.sticky-atc__price {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-taupe);
+  margin: 0;
+}
+
+/* Right: select + button */
+
+.sticky-atc__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.sticky-atc__right form {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Variant select */
+
+.sticky-atc__select-wrap {
+  position: relative;
+}
+
+.sticky-atc__select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: 1px solid var(--color-taupe);
+  color: var(--color-bone);
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  padding: var(--space-3) var(--space-8) var(--space-3) var(--space-4);
+  cursor: pointer;
+  min-width: 140px;
+  max-width: 200px;
+}
+
+.sticky-atc__select option {
+  background-color: var(--color-black);
+  color: var(--color-bone);
+}
+
+.sticky-atc__select:focus-visible {
+  outline: 2px solid var(--color-walnut);
+  outline-offset: 2px;
+}
+
+.sticky-atc__caret {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--color-bone);
+  pointer-events: none;
+}
+
+/* ATC button */
+
+.sticky-atc__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-6);
+  background-color: var(--color-walnut);
+  color: var(--color-bone);
+  font-family: var(--font-label);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  min-height: 44px;
+  min-width: 130px;
+  transition: background-color 0.18s ease;
+}
+
+.sticky-atc__btn:hover:not(:disabled) {
+  background-color: var(--color-walnut-hover);
+}
+
+.sticky-atc__btn:focus-visible {
+  outline: 2px solid var(--color-bone);
+  outline-offset: 2px;
+}
+
+.sticky-atc__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sticky-atc__btn[data-state="adding"] {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Mobile: hide left info, stack right section */
+
+@media screen and (max-width: 749px) {
+  .sticky-atc__left {
+    display: none;
+  }
+
+  .sticky-atc__right {
+    width: 100%;
+  }
+
+  .sticky-atc__right form {
+    width: 100%;
+  }
+
+  .sticky-atc__select {
+    flex: 1;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .sticky-atc__btn {
+    flex-shrink: 0;
+  }
+}

@@ -358,6 +358,7 @@
     {%- comment -%} /product-info {%- endcomment -%}
 
   </div>
+  {%- content_for 'blocks' -%}
 </section>
 
 
@@ -1328,6 +1329,9 @@
       "label": "Ingredients & certifications",
       "info": "Leave blank to use default copy."
     }
+  ],
+  "blocks": [
+    { "type": "_sticky-add-to-cart" }
   ],
   "presets": [
     {
