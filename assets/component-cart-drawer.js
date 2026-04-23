@@ -443,17 +443,22 @@
     _updateGoals: function (totalCents) {
       var bar = document.getElementById('CartGoals');
       if (!bar) return;
+      var count = parseInt(bar.dataset.milestones, 10) || 0;
       var goal1 = parseInt(bar.dataset.goal1, 10) || 0;
       var goal2 = parseInt(bar.dataset.goal2, 10) || 0;
-      if (!goal1 || !goal2) return;
-
-      var leftPct  = Math.min(100, (totalCents / goal1) * 100);
-      var rightPct = Math.min(100, Math.max(0, ((totalCents - goal1) / goal1) * 100));
+      if (!count || !goal1) return;
 
       var fill1 = document.getElementById('CartGoalsFill1');
       var fill2 = document.getElementById('CartGoalsFill2');
-      if (fill1) fill1.style.width = leftPct + '%';
-      if (fill2) fill2.style.width = rightPct + '%';
+
+      if (count === 1) {
+        if (fill1) fill1.style.width = Math.min(100, (totalCents / goal1) * 100) + '%';
+      } else {
+        if (fill1) fill1.style.width = Math.min(100, (totalCents / goal1) * 100) + '%';
+        var gap = goal2 - goal1;
+        var rightPct = gap > 0 ? Math.min(100, Math.max(0, ((totalCents - goal1) / gap) * 100)) : 0;
+        if (fill2) fill2.style.width = rightPct + '%';
+      }
 
       var nodes = bar.querySelectorAll('.cart-goals__node');
       if (nodes[0]) nodes[0].classList.toggle('is-reached', totalCents >= goal1);

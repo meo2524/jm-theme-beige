@@ -3,13 +3,37 @@
 {% endcomment %}
 
 {%- liquid
-  assign goal1_cents = 0
-  assign goal2_cents = 0
-  if settings.free_shipping_goal > 0
-    assign goal1_cents = settings.free_shipping_goal | times: 100
-    assign goal2_cents = goal1_cents | times: 2
-  endif
   assign cart_product_ids = cart.items | map: 'product_id'
+
+  assign m1_cents = 0
+  assign m1_label = ''
+  assign m1_icon  = ''
+  assign m2_cents = 0
+  assign m2_label = ''
+  assign m2_icon  = ''
+  assign milestone_count = 0
+
+  if settings.goal_shipping_enabled and settings.goal_shipping_amount > 0
+    assign m1_cents = settings.goal_shipping_amount | times: 100
+    assign m1_label = 'Free shipping'
+    assign m1_icon  = 'truck'
+    assign milestone_count = 1
+  endif
+
+  if settings.goal_gift_enabled and settings.goal_gift_amount > 0
+    assign gift_cents = settings.goal_gift_amount | times: 100
+    if milestone_count == 0
+      assign m1_cents = gift_cents
+      assign m1_label = 'Free gift'
+      assign m1_icon  = 'gift'
+      assign milestone_count = 1
+    else
+      assign m2_cents = gift_cents
+      assign m2_label = 'Free gift'
+      assign m2_icon  = 'gift'
+      assign milestone_count = 2
+    endif
+  endif
 -%}
 
 <div
@@ -50,62 +74,88 @@
       JOIN OVER 5,000 HAPPY CUSTOMERS
     </div>
 
-    {%- comment -%} Two-milestone goal progress bar {%- endcomment -%}
-    {%- if goal1_cents > 0 and cart.item_count > 0 -%}
+    {%- comment -%} Cart goals progress bar (0, 1, or 2 milestones) {%- endcomment -%}
+    {%- if milestone_count > 0 and cart.item_count > 0 -%}
       {%- liquid
-        assign goal1_reached = false
-        assign goal2_reached = false
-        if cart.total_price >= goal1_cents
-          assign goal1_reached = true
+        assign m1_reached = false
+        assign m2_reached = false
+        if cart.total_price >= m1_cents
+          assign m1_reached = true
         endif
-        if cart.total_price >= goal2_cents
-          assign goal2_reached = true
+        if milestone_count == 2 and cart.total_price >= m2_cents
+          assign m2_reached = true
         endif
-        assign left_pct  = cart.total_price | times: 100 | divided_by: goal1_cents | at_most: 100
-        assign right_raw = cart.total_price | minus: goal1_cents | at_least: 0
-        assign right_pct = right_raw | times: 100 | divided_by: goal1_cents | at_most: 100
-        assign goal1_dollars = goal1_cents | divided_by: 100
-        assign goal2_dollars = goal2_cents | divided_by: 100
+
+        if milestone_count == 1
+          assign fill1_pct = cart.total_price | times: 100 | divided_by: m1_cents | at_most: 100
+          assign fill2_pct = 0
+        else
+          assign fill1_pct = cart.total_price | times: 100 | divided_by: m1_cents | at_most: 100
+          assign right_raw = cart.total_price | minus: m1_cents | at_least: 0
+          assign gap_cents  = m2_cents | minus: m1_cents
+          assign fill2_pct = right_raw | times: 100 | divided_by: gap_cents | at_most: 100
+        endif
+
+        assign m1_dollars = m1_cents | divided_by: 100
+        assign m2_dollars = m2_cents | divided_by: 100
       -%}
-      <div class="cart-goals" id="CartGoals" data-goal1="{{ goal1_cents }}" data-goal2="{{ goal2_cents }}">
+
+      {%- capture icon_truck -%}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 5v3h-7V8z"/>
+          <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+        </svg>
+      {%- endcapture -%}
+      {%- capture icon_gift -%}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5" rx="1"/>
+          <line x1="12" y1="22" x2="12" y2="7"/>
+          <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+          <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+        </svg>
+      {%- endcapture -%}
+
+      <div
+        class="cart-goals{% if milestone_count == 1 %} cart-goals--single{% endif %}"
+        id="CartGoals"
+        data-milestones="{{ milestone_count }}"
+        data-goal1="{{ m1_cents }}"
+        data-goal2="{{ m2_cents }}"
+      >
         <div class="cart-goals__row">
 
           <div class="cart-goals__segment">
             <div class="cart-goals__track">
-              <div class="cart-goals__fill" id="CartGoalsFill1" data-pct="{{ left_pct }}" style="width: 0%"></div>
+              <div class="cart-goals__fill" id="CartGoalsFill1" data-pct="{{ fill1_pct }}" style="width: 0%"></div>
             </div>
-            <div class="cart-goals__node{% if goal1_reached %} is-reached{% endif %}">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 5v3h-7V8z"/>
-                <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
-              </svg>
+            <div class="cart-goals__node{% if m1_reached %} is-reached{% endif %}">
+              {%- if m1_icon == 'truck' -%}{{ icon_truck }}{%- else -%}{{ icon_gift }}{%- endif -%}
             </div>
           </div>
 
-          <div class="cart-goals__segment">
-            <div class="cart-goals__track">
-              <div class="cart-goals__fill" id="CartGoalsFill2" data-pct="{{ right_pct }}" style="width: 0%"></div>
+          {%- if milestone_count == 2 -%}
+            <div class="cart-goals__segment">
+              <div class="cart-goals__track">
+                <div class="cart-goals__fill" id="CartGoalsFill2" data-pct="{{ fill2_pct }}" style="width: 0%"></div>
+              </div>
+              <div class="cart-goals__node{% if m2_reached %} is-reached{% endif %}">
+                {%- if m2_icon == 'truck' -%}{{ icon_truck }}{%- else -%}{{ icon_gift }}{%- endif -%}
+              </div>
             </div>
-            <div class="cart-goals__node{% if goal2_reached %} is-reached{% endif %}">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5" rx="1"/>
-                <line x1="12" y1="22" x2="12" y2="7"/>
-                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
-                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
-              </svg>
-            </div>
-          </div>
+          {%- endif -%}
 
         </div>
         <div class="cart-goals__labels">
-          <div class="cart-goals__label{% if goal1_reached %} is-reached{% endif %}">
-            <span class="cart-goals__label-name">Free shipping</span>
-            <span class="cart-goals__label-sub">Spend ${{ goal1_dollars }}</span>
+          <div class="cart-goals__label{% if m1_reached %} is-reached{% endif %}">
+            <span class="cart-goals__label-name">{{ m1_label }}</span>
+            <span class="cart-goals__label-sub">Spend ${{ m1_dollars }}</span>
           </div>
-          <div class="cart-goals__label{% if goal2_reached %} is-reached{% endif %}">
-            <span class="cart-goals__label-name">Free gift</span>
-            <span class="cart-goals__label-sub">Spend ${{ goal2_dollars }}</span>
-          </div>
+          {%- if milestone_count == 2 -%}
+            <div class="cart-goals__label{% if m2_reached %} is-reached{% endif %}">
+              <span class="cart-goals__label-name">{{ m2_label }}</span>
+              <span class="cart-goals__label-sub">Spend ${{ m2_dollars }}</span>
+            </div>
+          {%- endif -%}
         </div>
       </div>
     {%- endif -%}

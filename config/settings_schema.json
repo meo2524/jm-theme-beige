@@ -252,27 +252,33 @@
   },
 
   {
-    "name": "Free shipping bar",
+    "name": "Cart goals bar",
     "settings": [
       {
+        "type": "checkbox",
+        "id": "goal_shipping_enabled",
+        "label": "Enable free shipping milestone",
+        "default": true
+      },
+      {
         "type": "number",
-        "id": "free_shipping_goal",
+        "id": "goal_shipping_amount",
         "label": "Free shipping threshold ($)",
-        "default": 50,
-        "info": "Set to 0 to hide the bar."
+        "default": 75,
+        "info": "Amount needed to unlock free shipping. Set 0 to disable."
       },
       {
-        "type": "text",
-        "id": "free_shipping_msg_before",
-        "label": "Message before goal",
-        "default": "Spend {amount} more for free shipping",
-        "info": "Use {amount} as placeholder for the remaining amount."
+        "type": "checkbox",
+        "id": "goal_gift_enabled",
+        "label": "Enable free gift milestone",
+        "default": false
       },
       {
-        "type": "text",
-        "id": "free_shipping_msg_after",
-        "label": "Message when goal reached",
-        "default": "You have unlocked free shipping!"
+        "type": "number",
+        "id": "goal_gift_amount",
+        "label": "Free gift threshold ($)",
+        "default": 100,
+        "info": "Amount needed to unlock the free gift. Should be higher than the shipping threshold."
       }
     ]
   },
