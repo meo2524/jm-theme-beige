@@ -1,6 +1,9 @@
 (function () {
   'use strict';
 
+  if (window.__mcQvInit) return;
+  window.__mcQvInit = true;
+
   var dialog = null;
   var bodyEl = null;
   var cache = {};
@@ -84,7 +87,7 @@
       bodyEl.innerHTML = '<p style="padding:3.2rem;color:var(--color-olive)">Product not available.</p>';
       return;
     }
-    setLoading(false);
+    bodyEl.innerHTML = '';
     bodyEl.appendChild(content);
     initForm(bodyEl);
   }
