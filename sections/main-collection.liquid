@@ -49,13 +49,11 @@
         height="{{ collection.image.height }}"
       >
       <div class="collection-hero__overlay">
-        <p class="collection-hero__eyebrow">Collection</p>
         <h1 class="collection-hero__title">{{ collection.title }}</h1>
       </div>
     </div>
   {%- else -%}
     <div class="collection-header">
-      <p class="collection-header__eyebrow">Collection</p>
       <h1 class="collection-header__title">{{ collection.title }}</h1>
       {%- if section.settings.show_description and collection.description != blank -%}
         <div class="collection-header__desc rte">{{ collection.description }}</div>
@@ -197,6 +195,9 @@
             <input type="hidden" name="sort_by" value="{{ sort_by }}">
 
             {%- for filter in collection.filters -%}
+              {%- if filter.param_name contains 'availability' or filter.label == 'Availability' -%}
+                {%- continue -%}
+              {%- endif -%}
               {%- assign group_id = 'FGroup-' | append: section.id | append: '-' | append: forloop.index -%}
               {%- assign panel_id = 'FPanel-' | append: section.id | append: '-' | append: forloop.index -%}
 
