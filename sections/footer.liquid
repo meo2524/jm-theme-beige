@@ -68,10 +68,13 @@
           <p class="footer__col-heading">Explore</p>
           <ul class="footer__nav-list" role="list">
             {%- for link in linklists[footer_menu].links -%}
-              {%- unless link.url contains '/search' or link.url contains '/policies/' -%}
+              {%- unless link.url contains '/search' or link.url contains '/policies/' or link.url contains '/pages/contact' -%}
                 <li><a href="{{ link.url }}" class="footer__nav-link">{{ link.title }}</a></li>
               {%- endunless -%}
             {%- endfor -%}
+            {%- if pages.contact != empty -%}
+              <li><a href="{{ pages.contact.url }}" class="footer__nav-link">Contact us</a></li>
+            {%- endif -%}
             {%- if shop.shipping_policy.body != blank -%}
               <li><a href="{{ shop.shipping_policy.url }}" class="footer__nav-link">{{ shop.shipping_policy.title }}</a></li>
             {%- endif -%}
