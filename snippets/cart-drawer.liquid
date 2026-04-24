@@ -205,7 +205,7 @@
           <p class="cart-upsells__heading">Trending this month</p>
           <div class="cart-upsells__list">
             {%- for upsell in collections.all.products limit: 4 -%}
-              {%- unless cart_product_ids contains upsell.id or upsell.type == 'Shipping Insurance' -%}
+              {%- unless cart_product_ids contains upsell.id or upsell.type == 'Shipping Insurance' or upsell.handle == 'shipping-protection' -%}
                 <div class="cart-upsell" data-upsell-product="{{ upsell.id }}">
                   <a href="{{ upsell.url }}" class="cart-upsell__img-wrap" tabindex="-1" aria-hidden="true">
                     {%- if upsell.featured_media -%}

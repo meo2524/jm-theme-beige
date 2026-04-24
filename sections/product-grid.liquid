@@ -29,7 +29,7 @@
     <div class="product-grid__items">
       {%- if collection != blank and collection.products_count > 0 -%}
         {%- for product in collection.products limit: limit -%}
-          {%- unless product.type == 'Shipping Insurance' -%}
+          {%- unless product.type == 'Shipping Insurance' or product.handle == 'shipping-protection' -%}
             {%- render 'product-card', product: product -%}
           {%- endunless -%}
         {%- endfor -%}

@@ -308,7 +308,7 @@
 
         <ul class="collection-grid" role="list">
           {%- for product in collection.products -%}
-            {%- unless product.type == 'Shipping Insurance' -%}
+            {%- unless product.type == 'Shipping Insurance' or product.handle == 'shipping-protection' -%}
               <li class="collection-grid__item">
                 {%- render 'product-card', product: product -%}
               </li>
