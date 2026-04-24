@@ -13,7 +13,7 @@
     "color_amber": "#8A6240",
     "color_linen": "#F2EDE4",
     "show_announcement": false,
-    "cart_free_shipping_threshold": "50",
+    "cart_free_shipping_threshold": "",
     "goal_shipping_amount": 50,
     "goal_gift_enabled": true,
     "sections": {
