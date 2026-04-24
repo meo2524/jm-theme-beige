@@ -13,7 +13,7 @@
     "color_amber": "#8A6240",
     "color_linen": "#F2EDE4",
     "show_announcement": false,
-    "cart_free_shipping_threshold": "20",
+    "cart_free_shipping_threshold": "50",
     "goal_shipping_amount": 25,
     "goal_gift_enabled": true,
     "sections": {
@@ -31,7 +31,12 @@
         "type": "header",
         "settings": {
           "logo_width": 140,
-          "menu": "main-menu"
+          "menu": "main-menu",
+          "account_popup_title": "Sign in or create account",
+          "shop_signin_label": "Sign in with shop",
+          "or_divider": "OR",
+          "orders_label": "Orders",
+          "profile_label": "Profile"
         }
       },
       "footer": {
@@ -41,6 +46,8 @@
           "brand_statement": "Most skin and hair problems start in the shower. Mend fixes the step the beauty industry won't talk about.",
           "footer_menu": "",
           "legal_menu": "",
+          "nav_heading": "Navigation",
+          "support_heading": "Support",
           "show_social": true,
           "show_payment": true
         }
