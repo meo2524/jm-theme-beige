@@ -41,9 +41,6 @@
           "brand_statement": "Most skin and hair problems start in the shower. Mend fixes the step the beauty industry won't talk about.",
           "footer_menu": "",
           "legal_menu": "",
-          "newsletter_heading": "Stay in the loop",
-          "newsletter_subtext": "Water quality guides, launch updates, and no noise.",
-          "newsletter_btn": "Subscribe",
           "show_social": true,
           "show_payment": true
         }
@@ -54,6 +51,11 @@
       "1804893150726543839": {
         "type": "shopify://apps/nova-multi-currency-converter/blocks/app-embed/a5be3c35-cbd0-46a1-ac3a-1ace57a9c1ce",
         "disabled": true,
+        "settings": {}
+      },
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
         "settings": {}
       }
     }
