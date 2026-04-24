@@ -206,7 +206,7 @@
           <div class="cart-upsells__list">
             {%- for upsell in collections.all.products limit: 4 -%}
               {%- unless cart_product_ids contains upsell.id -%}
-                <div class="cart-upsell">
+                <div class="cart-upsell" data-upsell-product="{{ upsell.id }}">
                   <a href="{{ upsell.url }}" class="cart-upsell__img-wrap" tabindex="-1" aria-hidden="true">
                     {%- if upsell.featured_media -%}
                       <img

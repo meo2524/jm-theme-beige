@@ -424,7 +424,13 @@
       if (goalsBar) goalsBar.hidden = cart.item_count === 0;
 
       var upsells = this.drawer && this.drawer.querySelector('[data-cart-upsells]');
-      if (upsells) upsells.hidden = cart.item_count === 0;
+      if (upsells) {
+        upsells.hidden = cart.item_count === 0;
+        var cartProductIds = (cart.items || []).map(function (i) { return String(i.product_id); });
+        upsells.querySelectorAll('[data-upsell-product]').forEach(function (el) {
+          el.hidden = cartProductIds.indexOf(el.dataset.upsellProduct) > -1;
+        });
+      }
     },
 
     _updateFooter: function (cart) {
