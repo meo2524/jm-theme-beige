@@ -242,13 +242,12 @@
       </a>
 
       <div class="cart-drawer__payments" aria-label="Accepted payment methods">
-        <span class="payment-badge">Visa</span>
-        <span class="payment-badge">Mastercard</span>
-        <span class="payment-badge">Amex</span>
-        <span class="payment-badge">Apple Pay</span>
-        <span class="payment-badge">Shop Pay</span>
-        <span class="payment-badge">PayPal</span>
-        <span class="payment-badge">G Pay</span>
+        {%- assign payment_types = 'visa,master,american_express,apple_pay,shopify_pay,paypal,google_pay' | split: ',' -%}
+        {%- for type in payment_types -%}
+          <span class="payment-badge">
+            {{ type | payment_type_svg_tag: class: 'payment-badge__icon' }}
+          </span>
+        {%- endfor -%}
       </div>
 
     </div>
