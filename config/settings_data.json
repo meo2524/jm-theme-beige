@@ -17,10 +17,10 @@
         "type": "announcement-bar",
         "settings": {
           "show": true,
-          "text": "Free shipping on orders over $75 — filtered water, clear skin.",
-          "link": "",
-          "bg_color": "#2D2D2D",
-          "text_color": "#F2EDE4"
+          "icon": "⭐ FLASH SALE",
+          "label": "70% OFF Ends In:",
+          "bg_color": "#D9C5B2",
+          "text_color": "#2d2d2d"
         }
       },
       "header": {
@@ -45,14 +45,7 @@
         }
       }
     },
-    "content_for_index": [],
-    "blocks": {
-      "14060646107696862457": {
-        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-        "disabled": false,
-        "settings": {}
-      }
-    }
+    "content_for_index": []
   },
   "presets": {}
 }
