@@ -81,6 +81,9 @@
             {%- if shop.refund_policy.body != blank -%}
               <li><a href="{{ shop.refund_policy.url }}" class="footer__nav-link">{{ shop.refund_policy.title }}</a></li>
             {%- endif -%}
+            {%- if shop.terms_of_service.body != blank -%}
+              <li><a href="{{ shop.terms_of_service.url }}" class="footer__nav-link">{{ shop.terms_of_service.title }}</a></li>
+            {%- endif -%}
           </ul>
         </div>
 
