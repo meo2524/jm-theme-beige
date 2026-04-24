@@ -421,7 +421,7 @@
 
       /* Show/hide goals bar and upsells */
       var goalsBar = document.getElementById('CartGoals');
-      if (goalsBar) goalsBar.style.display = cart.item_count === 0 ? 'none' : '';
+      if (goalsBar) goalsBar.hidden = cart.item_count === 0;
 
       var upsells = this.drawer && this.drawer.querySelector('[data-cart-upsells]');
       if (upsells) upsells.style.display = cart.item_count === 0 ? 'none' : '';
