@@ -424,7 +424,7 @@
       if (goalsBar) goalsBar.hidden = cart.item_count === 0;
 
       var upsells = this.drawer && this.drawer.querySelector('[data-cart-upsells]');
-      if (upsells) upsells.style.display = cart.item_count === 0 ? 'none' : '';
+      if (upsells) upsells.hidden = cart.item_count === 0;
     },
 
     _updateFooter: function (cart) {

@@ -200,8 +200,8 @@
         {%- endif -%}
       </div>
 
-      {%- if cart.item_count > 0 and collections.all.products.size > 0 -%}
-        <div class="cart-upsells" data-cart-upsells>
+      {%- if collections.all.products.size > 0 -%}
+        <div class="cart-upsells" data-cart-upsells {% if cart.item_count == 0 %}hidden{% endif %}>
           <p class="cart-upsells__heading">Trending this month</p>
           <div class="cart-upsells__list">
             {%- for upsell in collections.all.products limit: 4 -%}
