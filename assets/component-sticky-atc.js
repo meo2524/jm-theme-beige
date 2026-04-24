@@ -76,7 +76,7 @@ customElements.get('mc-sticky-atc') || customElements.define('mc-sticky-atc', cl
       })
       .then(() => {
         if (this.btnText) this.btnText.textContent = 'Added!';
-        document.dispatchEvent(new CustomEvent('cart:updated', { bubbles: true }));
+        document.dispatchEvent(new CustomEvent('cart:refresh', { detail: { openDrawer: true } }));
         setTimeout(() => {
           if (this.btnText) this.btnText.textContent = originalText;
           delete btn.dataset.state;
