@@ -65,16 +65,24 @@
 
         <!-- Navigation -->
         <div class="footer__col footer__col--nav">
+          <p class="footer__col-heading">Navigation</p>
+          <ul class="footer__nav-list" role="list">
+            <li><a href="{{ routes.all_products_collection_url }}" class="footer__nav-link">Products</a></li>
+            {%- if pages.contact != empty -%}
+              <li><a href="{{ pages.contact.url }}" class="footer__nav-link">Contact</a></li>
+            {%- endif -%}
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div class="footer__col footer__col--support">
           <p class="footer__col-heading">Support</p>
           <ul class="footer__nav-list" role="list">
             {%- for link in linklists[footer_menu].links -%}
-              {%- unless link.url contains '/search' or link.url contains '/policies/' or link.url contains '/pages/contact' -%}
+              {%- unless link.url contains '/search' or link.url contains '/policies/' or link.url contains '/pages/contact' or link.url contains routes.all_products_collection_url -%}
                 <li><a href="{{ link.url }}" class="footer__nav-link">{{ link.title }}</a></li>
               {%- endunless -%}
             {%- endfor -%}
-            {%- if pages.contact != empty -%}
-              <li><a href="{{ pages.contact.url }}" class="footer__nav-link">Contact us</a></li>
-            {%- endif -%}
             {%- if shop.shipping_policy.body != blank -%}
               <li><a href="{{ shop.shipping_policy.url }}" class="footer__nav-link">{{ shop.shipping_policy.title }}</a></li>
             {%- endif -%}
@@ -130,7 +138,7 @@
 }
 .footer__grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
+  grid-template-columns: 1.6fr 1fr 1fr;
   gap: 4rem;
   align-items: start;
 }
@@ -243,6 +251,7 @@
 .footer__payment-icon { height: 22px; width: auto; border-radius: 3px; opacity: 0.55; }
 @media (max-width: 1023px) {
   .footer__grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .footer__col--brand { grid-column: 1 / -1; }
 }
 @media (max-width: 767px) {
   .footer__grid { grid-template-columns: 1fr; gap: 2.5rem; }
