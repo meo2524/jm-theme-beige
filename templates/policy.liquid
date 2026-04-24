@@ -1,0 +1,301 @@
+{% comment %}
+  policy.liquid
+  Mend & Co -- renders /policies/privacy-policy, /policies/refund-policy, etc.
+  Dark hero header, auto-generated sticky TOC sidebar, polished typography.
+{% endcomment %}
+
+<div class="policy" data-section-id="policy">
+
+  <!-- ── HERO HEADER ─────────────────────────────────────── -->
+  <div class="policy__hero">
+    <div class="container container--narrow">
+      <p class="policy__eyebrow">Legal</p>
+      <h1 class="policy__title">{{ policy.title }}</h1>
+      {%- if policy.updated_at -%}
+        <p class="policy__meta">Last updated {{ policy.updated_at | date: "%B %d, %Y" }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- ── BODY ───────────────────────────────────────────── -->
+  <div class="policy__body">
+    <div class="container container--wide policy__layout">
+
+      <!-- TOC sidebar (populated by JS) -->
+      <aside class="policy__toc" aria-label="Table of contents">
+        <p class="policy__toc-label">Contents</p>
+        <nav id="policy-toc" class="policy__toc-nav"></nav>
+      </aside>
+
+      <!-- Content -->
+      <article class="policy__content rte policy__rte">
+        {{ policy.body }}
+      </article>
+
+    </div>
+  </div>
+
+</div>
+
+<style>
+/* ── POLICY PAGE ────────────────────────────────────────── */
+
+.policy__hero {
+  background: #2D2D2D;
+  padding: 5rem 0 4rem;
+  border-bottom: 1px solid rgba(242, 237, 228, 0.08);
+}
+
+.policy__eyebrow {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-walnut, #8A6240);
+  margin: 0 0 1rem;
+}
+
+.policy__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--color-bone, #F2EDE4);
+  margin: 0 0 1.25rem;
+}
+
+.policy__meta {
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  color: rgba(242, 237, 228, 0.4);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* ── BODY LAYOUT ────────────────────────────────────────── */
+
+.policy__body {
+  background: var(--color-bone, #F2EDE4);
+  padding: 4rem 0 8rem;
+}
+
+.policy__layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* ── TOC SIDEBAR ────────────────────────────────────────── */
+
+.policy__toc {
+  position: sticky;
+  top: 100px;
+}
+
+.policy__toc-label {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(43, 43, 43, 0.4);
+  margin: 0 0 1rem;
+}
+
+.policy__toc-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.policy__toc-link {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: rgba(43, 43, 43, 0.55);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-left: 2px solid transparent;
+  border-radius: 0 4px 4px 0;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.policy__toc-link:hover {
+  color: #2D2D2D;
+  background: rgba(43, 43, 43, 0.05);
+}
+
+.policy__toc-link.is-active {
+  color: var(--color-walnut, #8A6240);
+  border-left-color: var(--color-walnut, #8A6240);
+  font-weight: 500;
+}
+
+/* ── CONTENT TYPOGRAPHY ─────────────────────────────────── */
+
+.policy__content {
+  max-width: 720px;
+}
+
+.policy__rte {
+  font-family: var(--font-body, Georgia, serif);
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(43, 43, 43, 0.85);
+}
+
+.policy__rte h2,
+.policy__rte h3,
+.policy__rte h4 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  color: #2D2D2D;
+  scroll-margin-top: 110px;
+}
+
+.policy__rte h2 {
+  font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+  letter-spacing: -0.015em;
+  margin: 3rem 0 1rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(43, 43, 43, 0.1);
+}
+
+.policy__rte h2:first-child {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.policy__rte h3 {
+  font-size: 1.125rem;
+  margin: 2rem 0 0.625rem;
+}
+
+.policy__rte h4 {
+  font-size: 0.9375rem;
+  font-family: var(--font-label);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 1.5rem 0 0.5rem;
+  color: var(--color-walnut, #8A6240);
+}
+
+.policy__rte p {
+  margin: 0 0 1.25rem;
+}
+
+.policy__rte a {
+  color: var(--color-walnut, #8A6240);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(138, 98, 64, 0.35);
+  transition: text-decoration-color 0.15s;
+}
+
+.policy__rte a:hover {
+  text-decoration-color: var(--color-walnut, #8A6240);
+}
+
+.policy__rte ul,
+.policy__rte ol {
+  padding-left: 1.5rem;
+  margin: 0 0 1.25rem;
+}
+
+.policy__rte li {
+  margin-bottom: 0.5rem;
+}
+
+.policy__rte ul li::marker {
+  color: var(--color-walnut, #8A6240);
+}
+
+.policy__rte strong {
+  font-weight: 600;
+  color: #2D2D2D;
+}
+
+.policy__rte hr {
+  border: none;
+  border-top: 1px solid rgba(43, 43, 43, 0.12);
+  margin: 2.5rem 0;
+}
+
+.policy__rte blockquote {
+  margin: 2rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--color-walnut, #8A6240);
+  background: rgba(138, 98, 64, 0.06);
+  border-radius: 0 6px 6px 0;
+  font-style: italic;
+  color: rgba(43, 43, 43, 0.7);
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .policy__layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .policy__toc {
+    position: static;
+    background: rgba(43, 43, 43, 0.04);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .policy__hero {
+    padding: 3.5rem 0 2.75rem;
+  }
+
+  .policy__body {
+    padding: 2.5rem 0 5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .policy__toc {
+    display: none;
+  }
+}
+</style>
+
+<script>
+  (function () {
+    var content = document.querySelector('.policy__content');
+    var toc     = document.getElementById('policy-toc');
+    if (!content || !toc) return;
+
+    var headings = content.querySelectorAll('h2');
+    if (!headings.length) { document.querySelector('.policy__toc').style.display = 'none'; return; }
+
+    var links = [];
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'policy-section-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.className = 'policy__toc-link';
+      a.textContent = h.textContent;
+      toc.appendChild(a);
+      links.push({ el: h, link: a });
+    });
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var match = links.find(function (l) { return l.el === entry.target; });
+        if (match) match.link.classList.toggle('is-active', entry.isIntersecting);
+      });
+    }, { rootMargin: '-80px 0px -60% 0px' });
+
+    links.forEach(function (l) { observer.observe(l.el); });
+  })();
+</script>
