@@ -5,6 +5,17 @@
 {%- liquid
   assign cart_product_ids = cart.items | map: 'product_id'
 
+  assign protection_product = all_products['shipping-protection']
+  assign protection_variant = protection_product.selected_or_first_available_variant
+  assign protection_variant_id = protection_variant.id
+
+  assign visible_item_count = cart.item_count
+  for item in cart.items
+    if item.variant_id == protection_variant_id
+      assign visible_item_count = visible_item_count | minus: item.quantity
+    endif
+  endfor
+
   assign cart_savings = cart.original_total_price | minus: cart.total_price
   for item in cart.items
     if item.variant.compare_at_price > item.variant.price
@@ -62,8 +73,8 @@
       <p class="cart-drawer__heading">
         Your cart
         <span class="cart-drawer__item-count" data-cart-count-label>
-          {%- if cart.item_count > 0 -%}
-            ({{ cart.item_count }} item{%- if cart.item_count != 1 -%}s{%- endif -%})
+          {%- if visible_item_count > 0 -%}
+            ({{ visible_item_count }} item{%- if visible_item_count != 1 -%}s{%- endif -%})
           {%- endif -%}
         </span>
       </p>
@@ -187,7 +198,9 @@
       <div data-cart-items>
         {%- if cart.item_count > 0 -%}
           {%- for item in cart.items -%}
-            {%- render 'cart-item', item: item, context: 'drawer' -%}
+            {%- unless item.variant_id == protection_variant_id -%}
+              {%- render 'cart-item', item: item, context: 'drawer' -%}
+            {%- endunless -%}
           {%- endfor -%}
         {%- else -%}
           <div class="cart-drawer__empty">
@@ -239,17 +252,13 @@
     </div>
 
     {%- comment -%} Footer (always in DOM; hidden via .is-hidden when empty) {%- endcomment -%}
-    {%- assign protection_product  = all_products['shipping-protection'] -%}
-    {%- assign protection_price    = protection_product.price | default: 350 -%}
-    {%- assign protection_variant  = protection_product.selected_or_first_available_variant -%}
-    {%- assign protection_in_cart  = false -%}
-    {%- if protection_variant -%}
-      {%- for item in cart.items -%}
-        {%- if item.variant_id == protection_variant.id -%}
-          {%- assign protection_in_cart = true -%}
-        {%- endif -%}
-      {%- endfor -%}
-    {%- endif -%}
+    {%- assign protection_price   = protection_product.price | default: 350 -%}
+    {%- assign protection_in_cart = false -%}
+    {%- for item in cart.items -%}
+      {%- if item.variant_id == protection_variant_id -%}
+        {%- assign protection_in_cart = true -%}
+      {%- endif -%}
+    {%- endfor -%}
     <div class="cart-drawer__footer{% if cart.item_count == 0 %} is-hidden{% endif %}" data-cart-footer>
 
       <label class="cart-drawer__protection" for="CartProtectionToggle">
