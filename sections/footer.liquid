@@ -70,10 +70,16 @@
           <p class="footer__col-heading">Explore</p>
           <ul class="footer__nav-list" role="list">
             {%- for link in linklists[footer_menu].links -%}
-              {%- unless link.url contains '/search' -%}
+              {%- unless link.url contains '/search' or link.url contains '/policies/' -%}
                 <li><a href="{{ link.url }}" class="footer__nav-link">{{ link.title }}</a></li>
               {%- endunless -%}
             {%- endfor -%}
+            {%- if shop.shipping_policy.body != blank -%}
+              <li><a href="{{ shop.shipping_policy.url }}" class="footer__nav-link">{{ shop.shipping_policy.title }}</a></li>
+            {%- endif -%}
+            {%- if shop.refund_policy.body != blank -%}
+              <li><a href="{{ shop.refund_policy.url }}" class="footer__nav-link">{{ shop.refund_policy.title }}</a></li>
+            {%- endif -%}
           </ul>
         </div>
 
