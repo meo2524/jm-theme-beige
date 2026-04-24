@@ -7,6 +7,11 @@
   assign main_menu = section.settings.menu | default: 'main-menu'
   assign logo      = section.settings.logo
   assign logo_width = section.settings.logo_width | default: 140
+  assign logo_width_2x = logo_width | times: 2
+  if logo != blank
+    assign logo_src_1x = logo | image_url: width: logo_width
+    assign logo_src_2x = logo | image_url: width: logo_width_2x
+  endif
 -%}
 
 <header
@@ -21,11 +26,8 @@
     <a href="{{ routes.root_url }}" class="header__logo" aria-label="{{ shop.name }}">
       {%- if logo != blank -%}
         <img
-          src="{{ logo | image_url: width: logo_width }}"
-          srcset="
-            {{ logo | image_url: width: logo_width }} 1x,
-            {{ logo | image_url: width: logo_width | times: 2 }} 2x
-          "
+          src="{{ logo_src_1x }}"
+          srcset="{{ logo_src_1x }} 1x, {{ logo_src_2x }} 2x"
           width="{{ logo_width }}"
           height="auto"
           alt="{{ shop.name }}"

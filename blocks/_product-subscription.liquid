@@ -8,6 +8,7 @@
     if block.settings.first_displayed_option == 'subscription'
       assign show_sub_first = true
     endif
+    assign product_groups = product.selling_plan_groups
   -%}
 
   <mc-subscription-widget
@@ -78,11 +79,14 @@
               </div>
             {%- endunless -%}
 
-            {%- assign group_ids = variant.selling_plan_allocations | map: 'selling_plan_group_id' | uniq -%}
+            {%- liquid
+              assign variant_allocations = variant.selling_plan_allocations
+              assign group_ids = variant_allocations | map: 'selling_plan_group_id' | uniq
+            -%}
             {%- for group_id in group_ids -%}
               {%- liquid
-                assign group       = product | map: 'selling_plan_groups' | where: 'id', group_id | first
-                assign allocations = variant | map: 'selling_plan_allocations' | where: 'selling_plan_group_id', group_id
+                assign group       = product_groups | where: 'id', group_id | first
+                assign allocations = variant_allocations | where: 'selling_plan_group_id', group_id
                 assign first_alloc = allocations | first
 
                 assign first_alloc_price   = first_alloc.price | money | escape

@@ -90,20 +90,27 @@
       <h1 class="product-title">{{ product.title }}</h1>
 
       {%- comment -%} -- Rating -- {%- endcomment -%}
-      <div class="product-rating" aria-label="Rated 4.9 out of 5, 127 reviews">
-        <div class="rating-stars" aria-hidden="true">
-          {%- for i in (1..5) -%}
-            <svg class="star" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true">
-              <polygon points="8,1.2 10.2,5.8 15.4,6.4 11.5,10.2 12.7,15.4 8,12.7 3.3,15.4 4.5,10.2 0.6,6.4 5.8,5.8"/>
-            </svg>
-          {%- endfor -%}
+      {%- if section.settings.rating_show -%}
+        {%- liquid
+          assign rating_value = section.settings.rating_value | default: '4.9'
+          assign rating_count = section.settings.rating_count_text | default: '127 reviews'
+          assign rating_href  = section.settings.rating_link | default: '#product-reviews'
+        -%}
+        <div class="product-rating" aria-label="Rated {{ rating_value }} out of 5, {{ rating_count }}">
+          <div class="rating-stars" aria-hidden="true">
+            {%- for i in (1..5) -%}
+              <svg class="star" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true">
+                <polygon points="8,1.2 10.2,5.8 15.4,6.4 11.5,10.2 12.7,15.4 8,12.7 3.3,15.4 4.5,10.2 0.6,6.4 5.8,5.8"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <span class="rating-text">
+            <strong>{{ rating_value }}</strong>
+            <span class="rating-sep" aria-hidden="true">&middot;</span>
+            <a href="{{ rating_href }}" class="rating-link">{{ rating_count }}</a>
+          </span>
         </div>
-        <span class="rating-text">
-          <strong>4.9</strong>
-          <span class="rating-sep" aria-hidden="true">&middot;</span>
-          <a href="#product-reviews" class="rating-link">127 reviews</a>
-        </span>
-      </div>
+      {%- endif -%}
 
       {%- comment -%} -- Price -- {%- endcomment -%}
       <div class="price-block" id="PriceBlock-{{ section.id }}">
@@ -142,7 +149,7 @@
           type="button"
           aria-pressed="true"
         >
-          <span class="toggle-label">One-time</span>
+          <span class="toggle-label">{{ section.settings.toggle_onetime_label | default: 'One-time' }}</span>
           <span class="toggle-price" id="TogglePriceOnce-{{ section.id }}">{{ current_variant.price | money }}</span>
         </button>
         <button
@@ -151,8 +158,8 @@
           type="button"
           aria-pressed="false"
         >
-          <span class="toggle-label">Subscribe &amp; Save</span>
-          <span class="toggle-price">10% off</span>
+          <span class="toggle-label">{{ section.settings.toggle_subscribe_label | default: 'Subscribe & Save' | escape }}</span>
+          <span class="toggle-price">{{ section.settings.toggle_subscribe_savings | default: '10% off' | escape }}</span>
         </button>
       </div>
       <input
@@ -209,7 +216,7 @@
                     <span class="variant-card__save">-{{ save_pct }}%</span>
                   {%- endif -%}
                   {%- unless matching_variant.available -%}
-                    <span class="variant-card__out">Sold out</span>
+                    <span class="variant-card__out">{{ section.settings.variant_sold_out_label | default: 'Sold out' | escape }}</span>
                   {%- endunless -%}
                 </label>
               {%- endfor -%}
@@ -232,7 +239,7 @@
 
         {%- comment -%} Quantity {%- endcomment -%}
         <div class="qty-row">
-          <label class="qty-label" for="Qty-{{ section.id }}">Qty</label>
+          <label class="qty-label" for="Qty-{{ section.id }}">{{ section.settings.qty_label | default: 'Qty' | escape }}</label>
           <div class="qty-stepper" role="group" aria-label="Quantity">
             <button
               class="qty-btn"
@@ -267,7 +274,11 @@
           aria-label="Add {{ product.title }} to cart"
         >
           <span id="AddToCartText-{{ section.id }}">
-            {%- if current_variant.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}
+            {%- if current_variant.available -%}
+              {{ section.settings.atc_label | default: 'Add to Cart' | escape }}
+            {%- else -%}
+              {{ section.settings.atc_sold_out_label | default: 'Sold Out' | escape }}
+            {%- endif -%}
           </span>
         </button>
 
@@ -281,20 +292,20 @@
             <circle cx="9" cy="20" r="1.5" fill="currentColor" stroke="none"/>
             <circle cx="18" cy="20" r="1.5" fill="currentColor" stroke="none"/>
           </svg>
-          <span>Free shipping over $60</span>
+          <span>{{ section.settings.trust_1_text | default: 'Free shipping over $60' | escape }}</span>
         </li>
         <li class="trust-item">
           <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
             <polyline points="1 4 1 10 7 10"/>
             <path d="M3.51 15a9 9 0 1 0 .49-4.17"/>
           </svg>
-          <span>30-day returns</span>
+          <span>{{ section.settings.trust_2_text | default: '30-day returns' | escape }}</span>
         </li>
         <li class="trust-item">
           <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
             <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.5C17.25 22.15 21 17.25 21 12V7L12 2z"/>
           </svg>
-          <span>2-year warranty</span>
+          <span>{{ section.settings.trust_3_text | default: '2-year warranty' | escape }}</span>
         </li>
       </ul>
 
@@ -1327,6 +1338,105 @@
       "id": "accordion_ingredients-certifications",
       "label": "Ingredients & certifications",
       "info": "Leave blank to use default copy."
+    },
+    {
+      "type": "header",
+      "content": "Rating"
+    },
+    {
+      "type": "checkbox",
+      "id": "rating_show",
+      "label": "Show rating",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Rating value",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "rating_count_text",
+      "label": "Review count text",
+      "default": "127 reviews"
+    },
+    {
+      "type": "url",
+      "id": "rating_link",
+      "label": "Reviews link"
+    },
+    {
+      "type": "header",
+      "content": "Purchase toggle"
+    },
+    {
+      "type": "text",
+      "id": "toggle_onetime_label",
+      "label": "One-time label",
+      "default": "One-time"
+    },
+    {
+      "type": "text",
+      "id": "toggle_subscribe_label",
+      "label": "Subscribe label",
+      "default": "Subscribe & Save"
+    },
+    {
+      "type": "text",
+      "id": "toggle_subscribe_savings",
+      "label": "Subscribe savings badge",
+      "default": "10% off"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "qty_label",
+      "label": "Quantity label",
+      "default": "Qty"
+    },
+    {
+      "type": "text",
+      "id": "atc_label",
+      "label": "Add to cart label",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "text",
+      "id": "atc_sold_out_label",
+      "label": "Sold out label",
+      "default": "Sold Out"
+    },
+    {
+      "type": "text",
+      "id": "variant_sold_out_label",
+      "label": "Variant sold-out tag",
+      "default": "Sold out"
+    },
+    {
+      "type": "header",
+      "content": "Trust strip"
+    },
+    {
+      "type": "text",
+      "id": "trust_1_text",
+      "label": "Trust item 1 text",
+      "default": "Free shipping over $60"
+    },
+    {
+      "type": "text",
+      "id": "trust_2_text",
+      "label": "Trust item 2 text",
+      "default": "30-day returns"
+    },
+    {
+      "type": "text",
+      "id": "trust_3_text",
+      "label": "Trust item 3 text",
+      "default": "2-year warranty"
     }
   ],
   "presets": [

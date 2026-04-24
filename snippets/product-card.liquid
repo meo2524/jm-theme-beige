@@ -10,6 +10,12 @@
   if product.variants.size == 1
     assign single_variant = true
   endif
+  if card_image != blank
+    assign card_img_400 = card_image | image_url: width: 400
+    assign card_img_600 = card_image | image_url: width: 600
+    assign card_img_900 = card_image | image_url: width: 900
+    assign card_img_alt = card_image.alt | default: product.title | escape
+  endif
 -%}
 {{ 'component-quick-view.css' | asset_url | stylesheet_tag: preload: true }}
 <script src="{{ 'component-quick-view.js' | asset_url }}" defer="defer"></script>
@@ -21,14 +27,10 @@
       <div class="card__media">
         {%- if card_image != blank -%}
           <img
-            src="{{ card_image | image_url: width: 600 }}"
-            srcset="
-              {{ card_image | image_url: width: 400 }} 400w,
-              {{ card_image | image_url: width: 600 }} 600w,
-              {{ card_image | image_url: width: 900 }} 900w
-            "
+            src="{{ card_img_600 }}"
+            srcset="{{ card_img_400 }} 400w, {{ card_img_600 }} 600w, {{ card_img_900 }} 900w"
             sizes="(max-width: 767px) 50vw, 33vw"
-            alt="{{ card_image.alt | default: product.title | escape }}"
+            alt="{{ card_img_alt }}"
             width="600"
             height="750"
             loading="lazy"
@@ -38,9 +40,9 @@
         {%- endif -%}
 
         {%- if on_sale -%}
-          <span class="card__badge badge badge--amber">Sale</span>
+          <span class="card__badge badge badge--amber">{{ settings.card_badge_sale | default: 'Sale' | escape }}</span>
         {%- elsif product.tags contains 'new' -%}
-          <span class="card__badge badge">New</span>
+          <span class="card__badge badge">{{ settings.card_badge_new | default: 'New' | escape }}</span>
         {%- endif -%}
       </div>
     </a>
@@ -66,13 +68,13 @@
         data-card-atc="{{ product.variants.first.id }}"
         aria-label="Add {{ product.title | escape }} to cart"
       >
-        <span class="card__atc-label">Add to Cart</span>
-        <span class="card__atc-added" aria-hidden="true">Added!</span>
+        <span class="card__atc-label">{{ settings.card_atc_label | default: 'Add to Cart' | escape }}</span>
+        <span class="card__atc-added" aria-hidden="true">{{ settings.card_atc_added | default: 'Added!' | escape }}</span>
       </button>
     {%- elsif product.available -%}
-      <a href="{{ product.url }}" class="card__atc-overlay">Select Options</a>
+      <a href="{{ product.url }}" class="card__atc-overlay">{{ settings.card_select_options_label | default: 'Select Options' | escape }}</a>
     {%- else -%}
-      <span class="card__atc-overlay card__atc-overlay--soldout">Sold Out</span>
+      <span class="card__atc-overlay card__atc-overlay--soldout">{{ settings.card_sold_out_label | default: 'Sold Out' | escape }}</span>
     {%- endif -%}
   </div>
 

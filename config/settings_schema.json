@@ -301,5 +301,56 @@
         "info": "Leave blank if using Shopify's built-in Google channel instead."
       }
     ]
+  },
+
+  {
+    "name": "Product card",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Badges"
+      },
+      {
+        "type": "text",
+        "id": "card_badge_sale",
+        "label": "Sale badge text",
+        "default": "Sale"
+      },
+      {
+        "type": "text",
+        "id": "card_badge_new",
+        "label": "New badge text",
+        "default": "New",
+        "info": "Shown when product is tagged 'new'."
+      },
+      {
+        "type": "header",
+        "content": "Overlay labels"
+      },
+      {
+        "type": "text",
+        "id": "card_atc_label",
+        "label": "Add to cart overlay",
+        "default": "Add to Cart"
+      },
+      {
+        "type": "text",
+        "id": "card_atc_added",
+        "label": "Added feedback",
+        "default": "Added!"
+      },
+      {
+        "type": "text",
+        "id": "card_select_options_label",
+        "label": "Select options overlay",
+        "default": "Select Options"
+      },
+      {
+        "type": "text",
+        "id": "card_sold_out_label",
+        "label": "Sold out overlay",
+        "default": "Sold Out"
+      }
+    ]
   }
 ]

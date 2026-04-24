@@ -324,16 +324,17 @@
 
         <div class="collection-empty">
           <div class="collection-empty__rule"></div>
-          <h2 class="collection-empty__title">No products found</h2>
-          <p class="collection-empty__body">
-            {%- if active_filters_count > 0 -%}
-              Try adjusting your filters, or
-              <a href="{{ collection.url }}" class="collection-empty__link">clear all filters</a>
-              to see everything in this collection.
-            {%- else -%}
-              This collection is empty — check back soon.
-            {%- endif -%}
-          </p>
+          <h2 class="collection-empty__title">{{ section.settings.empty_title | default: 'No products found' | escape }}</h2>
+          {%- if active_filters_count > 0 -%}
+            <div class="collection-empty__body">
+              {{ section.settings.empty_filtered_body }}
+              <p>
+                <a href="{{ collection.url }}" class="collection-empty__link">{{ section.settings.empty_clear_label | default: 'clear all filters' | escape }}</a>
+              </p>
+            </div>
+          {%- else -%}
+            <p class="collection-empty__body">{{ section.settings.empty_body | default: 'This collection is empty.' | escape }}</p>
+          {%- endif -%}
         </div>
 
       {%- endif -%}
@@ -1387,6 +1388,36 @@
         { "value": "48", "label": "48" }
       ],
       "default": "24"
+    },
+    {
+      "type": "header",
+      "content": "Empty state"
+    },
+    {
+      "type": "text",
+      "id": "empty_title",
+      "label": "Empty state heading",
+      "default": "No products found"
+    },
+    {
+      "type": "richtext",
+      "id": "empty_filtered_body",
+      "label": "Empty state body (when filtered)",
+      "default": "<p>Try adjusting your filters to see more products.</p>",
+      "info": "Shown when active filters return zero results."
+    },
+    {
+      "type": "textarea",
+      "id": "empty_body",
+      "label": "Empty state body (no filters)",
+      "default": "This collection is empty - check back soon.",
+      "info": "Shown when the collection has no products."
+    },
+    {
+      "type": "text",
+      "id": "empty_clear_label",
+      "label": "Clear filters link text",
+      "default": "clear all filters"
     }
   ],
   "presets": [
