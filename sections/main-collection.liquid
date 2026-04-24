@@ -101,7 +101,7 @@
             aria-label="Sort products"
             data-collection-sort
           >
-            {%- assign sort_options = "manual:Featured,best-selling:Best selling,title-ascending:A–Z,title-descending:Z–A,price-ascending:Price: low–high,price-descending:Price: high–low,created-descending:Newest" | split: "," -%}
+            {%- assign sort_options = "manual:Featured,best-selling:Best selling,title-ascending:A–Z,title-descending:Z–A,price-ascending:Lowest price,price-descending:Highest price,created-descending:Newest" | split: "," -%}
             {%- for opt in sort_options -%}
               {%- assign parts = opt | split: ":" -%}
               <option value="{{ parts[0] }}"{% if sort_by == parts[0] %} selected{% endif %}>{{ parts[1] }}</option>
