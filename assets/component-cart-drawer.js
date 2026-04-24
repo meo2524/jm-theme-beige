@@ -145,14 +145,17 @@
 
   var MendCart = {
 
-    drawer:       null,
-    itemsWrap:    null,
-    footer:       null,
-    counts:       null,
-    countLabels:  null,
-    totals:       null,
-    _lastFocus:   null,
-    _trapHandler: null,
+    drawer:                  null,
+    itemsWrap:               null,
+    footer:                  null,
+    counts:                  null,
+    countLabels:             null,
+    totals:                  null,
+    _lastFocus:              null,
+    _trapHandler:            null,
+    _protectionVariantId:    null,
+    _protectionToggle:       null,
+    _lastCart:               null,
 
     init: function () {
       this.drawer = document.querySelector('[data-cart-drawer]');
@@ -164,9 +167,16 @@
       this.countLabels = document.querySelectorAll('[data-cart-count-label]');
       this.totals     = document.querySelectorAll('[data-cart-total]');
 
+      var toggle = document.getElementById('CartProtectionToggle');
+      if (toggle && toggle.dataset.protectionVariant) {
+        this._protectionToggle    = toggle;
+        this._protectionVariantId = toggle.dataset.protectionVariant;
+      }
+
       this._bindDrawerUI();
       this._bindCartEvents();
       this._bindATCForms();
+      this._bindProtectionToggle();
       this._initGoals();
     },
 
@@ -344,16 +354,65 @@
         });
     },
 
+    /* ── PROTECTION TOGGLE ────────────────────────────── */
+
+    _bindProtectionToggle: function () {
+      if (!this._protectionToggle) return;
+      var self = this;
+
+      this._protectionToggle.addEventListener('change', function () {
+        self._setLoading(true);
+
+        if (self._protectionToggle.checked) {
+          cartPost('/cart/add.js', { id: self._protectionVariantId, quantity: 1 })
+            .then(function () { return self._refreshCart(); })
+            .catch(function () {
+              self._protectionToggle.checked = false;
+              self._setLoading(false);
+            });
+        } else {
+          var key = self._findProtectionKey();
+          if (!key) { self._setLoading(false); return; }
+          cartPost('/cart/change.js', { id: key, quantity: 0 })
+            .then(function () { return self._refreshCart(); })
+            .catch(function () {
+              self._protectionToggle.checked = true;
+              self._setLoading(false);
+            });
+        }
+      });
+    },
+
+    _findProtectionKey: function () {
+      if (!this._lastCart || !this._protectionVariantId) return null;
+      var vid  = String(this._protectionVariantId);
+      var item = (this._lastCart.items || []).filter(function (i) {
+        return String(i.variant_id) === vid;
+      })[0];
+      return item ? item.key : null;
+    },
+
+    _syncProtectionToggle: function (cart) {
+      if (!this._protectionToggle || !this._protectionVariantId) return;
+      var vid    = String(this._protectionVariantId);
+      var inCart = (cart.items || []).some(function (i) {
+        return String(i.variant_id) === vid;
+      });
+      this._protectionToggle.checked = inCart;
+    },
+
     /* ── REFRESH CART DOM ─────────────────────────────── */
 
     _refreshCart: function () {
       var self = this;
       return cartGet().then(function (cart) {
+        self._lastCart = cart;
         self._updateCounts(cart.item_count, cart.total_price);
         self._updateTotals(cart.total_price);
         self._updateItems(cart);
         self._updateFooter(cart);
         self._updateSavings(cart);
+        self._syncProtectionToggle(cart);
         self._setLoading(false);
         return cart;
       });
@@ -413,10 +472,15 @@
     _updateItems: function (cart) {
       if (!this.itemsWrap) return;
 
-      if (cart.item_count === 0) {
+      var vid = this._protectionVariantId ? String(this._protectionVariantId) : null;
+      var visibleItems = vid
+        ? (cart.items || []).filter(function (i) { return String(i.variant_id) !== vid; })
+        : (cart.items || []);
+
+      if (visibleItems.length === 0) {
         this.itemsWrap.innerHTML = emptyStateHtml();
       } else {
-        this.itemsWrap.innerHTML = cart.items.map(renderItem).join('');
+        this.itemsWrap.innerHTML = visibleItems.map(renderItem).join('');
       }
 
       /* Show/hide goals bar and upsells */

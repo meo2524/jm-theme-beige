@@ -239,8 +239,17 @@
     </div>
 
     {%- comment -%} Footer (always in DOM; hidden via .is-hidden when empty) {%- endcomment -%}
-    {%- assign protection_product = all_products['shipping-protection'] -%}
-    {%- assign protection_price = protection_product.price | default: 350 -%}
+    {%- assign protection_product  = all_products['shipping-protection'] -%}
+    {%- assign protection_price    = protection_product.price | default: 350 -%}
+    {%- assign protection_variant  = protection_product.selected_or_first_available_variant -%}
+    {%- assign protection_in_cart  = false -%}
+    {%- if protection_variant -%}
+      {%- for item in cart.items -%}
+        {%- if item.variant_id == protection_variant.id -%}
+          {%- assign protection_in_cart = true -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
     <div class="cart-drawer__footer{% if cart.item_count == 0 %} is-hidden{% endif %}" data-cart-footer>
 
       <label class="cart-drawer__protection" for="CartProtectionToggle">
@@ -255,7 +264,14 @@
           </div>
         </div>
         <div class="cart-drawer__toggle">
-          <input type="checkbox" id="CartProtectionToggle" class="cart-drawer__toggle-input" aria-label="Add shipping protection">
+          <input
+            type="checkbox"
+            id="CartProtectionToggle"
+            class="cart-drawer__toggle-input"
+            aria-label="Add shipping protection"
+            data-protection-variant="{{ protection_variant.id }}"
+            {% if protection_in_cart %}checked{% endif %}
+          >
           <span class="cart-drawer__toggle-track"></span>
         </div>
       </label>
