@@ -12,6 +12,10 @@
     "color_espresso": "#2D2D2D",
     "color_amber": "#8A6240",
     "color_linen": "#F2EDE4",
+    "show_announcement": false,
+    "cart_free_shipping_threshold": "20",
+    "goal_shipping_amount": 25,
+    "goal_gift_enabled": true,
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
@@ -49,7 +53,7 @@
     "blocks": {
       "1804893150726543839": {
         "type": "shopify://apps/nova-multi-currency-converter/blocks/app-embed/a5be3c35-cbd0-46a1-ac3a-1ace57a9c1ce",
-        "disabled": false,
+        "disabled": true,
         "settings": {}
       }
     }
