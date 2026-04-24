@@ -410,9 +410,11 @@
   margin-bottom: 0.5rem;
 }
 
-/* Dark fallback (no image) gets a subtle warm grain */
+/* No-image fallback: warm walnut radial glow */
 .collection-hero--no-img {
-  background: linear-gradient(135deg, #2D2D2D 0%, #3a3228 100%);
+  background:
+    radial-gradient(ellipse 80% 140% at 50% 110%, rgba(138, 98, 64, 0.55) 0%, transparent 65%),
+    linear-gradient(170deg, #1a1512 0%, #2D2D2D 40%, #241b14 100%);
 }
 
 .collection-hero__img {
