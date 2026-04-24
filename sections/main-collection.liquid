@@ -191,9 +191,6 @@
             <input type="hidden" name="sort_by" value="{{ sort_by }}">
 
             {%- for filter in collection.filters -%}
-              {%- if filter.param_name contains 'availability' or filter.label == 'Availability' -%}
-                {%- continue -%}
-              {%- endif -%}
               {%- assign group_id = 'FGroup-' | append: section.id | append: '-' | append: forloop.index -%}
               {%- assign panel_id = 'FPanel-' | append: section.id | append: '-' | append: forloop.index -%}
 
