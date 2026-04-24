@@ -7,6 +7,17 @@
   var dialog = null;
   var bodyEl = null;
   var cache  = {};
+  var cacheKeys = [];
+  var CACHE_MAX = 40;
+  var fetchController = null;
+
+  function cacheSet(handle, html) {
+    var idx = cacheKeys.indexOf(handle);
+    if (idx > -1) cacheKeys.splice(idx, 1);
+    if (cacheKeys.length >= CACHE_MAX) delete cache[cacheKeys.shift()];
+    cache[handle] = html;
+    cacheKeys.push(handle);
+  }
 
   /* -- Dialog factory (lazy, singleton) ---------------------- */
   function getDialog() {
@@ -51,16 +62,22 @@
 
     if (cache[handle]) { inject(cache[handle]); return; }
 
-    fetch('/products/' + handle + '?view=quick-view')
+    if (fetchController) fetchController.abort();
+    fetchController = new AbortController();
+
+    fetch('/products/' + handle + '?view=quick-view', { signal: fetchController.signal })
       .then(function (r) {
         if (!r.ok) throw new Error('fetch failed');
         return r.text();
       })
       .then(function (html) {
-        cache[handle] = html;
+        fetchController = null;
+        cacheSet(handle, html);
         inject(html);
       })
-      .catch(function () {
+      .catch(function (err) {
+        if (err.name === 'AbortError') return;
+        fetchController = null;
         setLoading(false);
         bodyEl.innerHTML = '<p style="padding:3.2rem;color:#8A6240">Could not load product.</p>';
       });

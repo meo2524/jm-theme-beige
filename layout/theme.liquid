@@ -86,6 +86,8 @@
 
   {%- if template.name == 'index' or template.name == 'collection' or template.name == 'product' or template.name == 'search' -%}
     {{ 'component-card.css' | asset_url | stylesheet_tag }}
+    {{ 'component-product-card.css' | asset_url | stylesheet_tag }}
+    {{ 'component-quick-view.css' | asset_url | stylesheet_tag }}
   {%- endif -%}
 
   {{- 'component-cart-drawer.css' | asset_url | stylesheet_tag -}}
@@ -152,6 +154,11 @@
 
   <!-- Core theme — mobile menu, quantity, variant switching -->
   <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+  {%- if template.name == 'index' or template.name == 'collection' or template.name == 'product' or template.name == 'search' -%}
+    <script src="{{ 'component-product-card.js' | asset_url }}" defer></script>
+    <script src="{{ 'component-quick-view.js' | asset_url }}" defer></script>
+  {%- endif -%}
 
 </body>
 </html>
