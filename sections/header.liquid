@@ -73,16 +73,31 @@
 
       <!-- Account -->
       {%- if shop.customer_accounts_enabled -%}
-        <a
-          href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
-          class="header__icon-btn"
-          aria-label="{% if customer %}Account{% else %}Log in{% endif %}"
-        >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
-            <circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M2.5 18c0-4.142 3.358-7.5 7.5-7.5s7.5 3.358 7.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </a>
+        {%- if customer -%}
+          <a
+            href="{{ routes.account_url }}"
+            class="header__icon-btn"
+            aria-label="Account"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+              <circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M2.5 18c0-4.142 3.358-7.5 7.5-7.5s7.5 3.358 7.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </a>
+        {%- else -%}
+          <shop-login-button class="header__shop-login" version="2" proxy="true">
+            <button
+              type="button"
+              class="header__icon-btn"
+              aria-label="Sign in"
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+                <circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M2.5 18c0-4.142 3.358-7.5 7.5-7.5s7.5 3.358 7.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </shop-login-button>
+        {%- endif -%}
       {%- endif -%}
 
       <!-- Cart -->
@@ -272,6 +287,22 @@
   .header__icon-btn:focus-visible {
     outline: 2px solid var(--color-taupe, #D9C5B2);
     outline-offset: 2px;
+  }
+
+  /* Shop login wrapper - strip Shopify's default styling so only our icon shows */
+  .header__shop-login {
+    display: inline-flex;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    min-width: 0 !important;
+    width: auto !important;
+    height: auto !important;
+  }
+  .header__shop-login::part(button),
+  .header__shop-login::part(shop-login-button) {
+    all: unset;
   }
 
   /* Cart count bubble */
