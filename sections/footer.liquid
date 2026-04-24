@@ -3,8 +3,6 @@
 {%- liquid
   assign footer_menu    = section.settings.footer_menu | default: 'footer'
   assign legal_menu     = section.settings.legal_menu  | default: 'footer-legal'
-  assign nl_form_id     = 'footer-nl-' | append: section.id
-  assign nl_btn_label   = section.settings.newsletter_btn | default: 'Subscribe'
   assign tagline_text   = section.settings.tagline | default: 'The routine before your routine.'
   assign brand_text     = section.settings.brand_statement | default: 'Most skin and hair problems start in the shower. Mend fixes the step the beauty industry ignores.'
 -%}
@@ -83,37 +81,6 @@
           </ul>
         </div>
 
-        <!-- Newsletter -->
-        <div class="footer__col footer__col--newsletter">
-          <p class="footer__col-heading">{{ section.settings.newsletter_heading | default: 'Stay in the loop' }}</p>
-          <p class="footer__nl-subtext">{{ section.settings.newsletter_subtext | default: 'Water quality guides, launch updates, and no noise.' }}</p>
-
-          {%- form 'customer', id: nl_form_id, class: 'footer__nl-form' -%}
-            <input type="hidden" name="contact[tags]" value="newsletter">
-            {%- if form.posted_successfully? -%}
-              <p class="footer__nl-success" role="status">You're in.</p>
-            {%- else -%}
-              {%- if form.errors -%}
-                <p class="footer__nl-error" role="alert">{{ form.errors | default_errors }}</p>
-              {%- endif -%}
-              <div class="footer__nl-row">
-                <label for="FooterEmail-{{ section.id }}" class="visually-hidden">Email address</label>
-                <input
-                  id="FooterEmail-{{ section.id }}"
-                  class="footer__nl-input"
-                  type="email"
-                  name="contact[email]"
-                  value="{{ form.email }}"
-                  placeholder="your@email.com"
-                  autocomplete="email"
-                  required
-                >
-                <button type="submit" class="footer__nl-btn" aria-label="{{ nl_btn_label }}">{{ nl_btn_label }}</button>
-              </div>
-            {%- endif -%}
-          {%- endform -%}
-        </div>
-
       </div>
     </div>
   </div>
@@ -157,7 +124,7 @@
 }
 .footer__grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1.4fr;
+  grid-template-columns: 1.4fr 1fr;
   gap: 4rem;
   align-items: start;
 }
@@ -236,54 +203,6 @@
 }
 .footer__nav-link:hover { color: var(--color-walnut, #8A6240); }
 .footer__nav-link:focus-visible { outline: 2px solid var(--color-walnut, #8A6240); outline-offset: 2px; border-radius: 1px; }
-.footer__nl-subtext {
-  font-family: var(--font-label);
-  font-size: 0.875rem;
-  line-height: 1.65;
-  color: #9A9490;
-  max-width: 28ch;
-  margin-bottom: 1.25rem;
-}
-.footer__nl-form { display: flex; flex-direction: column; gap: 0.75rem; }
-.footer__nl-row {
-  display: flex;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 2px;
-  overflow: hidden;
-}
-.footer__nl-row:focus-within { outline: 2px solid var(--color-walnut, #8A6240); outline-offset: 2px; border-color: transparent; }
-.footer__nl-input {
-  flex: 1;
-  min-width: 0;
-  height: 44px;
-  padding: 0 0.875rem;
-  background: rgba(255, 255, 255, 0.07);
-  border: none;
-  font-family: var(--font-label);
-  font-size: 0.875rem;
-  color: #E8E0D8;
-  outline: none;
-}
-.footer__nl-input::placeholder { color: rgba(242, 232, 213, 0.5); }
-.footer__nl-btn {
-  height: 44px;
-  padding: 0 1.125rem;
-  background: var(--color-cta, #2D2D2D);
-  border: none;
-  cursor: pointer;
-  font-family: var(--font-label);
-  font-size: 0.625rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--color-bone, #F2EDE4);
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: background 0.15s ease;
-}
-.footer__nl-btn:hover { background: #8A6240; }
-.footer__nl-success { font-family: var(--font-label); font-size: 0.875rem; color: var(--color-walnut, #8A6240); }
-.footer__nl-error { font-family: var(--font-label); font-size: 0.75rem; color: #D9C5B2; }
 .footer__bottom {
   border-top: 1px solid rgba(215, 196, 163, 0.1);
   padding: 1.25rem 0;
@@ -318,24 +237,15 @@
 .footer__payment-icon { height: 22px; width: auto; border-radius: 3px; opacity: 0.55; }
 @media (max-width: 1023px) {
   .footer__grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
-  .footer__col--newsletter { grid-column: 1 / -1; }
-  .footer__nl-row { max-width: 400px; }
 }
 @media (max-width: 767px) {
   .footer__grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .footer__col--newsletter { grid-column: auto; }
-  .footer__nl-row { max-width: none; flex-direction: column; border: none; gap: 0.5rem; }
-  .footer__nl-row:focus-within { outline: none; }
-  .footer__nl-input { border: 1px solid rgba(215, 196, 163, 0.2); border-radius: 2px; width: 100%; }
-  .footer__nl-input:focus { outline: 2px solid var(--color-walnut, #8A6240); outline-offset: 2px; }
-  .footer__nl-btn { border-radius: 2px; width: 100%; }
   .footer__bottom-inner { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .footer__social-link,
   .footer__nav-link,
-  .footer__legal-link,
-  .footer__nl-btn { transition: none; }
+  .footer__legal-link { transition: none; }
 }
 </style>
 
@@ -374,28 +284,6 @@
       "type": "link_list",
       "id": "legal_menu",
       "label": "Legal menu"
-    },
-    {
-      "type": "header",
-      "content": "Newsletter"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_heading",
-      "label": "Heading",
-      "default": "Stay in the loop"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_subtext",
-      "label": "Subtext",
-      "default": "Water quality guides, launch updates, and no noise."
-    },
-    {
-      "type": "text",
-      "id": "newsletter_btn",
-      "label": "Button label",
-      "default": "Subscribe"
     },
     {
       "type": "header",
