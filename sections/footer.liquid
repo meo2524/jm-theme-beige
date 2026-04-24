@@ -70,7 +70,9 @@
           <p class="footer__col-heading">Explore</p>
           <ul class="footer__nav-list" role="list">
             {%- for link in linklists[footer_menu].links -%}
-              <li><a href="{{ link.url }}" class="footer__nav-link">{{ link.title }}</a></li>
+              {%- unless link.url contains '/search' -%}
+                <li><a href="{{ link.url }}" class="footer__nav-link">{{ link.title }}</a></li>
+              {%- endunless -%}
             {%- endfor -%}
           </ul>
         </div>
