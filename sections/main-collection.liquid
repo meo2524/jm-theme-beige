@@ -86,9 +86,16 @@
           </button>
         {%- endif -%}
 
+        {%- assign hidden_count = 0 -%}
+        {%- for p in collection.products -%}
+          {%- if p.type == 'Shipping Insurance' or p.handle == 'shipping-protection' -%}
+            {%- assign hidden_count = hidden_count | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- assign visible_count = collection.products_count | minus: hidden_count -%}
         <p class="toolbar-count" aria-live="polite" data-collection-count>
-          {{ collection.products_count }}
-          {%- if collection.products_count == 1 -%}&nbsp;product{%- else -%}&nbsp;products{%- endif -%}
+          {{ visible_count }}
+          {%- if visible_count == 1 -%}&nbsp;product{%- else -%}&nbsp;products{%- endif -%}
         </p>
       </div>
 
