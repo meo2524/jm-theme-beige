@@ -407,7 +407,14 @@
       var self = this;
       return cartGet().then(function (cart) {
         self._lastCart = cart;
-        self._updateCounts(cart.item_count, cart.total_price);
+        var vid = self._protectionVariantId ? String(self._protectionVariantId) : null;
+        var visibleCount = cart.item_count;
+        if (vid) {
+          (cart.items || []).forEach(function (i) {
+            if (String(i.variant_id) === vid) visibleCount -= i.quantity;
+          });
+        }
+        self._updateCounts(visibleCount, cart.total_price);
         self._updateTotals(cart.total_price);
         self._updateItems(cart);
         self._updateFooter(cart);
