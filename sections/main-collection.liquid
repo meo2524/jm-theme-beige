@@ -308,9 +308,11 @@
 
         <ul class="collection-grid" role="list">
           {%- for product in collection.products -%}
-            <li class="collection-grid__item">
-              {%- render 'product-card', product: product -%}
-            </li>
+            {%- unless product.type == 'Shipping Insurance' -%}
+              <li class="collection-grid__item">
+                {%- render 'product-card', product: product -%}
+              </li>
+            {%- endunless -%}
           {%- endfor -%}
         </ul>
 
