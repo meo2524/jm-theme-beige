@@ -85,24 +85,80 @@
             </svg>
           </a>
         {%- else -%}
-          <button
-            type="button"
-            class="header__icon-btn"
-            aria-label="Sign in"
-            data-shop-login-trigger
-          >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
-              <circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M2.5 18c0-4.142 3.358-7.5 7.5-7.5s7.5 3.358 7.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </button>
-          <shop-login-button
-            class="header__shop-login-hidden"
-            version="2"
-            proxy="true"
-            aria-hidden="true"
-            tabindex="-1"
-          ></shop-login-button>
+          <div class="header__account-wrap">
+            <button
+              type="button"
+              class="header__icon-btn"
+              aria-label="Sign in"
+              aria-expanded="false"
+              aria-controls="account-popup"
+              data-account-trigger
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+                <circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M2.5 18c0-4.142 3.358-7.5 7.5-7.5s7.5 3.358 7.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+
+            <div class="account-popup" id="account-popup" aria-hidden="true" data-account-popup role="dialog" aria-label="Sign in">
+              <div class="account-popup__caret" aria-hidden="true"></div>
+
+              <div class="account-popup__head">
+                <p class="account-popup__title">Sign in or create account</p>
+                <button type="button" class="account-popup__close" aria-label="Close sign in" data-account-close>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </div>
+
+              <a href="{{ routes.account_login_url }}" class="account-popup__shop-btn">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <rect width="18" height="18" rx="4" fill="white" fill-opacity="0.15"/>
+                  <path d="M5 9a4 4 0 118 0 4 4 0 01-8 0z" fill="white"/>
+                </svg>
+                Sign in with <strong>shop</strong>
+              </a>
+
+              <div class="account-popup__or" aria-hidden="true"><span>OR</span></div>
+
+              <form action="{{ routes.account_login_url }}" method="get" class="account-popup__email-form">
+                <div class="account-popup__email-wrap">
+                  <label for="account-popup-email" class="visually-hidden">Email address</label>
+                  <input
+                    id="account-popup-email"
+                    type="email"
+                    name="checkout[email]"
+                    placeholder="Email"
+                    class="account-popup__email-input"
+                    autocomplete="email"
+                  >
+                  <button type="submit" class="account-popup__email-submit" aria-label="Continue with email">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </form>
+
+              <div class="account-popup__quick">
+                <a href="{{ routes.account_url }}" class="account-popup__quick-btn">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/>
+                    <path d="M5 6h6M5 9h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                  </svg>
+                  Orders
+                </a>
+                <a href="{{ routes.account_url }}" class="account-popup__quick-btn">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <circle cx="8" cy="6" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+                    <path d="M2.5 14c0-3.038 2.462-5.5 5.5-5.5s5.5 2.462 5.5 5.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                  </svg>
+                  Profile
+                </a>
+              </div>
+            </div>
+          </div>
         {%- endif -%}
       {%- endif -%}
 
@@ -295,18 +351,220 @@
     outline-offset: 2px;
   }
 
-  /* Hidden Shop login component - visually removed but still interactive */
-  .header__shop-login-hidden {
+  /* Account popup wrapper */
+  .header__account-wrap {
+    position: relative;
+  }
+
+  .account-popup {
     position: absolute;
-    width: 1px;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 290px;
+    background: #2D2D2D;
+    border: 1px solid rgba(242, 237, 228, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s 0.18s;
+    z-index: 200;
+  }
+
+  .account-popup.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  /* Speech bubble caret */
+  .account-popup__caret {
+    position: absolute;
+    top: -7px;
+    right: 14px;
+    width: 12px;
+    height: 7px;
+    overflow: visible;
+  }
+
+  .account-popup__caret::before,
+  .account-popup__caret::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+  }
+
+  .account-popup__caret::before {
+    top: -1px;
+    border-bottom: 7px solid rgba(242, 237, 228, 0.1);
+  }
+
+  .account-popup__caret::after {
+    top: 1px;
+    border-bottom: 7px solid #2D2D2D;
+  }
+
+  /* Popup header row */
+  .account-popup__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .account-popup__title {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-bone, #F2EDE4);
+    margin: 0;
+  }
+
+  .account-popup__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: none;
+    border: none;
+    border-radius: 6px;
+    color: rgba(242, 237, 228, 0.5);
+    cursor: pointer;
+    transition: color 0.15s, background 0.15s;
+    flex-shrink: 0;
+  }
+
+  .account-popup__close:hover {
+    color: var(--color-bone, #F2EDE4);
+    background: rgba(242, 237, 228, 0.08);
+  }
+
+  /* Sign in with Shop button */
+  .account-popup__shop-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 11px 16px;
+    background: #5433EB;
+    border-radius: 8px;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .account-popup__shop-btn:hover {
+    background: #4527CC;
+  }
+
+  /* OR divider */
+  .account-popup__or {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0;
+    color: rgba(242, 237, 228, 0.35);
+    font-family: var(--font-label);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+  }
+
+  .account-popup__or::before,
+  .account-popup__or::after {
+    content: '';
+    flex: 1;
     height: 1px;
-    padding: 0;
-    margin: -1px;
+    background: rgba(242, 237, 228, 0.12);
+  }
+
+  /* Email input row */
+  .account-popup__email-form {
+    margin-bottom: 12px;
+  }
+
+  .account-popup__email-wrap {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(242, 237, 228, 0.18);
+    border-radius: 8px;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-    pointer-events: none;
+    transition: border-color 0.15s;
+  }
+
+  .account-popup__email-wrap:focus-within {
+    border-color: rgba(242, 237, 228, 0.45);
+  }
+
+  .account-popup__email-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 11px 14px;
+    color: var(--color-bone, #F2EDE4);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+  }
+
+  .account-popup__email-input::placeholder {
+    color: rgba(242, 237, 228, 0.4);
+  }
+
+  .account-popup__email-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background: none;
+    border: none;
+    color: rgba(242, 237, 228, 0.5);
+    cursor: pointer;
+    transition: color 0.15s;
+    flex-shrink: 0;
+  }
+
+  .account-popup__email-submit:hover {
+    color: var(--color-bone, #F2EDE4);
+  }
+
+  /* Quick links row */
+  .account-popup__quick {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .account-popup__quick-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 12px;
+    border: 1px solid rgba(242, 237, 228, 0.12);
+    border-radius: 8px;
+    color: rgba(242, 237, 228, 0.7);
+    font-family: var(--font-body);
+    font-size: 0.83rem;
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+  }
+
+  .account-popup__quick-btn:hover {
+    border-color: rgba(242, 237, 228, 0.3);
+    color: var(--color-bone, #F2EDE4);
+    background: rgba(242, 237, 228, 0.05);
   }
 
   /* Cart count bubble */
@@ -461,19 +719,36 @@
      ============================================================ -->
 <script>
   (function () {
-    var trigger = document.querySelector('[data-shop-login-trigger]');
-    if (!trigger) return;
+    var trigger  = document.querySelector('[data-account-trigger]');
+    var popup    = document.querySelector('[data-account-popup]');
+    var closeBtn = document.querySelector('[data-account-close]');
+    if (!trigger || !popup) return;
+
+    function open() {
+      popup.classList.add('is-open');
+      popup.setAttribute('aria-hidden', 'false');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+
+    function close() {
+      popup.classList.remove('is-open');
+      popup.setAttribute('aria-hidden', 'true');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
 
     trigger.addEventListener('click', function (e) {
-      e.preventDefault();
-      var hidden = document.querySelector('.header__shop-login-hidden');
-      if (!hidden) return;
-      var inner = hidden.shadowRoot && hidden.shadowRoot.querySelector('button, a');
-      if (inner) {
-        inner.click();
-      } else {
-        hidden.click();
-      }
+      e.stopPropagation();
+      popup.classList.contains('is-open') ? close() : open();
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', close);
+
+    document.addEventListener('click', function (e) {
+      if (!popup.contains(e.target) && e.target !== trigger) close();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close();
     });
   })();
 </script>
