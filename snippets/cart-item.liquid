@@ -60,19 +60,21 @@
     </div>
 
     <div class="cart-item__bottom">
-      <div class="cart-item__qty qty-stepper" role="group" aria-label="Quantity for {{ item.title | escape }}">
-        <button class="qty-btn" type="button" aria-label="Decrease quantity" data-qty-change="-1">-</button>
-        <input
-          class="qty-input"
-          type="number"
-          name="updates[]"
-          value="{{ item.quantity }}"
-          min="0"
-          aria-label="Quantity"
-          data-item-qty
-        >
-        <button class="qty-btn" type="button" aria-label="Increase quantity" data-qty-change="1">+</button>
-      </div>
+      {%- unless item.product.handle == 'shipping-protection' -%}
+        <div class="cart-item__qty qty-stepper" role="group" aria-label="Quantity for {{ item.title | escape }}">
+          <button class="qty-btn" type="button" aria-label="Decrease quantity" data-qty-change="-1">-</button>
+          <input
+            class="qty-input"
+            type="number"
+            name="updates[]"
+            value="{{ item.quantity }}"
+            min="0"
+            aria-label="Quantity"
+            data-item-qty
+          >
+          <button class="qty-btn" type="button" aria-label="Increase quantity" data-qty-change="1">+</button>
+        </div>
+      {%- endunless -%}
 
       <div class="cart-item__price-group">
         {%- if savings > 0 -%}

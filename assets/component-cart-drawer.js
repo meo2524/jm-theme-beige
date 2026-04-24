@@ -480,6 +480,16 @@
         this.itemsWrap.innerHTML = items.map(renderItem).join('');
       }
 
+      /* Lock protection item to qty 1 — hide stepper */
+      var vid = this._protectionVariantId ? String(this._protectionVariantId) : null;
+      if (vid) {
+        var protEl = this.itemsWrap.querySelector('[data-variant-id="' + vid + '"]');
+        if (protEl) {
+          var stepper = protEl.querySelector('.cart-item__qty');
+          if (stepper) stepper.style.display = 'none';
+        }
+      }
+
       /* Show/hide goals bar and upsells */
       var goalsBar = document.getElementById('CartGoals');
       if (goalsBar) goalsBar.hidden = cart.item_count === 0;
