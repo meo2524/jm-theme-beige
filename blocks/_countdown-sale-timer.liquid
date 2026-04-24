@@ -13,10 +13,10 @@
     role="timer"
     aria-label="Countdown timer"
   >
-    <span data-days><em>Days</em></span>
-    <span data-hours><em>Hrs</em></span>
-    <span data-min><em>Min</em></span>
-    <span data-sec><em>Sec</em></span>
+    <span data-days><em>{{ block.settings.text_days | default: 'Days' | escape }}</em></span>
+    <span data-hours><em>{{ block.settings.text_hours | default: 'Hrs' | escape }}</em></span>
+    <span data-min><em>{{ block.settings.text_minutes | default: 'Min' | escape }}</em></span>
+    <span data-sec><em>{{ block.settings.text_seconds | default: 'Sec' | escape }}</em></span>
   </mc-countdown>
 </div>
 

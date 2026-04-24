@@ -98,7 +98,7 @@
               <div class="account-popup__caret" aria-hidden="true"></div>
 
               <div class="account-popup__head">
-                <p class="account-popup__title">Sign in or create account</p>
+                <p class="account-popup__title">{{ section.settings.account_popup_title | default: 'Sign in or create account' | escape }}</p>
                 <button type="button" class="account-popup__close" aria-label="Close sign in" data-account-close>
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
@@ -111,10 +111,10 @@
                   <rect width="18" height="18" rx="4" fill="white" fill-opacity="0.15"/>
                   <path d="M5 9a4 4 0 118 0 4 4 0 01-8 0z" fill="white"/>
                 </svg>
-                Sign in with <strong>shop</strong>
+                {{ section.settings.shop_signin_label | default: 'Sign in with shop' | escape }}
               </a>
 
-              <div class="account-popup__or" aria-hidden="true"><span>OR</span></div>
+              <div class="account-popup__or" aria-hidden="true"><span>{{ section.settings.or_divider | default: 'OR' | escape }}</span></div>
 
               <form action="{{ routes.account_login_url }}" method="get" class="account-popup__email-form">
                 <div class="account-popup__email-wrap">
@@ -141,14 +141,14 @@
                     <rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/>
                     <path d="M5 6h6M5 9h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
                   </svg>
-                  Orders
+                  {{ section.settings.orders_label | default: 'Orders' | escape }}
                 </a>
                 <a href="{{ routes.account_url }}" class="account-popup__quick-btn">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <circle cx="8" cy="6" r="2.5" stroke="currentColor" stroke-width="1.3"/>
                     <path d="M2.5 14c0-3.038 2.462-5.5 5.5-5.5s5.5 2.462 5.5 5.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
                   </svg>
-                  Profile
+                  {{ section.settings.profile_label | default: 'Profile' | escape }}
                 </a>
               </div>
             </div>
@@ -775,6 +775,40 @@
       "id": "menu",
       "label": "Navigation menu",
       "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Account popup"
+    },
+    {
+      "type": "text",
+      "id": "account_popup_title",
+      "label": "Popup heading",
+      "default": "Sign in or create account"
+    },
+    {
+      "type": "text",
+      "id": "shop_signin_label",
+      "label": "Shop sign-in button",
+      "default": "Sign in with shop"
+    },
+    {
+      "type": "text",
+      "id": "or_divider",
+      "label": "Divider text",
+      "default": "OR"
+    },
+    {
+      "type": "text",
+      "id": "orders_label",
+      "label": "Orders quick link",
+      "default": "Orders"
+    },
+    {
+      "type": "text",
+      "id": "profile_label",
+      "label": "Profile quick link",
+      "default": "Profile"
     }
   ]
 }

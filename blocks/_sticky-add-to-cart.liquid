@@ -42,7 +42,7 @@
                       {%- if variant.id == current_variant.id %} selected{%- endif -%}
                       {%- unless variant.available %} disabled{%- endunless -%}
                     >
-                      {{ variant.title }}{%- unless variant.available %} - Sold Out{%- endunless -%}
+                      {{ variant.title }}{%- unless variant.available %} - {{ block.settings.sold_out_label | default: 'Sold Out' | escape }}{%- endunless -%}
                     </option>
                   {%- endfor -%}
                 </select>
@@ -62,7 +62,11 @@
               aria-label="Add {{ product.title }} to cart"
             >
               <span class="sticky-atc__btn-text">
-                {%- if current_variant.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}
+                {%- if current_variant.available -%}
+                  {{ block.settings.atc_label | default: 'Add to Cart' | escape }}
+                {%- else -%}
+                  {{ block.settings.sold_out_label | default: 'Sold Out' | escape }}
+                {%- endif -%}
               </span>
             </button>
 
@@ -101,6 +105,18 @@
         { "value": "bottom", "label": "Bottom" },
         { "value": "top", "label": "Top" }
       ]
+    },
+    {
+      "type": "text",
+      "id": "atc_label",
+      "label": "Add to cart label",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "text",
+      "id": "sold_out_label",
+      "label": "Sold out label",
+      "default": "Sold Out"
     }
   ],
   "presets": [

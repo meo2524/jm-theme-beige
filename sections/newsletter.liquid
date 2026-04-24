@@ -68,8 +68,8 @@
         </div>
 
         <p class="nl__privacy" id="nl-privacy-{{ section.id }}">
-          We respect your privacy. Unsubscribe any time. &nbsp;
-          <a href="{{ shop.privacy_policy.url }}" class="nl__privacy-link">Privacy policy</a>
+          {{ section.settings.privacy_note | default: 'We respect your privacy. Unsubscribe any time.' | escape }} &nbsp;
+          <a href="{{ shop.privacy_policy.url }}" class="nl__privacy-link">{{ section.settings.privacy_link_label | default: 'Privacy policy' | escape }}</a>
         </p>
 
       {%- endif -%}
@@ -317,6 +317,18 @@
       "id": "success_message",
       "label": "Success message",
       "default": "You\u2019re in. We\u2019ll be in touch."
+    },
+    {
+      "type": "text",
+      "id": "privacy_note",
+      "label": "Privacy note",
+      "default": "We respect your privacy. Unsubscribe any time."
+    },
+    {
+      "type": "text",
+      "id": "privacy_link_label",
+      "label": "Privacy link label",
+      "default": "Privacy policy"
     }
   ],
   "presets": [

@@ -65,7 +65,7 @@
 
         <!-- Navigation -->
         <div class="footer__col footer__col--nav">
-          <p class="footer__col-heading">Navigation</p>
+          <p class="footer__col-heading">{{ section.settings.nav_heading | default: 'Navigation' | escape }}</p>
           <ul class="footer__nav-list" role="list">
             <li><a href="{{ routes.all_products_collection_url }}" class="footer__nav-link">Products</a></li>
             {%- if pages.contact != empty -%}
@@ -76,7 +76,7 @@
 
         <!-- Support -->
         <div class="footer__col footer__col--support">
-          <p class="footer__col-heading">Support</p>
+          <p class="footer__col-heading">{{ section.settings.support_heading | default: 'Support' | escape }}</p>
           <ul class="footer__nav-list" role="list">
             {%- for link in linklists[footer_menu].links -%}
               {%- unless link.url contains '/search' or link.url contains '/policies/' or link.url contains '/pages/contact' or link.url contains routes.all_products_collection_url -%}
@@ -299,6 +299,18 @@
       "type": "link_list",
       "id": "legal_menu",
       "label": "Legal menu"
+    },
+    {
+      "type": "text",
+      "id": "nav_heading",
+      "label": "Navigation column heading",
+      "default": "Navigation"
+    },
+    {
+      "type": "text",
+      "id": "support_heading",
+      "label": "Support column heading",
+      "default": "Support"
     },
     {
       "type": "header",
