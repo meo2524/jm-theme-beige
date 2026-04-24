@@ -120,6 +120,34 @@
 }
 
 
+/* ── SAVINGS BANNER ────────────────────────────────────── */
+
+.cart-drawer__savings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  background: rgba(138, 98, 64, 0.1);
+  color: var(--color-walnut, #8A6240);
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(138, 98, 64, 0.16);
+}
+
+.cart-drawer__savings[hidden] {
+  display: none;
+}
+
+.cart-drawer__savings strong {
+  font-weight: 700;
+  color: var(--color-black, #2D2D2D);
+}
+
+
 /* ── GOALS PROGRESS BAR ────────────────────────────────── */
 
 .cart-goals {

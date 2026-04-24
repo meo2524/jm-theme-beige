@@ -5,6 +5,14 @@
 {%- liquid
   assign cart_product_ids = cart.items | map: 'product_id'
 
+  assign cart_savings = cart.original_total_price | minus: cart.total_price
+  for item in cart.items
+    if item.variant.compare_at_price > item.variant.price
+      assign compare_delta = item.variant.compare_at_price | minus: item.variant.price | times: item.quantity
+      assign cart_savings = cart_savings | plus: compare_delta
+    endif
+  endfor
+
   assign m1_cents = 0
   assign m1_label = ''
   assign m1_icon  = ''
@@ -72,6 +80,18 @@
         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
       </svg>
       JOIN OVER 5,000 HAPPY CUSTOMERS
+    </div>
+
+    {%- comment -%} Savings banner (always in DOM; JS toggles [hidden]) {%- endcomment -%}
+    <div
+      class="cart-drawer__savings"
+      data-cart-savings
+      {% if cart_savings <= 0 or cart.item_count == 0 %}hidden{% endif %}
+    >
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+      </svg>
+      <span>You&rsquo;re saving <strong data-cart-savings-amount>{{ cart_savings | money }}</strong> on this order</span>
     </div>
 
     {%- comment -%} Cart goals progress bar (0, 1, or 2 milestones) {%- endcomment -%}

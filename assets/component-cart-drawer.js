@@ -353,9 +353,31 @@
         self._updateTotals(cart.total_price);
         self._updateItems(cart);
         self._updateFooter(cart);
+        self._updateSavings(cart);
         self._setLoading(false);
         return cart;
       });
+    },
+
+    _updateSavings: function (cart) {
+      var banner = document.querySelector('[data-cart-savings]');
+      if (!banner) return;
+      var amountEl = banner.querySelector('[data-cart-savings-amount]');
+
+      var savings = (cart.original_total_price || 0) - (cart.total_price || 0);
+      (cart.items || []).forEach(function (item) {
+        var cmp = item.compare_at_price;
+        if (cmp && cmp > item.price) {
+          savings += (cmp - item.price) * item.quantity;
+        }
+      });
+
+      if (savings > 0 && cart.item_count > 0) {
+        if (amountEl) amountEl.textContent = formatMoney(savings);
+        banner.hidden = false;
+      } else {
+        banner.hidden = true;
+      }
     },
 
     _updateCounts: function (count, total) {
