@@ -33,41 +33,6 @@
         "stat_3_label": "Filter lifespan"
       }
     },
-    "product-feature": {
-      "type": "product-feature",
-      "settings": {
-        "eyebrow": "The science",
-        "heading": "Most routines start too late.",
-        "body": "Chlorine strips skin of its natural oils. Heavy metals accumulate in hair follicles over time. Every serum and shampoo you apply after an unfiltered shower is working against a contaminated baseline.",
-        "cta_label": "Learn more",
-        "cta_url": "",
-        "reverse": false
-      }
-    },
-    "before-after": {
-      "type": "before-after",
-      "settings": {
-        "heading": "See the Difference",
-        "subheading": "Filtered water. Visibly healthier skin and hair.",
-        "initial_position": 50
-      }
-    },
-    "product-grid": {
-      "type": "product-grid",
-      "settings": {
-        "eyebrow": "Shop",
-        "heading": "Start here.",
-        "collection": "",
-        "product_limit": 3
-      }
-    },
-    "countdown": {
-      "type": "countdown-sale",
-      "settings": {
-        "heading": "Limited Time Offer",
-        "button_label": "Shop Now"
-      }
-    },
     "testimonials": {
       "type": "testimonials",
       "settings": {
@@ -89,10 +54,6 @@
   "order": [
     "hero",
     "stats-strip",
-    "product-feature",
-    "before-after",
-    "product-grid",
-    "countdown",
     "testimonials",
     "newsletter"
   ]
