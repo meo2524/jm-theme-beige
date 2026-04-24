@@ -86,7 +86,7 @@
           </button>
         {%- endif -%}
 
-        <p class="toolbar-count" aria-live="polite">
+        <p class="toolbar-count" aria-live="polite" data-collection-count>
           {{ collection.products_count }}
           {%- if collection.products_count == 1 -%}&nbsp;product{%- else -%}&nbsp;products{%- endif -%}
         </p>
@@ -115,39 +115,41 @@
 
     </div>
 
-    {%- comment -%} Active filter pills {%- endcomment -%}
-    {%- if active_filters_count > 0 -%}
-      <div class="active-filters">
-        {%- for filter in collection.filters -%}
-          {%- if filter.type == 'price_range' -%}
-            {%- if filter.min_value.value or filter.max_value.value -%}
-              <a href="{{ filter.url_to_remove }}" class="active-filter-pill">
-                <span>Price:
-                  {%- if filter.min_value.value -%}&nbsp;{{ filter.min_value.value | money_without_trailing_zeros }}{%- else -%}&nbsp;$0{%- endif -%}
-                  &nbsp;–
-                  {%- if filter.max_value.value -%}&nbsp;{{ filter.max_value.value | money_without_trailing_zeros }}{%- else -%}&nbsp;any{%- endif -%}
-                </span>
-                <svg class="active-filter-pill__x" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                  <line x1="1" y1="1" x2="11" y2="11"/>
-                  <line x1="11" y1="1" x2="1" y2="11"/>
-                </svg>
-              </a>
+    {%- comment -%} Active filter pills — always rendered so AJAX can swap content {%- endcomment -%}
+    <div data-collection-pills>
+      {%- if active_filters_count > 0 -%}
+        <div class="active-filters">
+          {%- for filter in collection.filters -%}
+            {%- if filter.type == 'price_range' -%}
+              {%- if filter.min_value.value or filter.max_value.value -%}
+                <a href="{{ filter.url_to_remove }}" class="active-filter-pill">
+                  <span>Price:
+                    {%- if filter.min_value.value -%}&nbsp;{{ filter.min_value.value | money_without_trailing_zeros }}{%- else -%}&nbsp;$0{%- endif -%}
+                    &nbsp;-
+                    {%- if filter.max_value.value -%}&nbsp;{{ filter.max_value.value | money_without_trailing_zeros }}{%- else -%}&nbsp;any{%- endif -%}
+                  </span>
+                  <svg class="active-filter-pill__x" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                    <line x1="1" y1="1" x2="11" y2="11"/>
+                    <line x1="11" y1="1" x2="1" y2="11"/>
+                  </svg>
+                </a>
+              {%- endif -%}
+            {%- else -%}
+              {%- for value in filter.active_values -%}
+                <a href="{{ value.url_to_remove }}" class="active-filter-pill">
+                  <span>{{ value.label }}</span>
+                  <svg class="active-filter-pill__x" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                    <line x1="1" y1="1" x2="11" y2="11"/>
+                    <line x1="11" y1="1" x2="1" y2="11"/>
+                  </svg>
+                </a>
+              {%- endfor -%}
             {%- endif -%}
-          {%- else -%}
-            {%- for value in filter.active_values -%}
-              <a href="{{ value.url_to_remove }}" class="active-filter-pill">
-                <span>{{ value.label }}</span>
-                <svg class="active-filter-pill__x" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                  <line x1="1" y1="1" x2="11" y2="11"/>
-                  <line x1="11" y1="1" x2="1" y2="11"/>
-                </svg>
-              </a>
-            {%- endfor -%}
-          {%- endif -%}
-        {%- endfor -%}
-        <a href="{{ collection.url }}" class="clear-filters">Clear all</a>
-      </div>
-    {%- endif -%}
+          {%- endfor -%}
+          <a href="{{ collection.url }}" class="clear-filters">Clear all</a>
+        </div>
+      {%- endif -%}
+    </div>
   </div>
 
 
@@ -165,7 +167,7 @@
         id="FilterSidebar-{{ section.id }}"
         aria-label="Product filters"
       >
-        <div class="filter-sidebar__inner">
+        <div class="filter-sidebar__inner" data-collection-sidebar>
 
           <div class="filter-sidebar__head">
             <p class="filter-sidebar__heading">Filters</p>
@@ -300,7 +302,7 @@
 
 
     {%- comment -%} ── PRODUCT GRID ── {%- endcomment -%}
-    <div class="collection-main">
+    <div class="collection-main" data-collection-results>
 
       {%- if collection.products.size > 0 -%}
 
@@ -1165,6 +1167,13 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* AJAX loading state */
+.collection-main.is-loading {
+  opacity: 0.45;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
 </style>
 
 
@@ -1176,29 +1185,137 @@
   var root = document.querySelector('[data-section-id="' + sid + '"]');
   if (!root) return;
 
+  var currentXhr = null;
+  var priceTimer;
 
-  /* ── SORT SELECT ──────────────────────────────────────── */
-  var sortSelect = root.querySelector('[data-collection-sort]');
-  if (sortSelect) {
-    sortSelect.addEventListener('change', function () {
-      var url = new URL(window.location.href);
-      url.searchParams.set('sort_by', this.value);
-      url.searchParams.delete('page');
-      window.location.href = url.toString();
-    });
+  /* ── AJAX FETCH ───────────────────────────────────────── */
+  function fetchResults(url) {
+    if (currentXhr) currentXhr.abort();
+
+    var resultsEl = root.querySelector('[data-collection-results]');
+    var pillsEl   = root.querySelector('[data-collection-pills]');
+    var countEl   = root.querySelector('[data-collection-count]');
+    var sidebarEl = root.querySelector('[data-collection-sidebar]');
+    var sortEl    = root.querySelector('[data-collection-sort]');
+
+    if (resultsEl) resultsEl.classList.add('is-loading');
+
+    history.pushState({}, '', url);
+
+    currentXhr = new XMLHttpRequest();
+    currentXhr.open('GET', url);
+    currentXhr.onload = function () {
+      if (currentXhr.status !== 200) {
+        if (resultsEl) resultsEl.classList.remove('is-loading');
+        return;
+      }
+      var doc = new DOMParser().parseFromString(currentXhr.responseText, 'text/html');
+
+      var newResults = doc.querySelector('[data-collection-results]');
+      if (newResults && resultsEl) resultsEl.innerHTML = newResults.innerHTML;
+
+      var newPills = doc.querySelector('[data-collection-pills]');
+      if (newPills && pillsEl) pillsEl.innerHTML = newPills.innerHTML;
+
+      var newCount = doc.querySelector('[data-collection-count]');
+      if (newCount && countEl) countEl.innerHTML = newCount.innerHTML;
+
+      var newSidebar = doc.querySelector('[data-collection-sidebar]');
+      if (newSidebar && sidebarEl) sidebarEl.innerHTML = newSidebar.innerHTML;
+
+      /* Sync sort select value to URL param */
+      if (sortEl) {
+        var params = new URLSearchParams(new URL(url).search);
+        var sortVal = params.get('sort_by');
+        if (sortVal) sortEl.value = sortVal;
+      }
+
+      if (resultsEl) resultsEl.classList.remove('is-loading');
+      currentXhr = null;
+    };
+    currentXhr.onerror = function () {
+      if (resultsEl) resultsEl.classList.remove('is-loading');
+      currentXhr = null;
+    };
+    currentXhr.send();
   }
 
-
-  /* ── FILTER ACCORDIONS ────────────────────────────────── */
-  root.querySelectorAll('.filter-group__trigger').forEach(function (trigger) {
-    trigger.addEventListener('click', function () {
-      var expanded = trigger.getAttribute('aria-expanded') === 'true';
-      var panel = root.querySelector('#' + trigger.getAttribute('aria-controls'));
-      trigger.setAttribute('aria-expanded', String(!expanded));
-      if (panel) panel.hidden = expanded;
+  /* ── BUILD URL FROM FILTER FORM ───────────────────────── */
+  function filterFormUrl() {
+    var form = root.querySelector('[id^="FilterForm-"]');
+    if (!form) return null;
+    var base   = new URL(form.action, window.location.origin);
+    var params = new URLSearchParams();
+    new FormData(form).forEach(function (val, key) {
+      if (String(val).trim() !== '') params.append(key, val);
     });
+    base.search = params.toString();
+    return base.toString();
+  }
+
+  /* ── DELEGATED EVENTS ─────────────────────────────────── */
+
+  /* Sort + checkbox auto-submit */
+  root.addEventListener('change', function (e) {
+    if (e.target.matches('[data-collection-sort]')) {
+      var url = new URL(window.location.href);
+      url.searchParams.set('sort_by', e.target.value);
+      url.searchParams.delete('page');
+      fetchResults(url.toString());
+    } else if (e.target.matches('[data-filter-auto-submit]')) {
+      var u = filterFormUrl();
+      if (u) fetchResults(u);
+    }
   });
 
+  /* Price inputs debounced */
+  root.addEventListener('input', function (e) {
+    if (!e.target.matches('[data-price-input]')) return;
+    clearTimeout(priceTimer);
+    priceTimer = setTimeout(function () {
+      var u = filterFormUrl();
+      if (u) fetchResults(u);
+    }, 900);
+  });
+
+  /* Price range Apply button and any filter form submit */
+  root.addEventListener('submit', function (e) {
+    if (!e.target.closest('[id^="FilterForm-"]')) return;
+    e.preventDefault();
+    var u = filterFormUrl();
+    if (u) fetchResults(u);
+  });
+
+  /* Active filter pills + Clear all */
+  root.addEventListener('click', function (e) {
+    var pill = e.target.closest('.active-filter-pill, .clear-filters');
+    if (pill && pill.href) { e.preventDefault(); fetchResults(pill.href); }
+  });
+
+  /* Pagination links */
+  root.addEventListener('click', function (e) {
+    var link = e.target.closest('[data-collection-results] .pagination a');
+    if (link && link.href) {
+      e.preventDefault();
+      fetchResults(link.href);
+      root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+
+  /* Filter accordion toggles */
+  root.addEventListener('click', function (e) {
+    var trigger = e.target.closest('.filter-group__trigger');
+    if (!trigger) return;
+    var expanded = trigger.getAttribute('aria-expanded') === 'true';
+    var panel    = root.querySelector('#' + trigger.getAttribute('aria-controls'));
+    trigger.setAttribute('aria-expanded', String(!expanded));
+    if (panel) panel.hidden = expanded;
+  });
+
+  /* Back/forward navigation */
+  window.addEventListener('popstate', function () {
+    fetchResults(window.location.href);
+  });
 
   /* ── MOBILE FILTER DRAWER ─────────────────────────────── */
   var sidebar  = root.querySelector('#FilterSidebar-' + sid);
@@ -1228,33 +1345,7 @@
   if (overlay)  overlay.addEventListener('click', closeFilters);
 
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) {
-      closeFilters();
-    }
-  });
-
-
-  /* ── FILTER CHECKBOX AUTO-SUBMIT ──────────────────────── */
-  root.querySelectorAll('[data-filter-auto-submit]').forEach(function (input) {
-    input.addEventListener('change', function () {
-      var form = input.closest('form');
-      if (form) form.submit();
-    });
-  });
-
-
-  /* ── PRICE FILTER DEBOUNCED SUBMIT ────────────────────── */
-  var priceInputs = root.querySelectorAll('[data-price-input]');
-  var priceTimer;
-
-  priceInputs.forEach(function (input) {
-    input.addEventListener('input', function () {
-      clearTimeout(priceTimer);
-      priceTimer = setTimeout(function () {
-        var form = input.closest('form');
-        if (form) form.submit();
-      }, 900);
-    });
+    if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeFilters();
   });
 
 }());
