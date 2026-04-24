@@ -300,7 +300,7 @@
         .then(function (res) { return res.json(); })
         .then(function () {
           btn.classList.add('is-added');
-          document.dispatchEvent(new CustomEvent('cart:refresh'));
+          document.dispatchEvent(new CustomEvent('cart:refresh', { detail: { openDrawer: true } }));
           setTimeout(function () {
             btn.classList.remove('is-added');
             btn.disabled = false;

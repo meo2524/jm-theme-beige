@@ -150,7 +150,7 @@
           .then(function () {
             btn.dataset.state = 'added';
             btnText.textContent = 'Added!';
-            document.dispatchEvent(new CustomEvent('cart:updated', { bubbles: true }));
+            document.dispatchEvent(new CustomEvent('cart:refresh', { detail: { openDrawer: true } }));
             setTimeout(function () {
               close();
               delete btn.dataset.state;

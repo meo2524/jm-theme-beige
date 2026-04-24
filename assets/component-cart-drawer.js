@@ -485,6 +485,14 @@
     MendCart.init();
   }
 
+  /* External cart:refresh — lets quick view / card ATC trigger a full refresh */
+  document.addEventListener('cart:refresh', function (e) {
+    if (!window.MendCart) return;
+    window.MendCart._refreshCart().then(function () {
+      if (e.detail && e.detail.openDrawer) window.MendCart.open();
+    });
+  });
+
   window.MendCart = MendCart;
 
 })();
