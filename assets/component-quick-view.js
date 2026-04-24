@@ -79,6 +79,7 @@
       bodyEl.innerHTML = '<p style="padding:3.2rem;color:#8A6240">Product not available.</p>';
       return;
     }
+    bodyEl.classList.remove('is-loading');
     bodyEl.innerHTML = '';
     bodyEl.appendChild(content);
     initForm(bodyEl);

@@ -13,10 +13,10 @@ customElements.get('mc-countdown') || customElements.define('mc-countdown', clas
     const hideOnExpired    = this.dataset.hideOnExpired === 'true';
     const sectionSelector  = this.dataset.sectionId;
 
-    const days  = this.querySelector('[data-days]');
-    const hours = this.querySelector('[data-hours]');
-    const mins  = this.querySelector('[data-min]');
-    const secs  = this.querySelector('[data-sec]');
+    const days  = this.querySelector('[data-days] b');
+    const hours = this.querySelector('[data-hours] b');
+    const mins  = this.querySelector('[data-min] b');
+    const secs  = this.querySelector('[data-sec] b');
 
     let target = infiniteMinutes
       ? this.#addMinutes(infiniteMinutes)
@@ -45,10 +45,10 @@ customElements.get('mc-countdown') || customElements.define('mc-countdown', clas
       const m = Math.floor((remaining % 3600000)  / 60000);
       const s = Math.floor((remaining % 60000)    / 1000);
 
-      if (days)  days.innerHTML  = `${d} <em>${this.dataset.textDays}</em>`;
-      if (hours) hours.innerHTML = `${h} <em>${this.dataset.textHours}</em>`;
-      if (mins)  mins.innerHTML  = `${m} <em>${this.dataset.textMin}</em>`;
-      if (secs)  secs.innerHTML  = `${s} <em>${this.dataset.textSec}</em>`;
+      if (days)  days.textContent  = d;
+      if (hours) hours.textContent = h;
+      if (mins)  mins.textContent  = m;
+      if (secs)  secs.textContent  = s;
     }, 1000);
   }
 

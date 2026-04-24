@@ -439,9 +439,8 @@
         this.footer.classList.add('is-hidden');
       } else {
         this.footer.classList.remove('is-hidden');
-        /* Re-cache totals in case this was the first cart-add from empty */
+        /* Re-cache totals in case a dynamic element was added since init */
         this.totals = document.querySelectorAll('[data-cart-total]');
-        this._updateTotals(cart.total_price);
       }
     },
 

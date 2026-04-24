@@ -12,29 +12,30 @@ customElements.get('mc-before-after') || customElements.define('mc-before-after'
 
     this.content.addEventListener('mousedown',  this.#startBound);
     this.content.addEventListener('touchstart', this.#startBound, { passive: true });
-    window.addEventListener('mouseup',   this.#endBound);
-    window.addEventListener('touchend',  this.#endBound);
-    window.addEventListener('mousemove', this.#moveBound);
-    window.addEventListener('touchmove', this.#moveBound, { passive: false });
   }
 
   disconnectedCallback() {
     this.content?.removeEventListener('mousedown',  this.#startBound);
     this.content?.removeEventListener('touchstart', this.#startBound);
-    window.removeEventListener('mouseup',   this.#endBound);
-    window.removeEventListener('touchend',  this.#endBound);
-    window.removeEventListener('mousemove', this.#moveBound);
-    window.removeEventListener('touchmove', this.#moveBound);
+    this.#end();
   }
 
   #start(e) {
     if (e.target.closest('a')) return;
     this.#locked = true;
     this.#size = this.content.getBoundingClientRect();
+    window.addEventListener('mouseup',   this.#endBound);
+    window.addEventListener('touchend',  this.#endBound);
+    window.addEventListener('mousemove', this.#moveBound);
+    window.addEventListener('touchmove', this.#moveBound, { passive: false });
   }
 
   #end() {
     this.#locked = false;
+    window.removeEventListener('mouseup',   this.#endBound);
+    window.removeEventListener('touchend',  this.#endBound);
+    window.removeEventListener('mousemove', this.#moveBound);
+    window.removeEventListener('touchmove', this.#moveBound);
   }
 
   #move(e) {
