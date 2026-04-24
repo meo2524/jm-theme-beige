@@ -22,16 +22,7 @@ customElements.get('mc-countdown') || customElements.define('mc-countdown', clas
       ? this.#addMinutes(infiniteMinutes)
       : Number(fixedTime) * 1000;
 
-    const startTick = () => {
-      if (this.#tick) return;
-      this.#tick = setInterval(tick, 1000);
-    };
-    const stopTick = () => { clearInterval(this.#tick); this.#tick = null; };
-    const onVisibility = () => document.hidden ? stopTick() : startTick();
-    document.addEventListener('visibilitychange', onVisibility);
-    this._onVisibility = onVisibility;
-
-    const tick = () => {
+    this.#tick = setInterval(() => {
       const remaining = target - Date.now();
 
       if (remaining <= 0) {
@@ -58,15 +49,12 @@ customElements.get('mc-countdown') || customElements.define('mc-countdown', clas
       if (hours) hours.innerHTML = `${h} <em>${this.dataset.textHours}</em>`;
       if (mins)  mins.innerHTML  = `${m} <em>${this.dataset.textMin}</em>`;
       if (secs)  secs.innerHTML  = `${s} <em>${this.dataset.textSec}</em>`;
-    };
-
-    startTick();
+    }, 1000);
   }
 
   disconnectedCallback() {
     clearInterval(this.#tick);
     this.#tick = null;
-    if (this._onVisibility) document.removeEventListener('visibilitychange', this._onVisibility);
   }
 
   #addMinutes(minutes) {

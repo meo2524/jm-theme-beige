@@ -1188,51 +1188,45 @@
   var currentXhr = null;
   var priceTimer;
 
-  /* Cache DOM refs once — containers are never replaced, only their innerHTML */
-  var resultsEl = root.querySelector('[data-collection-results]');
-  var pillsEl   = root.querySelector('[data-collection-pills]');
-  var countEl   = root.querySelector('[data-collection-count]');
-  var sidebarEl = root.querySelector('[data-collection-sidebar]');
-  var sortEl    = root.querySelector('[data-collection-sort]');
-
-  /* ── AJAX FETCH via Shopify Sections API ──────────────── */
+  /* ── AJAX FETCH ───────────────────────────────────────── */
   function fetchResults(url) {
     if (currentXhr) currentXhr.abort();
+
+    var resultsEl = root.querySelector('[data-collection-results]');
+    var pillsEl   = root.querySelector('[data-collection-pills]');
+    var countEl   = root.querySelector('[data-collection-count]');
+    var sidebarEl = root.querySelector('[data-collection-sidebar]');
+    var sortEl    = root.querySelector('[data-collection-sort]');
+
     if (resultsEl) resultsEl.classList.add('is-loading');
 
     history.pushState({}, '', url);
 
-    /* Append ?sections=main so Shopify returns only this section as JSON */
-    var sectionsUrl = new URL(url, window.location.origin);
-    sectionsUrl.searchParams.set('sections', 'main');
-
     currentXhr = new XMLHttpRequest();
-    currentXhr.open('GET', sectionsUrl.toString());
-    currentXhr.setRequestHeader('Accept', 'application/json');
+    currentXhr.open('GET', url);
     currentXhr.onload = function () {
       if (currentXhr.status !== 200) {
         if (resultsEl) resultsEl.classList.remove('is-loading');
-        currentXhr = null;
         return;
       }
+      var doc = new DOMParser().parseFromString(currentXhr.responseText, 'text/html');
 
-      var data;
-      try { data = JSON.parse(currentXhr.responseText); }
-      catch (e) { if (resultsEl) resultsEl.classList.remove('is-loading'); currentXhr = null; return; }
+      var newResults = doc.querySelector('[data-collection-results]');
+      if (newResults && resultsEl) resultsEl.innerHTML = newResults.innerHTML;
 
-      var sectionHtml = data['main'];
-      if (!sectionHtml) { if (resultsEl) resultsEl.classList.remove('is-loading'); currentXhr = null; return; }
+      var newPills = doc.querySelector('[data-collection-pills]');
+      if (newPills && pillsEl) pillsEl.innerHTML = newPills.innerHTML;
 
-      var doc = new DOMParser().parseFromString(sectionHtml, 'text/html');
+      var newCount = doc.querySelector('[data-collection-count]');
+      if (newCount && countEl) countEl.innerHTML = newCount.innerHTML;
 
-      var n;
-      n = doc.querySelector('[data-collection-results]'); if (n && resultsEl) resultsEl.innerHTML = n.innerHTML;
-      n = doc.querySelector('[data-collection-pills]');   if (n && pillsEl)   pillsEl.innerHTML   = n.innerHTML;
-      n = doc.querySelector('[data-collection-count]');   if (n && countEl)   countEl.innerHTML   = n.innerHTML;
-      n = doc.querySelector('[data-collection-sidebar]'); if (n && sidebarEl) sidebarEl.innerHTML = n.innerHTML;
+      var newSidebar = doc.querySelector('[data-collection-sidebar]');
+      if (newSidebar && sidebarEl) sidebarEl.innerHTML = newSidebar.innerHTML;
 
+      /* Sync sort select value to URL param */
       if (sortEl) {
-        var sortVal = new URL(url, window.location.origin).searchParams.get('sort_by');
+        var params = new URLSearchParams(new URL(url).search);
+        var sortVal = params.get('sort_by');
         if (sortVal) sortEl.value = sortVal;
       }
 
