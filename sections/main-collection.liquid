@@ -32,8 +32,8 @@
     COLLECTION HEADER
   ═══════════════════════════════════════════ {%- endcomment -%}
 
-  {%- if collection.image and section.settings.show_hero_image -%}
-    <div class="collection-hero">
+  <div class="collection-hero{% unless collection.image and section.settings.show_hero_image %} collection-hero--no-img{% endunless %}">
+    {%- if collection.image and section.settings.show_hero_image -%}
       <img
         src="{{ collection.image | image_url: width: 1600 }}"
         srcset="
@@ -48,18 +48,14 @@
         width="{{ collection.image.width }}"
         height="{{ collection.image.height }}"
       >
-      <div class="collection-hero__overlay">
-        <h1 class="collection-hero__title">{{ collection.title }}</h1>
-      </div>
-    </div>
-  {%- else -%}
-    <div class="collection-header">
-      <h1 class="collection-header__title">{{ collection.title }}</h1>
+    {%- endif -%}
+    <div class="collection-hero__overlay">
+      <h1 class="collection-hero__title">{{ collection.title }}</h1>
       {%- if section.settings.show_description and collection.description != blank -%}
-        <div class="collection-header__desc rte">{{ collection.description }}</div>
+        <p class="collection-hero__desc">{{ collection.description | strip_html | truncate: 120 }}</p>
       {%- endif -%}
     </div>
-  {%- endif -%}
+  </div>
 
 
   {%- comment -%} ═══════════════════════════════════════════
@@ -404,12 +400,19 @@
   margin: 0 auto;
 }
 
-/* Hero banner variant */
+/* Hero banner */
 .collection-hero {
   position: relative;
-  height: 400px;
+  height: 420px;
   overflow: hidden;
-  background: var(--color-bone);
+  background: var(--color-black, #2D2D2D);
+  border-radius: 0 0 16px 16px;
+  margin-bottom: 0.5rem;
+}
+
+/* Dark fallback (no image) gets a subtle warm grain */
+.collection-hero--no-img {
+  background: linear-gradient(135deg, #2D2D2D 0%, #3a3228 100%);
 }
 
 .collection-hero__img {
@@ -417,39 +420,53 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  opacity: 0.55;
+  opacity: 1;
+}
+
+/* Gradient scrim so title is always legible */
+.collection-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 16, 12, 0.18) 0%,
+    rgba(20, 16, 12, 0.55) 100%
+  );
+  pointer-events: none;
 }
 
 .collection-hero__overlay {
   position: absolute;
   inset: 0;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   text-align: center;
-  padding: 2rem;
-}
-
-.collection-hero__eyebrow {
-  font-family: var(--font-label);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 3.5px;
-  text-transform: uppercase;
-  /* Soft gold on espresso bg — high contrast decorative label */
-  color: var(--color-olive);
-  margin: 0 0 1rem;
+  padding: 3rem 2rem;
 }
 
 .collection-hero__title {
   font-family: var(--font-heading);
-  font-size: clamp(2.25rem, 5vw, 3.75rem);
-  font-weight: 400;
-  color: var(--color-black);
-  letter-spacing: -0.025em;
-  line-height: 1.1;
+  font-size: clamp(2.75rem, 6vw, 5rem);
+  font-weight: 700;
+  color: var(--color-bone, #F2EDE4);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
   margin: 0;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+}
+
+.collection-hero__desc {
+  font-family: var(--font-label);
+  font-size: 0.9375rem;
+  color: rgba(242, 237, 228, 0.72);
+  margin: 0.875rem 0 0;
+  max-width: 480px;
+  line-height: 1.6;
 }
 
 
@@ -1119,7 +1136,8 @@
   }
 
   .collection-hero {
-    height: 280px;
+    height: 260px;
+    border-radius: 0 0 10px 10px;
   }
 
   .collection-body {
