@@ -407,14 +407,7 @@
       var self = this;
       return cartGet().then(function (cart) {
         self._lastCart = cart;
-        var vid = self._protectionVariantId ? String(self._protectionVariantId) : null;
-        var visibleCount = cart.item_count;
-        if (vid) {
-          (cart.items || []).forEach(function (i) {
-            if (String(i.variant_id) === vid) visibleCount -= i.quantity;
-          });
-        }
-        self._updateCounts(visibleCount, cart.total_price);
+        self._updateCounts(cart.item_count, cart.total_price);
         self._updateTotals(cart.total_price);
         self._updateItems(cart);
         self._updateFooter(cart);
@@ -479,15 +472,12 @@
     _updateItems: function (cart) {
       if (!this.itemsWrap) return;
 
-      var vid = this._protectionVariantId ? String(this._protectionVariantId) : null;
-      var visibleItems = vid
-        ? (cart.items || []).filter(function (i) { return String(i.variant_id) !== vid; })
-        : (cart.items || []);
+      var items = cart.items || [];
 
-      if (visibleItems.length === 0) {
+      if (items.length === 0) {
         this.itemsWrap.innerHTML = emptyStateHtml();
       } else {
-        this.itemsWrap.innerHTML = visibleItems.map(renderItem).join('');
+        this.itemsWrap.innerHTML = items.map(renderItem).join('');
       }
 
       /* Show/hide goals bar and upsells */

@@ -9,13 +9,6 @@
   assign protection_variant = protection_product.selected_or_first_available_variant
   assign protection_variant_id = protection_variant.id
 
-  assign visible_item_count = cart.item_count
-  for item in cart.items
-    if item.variant_id == protection_variant_id
-      assign visible_item_count = visible_item_count | minus: item.quantity
-    endif
-  endfor
-
   assign cart_savings = cart.original_total_price | minus: cart.total_price
   for item in cart.items
     if item.variant.compare_at_price > item.variant.price
@@ -73,8 +66,8 @@
       <p class="cart-drawer__heading">
         Your cart
         <span class="cart-drawer__item-count" data-cart-count-label>
-          {%- if visible_item_count > 0 -%}
-            ({{ visible_item_count }} item{%- if visible_item_count != 1 -%}s{%- endif -%})
+          {%- if cart.item_count > 0 -%}
+            ({{ cart.item_count }} item{%- if cart.item_count != 1 -%}s{%- endif -%})
           {%- endif -%}
         </span>
       </p>
@@ -198,9 +191,7 @@
       <div data-cart-items>
         {%- if cart.item_count > 0 -%}
           {%- for item in cart.items -%}
-            {%- unless item.variant_id == protection_variant_id -%}
-              {%- render 'cart-item', item: item, context: 'drawer' -%}
-            {%- endunless -%}
+            {%- render 'cart-item', item: item, context: 'drawer' -%}
           {%- endfor -%}
         {%- else -%}
           <div class="cart-drawer__empty">
