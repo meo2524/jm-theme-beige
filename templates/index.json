@@ -41,15 +41,6 @@
         "reviews_count": 6
       }
     },
-    "newsletter": {
-      "type": "newsletter",
-      "settings": {
-        "heading": "Skin starts in the shower.",
-        "subtext": "Join the list for the science, the rituals, and the offers worth opening.",
-        "btn_label": "Subscribe",
-        "success_message": "You're in. We'll be in touch."
-      }
-    },
     "177700770423191747": {
       "type": "apps",
       "blocks": {
@@ -68,13 +59,22 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Skin starts in the shower.",
+        "subtext": "Join the list for the science, the rituals, and the offers worth opening.",
+        "btn_label": "Subscribe",
+        "success_message": "You're in. We'll be in touch."
+      }
     }
   },
   "order": [
     "hero",
     "stats-strip",
     "testimonials",
-    "newsletter",
-    "177700770423191747"
+    "177700770423191747",
+    "newsletter"
   ]
 }
