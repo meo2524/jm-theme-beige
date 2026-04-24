@@ -1,8 +1,12 @@
 {%- layout none -%}
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
+  assign short_desc = product.description | strip_html | truncate: 160
 -%}
+
 <div class="mc-qv-content">
+
+  <!-- Left: image -->
   <div class="mc-qv-media">
     {%- if product.featured_media != blank -%}
       {{
@@ -24,7 +28,9 @@
     {%- endif -%}
   </div>
 
+  <!-- Right: info -->
   <div class="mc-qv-info">
+
     <p class="mc-qv-vendor">{{ product.vendor }}</p>
     <h2 class="mc-qv-title">{{ product.title }}</h2>
 
@@ -37,14 +43,27 @@
       {%- endif -%}
     </div>
 
+    <!-- Stock status -->
+    <p class="mc-qv-stock{% unless current_variant.available %} mc-qv-stock--out{% endunless %}">
+      <span class="mc-qv-stock__dot" aria-hidden="true"></span>
+      {%- if current_variant.available -%}
+        Stock Adequate! Ready to Ship
+      {%- else -%}
+        Out of Stock
+      {%- endif -%}
+    </p>
+
+    <!-- Short description -->
+    {%- if short_desc != blank -%}
+      <p class="mc-qv-desc">&ldquo;{{ short_desc }}&rdquo;</p>
+    {%- endif -%}
+
     {%- form 'product', product, class: 'mc-qv-form', novalidate: 'novalidate' -%}
       <input type="hidden" name="id" class="mc-qv-variant-id" value="{{ current_variant.id }}">
 
       {%- unless product.has_only_default_variant -%}
         <div class="mc-qv-variants">
-          <label class="mc-qv-label" for="mc-qv-select-{{ product.id }}">
-            {{- 'products.product.choose_variant' | t | default: 'Variant' -}}
-          </label>
+          <label class="mc-qv-label" for="mc-qv-select-{{ product.id }}">Variant</label>
           <div class="mc-qv-select-wrap">
             <select
               id="mc-qv-select-{{ product.id }}"
@@ -69,21 +88,53 @@
         </div>
       {%- endunless -%}
 
-      <button
-        type="submit"
-        class="mc-qv-atc"
-        {%- unless current_variant.available %} disabled{%- endunless -%}
-      >
-        <span class="mc-qv-atc-text">
-          {%- if current_variant.available -%}
-            Add to cart
-          {%- else -%}
-            Sold out
-          {%- endif -%}
-        </span>
-      </button>
+      <!-- Qty + ATC row -->
+      <div class="mc-qv-atc-row">
+        <div class="mc-qv-qty">
+          <button type="button" class="mc-qv-qty__btn" data-qty-dec aria-label="Decrease quantity">-</button>
+          <input
+            class="mc-qv-qty__input"
+            type="number"
+            name="quantity"
+            value="1"
+            min="1"
+            aria-label="Quantity"
+          >
+          <button type="button" class="mc-qv-qty__btn" data-qty-inc aria-label="Increase quantity">+</button>
+        </div>
+
+        <button
+          type="submit"
+          class="mc-qv-atc"
+          {%- unless current_variant.available %} disabled{%- endunless -%}
+        >
+          <span class="mc-qv-atc-text">
+            {%- if current_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
+          </span>
+        </button>
+      </div>
+
     {%- endform -%}
 
-    <a href="{{ product.url }}" class="mc-qv-full-link">View full details</a>
+    <!-- Buy with Shop -->
+    <button
+      type="button"
+      class="mc-qv-shop-pay"
+      data-qv-buynow="{{ current_variant.id }}"
+      {%- unless current_variant.available %} disabled{%- endunless -%}
+    >
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+        <rect width="15" height="15" rx="3" fill="white" fill-opacity="0.2"/>
+        <circle cx="7.5" cy="7.5" r="4" fill="white"/>
+      </svg>
+      Buy with <strong>shop</strong>
+    </button>
+
+    <!-- More payment options -->
+    <a href="/checkout" class="mc-qv-more-payments">More payment options</a>
+
+    <!-- View full details -->
+    <a href="{{ product.url }}" class="mc-qv-full-link">View Full Details</a>
+
   </div>
 </div>

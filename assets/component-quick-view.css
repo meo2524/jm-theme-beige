@@ -1,22 +1,18 @@
 /* ================================================================
    QUICK VIEW MODAL -- Mend & Co
-   Native <dialog>, two-column layout, Japandi Bone palette.
    ================================================================ */
 
-/* ---- Dialog backdrop ------------------------------------------ */
-
+/* ---- Backdrop ------------------------------------------------- */
 .mc-qv-dialog::backdrop {
   background: rgba(45, 45, 45, 0.55);
   animation: mc-qv-backdrop-in 0.22s ease both;
 }
-
 @keyframes mc-qv-backdrop-in {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
 
 /* ---- Dialog shell --------------------------------------------- */
-
 .mc-qv-dialog {
   position: fixed;
   inset: 0;
@@ -24,97 +20,73 @@
   padding: 0;
   width: min(860px, calc(100vw - 3.2rem));
   max-height: calc(100vh - 4rem);
-  border: 1px solid var(--color-taupe);
-  border-radius: 3px;
-  background: var(--color-bone);
+  border: none;
+  border-radius: 16px;
+  background: #fff;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(45, 45, 45, 0.18);
+  box-shadow: 0 24px 72px rgba(45, 45, 45, 0.22), 0 4px 16px rgba(45,45,45,0.1);
   animation: mc-qv-enter 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-
 @keyframes mc-qv-enter {
-  from {
-    opacity: 0;
-    transform: translateY(18px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 /* ---- Close button --------------------------------------------- */
-
 .mc-qv-close {
   position: absolute;
-  top: 1.4rem;
-  right: 1.4rem;
+  top: 1.2rem;
+  right: 1.2rem;
   z-index: 10;
-  width: 3.2rem;
-  height: 3.2rem;
+  width: 2.8rem;
+  height: 2.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: 1px solid var(--color-taupe);
-  border-radius: 2px;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
   cursor: pointer;
-  color: var(--color-black);
-  font-size: 1.8rem;
-  line-height: 1;
-  padding: 0;
-  transition: background-color 0.16s ease, border-color 0.16s ease;
+  color: #2D2D2D;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+  transition: background 0.15s;
 }
+.mc-qv-close:hover { background: #f0ebe3; }
 
-.mc-qv-close:hover {
-  background: var(--color-black);
-  border-color: var(--color-black);
-  color: var(--color-bone);
-}
-
-/* ---- Loading state -------------------------------------------- */
-
+/* ---- Loading -------------------------------------------------- */
 .mc-qv-body {
   overflow-y: auto;
   max-height: calc(100vh - 4rem);
 }
-
 .mc-qv-body.is-loading {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 36rem;
 }
-
 .mc-qv-spinner {
   width: 3.2rem;
   height: 3.2rem;
-  border: 2px solid var(--color-taupe);
-  border-top-color: var(--color-walnut);
+  border: 2px solid #e8e0d5;
+  border-top-color: #8A6240;
   border-radius: 50%;
   animation: mc-qv-spin 0.7s linear infinite;
 }
+@keyframes mc-qv-spin { to { transform: rotate(360deg); } }
 
-@keyframes mc-qv-spin {
-  to { transform: rotate(360deg); }
-}
-
-/* ---- Content two-column layout -------------------------------- */
-
+/* ---- Two-column layout ---------------------------------------- */
 .mc-qv-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 36rem;
 }
 
+/* ---- Image panel ---------------------------------------------- */
 .mc-qv-media {
   position: relative;
-  aspect-ratio: 4 / 5;
   overflow: hidden;
-  background: var(--color-taupe);
-  opacity: 0.92;
+  background: #F2EDE4;
 }
-
 .mc-qv-img {
   width: 100%;
   height: 100%;
@@ -122,7 +94,6 @@
   object-position: center;
   display: block;
 }
-
 .mc-qv-img-placeholder {
   width: 100%;
   height: 100%;
@@ -130,239 +101,268 @@
   align-items: center;
   justify-content: center;
 }
-
 .mc-qv-img-placeholder .placeholder-svg {
   width: 60%;
   height: 60%;
-  fill: var(--color-stone);
-  opacity: 0.4;
+  opacity: 0.15;
 }
 
 /* ---- Info panel ----------------------------------------------- */
-
 .mc-qv-info {
-  padding: 3.2rem 3.2rem 3.2rem 2.8rem;
+  padding: 3rem 3rem 2.4rem 2.6rem;
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
+  gap: 1.1rem;
   overflow-y: auto;
 }
 
+/* Vendor */
 .mc-qv-vendor {
-  font-size: 1.1rem;
-  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-olive);
+  color: rgba(43,43,43,0.45);
   margin: 0;
 }
 
+/* Title */
 .mc-qv-title {
-  font-family: var(--font-heading-family);
-  font-size: 2.2rem;
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
   font-weight: 400;
-  color: var(--color-black);
+  color: #2D2D2D;
   line-height: 1.2;
   margin: 0;
 }
 
+/* Price */
 .mc-qv-price-row {
   display: flex;
   align-items: baseline;
   gap: 0.8rem;
 }
-
 .mc-qv-price {
-  font-family: var(--font-heading-family);
-  font-size: 1.8rem;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
   font-weight: 600;
-  color: var(--color-black);
+  color: #2D2D2D;
 }
-
 .mc-qv-compare-price {
-  font-size: 1.4rem;
-  color: var(--color-stone);
+  font-size: 1.1rem;
+  color: #aaa;
   text-decoration: line-through;
 }
 
-/* ---- Variant select ------------------------------------------- */
-
-.mc-qv-variants {
+/* Stock indicator */
+.mc-qv-stock {
   display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.mc-qv-label {
-  font-size: 1.1rem;
-  letter-spacing: 0.07em;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-olive);
+  color: #3a8c5c;
+  margin: 0;
+}
+.mc-qv-stock--out { color: #c0392b; }
+
+.mc-qv-stock__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3a8c5c;
+  flex-shrink: 0;
+}
+.mc-qv-stock--out .mc-qv-stock__dot { background: #c0392b; }
+
+/* Short description */
+.mc-qv-desc {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: rgba(43,43,43,0.65);
+  margin: 0;
 }
 
-.mc-qv-select-wrap {
-  position: relative;
+/* ---- Variant select ------------------------------------------- */
+.mc-qv-variants { display: flex; flex-direction: column; gap: 0.5rem; }
+.mc-qv-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(43,43,43,0.5);
 }
-
+.mc-qv-select-wrap { position: relative; }
 .mc-qv-select-wrap::after {
   content: '';
   position: absolute;
-  right: 1.2rem;
+  right: 1.1rem;
   top: 50%;
   transform: translateY(-50%);
-  width: 0;
-  height: 0;
+  width: 0; height: 0;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
-  border-top: 5px solid var(--color-black);
+  border-top: 5px solid #2D2D2D;
   pointer-events: none;
 }
-
 .mc-qv-select {
   width: 100%;
-  height: 4.4rem;
-  padding: 0 3.2rem 0 1.1rem;
-  border: 1px solid var(--color-taupe);
-  border-radius: 2px;
+  height: 4rem;
+  padding: 0 3rem 0 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   background: transparent;
-  color: var(--color-black);
-  font-size: 1.3rem;
+  color: #2D2D2D;
+  font-size: 0.875rem;
   appearance: none;
   -webkit-appearance: none;
   cursor: pointer;
   outline: none;
-  transition: border-color 0.18s ease;
+  transition: border-color 0.18s;
+}
+.mc-qv-select:focus { border-color: #8A6240; }
+
+/* ---- Qty + ATC row -------------------------------------------- */
+.mc-qv-atc-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: stretch;
 }
 
-.mc-qv-select:focus {
-  border-color: var(--color-walnut);
+/* Quantity stepper */
+.mc-qv-qty {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
 }
-
-/* ---- Add to cart button --------------------------------------- */
-
-.mc-qv-atc {
-  width: 100%;
-  height: 4.8rem;
-  background: var(--color-walnut);
-  color: var(--color-bone);
+.mc-qv-qty__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 48px;
+  background: none;
   border: none;
-  border-radius: 2px;
-  font-family: var(--font-heading-family);
-  font-size: 1.3rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background-color 0.18s ease;
-  margin-top: auto;
-}
-
-.mc-qv-atc:hover:not(:disabled) {
-  background: var(--color-walnut-hover);
-}
-
-.mc-qv-atc:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-.mc-qv-atc[data-state="adding"] {
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-.mc-qv-atc[data-state="added"] {
-  background: var(--color-olive);
-}
-
-/* ---- View full link ------------------------------------------- */
-
-.mc-qv-full-link {
-  display: inline-block;
-  font-size: 1.2rem;
-  color: var(--color-olive);
-  text-decoration: none;
-  letter-spacing: 0.04em;
-  padding-bottom: 1px;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.16s ease;
-  align-self: flex-start;
-}
-
-.mc-qv-full-link:hover {
-  border-bottom-color: var(--color-olive);
-}
-
-/* ---- Quick View trigger button on card ----------------------- */
-
-.card__quick-view {
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%) translateY(6px);
-  opacity: 0;
-  background: var(--color-bone);
-  color: var(--color-black);
-  border: 1px solid var(--color-taupe);
-  border-radius: 2px;
-  font-family: var(--font-heading-family);
   font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  padding: 0.6rem 1.4rem;
+  color: #2D2D2D;
   cursor: pointer;
-  white-space: nowrap;
-  transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.16s ease;
-  z-index: 3;
+  transition: background 0.14s;
 }
+.mc-qv-qty__btn:hover { background: #f5f0ea; }
+.mc-qv-qty__input {
+  width: 36px;
+  height: 48px;
+  border: none;
+  border-left: 1.5px solid #ddd;
+  border-right: 1.5px solid #ddd;
+  text-align: center;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #2D2D2D;
+  background: transparent;
+  outline: none;
+  -moz-appearance: textfield;
+}
+.mc-qv-qty__input::-webkit-inner-spin-button,
+.mc-qv-qty__input::-webkit-outer-spin-button { -webkit-appearance: none; }
 
-.card:hover .card__quick-view,
-.card:focus-within .card__quick-view {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
+/* Add to Bag */
+.mc-qv-atc {
+  flex: 1;
+  height: 52px;
+  background: transparent;
+  color: #2D2D2D;
+  border: 1.5px solid #2D2D2D;
+  border-radius: 8px;
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
 }
+.mc-qv-atc:hover:not(:disabled) {
+  background: #2D2D2D;
+  color: #F2EDE4;
+}
+.mc-qv-atc:disabled { opacity: 0.4; cursor: not-allowed; }
+.mc-qv-atc[data-state="adding"] { opacity: 0.7; pointer-events: none; }
+.mc-qv-atc[data-state="added"] { background: #2D2D2D; color: #F2EDE4; }
 
-.card__quick-view:hover {
-  background: var(--color-black);
-  color: var(--color-bone);
-  border-color: var(--color-black);
+/* ---- Buy with Shop -------------------------------------------- */
+.mc-qv-shop-pay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 52px;
+  background: #5433EB;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
 }
+.mc-qv-shop-pay:hover:not(:disabled) { background: #4527CC; }
+.mc-qv-shop-pay:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ---- More payment options ------------------------------------- */
+.mc-qv-more-payments {
+  display: block;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: rgba(43,43,43,0.55);
+  transition: color 0.15s;
+}
+.mc-qv-more-payments:hover { color: #2D2D2D; }
+
+/* ---- View full details ---------------------------------------- */
+.mc-qv-full-link {
+  display: block;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(43,43,43,0.4);
+  text-decoration: none;
+  transition: color 0.15s;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+.mc-qv-full-link:hover { color: #2D2D2D; }
 
 /* ---- Mobile --------------------------------------------------- */
-
 @media (max-width: 640px) {
   .mc-qv-dialog {
     width: 100vw;
-    max-height: 92vh;
+    max-height: 94vh;
     margin: auto auto 0;
-    border-radius: 3px 3px 0 0;
+    border-radius: 16px 16px 0 0;
     animation: mc-qv-enter-mobile 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
-
   @keyframes mc-qv-enter-mobile {
-    from {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
-
-  .mc-qv-content {
-    grid-template-columns: 1fr;
-  }
-
-  .mc-qv-media {
-    aspect-ratio: 3 / 2;
-  }
-
-  .mc-qv-info {
-    padding: 2rem 1.6rem 2.4rem;
-  }
-
-  .mc-qv-title {
-    font-size: 1.8rem;
-  }
+  .mc-qv-content { grid-template-columns: 1fr; }
+  .mc-qv-media { aspect-ratio: 4 / 3; }
+  .mc-qv-info { padding: 2rem 1.6rem 2.4rem; }
+  .mc-qv-title { font-size: 1.5rem; }
 }
