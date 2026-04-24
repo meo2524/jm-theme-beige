@@ -168,12 +168,12 @@
         <div class="cart-goals__labels">
           <div class="cart-goals__label{% if m1_reached %} is-reached{% endif %}">
             <span class="cart-goals__label-name">{{ m1_label }}</span>
-            <span class="cart-goals__label-sub">Spend ${{ m1_dollars }}</span>
+            <span class="cart-goals__label-sub">Spend <span class="money">{{ m1_cents | money_without_trailing_zeros }}</span></span>
           </div>
           {%- if milestone_count == 2 -%}
             <div class="cart-goals__label{% if m2_reached %} is-reached{% endif %}">
               <span class="cart-goals__label-name">{{ m2_label }}</span>
-              <span class="cart-goals__label-sub">Spend ${{ m2_dollars }}</span>
+              <span class="cart-goals__label-sub">Spend <span class="money">{{ m2_cents | money_without_trailing_zeros }}</span></span>
             </div>
           {%- endif -%}
         </div>
@@ -247,7 +247,7 @@
             <polyline points="9 12 11 14 15 10"/>
           </svg>
           <div class="cart-drawer__protection-text">
-            <p class="cart-drawer__protection-name">Shipping protection &ndash; $3.50</p>
+            <p class="cart-drawer__protection-name">Shipping protection &ndash; <span class="money">{{ 350 | money }}</span></p>
             <p class="cart-drawer__protection-desc">Covers damage, loss or theft during shipping.</p>
           </div>
         </div>
