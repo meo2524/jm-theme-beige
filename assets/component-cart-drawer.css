@@ -783,6 +783,9 @@
 
 .cart-drawer__discount-input:focus {
   border-color: var(--color-walnut, #8B6F47);
+  box-shadow: 0 0 0 3px rgba(138,98,64,0.18);
+  transition: box-shadow 0.15s ease;
+  outline: none;
 }
 
 .cart-drawer__discount-input::placeholder {
@@ -808,8 +811,9 @@
 }
 
 .cart-drawer__discount-btn:hover {
-  background: var(--color-black);
-  color: var(--color-bone, #F2EDE4);
+  background: var(--color-walnut, #8A6240);
+  color: #fff;
+  border-color: var(--color-walnut, #8A6240);
 }
 
 .cart-drawer__discount-msg {
@@ -852,6 +856,9 @@
   text-decoration: none;
   gap: 0.4rem;
   transition: background 0.18s ease;
+  position: relative;
+  overflow: hidden;
+  animation: breathe 2.4s ease-in-out infinite;
 }
 
 .cart-drawer__checkout:hover {
@@ -865,6 +872,33 @@
 .cart-drawer__checkout:focus-visible {
   outline: 2px solid var(--color-walnut);
   outline-offset: 3px;
+}
+
+.cart-drawer__checkout::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(255,255,255,0.35);
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cart-drawer__checkout.is-rippling::after {
+  animation: ripple-expand 0.5s ease forwards;
+}
+
+@keyframes ripple-expand {
+  from { transform: scale(0); opacity: 0.3; }
+  to   { transform: scale(2.5); opacity: 0; }
+}
+
+/* Mobile: opacity-only breathe (no box-shadow animation) */
+@media (max-width: 767px) {
+  .cart-drawer__checkout {
+    animation: breathe-opacity 2.4s ease-in-out infinite;
+  }
 }
 
 /* Payment badges */

@@ -179,6 +179,7 @@
       this._bindProtectionToggle();
       this._initGoals();
       this._initDiscount();
+      this._initCheckoutEffects();
     },
 
     /* ── DRAWER OPEN / CLOSE ──────────────────────────── */
@@ -571,6 +572,20 @@
       if (!msg) return;
       msg.textContent = '\u2714 "' + code + '" will be applied at checkout';
       msg.hidden = false;
+    },
+
+    /* ── CHECKOUT EFFECTS ────────────────────────────── */
+
+    _initCheckoutEffects: function () {
+      var checkoutBtn = document.querySelector('#CartDrawerCheckout');
+      if (!checkoutBtn) return;
+      checkoutBtn.addEventListener('click', function () {
+        var btn = this;
+        btn.classList.remove('is-rippling');
+        void btn.offsetWidth;
+        btn.classList.add('is-rippling');
+        setTimeout(function () { btn.classList.remove('is-rippling'); }, 500);
+      });
     },
 
     /* ── GOALS BAR ────────────────────────────────────── */
