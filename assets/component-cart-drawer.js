@@ -442,8 +442,12 @@
           setTimeout(function () { amountEl.classList.remove('is-popping'); }, 200);
         }
         banner.hidden = false;
+        banner.classList.remove('is-revealing');
+        void banner.offsetWidth;
+        banner.classList.add('is-revealing');
       } else {
         banner.hidden = true;
+        banner.classList.remove('is-revealing');
       }
     },
 

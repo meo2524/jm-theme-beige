@@ -154,6 +154,9 @@
   border-left: 3px solid var(--color-walnut, #8A6240);
   padding-left: 12px;
   overflow: hidden;
+}
+
+[data-cart-savings].is-revealing {
   animation: savings-reveal 0.35s cubic-bezier(0.16,1,0.3,1) both;
 }
 
