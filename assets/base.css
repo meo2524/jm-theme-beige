@@ -23,9 +23,9 @@
   --char-2:               #2a2622;
   --char-soft:            #4a423a;   /* Secondary text */
   --ink-mute:             #6a6258;   /* Mono labels, captions */
-  --gold:                 #a8814f;   /* Warm gold — accents */
-  --gold-deep:            #8a663b;   /* Deeper gold — italic accent word */
-  --gold-light:           #c9a16b;   /* Light gold — on-dark labels */
+  --gold:                 #9a7e57;   /* Bronze — accents (less orange) */
+  --gold-deep:            #735b3f;   /* Deep bronze — italic accent word */
+  --gold-light:           #c4b89e;   /* Warm cream — on-dark labels (was amber) */
   --rose:                 #b87858;
   --line:                 rgba(31, 29, 26, 0.14);
   --line-strong:          rgba(31, 29, 26, 0.28);
