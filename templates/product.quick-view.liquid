@@ -9,6 +9,7 @@
   <!-- Left: image -->
   <div class="mc-qv-media">
     {%- if product.featured_media != blank -%}
+      {%- assign qv_img_alt = product.featured_media.alt | default: product.title | escape -%}
       {{
         product.featured_media
         | image_url: width: 800
@@ -17,7 +18,7 @@
           loading: 'eager',
           widths: '400, 600, 800',
           sizes: '(max-width: 767px) 100vw, 45vw',
-          alt: product.featured_media.alt | default: product.title | escape,
+          alt: qv_img_alt,
           width: 800,
           height: 1000
       }}
