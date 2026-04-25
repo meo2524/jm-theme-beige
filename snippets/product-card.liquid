@@ -47,7 +47,7 @@
               <span class="badge badge--amber">{{ settings.card_badge_sale | default: 'Sale' | escape }}</span>
             {%- endif -%}
             {%- if is_hot -%}
-              <span class="badge badge--hot">🔥 Hot</span>
+              <span class="badge badge--hot">Hot</span>
             {%- endif -%}
             {%- unless on_sale or is_hot -%}
               {%- if product.tags contains 'new' -%}
@@ -177,9 +177,13 @@
     left: var(--space-3);
     z-index: 1;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 4px;
-    align-items: flex-start;
+  }
+
+  .card__badges .badge {
+    min-width: 42px;
+    justify-content: center;
   }
 
   /* ── MAGNIFYING GLASS BUTTON ────────────────────────────── */

@@ -123,7 +123,7 @@
             <span class="badge badge--amber">Sale</span>
           {%- endif -%}
           {%- if pdp_is_hot -%}
-            <span class="badge badge--hot">🔥 Hot</span>
+            <span class="badge badge--hot">Hot</span>
           {%- endif -%}
         </div>
       {%- endif -%}
@@ -595,9 +595,14 @@
 /* Product badges */
 .pdp-badges {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
   gap: 6px;
   margin-bottom: 1rem;
+}
+
+.pdp-badges .badge {
+  min-width: 42px;
+  justify-content: center;
 }
 
 /* Price block */
