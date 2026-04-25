@@ -1,0 +1,227 @@
+{%- comment -%}
+  Mend & Co — Story section (Direction 01 — Refined)
+  Two-column editorial: image on the left, eyebrow + italic-accent
+  headline + two short serif paragraphs + underlined tlink on the right.
+{%- endcomment -%}
+
+{%- liquid
+  assign eyebrow         = section.settings.eyebrow         | default: 'Our Practice'
+  assign heading_pre     = section.settings.heading_pre     | default: 'The opposite of'
+  assign heading_em      = section.settings.heading_em      | default: 'more'
+  assign heading_post    = section.settings.heading_post    | default: '.'
+  assign paragraph_1     = section.settings.paragraph_1
+  assign paragraph_2     = section.settings.paragraph_2
+  assign link_label      = section.settings.link_label      | default: 'Read the full story →'
+  assign link_url        = section.settings.link_url
+  assign image           = section.settings.image
+  assign image_label     = section.settings.image_label     | default: 'hands · oil · linen'
+-%}
+
+<section class="story" aria-label="{{ eyebrow }}">
+  <div class="story__inner container">
+
+    <div class="story__media">
+      {%- if image != blank -%}
+        <img
+          src="{{ image | image_url: width: 1200 }}"
+          srcset="{{ image | image_url: width: 600 }} 600w, {{ image | image_url: width: 1200 }} 1200w, {{ image | image_url: width: 1800 }} 1800w"
+          sizes="(max-width: 767px) 100vw, 50vw"
+          alt="{{ image.alt | default: image_label | escape }}"
+          width="1200"
+          height="1090"
+          loading="lazy"
+        >
+      {%- else -%}
+        <div class="story__placeholder ph">
+          <span class="ph-label">[{{ image_label }}]</span>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="story__content">
+      <span class="eyebrow gold">{{ eyebrow }}</span>
+
+      <h2 class="story__heading">
+        {{ heading_pre }} <em>{{ heading_em }}</em>{{ heading_post }}
+      </h2>
+
+      {%- if paragraph_1 != blank -%}
+        <p class="story__para">{{ paragraph_1 }}</p>
+      {%- endif -%}
+      {%- if paragraph_2 != blank -%}
+        <p class="story__para">{{ paragraph_2 }}</p>
+      {%- endif -%}
+
+      {%- if link_url != blank -%}
+        <a href="{{ link_url }}" class="tlink story__link">{{ link_label }}</a>
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .story {
+    background: var(--cream);
+    padding: 100px 0 120px;
+  }
+
+  .story__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  /* Image column */
+  .story__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1.1 / 1;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .story__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .story__placeholder {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Content column */
+  .story__content {
+    max-width: 480px;
+  }
+
+  .story__heading {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 4.2vw, 4rem);  /* up to 64px */
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--char);
+    margin: 24px 0 0;
+    text-wrap: balance;
+  }
+  .story__heading em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold-deep);
+  }
+
+  .story__para {
+    font-family: var(--font-serif);
+    font-size: 21px;
+    line-height: 1.55;
+    color: var(--char-soft);
+    margin-top: 24px;
+    max-width: 480px;
+  }
+  .story__para + .story__para {
+    margin-top: 18px;
+  }
+
+  .story__link {
+    margin-top: 40px;
+  }
+
+  @media (max-width: 1023px) {
+    .story__inner { gap: 56px; }
+  }
+
+  @media (max-width: 767px) {
+    .story { padding: 64px 0 80px; }
+    .story__inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .story__media {
+      aspect-ratio: 4 / 3;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Story",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Our Practice"
+    },
+    {
+      "type": "text",
+      "id": "heading_pre",
+      "label": "Heading — before italic",
+      "default": "The opposite of"
+    },
+    {
+      "type": "text",
+      "id": "heading_em",
+      "label": "Heading — italic accent word",
+      "default": "more",
+      "info": "Renders italic in warm gold."
+    },
+    {
+      "type": "text",
+      "id": "heading_post",
+      "label": "Heading — after italic",
+      "default": "."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_1",
+      "label": "Paragraph 1",
+      "default": "We started Mend & Co because the shelf had become a problem. Twelve products, twenty steps, and skin that still felt borrowed."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_2",
+      "label": "Paragraph 2",
+      "default": "So we made fewer things, slower. Each formula is an answer to a question the body was already asking."
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Read the full story →"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_label",
+      "label": "Placeholder label",
+      "default": "hands · oil · linen",
+      "info": "Shown when no image is uploaded."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Story"
+    }
+  ]
+}
+{% endschema %}
