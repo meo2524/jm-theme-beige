@@ -94,6 +94,9 @@
   <!-- Small mono annotation near the orb -->
   <span class="hero__orb-mark" aria-hidden="true">✶ Begin again ✶</span>
 
+  <!-- Breath word — cycles inhale / exhale synced to the orb -->
+  <span class="hero__breath-word" data-hero-breath aria-hidden="true">inhale</span>
+
   <!-- Content -->
   <div class="hero__inner container">
 
@@ -393,6 +396,37 @@
   }
   @media (max-width: 767px) {
     .hero__orb-mark { display: none; }
+  }
+
+  /* ---- Breath word (inhale / exhale) ---- */
+  .hero__breath-word {
+    position: absolute;
+    left: 70%;
+    top: 78%;
+    transform: translateX(-50%);
+    z-index: 4;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 24px;
+    color: var(--char-soft);
+    letter-spacing: 0.04em;
+    pointer-events: none;
+    transition: opacity 0.7s ease;
+  }
+  @media (max-width: 1024px) {
+    .hero__breath-word { font-size: 20px; }
+  }
+  @media (max-width: 767px) {
+    /* Mobile: orb sits at top:22%/left:50%, ~200px tall.
+       Place breath word just below the orb. */
+    .hero__breath-word {
+      left: 50%;
+      top: 38%;
+      font-size: 18px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__breath-word { transition: none; }
   }
 
   /* ---- Reduced motion ---- */
@@ -790,6 +824,45 @@
 
       dropIn();
       requestAnimationFrame(step);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+
+  // ---- Breath word cycle — synced to the 7s orb breathe loop ----
+  (function () {
+    if (window.__mcHeroBreathInit) return;
+    window.__mcHeroBreathInit = true;
+
+    function init() {
+      var hero = document.getElementById('hero');
+      if (!hero) return;
+      var el = hero.querySelector('[data-hero-breath]');
+      if (!el) return;
+
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduced) {
+        // Static — show "breathe" once and stop
+        el.textContent = 'breathe';
+        return;
+      }
+
+      var inhale = true;
+      el.textContent = 'inhale';
+
+      // 7s orb breathe → swap word at the midpoint (every 3.5s)
+      setInterval(function () {
+        el.style.opacity = '0';
+        setTimeout(function () {
+          inhale = !inhale;
+          el.textContent = inhale ? 'inhale' : 'exhale';
+          el.style.opacity = '';
+        }, 350);
+      }, 3500);
     }
 
     if (document.readyState === 'loading') {
