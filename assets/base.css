@@ -895,7 +895,7 @@ p {
 /* ── Eyebrow (mono uppercase + leading hairline) ──────────── */
 .eyebrow {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -918,12 +918,13 @@ p {
 .wordmark {
   font-family: var(--font-serif);
   font-weight: 500;
-  font-size: 22px;
+  font-size: 28px;
   letter-spacing: 0.01em;
   color: inherit;
   display: inline-flex;
   align-items: baseline;
   text-decoration: none;
+  line-height: 1;
 }
 .wordmark em {
   font-style: italic;
@@ -938,10 +939,10 @@ p {
   border: 0;
   background: var(--char);
   color: var(--cream);
-  font: 500 11px/1 var(--font-mono);
+  font: 500 12px/1 var(--font-mono);
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 16px 28px;
+  padding: 18px 30px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -979,7 +980,7 @@ p {
 
 /* ── Underlined text-link (tlink) ─────────────────────────── */
 .tlink {
-  font: 500 11px/1 var(--font-mono);
+  font: 500 12px/1 var(--font-mono);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--char);
