@@ -510,7 +510,10 @@
         this.footer.classList.add('is-hidden');
       } else {
         this.footer.classList.remove('is-hidden');
-        /* Re-cache totals in case a dynamic element was added since init */
+        var itemTotalEl = this.footer.querySelector('[data-cart-item-total]');
+        if (itemTotalEl) {
+          itemTotalEl.textContent = cart.item_count + ' item' + (cart.item_count === 1 ? '' : 's');
+        }
         this.totals = document.querySelectorAll('[data-cart-total]');
       }
     },
