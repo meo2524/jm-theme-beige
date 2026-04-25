@@ -153,6 +153,9 @@
   <!-- Core theme — mobile menu, quantity, variant switching -->
   <script src="{{ 'theme.js' | asset_url }}" defer></script>
 
+  <!-- No-JS fallback: make data-reveal elements visible if JS is blocked -->
+  <noscript><style>[data-reveal]{opacity:1!important;transform:none!important}</style></noscript>
+
   <!-- Reveal observer -->
   <script>
   (function () {
