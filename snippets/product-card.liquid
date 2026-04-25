@@ -89,8 +89,12 @@
       {%- if on_sale -%}
         <span class="price price--sale">{{ card_price | money }}</span>
         <span class="price price--compare">{{ compare | money }}</span>
-        {%- assign save_pct = compare | minus: card_price | times: 100 | divided_by: compare -%}
-        <span class="card__save-pill">Save {{ save_pct }}%</span>
+        {%- if compare > 0 -%}
+          {%- assign save_pct = compare | minus: card_price | times: 100 | divided_by: compare -%}
+          {%- if save_pct > 0 -%}
+            <span class="card__save-pill">Save {{ save_pct }}%</span>
+          {%- endif -%}
+        {%- endif -%}
       {%- else -%}
         <span class="price">{{ card_price | money }}</span>
       {%- endif -%}
