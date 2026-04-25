@@ -332,10 +332,14 @@
 
       cartPost('/cart/add.js', payload)
         .then(function () { return self._refreshCart(); })
-        .then(function () { self.open(); })
+        .then(function () {
+          self.open();
+          document.dispatchEvent(new CustomEvent('cart:refresh'));
+        })
         .catch(function (err) {
           console.error('[MendCart] add-to-cart error:', err.message);
           self._setLoading(false);
+          document.dispatchEvent(new CustomEvent('cart:refresh'));
         })
         .finally(function () {
           if (atcBtn) {
