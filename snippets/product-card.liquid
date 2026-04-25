@@ -20,7 +20,7 @@
 {{ 'component-quick-view.css' | asset_url | stylesheet_tag: preload: true }}
 <script src="{{ 'component-quick-view.js' | asset_url }}" defer="defer"></script>
 
-<article class="card" aria-label="{{ product.title }}">
+<article class="card{% if on_sale %} card--on-sale{% endif %}" aria-label="{{ product.title }}">
 
   <div class="card__media-wrap">
     <a href="{{ product.url }}" class="card__media-link" aria-label="{{ product.title | escape }}">
@@ -89,6 +89,8 @@
       {%- if on_sale -%}
         <span class="price price--sale">{{ card_price | money }}</span>
         <span class="price price--compare">{{ compare | money }}</span>
+        {%- assign save_pct = compare | minus: card_price | times: 100 | divided_by: compare -%}
+        <span class="card__save-pill">Save {{ save_pct }}%</span>
       {%- else -%}
         <span class="price">{{ card_price | money }}</span>
       {%- endif -%}
@@ -103,6 +105,16 @@
     flex-direction: column;
     gap: var(--space-3);
     cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    box-shadow: 0 8px 32px rgba(43,43,43,0.14);
+  }
+
+  @media (max-width: 767px) {
+    .card:hover { box-shadow: none; }
+    .card:active { box-shadow: 0 8px 32px rgba(43,43,43,0.14); }
   }
 
   /* ── MEDIA WRAP ─────────────────────────────────────────── */
@@ -133,7 +145,7 @@
 
   .card:hover .card__media img,
   .card:focus-within .card__media img {
-    transform: scale(1.04);
+    transform: scale(1.06);
   }
 
   .card__media .placeholder-svg {
@@ -291,9 +303,55 @@
   }
 
   .price--compare {
+    font-size: 0.85em;
     text-decoration: line-through;
     opacity: 0.45;
-    font-size: 0.85em;
+  }
+
+  /* ── SAVE PILL ──────────────────────────────────────────── */
+  .card__save-pill {
+    font-size: 0.6875rem;
+    background: rgba(192,57,43,0.1);
+    color: #C0392B;
+    border-radius: 2px;
+    padding: 2px 6px;
+    display: inline-block;
+  }
+
+  /* ── SALE BADGE ─────────────────────────────────────────── */
+  .badge--sale,
+  .badge--amber {
+    background: #C0392B;
+    color: #fff;
+    animation: badge-pulse 2s ease-in-out infinite;
+  }
+
+  @media (max-width: 767px) {
+    .badge--sale,
+    .badge--amber {
+      animation: none;
+    }
+  }
+
+  /* ── ATC OVERLAY ON SALE CARDS ──────────────────────────── */
+  .card--on-sale .card__atc-overlay {
+    background: var(--color-walnut, #8A6240);
+    color: #fff;
+  }
+
+  .card--on-sale .card__atc-overlay:hover {
+    background: var(--color-walnut, #8A6240);
+    filter: brightness(1.08);
+  }
+
+  /* ── MOBILE: replace hover states with :active ──────────── */
+  @media (max-width: 767px) {
+    .card:hover .card__qv-btn { opacity: 0; transform: scale(0.85); }
+    .card:active .card__qv-btn { opacity: 1; transform: scale(1); }
+    .card:hover .card__atc-overlay { opacity: 0; transform: translateX(-50%) translateY(6px); }
+    .card:active .card__atc-overlay { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .card:hover .card__media img { transform: none; }
+    .card:active .card__media img { transform: scale(1.06); }
   }
 </style>
 
@@ -326,5 +384,53 @@
       })
       .catch(function () { btn.disabled = false; });
     });
+  })();
+</script>
+
+<script>
+  (function () {
+    if (window.__mcCardRevealInit) return;
+    window.__mcCardRevealInit = true;
+
+    function initCardReveal() {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var cards = document.querySelectorAll('.card');
+      if (!cards.length) return;
+
+      if (!('IntersectionObserver' in window) || reduced) {
+        cards.forEach(function (card) {
+          card.style.opacity = '1';
+          card.style.transform = 'none';
+        });
+        return;
+      }
+
+      cards.forEach(function (card, i) {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(16px)';
+        card.style.transition = 'opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1)';
+        var delay = Math.min(i * 60, 300);
+        // On mobile, cap stagger at 2 cards
+        if (window.innerWidth <= 480 && i >= 2) delay = 0;
+        card.style.transitionDelay = delay + 'ms';
+      });
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'none';
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.1 });
+
+      cards.forEach(function (card) { observer.observe(card); });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCardReveal);
+    } else {
+      initCardReveal();
+    }
   })();
 </script>
