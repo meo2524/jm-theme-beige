@@ -178,6 +178,7 @@
       this._bindATCForms();
       this._bindProtectionToggle();
       this._initGoals();
+      this._initDiscount();
     },
 
     /* ── DRAWER OPEN / CLOSE ──────────────────────────── */
@@ -516,6 +517,49 @@
         }
         this.totals = document.querySelectorAll('[data-cart-total]');
       }
+    },
+
+    /* ── DISCOUNT CODE ────────────────────────────────── */
+
+    _initDiscount: function () {
+      var self    = this;
+      var form    = this.drawer.querySelector('[data-discount-form]');
+      var input   = this.drawer.querySelector('[data-discount-input]');
+      var msg     = this.drawer.querySelector('[data-discount-msg]');
+      var checkout = document.getElementById('CartDrawerCheckout');
+      if (!form || !input || !checkout) return;
+
+      /* Restore any previously entered code */
+      var saved = sessionStorage.getItem('mend_discount');
+      if (saved) {
+        input.value = saved;
+        checkout.href = '/checkout?discount=' + encodeURIComponent(saved);
+        self._showDiscountMsg(msg, saved, true);
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var code = input.value.trim();
+        if (!code) return;
+        sessionStorage.setItem('mend_discount', code);
+        checkout.href = '/checkout?discount=' + encodeURIComponent(code);
+        self._showDiscountMsg(msg, code, true);
+      });
+
+      /* Clear code when input is emptied */
+      input.addEventListener('input', function () {
+        if (input.value.trim() === '') {
+          sessionStorage.removeItem('mend_discount');
+          checkout.href = '/checkout';
+          if (msg) msg.hidden = true;
+        }
+      });
+    },
+
+    _showDiscountMsg: function (msg, code, applied) {
+      if (!msg) return;
+      msg.textContent = '\u2714 "' + code + '" will be applied at checkout';
+      msg.hidden = false;
     },
 
     /* ── GOALS BAR ────────────────────────────────────── */
