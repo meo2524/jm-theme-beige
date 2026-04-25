@@ -361,6 +361,11 @@
           </span>
         </button>
 
+        {%- comment -%} Accelerated checkout (Shop Pay, Apple Pay, etc.) {%- endcomment -%}
+        <div class="pdp-payment-btns">
+          {{ form | payment_button }}
+        </div>
+
       {%- endform -%}
 
       {%- comment -%} -- Trust strip -- {%- endcomment -%}
@@ -1010,11 +1015,20 @@
   text-transform: uppercase;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.12s ease, box-shadow 0.2s ease;
-  margin-bottom: 1.375rem;
+  margin-bottom: 0.75rem;
   box-shadow: 0 2px 12px rgba(43, 43, 43, 0.18);
   position: relative;
   overflow: hidden;
   animation: breathe 2.4s ease-in-out infinite;
+}
+
+.pdp-payment-btns {
+  margin-bottom: 1.375rem;
+}
+
+.pdp-payment-btns .shopify-payment-button__button {
+  border-radius: 4px;
+  font-size: 0.875rem;
 }
 
 @media (max-width: 767px) {
