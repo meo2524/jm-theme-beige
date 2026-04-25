@@ -12,12 +12,12 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "eyebrow": "The routine before your routine.",
-        "heading": "Your shower is",
-        "heading_em": "undoing",
-        "heading_2": "everything.",
-        "subtext": "Chlorine, heavy metals, sediment -- every product you apply after is working against a contaminated baseline.",
-        "cta_label": "Shop the filter",
+        "eyebrow": "Begin the mend.",
+        "heading": "Most routines",
+        "heading_em": "undo",
+        "heading_2": "themselves.",
+        "subtext": "What you put in, wash off, and layer on — it all either mends or erodes. We make the things that mend.",
+        "cta_label": "Shop now",
         "cta_url": "",
         "show_scroll_cue": true
       }
@@ -25,12 +25,12 @@
     "stats-strip": {
       "type": "stats-strip",
       "settings": {
-        "stat_1_value": "99%",
-        "stat_1_label": "Chlorine removed",
-        "stat_2_value": "15+",
-        "stat_2_label": "Contaminants filtered",
-        "stat_3_value": "6 months",
-        "stat_3_label": "Filter lifespan"
+        "stat_1_value": "100%",
+        "stat_1_label": "Natural ingredients",
+        "stat_2_value": "0",
+        "stat_2_label": "Harsh chemicals",
+        "stat_3_value": "Daily",
+        "stat_3_label": "Mending rituals"
       }
     },
     "testimonials": {
@@ -63,8 +63,8 @@
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "heading": "Skin starts in the shower.",
-        "subtext": "Join the list for the science, the rituals, and the offers worth opening.",
+        "heading": "The mend starts here.",
+        "subtext": "Join the list for rituals, research, and offers worth your time.",
         "btn_label": "Subscribe",
         "success_message": "You're in. We'll be in touch.",
         "privacy_note": "We respect your privacy. Unsubscribe any time.",
