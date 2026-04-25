@@ -39,10 +39,22 @@
           {{ product.title | placeholder_svg_tag: 'placeholder-svg' }}
         {%- endif -%}
 
-        {%- if on_sale -%}
-          <span class="card__badge badge badge--amber">{{ settings.card_badge_sale | default: 'Sale' | escape }}</span>
-        {%- elsif product.tags contains 'new' -%}
-          <span class="card__badge badge">{{ settings.card_badge_new | default: 'New' | escape }}</span>
+        {%- assign is_hot = false -%}
+        {%- if product.tags contains 'Hot' -%}{%- assign is_hot = true -%}{%- endif -%}
+        {%- if on_sale or is_hot or product.tags contains 'new' -%}
+          <div class="card__badges">
+            {%- if on_sale -%}
+              <span class="badge badge--amber">{{ settings.card_badge_sale | default: 'Sale' | escape }}</span>
+            {%- endif -%}
+            {%- if is_hot -%}
+              <span class="badge badge--hot">🔥 Hot</span>
+            {%- endif -%}
+            {%- unless on_sale or is_hot -%}
+              {%- if product.tags contains 'new' -%}
+                <span class="badge">{{ settings.card_badge_new | default: 'New' | escape }}</span>
+              {%- endif -%}
+            {%- endunless -%}
+          </div>
         {%- endif -%}
       </div>
     </a>
@@ -159,11 +171,15 @@
     opacity: 0.08;
   }
 
-  .card__badge {
+  .card__badges {
     position: absolute;
     top: var(--space-3);
     left: var(--space-3);
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
   }
 
   /* ── MAGNIFYING GLASS BUTTON ────────────────────────────── */
@@ -322,17 +338,17 @@
     display: inline-block;
   }
 
-  /* ── SALE BADGE ─────────────────────────────────────────── */
+  /* ── SALE / HOT BADGE animations ───────────────────────── */
   .badge--sale,
-  .badge--amber {
-    background: #C0392B;
-    color: #fff;
+  .badge--amber,
+  .badge--hot {
     animation: badge-pulse 2s ease-in-out infinite;
   }
 
   @media (max-width: 767px) {
     .badge--sale,
-    .badge--amber {
+    .badge--amber,
+    .badge--hot {
       animation: none;
     }
   }

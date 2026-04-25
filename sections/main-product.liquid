@@ -112,6 +112,22 @@
         </div>
       {%- endif -%}
 
+      {%- comment -%} -- Product badges -- {%- endcomment -%}
+      {%- assign pdp_is_hot = false -%}
+      {%- if product.tags contains 'Hot' -%}{%- assign pdp_is_hot = true -%}{%- endif -%}
+      {%- assign pdp_on_sale = false -%}
+      {%- if current_variant.compare_at_price > current_variant.price -%}{%- assign pdp_on_sale = true -%}{%- endif -%}
+      {%- if pdp_on_sale or pdp_is_hot -%}
+        <div class="pdp-badges" data-reveal data-reveal-delay="0">
+          {%- if pdp_on_sale -%}
+            <span class="badge badge--amber">Sale</span>
+          {%- endif -%}
+          {%- if pdp_is_hot -%}
+            <span class="badge badge--hot">🔥 Hot</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
       {%- comment -%} -- Price -- {%- endcomment -%}
       <div class="price-block" id="PriceBlock-{{ section.id }}" data-reveal data-reveal-delay="0">
         <div class="price-row">
@@ -574,6 +590,14 @@
 
 .rating-link:hover {
   text-decoration-color: var(--color-walnut, #8A6240);
+}
+
+/* Product badges */
+.pdp-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 1rem;
 }
 
 /* Price block */
