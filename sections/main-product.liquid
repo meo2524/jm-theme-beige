@@ -113,9 +113,9 @@
       {%- endif -%}
 
       {%- comment -%} -- Price -- {%- endcomment -%}
-      <div class="price-block" id="PriceBlock-{{ section.id }}">
+      <div class="price-block" id="PriceBlock-{{ section.id }}" data-reveal data-reveal-delay="0">
         <div class="price-row">
-          <span class="price-now" id="PriceNow-{{ section.id }}">
+          <span class="price-now{% if current_variant.compare_at_price > current_variant.price %} price-now--on-sale{% endif %}" id="PriceNow-{{ section.id }}">
             {{ current_variant.price | money }}
           </span>
           {%- if current_variant.compare_at_price > current_variant.price -%}
@@ -286,7 +286,7 @@
 
       {%- comment -%} -- Trust strip -- {%- endcomment -%}
       <ul class="trust-strip" role="list">
-        <li class="trust-item">
+        <li class="trust-item" data-reveal data-reveal-delay="0">
           <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
             <path d="M1 3h4l2.5 11.5h11L21 7H6"/>
             <circle cx="9" cy="20" r="1.5" fill="currentColor" stroke="none"/>
@@ -294,14 +294,14 @@
           </svg>
           <span>{{ section.settings.trust_1_text | default: 'Free shipping over $60' | escape }}</span>
         </li>
-        <li class="trust-item">
+        <li class="trust-item" data-reveal data-reveal-delay="80">
           <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
             <polyline points="1 4 1 10 7 10"/>
             <path d="M3.51 15a9 9 0 1 0 .49-4.17"/>
           </svg>
           <span>{{ section.settings.trust_2_text | default: '30-day returns' | escape }}</span>
         </li>
-        <li class="trust-item">
+        <li class="trust-item" data-reveal data-reveal-delay="160">
           <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
             <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.5C17.25 22.15 21 17.25 21 12V7L12 2z"/>
           </svg>
@@ -606,15 +606,18 @@
   opacity: 0.55;
 }
 
+.price-now--on-sale {
+  color: var(--color-walnut, #8A6240);
+}
+
 .price-save {
   font-family: var(--font-label);
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  /* Deep Walnut #8A6240 on bone-tint - contrast OK */
-  color: var(--color-walnut, #8A6240);
-  background: rgba(74, 123, 114, 0.1);
+  color: #C0392B;
+  background: rgba(192, 57, 43, 0.1);
   padding: 0.25rem 0.5rem;
   border-radius: 2px;
   align-self: center;
@@ -922,6 +925,12 @@
   height: 17px;
   color: var(--color-walnut, #8A6240);
   flex-shrink: 0;
+}
+
+.trust-item .trust-icon,
+.trust-item svg,
+.trust-item__icon {
+  color: var(--color-walnut, #8A6240);
 }
 
 /* Accordion */
