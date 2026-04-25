@@ -58,14 +58,17 @@
       ? escHtml(item.selling_plan_allocation.selling_plan.name)
       : 'One-time purchase';
 
-    var savings = item.original_line_price - item.final_line_price;
+    // Use the higher of compare_at_price (product-level discount) or original_line_price (code discount)
+    var compareAtTotal = item.compare_at_price ? item.compare_at_price * item.quantity : 0;
+    var displayCompare = Math.max(item.original_line_price, compareAtTotal);
+    var displaySavings = displayCompare - item.final_line_price;
 
-    var compareHtml = savings > 0
-      ? '<span class="cart-item__price-compare">' + formatMoney(item.original_line_price) + '</span>'
+    var compareHtml = displaySavings > 0
+      ? '<span class="cart-item__price-compare">' + formatMoney(displayCompare) + '</span>'
       : '';
 
-    var saveBadge = savings > 0
-      ? '<span class="cart-item__save-badge">Save ' + formatMoney(savings) + '</span>'
+    var saveBadge = displaySavings > 0
+      ? '<span class="cart-item__save-badge">Save ' + formatMoney(displaySavings) + '</span>'
       : '';
 
     var trashSvg =
