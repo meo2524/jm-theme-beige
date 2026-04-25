@@ -1172,10 +1172,12 @@
   var togglePriceOnce = root.querySelector('#TogglePriceOnce-' + sid);
   var productVariants = {{ product.variants | json }};
 
-  function formatMoney(cents) {
-    var str = (cents / 100).toFixed(2);
-    return '$' + (str.slice(-3) === '.00' ? str.slice(0, -3) : str);
-  }
+  var _moneyFmt = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: (window.Shopify && Shopify.currency && Shopify.currency.active) || 'USD',
+    minimumFractionDigits: 2,
+  });
+  function formatMoney(cents) { return _moneyFmt.format(cents / 100); }
 
   function getSelectedOptions() {
     var opts = {};
