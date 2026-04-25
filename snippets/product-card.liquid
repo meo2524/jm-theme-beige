@@ -210,7 +210,8 @@
     justify-content: center;
     width: calc(100% - 24px);
     padding: 12px 16px;
-    background: #fff;
+    background: var(--color-walnut, #8A6240);
+    color: #fff;
     border: none;
     border-radius: 6px;
     font-family: var(--font-label);
@@ -218,7 +219,6 @@
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #2D2D2D;
     text-decoration: none;
     cursor: pointer;
     opacity: 0;
@@ -234,7 +234,7 @@
   }
 
   .card__atc-overlay:hover {
-    background: var(--color-bone, #F2EDE4);
+    filter: brightness(1.08);
   }
 
   .card__atc-overlay--soldout {
@@ -337,16 +337,6 @@
     }
   }
 
-  /* ── ATC OVERLAY ON SALE CARDS ──────────────────────────── */
-  .card--on-sale .card__atc-overlay {
-    background: var(--color-walnut, #8A6240);
-    color: #fff;
-  }
-
-  .card--on-sale .card__atc-overlay:hover {
-    background: var(--color-walnut, #8A6240);
-    filter: brightness(1.08);
-  }
 
   /* ── MOBILE: replace hover states with :active ──────────── */
   @media (max-width: 767px) {
