@@ -211,6 +211,22 @@
   background: var(--color-walnut, #8A6240);
   border-radius: 2px;
   transition: width 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.cart-goals__fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  animation: none;
+}
+
+.cart-goals__fill.is-shimmer::after {
+  animation: shimmer 0.8s ease forwards;
 }
 
 .cart-goals__node {
@@ -229,6 +245,7 @@
 .cart-goals__node.is-reached {
   background: var(--color-walnut, #8A6240);
   color: var(--color-bone, #F2EDE4);
+  animation: ring-pulse 0.6s ease forwards;
 }
 
 .cart-goals__labels {
@@ -250,6 +267,7 @@
   font-size: 0.6875rem;
   font-weight: 600;
   color: var(--color-black);
+  transition: color 0.3s ease;
 }
 
 .cart-goals__label-sub {

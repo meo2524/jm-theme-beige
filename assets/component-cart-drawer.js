@@ -576,6 +576,7 @@
     /* ── GOALS BAR ────────────────────────────────────── */
 
     _initGoals: function () {
+      var self  = this;
       var fill1 = document.getElementById('CartGoalsFill1');
       var fill2 = document.getElementById('CartGoalsFill2');
       if (fill1) {
@@ -583,6 +584,7 @@
         requestAnimationFrame(function () {
           requestAnimationFrame(function () {
             fill1.style.width = pct1 + '%';
+            if (pct1 > 0) self._triggerGoalShimmer(fill1);
           });
         });
       }
@@ -591,9 +593,17 @@
         requestAnimationFrame(function () {
           requestAnimationFrame(function () {
             fill2.style.width = pct2 + '%';
+            if (pct2 > 0) self._triggerGoalShimmer(fill2);
           });
         });
       }
+    },
+
+    _triggerGoalShimmer: function (fill) {
+      if (!fill) return;
+      fill.classList.remove('is-shimmer');
+      void fill.offsetWidth;
+      fill.classList.add('is-shimmer');
     },
 
     _updateGoals: function (totalCents) {
@@ -607,6 +617,14 @@
       var fill1 = document.getElementById('CartGoalsFill1');
       var fill2 = document.getElementById('CartGoalsFill2');
 
+      var wasReached1 = fill1 && fill1.closest('.cart-goals__segment') &&
+        fill1.closest('.cart-goals__segment').querySelector('.cart-goals__node.is-reached') !== null;
+      var wasReached2 = fill2 && fill2.closest('.cart-goals__segment') &&
+        fill2.closest('.cart-goals__segment').querySelector('.cart-goals__node.is-reached') !== null;
+
+      var nowReached1 = totalCents >= goal1;
+      var nowReached2 = count >= 2 && totalCents >= goal2;
+
       if (count === 1) {
         if (fill1) fill1.style.width = Math.min(100, (totalCents / goal1) * 100) + '%';
       } else {
@@ -617,12 +635,28 @@
       }
 
       var nodes = bar.querySelectorAll('.cart-goals__node');
-      if (nodes[0]) nodes[0].classList.toggle('is-reached', totalCents >= goal1);
-      if (nodes[1]) nodes[1].classList.toggle('is-reached', totalCents >= goal2);
+      if (nodes[0]) nodes[0].classList.toggle('is-reached', nowReached1);
+      if (nodes[1]) nodes[1].classList.toggle('is-reached', nowReached2);
 
       var labels = bar.querySelectorAll('.cart-goals__label');
-      if (labels[0]) labels[0].classList.toggle('is-reached', totalCents >= goal1);
-      if (labels[1]) labels[1].classList.toggle('is-reached', totalCents >= goal2);
+      if (labels[0]) labels[0].classList.toggle('is-reached', nowReached1);
+      if (labels[1]) labels[1].classList.toggle('is-reached', nowReached2);
+
+      /* Milestone just reached — update sub-label text and trigger shimmer */
+      if (!wasReached1 && nowReached1) {
+        var subEl1 = labels[0] && labels[0].querySelector('.cart-goals__label-sub');
+        if (subEl1) subEl1.textContent = 'Unlocked! \uD83C\uDF89';
+        this._triggerGoalShimmer(fill1);
+      }
+      if (!wasReached2 && nowReached2) {
+        var subEl2 = labels[1] && labels[1].querySelector('.cart-goals__label-sub');
+        if (subEl2) subEl2.textContent = 'Unlocked! \uD83C\uDF89';
+        this._triggerGoalShimmer(fill2);
+      }
+
+      /* Also shimmer whenever the bar advances (width increases) */
+      if (nowReached1 && fill1) this._triggerGoalShimmer(fill1);
+      if (nowReached2 && fill2) this._triggerGoalShimmer(fill2);
     },
 
     /* ── LOADING STATE ────────────────────────────────── */
