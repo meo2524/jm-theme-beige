@@ -9,34 +9,60 @@
 
 :root {
 
-  /* Colour palette — Japandi Bone */
-  --color-black:          #2D2D2D;  /* Matte Black — text, CTAs, dark sections */
-  --color-black-hover:    #1A1A1A;  /* Matte Black dark — button hover */
-  --color-walnut:         #8A6240;  /* Deep Walnut — decorative rules, underlines, accents */
-  --color-walnut-hover:   #6B4F32;  /* Deep Walnut dark — hover on walnut elements */
-  --color-taupe:          #D9C5B2;  /* Sandy Taupe — borders, cards, alt surfaces */
-  --color-stone:          #BEBDB8;  /* Stone Grey — dividers, inactive UI */
-  --color-olive:          #4F5947;  /* Olive Green — secondary labels, trust badges */
-  --color-bone:           #F2EDE4;  /* Bone White — primary background */
-  --color-bone-alt:       #FFFFFF;
+  /* ----------------------------------------------------------
+     Colour palette — Mend & Co (Direction 01 — Refined)
+     Cream + Charcoal + Warm gold. Matches the design handoff.
+     Old token names are preserved as aliases below so existing
+     sections keep working until they're upgraded.
+     ---------------------------------------------------------- */
+  --cream:                #efe8dc;   /* Primary background */
+  --cream-2:              #e7dfd0;   /* Alt surfaces, promo bar */
+  --cream-3:              #ddd2bf;   /* Deeper cream */
+  --paper:                #f5efe4;   /* Lightest paper */
+  --char:                 #1f1d1a;   /* Primary text, dark sections */
+  --char-2:               #2a2622;
+  --char-soft:            #4a423a;   /* Secondary text */
+  --ink-mute:             #6a6258;   /* Mono labels, captions */
+  --gold:                 #a8814f;   /* Warm gold — accents */
+  --gold-deep:            #8a663b;   /* Deeper gold — italic accent word */
+  --gold-light:           #c9a16b;   /* Light gold — on-dark labels */
+  --rose:                 #b87858;
+  --line:                 rgba(31, 29, 26, 0.14);
+  --line-strong:          rgba(31, 29, 26, 0.28);
+
+  /* Legacy aliases — keep existing sections working through phased rollout */
+  --color-black:          var(--char);
+  --color-black-hover:    #0e0d0c;
+  --color-walnut:         var(--gold-deep);
+  --color-walnut-hover:   #6B4F32;
+  --color-taupe:          var(--cream-3);
+  --color-stone:          #BEBDB8;
+  --color-olive:          var(--char-soft);
+  --color-bone:           var(--cream);
+  --color-bone-alt:       var(--paper);
 
   /* Semantic tokens */
-  --color-bg:             var(--color-bone);
-  --color-bg-alt:         var(--color-bone-alt);
-  --color-bg-dark:        var(--color-black);
-  --color-text:           var(--color-black);
-  --color-text-muted:     var(--color-olive);
-  --color-text-on-dark:   #F2EDE4;
-  --color-border:         var(--color-taupe);
-  --color-rule:           var(--color-taupe);
-  --color-cta:            var(--color-black);
-  --color-cta-hover:      var(--color-black-hover);
-  --color-badge:          var(--color-taupe);
+  --color-bg:             var(--cream);
+  --color-bg-alt:         var(--paper);
+  --color-bg-dark:        var(--char);
+  --color-text:           var(--char);
+  --color-text-muted:     var(--char-soft);
+  --color-text-on-dark:   var(--cream);
+  --color-border:         var(--line);
+  --color-rule:           var(--line-strong);
+  --color-cta:            var(--char);
+  --color-cta-hover:      #0e0d0c;
+  --color-badge:          var(--cream-3);
 
-  /* Typography */
-  --font-heading:         'Playfair Display', Georgia, serif;
-  --font-body:            'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-label:           'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* ----------------------------------------------------------
+     Typography — Cormorant Garamond (display) + Inter (body)
+                + JetBrains Mono (eyebrows / labels / utility)
+     ---------------------------------------------------------- */
+  --font-heading:         'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body:            'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-label:           'JetBrains Mono', ui-monospace, 'Menlo', monospace;
+  --font-mono:            'JetBrains Mono', ui-monospace, 'Menlo', monospace;
+  --font-serif:           'Cormorant Garamond', Georgia, 'Times New Roman', serif;
 
   --font-size-xs:         0.75rem;    /* 12px */
   --font-size-sm:         0.875rem;   /* 14px */
@@ -853,4 +879,212 @@ p {
   .cart-goals__node {
     animation: none !important;
   }
+}
+
+/* ============================================================
+   MEND & CO — DESIGN SYSTEM UTILITIES (Direction 01 — Refined)
+   Drop-in classes for the redesign. Use these on top of the
+   existing component CSS — they don't replace anything.
+   ============================================================ */
+
+/* ── Type helpers ─────────────────────────────────────────── */
+.serif { font-family: var(--font-serif); font-weight: 400; }
+.sans  { font-family: var(--font-body); }
+.mono  { font-family: var(--font-mono); }
+
+/* ── Eyebrow (mono uppercase + leading hairline) ──────────── */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--char-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+.eyebrow.gold,
+.eyebrow--gold { color: var(--gold-deep); }
+
+/* ── Wordmark ─────────────────────────────────────────────── */
+.wordmark {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: 0.01em;
+  color: inherit;
+  display: inline-flex;
+  align-items: baseline;
+  text-decoration: none;
+}
+.wordmark em {
+  font-style: italic;
+  font-weight: 400;
+  margin: 0 1px;
+  color: var(--gold-deep);
+}
+
+/* ── CTA buttons ──────────────────────────────────────────── */
+.btn-mend {
+  appearance: none;
+  border: 0;
+  background: var(--char);
+  color: var(--cream);
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 16px 28px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.btn-mend:hover { background: #0e0d0c; }
+.btn-mend:active { transform: scale(0.98); }
+.btn-mend .arr {
+  width: 16px;
+  height: 1px;
+  background: currentColor;
+  position: relative;
+}
+.btn-mend .arr::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+.btn-mend.ghost,
+.btn-mend--ghost {
+  background: transparent;
+  color: var(--char);
+  border: 1px solid var(--line-strong);
+}
+.btn-mend.ghost:hover,
+.btn-mend--ghost:hover { background: rgba(31, 29, 26, 0.04); }
+
+/* ── Underlined text-link (tlink) ─────────────────────────── */
+.tlink {
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--char);
+  text-decoration: none;
+  border-bottom: 1px solid var(--char);
+  padding-bottom: 3px;
+  display: inline-block;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.tlink:hover {
+  color: var(--gold-deep);
+  border-bottom-color: var(--gold-deep);
+}
+
+/* ── Number markers (N° 01) ───────────────────────────────── */
+.num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--gold-deep);
+  letter-spacing: 0.04em;
+}
+
+/* ── Hairline dividers ────────────────────────────────────── */
+.hr-mend        { height: 1px; background: var(--line); border: 0; margin: 0; }
+.hr-mend-strong { height: 1px; background: var(--line-strong); border: 0; margin: 0; }
+
+/* ── Placeholder imagery (striped + labeled) ──────────────── */
+.ph {
+  position: relative;
+  background-color: var(--cream-2);
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0,
+    transparent 11px,
+    rgba(31, 29, 26, 0.05) 11px,
+    rgba(31, 29, 26, 0.05) 12px
+  );
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.ph::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 50% at 50% 40%, rgba(168, 129, 79, 0.08), transparent 70%);
+  pointer-events: none;
+}
+.ph-label {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  padding: 4px 10px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+/* ── Subtle paper grain overlay ───────────────────────────── */
+.grain { position: relative; }
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.16  0 0 0 0 0.13  0 0 0 0 0.08  0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/></svg>");
+  mix-blend-mode: multiply;
+  opacity: 0.10;
+  pointer-events: none;
+}
+
+/* ── Marquee (promo bar) ──────────────────────────────────── */
+@keyframes mend-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: mend-marquee 60s linear infinite;
+  gap: 64px;
+  padding-right: 64px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee { animation: none; }
+}
+
+/* ── Pulse dot (live indicators) ──────────────────────────── */
+@keyframes mend-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.85); }
+  50%      { opacity: 1;    transform: scale(1.1); }
+}
+.pulse-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold-deep);
+  animation: mend-pulse 3.6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pulse-dot { animation: none; }
 }
