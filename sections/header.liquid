@@ -305,9 +305,7 @@
     text-transform: uppercase;
     color: rgba(242, 237, 228, 0.75);
     padding-block: var(--space-2);
-    border-bottom: 1.5px solid transparent;
-    transition: border-color var(--transition-fast),
-                color var(--transition-fast);
+    transition: color var(--transition-fast);
   }
 
   .header__nav-link::after {
@@ -325,12 +323,12 @@
 
   .header__nav-link:hover,
   .header__nav-link.is-active {
-    border-bottom-color: var(--color-taupe, #D9C5B2);
     color: var(--color-bone, #F2EDE4);
   }
 
   .header__nav-link:hover::after,
-  .header__nav-link:focus-visible::after {
+  .header__nav-link:focus-visible::after,
+  .header__nav-link.is-active::after {
     transform: scaleX(1);
   }
 
