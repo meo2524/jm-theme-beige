@@ -5,6 +5,18 @@
   assign legal_menu     = section.settings.legal_menu  | default: 'footer-legal'
   assign tagline_text   = section.settings.tagline | default: 'Mend what matters.'
   assign brand_text     = section.settings.brand_statement | default: 'Every day, your routine either builds you up or breaks you down. We make the products that tip the balance.'
+
+  # Compute the current year as Roman numerals (works for 2000–2099).
+  # 2026 → MMXXVI. Fallback to Gregorian if outside that range.
+  assign year_num = 'now' | date: '%Y' | times: 1
+  assign year_roman = year_num | append: ''
+  if year_num >= 2000 and year_num <= 2099
+    assign tens_idx = year_num | modulo: 100 | divided_by: 10
+    assign ones_idx = year_num | modulo: 10
+    assign tens_map = ',X,XX,XXX,XL,L,LX,LXX,LXXX,XC' | split: ','
+    assign ones_map = ',I,II,III,IV,V,VI,VII,VIII,IX' | split: ','
+    assign year_roman = 'MM' | append: tens_map[tens_idx] | append: ones_map[ones_idx]
+  endif
 -%}
 
 <footer class="site-footer" role="contentinfo">
@@ -118,7 +130,7 @@
       <div class="footer__bottom-inner">
         <nav aria-label="Legal">
           <ul class="footer__legal-list" role="list">
-            <li><span class="footer__copyright">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</span></li>
+            <li><span class="footer__copyright">&copy; {{ shop.name }} — {{ year_roman }} · All gentle rights reserved</span></li>
             {%- for link in linklists[legal_menu].links -%}
               <li><a href="{{ link.url }}" class="footer__legal-link">{{ link.title }}</a></li>
             {%- endfor -%}

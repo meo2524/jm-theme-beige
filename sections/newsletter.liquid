@@ -82,8 +82,8 @@
 /* ── NEWSLETTER ─────────────────────────────────────────── */
 
 .nl {
-  background: var(--color-bone);
-  padding: 3.5rem 2rem;
+  background: var(--cream);
+  padding: 80px 2rem;
 }
 
 .nl__inner {
@@ -96,26 +96,32 @@
 .nl__rule-above {
   margin-inline: auto;
   margin-bottom: 1.5rem;
+  background-color: var(--gold-deep);
 }
 
-/* Heading — linen on espresso 14.18:1 ✅ */
+/* Heading — Cormorant Garamond serif */
 .nl__heading {
-  font-family: var(--font-heading);
-  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3rem);  /* up to 48px */
   font-weight: 400;
-  line-height: 1.15;
+  line-height: 1.05;
   letter-spacing: -0.02em;
-  color: var(--color-black);
+  color: var(--char);
   margin: 0 0 1.125rem;
+  text-wrap: balance;
+}
+.nl__heading em {
+  font-style: italic;
+  color: var(--gold-deep);
 }
 
-/* Subtext — soft gold on espresso 10.51:1 ✅ */
+/* Subtext — serif italic-friendly */
 .nl__subtext {
-  font-family: var(--font-label);
-  font-size: 0.9375rem;
-  line-height: 1.65;
-  color: var(--color-olive);
-  margin: 0 0 1.75rem;
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;  /* 17px */
+  line-height: 1.55;
+  color: var(--char-soft);
+  margin: 0 0 2rem;
 }
 
 /* ── FORM ──────────────────────────────────────────────── */
@@ -124,59 +130,62 @@
   display: flex;
   max-width: 480px;
   margin: 0 auto;
-  border: 1.5px solid rgba(166, 137, 102, 0.35);
-  border-radius: var(--radius-sm, 2px);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
   overflow: hidden;
+  background: var(--paper);
 }
 
 .nl__field-row:focus-within {
-  outline: 2px solid var(--color-walnut, #8A6240);
+  outline: 2px solid var(--gold-deep);
   outline-offset: 2px;
   border-color: transparent;
 }
 
-/* Input — linen bg, espresso text */
+/* Input */
 .nl__input {
   flex: 1;
   height: 48px;
   padding: 0 1.125rem;
-  background: #FFFFFF;
+  background: var(--paper);
   border: none;
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.875rem;
-  color: var(--color-black);
+  color: var(--char);
   outline: none;
   min-width: 0;
 }
 
 .nl__input::placeholder {
-  /* Warm mahogany-tinted on linen → #8A6240, 3.30:1 ✅ */
-  color: #8A6240;
+  color: var(--ink-mute);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.05em;
 }
 
-/* Button — teal bg, white text — 6.2:1 ✅ */
+/* Button — charcoal mono pill */
 .nl__btn {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 14px;
   height: 48px;
-  padding: 0 1.375rem;
-  background: var(--color-cta, #2D2D2D);
+  padding: 0 28px;
+  background: var(--char);
   border: none;
   cursor: pointer;
-  font-family: var(--font-label);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 2px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-bone, #F2EDE4);
+  color: var(--cream);
   white-space: nowrap;
   transition: background 0.2s ease;
   flex-shrink: 0;
 }
 
 .nl__btn:hover {
-  background: var(--color-cta-hover, #1A1A1A);
+  background: #0e0d0c;
 }
 
 .nl__btn:active {
@@ -191,37 +200,38 @@
   transform: translateX(3px);
 }
 
-/* Privacy note — #D9C5B2, 6.62:1 on espresso ✅ */
+/* Privacy note — mono uppercase */
 .nl__privacy {
-  font-family: var(--font-label);
-  font-size: 0.6875rem;
-  color: var(--color-olive);
-  margin: 1.125rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin: 1.25rem 0 0;
   line-height: 1.6;
 }
 
 .nl__privacy-link {
-  color: inherit;
+  color: var(--gold-deep);
   text-decoration: underline;
-  text-underline-offset: 2px;
-  text-decoration-color: rgba(166, 137, 102, 0.45);
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(138, 102, 59, 0.45);
   transition: text-decoration-color 0.15s ease, color 0.15s ease;
 }
 
 .nl__privacy-link:hover {
-  color: #F2EDE4;
-  text-decoration-color: rgba(215, 196, 163, 0.5);
+  color: var(--char);
+  text-decoration-color: var(--char);
 }
 
 /* ── SUCCESS STATE ─────────────────────────────────────── */
 
 .nl__success {
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
   font-weight: 400;
   font-style: italic;
-  /* Soft gold on espresso 10.51:1 ✅ */
-  color: #F2EDE4;
+  color: var(--gold-deep);
   margin: 0;
   padding: 1.5rem 0;
   animation: nl-fade-in 0.4s ease forwards;
@@ -230,10 +240,11 @@
 /* ── ERROR STATE ───────────────────────────────────────── */
 
 .nl__error {
-  font-family: var(--font-label);
-  font-size: 0.8125rem;
-  /* #D9C5B2 on espresso 8.19:1 ✅ */
-  color: #D9C5B2;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rose);
   margin: 0 0 1rem;
   text-align: center;
 }
