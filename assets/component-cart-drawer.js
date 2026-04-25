@@ -518,17 +518,6 @@
     /* ── GOALS BAR ────────────────────────────────────── */
 
     _initGoals: function () {
-      /* Populate threshold labels using the active currency formatter */
-      var bar = document.getElementById('CartGoals');
-      if (bar) {
-        var g1 = parseInt(bar.dataset.goal1, 10) || 0;
-        var g2 = parseInt(bar.dataset.goal2, 10) || 0;
-        var t1 = bar.querySelector('[data-goal-threshold="1"]');
-        var t2 = bar.querySelector('[data-goal-threshold="2"]');
-        if (t1 && g1) t1.textContent = formatMoney(g1);
-        if (t2 && g2) t2.textContent = formatMoney(g2);
-      }
-
       var fill1 = document.getElementById('CartGoalsFill1');
       var fill2 = document.getElementById('CartGoalsFill2');
       if (fill1) {

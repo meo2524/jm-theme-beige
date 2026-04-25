@@ -173,12 +173,12 @@
         <div class="cart-goals__labels">
           <div class="cart-goals__label{% if m1_reached %} is-reached{% endif %}">
             <span class="cart-goals__label-name">{{ m1_label }}</span>
-            <span class="cart-goals__label-sub">Spend <span data-goal-threshold="1"></span></span>
+            <span class="cart-goals__label-sub">Spend <span class="money">{{ m1_cents | money_without_trailing_zeros }}</span></span>
           </div>
           {%- if milestone_count == 2 -%}
             <div class="cart-goals__label{% if m2_reached %} is-reached{% endif %}">
               <span class="cart-goals__label-name">{{ m2_label }}</span>
-              <span class="cart-goals__label-sub">Spend <span data-goal-threshold="2"></span></span>
+              <span class="cart-goals__label-sub">Spend <span class="money">{{ m2_cents | money_without_trailing_zeros }}</span></span>
             </div>
           {%- endif -%}
         </div>
