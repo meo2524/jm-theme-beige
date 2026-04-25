@@ -290,10 +290,6 @@
                     class="variant-card__radio"
                   >
                   <span class="variant-card__name">{{ value }}</span>
-                  {%- if matching_variant.compare_at_price > matching_variant.price -%}
-                    {%- assign save_pct = matching_variant.compare_at_price | minus: matching_variant.price | times: 100 | divided_by: matching_variant.compare_at_price -%}
-                    <span class="variant-card__save">-{{ save_pct }}%</span>
-                  {%- endif -%}
                   {%- unless matching_variant.available -%}
                     <span class="variant-card__out">{{ section.settings.variant_sold_out_label | default: 'Sold out' | escape }}</span>
                   {%- endunless -%}
