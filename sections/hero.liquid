@@ -80,13 +80,15 @@
     <!-- Cursor glow -->
     <div class="hero__cursor-glow" data-hero-cursor></div>
 
-    <!-- Interactive orb -->
-    <div class="hero__orb-stage" data-hero-orb-stage>
-      <div class="hero__orb-shadow" data-hero-orb-shadow></div>
-      <div class="hero__orb-halo"   data-hero-orb-halo></div>
-      <div class="hero__orb"        data-hero-orb role="button" tabindex="0" aria-label="Drag to push the orb"></div>
-    </div>
+  </div>
 
+  <!-- Interactive orb — sibling of .hero__inner so its z-index can
+       sit above the content layer without being trapped inside the
+       .hero__scene stacking context. -->
+  <div class="hero__orb-stage" data-hero-orb-stage>
+    <div class="hero__orb-shadow" data-hero-orb-shadow></div>
+    <div class="hero__orb-halo"   data-hero-orb-halo></div>
+    <div class="hero__orb"        data-hero-orb role="button" tabindex="0" aria-label="Drag to push the orb"></div>
   </div>
 
   <!-- Content -->
