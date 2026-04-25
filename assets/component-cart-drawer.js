@@ -437,7 +437,10 @@
 
       var savings = (cart.original_total_price || 0) - (cart.total_price || 0);
       (cart.items || []).forEach(function (item) {
-        var cmp = item.compare_at_price;
+        // Use compare_at_price from cart.js or the Liquid-seeded map as fallback
+        var cmp = item.compare_at_price
+          || (window.__mendCompareAt && window.__mendCompareAt[item.variant_id])
+          || 0;
         if (cmp && cmp > item.price) {
           savings += (cmp - item.price) * item.quantity;
         }
