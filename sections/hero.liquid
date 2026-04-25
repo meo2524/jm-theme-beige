@@ -286,8 +286,17 @@
 
   /* Typography override only — bg/color inherits from .btn--primary */
   .hero__cta .btn--primary {
-    font-size: 11px;
-    letter-spacing: 0.18em;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    padding: 22px 40px;
+    min-height: 64px;
+  }
+  @media (max-width: 767px) {
+    .hero__cta .btn--primary {
+      font-size: 13px;
+      padding: 20px 32px;
+      min-height: 58px;
+    }
   }
 
   /* ---- Scroll cue ---- */
