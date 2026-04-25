@@ -842,6 +842,12 @@
   border-radius: 3px;
   background: #fff;
   overflow: hidden;
+  opacity: 0.55;
+  transition: opacity 0.15s ease;
+}
+
+.payment-badge:hover {
+  opacity: 1;
 }
 
 .payment-badge__icon,
