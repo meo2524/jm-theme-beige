@@ -113,14 +113,35 @@
       <h1 class="product-title">{{ product.title }}</h1>
 
       {%- comment -%} -- Rating -- {%- endcomment -%}
-      {%- if section.settings.rating_show -%}
-        {%- liquid
-          assign mf_rv = product.metafields.custom.rating_value
-          assign mf_rc = product.metafields.custom.rating_count
-          assign rating_value = mf_rv | default: section.settings.rating_value | default: '4.9'
-          assign rating_count = mf_rc | default: section.settings.rating_count_text | default: '127 reviews'
-          assign rating_href  = section.settings.rating_link | default: '#product-reviews'
-        -%}
+      {%- liquid
+        comment
+          Priority:
+          1. product.metafields.reviews.rating / reviews.rating_count (Judge.me, Okendo, etc.)
+          2. product.metafields.custom.rating_value / custom.rating_count
+          3. Section setting overrides (manual fallback)
+        endcomment
+
+        assign rating_value = ''
+        assign rating_count = ''
+
+        if product.metafields.reviews.rating != blank
+          assign rating_value = product.metafields.reviews.rating.value
+          assign rating_count = product.metafields.reviews.rating_count.value
+        elsif product.metafields.custom.rating_value != blank
+          assign rating_value = product.metafields.custom.rating_value
+          assign rating_count = product.metafields.custom.rating_count
+        endif
+
+        if section.settings.rating_value != blank
+          assign rating_value = section.settings.rating_value
+        endif
+        if section.settings.rating_count_text != blank
+          assign rating_count = section.settings.rating_count_text
+        endif
+
+        assign rating_href = section.settings.rating_link | default: '#product-reviews'
+      -%}
+      {%- if rating_value != blank and section.settings.rating_show -%}
         <div class="product-rating" aria-label="Rated {{ rating_value }} out of 5, {{ rating_count }}">
           <div class="rating-stars" aria-hidden="true">
             {%- for i in (1..5) -%}
@@ -1590,21 +1611,20 @@
       "type": "checkbox",
       "id": "rating_show",
       "label": "Show rating",
-      "default": true
+      "default": true,
+      "info": "Uncheck to hide the rating block site-wide regardless of data."
     },
     {
       "type": "text",
       "id": "rating_value",
-      "label": "Rating value (fallback)",
-      "default": "4.9",
-      "info": "Set per product via metafield custom.rating_value — that takes priority."
+      "label": "Rating value (override)",
+      "info": "Overrides all metafield data. Leave blank to use reviews.rating or custom.rating_value metafields automatically."
     },
     {
       "type": "text",
       "id": "rating_count_text",
-      "label": "Review count text (fallback)",
-      "default": "127 reviews",
-      "info": "Set per product via metafield custom.rating_count — that takes priority."
+      "label": "Review count text (override)",
+      "info": "Overrides all metafield data. Leave blank to use reviews.rating_count or custom.rating_count metafields automatically."
     },
     {
       "type": "url",
