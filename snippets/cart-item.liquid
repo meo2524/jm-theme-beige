@@ -3,8 +3,15 @@
   Parameters: item {object}, context {string} 'page' | 'drawer'
 {% endcomment %}
 
-{%- assign ctx     = context | default: 'page' -%}
-{%- assign savings = item.original_line_price | minus: item.final_line_price -%}
+{%- assign ctx = context | default: 'page' -%}
+
+{%- comment -%} Use compare_at_price (product discount) or original_line_price (code discount), whichever is higher {%- endcomment -%}
+{%- assign compare_at_total = item.variant.compare_at_price | times: item.quantity -%}
+{%- assign display_compare  = item.original_line_price -%}
+{%- if compare_at_total > item.original_line_price -%}
+  {%- assign display_compare = compare_at_total -%}
+{%- endif -%}
+{%- assign savings = display_compare | minus: item.final_line_price -%}
 
 <div
   class="cart-item cart-item--{{ ctx }}"
@@ -78,7 +85,7 @@
 
       <div class="cart-item__price-group">
         {%- if savings > 0 -%}
-          <span class="cart-item__price-compare">{{ item.original_line_price | money }}</span>
+          <span class="cart-item__price-compare">{{ display_compare | money }}</span>
         {%- endif -%}
         <span class="cart-item__price" data-item-price>{{ item.final_line_price | money }}</span>
         {%- if savings > 0 -%}
