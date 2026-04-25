@@ -58,8 +58,11 @@
       ? escHtml(item.selling_plan_allocation.selling_plan.name)
       : 'One-time purchase';
 
-    // Use the higher of compare_at_price (product-level discount) or original_line_price (code discount)
-    var compareAtTotal = item.compare_at_price ? item.compare_at_price * item.quantity : 0;
+    // Use compare_at_price from cart.js or the Liquid-seeded map (cart.js doesn't always include it)
+    var compareAtPrice = item.compare_at_price
+      || (window.__mendCompareAt && window.__mendCompareAt[item.variant_id])
+      || 0;
+    var compareAtTotal = compareAtPrice ? compareAtPrice * item.quantity : 0;
     var displayCompare = Math.max(item.original_line_price, compareAtTotal);
     var displaySavings = displayCompare - item.final_line_price;
 
@@ -493,6 +496,12 @@
       if (!this.itemsWrap) return;
 
       var items = cart.items || [];
+
+      /* Keep compare-at map current — cart.js includes compare_at_price when available */
+      window.__mendCompareAt = window.__mendCompareAt || {};
+      items.forEach(function (item) {
+        if (item.compare_at_price) window.__mendCompareAt[item.variant_id] = item.compare_at_price;
+      });
 
       if (items.length === 0) {
         this.itemsWrap.innerHTML = emptyStateHtml();

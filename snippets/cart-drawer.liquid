@@ -331,3 +331,13 @@
 
   </div>
 </div>
+
+{%- comment -%} Seed compare-at prices for JS re-renders (cart.js doesn't always return compare_at_price) {%- endcomment -%}
+<script>
+window.__mendCompareAt = window.__mendCompareAt || {};
+{%- for item in cart.items -%}
+  {%- if item.variant.compare_at_price > 0 -%}
+window.__mendCompareAt[{{ item.variant_id }}] = {{ item.variant.compare_at_price }};
+  {%- endif -%}
+{%- endfor -%}
+</script>
