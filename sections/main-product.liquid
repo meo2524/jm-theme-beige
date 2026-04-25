@@ -1362,7 +1362,8 @@
     }
   }
 
-  /* Restore on cart refresh / drawer open */
+  /* Restore when item added (success or error) or cart externally refreshed */
+  document.addEventListener('cart:item-added', atcClearLoading);
   document.addEventListener('cart:refresh', atcClearLoading);
 
 }());

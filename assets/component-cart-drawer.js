@@ -334,12 +334,12 @@
         .then(function () { return self._refreshCart(); })
         .then(function () {
           self.open();
-          document.dispatchEvent(new CustomEvent('cart:refresh'));
+          document.dispatchEvent(new CustomEvent('cart:item-added'));
         })
         .catch(function (err) {
           console.error('[MendCart] add-to-cart error:', err.message);
           self._setLoading(false);
-          document.dispatchEvent(new CustomEvent('cart:refresh'));
+          document.dispatchEvent(new CustomEvent('cart:item-added'));
         })
         .finally(function () {
           if (atcBtn) {
