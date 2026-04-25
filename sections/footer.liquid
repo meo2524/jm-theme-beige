@@ -41,11 +41,12 @@
                 class="footer__logo-img"
               >
             {%- else -%}
-              {%- assign name_parts = shop.name | default: 'Mend & Co' | split: '&' -%}
+              {%- assign clean_name = shop.name | default: 'Mend & Co' | replace: '&amp;', '&' -%}
+              {%- assign name_parts = clean_name | split: '&' -%}
               {%- if name_parts.size == 2 -%}
                 <span class="footer__logo-text">{{ name_parts[0] | strip }}<em>&amp;</em>{{ name_parts[1] | strip }}</span>
               {%- else -%}
-                <span class="footer__logo-text">{{ shop.name }}</span>
+                <span class="footer__logo-text">{{ clean_name }}</span>
               {%- endif -%}
             {%- endif -%}
           </a>

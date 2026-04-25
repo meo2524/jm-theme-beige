@@ -36,15 +36,16 @@
         >
       {%- else -%}
         {%- comment -%}
-          Mend & Co wordmark — italic gold ampersand. Falls back to
-          shop.name split on "&" so any "Brand & Co" name renders the
-          ampersand in italic gold; otherwise just shows shop.name.
+          Mend & Co wordmark — italic gold ampersand. Shopify returns
+          shop.name HTML-encoded ("Mend&amp;Co"), so decode it before
+          splitting; otherwise the split produces literal "amp;" text.
         {%- endcomment -%}
-        {%- assign name_parts = shop.name | split: '&' -%}
+        {%- assign clean_name = shop.name | replace: '&amp;', '&' -%}
+        {%- assign name_parts = clean_name | split: '&' -%}
         {%- if name_parts.size == 2 -%}
           <span class="header__logo-text">{{ name_parts[0] | strip }}<em>&amp;</em>{{ name_parts[1] | strip }}</span>
         {%- else -%}
-          <span class="header__logo-text">{{ shop.name }}</span>
+          <span class="header__logo-text">{{ clean_name }}</span>
         {%- endif -%}
       {%- endif -%}
     </a>
