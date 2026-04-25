@@ -159,7 +159,7 @@
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var els = document.querySelectorAll('[data-reveal]');
     if (!els.length) return;
-    if (reduced) {
+    if (reduced || !('IntersectionObserver' in window)) {
       els.forEach(function (el) { el.classList.add('is-visible'); });
       return;
     }

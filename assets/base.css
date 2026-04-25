@@ -800,7 +800,7 @@ p {
 
 @keyframes amount-pop {
   0%   { transform: scale(1); }
-  50%  { transform: scale(1.14); }
+  50%  { transform: scale(1.08); }
   100% { transform: scale(1); }
 }
 
@@ -830,8 +830,8 @@ p {
 @media (prefers-reduced-motion: reduce) {
   [data-reveal],
   [data-reveal].is-visible {
-    opacity: 1;
-    transform: none;
+    opacity: 1 !important;
+    transform: none !important;
     transition: none;
   }
 
