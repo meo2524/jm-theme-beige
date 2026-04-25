@@ -654,9 +654,6 @@
         this._triggerGoalShimmer(fill2);
       }
 
-      /* Also shimmer whenever the bar advances (width increases) */
-      if (nowReached1 && fill1) this._triggerGoalShimmer(fill1);
-      if (nowReached2 && fill2) this._triggerGoalShimmer(fill2);
     },
 
     /* ── LOADING STATE ────────────────────────────────── */
