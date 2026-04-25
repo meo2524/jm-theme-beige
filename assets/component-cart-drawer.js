@@ -664,17 +664,28 @@
       if (labels[0]) labels[0].classList.toggle('is-reached', nowReached1);
       if (labels[1]) labels[1].classList.toggle('is-reached', nowReached2);
 
-      /* Milestone just reached — update sub-label text and trigger shimmer */
-      if (!wasReached1 && nowReached1) {
-        var subEl1 = labels[0] && labels[0].querySelector('.cart-goals__label-sub');
-        if (subEl1) subEl1.textContent = 'Unlocked! \uD83C\uDF89';
-        this._triggerGoalShimmer(fill1);
+      /* Always update sub-labels with remaining amount or unlocked state */
+      var subEl1 = labels[0] && labels[0].querySelector('.cart-goals__label-sub');
+      var subEl2 = labels[1] && labels[1].querySelector('.cart-goals__label-sub');
+
+      if (subEl1) {
+        if (!nowReached1) {
+          subEl1.textContent = formatMoney(goal1 - totalCents) + ' more to go';
+        } else if (!wasReached1) {
+          subEl1.textContent = 'Unlocked! \uD83C\uDF89';
+        }
       }
-      if (!wasReached2 && nowReached2) {
-        var subEl2 = labels[1] && labels[1].querySelector('.cart-goals__label-sub');
-        if (subEl2) subEl2.textContent = 'Unlocked! \uD83C\uDF89';
-        this._triggerGoalShimmer(fill2);
+      if (subEl2) {
+        if (!nowReached2) {
+          subEl2.textContent = formatMoney(goal2 - totalCents) + ' more to go';
+        } else if (!wasReached2) {
+          subEl2.textContent = 'Unlocked! \uD83C\uDF89';
+        }
       }
+
+      /* Trigger shimmer on milestone unlock */
+      if (!wasReached1 && nowReached1) this._triggerGoalShimmer(fill1);
+      if (!wasReached2 && nowReached2) this._triggerGoalShimmer(fill2);
 
     },
 

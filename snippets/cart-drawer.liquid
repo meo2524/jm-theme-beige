@@ -122,6 +122,9 @@
 
         assign m1_dollars = m1_cents | divided_by: 100
         assign m2_dollars = m2_cents | divided_by: 100
+
+        assign m1_remaining = m1_cents | minus: cart.total_price | at_least: 0
+        assign m2_remaining = m2_cents | minus: cart.total_price | at_least: 0
       -%}
 
       {%- capture icon_truck -%}
@@ -173,12 +176,24 @@
         <div class="cart-goals__labels">
           <div class="cart-goals__label{% if m1_reached %} is-reached{% endif %}">
             <span class="cart-goals__label-name">{{ m1_label }}</span>
-            <span class="cart-goals__label-sub">Spend <span class="money">{{ m1_cents | money_without_trailing_zeros }}</span></span>
+            <span class="cart-goals__label-sub">
+              {%- if m1_reached -%}
+                Unlocked! 🎉
+              {%- else -%}
+                {{ m1_remaining | money_without_trailing_zeros }} more to go
+              {%- endif -%}
+            </span>
           </div>
           {%- if milestone_count == 2 -%}
             <div class="cart-goals__label{% if m2_reached %} is-reached{% endif %}">
               <span class="cart-goals__label-name">{{ m2_label }}</span>
-              <span class="cart-goals__label-sub">Spend <span class="money">{{ m2_cents | money_without_trailing_zeros }}</span></span>
+              <span class="cart-goals__label-sub">
+                {%- if m2_reached -%}
+                  Unlocked! 🎉
+                {%- else -%}
+                  {{ m2_remaining | money_without_trailing_zeros }} more to go
+                {%- endif -%}
+              </span>
             </div>
           {%- endif -%}
         </div>
