@@ -177,49 +177,51 @@
         </p>
       </div>
 
-      {%- comment -%} -- Subscription toggle (only when selling plans exist) -- {%- endcomment -%}
-      {%- if product.selling_plan_groups.size > 0 -%}
-        {%- liquid
-          assign sp_group = product.selling_plan_groups.first
-          assign sp       = sp_group.selling_plans.first
-          assign sp_adj   = sp.price_adjustments.first
+      {%- comment -%} -- Subscription toggle -- {%- endcomment -%}
+      {%- liquid
+        assign sp_group = product.selling_plan_groups.first
+        assign sp       = sp_group.selling_plans.first
+        assign sp_adj   = sp.price_adjustments.first
 
+        if sp_group != blank
           assign subscribe_label = sp_group.name | default: section.settings.toggle_subscribe_label | default: 'Subscribe & Save'
+        else
+          assign subscribe_label = section.settings.toggle_subscribe_label | default: 'Subscribe & Save'
+        endif
 
-          if sp_adj.value_type == 'percentage'
-            assign subscribe_badge = sp_adj.value | append: '% off'
-          elsif sp_adj.value_type == 'fixed_amount'
-            assign subscribe_badge = sp_adj.value | money | append: ' off'
-          else
-            assign subscribe_badge = section.settings.toggle_subscribe_savings | default: '10% off'
-          endif
-        -%}
-        <div
-          class="purchase-toggle"
-          role="group"
-          aria-label="Purchase type"
-          id="PurchaseToggle-{{ section.id }}"
+        if sp_adj.value_type == 'percentage'
+          assign subscribe_badge = sp_adj.value | append: '% off'
+        elsif sp_adj.value_type == 'fixed_amount'
+          assign subscribe_badge = sp_adj.value | money | append: ' off'
+        else
+          assign subscribe_badge = section.settings.toggle_subscribe_savings | default: '10% off'
+        endif
+      -%}
+      <div
+        class="purchase-toggle"
+        role="group"
+        aria-label="Purchase type"
+        id="PurchaseToggle-{{ section.id }}"
+      >
+        <button
+          class="purchase-toggle__btn is-active"
+          data-purchase-type="one-time"
+          type="button"
+          aria-pressed="true"
         >
-          <button
-            class="purchase-toggle__btn is-active"
-            data-purchase-type="one-time"
-            type="button"
-            aria-pressed="true"
-          >
-            <span class="toggle-label">{{ section.settings.toggle_onetime_label | default: 'One-time' }}</span>
-            <span class="toggle-price" id="TogglePriceOnce-{{ section.id }}">{{ current_variant.price | money }}</span>
-          </button>
-          <button
-            class="purchase-toggle__btn"
-            data-purchase-type="subscribe"
-            type="button"
-            aria-pressed="false"
-          >
-            <span class="toggle-label">{{ subscribe_label | escape }}</span>
-            <span class="toggle-price">{{ subscribe_badge | escape }}</span>
-          </button>
-        </div>
-      {%- endif -%}
+          <span class="toggle-label">{{ section.settings.toggle_onetime_label | default: 'One-time' }}</span>
+          <span class="toggle-price" id="TogglePriceOnce-{{ section.id }}">{{ current_variant.price | money }}</span>
+        </button>
+        <button
+          class="purchase-toggle__btn"
+          data-purchase-type="subscribe"
+          type="button"
+          aria-pressed="false"
+        >
+          <span class="toggle-label">{{ subscribe_label | escape }}</span>
+          <span class="toggle-price">{{ subscribe_badge | escape }}</span>
+        </button>
+      </div>
       <input
         type="hidden"
         name="selling_plan"
