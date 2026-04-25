@@ -188,7 +188,12 @@
 }
 
 /* ---- Variant select ------------------------------------------- */
-.mc-qv-variants { display: flex; flex-direction: column; gap: 0.5rem; }
+.mc-qv-variants {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
 .mc-qv-label {
   font-size: 0.7rem;
   font-weight: 600;
