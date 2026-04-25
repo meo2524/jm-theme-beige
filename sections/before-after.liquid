@@ -7,10 +7,10 @@
     {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
       <div class="before-after__header">
         {%- if section.settings.heading != blank -%}
-          <h2 class="before-after__title">{{ section.settings.heading | escape }}</h2>
+          <h2 class="before-after__title" data-reveal data-reveal-delay="0">{{ section.settings.heading | escape }}</h2>
         {%- endif -%}
         {%- if section.settings.subheading != blank -%}
-          <p class="before-after__subtitle">{{ section.settings.subheading | escape }}</p>
+          <p class="before-after__subtitle" data-reveal data-reveal-delay="80">{{ section.settings.subheading | escape }}</p>
         {%- endif -%}
       </div>
     {%- endif -%}

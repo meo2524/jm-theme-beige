@@ -19,7 +19,7 @@
           assign val   = section.settings[val]
           assign label = section.settings[label]
         -%}
-        <div class="stats-strip__item">
+        <div class="stats-strip__item" data-reveal data-reveal-delay="{{ forloop.index0 | times: 80 }}">
           <span class="stats-strip__value" aria-label="{{ val }} — {{ label }}">{{ val }}</span>
           <span class="stats-strip__rule" aria-hidden="true"></span>
           <span class="stats-strip__label">{{ label }}</span>

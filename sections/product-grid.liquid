@@ -13,9 +13,9 @@
       <div>
         <span class="rule-above" aria-hidden="true"></span>
         {%- if eyebrow != blank -%}
-          <p class="product-grid__eyebrow t-label">{{ eyebrow }}</p>
+          <p class="product-grid__eyebrow t-label" data-reveal data-reveal-delay="0">{{ eyebrow }}</p>
         {%- endif -%}
-        <h2 class="product-grid__heading t-display-md">{{ heading }}</h2>
+        <h2 class="product-grid__heading t-display-md" data-reveal data-reveal-delay="80">{{ heading }}</h2>
       </div>
 
       {%- if collection != blank -%}

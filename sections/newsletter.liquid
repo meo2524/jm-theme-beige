@@ -16,12 +16,12 @@
 
     <div class="rule-above nl__rule-above" aria-hidden="true"></div>
 
-    <h2 class="nl__heading">
+    <h2 class="nl__heading" data-reveal data-reveal-delay="0">
       {{ section.settings.heading | default: 'Skin starts in the shower.' }}
     </h2>
 
     {%- if section.settings.subtext != blank -%}
-      <p class="nl__subtext">{{ section.settings.subtext }}</p>
+      <p class="nl__subtext" data-reveal data-reveal-delay="80">{{ section.settings.subtext }}</p>
     {%- endif -%}
 
     {%- form 'customer', id: form_id, class: 'nl__form' -%}
@@ -41,7 +41,7 @@
           </p>
         {%- endif -%}
 
-        <div class="nl__field-row">
+        <div class="nl__field-row" data-reveal data-reveal-delay="160">
           <label for="NlEmail-{{ section.id }}" class="visually-hidden">Email address</label>
           <input
             id="NlEmail-{{ section.id }}"
