@@ -878,6 +878,38 @@
   transition: background 0.2s ease, transform 0.12s ease, box-shadow 0.2s ease;
   margin-bottom: 1.375rem;
   box-shadow: 0 2px 12px rgba(43, 43, 43, 0.18);
+  position: relative;
+  overflow: hidden;
+  animation: breathe 2.4s ease-in-out infinite;
+}
+
+@media (max-width: 767px) {
+  .btn-atc {
+    animation: breathe-opacity 2.4s ease-in-out infinite;
+  }
+}
+
+.btn-atc.is-loading {
+  background: var(--color-walnut, #8A6240);
+  color: #fff;
+  pointer-events: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-atc::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: rgba(255,255,255,0.6);
+  transition: width 0s;
+}
+
+.btn-atc.is-loading::after {
+  width: 100%;
+  transition: width 0.6s ease;
 }
 
 .btn-atc:hover:not(:disabled) {
@@ -1120,6 +1152,12 @@
     justify-content: space-between;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-atc {
+    animation: none !important;
+  }
+}
 </style>
 
 
@@ -1297,6 +1335,35 @@
       if (panel) panel.hidden = expanded;
     });
   });
+
+
+  /* -- ATC LOADING STATE ------------------------------------- */
+  var atcOriginalText = addToCartText ? addToCartText.textContent.trim() : 'Add to Cart';
+
+  function atcSetLoading() {
+    if (!addToCartBtn) return;
+    addToCartBtn.classList.add('is-loading');
+    if (addToCartText) addToCartText.textContent = 'Adding\u2026';
+  }
+
+  function atcClearLoading() {
+    if (!addToCartBtn) return;
+    addToCartBtn.classList.remove('is-loading');
+    if (addToCartText) addToCartText.textContent = atcOriginalText;
+  }
+
+  if (addToCartBtn) {
+    var atcForm = addToCartBtn.closest('form');
+    if (atcForm) {
+      atcForm.addEventListener('submit', function (e) {
+        if (addToCartBtn.disabled) return;
+        atcSetLoading();
+      });
+    }
+  }
+
+  /* Restore on cart refresh / drawer open */
+  document.addEventListener('cart:refresh', atcClearLoading);
 
 }());
 </script>
