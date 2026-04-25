@@ -3,8 +3,8 @@
 {%- liquid
   assign footer_menu    = section.settings.footer_menu | default: 'footer'
   assign legal_menu     = section.settings.legal_menu  | default: 'footer-legal'
-  assign tagline_text   = section.settings.tagline | default: 'The routine before your routine.'
-  assign brand_text     = section.settings.brand_statement | default: 'Most skin and hair problems start in the shower. Mend fixes the step the beauty industry ignores.'
+  assign tagline_text   = section.settings.tagline | default: 'Mend what matters.'
+  assign brand_text     = section.settings.brand_statement | default: 'Every day, your routine either builds you up or breaks you down. We make the products that tip the balance.'
 -%}
 
 <footer class="site-footer" role="contentinfo">
@@ -298,13 +298,13 @@
       "type": "text",
       "id": "tagline",
       "label": "Tagline",
-      "default": "The routine before your routine."
+      "default": "Mend what matters."
     },
     {
       "type": "textarea",
       "id": "brand_statement",
       "label": "Brand statement",
-      "default": "Most skin and hair problems start in the shower. Mend fixes the step the beauty industry won't talk about."
+      "default": "Every day, your routine either builds you up or breaks you down. We make the products that tip the balance."
     },
     {
       "type": "header",
