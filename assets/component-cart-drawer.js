@@ -433,7 +433,14 @@
       });
 
       if (savings > 0 && cart.item_count > 0) {
-        if (amountEl) amountEl.textContent = formatMoney(savings);
+        if (amountEl) {
+          amountEl.textContent = formatMoney(savings);
+          amountEl.classList.remove('is-popping');
+          // Force reflow so animation re-fires if already playing
+          void amountEl.offsetWidth;
+          amountEl.classList.add('is-popping');
+          setTimeout(function () { amountEl.classList.remove('is-popping'); }, 200);
+        }
         banner.hidden = false;
       } else {
         banner.hidden = true;
