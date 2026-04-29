@@ -13,11 +13,11 @@
       "type": "hero",
       "settings": {
         "eyebrow": "Begin the mend.",
-        "heading": "Most routines",
-        "heading_em": "undo",
-        "heading_2": "themselves.",
-        "subtext": "What you put in, wash off, and layer on — it all either mends or erodes. We make the things that mend.",
-        "cta_label": "Shop now",
+        "heading": "Your body",
+        "heading_em": "already",
+        "heading_2": "knows.",
+        "subtext": "We make things worth keeping. Quiet tools for the long repair — not the quick fix.",
+        "cta_label": "Shop the collection",
         "cta_url": "",
         "show_scroll_cue": true
       }
@@ -26,11 +26,11 @@
       "type": "stats-strip",
       "settings": {
         "stat_1_value": "100%",
-        "stat_1_label": "Natural ingredients",
-        "stat_2_value": "0",
-        "stat_2_label": "Harsh chemicals",
+        "stat_1_label": "Honest materials",
+        "stat_2_value": "Zero",
+        "stat_2_label": "Compromises",
         "stat_3_value": "Daily",
-        "stat_3_label": "Mending rituals"
+        "stat_3_label": "Mending practice"
       }
     },
     "testimonials": {
