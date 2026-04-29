@@ -94,8 +94,8 @@
     {%- liquid
       # N° marker priority: metafield → vendor (uppercase) → blank
       assign card_no = product.metafields.custom.card_number
-      if card_no == blank and product.vendor != blank
-        assign card_no = product.vendor
+      if card_no == blank
+        assign card_no = 'Mend&Co'
       endif
 
       # Tag line (e.g. "Face oil · 30ml") — metafield → product.type
