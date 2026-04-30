@@ -419,16 +419,17 @@
   position: relative;
   height: 280px;
   overflow: hidden;
-  background: var(--color-black, #2D2D2D);
+  background: var(--cream);
   border-radius: 0 0 16px 16px;
   margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
 }
 
-/* No-image fallback: warm walnut radial glow */
+/* No-image fallback: warm cream radial */
 .collection-hero--no-img {
   background:
-    radial-gradient(ellipse 80% 140% at 50% 110%, rgba(138, 98, 64, 0.55) 0%, transparent 65%),
-    linear-gradient(170deg, #1a1512 0%, #2D2D2D 40%, #241b14 100%);
+    radial-gradient(ellipse 70% 120% at 50% 110%, rgba(196, 184, 158, 0.45) 0%, transparent 70%),
+    var(--cream);
 }
 
 .collection-hero__img {
@@ -439,17 +440,9 @@
   opacity: 1;
 }
 
-/* Gradient scrim so title is always legible */
+/* No scrim needed on light background */
 .collection-hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(20, 16, 12, 0.18) 0%,
-    rgba(20, 16, 12, 0.55) 100%
-  );
-  pointer-events: none;
+  display: none;
 }
 
 .collection-hero__overlay {
@@ -467,19 +460,18 @@
 .collection-hero__title {
   font-family: var(--font-heading);
   font-size: clamp(2.75rem, 6vw, 5rem);
-  font-weight: 700;
-  color: var(--color-bone, #F2EDE4);
+  font-weight: 500;
+  color: var(--char);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   line-height: 1;
   margin: 0;
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
 }
 
 .collection-hero__desc {
   font-family: var(--font-label);
   font-size: 0.9375rem;
-  color: rgba(242, 237, 228, 0.72);
+  color: var(--char-soft);
   margin: 0.875rem 0 0;
   max-width: 480px;
   line-height: 1.6;
@@ -682,7 +674,7 @@
   margin: 0 auto;
   padding: 3rem 4rem 6rem;
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 1fr;
   gap: 4rem;
   align-items: start;
 }
@@ -1086,13 +1078,8 @@
     padding-right: 2.5rem;
   }
 
-  .collection-body {
-    grid-template-columns: 200px 1fr;
-    gap: 3rem;
-  }
-
   .collection-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
