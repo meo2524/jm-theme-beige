@@ -21,15 +21,7 @@
         "type": "announcement-bar",
         "settings": {
           "show": true
-        },
-        "blocks": {
-          "bar-1": { "type": "item", "settings": { "mark": "N° 01", "text": "New arrival — Marrow Ring No.1" } },
-          "bar-2": { "type": "item", "settings": { "mark": "✶", "text": "Worn daily. Felt quietly." } },
-          "bar-3": { "type": "item", "settings": { "mark": "◐", "text": "Every order ships with a ritual guide" } },
-          "bar-4": { "type": "item", "settings": { "mark": "N° 02", "text": "Designed to mend. Built to last." } },
-          "bar-5": { "type": "item", "settings": { "mark": "✶", "text": "Free returns within 30 days" } }
-        },
-        "block_order": ["bar-1", "bar-2", "bar-3", "bar-4", "bar-5"]
+        }
       },
       "header": {
         "type": "header",
