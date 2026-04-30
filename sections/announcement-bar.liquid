@@ -9,8 +9,8 @@
   {%- assign items = section.blocks -%}
 
   {%- comment -%} Default items when no blocks are configured in the theme editor {%- endcomment -%}
-  {%- assign default_marks = 'N° 01,✶,◐,N° 02,✶' | split: ',' -%}
-  {%- assign default_texts = 'New arrival — Marrow Ring No.1,Worn daily. Felt quietly.,Trusted by 30,000+ customers,Designed to mend. Built to last.,Free returns within 30 days' | split: ',' -%}
+  {%- assign default_marks = 'N° 01|✶|◐|N° 02|✶' | split: '|' -%}
+  {%- assign default_texts = 'New arrival — Marrow Ring No.1|Worn daily. Felt quietly.|Trusted by 30,000+ customers|Designed to mend. Built to last.|Free returns within 30 days' | split: '|' -%}
 
   <div class="promo-bar" role="region" aria-label="Announcements">
     <div class="marquee promo-bar__marquee">
