@@ -29,134 +29,64 @@
 >
 
   {%- comment -%} ═══════════════════════════════════════════
-    COLLECTION HEADER
+    COLLECTION HEADER — title left, count + sort right
   ═══════════════════════════════════════════ {%- endcomment -%}
 
-  <div class="collection-hero{% unless collection.image and section.settings.show_hero_image %} collection-hero--no-img{% endunless %}">
-    {%- if collection.image and section.settings.show_hero_image -%}
-      <img
-        src="{{ collection.image | image_url: width: 1600 }}"
-        srcset="
-          {{ collection.image | image_url: width: 800 }}  800w,
-          {{ collection.image | image_url: width: 1200 }} 1200w,
-          {{ collection.image | image_url: width: 1600 }} 1600w
-        "
-        sizes="100vw"
-        alt="{{ collection.title | escape }}"
-        class="collection-hero__img"
-        loading="eager"
-        width="{{ collection.image.width }}"
-        height="{{ collection.image.height }}"
-      >
+  {%- assign hidden_count = 0 -%}
+  {%- for p in collection.products -%}
+    {%- if p.type == 'Shipping Insurance' or p.handle == 'shipping-protection' -%}
+      {%- assign hidden_count = hidden_count | plus: 1 -%}
     {%- endif -%}
-    <div class="collection-hero__overlay">
-      <h1 class="collection-hero__title">{{ collection.title }}</h1>
-      {%- if section.settings.show_description and collection.description != blank -%}
-        <p class="collection-hero__desc">{{ collection.description | strip_html | truncate: 120 }}</p>
-      {%- endif -%}
+  {%- endfor -%}
+  {%- assign visible_count = collection.products_count | minus: hidden_count -%}
+
+  <div class="collection-header">
+    <h1 class="collection-header__title">{{ collection.title }}</h1>
+    <div class="collection-header__right">
+      <p class="toolbar-count" aria-live="polite" data-collection-count>
+        {{ visible_count }}{% if visible_count == 1 %}&nbsp;product{% else %}&nbsp;products{% endif %}
+      </p>
+      <label class="sort-label" for="SortBy-{{ section.id }}">Sort by</label>
+      <div class="sort-wrap">
+        <select id="SortBy-{{ section.id }}" class="sort-select" aria-label="Sort products" data-collection-sort>
+          {%- assign sort_options = "manual:Featured,best-selling:Best selling,title-ascending:A–Z,title-descending:Z–A,price-ascending:Lowest price,price-descending:Highest price,created-descending:Newest" | split: "," -%}
+          {%- for opt in sort_options -%}
+            {%- assign parts = opt | split: ":" -%}
+            <option value="{{ parts[0] }}"{% if sort_by == parts[0] %} selected{% endif %}>{{ parts[1] }}</option>
+          {%- endfor -%}
+        </select>
+        <svg class="sort-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
     </div>
   </div>
+  <div class="collection-header__rule"></div>
 
-
-  {%- comment -%} ═══════════════════════════════════════════
-    TOOLBAR
-  ═══════════════════════════════════════════ {%- endcomment -%}
-
-  <div class="collection-toolbar">
-    <div class="toolbar-row">
-
-      <div class="toolbar-left">
-        {%- if show_filters -%}
-          <button
-            class="filter-toggle"
-            id="FilterToggle-{{ section.id }}"
-            type="button"
-            aria-expanded="false"
-            aria-controls="FilterSidebar-{{ section.id }}"
-          >
-            <svg class="filter-toggle__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <line x1="4" y1="6" x2="20" y2="6"/>
-              <line x1="4" y1="12" x2="15" y2="12"/>
-              <line x1="4" y1="18" x2="10" y2="18"/>
-            </svg>
-            <span>Filter</span>
-            {%- if active_filters_count > 0 -%}
-              <span class="filter-toggle__badge" aria-label="{{ active_filters_count }} active filters">{{ active_filters_count }}</span>
+  {%- comment -%} Active filter pills {%- endcomment -%}
+  <div data-collection-pills>
+    {%- if active_filters_count > 0 -%}
+      <div class="active-filters">
+        {%- for filter in collection.filters -%}
+          {%- if filter.type == 'price_range' -%}
+            {%- if filter.min_value.value or filter.max_value.value -%}
+              <a href="{{ filter.url_to_remove }}" class="active-filter-pill">
+                <span>Price: {% if filter.min_value.value %}{{ filter.min_value.value | money_without_trailing_zeros }}{% else %}$0{% endif %} - {% if filter.max_value.value %}{{ filter.max_value.value | money_without_trailing_zeros }}{% else %}any{% endif %}</span>
+                <svg class="active-filter-pill__x" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg>
+              </a>
             {%- endif -%}
-          </button>
-        {%- endif -%}
-
-        {%- assign hidden_count = 0 -%}
-        {%- for p in collection.products -%}
-          {%- if p.type == 'Shipping Insurance' or p.handle == 'shipping-protection' -%}
-            {%- assign hidden_count = hidden_count | plus: 1 -%}
+          {%- else -%}
+            {%- for value in filter.active_values -%}
+              <a href="{{ value.url_to_remove }}" class="active-filter-pill">
+                <span>{{ value.label }}</span>
+                <svg class="active-filter-pill__x" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg>
+              </a>
+            {%- endfor -%}
           {%- endif -%}
         {%- endfor -%}
-        {%- assign visible_count = collection.products_count | minus: hidden_count -%}
-        <p class="toolbar-count" aria-live="polite" data-collection-count>
-          {{ visible_count }}
-          {%- if visible_count == 1 -%}&nbsp;product{%- else -%}&nbsp;products{%- endif -%}
-        </p>
+        <a href="{{ collection.url }}" class="clear-filters">Clear all</a>
       </div>
-
-      <div class="toolbar-right">
-        <label class="sort-label" for="SortBy-{{ section.id }}">Sort by</label>
-        <div class="sort-wrap">
-          <select
-            id="SortBy-{{ section.id }}"
-            class="sort-select"
-            aria-label="Sort products"
-            data-collection-sort
-          >
-            {%- assign sort_options = "manual:Featured,best-selling:Best selling,title-ascending:A–Z,title-descending:Z–A,price-ascending:Lowest price,price-descending:Highest price,created-descending:Newest" | split: "," -%}
-            {%- for opt in sort_options -%}
-              {%- assign parts = opt | split: ":" -%}
-              <option value="{{ parts[0] }}"{% if sort_by == parts[0] %} selected{% endif %}>{{ parts[1] }}</option>
-            {%- endfor -%}
-          </select>
-          <svg class="sort-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
-        </div>
-      </div>
-
-    </div>
-
-    {%- comment -%} Active filter pills — always rendered so AJAX can swap content {%- endcomment -%}
-    <div data-collection-pills>
-      {%- if active_filters_count > 0 -%}
-        <div class="active-filters">
-          {%- for filter in collection.filters -%}
-            {%- if filter.type == 'price_range' -%}
-              {%- if filter.min_value.value or filter.max_value.value -%}
-                <a href="{{ filter.url_to_remove }}" class="active-filter-pill">
-                  <span>Price:
-                    {%- if filter.min_value.value -%}&nbsp;{{ filter.min_value.value | money_without_trailing_zeros }}{%- else -%}&nbsp;$0{%- endif -%}
-                    &nbsp;-
-                    {%- if filter.max_value.value -%}&nbsp;{{ filter.max_value.value | money_without_trailing_zeros }}{%- else -%}&nbsp;any{%- endif -%}
-                  </span>
-                  <svg class="active-filter-pill__x" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                    <line x1="1" y1="1" x2="11" y2="11"/>
-                    <line x1="11" y1="1" x2="1" y2="11"/>
-                  </svg>
-                </a>
-              {%- endif -%}
-            {%- else -%}
-              {%- for value in filter.active_values -%}
-                <a href="{{ value.url_to_remove }}" class="active-filter-pill">
-                  <span>{{ value.label }}</span>
-                  <svg class="active-filter-pill__x" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                    <line x1="1" y1="1" x2="11" y2="11"/>
-                    <line x1="11" y1="1" x2="1" y2="11"/>
-                  </svg>
-                </a>
-              {%- endfor -%}
-            {%- endif -%}
-          {%- endfor -%}
-          <a href="{{ collection.url }}" class="clear-filters">Clear all</a>
-        </div>
-      {%- endif -%}
-    </div>
+    {%- endif -%}
   </div>
 
 
@@ -380,122 +310,42 @@
 .collection-header {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 4rem 4rem 3rem;
-  text-align: center;
-  border-bottom: 1px solid rgba(43, 43, 43, 0.08);
-}
-
-.collection-header__eyebrow {
-  font-family: var(--font-label);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 3.5px;
-  text-transform: uppercase;
-  color: var(--color-olive);
-  margin: 0 0 0.875rem;
+  padding: 3rem 4rem 1.25rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
 }
 
 .collection-header__title {
-  font-family: var(--font-heading);
-  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 400;
-  color: var(--color-black);
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  margin: 0 0 1.25rem;
-}
-
-.collection-header__desc {
-  font-family: var(--font-label);
-  font-size: 0.9375rem;
-  line-height: 1.72;
-  color: var(--color-olive);
-  max-width: 540px;
-  margin: 0 auto;
-}
-
-/* Hero banner */
-.collection-hero {
-  position: relative;
-  height: 280px;
-  overflow: hidden;
-  background: var(--cream);
-  border-radius: 0 0 16px 16px;
-  margin-bottom: 0.5rem;
-  border-bottom: 1px solid var(--line);
-}
-
-/* No-image fallback: warm cream radial */
-.collection-hero--no-img {
-  background:
-    radial-gradient(ellipse 70% 120% at 50% 110%, rgba(196, 184, 158, 0.45) 0%, transparent 70%),
-    var(--cream);
-}
-
-.collection-hero__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  opacity: 1;
-}
-
-/* No scrim needed on light background */
-.collection-hero::after {
-  display: none;
-}
-
-.collection-hero__overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2rem;
-}
-
-.collection-hero__title {
-  font-family: var(--font-heading);
-  font-size: clamp(2.75rem, 6vw, 5rem);
-  font-weight: 500;
+  font-style: normal;
   color: var(--char);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  line-height: 1;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
   margin: 0;
 }
 
-.collection-hero__desc {
-  font-family: var(--font-label);
-  font-size: 0.9375rem;
-  color: var(--char-soft);
-  margin: 0.875rem 0 0;
-  max-width: 480px;
-  line-height: 1.6;
-}
-
-
-/* ── TOOLBAR ───────────────────────────────────────────── */
-
-.collection-toolbar {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 1.25rem 4rem;
-  border-bottom: 1px solid rgba(43, 43, 43, 0.08);
-  position: sticky;
-  top: 0;
-  background: var(--color-bone, #F2EDE4);
-  z-index: 20;
-}
-
-.toolbar-row {
+.collection-header__right {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 1.25rem;
+  flex-shrink: 0;
+}
+
+.collection-header__rule {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 4rem;
+}
+
+.collection-header__rule::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: var(--line);
 }
 
 .toolbar-left {
@@ -674,7 +524,7 @@
   margin: 0 auto;
   padding: 3rem 4rem 6rem;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 220px 1fr;
   gap: 4rem;
   align-items: start;
 }
@@ -1072,10 +922,15 @@
 
 @media (max-width: 1024px) {
   .collection-header,
-  .collection-toolbar,
+  .collection-header__rule,
   .collection-body {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
+  }
+
+  .collection-body {
+    grid-template-columns: 180px 1fr;
+    gap: 2.5rem;
   }
 
   .collection-grid {
