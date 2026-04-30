@@ -1,8 +1,8 @@
 {%- liquid
-  assign card_image   = product.featured_media
-  assign card_price   = product.price
-  assign compare      = product.compare_at_price
-  assign on_sale      = false
+  assign card_image = product.featured_media
+  assign card_price = product.price
+  assign compare    = product.compare_at_price
+  assign on_sale    = false
   if compare > card_price
     assign on_sale = true
   endif
@@ -13,290 +13,499 @@
   if card_image != blank
     assign card_img_400 = card_image | image_url: width: 400
     assign card_img_600 = card_image | image_url: width: 600
-    assign card_img_800 = card_image | image_url: width: 800
+    assign card_img_900 = card_image | image_url: width: 900
     assign card_img_alt = card_image.alt | default: product.title | escape
   endif
-  assign card_subtitle = product.metafields.custom.card_tag
-  if card_subtitle == blank
-    assign card_subtitle = product.type
-  endif
 -%}
+{{ 'component-quick-view.css' | asset_url | stylesheet_tag: preload: true }}
+<script src="{{ 'component-quick-view.js' | asset_url }}" defer="defer"></script>
 
 <article class="card{% if on_sale %} card--on-sale{% endif %}" aria-label="{{ product.title }}">
 
-  <a href="{{ product.url }}" class="card__media-link" tabindex="-1" aria-hidden="true">
-    <div class="card__media">
-      {%- if card_image != blank -%}
-        <img
-          src="{{ card_img_600 }}"
-          srcset="{{ card_img_400 }} 400w, {{ card_img_600 }} 600w, {{ card_img_800 }} 800w"
-          sizes="(max-width: 767px) 50vw, 33vw"
-          alt="{{ card_img_alt }}"
-          width="600"
-          height="600"
-          loading="lazy"
-        >
-      {%- else -%}
-        {{ product.title | placeholder_svg_tag: 'placeholder-svg card__placeholder' }}
-      {%- endif -%}
-
-      {%- if on_sale -%}
-        <span class="card__badge">Sale</span>
-      {%- endif -%}
-    </div>
-  </a>
-
-  <div class="card__rule"></div>
-
-  <div class="card__info">
-    <a href="{{ product.url }}" class="card__title-link">
-      <h3 class="card__title">{{ product.title }}</h3>
-    </a>
-
-    {%- if card_subtitle != blank -%}
-      <p class="card__subtitle">{{ card_subtitle }}</p>
-    {%- endif -%}
-
-    <div class="card__meta">
-      {%- if single_variant -%}
-        <span class="card__size">{{ product.variants.first.title }}</span>
-      {%- else -%}
-        <span class="card__size">{{ product.variants.size }} options</span>
-      {%- endif -%}
-
-      <div class="card__price">
-        {%- if on_sale -%}
-          <span class="card__price-now">{{ card_price | money }}</span>
-          <span class="card__price-was">{{ compare | money }}</span>
+  <div class="card__media-wrap">
+    <a href="{{ product.url }}" class="card__media-link" aria-label="{{ product.title | escape }}">
+      <div class="card__media">
+        {%- if card_image != blank -%}
+          <img
+            src="{{ card_img_600 }}"
+            srcset="{{ card_img_400 }} 400w, {{ card_img_600 }} 600w, {{ card_img_900 }} 900w"
+            sizes="(max-width: 767px) 50vw, 33vw"
+            alt="{{ card_img_alt }}"
+            width="600"
+            height="750"
+            loading="lazy"
+          >
         {%- else -%}
-          <span class="card__price-now">{{ card_price | money }}</span>
+          {{ product.title | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+
+        {%- assign is_hot = false -%}
+        {%- if product.tags contains 'Hot' -%}{%- assign is_hot = true -%}{%- endif -%}
+        {%- if on_sale or is_hot or product.tags contains 'new' -%}
+          <div class="card__badges">
+            {%- if on_sale -%}
+              <span class="badge badge--amber">{{ settings.card_badge_sale | default: 'Sale' | escape }}</span>
+            {%- endif -%}
+            {%- if is_hot -%}
+              <span class="badge badge--hot">Hot</span>
+            {%- endif -%}
+            {%- unless on_sale or is_hot -%}
+              {%- if product.tags contains 'new' -%}
+                <span class="badge">{{ settings.card_badge_new | default: 'New' | escape }}</span>
+              {%- endif -%}
+            {%- endunless -%}
+          </div>
         {%- endif -%}
       </div>
-    </div>
+    </a>
 
+    <!-- Magnifying glass quick view (top right) -->
+    <button
+      class="card__qv-btn"
+      type="button"
+      data-quick-view="{{ product.handle }}"
+      aria-label="Quick view {{ product.title | escape }}"
+    >
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <circle cx="6.5" cy="6.5" r="4" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M10 10l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <!-- Add to cart overlay (centred, appears on hover) -->
     {%- if single_variant and product.available -%}
       <button
-        class="card__atc"
+        class="card__atc-overlay"
         type="button"
         data-card-atc="{{ product.variants.first.id }}"
         aria-label="Add {{ product.title | escape }} to cart"
       >
-        <span class="card__atc-label">Add to cart</span>
-        <span class="card__atc-added" aria-hidden="true">Added</span>
+        <span class="card__atc-label">{{ settings.card_atc_label | default: 'Add to Cart' | escape }}</span>
+        <span class="card__atc-added" aria-hidden="true">{{ settings.card_atc_added | default: 'Added!' | escape }}</span>
       </button>
     {%- elsif product.available -%}
-      <a href="{{ product.url }}" class="card__atc">Select options</a>
+      <a href="{{ product.url }}" class="card__atc-overlay">{{ settings.card_select_options_label | default: 'Select Options' | escape }}</a>
     {%- else -%}
-      <span class="card__atc card__atc--soldout">Sold out</span>
+      <span class="card__atc-overlay card__atc-overlay--soldout">{{ settings.card_sold_out_label | default: 'Sold Out' | escape }}</span>
     {%- endif -%}
+  </div>
+
+  <div class="card__info">
+    {%- liquid
+      # N° marker priority: metafield → vendor (uppercase) → blank
+      assign card_no = product.metafields.custom.card_number
+      if card_no == blank and product.vendor != blank
+        assign card_no = product.vendor
+      endif
+
+      # Tag line (e.g. "Face oil · 30ml") — metafield → product.type
+      assign card_tag = product.metafields.custom.card_tag
+      if card_tag == blank and product.type != blank
+        assign card_tag = product.type
+      endif
+    -%}
+
+    <div class="card__row">
+      <div class="card__row-left">
+        {%- if card_no != blank -%}
+          <span class="card__no">{{ card_no | upcase }}</span>
+        {%- endif -%}
+        <a href="{{ product.url }}" class="card__title-link">
+          <h3 class="card__title">{{ product.title }}</h3>
+        </a>
+        {%- if card_tag != blank -%}
+          <span class="card__tag">{{ card_tag }}</span>
+        {%- endif -%}
+      </div>
+
+      <div class="card__pricing">
+        {%- if on_sale -%}
+          <span class="price price--sale">{{ card_price | money }}</span>
+          <span class="price price--compare">{{ compare | money }}</span>
+          {%- if compare > 0 -%}
+            {%- assign save_pct = compare | minus: card_price | times: 100 | divided_by: compare -%}
+            {%- if save_pct > 0 -%}
+              <span class="card__save-pill">Save {{ save_pct }}%</span>
+            {%- endif -%}
+          {%- endif -%}
+        {%- else -%}
+          <span class="price">{{ card_price | money }}</span>
+        {%- endif -%}
+      </div>
+    </div>
   </div>
 
 </article>
 
 <style>
-.card {
-  display: flex;
-  flex-direction: column;
-  background: transparent;
-}
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
 
-.card__media-link {
-  display: block;
-  text-decoration: none;
-}
+  .card:hover {
+    box-shadow: 0 8px 32px rgba(43,43,43,0.14);
+  }
 
-.card__media {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  background: var(--paper);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
+  @media (max-width: 767px) {
+    .card:hover { box-shadow: none; }
+    .card:active { box-shadow: 0 8px 32px rgba(43,43,43,0.14); }
+  }
 
-.card__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  padding: 2rem;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
+  /* ── MEDIA WRAP ─────────────────────────────────────────── */
+  .card__media-wrap {
+    position: relative;
+  }
 
-.card__media-link:hover .card__media img {
-  transform: scale(1.04);
-}
+  .card__media-link {
+    display: block;
+    text-decoration: none;
+  }
 
-.card__placeholder {
-  width: 60%;
-  height: 60%;
-  opacity: 0.12;
-  fill: var(--char);
-}
+  .card__media {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background-color: var(--color-bone-alt, #EDE8DF);
+    border-radius: var(--radius-base);
+  }
 
-.card__badge {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--cream);
-  background: var(--char);
-  padding: 4px 8px;
-  border-radius: 2px;
-}
+  .card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
 
-.card__rule {
-  height: 1px;
-  background: var(--line);
-  margin: 0;
-}
+  .card:hover .card__media img,
+  .card:focus-within .card__media img {
+    transform: scale(1.06);
+  }
 
-.card__info {
-  padding: 1.25rem 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  flex: 1;
-}
+  .card__media .placeholder-svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--color-olive);
+    opacity: 0.08;
+  }
 
-.card__title-link {
-  text-decoration: none;
-  color: inherit;
-}
+  .card__badges {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+  }
 
-.card__title {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  font-weight: 500;
-  font-style: normal;
-  color: var(--char);
-  line-height: 1.25;
-  margin: 0;
-  transition: color 0.15s ease;
-}
+  .card__badges .badge {
+    min-width: 42px;
+    justify-content: center;
+  }
 
-.card__title-link:hover .card__title {
-  color: var(--gold-deep);
-}
+  /* ── MAGNIFYING GLASS BUTTON ────────────────────────────── */
+  .card__qv-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    color: #2D2D2D;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
 
-.card__subtitle {
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  color: var(--char-soft);
-  margin: 0;
-  line-height: 1.4;
-}
+  .card:hover .card__qv-btn,
+  .card:focus-within .card__qv-btn {
+    opacity: 1;
+    transform: scale(1);
+  }
 
-.card__meta {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.5rem;
-  margin-top: 0.25rem;
-}
+  .card__qv-btn:hover {
+    background: var(--color-bone, #F2EDE4);
+  }
 
-.card__size {
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  color: var(--char-soft);
-}
+  /* ── ADD TO CART OVERLAY ────────────────────────────────── */
+  .card__atc-overlay {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 24px);
+    padding: 12px 16px;
+    background: var(--color-walnut, #8A6240);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.22s ease, transform 0.22s ease, background 0.15s;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 
-.card__price {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-}
+  .card:hover .card__atc-overlay,
+  .card:focus-within .card__atc-overlay {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 
-.card__price-now {
-  font-family: var(--font-body);
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--char);
-}
+  .card__atc-overlay:hover {
+    filter: brightness(1.08);
+  }
 
-.card__price-was {
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  color: var(--char-soft);
-  text-decoration: line-through;
-}
+  .card__atc-overlay--soldout {
+    opacity: 0 !important;
+    pointer-events: none;
+  }
 
-.card--on-sale .card__price-now {
-  color: var(--gold-deep);
-}
+  /* "Added!" feedback state */
+  .card__atc-added {
+    display: none;
+    color: var(--color-walnut, #8A6240);
+  }
 
-.card__atc {
-  display: block;
-  width: 100%;
-  margin-top: auto;
-  padding: 0.75rem 1rem;
-  background: var(--char);
-  color: var(--cream);
-  border: none;
-  border-radius: 0;
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.18s ease;
-  margin-top: 0.875rem;
-}
+  .card__atc-overlay.is-added .card__atc-label { display: none; }
+  .card__atc-overlay.is-added .card__atc-added { display: inline; }
 
-.card__atc:hover {
-  background: var(--gold-deep);
-}
+  /* ── CARD INFO ──────────────────────────────────────────── */
+  .card__info {
+    display: flex;
+    flex-direction: column;
+    margin-top: 18px;
+    gap: 12px;
+  }
 
-.card__atc--soldout {
-  opacity: 0.45;
-  cursor: not-allowed;
-  pointer-events: none;
-}
+  /* Stack vertically: name block on top, price row below.
+     Gives the title full card-width so long names like
+     "Filter shower head" stay on one line. */
+  .card__row {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
 
-.card__atc-added { display: none; }
-.card__atc.is-added .card__atc-label { display: none; }
-.card__atc.is-added .card__atc-added { display: inline; }
+  .card__row-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
 
-@media (max-width: 767px) {
-  .card__media img { padding: 1.25rem; }
-}
+  /* N° marker — gold mono uppercase */
+  .card__no {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+
+  .card__title-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .card__title-link:focus-visible {
+    outline: 2px solid var(--gold-deep);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Italic serif product name */
+  .card__title {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--char);
+    line-height: 1.1;
+    margin: 0;
+    transition: color var(--transition-fast);
+  }
+
+  .card__title-link:hover .card__title {
+    color: var(--gold-deep);
+  }
+
+  /* Tag line — mono caption underneath */
+  .card__tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+
+  /* Pricing row — sits below the name block, aligned left */
+  .card__pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: var(--char);
+  }
+
+  .price { font-family: var(--font-serif); font-size: 22px; color: var(--char); }
+
+  .price--sale {
+    color: var(--gold-deep);
+    font-weight: 500;
+  }
+
+  .price--compare {
+    font-size: 0.85em;
+    text-decoration: line-through;
+    opacity: 0.45;
+  }
+
+  /* ── SAVE PILL — bumped for legibility ───────────────────── */
+  .card__save-pill {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(178, 53, 32, 0.14);
+    color: #B23520;
+    border-radius: 3px;
+    padding: 5px 10px;
+    display: inline-block;
+    line-height: 1.2;
+  }
+
+  /* ── SALE / HOT BADGE animations ───────────────────────── */
+  .badge--sale,
+  .badge--amber,
+  .badge--hot {
+    animation: badge-pulse 2s ease-in-out infinite;
+  }
+
+  @media (max-width: 767px) {
+    .badge--sale,
+    .badge--amber,
+    .badge--hot {
+      animation: none;
+    }
+  }
+
+
+  /* ── MOBILE: replace hover states with :active ──────────── */
+  @media (max-width: 767px) {
+    .card:hover .card__qv-btn { opacity: 0; transform: scale(0.85); }
+    .card:active .card__qv-btn { opacity: 1; transform: scale(1); }
+    .card:hover .card__atc-overlay { opacity: 0; transform: translateX(-50%) translateY(6px); }
+    .card:active .card__atc-overlay { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .card:hover .card__media img { transform: none; }
+    .card:active .card__media img { transform: scale(1.06); }
+  }
 </style>
 
 <script>
-(function () {
-  if (window.__mcCardAtcInit) return;
-  window.__mcCardAtcInit = true;
+  (function () {
+    if (window.__mcCardAtcInit) return;
+    window.__mcCardAtcInit = true;
 
-  document.addEventListener('click', function (e) {
-    var btn = e.target.closest('[data-card-atc]');
-    if (!btn || btn.disabled) return;
-    e.preventDefault();
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-card-atc]');
+      if (!btn || btn.disabled) return;
+      e.preventDefault();
 
-    var variantId = btn.dataset.cardAtc;
-    btn.disabled = true;
+      var variantId = btn.dataset.cardAtc;
+      btn.disabled = true;
 
-    fetch('/cart/add.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
-      body: JSON.stringify({ id: variantId, quantity: 1 })
-    })
-    .then(function (res) { return res.json(); })
-    .then(function () {
-      btn.classList.add('is-added');
-      document.dispatchEvent(new CustomEvent('cart:refresh', { detail: { openDrawer: true } }));
-      setTimeout(function () {
-        btn.classList.remove('is-added');
-        btn.disabled = false;
-      }, 1800);
-    })
-    .catch(function () { btn.disabled = false; });
-  });
-}());
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+        body: JSON.stringify({ id: variantId, quantity: 1 })
+      })
+      .then(function (res) { return res.json(); })
+      .then(function () {
+        btn.classList.add('is-added');
+        document.dispatchEvent(new CustomEvent('cart:refresh', { detail: { openDrawer: true } }));
+        setTimeout(function () {
+          btn.classList.remove('is-added');
+          btn.disabled = false;
+        }, 1800);
+      })
+      .catch(function () { btn.disabled = false; });
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    if (window.__mcCardRevealInit) return;
+    window.__mcCardRevealInit = true;
+
+    function initCardReveal() {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var cards = document.querySelectorAll('.card');
+      if (!cards.length) return;
+
+      if (!('IntersectionObserver' in window) || reduced) {
+        cards.forEach(function (card) {
+          card.style.opacity = '1';
+          card.style.transform = 'none';
+        });
+        return;
+      }
+
+      cards.forEach(function (card, i) {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(16px)';
+        card.style.transition = 'opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1)';
+        var delay = Math.min(i * 60, 300);
+        // On mobile, cap stagger at 2 cards
+        if (window.innerWidth <= 480 && i >= 2) delay = 0;
+        card.style.transitionDelay = delay + 'ms';
+      });
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'none';
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.1 });
+
+      cards.forEach(function (card) { observer.observe(card); });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCardReveal);
+    } else {
+      initCardReveal();
+    }
+  })();
 </script>
