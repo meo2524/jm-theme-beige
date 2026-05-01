@@ -1,32 +1,50 @@
 {%- layout none -%}
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
-  assign short_desc = product.description | strip_html | truncate: 160
+  assign option_count = product.options.size
 -%}
 
 <div class="mc-qv-content">
 
-  <!-- Left: image -->
+  <!-- Left: image carousel -->
   <div class="mc-qv-media">
-    {%- if product.featured_media != blank -%}
-      {%- assign qv_img_alt = product.featured_media.alt | default: product.title | escape -%}
-      {{
-        product.featured_media
-        | image_url: width: 800
-        | image_tag:
-          class: 'mc-qv-img',
-          loading: 'eager',
-          widths: '400, 600, 800',
-          sizes: '(max-width: 767px) 100vw, 45vw',
-          alt: qv_img_alt,
-          width: 800,
-          height: 1000
-      }}
-    {%- else -%}
-      <div class="mc-qv-img-placeholder">
-        {{ product.title | placeholder_svg_tag: 'placeholder-svg' }}
+    <div class="mc-qv-carousel" data-carousel>
+      <div class="mc-qv-carousel__track" data-track>
+        {%- for media in product.images limit: 8 -%}
+          <div class="mc-qv-carousel__slide{% if forloop.first %} is-active{% endif %}">
+            {{
+              media
+              | image_url: width: 900
+              | image_tag:
+                class: 'mc-qv-img',
+                loading: 'eager',
+                widths: '450, 700, 900',
+                sizes: '(max-width: 640px) 100vw, 45vw',
+                alt: media.alt | default: product.title | escape
+            }}
+          </div>
+        {%- endfor -%}
       </div>
-    {%- endif -%}
+
+      {%- if product.images.size > 1 -%}
+        <button class="mc-qv-carousel__arrow mc-qv-carousel__arrow--prev" data-carousel-prev aria-label="Previous image">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18">
+            <polyline points="13 4 7 10 13 16"/>
+          </svg>
+        </button>
+        <button class="mc-qv-carousel__arrow mc-qv-carousel__arrow--next" data-carousel-next aria-label="Next image">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18">
+            <polyline points="7 4 13 10 7 16"/>
+          </svg>
+        </button>
+        <div class="mc-qv-carousel__dots" data-dots>
+          {%- for media in product.images limit: 8 -%}
+            <button class="mc-qv-carousel__dot{% if forloop.first %} is-active{% endif %}"
+              data-dot="{{ forloop.index0 }}" aria-label="Go to image {{ forloop.index }}"></button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
   </div>
 
   <!-- Right: info -->
@@ -40,68 +58,57 @@
         {{- current_variant.price | money -}}
       </span>
       {%- if current_variant.compare_at_price > current_variant.price -%}
-        <span class="mc-qv-compare-price">{{ current_variant.compare_at_price | money }}</span>
+        <span class="mc-qv-compare-price" id="mc-qv-compare-{{ product.id }}">{{ current_variant.compare_at_price | money }}</span>
       {%- endif -%}
     </div>
-
-    <!-- Stock status -->
-    <p class="mc-qv-stock{% unless current_variant.available %} mc-qv-stock--out{% endunless %}">
-      <span class="mc-qv-stock__dot" aria-hidden="true"></span>
-      {%- if current_variant.available -%}
-        Stock Adequate! Ready to Ship
-      {%- else -%}
-        Out of Stock
-      {%- endif -%}
-    </p>
-
-    <!-- Short description -->
-    {%- if short_desc != blank -%}
-      <p class="mc-qv-desc">&ldquo;{{ short_desc }}&rdquo;</p>
-    {%- endif -%}
 
     {%- form 'product', product, class: 'mc-qv-form', novalidate: 'novalidate' -%}
       <input type="hidden" name="id" class="mc-qv-variant-id" value="{{ current_variant.id }}">
 
+      {%- comment -%} Variant data for JS {%- endcomment -%}
+      <script class="mc-qv-variants-json" type="application/json">
+        [
+          {%- for v in product.variants -%}
+          {
+            "id":         {{ v.id }},
+            "title":      {{ v.title | json }},
+            "price":      {{ v.price | money | json }},
+            "compare":    {% if v.compare_at_price > v.price %}{{ v.compare_at_price | money | json }}{% else %}null{% endif %},
+            "available":  {{ v.available }},
+            "option1":    {{ v.option1 | json }},
+            "option2":    {{ v.option2 | json }},
+            "option3":    {{ v.option3 | json }}
+          }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      </script>
+
       {%- unless product.has_only_default_variant -%}
-        <div class="mc-qv-variants">
-          <label class="mc-qv-label" for="mc-qv-select-{{ product.id }}">Variant</label>
-          <div class="mc-qv-select-wrap">
-            <select
-              id="mc-qv-select-{{ product.id }}"
-              class="mc-qv-select"
-              aria-label="Select variant"
-            >
-              {%- for variant in product.variants -%}
-                <option
-                  value="{{ variant.id }}"
-                  data-price="{{ variant.price | money }}"
-                  data-compare="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
-                  data-available="{{ variant.available }}"
-                  {%- if variant == current_variant %} selected{%- endif -%}
-                  {%- unless variant.available %} disabled{%- endunless -%}
+        {%- for option in product.options_with_values -%}
+          <div class="mc-qv-opt-group">
+            <span class="mc-qv-label">{{ option.name }}</span>
+            <div class="mc-qv-opt-btns">
+              {%- for value in option.values -%}
+                <button
+                  type="button"
+                  class="mc-qv-opt-btn{% if option.selected_value == value %} is-active{% endif %}"
+                  data-opt-pos="{{ option.position }}"
+                  data-opt-val="{{ value | escape }}"
                 >
-                  {{- variant.title -}}
-                  {%- unless variant.available %} - Sold out{%- endunless -%}
-                </option>
+                  {{- value -}}
+                </button>
               {%- endfor -%}
-            </select>
+            </div>
           </div>
-        </div>
+        {%- endfor -%}
       {%- endunless -%}
 
-      <!-- Qty + ATC row -->
+      <!-- Qty + ATC -->
       <div class="mc-qv-atc-row">
         <div class="mc-qv-qty">
-          <button type="button" class="mc-qv-qty__btn" data-qty-dec aria-label="Decrease quantity">-</button>
-          <input
-            class="mc-qv-qty__input"
-            type="number"
-            name="quantity"
-            value="1"
-            min="1"
-            aria-label="Quantity"
-          >
-          <button type="button" class="mc-qv-qty__btn" data-qty-inc aria-label="Increase quantity">+</button>
+          <button type="button" class="mc-qv-qty__btn" data-qty-dec aria-label="Decrease">−</button>
+          <input class="mc-qv-qty__input" type="number" name="quantity" value="1" min="1" aria-label="Quantity">
+          <button type="button" class="mc-qv-qty__btn" data-qty-inc aria-label="Increase">+</button>
         </div>
 
         <button
@@ -110,32 +117,14 @@
           {%- unless current_variant.available %} disabled{%- endunless -%}
         >
           <span class="mc-qv-atc-text">
-            {%- if current_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
+            {%- if current_variant.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}
           </span>
         </button>
       </div>
 
     {%- endform -%}
 
-    <!-- Buy with Shop -->
-    <button
-      type="button"
-      class="mc-qv-shop-pay"
-      data-qv-buynow="{{ current_variant.id }}"
-      {%- unless current_variant.available %} disabled{%- endunless -%}
-    >
-      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
-        <rect width="15" height="15" rx="3" fill="white" fill-opacity="0.2"/>
-        <circle cx="7.5" cy="7.5" r="4" fill="white"/>
-      </svg>
-      Buy with <strong>shop</strong>
-    </button>
-
-    <!-- More payment options -->
-    <a href="/checkout" class="mc-qv-more-payments">More payment options</a>
-
-    <!-- View full details -->
-    <a href="{{ product.url }}" class="mc-qv-full-link">View Full Details</a>
+    <a href="{{ product.url }}" class="mc-qv-full-link">View full details →</a>
 
   </div>
 </div>

@@ -1,10 +1,12 @@
 /* ================================================================
-   QUICK VIEW MODAL -- Mend & Co
+   QUICK VIEW MODAL — Mend & Co  (on-brand: cream / charcoal / gold)
    ================================================================ */
 
 /* ---- Backdrop ------------------------------------------------- */
 .mc-qv-dialog::backdrop {
-  background: rgba(45, 45, 45, 0.55);
+  background: rgba(31, 29, 26, 0.60);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   animation: mc-qv-backdrop-in 0.22s ease both;
 }
 @keyframes mc-qv-backdrop-in {
@@ -18,13 +20,13 @@
   inset: 0;
   margin: auto;
   padding: 0;
-  width: min(860px, calc(100vw - 3.2rem));
+  width: min(900px, calc(100vw - 3.2rem));
   max-height: calc(100vh - 4rem);
   border: none;
   border-radius: 16px;
-  background: #fff;
+  background: #f5efe4;
   overflow: hidden;
-  box-shadow: 0 24px 72px rgba(45, 45, 45, 0.22), 0 4px 16px rgba(45,45,45,0.1);
+  box-shadow: 0 24px 72px rgba(31,29,26,0.25), 0 4px 16px rgba(31,29,26,0.1);
   animation: mc-qv-enter 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 @keyframes mc-qv-enter {
@@ -43,15 +45,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background: rgba(31,29,26,0.07);
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  color: #2D2D2D;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+  color: #1f1d1a;
   transition: background 0.15s;
 }
-.mc-qv-close:hover { background: #f0ebe3; }
+.mc-qv-close:hover { background: rgba(31,29,26,0.14); }
 
 /* ---- Loading -------------------------------------------------- */
 .mc-qv-body {
@@ -67,8 +68,8 @@
 .mc-qv-spinner {
   width: 3.2rem;
   height: 3.2rem;
-  border: 2px solid #e8e0d5;
-  border-top-color: #8A6240;
+  border: 2px solid rgba(31,29,26,0.12);
+  border-top-color: #9a7e57;
   border-radius: 50%;
   animation: mc-qv-spin 0.7s linear infinite;
 }
@@ -84,165 +85,196 @@
 /* ---- Image panel ---------------------------------------------- */
 .mc-qv-media {
   position: relative;
+  background: #efe8dc;
   overflow: hidden;
-  background: #F2EDE4;
 }
-.mc-qv-img {
+
+/* ---- Carousel ------------------------------------------------- */
+.mc-qv-carousel {
+  position: relative;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
+  min-height: 36rem;
 }
-.mc-qv-img-placeholder {
+.mc-qv-carousel__track {
   width: 100%;
   height: 100%;
+  position: relative;
+}
+.mc-qv-carousel__slide {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
-.mc-qv-img-placeholder .placeholder-svg {
-  width: 60%;
-  height: 60%;
-  opacity: 0.15;
+.mc-qv-carousel__slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  position: relative;
+}
+
+.mc-qv-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  max-height: 520px;
+}
+
+.mc-qv-carousel__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(245,239,228,0.9);
+  border: 1px solid rgba(31,29,26,0.12);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1f1d1a;
+  transition: background 0.15s, border-color 0.15s;
+}
+.mc-qv-carousel__arrow:hover {
+  background: #f5efe4;
+  border-color: rgba(31,29,26,0.25);
+}
+.mc-qv-carousel__arrow--prev { left: 12px; }
+.mc-qv-carousel__arrow--next { right: 12px; }
+
+.mc-qv-carousel__dots {
+  position: absolute;
+  bottom: 12px;
+  left: 0; right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+.mc-qv-carousel__dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(31,29,26,0.25);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+.mc-qv-carousel__dot.is-active {
+  background: #9a7e57;
+  transform: scale(1.3);
 }
 
 /* ---- Info panel ----------------------------------------------- */
 .mc-qv-info {
-  padding: 3rem 3rem 2.4rem 2.6rem;
+  padding: 2.4rem 2.6rem 2.2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: 1rem;
   overflow-y: auto;
+  background: #f5efe4;
 }
 
-/* Vendor */
 .mc-qv-vendor {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(43,43,43,0.45);
+  color: rgba(31,29,26,0.4);
   margin: 0;
 }
 
-/* Title */
 .mc-qv-title {
-  font-family: var(--font-heading);
-  font-size: 1.75rem;
+  font-family: var(--font-heading, serif);
+  font-size: 1.7rem;
   font-weight: 400;
-  color: #2D2D2D;
-  line-height: 1.2;
+  color: #1f1d1a;
+  line-height: 1.15;
   margin: 0;
 }
 
-/* Price */
 .mc-qv-price-row {
   display: flex;
   align-items: baseline;
   gap: 0.8rem;
 }
 .mc-qv-price {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
+  font-family: var(--font-heading, serif);
+  font-size: 1.45rem;
   font-weight: 600;
-  color: #2D2D2D;
+  color: #1f1d1a;
 }
 .mc-qv-compare-price {
-  font-size: 1.1rem;
-  color: #aaa;
+  font-size: 1.05rem;
+  color: rgba(31,29,26,0.35);
   text-decoration: line-through;
 }
 
-/* Stock indicator */
-.mc-qv-stock {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #3a8c5c;
-  margin: 0;
-}
-.mc-qv-stock--out { color: #c0392b; }
-
-.mc-qv-stock__dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #3a8c5c;
-  flex-shrink: 0;
-}
-.mc-qv-stock--out .mc-qv-stock__dot { background: #c0392b; }
-
-/* Short description */
-.mc-qv-desc {
-  font-family: var(--font-heading);
-  font-style: italic;
-  font-size: 0.9375rem;
-  line-height: 1.55;
-  color: rgba(43,43,43,0.65);
-  margin: 0;
-}
-
-/* ---- Variant select ------------------------------------------- */
-.mc-qv-variants {
+/* ---- Option groups (Color / Size buttons) --------------------- */
+.mc-qv-opt-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1.25rem;
+  gap: 8px;
 }
+
 .mc-qv-label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(43,43,43,0.5);
+  color: rgba(31,29,26,0.45);
 }
-.mc-qv-select-wrap { position: relative; }
-.mc-qv-select-wrap::after {
-  content: '';
-  position: absolute;
-  right: 1.1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 0; height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 5px solid #2D2D2D;
-  pointer-events: none;
+
+.mc-qv-opt-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
-.mc-qv-select {
-  width: 100%;
-  height: 4rem;
-  padding: 0 3rem 0 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: transparent;
-  color: #2D2D2D;
-  font-size: 0.875rem;
-  appearance: none;
-  -webkit-appearance: none;
+
+.mc-qv-opt-btn {
+  padding: 7px 14px;
+  border: 1.5px solid rgba(31,29,26,0.18);
+  border-radius: 6px;
+  background: rgba(31,29,26,0.03);
+  color: #1f1d1a;
+  font-size: 0.8125rem;
+  font-weight: 500;
   cursor: pointer;
-  outline: none;
-  transition: border-color 0.18s;
+  transition: border-color 0.15s, background 0.15s;
+  line-height: 1;
 }
-.mc-qv-select:focus { border-color: #8A6240; }
+.mc-qv-opt-btn:hover {
+  border-color: rgba(31,29,26,0.4);
+}
+.mc-qv-opt-btn.is-active {
+  border-color: #1f1d1a;
+  background: #1f1d1a;
+  color: #efe8dc;
+}
+.mc-qv-opt-btn.is-unavailable {
+  opacity: 0.35;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
 
 /* ---- Qty + ATC row -------------------------------------------- */
 .mc-qv-atc-row {
   display: flex;
   gap: 0.75rem;
   align-items: stretch;
+  margin-top: 0.25rem;
 }
 
-/* Quantity stepper */
 .mc-qv-qty {
   display: flex;
   align-items: center;
-  border: 1.5px solid #ddd;
+  border: 1.5px solid rgba(31,29,26,0.18);
   border-radius: 8px;
   overflow: hidden;
   flex-shrink: 0;
@@ -251,26 +283,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 48px;
+  width: 38px; height: 48px;
   background: none;
   border: none;
   font-size: 1.1rem;
-  color: #2D2D2D;
+  color: #1f1d1a;
   cursor: pointer;
   transition: background 0.14s;
 }
-.mc-qv-qty__btn:hover { background: #f5f0ea; }
+.mc-qv-qty__btn:hover { background: rgba(31,29,26,0.06); }
 .mc-qv-qty__input {
-  width: 36px;
-  height: 48px;
+  width: 36px; height: 48px;
   border: none;
-  border-left: 1.5px solid #ddd;
-  border-right: 1.5px solid #ddd;
+  border-left: 1.5px solid rgba(31,29,26,0.18);
+  border-right: 1.5px solid rgba(31,29,26,0.18);
   text-align: center;
   font-size: 0.9375rem;
   font-weight: 600;
-  color: #2D2D2D;
+  color: #1f1d1a;
   background: transparent;
   outline: none;
   -moz-appearance: textfield;
@@ -278,80 +308,39 @@
 .mc-qv-qty__input::-webkit-inner-spin-button,
 .mc-qv-qty__input::-webkit-outer-spin-button { -webkit-appearance: none; }
 
-/* Add to Bag */
 .mc-qv-atc {
   flex: 1;
   height: 52px;
-  background: transparent;
-  color: #2D2D2D;
-  border: 1.5px solid #2D2D2D;
+  background: #1f1d1a;
+  color: #efe8dc;
+  border: none;
   border-radius: 8px;
-  font-family: var(--font-label);
-  font-size: 0.75rem;
+  font-family: var(--font-label, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.mc-qv-atc:hover:not(:disabled) { background: #2a2622; }
+.mc-qv-atc:disabled { opacity: 0.4; cursor: not-allowed; }
+.mc-qv-atc[data-state="adding"] { opacity: 0.7; pointer-events: none; }
+.mc-qv-atc[data-state="added"] { background: #9a7e57; }
+
+.mc-qv-full-link {
+  display: block;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.18s, color 0.18s;
-}
-.mc-qv-atc:hover:not(:disabled) {
-  background: #2D2D2D;
-  color: #F2EDE4;
-}
-.mc-qv-atc:disabled { opacity: 0.4; cursor: not-allowed; }
-.mc-qv-atc[data-state="adding"] { opacity: 0.7; pointer-events: none; }
-.mc-qv-atc[data-state="added"] { background: #2D2D2D; color: #F2EDE4; }
-
-/* ---- Buy with Shop -------------------------------------------- */
-.mc-qv-shop-pay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  height: 52px;
-  background: #5433EB;
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-.mc-qv-shop-pay:hover:not(:disabled) { background: #4527CC; }
-.mc-qv-shop-pay:disabled { opacity: 0.4; cursor: not-allowed; }
-
-/* ---- More payment options ------------------------------------- */
-.mc-qv-more-payments {
-  display: block;
-  text-align: center;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  color: rgba(43,43,43,0.55);
-  transition: color 0.15s;
-}
-.mc-qv-more-payments:hover { color: #2D2D2D; }
-
-/* ---- View full details ---------------------------------------- */
-.mc-qv-full-link {
-  display: block;
-  text-align: center;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(43,43,43,0.4);
+  color: rgba(31,29,26,0.4);
   text-decoration: none;
   transition: color 0.15s;
   margin-top: auto;
-  padding-top: 0.5rem;
+  padding-top: 0.25rem;
 }
-.mc-qv-full-link:hover { color: #2D2D2D; }
+.mc-qv-full-link:hover { color: #1f1d1a; }
 
 /* ---- Mobile --------------------------------------------------- */
 @media (max-width: 640px) {
@@ -367,7 +356,8 @@
     to   { opacity: 1; transform: translateY(0); }
   }
   .mc-qv-content { grid-template-columns: 1fr; }
-  .mc-qv-media { aspect-ratio: 4 / 3; }
-  .mc-qv-info { padding: 2rem 1.6rem 2.4rem; }
-  .mc-qv-title { font-size: 1.5rem; }
+  .mc-qv-carousel { min-height: 280px; }
+  .mc-qv-img { max-height: 280px; }
+  .mc-qv-info { padding: 1.6rem 1.6rem 2rem; }
+  .mc-qv-title { font-size: 1.4rem; }
 }

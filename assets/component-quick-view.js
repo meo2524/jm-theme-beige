@@ -30,6 +30,9 @@
     dialog.addEventListener('click', function (e) {
       if (e.target === dialog) close();
     });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && dialog.open) close();
+    });
 
     return dialog;
   }
@@ -62,7 +65,7 @@
       })
       .catch(function () {
         setLoading(false);
-        bodyEl.innerHTML = '<p style="padding:3.2rem;color:#8A6240">Could not load product.</p>';
+        bodyEl.innerHTML = '<p style="padding:3.2rem;color:#9a7e57">Could not load product.</p>';
       });
   }
 
@@ -76,26 +79,100 @@
     var content = parsed.querySelector('.mc-qv-content');
     if (!content) {
       setLoading(false);
-      bodyEl.innerHTML = '<p style="padding:3.2rem;color:#8A6240">Product not available.</p>';
+      bodyEl.innerHTML = '<p style="padding:3.2rem;color:#9a7e57">Product not available.</p>';
       return;
     }
     bodyEl.classList.remove('is-loading');
     bodyEl.innerHTML = '';
     bodyEl.appendChild(content);
+    initCarousel(bodyEl);
     initForm(bodyEl);
   }
 
-  /* -- Wire up form, qty stepper, buy-now -------------------- */
+  /* -- Carousel ---------------------------------------------- */
+  function initCarousel(root) {
+    var slides  = root.querySelectorAll('.mc-qv-carousel__slide');
+    var dots    = root.querySelectorAll('.mc-qv-carousel__dot');
+    var prevBtn = root.querySelector('[data-carousel-prev]');
+    var nextBtn = root.querySelector('[data-carousel-next]');
+    if (!slides.length) return;
+
+    var current = 0;
+
+    function goTo(idx) {
+      slides[current].classList.remove('is-active');
+      if (dots[current]) dots[current].classList.remove('is-active');
+      current = (idx + slides.length) % slides.length;
+      slides[current].classList.add('is-active');
+      if (dots[current]) dots[current].classList.add('is-active');
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); });
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () { goTo(parseInt(dot.dataset.dot, 10)); });
+    });
+  }
+
+  /* -- Variant form ------------------------------------------ */
   function initForm(root) {
-    var select  = root.querySelector('.mc-qv-select');
-    var idInput = root.querySelector('.mc-qv-variant-id');
-    var priceEl = root.querySelector('.mc-qv-price');
-    var cmpEl   = root.querySelector('.mc-qv-compare-price');
-    var btn     = root.querySelector('.mc-qv-atc');
-    var btnText = root.querySelector('.mc-qv-atc-text');
-    var stockEl = root.querySelector('.mc-qv-stock');
-    var qtyInput= root.querySelector('.mc-qv-qty__input');
-    var buyNow  = root.querySelector('[data-qv-buynow]');
+    var variantsJson = root.querySelector('.mc-qv-variants-json');
+    if (!variantsJson) return;
+
+    var variants = JSON.parse(variantsJson.textContent);
+    var idInput  = root.querySelector('.mc-qv-variant-id');
+    var priceEl  = root.querySelector('.mc-qv-price');
+    var cmpEl    = root.querySelector('.mc-qv-compare-price');
+    var btn      = root.querySelector('.mc-qv-atc');
+    var btnText  = root.querySelector('.mc-qv-atc-text');
+    var qtyInput = root.querySelector('.mc-qv-qty__input');
+    var optBtns  = root.querySelectorAll('.mc-qv-opt-btn');
+
+    /* Track selected option values {pos: val} */
+    var selected = {};
+    root.querySelectorAll('.mc-qv-opt-btn.is-active').forEach(function (b) {
+      selected[b.dataset.optPos] = b.dataset.optVal;
+    });
+
+    function findVariant() {
+      return variants.find(function (v) {
+        return Object.keys(selected).every(function (pos) {
+          return v['option' + pos] === selected[pos];
+        });
+      });
+    }
+
+    function applyVariant(v) {
+      if (!v) return;
+      if (idInput) idInput.value = v.id;
+      if (priceEl) priceEl.textContent = v.price;
+      if (cmpEl) {
+        if (v.compare) {
+          cmpEl.textContent = v.compare;
+          cmpEl.hidden = false;
+        } else {
+          cmpEl.textContent = '';
+          cmpEl.hidden = true;
+        }
+      }
+      if (btn) {
+        btn.disabled = !v.available;
+        if (btnText) btnText.textContent = v.available ? 'Add to Cart' : 'Sold Out';
+      }
+    }
+
+    /* Option button clicks */
+    optBtns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var pos = b.dataset.optPos;
+        root.querySelectorAll('[data-opt-pos="' + pos + '"]').forEach(function (x) {
+          x.classList.remove('is-active');
+        });
+        b.classList.add('is-active');
+        selected[pos] = b.dataset.optVal;
+        applyVariant(findVariant());
+      });
+    });
 
     /* Quantity stepper */
     root.querySelectorAll('[data-qty-dec],[data-qty-inc]').forEach(function (b) {
@@ -107,41 +184,13 @@
       });
     });
 
-    /* Variant select */
-    if (select && idInput) {
-      select.addEventListener('change', function () {
-        var opt   = select.options[select.selectedIndex];
-        var avail = opt.dataset.available === 'true';
-        idInput.value = opt.value;
-        if (priceEl && opt.dataset.price) priceEl.textContent = opt.dataset.price;
-        if (cmpEl) {
-          cmpEl.textContent = opt.dataset.compare || '';
-          cmpEl.hidden      = !opt.dataset.compare;
-        }
-        if (btn) {
-          btn.disabled = !avail;
-          if (btnText) btnText.textContent = avail ? 'Add to Bag' : 'Sold Out';
-        }
-        if (stockEl) {
-          stockEl.classList.toggle('mc-qv-stock--out', !avail);
-          var dot = stockEl.querySelector('.mc-qv-stock__dot');
-          stockEl.childNodes[stockEl.childNodes.length - 1].textContent =
-            avail ? ' Stock Adequate! Ready to Ship' : ' Out of Stock';
-        }
-        if (buyNow) {
-          buyNow.dataset.qvBuynow = opt.value;
-          buyNow.disabled = !avail;
-        }
-      });
-    }
-
-    /* Add to Bag submit */
+    /* Add to cart submit */
     var form = root.querySelector('.mc-qv-form');
     if (form && btn && btnText) {
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         btn.dataset.state = 'adding';
-        btnText.textContent = 'Adding...';
+        btnText.textContent = 'Adding…';
 
         fetch('/cart/add.js', { method: 'POST', body: new FormData(form) })
           .then(function (r) {
@@ -155,34 +204,13 @@
             setTimeout(function () {
               close();
               delete btn.dataset.state;
-              btnText.textContent = 'Add to Bag';
+              btnText.textContent = 'Add to Cart';
             }, 1200);
           })
           .catch(function () {
             delete btn.dataset.state;
-            btnText.textContent = 'Add to Bag';
+            btnText.textContent = 'Add to Cart';
           });
-      });
-    }
-
-    /* Buy with Shop — add to cart then go to checkout */
-    if (buyNow) {
-      buyNow.addEventListener('click', function () {
-        var variantId = buyNow.dataset.qvBuynow;
-        var qty       = qtyInput ? (parseInt(qtyInput.value, 10) || 1) : 1;
-        buyNow.disabled = true;
-
-        fetch('/cart/add.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id: variantId, quantity: qty })
-        })
-        .then(function () {
-          window.location.href = '/checkout';
-        })
-        .catch(function () {
-          buyNow.disabled = false;
-        });
       });
     }
   }
