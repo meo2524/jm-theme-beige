@@ -293,6 +293,66 @@
       "type": "ring-size-modal",
       "settings": {}
     },
+    "product_faq": {
+      "type": "product-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Which finger should I wear it on?",
+            "answer": "<p>The index or middle finger gives the most accurate readings. Avoid the dominant hand's pinky — it moves too much during sleep. The ring should sit comfortably snug, not tight.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is there really no subscription?",
+            "answer": "<p>Correct. You pay once and you own everything — the ring, the app, and all your data. Oura charges $5.99/month. We don't. Your health data belongs to you.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I find my ring size?",
+            "answer": "<p>Measure the circumference of the finger you'll wear it on using a strip of paper. Wrap it snugly (not tightly), mark where it overlaps, and measure in millimetres. Most people wear a size 10 on their index finger. Use the size guide above for the full chart.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I wear it in the shower or pool?",
+            "answer": "<p>Yes. The N°01 Smart Band is rated IP68 — waterproof to 100 metres. Shower, swim, sauna — wear it without thinking twice.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How accurate is the sleep tracking?",
+            "answer": "<p>The ring's PPG sensors track heart rate and blood oxygen continuously overnight. Sleep stage detection (deep, light, REM) is derived from HRV and movement patterns — the same method used by clinical-grade sleep monitors. It won't replace a sleep study, but it will show you the patterns your body produces night after night.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's the battery life like in real use?",
+            "answer": "<p>Up to 7 days on a full charge with 24/7 tracking active. Most people charge it every 5–6 days in about 60–90 minutes. Charge it while you eat breakfast — you'll never miss a night's data.</p>"
+          }
+        },
+        "faq_7": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is my health data private?",
+            "answer": "<p>Your data is stored locally on your device and only synced to your own account. We do not sell health data to third parties. Your N°01 data stays yours — always.</p>"
+          }
+        }
+      },
+      "block_order": ["faq_1","faq_2","faq_3","faq_4","faq_5","faq_6","faq_7"],
+      "settings": {
+        "eyebrow": "Questions",
+        "heading": "Everything you want to know.",
+        "subheading": ""
+      }
+    },
     "judgeme_reviews": {
       "type": "judgeme-reviews",
       "disabled": true,
@@ -332,6 +392,7 @@
     "testimonials",
     "reviews_widget",
     "ring_size_modal",
+    "product_faq",
     "judgeme_reviews",
     "related",
     "countdown"
