@@ -392,8 +392,11 @@
       {%- comment -%} -- Accordion -- {%- endcomment -%}
       <div class="accordion" id="Accordion-{{ section.id }}">
 
-        {%- assign accordion_keys   = "whats-included,how-it-works,ingredients-certifications" | split: "," -%}
-        {%- assign accordion_labels = "What's included,How it works,Ingredients & certifications" | split: "," -%}
+        {%- assign accordion_keys = "whats-included,how-it-works,ingredients-certifications" | split: "," -%}
+        {%- assign label_1 = section.settings.accordion_label_1 | default: "What's included" -%}
+        {%- assign label_2 = section.settings.accordion_label_2 | default: "How it works" -%}
+        {%- assign label_3 = section.settings.accordion_label_3 | default: "Ingredients & certifications" -%}
+        {%- assign accordion_labels = label_1 | append: "|||" | append: label_2 | append: "|||" | append: label_3 | split: "|||" -%}
 
         {%- for label in accordion_labels -%}
           {%- assign key        = accordion_keys[forloop.index0] -%}
@@ -1594,6 +1597,24 @@
     {
       "type": "header",
       "content": "Accordion content"
+    },
+    {
+      "type": "text",
+      "id": "accordion_label_1",
+      "label": "Accordion 1 label",
+      "default": "What's included"
+    },
+    {
+      "type": "text",
+      "id": "accordion_label_2",
+      "label": "Accordion 2 label",
+      "default": "How it works"
+    },
+    {
+      "type": "text",
+      "id": "accordion_label_3",
+      "label": "Accordion 3 label",
+      "default": "Ingredients & certifications"
     },
     {
       "type": "richtext",

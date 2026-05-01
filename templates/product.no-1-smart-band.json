@@ -1,0 +1,197 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "eyebrow_text": "Health Technology",
+        "short_description": "Tracks sleep, heart rate, HRV, SpO₂ and recovery. Continuously. No subscription.",
+        "per_use_text": "$0 / month",
+        "accordion_label_1": "What's in the box",
+        "accordion_label_2": "How it works",
+        "accordion_label_3": "Specs & certifications",
+        "accordion_whats-included": "<p>1× N°…01 Smart Band (your chosen colour)<br>1× USB-C magnetic charging cable<br>1× Quick start guide</p>",
+        "accordion_how-it-works": "<p><strong>1. Wear it.</strong> Slide the ring onto your index or middle finger. The sensors face inward.<br><strong>2. Charge weekly.</strong> A full charge takes 60–90 minutes and lasts up to 7 days.<br><strong>3. Open the QRing app.</strong> Download free on iOS or Android. Sync, and your overnight data appears instantly.<br><strong>4. Read your scores.</strong> Sleep quality, HRV, resting heart rate, SpO₂ and daily recovery — all in one view.</p>",
+        "accordion_ingredients-certifications": "<p><strong>Materials</strong><br>Glossy ceramic shell · Polished chrome inner band<br><br><strong>Sensors</strong><br>PPG (photoplethysmography) · Accelerometer · Skin temperature · SpO₂<br><br><strong>Connectivity</strong><br>Bluetooth 5.0<br><br><strong>Waterproof rating</strong><br>IP68 — 100 m / 328 ft<br><br><strong>Compatibility</strong><br>iOS 14+ · Android 8+<br><br><strong>Subscription</strong><br>None. The app is free. Forever.</p>",
+        "rating_show": false,
+        "qty_label": "Size",
+        "atc_label": "Add to Cart",
+        "atc_sold_out_label": "Notify Me",
+        "variant_sold_out_label": "Sold out",
+        "trust_1_text": "Free shipping over $65",
+        "trust_2_text": "30-day returns",
+        "trust_3_text": "No subscription — ever"
+      }
+    },
+    "benefit_pitch": {
+      "type": "product-feature",
+      "blocks": {
+        "bullet_battery": {
+          "type": "bullet",
+          "settings": {
+            "text": "7-day battery — never miss a night of data"
+          }
+        },
+        "bullet_sub": {
+          "type": "bullet",
+          "settings": {
+            "text": "$0/month. Own your health data outright."
+          }
+        },
+        "bullet_water": {
+          "type": "bullet",
+          "settings": {
+            "text": "IP68 waterproof — shower, swim, sweat"
+          }
+        },
+        "bullet_design": {
+          "type": "bullet",
+          "settings": {
+            "text": "Jewelry-grade ceramic — looks like a ring, not a gadget"
+          }
+        }
+      },
+      "block_order": [
+        "bullet_battery",
+        "bullet_sub",
+        "bullet_water",
+        "bullet_design"
+      ],
+      "settings": {
+        "eyebrow": "Why N° 01",
+        "heading": "Everything your watch can’t tell you.",
+        "body": "Your smartwatch counts steps and celebrates effort. The N°…01 Smart Band tracks the metric that actually matters — how recovered you are. HRV, sleep architecture, overnight temperature. The numbers that decide whether tomorrow builds you up or breaks you down.",
+        "cta_label": "",
+        "cta_url": "",
+        "reverse": false
+      }
+    },
+    "health_metrics": {
+      "type": "product-feature",
+      "blocks": {
+        "bullet_sleep": {
+          "type": "bullet",
+          "settings": {
+            "text": "Sleep stages — deep, light, REM + sleep score"
+          }
+        },
+        "bullet_hrv": {
+          "type": "bullet",
+          "settings": {
+            "text": "Heart rate variability (HRV) — true recovery signal"
+          }
+        },
+        "bullet_spo2": {
+          "type": "bullet",
+          "settings": {
+            "text": "Blood oxygen (SpO₂) — overnight saturation"
+          }
+        },
+        "bullet_temp": {
+          "type": "bullet",
+          "settings": {
+            "text": "Skin temperature — catches illness and cycle shifts early"
+          }
+        },
+        "bullet_stress": {
+          "type": "bullet",
+          "settings": {
+            "text": "Stress & recovery score — know when to push, when to rest"
+          }
+        },
+        "bullet_activity": {
+          "type": "bullet",
+          "settings": {
+            "text": "Steps, calories, active minutes — automatic workout detection"
+          }
+        }
+      },
+      "block_order": [
+        "bullet_sleep",
+        "bullet_hrv",
+        "bullet_spo2",
+        "bullet_temp",
+        "bullet_stress",
+        "bullet_activity"
+      ],
+      "settings": {
+        "eyebrow": "What it tracks",
+        "heading": "One ring. Everything that matters.",
+        "body": "Your body is always communicating. Most trackers catch one or two signals. The N°…01 reads six — day and night, automatically, without you touching a thing.",
+        "cta_label": "",
+        "cta_url": "",
+        "reverse": true
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_sarah": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I’ve been telling my doctor something was wrong for two years. I brought in my HRV and temperature charts and she finally listened. First thing that’s ever given me proof.",
+            "author": "Sarah M.",
+            "author_detail": "Verified buyer · White",
+            "verified": true,
+            "stars": 5
+          }
+        },
+        "testimonial_keelan": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Been lifting for 4 years. This showed me I was recovered enough to train hard exactly 11 times in 2 months. Stopped overtraining, finally broke a plateau.",
+            "author": "Keelan R.",
+            "author_detail": "Verified buyer · Black",
+            "verified": true,
+            "stars": 5
+          }
+        },
+        "testimonial_david": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I’ve rejected every smartwatch my wife has bought me. This is different — it looks like a ring because it is one. Nobody at work even knows what it is.",
+            "author": "David H.",
+            "author_detail": "Verified buyer · Black",
+            "verified": true,
+            "stars": 5
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_sarah",
+        "testimonial_keelan",
+        "testimonial_david"
+      ],
+      "settings": {
+        "eyebrow": "Early wearers",
+        "heading": "Real people. Real data.",
+        "reviews_count": 3
+      }
+    },
+    "related": {
+      "type": "product-grid",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "More from Mend",
+        "heading": "You may also like.",
+        "collection": "",
+        "product_limit": 3
+      }
+    },
+    "countdown": {
+      "type": "countdown-sale",
+      "disabled": true,
+      "settings": {
+        "heading": "Limited Time Offer",
+        "button_label": "Shop Now"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "benefit_pitch",
+    "health_metrics",
+    "testimonials",
+    "related",
+    "countdown"
+  ]
+}
