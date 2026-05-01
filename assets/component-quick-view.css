@@ -79,7 +79,7 @@
 .mc-qv-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 36rem;
+  min-height: 46rem;
 }
 
 /* ---- Image panel ---------------------------------------------- */
@@ -94,7 +94,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 36rem;
+  min-height: 46rem;
 }
 .mc-qv-carousel__track {
   width: 100%;
@@ -173,10 +173,10 @@
 
 /* ---- Info panel ----------------------------------------------- */
 .mc-qv-info {
-  padding: 2.4rem 2.6rem 2.2rem;
+  padding: 3rem 3.2rem 2.8rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   overflow-y: auto;
   background: #f5efe4;
 }
@@ -268,7 +268,19 @@
   display: flex;
   gap: 0.75rem;
   align-items: stretch;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+/* ---- Dynamic payment buttons (Shop Pay etc.) ------------------ */
+.mc-qv-payment-btn { margin-top: -0.25rem; }
+.mc-qv-payment-btn .shopify-payment-button__button {
+  border-radius: 8px !important;
+  min-height: 48px !important;
+  font-size: 0.72rem !important;
+}
+.mc-qv-payment-btn .shopify-payment-button__button--unbranded {
+  background: rgba(31,29,26,0.07) !important;
+  color: #1f1d1a !important;
 }
 
 .mc-qv-qty {
@@ -356,8 +368,8 @@
     to   { opacity: 1; transform: translateY(0); }
   }
   .mc-qv-content { grid-template-columns: 1fr; }
-  .mc-qv-carousel { min-height: 280px; }
-  .mc-qv-img { max-height: 280px; }
-  .mc-qv-info { padding: 1.6rem 1.6rem 2rem; }
+  .mc-qv-carousel { min-height: 320px; }
+  .mc-qv-img { max-height: 320px; }
+  .mc-qv-info { padding: 2rem 2rem 2.4rem; gap: 1.2rem; }
   .mc-qv-title { font-size: 1.4rem; }
 }

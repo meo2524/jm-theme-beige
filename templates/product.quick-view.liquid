@@ -123,6 +123,10 @@
         </button>
       </div>
 
+      <div class="mc-qv-payment-btn">
+        {{ form | payment_button }}
+      </div>
+
     {%- endform -%}
 
     <a href="{{ product.url }}" class="mc-qv-full-link">View full details →</a>

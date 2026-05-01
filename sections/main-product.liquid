@@ -1445,6 +1445,10 @@
     if (!variant) return;
     if (variantIdInput) variantIdInput.value = variant.id;
 
+    if (variant.featured_image && variant.featured_image.position) {
+      goTo(variant.featured_image.position - 1);
+    }
+
     if (priceNow) priceNow.textContent = formatMoney(variant.price);
     if (togglePriceOnce) togglePriceOnce.textContent = formatMoney(variant.price);
 
