@@ -1,10 +1,10 @@
-{% comment %} Science / Evidence section — animated, dark navy {% endcomment %}
+{% comment %} Science / Evidence — on-brand: charcoal bg, bronze-gold accent {% endcomment %}
 
 <style>
   .ps-wrap {
     padding: 96px 20px;
-    background: linear-gradient(160deg, #08091a 0%, #0c0d1f 40%, #090912 100%);
-    color: #fff;
+    background: #1f1d1a;
+    color: #efe8dc;
     margin: 0;
     overflow: hidden;
     position: relative;
@@ -15,92 +15,75 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 60% 40% at 20% 20%, rgba(16,132,116,0.07) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 50% at 80% 80%, rgba(45,212,191,0.05) 0%, transparent 60%);
+      radial-gradient(ellipse 55% 45% at 15% 15%, rgba(154,126,87,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 45% 55% at 85% 85%, rgba(154,126,87,0.06) 0%, transparent 60%);
     pointer-events: none;
   }
 
   .ps-inner { max-width: 1100px; margin: 0 auto; position: relative; }
 
-  /* Header */
+  /* ── Animations ── */
+  @keyframes ps-fadein {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .ps-anim {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .ps-anim.ps-visible { opacity: 1; transform: none; }
+
+  /* ── Header ── */
   .ps-header { text-align: center; margin-bottom: 72px; }
+
   .ps-eyebrow {
-    display: inline-block;
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #2dd4bf;
+    color: #9a7e57;
     margin: 0 0 16px;
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
   }
-  .ps-eyebrow.ps-visible { opacity: 1; transform: none; }
-
   .ps-title {
     font-size: clamp(28px, 4vw, 44px);
     font-weight: 700;
-    margin: 0 0 20px;
+    margin: 0 0 18px;
     line-height: 1.15;
-    color: #f0f0f0;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
+    color: #efe8dc;
   }
-  .ps-title.ps-visible { opacity: 1; transform: none; }
-
   .ps-subtitle {
     font-size: 15px;
-    color: #8899aa;
+    color: #8a7d6e;
     max-width: 520px;
     margin: 0 auto;
     line-height: 1.75;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
   }
-  .ps-subtitle.ps-visible { opacity: 1; transform: none; }
 
-  /* Stat grid */
+  /* ── Stat grid ── */
   .ps-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 1px;
     margin-bottom: 64px;
-    background: rgba(255,255,255,0.06);
+    background: rgba(239,232,220,0.08);
     border-radius: 16px;
     overflow: hidden;
   }
 
   .ps-stat {
-    background: rgba(255,255,255,0.03);
+    background: rgba(239,232,220,0.03);
     padding: 44px 32px;
     text-align: center;
-    position: relative;
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.6s ease, transform 0.6s ease, background 0.3s;
+    transition: background 0.3s;
   }
-  .ps-stat.ps-visible { opacity: 1; transform: none; }
-  .ps-stat:hover { background: rgba(45,212,191,0.06); }
-
-  .ps-stat::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 20%; right: 20%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(45,212,191,0.3), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .ps-stat:hover::after { opacity: 1; }
+  .ps-stat:hover { background: rgba(154,126,87,0.09); }
 
   .ps-number {
     font-size: clamp(40px, 6vw, 60px);
     font-weight: 800;
     letter-spacing: -0.03em;
     margin: 0 0 12px;
-    background: linear-gradient(135deg, #f0f0f0 0%, #2dd4bf 100%);
+    background: linear-gradient(135deg, #efe8dc 0%, #9a7e57 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -108,39 +91,35 @@
   }
   .ps-stat-desc {
     font-size: 13px;
-    color: #8899aa;
+    color: #8a7d6e;
     margin: 0 0 16px;
     line-height: 1.65;
   }
-  .ps-source {
+  .ps-source-label {
     font-size: 10px;
-    color: rgba(45,212,191,0.5);
+    color: rgba(154,126,87,0.6);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     margin: 0;
   }
 
-  /* Quote */
+  /* ── Harvard quote ── */
   .ps-quote {
     margin: 0 0 64px;
     padding: 40px 44px;
-    background: rgba(255,255,255,0.025);
+    background: rgba(239,232,220,0.03);
     border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.07);
-    border-left: 3px solid #2dd4bf;
+    border: 1px solid rgba(239,232,220,0.08);
+    border-left: 3px solid #9a7e57;
     position: relative;
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
   }
-  .ps-quote.ps-visible { opacity: 1; transform: none; }
 
   .ps-quote::before {
     content: '\201C';
     position: absolute;
-    top: 16px; left: 24px;
-    font-size: 72px;
-    color: rgba(45,212,191,0.15);
+    top: 14px; left: 22px;
+    font-size: 80px;
+    color: rgba(154,126,87,0.12);
     font-family: Georgia, serif;
     line-height: 1;
   }
@@ -148,36 +127,31 @@
   .ps-quote-text {
     font-size: clamp(16px, 2vw, 19px);
     line-height: 1.75;
-    color: #c8d4dc;
+    color: #c4b89e;
     margin: 0 0 20px;
     font-style: italic;
     padding-left: 20px;
   }
   .ps-quote-attr {
     font-size: 11px;
-    color: #2dd4bf;
+    color: #9a7e57;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     margin: 0;
     padding-left: 20px;
   }
 
-  /* Sources */
-  .ps-sources {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
-  }
-  .ps-sources.ps-visible { opacity: 1; transform: none; }
+  /* ── Sources ── */
+  .ps-sources { }
 
   .ps-sources-label {
     text-align: center;
     font-size: 10px;
-    color: #445566;
+    color: #4a423a;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     margin: 0 0 24px;
-    border-top: 1px solid rgba(255,255,255,0.06);
+    border-top: 1px solid rgba(239,232,220,0.08);
     padding-top: 32px;
   }
 
@@ -185,35 +159,35 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 16px;
+    gap: 14px;
     align-items: center;
   }
 
   .ps-source-badge {
     text-decoration: none;
     display: block;
-    background: rgba(255,255,255,0.03);
+    background: rgba(239,232,220,0.03);
     padding: 14px 22px;
     border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.07);
+    border: 1px solid rgba(239,232,220,0.08);
     transition: border-color 0.25s, background 0.25s, transform 0.25s;
   }
   .ps-source-badge:hover {
-    border-color: rgba(45,212,191,0.35);
-    background: rgba(45,212,191,0.05);
+    border-color: rgba(154,126,87,0.4);
+    background: rgba(154,126,87,0.06);
     transform: translateY(-2px);
   }
   .ps-source-name {
     margin: 0;
     font-size: 12px;
     font-weight: 700;
-    color: #aabbcc;
+    color: #c4b89e;
     letter-spacing: 0.04em;
   }
   .ps-source-sub {
     margin: 3px 0 0;
     font-size: 10px;
-    color: #445566;
+    color: #4a423a;
   }
 
   @media (max-width: 600px) {
@@ -228,8 +202,8 @@
 
     <div class="ps-header">
       <p class="ps-eyebrow ps-anim">Peer-reviewed research</p>
-      <h2 class="ps-title ps-anim">The science behind the ring.</h2>
-      <p class="ps-subtitle ps-anim">Validated across 107 peer-reviewed studies and nearly 100,000 participants. Here's what the research says.</p>
+      <h2 class="ps-title ps-anim" style="transition-delay:0.08s">The science behind the ring.</h2>
+      <p class="ps-subtitle ps-anim" style="transition-delay:0.16s">Validated across 107 peer-reviewed studies and nearly 100,000 participants. Here's what the research says.</p>
     </div>
 
     <div class="ps-grid">
@@ -237,25 +211,25 @@
       <div class="ps-stat ps-anim" style="transition-delay:0s">
         <p class="ps-number" data-count="99.6" data-suffix="%">0%</p>
         <p class="ps-stat-desc">Heart rate correlation vs. medical-grade ECG devices</p>
-        <p class="ps-source">NIH · PubMed Central</p>
+        <p class="ps-source-label">NIH · PubMed Central</p>
       </div>
 
       <div class="ps-stat ps-anim" style="transition-delay:0.1s">
         <p class="ps-number" data-count="98" data-suffix="%">0%</p>
         <p class="ps-stat-desc">HRV accuracy against gold-standard electrocardiography</p>
-        <p class="ps-source">NIH · PubMed Central</p>
+        <p class="ps-source-label">NIH · PubMed Central</p>
       </div>
 
       <div class="ps-stat ps-anim" style="transition-delay:0.2s">
         <p class="ps-number">93–96%</p>
         <p class="ps-stat-desc">Sensitivity identifying sleep vs. wakefulness across validation studies</p>
-        <p class="ps-source">NIH · PubMed Central</p>
+        <p class="ps-source-label">NIH · PubMed Central</p>
       </div>
 
       <div class="ps-stat ps-anim" style="transition-delay:0.3s">
         <p class="ps-number" data-count="82" data-suffix="%">0%</p>
-        <p class="ps-stat-desc">Sensitivity detecting illness 2.75 days before symptoms appear</p>
-        <p class="ps-source">NIH · 63,153 participants</p>
+        <p class="ps-stat-desc">Detecting illness 2.75 days before symptoms appear</p>
+        <p class="ps-source-label">NIH · 63,153 participants</p>
       </div>
 
     </div>
@@ -297,42 +271,40 @@
 
 <script>
 (function() {
-  var animEls = document.querySelectorAll('.section-product-science .ps-anim');
-  var countEls = document.querySelectorAll('.section-product-science [data-count]');
+  var animEls   = document.querySelectorAll('.section-product-science .ps-anim');
+  var countEls  = document.querySelectorAll('.section-product-science [data-count]');
 
   function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
 
   function countUp(el) {
-    var target = parseFloat(el.dataset.count);
-    var suffix = el.dataset.suffix || '';
+    var target   = parseFloat(el.dataset.count);
+    var suffix   = el.dataset.suffix || '';
     var decimals = target % 1 !== 0 ? 1 : 0;
     var duration = 1400;
-    var start = performance.now();
-    function tick(now) {
+    var start    = performance.now();
+    (function tick(now) {
       var elapsed = Math.min((now - start) / duration, 1);
-      var val = easeOut(elapsed) * target;
-      el.textContent = val.toFixed(decimals) + suffix;
+      el.textContent = (easeOut(elapsed) * target).toFixed(decimals) + suffix;
       if (elapsed < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
+    })(start);
   }
 
   var counted = new WeakSet();
 
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('ps-visible');
-      if (entry.target.dataset.count && !counted.has(entry.target)) {
-        counted.add(entry.target);
-        countUp(entry.target);
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('ps-visible');
+      if (e.target.dataset.count && !counted.has(e.target)) {
+        counted.add(e.target);
+        countUp(e.target);
       }
-      observer.unobserve(entry.target);
+      io.unobserve(e.target);
     });
   }, { threshold: 0.15 });
 
-  animEls.forEach(function(el) { observer.observe(el); });
-  countEls.forEach(function(el) { observer.observe(el); });
+  animEls.forEach(function(el) { io.observe(el); });
+  countEls.forEach(function(el) { io.observe(el); });
 })();
 </script>
 

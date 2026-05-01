@@ -289,6 +289,10 @@
         "include_margins": true
       }
     },
+    "ring_size_modal": {
+      "type": "ring-size-modal",
+      "settings": {}
+    },
     "judgeme_reviews": {
       "type": "judgeme-reviews",
       "disabled": true,
@@ -327,6 +331,7 @@
     "product_science",
     "testimonials",
     "reviews_widget",
+    "ring_size_modal",
     "judgeme_reviews",
     "related",
     "countdown"
