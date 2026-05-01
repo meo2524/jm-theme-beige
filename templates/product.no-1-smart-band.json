@@ -12,7 +12,7 @@
     "main": {
       "type": "main-product",
       "settings": {
-        "eyebrow_text": "Health Technology",
+        "eyebrow_text": "N° 01",
         "short_description": "Tracks sleep, heart rate, HRV, SpO₂ and recovery. Continuously. No subscription.",
         "per_use_text": "$0 / month",
         "accordion_label_1": "What's in the box",
