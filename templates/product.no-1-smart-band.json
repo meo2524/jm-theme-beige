@@ -226,7 +226,7 @@
         "reviews_count": 6
       }
     },
-    "177767177860fdc853": {
+    "reviews_carousel": {
       "type": "apps",
       "blocks": {
         "judge_me_reviews_videos_carousel_WK6GHc": {
@@ -260,7 +260,18 @@
             "header_text": "Real customer stories",
             "show_average_rating": true
           }
-        },
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_videos_carousel_WK6GHc"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "reviews_widget": {
+      "type": "apps",
+      "blocks": {
         "judge_me_reviews_review_widget_QD8Ut3": {
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
@@ -272,7 +283,6 @@
         }
       },
       "block_order": [
-        "judge_me_reviews_videos_carousel_WK6GHc",
         "judge_me_reviews_review_widget_QD8Ut3"
       ],
       "settings": {
@@ -312,10 +322,11 @@
   "order": [
     "main",
     "benefit_pitch",
+    "reviews_carousel",
     "health_metrics",
     "product_science",
     "testimonials",
-    "177767177860fdc853",
+    "reviews_widget",
     "judgeme_reviews",
     "related",
     "countdown"

@@ -1,82 +1,292 @@
-{% comment %} Science / Evidence section for smart ring product pages {% endcomment %}
+{% comment %} Science / Evidence section — animated, dark navy {% endcomment %}
 
-<div class="product-science" style="padding:64px 20px;background:#0d0d0d;color:#fff;margin:0;">
+<style>
+  .ps-wrap {
+    padding: 96px 20px;
+    background: linear-gradient(160deg, #08091a 0%, #0c0d1f 40%, #090912 100%);
+    color: #fff;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+  }
 
-  <div style="max-width:1100px;margin:0 auto;">
+  .ps-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 20%, rgba(16,132,116,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 80% 80%, rgba(45,212,191,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
 
-    <!-- Header -->
-    <div style="text-align:center;margin-bottom:56px;">
-      <p style="font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#666;margin:0 0 12px;">Peer-reviewed research</p>
-      <h2 style="font-size:clamp(26px,4vw,40px);font-weight:700;margin:0 0 16px;line-height:1.2;">The science behind the ring.</h2>
-      <p style="font-size:15px;color:#888;max-width:540px;margin:0 auto;line-height:1.7;">Smart ring technology has been validated across 107 peer-reviewed studies involving nearly 100,000 participants. Here's what the research says.</p>
+  .ps-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+
+  /* Header */
+  .ps-header { text-align: center; margin-bottom: 72px; }
+  .ps-eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #2dd4bf;
+    margin: 0 0 16px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .ps-eyebrow.ps-visible { opacity: 1; transform: none; }
+
+  .ps-title {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700;
+    margin: 0 0 20px;
+    line-height: 1.15;
+    color: #f0f0f0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
+  }
+  .ps-title.ps-visible { opacity: 1; transform: none; }
+
+  .ps-subtitle {
+    font-size: 15px;
+    color: #8899aa;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.75;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+  }
+  .ps-subtitle.ps-visible { opacity: 1; transform: none; }
+
+  /* Stat grid */
+  .ps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1px;
+    margin-bottom: 64px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .ps-stat {
+    background: rgba(255,255,255,0.03);
+    padding: 44px 32px;
+    text-align: center;
+    position: relative;
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease, background 0.3s;
+  }
+  .ps-stat.ps-visible { opacity: 1; transform: none; }
+  .ps-stat:hover { background: rgba(45,212,191,0.06); }
+
+  .ps-stat::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 20%; right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(45,212,191,0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .ps-stat:hover::after { opacity: 1; }
+
+  .ps-number {
+    font-size: clamp(40px, 6vw, 60px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 0 0 12px;
+    background: linear-gradient(135deg, #f0f0f0 0%, #2dd4bf 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+  .ps-stat-desc {
+    font-size: 13px;
+    color: #8899aa;
+    margin: 0 0 16px;
+    line-height: 1.65;
+  }
+  .ps-source {
+    font-size: 10px;
+    color: rgba(45,212,191,0.5);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  /* Quote */
+  .ps-quote {
+    margin: 0 0 64px;
+    padding: 40px 44px;
+    background: rgba(255,255,255,0.025);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-left: 3px solid #2dd4bf;
+    position: relative;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .ps-quote.ps-visible { opacity: 1; transform: none; }
+
+  .ps-quote::before {
+    content: '\201C';
+    position: absolute;
+    top: 16px; left: 24px;
+    font-size: 72px;
+    color: rgba(45,212,191,0.15);
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  .ps-quote-text {
+    font-size: clamp(16px, 2vw, 19px);
+    line-height: 1.75;
+    color: #c8d4dc;
+    margin: 0 0 20px;
+    font-style: italic;
+    padding-left: 20px;
+  }
+  .ps-quote-attr {
+    font-size: 11px;
+    color: #2dd4bf;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  /* Sources */
+  .ps-sources {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
+  }
+  .ps-sources.ps-visible { opacity: 1; transform: none; }
+
+  .ps-sources-label {
+    text-align: center;
+    font-size: 10px;
+    color: #445566;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 32px;
+  }
+
+  .ps-sources-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .ps-source-badge {
+    text-decoration: none;
+    display: block;
+    background: rgba(255,255,255,0.03);
+    padding: 14px 22px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.07);
+    transition: border-color 0.25s, background 0.25s, transform 0.25s;
+  }
+  .ps-source-badge:hover {
+    border-color: rgba(45,212,191,0.35);
+    background: rgba(45,212,191,0.05);
+    transform: translateY(-2px);
+  }
+  .ps-source-name {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    color: #aabbcc;
+    letter-spacing: 0.04em;
+  }
+  .ps-source-sub {
+    margin: 3px 0 0;
+    font-size: 10px;
+    color: #445566;
+  }
+
+  @media (max-width: 600px) {
+    .ps-quote { padding: 28px 24px; }
+    .ps-quote::before { display: none; }
+    .ps-quote-text, .ps-quote-attr { padding-left: 0; }
+  }
+</style>
+
+<div class="ps-wrap">
+  <div class="ps-inner">
+
+    <div class="ps-header">
+      <p class="ps-eyebrow ps-anim">Peer-reviewed research</p>
+      <h2 class="ps-title ps-anim">The science behind the ring.</h2>
+      <p class="ps-subtitle ps-anim">Validated across 107 peer-reviewed studies and nearly 100,000 participants. Here's what the research says.</p>
     </div>
 
-    <!-- Stat callouts -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;margin-bottom:56px;">
+    <div class="ps-grid">
 
-      <div style="background:#161616;padding:36px 28px;text-align:center;">
-        <p style="font-size:clamp(36px,6vw,56px);font-weight:800;margin:0 0 8px;letter-spacing:-0.02em;color:#fff;">99.6%</p>
-        <p style="font-size:13px;color:#aaa;margin:0 0 16px;line-height:1.6;">Heart rate correlation vs. medical-grade ECG devices</p>
-        <p style="font-size:11px;color:#555;letter-spacing:0.1em;text-transform:uppercase;">NIH / PubMed Central</p>
+      <div class="ps-stat ps-anim" style="transition-delay:0s">
+        <p class="ps-number" data-count="99.6" data-suffix="%">0%</p>
+        <p class="ps-stat-desc">Heart rate correlation vs. medical-grade ECG devices</p>
+        <p class="ps-source">NIH · PubMed Central</p>
       </div>
 
-      <div style="background:#161616;padding:36px 28px;text-align:center;">
-        <p style="font-size:clamp(36px,6vw,56px);font-weight:800;margin:0 0 8px;letter-spacing:-0.02em;color:#fff;">98%</p>
-        <p style="font-size:13px;color:#aaa;margin:0 0 16px;line-height:1.6;">HRV accuracy against gold-standard electrocardiography</p>
-        <p style="font-size:11px;color:#555;letter-spacing:0.1em;text-transform:uppercase;">NIH / PubMed Central</p>
+      <div class="ps-stat ps-anim" style="transition-delay:0.1s">
+        <p class="ps-number" data-count="98" data-suffix="%">0%</p>
+        <p class="ps-stat-desc">HRV accuracy against gold-standard electrocardiography</p>
+        <p class="ps-source">NIH · PubMed Central</p>
       </div>
 
-      <div style="background:#161616;padding:36px 28px;text-align:center;">
-        <p style="font-size:clamp(36px,6vw,56px);font-weight:800;margin:0 0 8px;letter-spacing:-0.02em;color:#fff;">93–96%</p>
-        <p style="font-size:13px;color:#aaa;margin:0 0 16px;line-height:1.6;">Sensitivity identifying sleep vs. wakefulness across validation studies</p>
-        <p style="font-size:11px;color:#555;letter-spacing:0.1em;text-transform:uppercase;">NIH / PubMed Central</p>
+      <div class="ps-stat ps-anim" style="transition-delay:0.2s">
+        <p class="ps-number">93–96%</p>
+        <p class="ps-stat-desc">Sensitivity identifying sleep vs. wakefulness across validation studies</p>
+        <p class="ps-source">NIH · PubMed Central</p>
       </div>
 
-      <div style="background:#161616;padding:36px 28px;text-align:center;">
-        <p style="font-size:clamp(36px,6vw,56px);font-weight:800;margin:0 0 8px;letter-spacing:-0.02em;color:#fff;">82%</p>
-        <p style="font-size:13px;color:#aaa;margin:0 0 16px;line-height:1.6;">Sensitivity detecting illness 2.75 days before symptoms appear</p>
-        <p style="font-size:11px;color:#555;letter-spacing:0.1em;text-transform:uppercase;">NIH / 63,153 participants</p>
+      <div class="ps-stat ps-anim" style="transition-delay:0.3s">
+        <p class="ps-number" data-count="82" data-suffix="%">0%</p>
+        <p class="ps-stat-desc">Sensitivity detecting illness 2.75 days before symptoms appear</p>
+        <p class="ps-source">NIH · 63,153 participants</p>
       </div>
 
     </div>
 
-    <!-- Harvard pull quote -->
-    <div style="border-left:3px solid #444;padding:24px 32px;margin-bottom:56px;background:#111;">
-      <p style="font-size:18px;line-height:1.7;color:#ccc;margin:0 0 16px;font-style:italic;">"Smart rings may be more accurate for sleep tracking than smartwatches — and their finger-based sensors offer better signal quality than wrist-worn devices."</p>
-      <p style="font-size:12px;color:#555;margin:0;letter-spacing:0.1em;text-transform:uppercase;">Harvard Health Publishing · Harvard Medical School</p>
+    <div class="ps-quote ps-anim">
+      <p class="ps-quote-text">"Smart rings may be more accurate for sleep tracking than smartwatches — and their finger-based sensors offer better signal quality than wrist-worn devices."</p>
+      <p class="ps-quote-attr">Harvard Health Publishing · Harvard Medical School</p>
     </div>
 
-    <!-- Source logos row -->
-    <div style="border-top:1px solid #222;padding-top:36px;">
-      <p style="text-align:center;font-size:11px;color:#555;letter-spacing:0.15em;text-transform:uppercase;margin:0 0 28px;">As cited in</p>
-      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px;align-items:center;">
+    <div class="ps-sources ps-anim">
+      <p class="ps-sources-label">As cited in</p>
+      <div class="ps-sources-row">
 
-        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12730986/" target="_blank" rel="noopener" style="text-decoration:none;">
-          <div style="background:#1a1a1a;padding:14px 24px;border-radius:8px;border:1px solid #2a2a2a;transition:border-color 0.2s;">
-            <p style="margin:0;font-size:13px;font-weight:700;color:#aaa;letter-spacing:0.05em;">NIH · PubMed Central</p>
-            <p style="margin:2px 0 0;font-size:10px;color:#555;">107 studies · 100,000 participants</p>
-          </div>
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12730986/" target="_blank" rel="noopener" class="ps-source-badge">
+          <p class="ps-source-name">NIH · PubMed Central</p>
+          <p class="ps-source-sub">107 studies · 100,000 participants</p>
         </a>
 
-        <a href="https://www.health.harvard.edu/heart-health/device-of-the-month-smart-ring" target="_blank" rel="noopener" style="text-decoration:none;">
-          <div style="background:#1a1a1a;padding:14px 24px;border-radius:8px;border:1px solid #2a2a2a;">
-            <p style="margin:0;font-size:13px;font-weight:700;color:#aaa;letter-spacing:0.05em;">Harvard Health Publishing</p>
-            <p style="margin:2px 0 0;font-size:10px;color:#555;">Harvard Medical School</p>
-          </div>
+        <a href="https://www.health.harvard.edu/heart-health/device-of-the-month-smart-ring" target="_blank" rel="noopener" class="ps-source-badge">
+          <p class="ps-source-name">Harvard Health Publishing</p>
+          <p class="ps-source-sub">Harvard Medical School</p>
         </a>
 
-        <a href="https://www.mdpi.com/2076-3417/14/23/10778" target="_blank" rel="noopener" style="text-decoration:none;">
-          <div style="background:#1a1a1a;padding:14px 24px;border-radius:8px;border:1px solid #2a2a2a;">
-            <p style="margin:0;font-size:13px;font-weight:700;color:#aaa;letter-spacing:0.05em;">MDPI Applied Sciences</p>
-            <p style="margin:2px 0 0;font-size:10px;color:#555;">Peer-reviewed journal</p>
-          </div>
+        <a href="https://www.mdpi.com/2076-3417/14/23/10778" target="_blank" rel="noopener" class="ps-source-badge">
+          <p class="ps-source-name">MDPI Applied Sciences</p>
+          <p class="ps-source-sub">Peer-reviewed journal</p>
         </a>
 
-        <a href="https://www.nature.com/articles/s41598-025-24312-0" target="_blank" rel="noopener" style="text-decoration:none;">
-          <div style="background:#1a1a1a;padding:14px 24px;border-radius:8px;border:1px solid #2a2a2a;">
-            <p style="margin:0;font-size:13px;font-weight:700;color:#aaa;letter-spacing:0.05em;">Nature · Scientific Reports</p>
-            <p style="margin:2px 0 0;font-size:10px;color:#555;">Nature Publishing Group</p>
-          </div>
+        <a href="https://www.nature.com/articles/s41598-025-24312-0" target="_blank" rel="noopener" class="ps-source-badge">
+          <p class="ps-source-name">Nature · Scientific Reports</p>
+          <p class="ps-source-sub">Nature Publishing Group</p>
         </a>
 
       </div>
@@ -84,6 +294,47 @@
 
   </div>
 </div>
+
+<script>
+(function() {
+  var animEls = document.querySelectorAll('.section-product-science .ps-anim');
+  var countEls = document.querySelectorAll('.section-product-science [data-count]');
+
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+  function countUp(el) {
+    var target = parseFloat(el.dataset.count);
+    var suffix = el.dataset.suffix || '';
+    var decimals = target % 1 !== 0 ? 1 : 0;
+    var duration = 1400;
+    var start = performance.now();
+    function tick(now) {
+      var elapsed = Math.min((now - start) / duration, 1);
+      var val = easeOut(elapsed) * target;
+      el.textContent = val.toFixed(decimals) + suffix;
+      if (elapsed < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  var counted = new WeakSet();
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('ps-visible');
+      if (entry.target.dataset.count && !counted.has(entry.target)) {
+        counted.add(entry.target);
+        countUp(entry.target);
+      }
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.15 });
+
+  animEls.forEach(function(el) { observer.observe(el); });
+  countEls.forEach(function(el) { observer.observe(el); });
+})();
+</script>
 
 {% schema %}
 {
