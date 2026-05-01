@@ -133,6 +133,7 @@
     },
     "testimonials": {
       "type": "testimonials",
+      "disabled": true,
       "blocks": {
         "testimonial_sarah": {
           "type": "testimonial",
