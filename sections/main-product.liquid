@@ -15,12 +15,12 @@
   <div class="product-container">
 
     {%- comment -%} ===========================================
-      GALLERY
+      LEFT COLUMN: gallery (sticky) + mini review carousel
     =========================================== {%- endcomment -%}
-    <div class="product-gallery">
+    <div class="pdp-left">
 
-      {%- comment -%} Sticky inner wrapper so mini-carousel can live below without sticking {%- endcomment -%}
-      <div class="gallery-images">
+      {%- comment -%} Gallery — sticky so it travels with the right column scroll {%- endcomment -%}
+      <div class="product-gallery">
 
         {%- comment -%} Left: vertical thumbnail strip (desktop only) {%- endcomment -%}
         {%- if product.images.size > 1 -%}
@@ -93,9 +93,9 @@
         </div>
 
       </div>
-      {%- comment -%} /gallery-images {%- endcomment -%}
+      {%- comment -%} /product-gallery {%- endcomment -%}
 
-      {%- comment -%} Mini testimonial carousel (below gallery, fills left column space) {%- endcomment -%}
+      {%- comment -%} Mini review carousel — sibling of gallery, scrolls normally while gallery sticks {%- endcomment -%}
       {%- assign mini_reviews = section.blocks | where: 'type', 'mini_testimonial' -%}
       {%- if mini_reviews.size > 0 -%}
         <div class="pdp-review-carousel" id="PdpReviewCarousel-{{ section.id }}" aria-label="Customer reviews">
@@ -140,7 +140,7 @@
       {%- endif -%}
 
     </div>
-    {%- comment -%} /gallery {%- endcomment -%}
+    {%- comment -%} /pdp-left {%- endcomment -%}
 
 
     {%- comment -%} ===========================================
@@ -559,14 +559,13 @@
 
 /* -- GALLERY --------------------------------------- */
 
-.product-gallery {
+.pdp-left {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  align-items: stretch;
 }
 
-.gallery-images {
+.product-gallery {
   position: sticky;
   top: 7rem;
   display: flex;
@@ -1470,14 +1469,12 @@
     padding: 0;
   }
 
-  /* Mobile gallery -- scroll-snap swipe */
-  .product-gallery {
-    position: static;
-    flex-direction: column;
+  /* Mobile: unstick gallery, stack vertically */
+  .pdp-left {
     gap: 0;
   }
 
-  .gallery-images {
+  .product-gallery {
     position: static;
     flex-direction: column;
     gap: 0;
