@@ -220,7 +220,6 @@
         "testimonial_james",
         "testimonial_priya"
       ],
-      "disabled": true,
       "settings": {
         "eyebrow": "83 reviews · 4.9 stars",
         "heading": "Real people. Real data.",
@@ -233,9 +232,11 @@
         "judge_me_reviews_videos_carousel_WK6GHc": {
           "type": "shopify://apps/judge-me-reviews/blocks/videos_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
-            "show_sample_reviews": true,
-            "reviews_selection": "all",
-            "products": [],
+            "show_sample_reviews": false,
+            "reviews_selection": "current_product",
+            "products": [
+              "n-01-smart-band"
+            ],
             "star_rating": "all",
             "review_type": "photo_and_video",
             "max_reviews": 20,
