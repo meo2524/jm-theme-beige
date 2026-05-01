@@ -209,6 +209,10 @@
         "reviews_count": 6
       }
     },
+    "judgeme_reviews": {
+      "type": "judgeme-reviews",
+      "settings": {}
+    },
     "related": {
       "type": "product-grid",
       "disabled": true,
@@ -233,6 +237,7 @@
     "benefit_pitch",
     "health_metrics",
     "testimonials",
+    "judgeme_reviews",
     "related",
     "countdown"
   ]

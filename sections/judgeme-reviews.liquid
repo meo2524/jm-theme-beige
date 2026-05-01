@@ -1,0 +1,13 @@
+{% comment %} Judge.me Review Widget — added for JSON template support {% endcomment %}
+<div class="judgeme-reviews-wrapper" style="max-width:1200px;margin:0 auto;padding:48px 20px;">
+  <div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-id='{{ product.id }}'></div>
+</div>
+
+{% schema %}
+{
+  "name": "Reviews (Judge.me)",
+  "tag": "section",
+  "class": "section-judgeme-reviews",
+  "settings": []
+}
+{% endschema %}
