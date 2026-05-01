@@ -85,8 +85,8 @@
     bodyEl.classList.remove('is-loading');
     bodyEl.innerHTML = '';
     bodyEl.appendChild(content);
-    initCarousel(bodyEl);
-    initForm(bodyEl);
+    var carousel = initCarousel(bodyEl);
+    initForm(bodyEl, carousel);
   }
 
   /* -- Carousel ---------------------------------------------- */
@@ -112,10 +112,12 @@
     dots.forEach(function (dot) {
       dot.addEventListener('click', function () { goTo(parseInt(dot.dataset.dot, 10)); });
     });
+
+    return { goTo: goTo };
   }
 
   /* -- Variant form ------------------------------------------ */
-  function initForm(root) {
+  function initForm(root, carousel) {
     var variantsJson = root.querySelector('.mc-qv-variants-json');
     if (!variantsJson) return;
 
@@ -170,7 +172,11 @@
         });
         b.classList.add('is-active');
         selected[pos] = b.dataset.optVal;
-        applyVariant(findVariant());
+        var v = findVariant();
+        applyVariant(v);
+        if (v && carousel && typeof v.image_index === 'number') {
+          carousel.goTo(v.image_index);
+        }
       });
     });
 
