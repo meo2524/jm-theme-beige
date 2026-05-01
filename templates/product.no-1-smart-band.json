@@ -5,14 +5,16 @@
       "settings": {
         "eyebrow_text": "Health Technology",
         "short_description": "Tracks sleep, heart rate, HRV, SpO₂ and recovery. Continuously. No subscription.",
-        "per_use_text": "$0 / month",
+        "per_use_text": "$0 / month",
         "accordion_label_1": "What's in the box",
-        "accordion_label_2": "How it works",
+        "accordion_label_2": "Find your size",
         "accordion_label_3": "Specs & certifications",
-        "accordion_whats-included": "<p>1× N°…01 Smart Band (your chosen colour)<br>1× USB-C magnetic charging cable<br>1× Quick start guide</p>",
-        "accordion_how-it-works": "<p><strong>1. Wear it.</strong> Slide the ring onto your index or middle finger. The sensors face inward.<br><strong>2. Charge weekly.</strong> A full charge takes 60–90 minutes and lasts up to 7 days.<br><strong>3. Open the QRing app.</strong> Download free on iOS or Android. Sync, and your overnight data appears instantly.<br><strong>4. Read your scores.</strong> Sleep quality, HRV, resting heart rate, SpO₂ and daily recovery — all in one view.</p>",
-        "accordion_ingredients-certifications": "<p><strong>Materials</strong><br>Glossy ceramic shell · Polished chrome inner band<br><br><strong>Sensors</strong><br>PPG (photoplethysmography) · Accelerometer · Skin temperature · SpO₂<br><br><strong>Connectivity</strong><br>Bluetooth 5.0<br><br><strong>Waterproof rating</strong><br>IP68 — 100 m / 328 ft<br><br><strong>Compatibility</strong><br>iOS 14+ · Android 8+<br><br><strong>Subscription</strong><br>None. The app is free. Forever.</p>",
-        "rating_show": false,
+        "accordion_whats-included": "<p>1× N° 01 Smart Band (your chosen colour)<br>1× Magnetic charging case<br>1× USB-C charging cable<br>1× Quick start guide</p>",
+        "accordion_how-it-works": "<p><strong>How to measure your ring size</strong><br><br>Wrap a thin strip of paper around the finger you plan to wear the ring on. Mark where the paper overlaps, then measure the length in millimetres. Match to the chart below.<br><br><strong>Size chart</strong><br><br>Size 8 — 18.3 mm inner diameter (57.5 mm circumference)<br>Size 9 — 19.1 mm inner diameter (60.0 mm circumference)<br>Size 10 — 20.0 mm inner diameter (62.8 mm circumference)<br>Size 11 — 20.8 mm inner diameter (65.3 mm circumference)<br>Size 12 — 21.6 mm inner diameter (67.9 mm circumference)<br>Size 13 — 22.4 mm inner diameter (70.4 mm circumference)<br><br><strong>Tips</strong><br>Measure at the end of the day — fingers are slightly larger then.<br>If you're between sizes, go up one size.<br>The ring should slide on snugly but come off without effort.<br>Recommended finger: index or middle finger for best sensor accuracy.</p>",
+        "accordion_ingredients-certifications": "<p><strong>Material</strong><br>Ceramic body · Polished chrome inner band<br><br><strong>Chipset</strong><br>Realtek RTL8762 ESF<br><br><strong>Bluetooth</strong><br>5.2<br><br><strong>Waterproof</strong><br>5ATM<br><br><strong>Battery</strong><br>14 mAh (18 mAh — sizes 11 and above)<br><br><strong>Charge time</strong><br>~1.5 hours (magnetic charging case)<br><br><strong>Battery life</strong><br>5–7 days active use · 15 days standby<br><br><strong>Weight</strong><br>3.5 g (size 11)<br><br><strong>Compatibility</strong><br>iOS 9.0+ · Android 5.1+<br><br><strong>App</strong><br>QRing (free — no subscription)<br><br><strong>Certifications</strong><br>CE · No display screen · No NFC<br><br><strong>Subscription</strong><br>None. Ever.</p>",
+        "rating_show": true,
+        "rating_value": "4.9",
+        "rating_count_text": "83 reviews",
         "qty_label": "Size",
         "atc_label": "Add to Cart",
         "atc_sold_out_label": "Notify Me",
@@ -28,7 +30,7 @@
         "bullet_battery": {
           "type": "bullet",
           "settings": {
-            "text": "7-day battery — never miss a night of data"
+            "text": "5–7 day battery — never miss a night's data"
           }
         },
         "bullet_sub": {
@@ -40,13 +42,19 @@
         "bullet_water": {
           "type": "bullet",
           "settings": {
-            "text": "IP68 waterproof — shower, swim, sweat"
+            "text": "5ATM waterproof — shower, swim, sweat"
           }
         },
         "bullet_design": {
           "type": "bullet",
           "settings": {
-            "text": "Jewelry-grade ceramic — looks like a ring, not a gadget"
+            "text": "Ceramic build — jewelry that happens to be a lab"
+          }
+        },
+        "bullet_gesture": {
+          "type": "bullet",
+          "settings": {
+            "text": "Gesture control — take remote photos, control music"
           }
         }
       },
@@ -54,12 +62,13 @@
         "bullet_battery",
         "bullet_sub",
         "bullet_water",
-        "bullet_design"
+        "bullet_design",
+        "bullet_gesture"
       ],
       "settings": {
         "eyebrow": "Why N° 01",
-        "heading": "Everything your watch can’t tell you.",
-        "body": "Your smartwatch counts steps and celebrates effort. The N°…01 Smart Band tracks the metric that actually matters — how recovered you are. HRV, sleep architecture, overnight temperature. The numbers that decide whether tomorrow builds you up or breaks you down.",
+        "heading": "Everything your watch can't tell you.",
+        "body": "Your smartwatch counts steps and celebrates effort. The N° 01 Smart Band tracks what actually matters — how recovered you are. HRV, sleep architecture, blood oxygen, overnight temperature. The numbers that decide whether tomorrow builds you up or breaks you down.",
         "cta_label": "",
         "cta_url": "",
         "reverse": false
@@ -83,25 +92,25 @@
         "bullet_spo2": {
           "type": "bullet",
           "settings": {
-            "text": "Blood oxygen (SpO₂) — overnight saturation"
-          }
-        },
-        "bullet_temp": {
-          "type": "bullet",
-          "settings": {
-            "text": "Skin temperature — catches illness and cycle shifts early"
+            "text": "Blood oxygen (SpO₂) — overnight saturation monitoring"
           }
         },
         "bullet_stress": {
           "type": "bullet",
           "settings": {
-            "text": "Stress & recovery score — know when to push, when to rest"
+            "text": "Stress score — know when to push, when to rest"
           }
         },
         "bullet_activity": {
           "type": "bullet",
           "settings": {
-            "text": "Steps, calories, active minutes — automatic workout detection"
+            "text": "Steps, distance, calories — automatic workout detection"
+          }
+        },
+        "bullet_camera": {
+          "type": "bullet",
+          "settings": {
+            "text": "Remote camera control — snap photos from your wrist"
           }
         }
       },
@@ -109,14 +118,14 @@
         "bullet_sleep",
         "bullet_hrv",
         "bullet_spo2",
-        "bullet_temp",
         "bullet_stress",
-        "bullet_activity"
+        "bullet_activity",
+        "bullet_camera"
       ],
       "settings": {
         "eyebrow": "What it tracks",
         "heading": "One ring. Everything that matters.",
-        "body": "Your body is always communicating. Most trackers catch one or two signals. The N°…01 reads six — day and night, automatically, without you touching a thing.",
+        "body": "Your body is always communicating. Most trackers catch one or two signals. The N° 01 reads six, day and night, automatically — plus gesture control and remote camera so it pulls double duty.",
         "cta_label": "",
         "cta_url": "",
         "reverse": true
@@ -128,9 +137,9 @@
         "testimonial_sarah": {
           "type": "testimonial",
           "settings": {
-            "quote": "I’ve been telling my doctor something was wrong for two years. I brought in my HRV and temperature charts and she finally listened. First thing that’s ever given me proof.",
+            "quote": "I've been telling my doctor something was wrong for two years. I brought in my HRV and temperature charts and she finally listened. First thing that's ever given me proof.",
             "author": "Sarah M.",
-            "author_detail": "Verified buyer · White",
+            "author_detail": "Verified buyer · White · Size 9",
             "verified": true,
             "stars": 5
           }
@@ -140,7 +149,7 @@
           "settings": {
             "quote": "Been lifting for 4 years. This showed me I was recovered enough to train hard exactly 11 times in 2 months. Stopped overtraining, finally broke a plateau.",
             "author": "Keelan R.",
-            "author_detail": "Verified buyer · Black",
+            "author_detail": "Verified buyer · Black · Size 11",
             "verified": true,
             "stars": 5
           }
@@ -148,9 +157,39 @@
         "testimonial_david": {
           "type": "testimonial",
           "settings": {
-            "quote": "I’ve rejected every smartwatch my wife has bought me. This is different — it looks like a ring because it is one. Nobody at work even knows what it is.",
+            "quote": "I've rejected every smartwatch my wife has bought me. This is different — looks like a ring because it is one. Nobody at work even knows what it is.",
             "author": "David H.",
-            "author_detail": "Verified buyer · Black",
+            "author_detail": "Verified buyer · Black · Size 12",
+            "verified": true,
+            "stars": 5
+          }
+        },
+        "testimonial_amy": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The sleep data alone is worth it. I finally understand why I'm exhausted — my deep sleep is basically non-existent. Two weeks in and I've already changed my evening routine.",
+            "author": "Amy T.",
+            "author_detail": "Verified buyer · Pink · Size 8",
+            "verified": true,
+            "stars": 5
+          }
+        },
+        "testimonial_james": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Battery lasts me nearly a week with 24/7 tracking on. My Apple Watch needed charging every night — I was never wearing it to sleep. This fixed the whole problem.",
+            "author": "James L.",
+            "author_detail": "Verified buyer · Black · Size 10",
+            "verified": true,
+            "stars": 5
+          }
+        },
+        "testimonial_priya": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Bought it for cycle tracking and the temperature data is surprisingly accurate. Way cheaper than Oura and does the same thing. No subscription is a huge deal.",
+            "author": "Priya K.",
+            "author_detail": "Verified buyer · White · Size 9",
             "verified": true,
             "stars": 5
           }
@@ -159,12 +198,15 @@
       "block_order": [
         "testimonial_sarah",
         "testimonial_keelan",
-        "testimonial_david"
+        "testimonial_david",
+        "testimonial_amy",
+        "testimonial_james",
+        "testimonial_priya"
       ],
       "settings": {
-        "eyebrow": "Early wearers",
+        "eyebrow": "83 reviews · 4.9 stars",
         "heading": "Real people. Real data.",
-        "reviews_count": 3
+        "reviews_count": 6
       }
     },
     "related": {
