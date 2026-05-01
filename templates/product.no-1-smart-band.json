@@ -144,6 +144,10 @@
         "reverse": true
       }
     },
+    "product_science": {
+      "type": "product-science",
+      "settings": {}
+    },
     "testimonials": {
       "type": "testimonials",
       "blocks": {
@@ -400,6 +404,7 @@
     "main",
     "benefit_pitch",
     "health_metrics",
+    "product_science",
     "testimonials",
     "177767177860fdc853",
     "judgeme_reviews",
