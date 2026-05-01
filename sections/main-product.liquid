@@ -19,75 +19,125 @@
     =========================================== {%- endcomment -%}
     <div class="product-gallery">
 
-      {%- comment -%} Left: vertical thumbnail strip (desktop only) {%- endcomment -%}
-      {%- if product.images.size > 1 -%}
-        <div class="gallery-thumbs" id="GalleryThumbs-{{ section.id }}" role="list" aria-label="Image thumbnails">
-          {%- for image in product.images limit: 8 -%}
-            <button
-              class="gallery-thumb{% if forloop.first %} is-active{% endif %}"
-              data-index="{{ forloop.index0 }}"
-              type="button"
-              aria-label="View image {{ forloop.index }}"
-              role="listitem"
-            >
-              <img
-                src="{{ image | image_url: width: 160 }}"
-                alt="{{ image.alt | escape | default: product.title }}"
-                width="160"
-                height="200"
-                loading="lazy"
-              >
-            </button>
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
+      {%- comment -%} Sticky inner wrapper so mini-carousel can live below without sticking {%- endcomment -%}
+      <div class="gallery-images">
 
-      {%- comment -%} Right: main image + arrows + dots {%- endcomment -%}
-      <div class="gallery-main">
-
-        <div class="gallery-track" id="GalleryTrack-{{ section.id }}" role="region" aria-label="Product images">
-          {%- if product.images.size > 0 -%}
+        {%- comment -%} Left: vertical thumbnail strip (desktop only) {%- endcomment -%}
+        {%- if product.images.size > 1 -%}
+          <div class="gallery-thumbs" id="GalleryThumbs-{{ section.id }}" role="list" aria-label="Image thumbnails">
             {%- for image in product.images limit: 8 -%}
-              <div
-                class="gallery-slide{% if forloop.first %} is-active{% endif %}"
+              <button
+                class="gallery-thumb{% if forloop.first %} is-active{% endif %}"
                 data-index="{{ forloop.index0 }}"
+                type="button"
+                aria-label="View image {{ forloop.index }}"
+                role="listitem"
               >
                 <img
-                  src="{{ image | image_url: width: 960 }}"
+                  src="{{ image | image_url: width: 160 }}"
                   alt="{{ image.alt | escape | default: product.title }}"
-                  width="{{ image.width }}"
-                  height="{{ image.height }}"
-                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                  class="gallery-slide__img"
+                  width="160"
+                  height="200"
+                  loading="lazy"
                 >
-              </div>
-            {%- endfor -%}
-          {%- else -%}
-            <div class="gallery-slide is-active">
-              {{ 'product-1' | placeholder_svg_tag: 'gallery-slide__placeholder' }}
-            </div>
-          {%- endif -%}
-
-          {%- comment -%} Arrows inside the track so z-index is unambiguous {%- endcomment -%}
-          {%- if product.images.size > 1 -%}
-            <button class="gallery-arrow gallery-arrow--prev" type="button" aria-label="Previous image" data-gallery-prev>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-            <button class="gallery-arrow gallery-arrow--next" type="button" aria-label="Next image" data-gallery-next>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
-          {%- endif -%}
-        </div>
-
-        {%- if product.images.size > 1 -%}
-          <div class="gallery-dots" aria-hidden="true">
-            {%- for image in product.images limit: 8 -%}
-              <span class="gallery-dot{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}"></span>
+              </button>
             {%- endfor -%}
           </div>
         {%- endif -%}
 
+        {%- comment -%} Right: main image + arrows + dots {%- endcomment -%}
+        <div class="gallery-main">
+
+          <div class="gallery-track" id="GalleryTrack-{{ section.id }}" role="region" aria-label="Product images">
+            {%- if product.images.size > 0 -%}
+              {%- for image in product.images limit: 8 -%}
+                <div
+                  class="gallery-slide{% if forloop.first %} is-active{% endif %}"
+                  data-index="{{ forloop.index0 }}"
+                >
+                  <img
+                    src="{{ image | image_url: width: 960 }}"
+                    alt="{{ image.alt | escape | default: product.title }}"
+                    width="{{ image.width }}"
+                    height="{{ image.height }}"
+                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                    class="gallery-slide__img"
+                  >
+                </div>
+              {%- endfor -%}
+            {%- else -%}
+              <div class="gallery-slide is-active">
+                {{ 'product-1' | placeholder_svg_tag: 'gallery-slide__placeholder' }}
+              </div>
+            {%- endif -%}
+
+            {%- comment -%} Arrows inside the track so z-index is unambiguous {%- endcomment -%}
+            {%- if product.images.size > 1 -%}
+              <button class="gallery-arrow gallery-arrow--prev" type="button" aria-label="Previous image" data-gallery-prev>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button class="gallery-arrow gallery-arrow--next" type="button" aria-label="Next image" data-gallery-next>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            {%- endif -%}
+          </div>
+
+          {%- if product.images.size > 1 -%}
+            <div class="gallery-dots" aria-hidden="true">
+              {%- for image in product.images limit: 8 -%}
+                <span class="gallery-dot{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}"></span>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+        </div>
+
       </div>
+      {%- comment -%} /gallery-images {%- endcomment -%}
+
+      {%- comment -%} Mini testimonial carousel (below gallery, fills left column space) {%- endcomment -%}
+      {%- assign mini_reviews = section.blocks | where: 'type', 'mini_testimonial' -%}
+      {%- if mini_reviews.size > 0 -%}
+        <div class="pdp-review-carousel" id="PdpReviewCarousel-{{ section.id }}" aria-label="Customer reviews">
+          <div class="prc-track">
+            {%- for block in mini_reviews -%}
+              <div class="prc-slide{% if forloop.first %} is-active{% endif %}" {{ block.shopify_attributes }}>
+                <div class="prc-stars" aria-label="{{ block.settings.stars | default: 5 }} out of 5 stars">
+                  {%- assign stars = block.settings.stars | default: 5 -%}
+                  {%- for i in (1..5) -%}
+                    <span class="prc-star{% if i > stars %} prc-star--empty{% endif %}" aria-hidden="true">★</span>
+                  {%- endfor -%}
+                </div>
+                <p class="prc-quote">{{ block.settings.quote | escape }}</p>
+                <div class="prc-footer">
+                  <div class="prc-author-wrap">
+                    <span class="prc-name">{{ block.settings.author | escape }}</span>
+                    {%- if block.settings.verified -%}
+                      <span class="prc-badge">Verified</span>
+                    {%- endif -%}
+                  </div>
+                  {%- if block.settings.author_detail != blank -%}
+                    <span class="prc-detail">{{ block.settings.author_detail | escape }}</span>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+          <div class="prc-controls">
+            <button class="prc-arrow prc-arrow--prev" type="button" aria-label="Previous review">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div class="prc-dots" aria-hidden="true">
+              {%- for block in mini_reviews -%}
+                <button class="prc-dot{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" type="button" aria-label="Review {{ forloop.index }}"></button>
+              {%- endfor -%}
+            </div>
+            <button class="prc-arrow prc-arrow--next" type="button" aria-label="Next review">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+      {%- endif -%}
 
     </div>
     {%- comment -%} /gallery {%- endcomment -%}
@@ -510,6 +560,13 @@
 /* -- GALLERY --------------------------------------- */
 
 .product-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.gallery-images {
   position: sticky;
   top: 7rem;
   display: flex;
@@ -1128,6 +1185,150 @@
   cursor: not-allowed;
 }
 
+/* -- MINI REVIEW CAROUSEL (below gallery) --------- */
+
+.pdp-review-carousel {
+  background: rgba(43,43,43,0.03);
+  border: 1px solid rgba(43,43,43,0.09);
+  border-radius: 8px;
+  padding: 1.25rem 1.375rem 1rem;
+  overflow: hidden;
+}
+
+.prc-track {
+  position: relative;
+  min-height: 5rem;
+}
+
+.prc-slide {
+  display: none;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.prc-slide.is-active {
+  display: flex;
+  animation: prc-fade 0.25s ease;
+}
+
+@keyframes prc-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.prc-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.prc-star {
+  font-size: 11px;
+  color: var(--color-walnut, #8A6240);
+  line-height: 1;
+}
+
+.prc-star--empty { opacity: 0.2; }
+
+.prc-quote {
+  font-family: var(--font-heading, serif);
+  font-size: 0.875rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--color-olive, #8A6240);
+  margin: 0;
+}
+
+.prc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-top: 0.625rem;
+  border-top: 1px solid rgba(43,43,43,0.08);
+}
+
+.prc-author-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.prc-name {
+  font-family: var(--font-label, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-black, #1f1d1a);
+}
+
+.prc-badge {
+  font-family: var(--font-label, sans-serif);
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #C8F0EC;
+  background: rgba(74,123,114,0.85);
+  padding: 2px 5px;
+  border-radius: 2px;
+}
+
+.prc-detail {
+  font-family: var(--font-label, sans-serif);
+  font-size: 0.6875rem;
+  color: var(--color-olive, #8A6240);
+  opacity: 0.7;
+}
+
+.prc-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.875rem;
+}
+
+.prc-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 1px solid rgba(43,43,43,0.15);
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--color-black, #1f1d1a);
+  transition: border-color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+
+.prc-arrow:hover {
+  border-color: rgba(43,43,43,0.35);
+  background: rgba(43,43,43,0.04);
+}
+
+.prc-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.prc-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(43,43,43,0.2);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.prc-dot.is-active {
+  background: var(--color-walnut, #8A6240);
+  transform: scale(1.4);
+}
+
 /* Trust strip */
 .trust-strip {
   list-style: none;
@@ -1274,6 +1475,16 @@
     position: static;
     flex-direction: column;
     gap: 0;
+  }
+
+  .gallery-images {
+    position: static;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .pdp-review-carousel {
+    margin: 1rem 1rem 0;
   }
 
   .gallery-thumbs {
@@ -1628,6 +1839,42 @@
 }());
 </script>
 
+<script>
+/* Mini review carousel */
+(function () {
+  var carousel = document.getElementById('PdpReviewCarousel-{{ section.id }}');
+  if (!carousel) return;
+
+  var slides = carousel.querySelectorAll('.prc-slide');
+  var dots   = carousel.querySelectorAll('.prc-dot');
+  var prev   = carousel.querySelector('.prc-arrow--prev');
+  var next   = carousel.querySelector('.prc-arrow--next');
+  var current = 0;
+
+  function goTo(idx) {
+    slides[current].classList.remove('is-active');
+    dots[current].classList.remove('is-active');
+    current = (idx + slides.length) % slides.length;
+    slides[current].classList.add('is-active');
+    dots[current].classList.add('is-active');
+  }
+
+  if (prev) prev.addEventListener('click', function () { goTo(current - 1); });
+  if (next) next.addEventListener('click', function () { goTo(current + 1); });
+  dots.forEach(function (dot, i) {
+    dot.addEventListener('click', function () { goTo(i); });
+  });
+
+  /* Auto-advance every 5 seconds */
+  var timer = setInterval(function () { goTo(current + 1); }, 5000);
+  carousel.addEventListener('mouseenter', function () { clearInterval(timer); });
+  carousel.addEventListener('mouseleave', function () {
+    clearInterval(timer);
+    timer = setInterval(function () { goTo(current + 1); }, 5000);
+  });
+}());
+</script>
+
 
 {% schema %}
 {
@@ -1796,6 +2043,47 @@
       "id": "trust_3_text",
       "label": "Trust item 3 text",
       "default": "2-year warranty"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mini_testimonial",
+      "name": "Mini review",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "Exactly what I needed."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author name",
+          "default": "Verified buyer"
+        },
+        {
+          "type": "text",
+          "id": "author_detail",
+          "label": "Detail (colour · size)",
+          "default": "White · Size 9"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Show Verified badge",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "label": "Star rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        }
+      ]
     }
   ],
   "presets": [

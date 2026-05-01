@@ -11,6 +11,76 @@
   "sections": {
     "main": {
       "type": "main-product",
+      "blocks": {
+        "mini_review_1": {
+          "type": "mini_testimonial",
+          "settings": {
+            "quote": "I've been telling my doctor something was wrong for two years. I brought in my HRV charts and she finally listened.",
+            "author": "Sarah M.",
+            "author_detail": "White · Size 9",
+            "verified": true,
+            "stars": 5
+          }
+        },
+        "mini_review_2": {
+          "type": "mini_testimonial",
+          "settings": {
+            "quote": "This showed me I was recovered enough to train hard exactly 11 times in 2 months. Finally broke a plateau.",
+            "author": "Keelan R.",
+            "author_detail": "Black · Size 11",
+            "verified": true,
+            "stars": 5
+          }
+        },
+        "mini_review_3": {
+          "type": "mini_testimonial",
+          "settings": {
+            "quote": "Looks like a ring because it is one. Nobody at work even knows what it is.",
+            "author": "David H.",
+            "author_detail": "Black · Size 12",
+            "verified": true,
+            "stars": 5
+          }
+        },
+        "mini_review_4": {
+          "type": "mini_testimonial",
+          "settings": {
+            "quote": "I finally understand why I'm exhausted — my deep sleep is basically non-existent. Two weeks in and I've already changed my routine.",
+            "author": "Amy T.",
+            "author_detail": "Pink · Size 8",
+            "verified": true,
+            "stars": 5
+          }
+        },
+        "mini_review_5": {
+          "type": "mini_testimonial",
+          "settings": {
+            "quote": "Battery lasts nearly a week with 24/7 tracking. My Apple Watch needed charging every night — I was never wearing it to sleep.",
+            "author": "James L.",
+            "author_detail": "Black · Size 10",
+            "verified": true,
+            "stars": 5
+          }
+        },
+        "mini_review_6": {
+          "type": "mini_testimonial",
+          "settings": {
+            "quote": "Way cheaper than Oura and does the same thing. No subscription is a huge deal.",
+            "author": "Priya K.",
+            "author_detail": "White · Size 9",
+            "verified": true,
+            "stars": 5
+          }
+        }
+      },
+      "block_order": [
+        "mini_review_1",
+        "mini_review_2",
+        "mini_review_3",
+        "mini_review_4",
+        "mini_review_5",
+        "mini_review_6"
+      ],
       "settings": {
         "eyebrow_text": "N°01",
         "short_description": "Tracks sleep, heart rate, HRV, SpO₂ and recovery. Continuously. No subscription.",
