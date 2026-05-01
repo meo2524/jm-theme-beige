@@ -581,7 +581,12 @@
   gap: 0.5rem;
   width: 76px;
   flex-shrink: 0;
+  /* Clamp to gallery-track height (track is 4:5 ratio; approximate height via vw calc) */
+  max-height: min(560px, calc((50vw - 4.5rem) * 1.25));
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
 }
+.gallery-thumbs::-webkit-scrollbar { display: none; }
 
 .gallery-thumb {
   width: 76px;
