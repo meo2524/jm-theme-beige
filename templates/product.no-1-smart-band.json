@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -9,12 +18,16 @@
         "accordion_label_1": "What's in the box",
         "accordion_label_2": "Find your size",
         "accordion_label_3": "Specs & certifications",
-        "accordion_whats-included": "<p>1× N° 01 Smart Band (your chosen colour)<br>1× Magnetic charging case<br>1× USB-C charging cable<br>1× Quick start guide</p>",
-        "accordion_how-it-works": "<p><strong>How to measure your ring size</strong><br><br>Wrap a thin strip of paper around the finger you plan to wear the ring on. Mark where the paper overlaps, then measure the length in millimetres. Match to the chart below.<br><br><strong>Size chart</strong><br><br>Size 8 — 18.3 mm inner diameter (57.5 mm circumference)<br>Size 9 — 19.1 mm inner diameter (60.0 mm circumference)<br>Size 10 — 20.0 mm inner diameter (62.8 mm circumference)<br>Size 11 — 20.8 mm inner diameter (65.3 mm circumference)<br>Size 12 — 21.6 mm inner diameter (67.9 mm circumference)<br>Size 13 — 22.4 mm inner diameter (70.4 mm circumference)<br><br><strong>Tips</strong><br>Measure at the end of the day — fingers are slightly larger then.<br>If you're between sizes, go up one size.<br>The ring should slide on snugly but come off without effort.<br>Recommended finger: index or middle finger for best sensor accuracy.</p>",
-        "accordion_ingredients-certifications": "<p><strong>Material</strong><br>Ceramic body · Polished chrome inner band<br><br><strong>Chipset</strong><br>Realtek RTL8762 ESF<br><br><strong>Bluetooth</strong><br>5.2<br><br><strong>Waterproof</strong><br>5ATM<br><br><strong>Battery</strong><br>14 mAh (18 mAh — sizes 11 and above)<br><br><strong>Charge time</strong><br>~1.5 hours (magnetic charging case)<br><br><strong>Battery life</strong><br>5–7 days active use · 15 days standby<br><br><strong>Weight</strong><br>3.5 g (size 11)<br><br><strong>Compatibility</strong><br>iOS 9.0+ · Android 5.1+<br><br><strong>App</strong><br>QRing (free — no subscription)<br><br><strong>Certifications</strong><br>CE · No display screen · No NFC<br><br><strong>Subscription</strong><br>None. Ever.</p>",
+        "accordion_whats-included": "<p>1× N° 01 Smart Band (your chosen colour)<br/>1× Magnetic charging case<br/>1× USB-C charging cable<br/>1× Quick start guide</p>",
+        "accordion_how-it-works": "<p><strong>How to measure your ring size</strong><br/><br/>Wrap a thin strip of paper around the finger you plan to wear the ring on. Mark where the paper overlaps, then measure the length in millimetres. Match to the chart below.<br/><br/><strong>Size chart</strong><br/><br/>Size 8 — 18.3 mm inner diameter (57.5 mm circumference)<br/>Size 9 — 19.1 mm inner diameter (60.0 mm circumference)<br/>Size 10 — 20.0 mm inner diameter (62.8 mm circumference)<br/>Size 11 — 20.8 mm inner diameter (65.3 mm circumference)<br/>Size 12 — 21.6 mm inner diameter (67.9 mm circumference)<br/>Size 13 — 22.4 mm inner diameter (70.4 mm circumference)<br/><br/><strong>Tips</strong><br/>Measure at the end of the day — fingers are slightly larger then.<br/>If you're between sizes, go up one size.<br/>The ring should slide on snugly but come off without effort.<br/>Recommended finger: index or middle finger for best sensor accuracy.</p>",
+        "accordion_ingredients-certifications": "<p><strong>Material</strong><br/>Ceramic body · Polished chrome inner band<br/><br/><strong>Chipset</strong><br/>Realtek RTL8762 ESF<br/><br/><strong>Bluetooth</strong><br/>5.2<br/><br/><strong>Waterproof</strong><br/>5ATM<br/><br/><strong>Battery</strong><br/>14 mAh (18 mAh — sizes 11 and above)<br/><br/><strong>Charge time</strong><br/>~1.5 hours (magnetic charging case)<br/><br/><strong>Battery life</strong><br/>5–7 days active use · 15 days standby<br/><br/><strong>Weight</strong><br/>3.5 g (size 11)<br/><br/><strong>Compatibility</strong><br/>iOS 9.0+ · Android 5.1+<br/><br/><strong>App</strong><br/>QRing (free — no subscription)<br/><br/><strong>Certifications</strong><br/>CE · No display screen · No NFC<br/><br/><strong>Subscription</strong><br/>None. Ever.</p>",
         "rating_show": true,
         "rating_value": "4.9",
         "rating_count_text": "83 reviews",
+        "rating_link": "",
+        "toggle_onetime_label": "One-time",
+        "toggle_subscribe_label": "Subscribe & Save",
+        "toggle_subscribe_savings": "10% off",
         "qty_label": "Size",
         "atc_label": "Add to Cart",
         "atc_sold_out_label": "Notify Me",
@@ -133,7 +146,6 @@
     },
     "testimonials": {
       "type": "testimonials",
-      "disabled": true,
       "blocks": {
         "testimonial_sarah": {
           "type": "testimonial",
@@ -204,14 +216,159 @@
         "testimonial_james",
         "testimonial_priya"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "83 reviews · 4.9 stars",
         "heading": "Real people. Real data.",
         "reviews_count": 6
       }
     },
+    "177767177860fdc853": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_cards_carousel_CmMAja": {
+          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": true,
+            "reviews_selection": "all",
+            "products": [],
+            "star_rating": "all",
+            "show_review_media": true,
+            "display_order": "media_first",
+            "no_image_fallback": "review_text_only",
+            "max_reviews": 20,
+            "review_length": "medium",
+            "text_size": "medium",
+            "image_ratio": "1",
+            "reviews_shown": 4,
+            "show_reviewer_name": true,
+            "show_product_name": true,
+            "hide_arrows_mobile": true,
+            "arrows_position": "sides",
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "header_text_color": "#000000",
+            "text_color": "#000000",
+            "card_color": "#F9F9F9",
+            "stars_color": "",
+            "arrows_color": "#000000",
+            "transition_speed": 5,
+            "header_text": "Customers are saying",
+            "show_average_rating": true
+          }
+        },
+        "judge_me_reviews_videos_carousel_WK6GHc": {
+          "type": "shopify://apps/judge-me-reviews/blocks/videos_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": true,
+            "reviews_selection": "all",
+            "products": [],
+            "star_rating": "all",
+            "review_type": "photo_and_video",
+            "max_reviews": 20,
+            "show_reviewer_name": true,
+            "stars_size": "medium",
+            "text_size": "medium",
+            "arrows_position": "bottom",
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "header_text_color": "#000000",
+            "card_color": "#7D7D7D",
+            "stars_color": "",
+            "text_color": "#FFFFFF",
+            "arrows_color": "#000000",
+            "show_drop_shadow": false,
+            "show_border": false,
+            "border_color": "#108474",
+            "autoplay_media": true,
+            "transition_speed": 5,
+            "carousel_style": "highlight",
+            "header_text": "Real customer stories",
+            "show_average_rating": true
+          }
+        },
+        "judge_me_reviews_testimonials_carousel_MT8DLt": {
+          "type": "shopify://apps/judge-me-reviews/blocks/testimonials_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": true,
+            "reviews_selection": "all",
+            "products": [],
+            "star_rating": "all",
+            "max_reviews": 20,
+            "quote_marks_size": "small",
+            "product_name_text_size": "small",
+            "verified_badge_style": "icon",
+            "card_height": "medium",
+            "text_size": "small",
+            "stars_size": "medium",
+            "arrows_position": "bottom",
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "quote_marks_style": "serif",
+            "card_color": "#F9F9F9",
+            "stars_and_quote_marks_color": "#108474",
+            "text_color": "#000000",
+            "arrows_color": "#000000",
+            "show_border": false,
+            "border_color": "#108474",
+            "show_drop_shadow": false,
+            "transition_speed": 5,
+            "header_text": "Customers are saying",
+            "show_average_rating": true
+          }
+        },
+        "judge_me_reviews_reviews_grid_widget_4ciHEX": {
+          "type": "shopify://apps/judge-me-reviews/blocks/reviews_grid_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": true,
+            "review_selection": "all",
+            "products": [],
+            "show_media_only": false,
+            "display_order": "media_first",
+            "card_grouping": "per_media",
+            "columns_desktop": 3,
+            "rows_desktop": 3,
+            "columns_mobile": "2",
+            "rows_mobile": 6,
+            "show_stars": true,
+            "show_reviewer_name": true,
+            "show_review_title_on_hover_desktop": true,
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "card_spacing": "medium",
+            "header_text_color": "#000000",
+            "star_and_reviewer_name_color": "#F9F9F9",
+            "drop_shadow_color": "#000000",
+            "overlay_and_background_color": "#000000",
+            "content_color": "#F9F9F9",
+            "header_text": "From our customers",
+            "show_average_rating": true
+          }
+        },
+        "judge_me_reviews_review_widget_QD8Ut3": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_cards_carousel_CmMAja",
+        "judge_me_reviews_videos_carousel_WK6GHc",
+        "judge_me_reviews_testimonials_carousel_MT8DLt",
+        "judge_me_reviews_reviews_grid_widget_4ciHEX",
+        "judge_me_reviews_review_widget_QD8Ut3"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
     "judgeme_reviews": {
       "type": "judgeme-reviews",
+      "disabled": true,
       "settings": {}
     },
     "related": {
@@ -229,7 +386,13 @@
       "disabled": true,
       "settings": {
         "heading": "Limited Time Offer",
-        "button_label": "Shop Now"
+        "subheading": "<p>Use this section to showcase offers that require a sense of urgency.</p>",
+        "button_label": "Shop Now",
+        "button_link": "",
+        "padding___top": "large",
+        "custom_padding_top": 72,
+        "padding___bottom": "large",
+        "custom_padding_bottom": 72
       }
     }
   },
@@ -238,6 +401,7 @@
     "benefit_pitch",
     "health_metrics",
     "testimonials",
+    "177767177860fdc853",
     "judgeme_reviews",
     "related",
     "countdown"
