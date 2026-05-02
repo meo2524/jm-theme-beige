@@ -22,6 +22,17 @@
         "show_scroll_cue": true
       }
     },
+    "stats-strip": {
+      "type": "stats-strip",
+      "settings": {
+        "stat_1_value": "100%",
+        "stat_1_label": "Honest materials",
+        "stat_2_value": "Zero",
+        "stat_2_label": "Compromises",
+        "stat_3_value": "Daily",
+        "stat_3_label": "Mending practice"
+      }
+    },
     "smart_band_spotlight": {
       "type": "product-feature",
       "blocks": {
@@ -57,6 +68,7 @@
         "bullet_look"
       ],
       "settings": {
+        "video_url": "",
         "eyebrow": "Now available",
         "heading": "Know how recovered you actually are.",
         "body": "The N°01 Smart Band tracks what your body is doing while you sleep — HRV, blood oxygen, sleep architecture, overnight temperature — and tells you in the morning whether to push or rest.",
@@ -71,22 +83,12 @@
         "eyebrow": "Meet the founder",
         "heading_pre": "Hi, I'm",
         "heading_em": "Claire",
-        "heading_post": " Whitmore.",
+        "heading_post": "Whitmore.",
         "paragraph_1": "I spent ten years as a physiotherapist helping people recover from injuries they never should have had. The pattern I kept seeing: people were completely disconnected from what their bodies were trying to tell them. They pushed too hard, rested too late, and treated symptoms instead of signals.",
         "paragraph_2": "I burned out at 32 — ironic, given my job. During my own recovery I discovered biometric tracking and understood, for the first time, what my body had been saying all along. Mend & Co exists because everyone deserves that kind of clarity — without a subscription, without complexity, without compromise.",
         "link_label": "Read the full story →",
-        "link_url": "/pages/about-us"
-      }
-    },
-    "stats-strip": {
-      "type": "stats-strip",
-      "settings": {
-        "stat_1_value": "100%",
-        "stat_1_label": "Honest materials",
-        "stat_2_value": "Zero",
-        "stat_2_label": "Compromises",
-        "stat_3_value": "Daily",
-        "stat_3_label": "Mending practice"
+        "link_url": "/pages/about-us",
+        "image_label": "hands · oil · linen"
       }
     },
     "testimonials": {
@@ -130,9 +132,9 @@
   },
   "order": [
     "hero",
+    "stats-strip",
     "smart_band_spotlight",
     "founder_story",
-    "stats-strip",
     "testimonials",
     "177700770423191747",
     "newsletter"
