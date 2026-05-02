@@ -238,7 +238,9 @@
 }
 
 .mc-qv-opt-btn {
-  padding: 7px 14px;
+  padding: 0 14px;
+  height: 40px;
+  min-width: 64px;
   border: 1.5px solid rgba(31,29,26,0.18);
   border-radius: 6px;
   background: rgba(31,29,26,0.03);
@@ -248,6 +250,11 @@
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s;
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
 }
 .mc-qv-opt-btn:hover {
   border-color: rgba(31,29,26,0.4);
@@ -355,22 +362,130 @@
 }
 .mc-qv-full-link:hover { color: #1f1d1a; }
 
+/* ---- Desktop image panel — border + centering ----------------- */
+@media (min-width: 641px) {
+  .mc-qv-media {
+    border-right: 1px solid rgba(31,29,26,0.08);
+  }
+  .mc-qv-carousel__slide {
+    background: #efe8dc;
+  }
+  .mc-qv-img {
+    max-height: 480px;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+}
+
 /* ---- Mobile --------------------------------------------------- */
 @media (max-width: 640px) {
   .mc-qv-dialog {
     width: 100vw;
-    max-height: 94vh;
+    max-height: 92vh;
+    height: 92vh;
     margin: auto auto 0;
-    border-radius: 16px 16px 0 0;
-    animation: mc-qv-enter-mobile 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+    border-radius: 20px 20px 0 0;
+    animation: mc-qv-enter-mobile 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
   @keyframes mc-qv-enter-mobile {
-    from { opacity: 0; transform: translateY(40px); }
+    from { opacity: 0; transform: translateY(60px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  .mc-qv-content { grid-template-columns: 1fr; }
-  .mc-qv-carousel { min-height: 320px; }
-  .mc-qv-img { max-height: 320px; }
-  .mc-qv-info { padding: 2rem 2rem 2.4rem; gap: 1.2rem; }
-  .mc-qv-title { font-size: 1.4rem; }
+
+  /* Body fills the dialog and enables the inner layout to scroll */
+  .mc-qv-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    max-height: none;
+  }
+
+  /* Stack image above info */
+  .mc-qv-content {
+    grid-template-columns: 1fr;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Image panel — fixed compact height */
+  .mc-qv-media {
+    flex-shrink: 0;
+    height: 240px;
+    min-height: 0;
+    border-bottom: 1px solid rgba(31,29,26,0.08);
+  }
+
+  .mc-qv-carousel {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .mc-qv-img {
+    max-height: 240px;
+  }
+
+  /* Info panel — scrollable */
+  .mc-qv-info {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 1.5rem 1.5rem 2rem;
+    gap: 0.9rem;
+  }
+
+  /* Typography */
+  .mc-qv-title { font-size: 1.3rem; }
+  .mc-qv-price { font-size: 1.25rem; }
+
+  /* Bigger tap targets for option buttons */
+  .mc-qv-opt-btn {
+    height: 48px;
+    min-width: 56px;
+    padding: 0 16px;
+    font-size: 0.875rem;
+  }
+
+  /* ATC row — stack qty + button */
+  .mc-qv-atc-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .mc-qv-qty {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .mc-qv-qty__btn { width: 48px; }
+
+  .mc-qv-atc {
+    width: 100%;
+    height: 56px;
+    font-size: 0.75rem;
+  }
+
+  /* Full-link separator */
+  .mc-qv-full-link {
+    text-align: center;
+    margin-top: 0.25rem;
+    padding-top: 0.75rem;
+  }
+
+  /* Close button — larger hit area on mobile */
+  .mc-qv-close {
+    top: 0.85rem;
+    right: 0.85rem;
+    width: 3rem;
+    height: 3rem;
+    background: rgba(31,29,26,0.09);
+  }
 }
