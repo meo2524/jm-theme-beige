@@ -1,4 +1,4 @@
-{% comment %} Ring Size Guide Modal {% endcomment %}
+{% comment %} Ring Size Guide Modal — metric / imperial toggle {% endcomment %}
 
 <div id="ring-size-modal" class="rsm-overlay" role="dialog" aria-modal="true" aria-label="Ring Size Guide" hidden>
   <div class="rsm-backdrop"></div>
@@ -17,6 +17,12 @@
         <p class="rsm-eyebrow">N°01 Smart Band</p>
         <h2 class="rsm-title">Find your size</h2>
         <p class="rsm-intro">Measure in under a minute. Two methods — pick whichever is easier.</p>
+
+        <!-- Unit toggle -->
+        <div class="rsm-unit-toggle" role="group" aria-label="Unit system">
+          <button class="rsm-unit-btn is-active" data-unit="mm" aria-pressed="true">mm</button>
+          <button class="rsm-unit-btn" data-unit="in" aria-pressed="false">in</button>
+        </div>
       </div>
 
       <!-- Methods -->
@@ -37,7 +43,7 @@
             <ol class="rsm-steps">
               <li>Cut a thin strip of paper or use a piece of string.</li>
               <li>Wrap it snugly around the base of the finger you'll wear the ring on.</li>
-              <li>Mark where the strip meets itself, then measure that length in millimetres.</li>
+              <li>Mark where the strip meets itself, then measure that length in <span data-mm="millimetres" data-in="inches" class="rsm-unit-word">millimetres</span>.</li>
               <li>That measurement is your <strong>circumference</strong> — match it in the table below.</li>
             </ol>
           </div>
@@ -60,7 +66,7 @@
             <h3 class="rsm-method-title">Method 2 — Existing ring</h3>
             <ol class="rsm-steps">
               <li>Find a ring that already fits the finger you'll wear this on.</li>
-              <li>Measure the <strong>inside diameter</strong> (across the centre of the ring, inside edge to inside edge).</li>
+              <li>Measure the <strong>inside diameter</strong> (across the centre of the ring, inside edge to inside edge) in <span data-mm="millimetres" data-in="inches" class="rsm-unit-word">millimetres</span>.</li>
               <li>Match that diameter in the table below.</li>
             </ol>
           </div>
@@ -73,14 +79,19 @@
         <h3 class="rsm-sizer-heading">Visual ring sizer</h3>
         <p class="rsm-sizer-note">Hold a ruler to your screen. Each circle shows the inside diameter at actual size (96 DPI reference). Use for guidance only — measure for accuracy.</p>
         <div class="rsm-sizer-row">
-          {%- assign sizes = "5,6,7,8,9,10,11,12,13" | split: "," -%}
-          {%- assign diameters = "15.7,16.5,17.3,18.3,19.1,20.0,20.8,21.6,22.4" | split: "," -%}
+          {%- assign sizes      = "5,6,7,8,9,10,11,12,13"                                           | split: "," -%}
+          {%- assign dias_mm    = "15.7,16.5,17.3,18.3,19.1,20.0,20.8,21.6,22.4"                   | split: "," -%}
+          {%- assign dias_in    = "0.618,0.650,0.681,0.720,0.752,0.787,0.819,0.850,0.882"           | split: "," -%}
           {%- for size in sizes -%}
-            {%- assign dia = diameters[forloop.index0] | times: 1.0 -%}
-            {%- assign px = dia | times: 3.78 | round -%}
-            <button class="rsm-circle-btn" data-size="{{ size }}" style="width:{{ px }}px;height:{{ px }}px;" aria-label="Size {{ size }}, {{ dia }}mm">
+            {%- assign dia_mm = dias_mm[forloop.index0] | times: 1.0 -%}
+            {%- assign dia_in = dias_in[forloop.index0] -%}
+            {%- assign px = dia_mm | times: 3.78 | round -%}
+            <button class="rsm-circle-btn"
+                    data-size="{{ size }}"
+                    style="width:{{ px }}px;height:{{ px }}px;"
+                    aria-label="Size {{ size }}, {{ dia_mm }}mm">
               <span class="rsm-circle-size">{{ size }}</span>
-              <span class="rsm-circle-dia">{{ dia }}mm</span>
+              <span class="rsm-circle-dia" data-mm="{{ dia_mm }}mm" data-in='{{ dia_in }}"'>{{ dia_mm }}mm</span>
             </button>
           {%- endfor -%}
         </div>
@@ -94,20 +105,24 @@
             <thead>
               <tr>
                 <th>Size</th>
-                <th>Inner diameter</th>
-                <th>Circumference</th>
+                <th class="rsm-th-dia">Inner diameter</th>
+                <th class="rsm-th-circ">Circumference</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>5</td><td>15.7 mm</td><td>49.3 mm</td></tr>
-              <tr><td>6</td><td>16.5 mm</td><td>51.9 mm</td></tr>
-              <tr><td>7</td><td>17.3 mm</td><td>54.4 mm</td></tr>
-              <tr><td>8</td><td>18.3 mm</td><td>57.5 mm</td></tr>
-              <tr><td>9</td><td>19.1 mm</td><td>60.0 mm</td></tr>
-              <tr><td>10</td><td>20.0 mm</td><td>62.8 mm</td></tr>
-              <tr><td>11</td><td>20.8 mm</td><td>65.3 mm</td></tr>
-              <tr><td>12</td><td>21.6 mm</td><td>67.9 mm</td></tr>
-              <tr><td>13</td><td>22.4 mm</td><td>70.4 mm</td></tr>
+              {%- assign circs_mm = "49.3,51.9,54.4,57.5,60.0,62.8,65.3,67.9,70.4" | split: "," -%}
+              {%- assign circs_in = "1.94,2.04,2.14,2.26,2.36,2.47,2.57,2.67,2.77" | split: "," -%}
+              {%- for size in sizes -%}
+                {%- assign dia_mm  = dias_mm[forloop.index0] -%}
+                {%- assign dia_in  = dias_in[forloop.index0] -%}
+                {%- assign circ_mm = circs_mm[forloop.index0] -%}
+                {%- assign circ_in = circs_in[forloop.index0] -%}
+                <tr>
+                  <td>{{ size }}</td>
+                  <td><span class="rsm-val" data-mm="{{ dia_mm }} mm" data-in='{{ dia_in }}"'>{{ dia_mm }} mm</span></td>
+                  <td><span class="rsm-val" data-mm="{{ circ_mm }} mm" data-in='{{ circ_in }}"'>{{ circ_mm }} mm</span></td>
+                </tr>
+              {%- endfor -%}
             </tbody>
           </table>
         </div>
@@ -173,9 +188,7 @@
   }
 
   @media (min-width: 700px) {
-    .rsm-overlay {
-      align-items: center;
-    }
+    .rsm-overlay { align-items: center; }
     .rsm-panel {
       border-radius: 20px;
       max-height: 88vh;
@@ -225,7 +238,43 @@
   .rsm-intro {
     font-size: 14px;
     color: #666;
-    margin: 0 0 36px;
+    margin: 0 0 20px;
+  }
+
+  /* ── Unit toggle ─────────────────────────────────────── */
+  .rsm-unit-toggle {
+    display: inline-flex;
+    background: rgba(31,29,26,0.06);
+    border-radius: 8px;
+    padding: 3px;
+    gap: 2px;
+    margin-bottom: 32px;
+  }
+
+  .rsm-unit-btn {
+    height: 32px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(31,29,26,0.5);
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s;
+  }
+
+  .rsm-unit-btn.is-active {
+    background: #1f1d1a;
+    color: #f5efe4;
+  }
+
+  .rsm-unit-btn:not(.is-active):hover {
+    background: rgba(31,29,26,0.1);
+    color: #1f1d1a;
   }
 
   /* Methods */
@@ -318,7 +367,7 @@
   .rsm-circle-btn:hover,
   .rsm-circle-btn.is-active {
     border-color: #9a7e57;
-    background: rgba(16,132,116,0.06);
+    background: rgba(154,126,87,0.08);
     transform: scale(1.05);
   }
   .rsm-circle-size {
@@ -331,6 +380,7 @@
     font-size: 9px;
     color: #999;
     line-height: 1;
+    transition: opacity 0.15s;
   }
 
   /* Table */
@@ -364,8 +414,18 @@
     color: #333;
   }
   .rsm-table tbody tr:last-child td { border-bottom: none; }
-  .rsm-table tbody tr:hover td { background: rgba(16,132,116,0.04); }
+  .rsm-table tbody tr:hover td { background: rgba(154,126,87,0.04); }
   .rsm-table td:first-child { font-weight: 700; color: #111; }
+
+  /* Value swap animation */
+  .rsm-val, .rsm-circle-dia, .rsm-unit-word {
+    transition: opacity 0.12s ease;
+  }
+  .rsm-swapping .rsm-val,
+  .rsm-swapping .rsm-circle-dia,
+  .rsm-swapping .rsm-unit-word {
+    opacity: 0;
+  }
 
   /* Tips */
   .rsm-tips-heading {
@@ -390,11 +450,73 @@
 
 <script>
 (function() {
-  var modal   = document.getElementById('ring-size-modal');
-  var backdrop = modal.querySelector('.rsm-backdrop');
-  var closeBtn = modal.querySelector('.rsm-close');
+  var modal      = document.getElementById('ring-size-modal');
+  var backdrop   = modal.querySelector('.rsm-backdrop');
+  var closeBtn   = modal.querySelector('.rsm-close');
   var circleBtns = modal.querySelectorAll('.rsm-circle-btn');
+  var unitBtns   = modal.querySelectorAll('.rsm-unit-btn');
+  var panel      = modal.querySelector('.rsm-panel');
 
+  /* ── Unit system ────────────────────────────────────────── */
+  var currentUnit = 'mm';
+
+  try {
+    var saved = localStorage.getItem('rsm-unit');
+    if (saved === 'mm' || saved === 'in') currentUnit = saved;
+  } catch(e) {}
+
+  function applyUnit(unit, animate) {
+    if (animate) panel.classList.add('rsm-swapping');
+
+    function swap() {
+      /* Values: data-mm / data-in on .rsm-val and .rsm-circle-dia */
+      modal.querySelectorAll('[data-mm][data-in]').forEach(function(el) {
+        el.textContent = el.getAttribute('data-' + unit);
+      });
+
+      /* aria-label on circle buttons */
+      circleBtns.forEach(function(btn) {
+        var size = btn.dataset.size;
+        var dia  = btn.querySelector('.rsm-circle-dia');
+        if (dia) btn.setAttribute('aria-label', 'Size ' + size + ', ' + dia.getAttribute('data-' + unit));
+      });
+
+      /* Toggle button states */
+      unitBtns.forEach(function(b) {
+        var active = b.dataset.unit === unit;
+        b.classList.toggle('is-active', active);
+        b.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+
+      currentUnit = unit;
+      try { localStorage.setItem('rsm-unit', unit); } catch(e) {}
+
+      if (animate) {
+        requestAnimationFrame(function() {
+          panel.classList.remove('rsm-swapping');
+        });
+      }
+    }
+
+    if (animate) {
+      setTimeout(swap, 120); /* wait for fade-out */
+    } else {
+      swap();
+    }
+  }
+
+  /* Apply saved preference immediately (no animation) */
+  applyUnit(currentUnit, false);
+
+  unitBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (btn.dataset.unit !== currentUnit) {
+        applyUnit(btn.dataset.unit, true);
+      }
+    });
+  });
+
+  /* ── Open / close ───────────────────────────────────────── */
   function openModal() {
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
