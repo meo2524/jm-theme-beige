@@ -157,6 +157,49 @@
         "reverse": false
       }
     },
+    "reviews_carousel": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_videos_carousel_WK6GHc": {
+          "type": "shopify://apps/judge-me-reviews/blocks/videos_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": false,
+            "reviews_selection": "current_product",
+            "products": [
+              "n-01-smart-band"
+            ],
+            "star_rating": "all",
+            "review_type": "photo_and_video",
+            "max_reviews": 20,
+            "show_reviewer_name": true,
+            "stars_size": "medium",
+            "text_size": "medium",
+            "arrows_position": "bottom",
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "header_text_color": "#000000",
+            "card_color": "#7d7d7d",
+            "stars_color": "",
+            "text_color": "#ffffff",
+            "arrows_color": "#000000",
+            "show_drop_shadow": false,
+            "show_border": false,
+            "border_color": "#108474",
+            "autoplay_media": true,
+            "transition_speed": 5,
+            "carousel_style": "highlight",
+            "header_text": "Real customer stories",
+            "show_average_rating": true
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_videos_carousel_WK6GHc"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
     "health_metrics": {
       "type": "product-feature",
       "blocks": {
@@ -290,53 +333,11 @@
         "testimonial_james",
         "testimonial_priya"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "83 reviews · 4.9 stars",
         "heading": "Real people. Real data.",
         "reviews_count": 6
-      }
-    },
-    "reviews_carousel": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_videos_carousel_WK6GHc": {
-          "type": "shopify://apps/judge-me-reviews/blocks/videos_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "show_sample_reviews": false,
-            "reviews_selection": "current_product",
-            "products": [
-              "n-01-smart-band"
-            ],
-            "star_rating": "all",
-            "review_type": "photo_and_video",
-            "max_reviews": 20,
-            "show_reviewer_name": true,
-            "stars_size": "medium",
-            "text_size": "medium",
-            "arrows_position": "bottom",
-            "max_width": 1100,
-            "corner_styling": "soft",
-            "header_text_color": "#000000",
-            "card_color": "#7d7d7d",
-            "stars_color": "",
-            "text_color": "#ffffff",
-            "arrows_color": "#000000",
-            "show_drop_shadow": false,
-            "show_border": false,
-            "border_color": "#108474",
-            "autoplay_media": true,
-            "transition_speed": 5,
-            "carousel_style": "highlight",
-            "header_text": "Real customer stories",
-            "show_average_rating": true
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_videos_carousel_WK6GHc"
-      ],
-      "settings": {
-        "include_margins": true
       }
     },
     "reviews_widget": {
@@ -416,7 +417,15 @@
           }
         }
       },
-      "block_order": ["faq_1","faq_2","faq_3","faq_4","faq_5","faq_6","faq_7"],
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7"
+      ],
       "settings": {
         "eyebrow": "Questions",
         "heading": "Everything you want to know.",
