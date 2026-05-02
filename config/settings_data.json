@@ -14,8 +14,8 @@
     "color_linen": "#F2EDE4",
     "show_announcement": false,
     "cart_free_shipping_threshold": "",
-    "goal_shipping_enabled": false,
-    "goal_shipping_amount": 50,
+    "goal_shipping_enabled": true,
+    "goal_shipping_amount": 70,
     "goal_gift_enabled": false,
     "sections": {
       "announcement-bar": {
