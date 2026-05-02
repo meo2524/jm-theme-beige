@@ -208,39 +208,42 @@
   </div>
   <!-- /header__inner -->
 
-  <!-- Mobile menu -->
-  <div
-    class="mobile-menu"
-    id="mobile-menu"
-    aria-hidden="true"
-    data-mobile-menu
-  >
-    <nav aria-label="Mobile navigation">
-      <ul class="mobile-menu__list" role="list">
-        {%- for link in linklists[main_menu].links -%}
-          <li class="mobile-menu__item">
-            <a
-              href="{{ link.url }}"
-              class="mobile-menu__link{% if link.active or link.child_active %} is-active{% endif %}"
-            >
-              {{ link.title }}
-            </a>
-          </li>
-        {%- endfor -%}
-      </ul>
-    </nav>
-
-    <div class="mobile-menu__footer">
-      {%- if shop.customer_accounts_enabled -%}
-        <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="t-label">
-          {% if customer %}Account{% else %}Log in{% endif %}
-        </a>
-      {%- endif -%}
-    </div>
-  </div>
-  <!-- /mobile-menu -->
 
 </header>
+
+<!-- Mobile menu — lives OUTSIDE <header> so its z-index (var(--z-modal)=50) is not
+     capped by the header's stacking context (var(--z-sticky)=30). The overlay at
+     z-overlay=40 would otherwise sit on top and block all touch events on links. -->
+<div
+  class="mobile-menu"
+  id="mobile-menu"
+  aria-hidden="true"
+  data-mobile-menu
+>
+  <nav aria-label="Mobile navigation">
+    <ul class="mobile-menu__list" role="list">
+      {%- for link in linklists[main_menu].links -%}
+        <li class="mobile-menu__item">
+          <a
+            href="{{ link.url }}"
+            class="mobile-menu__link{% if link.active or link.child_active %} is-active{% endif %}"
+          >
+            {{ link.title }}
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+
+  <div class="mobile-menu__footer">
+    {%- if shop.customer_accounts_enabled -%}
+      <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="t-label">
+        {% if customer %}Account{% else %}Log in{% endif %}
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+<!-- /mobile-menu -->
 
 <!-- Overlay for mobile menu -->
 <div class="nav-overlay" aria-hidden="true" data-nav-overlay></div>

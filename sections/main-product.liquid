@@ -1508,9 +1508,11 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    aspect-ratio: unset;
-    height: 75vw;
-    max-height: 480px;
+    /* Use proper aspect ratio instead of fixed height so ring photos
+       aren't squashed — 1:1 works for square/portrait product shots */
+    aspect-ratio: 1 / 1;
+    height: auto;
+    max-height: 520px;
     border-left: none;
     border-right: none;
     border-radius: 0;

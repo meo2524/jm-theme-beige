@@ -260,13 +260,22 @@
 
 @media (max-width: 540px) {
   .nl {
-    padding: 3rem 1.5rem;
+    padding: 3rem 1.25rem;
+  }
+
+  .nl__inner {
+    text-align: left;
+  }
+
+  .nl__rule-above {
+    margin-inline: 0;
   }
 
   .nl__field-row {
     flex-direction: column;
     border: none;
-    gap: 0.625rem;
+    gap: 0.5rem;
+    max-width: 100%;
   }
 
   .nl__field-row:focus-within {
@@ -274,9 +283,11 @@
   }
 
   .nl__input {
+    height: 52px;
     border: 1.5px solid rgba(166, 137, 102, 0.35);
     border-radius: var(--radius-sm, 2px);
     outline: none;
+    font-size: 1rem;
   }
 
   .nl__input:focus {
@@ -286,8 +297,16 @@
 
   .nl__btn {
     width: 100%;
+    height: 52px;
     justify-content: center;
     border-radius: var(--radius-sm, 2px);
+    font-size: 12px;
+    gap: 10px;
+  }
+
+  .nl__privacy {
+    text-align: left;
+    font-size: 11px;
   }
 }
 
