@@ -17,8 +17,6 @@
     assign card_img_alt = card_image.alt | default: product.title | escape
   endif
 -%}
-{{ 'component-quick-view.css' | asset_url | stylesheet_tag: preload: true }}
-<script src="{{ 'component-quick-view.js' | asset_url }}" defer="defer"></script>
 
 <article class="card{% if on_sale %} card--on-sale{% endif %}" aria-label="{{ product.title }}">
 
@@ -58,19 +56,6 @@
         {%- endif -%}
       </div>
     </a>
-
-    <!-- Magnifying glass quick view (top right) -->
-    <button
-      class="card__qv-btn"
-      type="button"
-      data-quick-view="{{ product.handle }}"
-      aria-label="Quick view {{ product.title | escape }}"
-    >
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-        <circle cx="6.5" cy="6.5" r="4" stroke="currentColor" stroke-width="1.5"/>
-        <path d="M10 10l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-    </button>
 
     <!-- Add to cart overlay (centred, appears on hover) -->
     {%- if single_variant and product.available -%}
@@ -156,26 +141,19 @@
   }
 
   /* ── TOUCH DEVICES: two-tap reveal ────────────────────────
-     Tap 1 on the image → JS adds .is-touched → overlays appear
-     Tap 2 on "Select Options" or magnifying glass → action fires
-     Overlays are invisible + pointer-events:none by default on touch
-     so they never intercept the first tap. */
+     Tap 1 on the image → JS adds .is-touched → overlay appears
+     Tap 2 on "Select Options" → action fires
+     Overlay is invisible + pointer-events:none by default on touch
+     so it never intercepts the first tap. */
   @media (hover: none) {
     /* Default: invisible, non-blocking */
-    .card__qv-btn,
     .card__atc-overlay {
       pointer-events: none;
       opacity: 0 !important;
     }
-    .card__qv-btn { transform: scale(0.85) !important; }
     .card__atc-overlay { transform: translateX(-50%) translateY(6px) !important; }
 
-    /* After first tap: reveal overlays */
-    .card.is-touched .card__qv-btn {
-      pointer-events: auto;
-      opacity: 1 !important;
-      transform: scale(1) !important;
-    }
+    /* After first tap: reveal overlay */
     .card.is-touched .card__atc-overlay {
       pointer-events: auto;
       opacity: 1 !important;
@@ -239,38 +217,6 @@
   .card__badges .badge {
     min-width: 42px;
     justify-content: center;
-  }
-
-  /* ── MAGNIFYING GLASS BUTTON ────────────────────────────── */
-  .card__qv-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: #fff;
-    border: none;
-    border-radius: 50%;
-    color: #2D2D2D;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    opacity: 0;
-    transform: scale(0.85);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-  }
-
-  .card:hover .card__qv-btn,
-  .card:focus-within .card__qv-btn {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  .card__qv-btn:hover {
-    background: var(--color-bone, #F2EDE4);
   }
 
   /* ── ADD TO CART OVERLAY ────────────────────────────────── */
@@ -454,8 +400,6 @@
 
   /* ── MOBILE: replace hover states with :active ──────────── */
   @media (max-width: 767px) {
-    .card:hover .card__qv-btn { opacity: 0; transform: scale(0.85); }
-    .card:active .card__qv-btn { opacity: 1; transform: scale(1); }
     .card:hover .card__atc-overlay { opacity: 0; transform: translateX(-50%) translateY(6px); }
     .card:active .card__atc-overlay { opacity: 1; transform: translateX(-50%) translateY(0); }
     .card:hover .card__media img { transform: none; }
@@ -483,7 +427,7 @@
       var link = e.target.closest('.card__media-link');
       if (!link) {
         /* Tapped outside any card image — dismiss all */
-        if (!e.target.closest('.card__atc-overlay') && !e.target.closest('.card__qv-btn')) {
+        if (!e.target.closest('.card__atc-overlay')) {
           clearTouched();
         }
         return;
