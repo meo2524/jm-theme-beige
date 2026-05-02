@@ -111,6 +111,76 @@
     }
   </style>
 
+  <!-- Judge.me review widget — global mobile containment
+       Applies to both the homepage app block widget and the product page
+       auto-injected widget. Must live in theme.liquid, not in the
+       judgeme-reviews section, so it loads on every page. -->
+  <style>
+    /* Wrapper that we control */
+    .judgeme-reviews-wrapper {
+      overflow: hidden;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    @media (max-width: 767px) {
+      /* Wrapper padding → 20px sides = visible gap from screen edge */
+      .judgeme-reviews-wrapper {
+        padding: 24px 20px !important;
+      }
+
+      /* Force every jdgm container to respect the viewport */
+      .jdgm-widget,
+      .jdgm-rev-widg,
+      .jdgm-rev-widg__body,
+      .jdgm-rev-widg__header,
+      .jdgm-rev-widg__reviews,
+      .jdgm-rev,
+      .jdgm-all-reviews-page,
+      .jdgm-all-reviews-text-area {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+      }
+
+      /* Review cards */
+      .jdgm-rev {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+
+      /* Photo/media gallery — let it scroll horizontally within its own box */
+      .jdgm-carousel-wrapper,
+      .jdgm-carousel,
+      .jdgm-media-preview-container,
+      .jdgm-media-gallery {
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* Summary / rating header */
+      .jdgm-summary,
+      .jdgm-summary__ratings,
+      .jdgm-histogram {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Write-review / load-more buttons */
+      .jdgm-rev-widg__btn-container {
+        flex-wrap: wrap !important;
+        gap: 8px;
+      }
+
+      /* Reviewer name + date row */
+      .jdgm-rev__header {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+
 </head>
 
 <body class="template-{{ template.name | replace: '/', '-' }}{% if customer %} customer-logged-in{% endif %}">
