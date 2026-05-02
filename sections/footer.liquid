@@ -93,6 +93,7 @@
         <div class="footer__col footer__col--nav">
           <p class="footer__col-heading">{{ section.settings.nav_heading | default: 'Navigation' | escape }}</p>
           <ul class="footer__nav-list" role="list">
+            <li><a href="{{ routes.root_url }}" class="footer__nav-link">Home</a></li>
             <li><a href="{{ routes.all_products_collection_url }}" class="footer__nav-link">Products</a></li>
             {%- if pages.contact != empty -%}
               <li><a href="{{ pages.contact.url }}" class="footer__nav-link">Contact</a></li>

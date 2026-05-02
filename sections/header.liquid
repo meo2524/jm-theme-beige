@@ -211,19 +211,30 @@
 
 </header>
 
-<!-- Mobile menu — lives OUTSIDE <header> so its z-index (var(--z-modal)=50) is not
-     capped by the header's stacking context (var(--z-sticky)=30). The overlay at
-     z-overlay=40 would otherwise sit on top and block all touch events on links. -->
+<!-- Mobile menu — full-screen editorial overlay -->
 <div
   class="mobile-menu"
   id="mobile-menu"
   aria-hidden="true"
   data-mobile-menu
 >
+  <!-- Wordmark inside drawer -->
+  <div class="mobile-menu__brand">
+    {%- assign clean_name = shop.name | replace: '&amp;', '&' -%}
+    {%- assign name_parts = clean_name | split: '&' -%}
+    <a href="{{ routes.root_url }}" class="mobile-menu__brand-link" aria-label="{{ shop.name }}">
+      {%- if name_parts.size == 2 -%}
+        <span class="mobile-menu__wordmark">{{ name_parts[0] | strip }}<em>&amp;</em>{{ name_parts[1] | strip }}</span>
+      {%- else -%}
+        <span class="mobile-menu__wordmark">{{ clean_name }}</span>
+      {%- endif -%}
+    </a>
+  </div>
+
   <nav aria-label="Mobile navigation">
     <ul class="mobile-menu__list" role="list">
       {%- for link in linklists[main_menu].links -%}
-        <li class="mobile-menu__item">
+        <li class="mobile-menu__item" style="--i:{{ forloop.index }}">
           <a
             href="{{ link.url }}"
             class="mobile-menu__link{% if link.active or link.child_active %} is-active{% endif %}"
@@ -237,15 +248,16 @@
 
   <div class="mobile-menu__footer">
     {%- if shop.customer_accounts_enabled -%}
-      <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="t-label">
+      <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="mobile-menu__footer-link">
         {% if customer %}Account{% else %}Log in{% endif %}
       </a>
     {%- endif -%}
+    <span class="mobile-menu__footer-tagline">Mend what matters.</span>
   </div>
 </div>
 <!-- /mobile-menu -->
 
-<!-- Overlay for mobile menu -->
+<!-- Overlay not needed for full-screen menu but kept for JS compatibility -->
 <div class="nav-overlay" aria-hidden="true" data-nav-overlay></div>
 
 
@@ -665,74 +677,134 @@
     transform: translateY(-6.5px) rotate(-45deg);
   }
 
-  /* ---- Mobile menu — light cream drawer ---- */
+  /* ---- Mobile menu — full-screen editorial overlay ---- */
   .mobile-menu {
     position: fixed;
     inset: 0;
-    top: 84px;
-    left: auto;
-    right: 0;
-    width: min(340px, 85vw);
-    height: calc(100dvh - 84px);
-    background-color: var(--cream);
-    border-left: 1px solid var(--line);
-    padding: var(--space-8) var(--space-6);
+    width: 100%;
+    height: 100%;
+    background: var(--char);
+    padding: 0 40px 48px;
     overflow-y: auto;
     z-index: var(--z-modal);
-    transform: translateX(100%);
-    transition: transform var(--transition-slow);
     display: flex;
     flex-direction: column;
-    gap: var(--space-8);
+    /* Hidden state */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(40px);
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1);
   }
 
   .mobile-menu.is-open {
+    opacity: 1;
+    pointer-events: all;
     transform: translateX(0);
   }
 
+  /* Brand row at top */
+  .mobile-menu__brand {
+    padding: 20px 0 48px;
+    border-bottom: 1px solid rgba(239,232,220,0.1);
+    margin-bottom: 48px;
+  }
+
+  .mobile-menu__brand-link {
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .mobile-menu__wordmark {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--cream);
+    letter-spacing: 0.01em;
+    display: inline-flex;
+    align-items: baseline;
+  }
+
+  .mobile-menu__wordmark em {
+    font-style: italic;
+    font-weight: 400;
+    margin: 0 2px;
+    color: var(--gold-light, #C9A16B);
+  }
+
+  /* Nav list */
   .mobile-menu__list {
     display: flex;
     flex-direction: column;
     gap: 0;
+    flex: 1;
   }
 
-  /* Editorial italic-friendly serif links */
+  .mobile-menu__item {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition-delay: calc(var(--i, 1) * 55ms);
+  }
+
+  .mobile-menu.is-open .mobile-menu__item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Editorial large serif links */
   .mobile-menu__link {
     display: block;
-    padding-block: var(--space-4);
+    padding: 18px 0;
     font-family: var(--font-serif);
-    font-size: 28px;
+    font-size: clamp(36px, 8vw, 48px);
     font-weight: 400;
-    line-height: 1.15;
-    color: var(--char);
-    border-bottom: 1px solid var(--line);
-    transition: color var(--transition-fast);
+    line-height: 1.1;
+    color: rgba(239,232,220,0.7);
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    transition: color 0.2s ease, letter-spacing 0.2s ease;
   }
 
-  .mobile-menu__link:hover,
+  .mobile-menu__link:hover {
+    color: var(--cream);
+    letter-spacing: 0.01em;
+  }
+
   .mobile-menu__link.is-active {
-    color: var(--gold-deep);
+    color: var(--cream);
     font-style: italic;
   }
 
+  /* Footer strip */
   .mobile-menu__footer {
     margin-top: auto;
-    padding-top: var(--space-6);
-    border-top: 1px solid var(--line);
+    padding-top: 32px;
+    border-top: 1px solid rgba(239,232,220,0.1);
     display: flex;
-    gap: var(--space-4);
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .mobile-menu__footer-link {
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--char-soft);
-  }
-  .mobile-menu__footer a {
-    color: inherit;
+    color: rgba(239,232,220,0.5);
     text-decoration: none;
     transition: color 0.15s ease;
   }
-  .mobile-menu__footer a:hover { color: var(--gold-deep); }
+
+  .mobile-menu__footer-link:hover { color: var(--gold-light, #C9A16B); }
+
+  .mobile-menu__footer-tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(239,232,220,0.3);
+  }
 
   /* ---- Overlay ---- */
   .nav-overlay {
