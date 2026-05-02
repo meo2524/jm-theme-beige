@@ -759,8 +759,8 @@ p {
     --container-padding: var(--space-4);
   }
 
-  .section { padding-block: var(--space-12); }
-  .section--lg { padding-block: var(--space-20); }
+  .section { padding-block: var(--space-8); }
+  .section--lg { padding-block: var(--space-12); }
 
   .grid--2,
   .grid--3,
