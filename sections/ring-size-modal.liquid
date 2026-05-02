@@ -73,8 +73,8 @@
         <h3 class="rsm-sizer-heading">Visual ring sizer</h3>
         <p class="rsm-sizer-note">Hold a ruler to your screen. Each circle shows the inside diameter at actual size (96 DPI reference). Use for guidance only — measure for accuracy.</p>
         <div class="rsm-sizer-row">
-          {%- assign sizes = "8,9,10,11,12,13" | split: "," -%}
-          {%- assign diameters = "18.3,19.1,20.0,20.8,21.6,22.4" | split: "," -%}
+          {%- assign sizes = "5,6,7,8,9,10,11,12,13" | split: "," -%}
+          {%- assign diameters = "15.7,16.5,17.3,18.3,19.1,20.0,20.8,21.6,22.4" | split: "," -%}
           {%- for size in sizes -%}
             {%- assign dia = diameters[forloop.index0] | times: 1.0 -%}
             {%- assign px = dia | times: 3.78 | round -%}
@@ -99,6 +99,9 @@
               </tr>
             </thead>
             <tbody>
+              <tr><td>5</td><td>15.7 mm</td><td>49.3 mm</td></tr>
+              <tr><td>6</td><td>16.5 mm</td><td>51.9 mm</td></tr>
+              <tr><td>7</td><td>17.3 mm</td><td>54.4 mm</td></tr>
               <tr><td>8</td><td>18.3 mm</td><td>57.5 mm</td></tr>
               <tr><td>9</td><td>19.1 mm</td><td>60.0 mm</td></tr>
               <tr><td>10</td><td>20.0 mm</td><td>62.8 mm</td></tr>
