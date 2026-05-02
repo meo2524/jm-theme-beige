@@ -571,7 +571,13 @@
   display: flex;
   flex-direction: row;
   gap: 0.75rem;
-  align-items: flex-start;
+  align-items: stretch;
+  /* Height = gallery-track height (aspect-ratio 4:5) computed from column width:
+     col = (min(100vw,1280px) - 8rem padding - 7rem gap) / 2
+     track-width = col - 76px thumb - 0.75rem gap
+     track-height = track-width * 5/4                                      */
+  height: calc((((min(100vw, 1280px) - 15rem) / 2) - 76px - 0.75rem) * 1.25);
+  z-index: 1;
 }
 
 /* Left: vertical thumbnail strip */
@@ -581,10 +587,8 @@
   gap: 0.5rem;
   width: 76px;
   flex-shrink: 0;
-  /* Clamp to gallery-track height (track is 4:5 ratio; approximate height via vw calc) */
-  max-height: min(560px, calc((50vw - 4.5rem) * 1.25));
   overflow-y: auto;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
 }
 .gallery-thumbs::-webkit-scrollbar { display: none; }
 
@@ -1201,13 +1205,17 @@
 
 .prc-track {
   position: relative;
-  min-height: 5rem;
+  /* Fixed height so controls never move: stars + quote (3 lines) + footer */
+  height: 8.5rem;
+  overflow: hidden;
 }
 
 .prc-slide {
   display: none;
   flex-direction: column;
-  gap: 0.625rem;
+  gap: 0.5rem;
+  position: absolute;
+  inset: 0;
 }
 
 .prc-slide.is-active {
@@ -1241,6 +1249,10 @@
   line-height: 1.55;
   color: var(--color-olive, #8A6240);
   margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .prc-footer {
@@ -1483,6 +1495,8 @@
     position: static;
     flex-direction: column;
     gap: 0;
+    height: auto;
+    align-items: flex-start;
   }
 
   .pdp-review-carousel {
