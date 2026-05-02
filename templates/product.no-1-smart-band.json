@@ -428,6 +428,7 @@
         "faq_6",
         "faq_7"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "Questions",
         "heading": "Everything you want to know.",
