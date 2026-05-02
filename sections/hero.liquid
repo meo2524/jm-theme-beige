@@ -82,20 +82,18 @@
 
   </div>
 
-  <!-- Interactive orb — sibling of .hero__inner so its z-index can
-       sit above the content layer without being trapped inside the
-       .hero__scene stacking context. -->
-  <div class="hero__orb-stage" data-hero-orb-stage>
-    <div class="hero__orb-shadow" data-hero-orb-shadow></div>
-    <div class="hero__orb-halo"   data-hero-orb-halo></div>
-    <div class="hero__orb"        data-hero-orb role="button" tabindex="0" aria-label="Drag to push the orb"></div>
+  <!-- Ring video — replaces orb -->
+  <div class="hero__ring-stage" aria-hidden="true">
+    <video
+      class="hero__ring-video"
+      src="{{ section.settings.hero_video_url | default: 'https://cdn.shopify.com/videos/c/vp/ee10541771864ebc970ce82f9b7359bb/ee10541771864ebc970ce82f9b7359bb.HD-1080p-7.2Mbps-83245518.mp4' }}"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+    ></video>
   </div>
-
-  <!-- Small mono annotation near the orb -->
-  <span class="hero__orb-mark" aria-hidden="true">✶ Begin again ✶</span>
-
-  <!-- Breath word — cycles inhale / exhale synced to the orb -->
-  <span class="hero__breath-word" data-hero-breath aria-hidden="true">inhale</span>
 
   <!-- Content -->
   <div class="hero__inner container">
@@ -396,53 +394,32 @@
     }
   }
 
-  /* ---- Orb annotation mark ---- */
-  .hero__orb-mark {
+  /* ---- Ring video ---- */
+  .hero__ring-stage {
     position: absolute;
-    top: var(--space-8);
-    right: var(--space-8);
-    z-index: 4;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    opacity: 0;
-    animation: hero-fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.95s forwards;
-  }
-  @media (max-width: 767px) {
-    .hero__orb-mark { display: none; }
-  }
-
-  /* ---- Breath word (inhale / exhale) ---- */
-  .hero__breath-word {
-    position: absolute;
-    left: 70%;
-    top: 78%;
-    transform: translateX(-50%);
-    z-index: 4;
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 24px;
-    color: var(--char-soft);
-    letter-spacing: 0.04em;
+    left: 70%; top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
     pointer-events: none;
-    transition: opacity 0.7s ease;
+    width: 420px; height: 420px;
+    opacity: 0;
+    animation: hero-fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  }
+  .hero__ring-video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+    filter: drop-shadow(0 24px 60px rgba(140, 100, 60, 0.35));
   }
   @media (max-width: 1024px) {
-    .hero__breath-word { font-size: 20px; }
+    .hero__ring-stage { width: 320px; height: 320px; }
   }
   @media (max-width: 767px) {
-    /* Orb is now at top:18%, ~200px tall on 100svh ≈ 844px = ~242px bottom.
-       Breath word sits just below the orb at ~32% from top. */
-    .hero__breath-word {
-      left: 50%;
-      top: 32%;
-      font-size: 18px;
+    .hero__ring-stage {
+      left: 50%; top: 18%;
+      width: 220px; height: 220px;
     }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .hero__breath-word { transition: none; }
   }
 
   /* ---- Reduced motion ---- */
@@ -574,317 +551,51 @@
   }
   .hero:hover .hero__cursor-glow { opacity: 1; }
 
-  /* === Interactive orb ===
-     Stage sits ABOVE the content layer so the orb is reachable
-     to pointers. The stage itself is pointer-events: none —
-     only the orb element captures clicks, so text/CTA below remain
-     clickable everywhere except directly under the orb. */
-  .hero__orb-stage {
-    position: absolute; inset: 0;
-    z-index: 3;
-    pointer-events: none;
-  }
-  .hero__orb {
-    position: absolute;
-    left: 70%; top: 50%;
-    width: 360px; height: 360px;
-    margin-left: -180px; margin-top: -180px;
-    border-radius: 50%;
-    background:
-      radial-gradient(circle at 38% 32%,
-        #fbeede 0%, #f1d4a5 22%, #d9a874 55%, #a8663b 85%, #6a3a1f 100%);
-    box-shadow:
-      0 0 0 1px rgba(255,250,240,0.35) inset,
-      0 30px 80px -10px rgba(168,129,79,0.6),
-      0 0 120px 12px rgba(217,168,116,0.45);
-    cursor: grab;
-    pointer-events: auto;
-    touch-action: none;
-    will-change: transform, filter;
-    transform: translate3d(var(--ox, 0px), var(--oy, 0px), 0) scale(var(--os, 1));
-    animation: hero-orb-breathe 7s ease-in-out infinite;
-  }
-  .hero__orb:active { cursor: grabbing; }
-  .hero__orb::after {
-    content: "";
-    position: absolute;
-    left: 22%; top: 16%;
-    width: 28%; height: 22%;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,250,240,0.92), rgba(255,250,240,0) 70%);
-    filter: blur(2px);
-    pointer-events: none;
-  }
-  .hero__orb-halo {
-    position: absolute;
-    left: 70%; top: 50%;
-    width: 720px; height: 720px;
-    margin-left: -360px; margin-top: -360px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(217,176,121,0.40), rgba(217,176,121,0) 65%);
-    transform: translate3d(var(--ox, 0px), var(--oy, 0px), 0) scale(var(--os, 1));
-    pointer-events: none;
-    will-change: transform;
-    mix-blend-mode: screen;
-    animation: hero-orb-breathe 7s ease-in-out infinite;
-  }
-  .hero__orb-shadow {
-    position: absolute;
-    left: 70%; top: 50%;
-    width: 320px; height: 38px;
-    margin-left: -160px;
-    margin-top: 160px;
-    border-radius: 50%;
-    background: radial-gradient(ellipse at center, rgba(58,42,28,0.32), rgba(58,42,28,0) 70%);
-    transform: translate3d(var(--sx, 0px), var(--sy, 0px), 0) scale(var(--ss, 1));
-    opacity: var(--sop, 1);
-    pointer-events: none;
-    will-change: transform, opacity;
-    filter: blur(2px);
-  }
-  @keyframes hero-orb-breathe {
-    0%, 100% { filter: brightness(0.96); }
-    50%      { filter: brightness(1.06); }
-  }
-
-  /* Tablet: shrink orb, shift right anchor a touch */
-  @media (max-width: 1024px) {
-    .hero__orb { width: 280px; height: 280px; margin-left: -140px; margin-top: -140px; }
-    .hero__orb-halo { width: 560px; height: 560px; margin-left: -280px; margin-top: -280px; }
-    .hero__orb-shadow { width: 240px; margin-left: -120px; }
-  }
-
-  /* Mobile: orb sits at top quarter, text sits at bottom — no overlap */
+  /* Mobile: scene atmosphere sits at top */
   @media (max-width: 767px) {
     .hero__scene { opacity: 0.85; }
     .hero__halo,
-    .hero__ring,
-    .hero__orb,
-    .hero__orb-halo,
-    .hero__orb-shadow { left: 50%; }
-    .hero__orb { width: 200px; height: 200px; margin-left: -100px; margin-top: -100px; top: 17%; }
-    .hero__orb-halo { width: 400px; height: 400px; margin-left: -200px; margin-top: -200px; top: 17%; }
-    .hero__orb-shadow { width: 170px; margin-left: -85px; top: 17%; }
-    .hero__halo { top: 17%; }
-    .hero__ring { top: 17%; }
+    .hero__ring { left: 50%; top: 18%; }
   }
 
-  /* Reduced motion: kill all orb animations */
+  /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
     .hero__halo,
     .hero__ring,
-    .hero__orb,
-    .hero__orb-halo,
     .hero__mote { animation: none; }
     .hero__cursor-glow { display: none; }
+    .hero__ring-video { animation: none; }
   }
 </style>
 
 
-<!-- ============================================================
-     ORB PHYSICS — drop-in, drag-to-fling, spring back home
-     ============================================================ -->
 <script>
+  /* Cursor glow on hero */
   (function () {
-    if (window.__mcHeroOrbInit) return;
-    window.__mcHeroOrbInit = true;
+    var hero   = document.getElementById('hero');
+    var cursor = hero && hero.querySelector('[data-hero-cursor]');
+    var motesWrap = hero && hero.querySelector('[data-hero-motes]');
+    if (!hero) return;
 
-    function init() {
-      var hero      = document.getElementById('hero');
-      if (!hero) return;
-      var stage     = hero.querySelector('[data-hero-orb-stage]');
-      var orb       = hero.querySelector('[data-hero-orb]');
-      var halo      = hero.querySelector('[data-hero-orb-halo]');
-      var shadow    = hero.querySelector('[data-hero-orb-shadow]');
-      var motesWrap = hero.querySelector('[data-hero-motes]');
-      var cursor    = hero.querySelector('[data-hero-cursor]');
-      if (!stage || !orb || !halo || !shadow) return;
-
-      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      // ---- Dust motes ----
-      function seedMotes(count) {
-        if (!motesWrap || reduced) return;
-        motesWrap.innerHTML = '';
-        for (var i = 0; i < count; i++) {
-          var m = document.createElement('div');
-          m.className = 'hero__mote';
-          var left = 40 + Math.random() * 55;          // weighted to right side
-          var top  = 25 + Math.random() * 60;
-          var dur  = 8 + Math.random() * 10;
-          var delay = -Math.random() * dur;
-          var dx = (Math.random() - 0.5) * 120;
-          var dy = -120 - Math.random() * 200;
-          m.style.left = left + '%';
-          m.style.top  = top  + '%';
-          m.style.animationDuration = dur + 's';
-          m.style.animationDelay = delay + 's';
-          m.style.setProperty('--dx', dx + 'px');
-          m.style.setProperty('--dy', dy + 'px');
-          m.style.opacity = 0.3 + Math.random() * 0.5;
-          motesWrap.appendChild(m);
-        }
-      }
-      seedMotes(16);
-
-      // ---- Cursor parallax + glow ----
+    if (cursor) {
       hero.addEventListener('pointermove', function (e) {
-        var rect = hero.getBoundingClientRect();
-        var x = e.clientX - rect.left;
-        var y = e.clientY - rect.top;
-        if (cursor) {
-          cursor.style.setProperty('--cx', x + 'px');
-          cursor.style.setProperty('--cy', y + 'px');
-        }
+        var r = hero.getBoundingClientRect();
+        cursor.style.setProperty('--cx', (e.clientX - r.left) + 'px');
+        cursor.style.setProperty('--cy', (e.clientY - r.top)  + 'px');
       });
-
-      // ---- Orb physics ----
-      var x = 0, y = 0, vx = 0, vy = 0;
-      var dragging = false, dragId = null, lastPx = 0, lastPy = 0, lastT = 0;
-      var restX = 0, restY = 0;
-      var homeX = 0, homeY = 0;
-      var dropping = false;
-      var k    = 0.06;     // spring constant
-      var damp = 0.86;     // friction
-      var maxV = 60;
-
-      function placeHome() {
-        // Orb is positioned via CSS at left:70%/top:50% (mobile: top:22%/left:78%)
-        // These translate offsets are deltas from that anchor — keep as 0 for resting state
-        homeX = 0;
-        homeY = 0;
-      }
-
-      function dropIn() {
-        placeHome();
-        if (reduced) {
-          x = homeX; y = homeY; restX = homeX; restY = homeY;
-          apply();
-          return;
-        }
-        dropping = true;
-        x = homeX;
-        y = homeY - hero.getBoundingClientRect().height - 200;
-        vx = 0; vy = 0;
-        restX = homeX; restY = homeY;
-      }
-
-      function apply() {
-        var lift = Math.max(0, restY - y);
-        var sOp = Math.max(0.15, 1 - lift / 600);
-        var sShadowScale = Math.max(0.45, 1 - lift / 800);
-        var oScale = 1 + Math.min(0.05, Math.max(-0.04, (restY - y) / 4000));
-        orb.style.setProperty('--ox', x + 'px');
-        orb.style.setProperty('--oy', y + 'px');
-        orb.style.setProperty('--os', oScale.toFixed(3));
-        halo.style.setProperty('--ox', x + 'px');
-        halo.style.setProperty('--oy', y + 'px');
-        halo.style.setProperty('--os', oScale.toFixed(3));
-        shadow.style.setProperty('--sx', x + 'px');
-        shadow.style.setProperty('--sy', restY + 'px');
-        shadow.style.setProperty('--ss', sShadowScale.toFixed(3));
-        shadow.style.setProperty('--sop', sOp.toFixed(3));
-      }
-
-      function step() {
-        if (!dragging) {
-          var dx = restX - x;
-          var dy = restY - y;
-          vx += dx * k;
-          vy += dy * k;
-          if (dropping && y < restY - 5) {
-            vy += 1.4;
-          } else if (dropping) {
-            dropping = false;
-          }
-          vx *= damp; vy *= damp;
-          if (Math.abs(vx) > maxV) vx = Math.sign(vx) * maxV;
-          if (Math.abs(vy) > maxV) vy = Math.sign(vy) * maxV;
-          x += vx; y += vy;
-        }
-        apply();
-        requestAnimationFrame(step);
-      }
-
-      orb.addEventListener('pointerdown', function (e) {
-        dragging = true;
-        dropping = false;
-        dragId = e.pointerId;
-        try { orb.setPointerCapture(dragId); } catch (_) {}
-        lastPx = e.clientX; lastPy = e.clientY; lastT = performance.now();
-      });
-      window.addEventListener('pointermove', function (e) {
-        if (!dragging || e.pointerId !== dragId) return;
-        var dx = e.clientX - lastPx;
-        var dy = e.clientY - lastPy;
-        x += dx; y += dy;
-        var now = performance.now();
-        var dt = Math.max(1, now - lastT);
-        vx = dx / dt * 16;
-        vy = dy / dt * 16;
-        lastPx = e.clientX; lastPy = e.clientY; lastT = now;
-      });
-      function endDrag(e) {
-        if (!dragging) return;
-        if (e && e.pointerId !== dragId) return;
-        dragging = false;
-        try { orb.releasePointerCapture(dragId); } catch (_) {}
-      }
-      window.addEventListener('pointerup', endDrag);
-      window.addEventListener('pointercancel', endDrag);
-
-      window.addEventListener('resize', function () {
-        placeHome();
-        restX = homeX; restY = homeY;
-      });
-
-      dropIn();
-      requestAnimationFrame(step);
     }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
-    } else {
-      init();
-    }
-  })();
-
-  // ---- Breath word cycle — synced to the 7s orb breathe loop ----
-  (function () {
-    if (window.__mcHeroBreathInit) return;
-    window.__mcHeroBreathInit = true;
-
-    function init() {
-      var hero = document.getElementById('hero');
-      if (!hero) return;
-      var el = hero.querySelector('[data-hero-breath]');
-      if (!el) return;
-
-      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduced) {
-        // Static — show "breathe" once and stop
-        el.textContent = 'breathe';
-        return;
+    if (motesWrap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      for (var i = 0; i < 16; i++) {
+        var m = document.createElement('div');
+        m.className = 'hero__mote';
+        var dur = 8 + Math.random() * 10;
+        m.style.cssText = 'left:' + (40 + Math.random() * 55) + '%;top:' + (25 + Math.random() * 60) + '%;'
+          + 'animation-duration:' + dur + 's;animation-delay:' + (-Math.random() * dur) + 's;';
+        m.style.setProperty('--dx', ((Math.random() - 0.5) * 120) + 'px');
+        m.style.setProperty('--dy', (-120 - Math.random() * 200) + 'px');
+        motesWrap.appendChild(m);
       }
-
-      var inhale = true;
-      el.textContent = 'inhale';
-
-      // 7s orb breathe → swap word at the midpoint (every 3.5s)
-      setInterval(function () {
-        el.style.opacity = '0';
-        setTimeout(function () {
-          inhale = !inhale;
-          el.textContent = inhale ? 'inhale' : 'exhale';
-          el.style.opacity = '';
-        }, 350);
-      }, 3500);
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
-    } else {
-      init();
     }
   })();
 </script>
@@ -943,6 +654,16 @@
       "type": "url",
       "id": "cta_url",
       "label": "Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Hero video"
+    },
+    {
+      "type": "url",
+      "id": "hero_video_url",
+      "label": "Ring video URL",
+      "info": "Paste a Shopify CDN video URL. Autoplays looped, muted."
     },
     {
       "type": "header",
