@@ -354,12 +354,30 @@
       font-weight: 600 !important;
     }
 
-    /* ── Most Popular badge ─────────────────────────────────── */
+    /* ── Most Popular badge — flat pill, no starburst shape ─── */
     .kaching-bundles__bar-most-popular,
     .kaching-bundles__bar-most-popular--fancy {
-      background: #1f1d1a !important;
-      color: #f5efe4 !important;
-      border-color: #1f1d1a !important;
+      clip-path: none !important;
+      -webkit-clip-path: none !important;
+      background: rgba(154,126,87,0.14) !important;
+      color: #9a7e57 !important;
+      border: 1px solid rgba(154,126,87,0.35) !important;
+      border-radius: 4px !important;
+      font-family: var(--font-mono, monospace) !important;
+      font-size: 9px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.16em !important;
+      text-transform: uppercase !important;
+      padding: 4px 8px !important;
+      width: auto !important;
+      height: auto !important;
+      aspect-ratio: auto !important;
+      overflow: visible !important;
+    }
+    /* Hide embedded star SVGs */
+    .kaching-bundles__bar-most-popular svg,
+    .kaching-bundles__bar-most-popular--fancy svg {
+      display: none !important;
     }
 
     /* ── Free gift bar ──────────────────────────────────────── */
