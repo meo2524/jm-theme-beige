@@ -112,6 +112,7 @@
     },
     "custom_liquid_TgB6HE": {
       "type": "custom-liquid",
+      "disabled": true,
       "name": "t:sections.custom-liquid.name",
       "settings": {
         "show_on": "both",
