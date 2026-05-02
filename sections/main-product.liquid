@@ -1887,37 +1887,21 @@
 <script>
 /* Smooth-scroll rating link to reviews section */
 (function () {
-  var link = document.querySelector('.rating-link[href^="#"]');
+  var link = document.querySelector('.rating-link');
   if (!link) return;
   link.addEventListener('click', function (e) {
     e.preventDefault();
-    var href = this.getAttribute('href');
-    var target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-      /* Target not in DOM yet — try id variants then fall back to hash */
-      var candidates = [
-        href.replace('#shopify-section-', '#'),
-        '#shopify-section-reviews_widget',
-        '#shopify-section-judgeme_reviews',
-        '#reviews',
-        '[data-section-type*="review"]',
-        '[id*="review"]'
-      ];
-      var found = null;
-      for (var i = 0; i < candidates.length; i++) {
-        try { found = document.querySelector(candidates[i]); } catch(err) {}
-        if (found) break;
-      }
-      if (found) {
-        found.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else {
-        /* Last resort: push hash and let browser handle it */
-        history.pushState(null, '', href);
-        var el = document.getElementById(href.slice(1));
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+    /* Shopify JSON templates prefix section IDs with the template ID,
+       e.g. shopify-section-template--12345__reviews_widget.
+       Use [id*="reviews_widget"] to match regardless of prefix. */
+    var found =
+      document.querySelector('[id*="reviews_widget"]') ||
+      document.querySelector('[id*="judgeme_reviews"]') ||
+      document.querySelector('[id*="review"]') ||
+      document.querySelector('.jdgm-widget') ||
+      document.querySelector('[data-section-type*="review"]');
+    if (found) {
+      found.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 }());
