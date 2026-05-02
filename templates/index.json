@@ -12,13 +12,13 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "eyebrow": "Begin the mend.",
-        "heading": "Your body",
-        "heading_em": "already",
-        "heading_2": "knows.",
-        "subtext": "We make things worth keeping. Quiet tools for the long repair — not the quick fix.",
-        "cta_label": "Shop the collection",
-        "cta_url": "",
+        "eyebrow": "Introducing the N°01.",
+        "heading": "Know before",
+        "heading_em": "your body",
+        "heading_2": "breaks down.",
+        "subtext": "The smart ring that tracks HRV, sleep stages, and recovery — every morning, no subscription.",
+        "cta_label": "Shop the N°01 Smart Band",
+        "cta_url": "/products/n-01-smart-band",
         "show_scroll_cue": true
       }
     },

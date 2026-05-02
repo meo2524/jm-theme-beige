@@ -188,18 +188,22 @@
       -%}
       {%- if rating_value != blank and section.settings.rating_show -%}
         <div class="product-rating" aria-label="Rated {{ rating_value }} out of 5, {{ rating_count }}">
-          <div class="rating-stars" aria-hidden="true">
-            {%- for i in (1..5) -%}
-              <svg class="star" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true">
-                <polygon points="8,1.2 10.2,5.8 15.4,6.4 11.5,10.2 12.7,15.4 8,12.7 3.3,15.4 4.5,10.2 0.6,6.4 5.8,5.8"/>
-              </svg>
-            {%- endfor -%}
+          <div class="rating-stars-wrap">
+            <div class="rating-stars" aria-hidden="true">
+              {%- for i in (1..5) -%}
+                <svg class="star" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true">
+                  <polygon points="8,1.2 10.2,5.8 15.4,6.4 11.5,10.2 12.7,15.4 8,12.7 3.3,15.4 4.5,10.2 0.6,6.4 5.8,5.8"/>
+                </svg>
+              {%- endfor -%}
+            </div>
+            <span class="rating-value-num">{{ rating_value }}</span>
           </div>
-          <span class="rating-text">
-            <strong>{{ rating_value }}</strong>
-            <span class="rating-sep" aria-hidden="true">&middot;</span>
-            <a href="{{ rating_href }}" class="rating-link">{{ rating_count }}</a>
-          </span>
+          <div class="rating-copy">
+            <span class="rating-count">{{ rating_count }}</span>
+            {%- if section.settings.rating_subtext != blank -%}
+              <span class="rating-subtext">{{ section.settings.rating_subtext }}</span>
+            {%- endif -%}
+          </div>
         </div>
       {%- endif -%}
 
@@ -295,15 +299,25 @@
       >
 
       {%- comment -%} -- Short description -- {%- endcomment -%}
-      <p class="product-short-desc">
-        {%- if product.metafields.custom.short_description != blank -%}
-          {{ product.metafields.custom.short_description }}
-        {%- elsif section.settings.short_description != blank -%}
-          {{ section.settings.short_description }}
-        {%- else -%}
-          {{ product.description | strip_html | truncate: 200 }}
+      {%- assign blurb_heading    = product.metafields.custom.blurb_heading    | default: section.settings.blurb_heading -%}
+      {%- assign blurb_subheading = product.metafields.custom.blurb_subheading | default: section.settings.blurb_subheading -%}
+      <div class="product-blurb">
+        {%- if blurb_heading != blank -%}
+          <p class="product-blurb__heading">{{ blurb_heading }}</p>
         {%- endif -%}
-      </p>
+        {%- if blurb_subheading != blank -%}
+          <p class="product-blurb__subhead">{{ blurb_subheading }}</p>
+        {%- endif -%}
+        <p class="product-blurb__body">
+          {%- if product.metafields.custom.short_description != blank -%}
+            {{ product.metafields.custom.short_description }}
+          {%- elsif section.settings.short_description != blank -%}
+            {{ section.settings.short_description }}
+          {%- else -%}
+            {{ product.description | strip_html | truncate: 200 }}
+          {%- endif -%}
+        </p>
+      </div>
 
       {%- comment -%} -- Spec pills -- {%- endcomment -%}
       <div class="spec-pills">
@@ -733,8 +747,19 @@
 .product-rating {
   display: flex;
   align-items: center;
-  gap: 0.625rem;
+  gap: 1rem;
   margin-bottom: 1.75rem;
+  background: rgba(138, 98, 64, 0.06);
+  border: 1px solid rgba(138, 98, 64, 0.15);
+  border-radius: 10px;
+  padding: 0.875rem 1.125rem;
+}
+
+.rating-stars-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .rating-stars {
@@ -746,34 +771,33 @@
   fill: var(--color-walnut, #8A6240);
 }
 
-.rating-text {
-  font-family: var(--font-label);
-  font-size: 0.8125rem;
-  color: var(--color-olive);
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
+.rating-value-num {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--color-black);
+  line-height: 1;
 }
 
-.rating-text strong {
+.rating-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.rating-count {
+  font-family: var(--font-label);
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--color-black);
+  line-height: 1.3;
 }
 
-.rating-sep {
-  opacity: 0.4;
-}
-
-.rating-link {
-  color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  text-decoration-color: rgba(166, 137, 102, 0.35);
-  transition: text-decoration-color 0.15s ease;
-}
-
-.rating-link:hover {
-  text-decoration-color: var(--color-walnut, #8A6240);
+.rating-subtext {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  color: var(--color-olive);
+  line-height: 1.3;
 }
 
 /* Product badges */
@@ -896,13 +920,40 @@
   color: var(--color-olive);
 }
 
-/* Short description */
-.product-short-desc {
+/* Blurb */
+.product-blurb {
+  margin: 0 0 1.875rem;
+}
+
+.product-blurb__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.375rem, 3vw, 1.75rem);
+  font-weight: 400;
+  color: var(--color-black);
+  line-height: 1.15;
+  margin: 0 0 0.15rem;
+}
+
+.product-blurb__subhead {
+  font-family: var(--font-heading);
+  font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-walnut, #8A6240);
+  line-height: 1.2;
+  margin: 0 0 0.875rem;
+}
+
+.product-blurb__body {
   font-family: var(--font-label);
   font-size: 0.9375rem;
   line-height: 1.72;
   color: var(--color-olive);
-  margin: 0 0 1.875rem;
+  margin: 0;
+  background: rgba(138, 98, 64, 0.05);
+  border-left: 2px solid rgba(138, 98, 64, 0.3);
+  padding: 0.75rem 1rem;
+  border-radius: 0 6px 6px 0;
 }
 
 /* Spec pills */
@@ -1925,8 +1976,20 @@
     },
     {
       "type": "text",
+      "id": "blurb_heading",
+      "label": "Blurb heading (fallback)",
+      "info": "e.g. 'Biometrics. Refined.' \u2014 set per product via metafield custom.blurb_heading for priority."
+    },
+    {
+      "type": "text",
+      "id": "blurb_subheading",
+      "label": "Blurb subheading \u2014 italic gold (fallback)",
+      "info": "e.g. 'Intelligence that fits.' \u2014 set per product via metafield custom.blurb_subheading for priority."
+    },
+    {
+      "type": "text",
       "id": "short_description",
-      "label": "Short description (fallback)",
+      "label": "Short description body (fallback)",
       "info": "Store-wide fallback. Set per product via metafield custom.short_description \u2014 that takes priority."
     },
     {
@@ -2000,9 +2063,11 @@
       "info": "Overrides all metafield data. Leave blank to use reviews.rating_count or custom.rating_count metafields automatically."
     },
     {
-      "type": "url",
-      "id": "rating_link",
-      "label": "Reviews link"
+      "type": "text",
+      "id": "rating_subtext",
+      "label": "Review subtext",
+      "default": "Trusted by verified buyers",
+      "info": "Second line under the review count. e.g. 'Trusted by thousands of customers'"
     },
     {
       "type": "header",
