@@ -1,0 +1,96 @@
+{{ section.settings.custom_liquid }}
+
+{% schema %}
+{
+  "name": "Custom Liquid",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "Show on",
+      "options": [
+        { "value": "both", "label": "Both" },
+        { "value": "desktop", "label": "Desktop only" },
+        { "value": "mobile", "label": "Mobile only" }
+      ],
+      "default": "both"
+    },
+    {
+      "type": "liquid",
+      "id": "custom_liquid",
+      "label": "Liquid code",
+      "info": "Add app snippets or other code to create advanced customizations."
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        { "value": "scheme-1", "label": "Scheme 1" },
+        { "value": "scheme-2", "label": "Scheme 2" }
+      ],
+      "default": "scheme-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "text",
+      "id": "custom_color_scheme",
+      "label": "Custom color scheme"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "Top padding",
+      "options": [
+        { "value": "inherit", "label": "Inherit" },
+        { "value": "none", "label": "None" },
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Custom top padding",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "Bottom padding",
+      "options": [
+        { "value": "inherit", "label": "Inherit" },
+        { "value": "none", "label": "None" },
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Custom bottom padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Liquid"
+    }
+  ]
+}
+{% endschema %}
