@@ -328,20 +328,12 @@
 
   /* ---- Responsive ---- */
   @media (max-width: 767px) {
-    /* Full-height hero so orb (top) and text (bottom) never overlap */
+    /* Stacked column — video on top, text below, no overlaps */
     .hero {
       min-height: 100svh;
-      align-items: flex-end;
-    }
-
-    /* Text block sits in the lower ~45% of the viewport */
-    .hero__inner {
-      padding-block: var(--space-10) var(--space-16);
-      position: relative;
-      z-index: 4;
-      /* Soft gradient lifts text off the background for readability */
-      background: linear-gradient(to top, var(--color-bone) 70%, transparent);
-      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
     }
 
     .hero__heading {
@@ -353,9 +345,7 @@
       max-width: 42ch;
     }
 
-    .hero__scroll-cue {
-      display: none;
-    }
+    .hero__scroll-cue { display: none; }
   }
 
   /* ---- Ring video ---- */
@@ -388,12 +378,26 @@
     .hero__ring-stage { width: 360px; height: 360px; margin-left: -180px; margin-top: -180px; }
   }
   @media (max-width: 767px) {
-    /* Full-width centred at top of screen, clear of text */
+    /* Pull out of absolute positioning — becomes a block at the top of the column */
     .hero__ring-stage {
-      left: 50%; top: 28%;
-      width: 72vw; height: 72vw;
-      max-width: 300px; max-height: 300px;
-      margin-left: calc(-36vw); margin-top: calc(-36vw);
+      position: relative;
+      left: auto; top: auto;
+      margin: 0;
+      width: 100%;
+      height: 62vw;
+      max-height: 360px;
+      z-index: 2;
+    }
+    .hero__ring-video {
+      border-radius: 0;
+      filter: none;
+    }
+    /* Text sits directly below the video */
+    .hero__inner {
+      position: relative;
+      z-index: 2;
+      padding: 28px 24px 48px;
+      flex: 1;
     }
   }
 
