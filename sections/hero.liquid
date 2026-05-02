@@ -44,45 +44,7 @@
     </div>
   {%- endif -%}
 
-  <!-- ===========================================================
-       ORB SCENE — warm, restorative breathing-orb composition
-       Drops in from above, draggable, springs back home.
-       =========================================================== -->
-  <div class="hero__scene" aria-hidden="true">
-
-    <!-- Paper warm wash -->
-    <div class="hero__paper"></div>
-
-    <!-- Sun halo behind everything -->
-    <div class="hero__halo"></div>
-
-    <!-- Expanding breath rings from the sun position -->
-    <div class="hero__rings">
-      <span class="hero__ring"></span>
-      <span class="hero__ring"></span>
-      <span class="hero__ring"></span>
-    </div>
-
-    <!-- Horizon line -->
-    <div class="hero__horizon"></div>
-
-    <!-- Static SVG: concentric rings + horizon -->
-    <svg class="hero__static" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet">
-      <circle cx="1380" cy="540" r="540" fill="none" stroke="#8a663b" stroke-opacity="0.07" stroke-width="1"/>
-      <circle cx="1380" cy="540" r="430" fill="none" stroke="#8a663b" stroke-opacity="0.10" stroke-width="1"/>
-      <circle cx="1380" cy="540" r="340" fill="none" stroke="#8a663b" stroke-opacity="0.14" stroke-width="1"/>
-      <circle cx="1380" cy="540" r="270" fill="none" stroke="#8a663b" stroke-opacity="0.20" stroke-width="1"/>
-    </svg>
-
-    <!-- Floating dust motes -->
-    <div class="hero__motes" data-hero-motes></div>
-
-    <!-- Cursor glow -->
-    <div class="hero__cursor-glow" data-hero-cursor></div>
-
-  </div>
-
-  <!-- Ring video — replaces orb -->
+  <!-- Ring video -->
   <div class="hero__ring-stage" aria-hidden="true">
     <video
       class="hero__ring-video"
@@ -451,133 +413,9 @@
     .hero__subtext { opacity: 0.62; }
   }
 
-  /* ============================================================
-     ORB SCENE — warm restorative breathing-orb
-     Anchored to the right side; behind text content.
-     ============================================================ */
-  .hero__scene {
-    position: absolute;
-    inset: 0;
-    z-index: 1;          /* above grain (1) but below content (2) */
-    pointer-events: none;
-    overflow: hidden;
-  }
-
-  /* Warm paper wash + subtle radial warmth on right side */
-  .hero__paper {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(70% 60% at 70% 55%, rgba(217, 176, 121, 0.10), rgba(217, 176, 121, 0) 70%),
-      radial-gradient(40% 50% at 90% 30%, rgba(201, 133, 104, 0.08), rgba(201, 133, 104, 0) 70%);
-    pointer-events: none;
-  }
-
-  /* Sun halo behind everything */
-  .hero__halo {
-    position: absolute;
-    left: 70%; top: 50%;
-    width: 44%; aspect-ratio: 1 / 1;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(217,176,121,0.28), rgba(217,176,121,0) 65%);
-    filter: blur(2px);
-    pointer-events: none;
-    animation: hero-halo-pulse 7s ease-in-out infinite;
-  }
-  @keyframes hero-halo-pulse {
-    0%, 100% { opacity: 0.7; transform: translate(-50%,-50%) scale(0.96); }
-    50%      { opacity: 1.0; transform: translate(-50%,-50%) scale(1.06); }
-  }
-
-  /* Static SVG concentric rings */
-  .hero__static {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    opacity: 0.85;
-  }
-
-  /* Horizon line — barely-there tabletop */
-  .hero__horizon {
-    position: absolute;
-    left: 0; right: 0;
-    top: 75%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(74,66,58,0.10) 30%, rgba(74,66,58,0.16) 50%, rgba(74,66,58,0.10) 70%, transparent);
-    pointer-events: none;
-  }
-
-  /* Expanding breath rings radiating from sun */
-  .hero__rings {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-  .hero__ring {
-    position: absolute;
-    left: 70%; top: 50%;
-    width: 200px; height: 200px;
-    margin-left: -100px; margin-top: -100px;
-    border: 1px solid rgba(168, 129, 79, 0.5);
-    border-radius: 50%;
-    opacity: 0;
-    animation: hero-ring-expand 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    will-change: transform, opacity;
-  }
-  .hero__ring:nth-child(2) { animation-delay: -2.33s; }
-  .hero__ring:nth-child(3) { animation-delay: -4.66s; }
-  @keyframes hero-ring-expand {
-    0%   { transform: scale(0.4); opacity: 0; }
-    20%  { opacity: 0.45; }
-    100% { transform: scale(2.6); opacity: 0; }
-  }
-
-  /* Floating dust motes */
-  .hero__motes { position: absolute; inset: 0; pointer-events: none; }
-  .hero__mote {
-    position: absolute;
-    width: 3px; height: 3px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,240,210,0.85), rgba(255,240,210,0) 70%);
-    animation: hero-mote-drift linear infinite;
-    will-change: transform, opacity;
-  }
-  @keyframes hero-mote-drift {
-    0%   { transform: translate(0, 0) scale(0.6); opacity: 0; }
-    15%  { opacity: 0.85; }
-    85%  { opacity: 0.55; }
-    100% { transform: translate(var(--dx, 0px), var(--dy, -180px)) scale(1.1); opacity: 0; }
-  }
-
-  /* Cursor glow follows pointer */
-  .hero__cursor-glow {
-    position: absolute;
-    left: var(--cx, -200px); top: var(--cy, -200px);
-    width: 360px; height: 360px;
-    margin-left: -180px; margin-top: -180px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,220,170,0.30), rgba(255,220,170,0) 65%);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    mix-blend-mode: screen;
-  }
-  .hero:hover .hero__cursor-glow { opacity: 1; }
-
-  /* Mobile: scene atmosphere tracks video position */
-  @media (max-width: 767px) {
-    .hero__scene { opacity: 0.85; }
-    .hero__halo  { left: 50%; top: 28%; }
-    .hero__ring  { left: 50%; top: 28%; }
-  }
-
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
-    .hero__halo,
-    .hero__ring,
-    .hero__mote { animation: none; }
-    .hero__cursor-glow { display: none; }
-    .hero__ring-video { animation: none; }
+    .hero__ring-stage { animation: none; opacity: 1; }
   }
 </style>
 
@@ -586,46 +424,14 @@
   (function () {
     var hero      = document.getElementById('hero');
     if (!hero) return;
-    var cursor    = hero.querySelector('[data-hero-cursor]');
-    var motesWrap = hero.querySelector('[data-hero-motes]');
-    var video     = hero.querySelector('.hero__ring-video');
-    var reduced   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var video = hero.querySelector('.hero__ring-video');
 
-    /* ---- Pick SD on mobile, HD on desktop ---- */
+    /* Pick SD on mobile, HD on desktop */
     if (video) {
-      var isMobile = window.matchMedia('(max-width: 767px)').matches;
-      var src = isMobile
+      var src = window.matchMedia('(max-width: 767px)').matches
         ? video.dataset.srcSd
         : video.dataset.srcHd;
-      if (src) {
-        video.src = src;
-        video.load();
-        video.play().catch(function () {});
-      }
-    }
-
-    /* ---- Cursor glow ---- */
-    if (cursor) {
-      hero.addEventListener('pointermove', function (e) {
-        var r = hero.getBoundingClientRect();
-        cursor.style.setProperty('--cx', (e.clientX - r.left) + 'px');
-        cursor.style.setProperty('--cy', (e.clientY - r.top)  + 'px');
-      });
-    }
-
-    /* ---- Dust motes ---- */
-    if (motesWrap && !reduced) {
-      for (var i = 0; i < 16; i++) {
-        var m = document.createElement('div');
-        m.className = 'hero__mote';
-        var dur = 8 + Math.random() * 10;
-        m.style.cssText = 'left:' + (40 + Math.random() * 55) + '%;top:'
-          + (25 + Math.random() * 60) + '%;animation-duration:' + dur
-          + 's;animation-delay:' + (-Math.random() * dur) + 's;';
-        m.style.setProperty('--dx', ((Math.random() - 0.5) * 120) + 'px');
-        m.style.setProperty('--dy', (-120 - Math.random() * 200) + 'px');
-        motesWrap.appendChild(m);
-      }
+      if (src) { video.src = src; video.load(); video.play().catch(function(){}); }
     }
   })();
 </script>
