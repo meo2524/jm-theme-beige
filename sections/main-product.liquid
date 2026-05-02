@@ -155,7 +155,12 @@
       </p>
 
       {%- comment -%} -- Title -- {%- endcomment -%}
-      <h1 class="product-title">{{ product.title }}</h1>
+      <h1 class="product-title">
+        {{ product.title }}
+        {%- if section.settings.model_badge != blank -%}
+          <span class="product-title__model">{{ section.settings.model_badge }}</span>
+        {%- endif -%}
+      </h1>
 
       {%- comment -%} -- Rating -- {%- endcomment -%}
       {%- liquid
@@ -741,6 +746,28 @@
   line-height: 1.18;
   letter-spacing: -0.015em;
   margin: 0 0 1.125rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.product-title__model {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6em;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-walnut, #8A6240);
+  background: rgba(138, 98, 64, 0.1);
+  border: 1px solid rgba(138, 98, 64, 0.25);
+  border-radius: 3px;
+  padding: 3px 8px;
+  vertical-align: middle;
+  line-height: 1;
+  white-space: nowrap;
+  position: relative;
+  top: -0.1em;
 }
 
 /* Rating */
@@ -1973,6 +2000,12 @@
       "label": "Eyebrow label",
       "default": "Shower Filtration",
       "info": "Shown above the product title. Falls back to collection name if blank."
+    },
+    {
+      "type": "text",
+      "id": "model_badge",
+      "label": "Model badge (inline with title)",
+      "info": "Small pill shown beside the product title. e.g. 'N°01'. Leave blank to hide."
     },
     {
       "type": "text",

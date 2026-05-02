@@ -82,7 +82,8 @@
         "mini_review_6"
       ],
       "settings": {
-        "eyebrow_text": "N°01",
+        "eyebrow_text": "Sleep & Recovery Tracker",
+        "model_badge": "N°01",
         "blurb_heading": "Biometric health. Decoded nightly.",
         "blurb_subheading": "Recovery that speaks for itself.",
         "short_description": "Tracks sleep stages, heart rate, HRV, SpO₂ and recovery score — every night, automatically. No subscription, ever. Own your data outright.",
