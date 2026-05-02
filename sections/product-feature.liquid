@@ -5,6 +5,7 @@
   assign cta_label = section.settings.cta_label | default: 'Learn more'
   assign cta_url   = section.settings.cta_url
   assign image     = section.settings.image
+  assign video_url = section.settings.video_url
   assign reverse   = section.settings.reverse
 -%}
 
@@ -13,9 +14,20 @@
 
     <div class="product-feature__grid{% if reverse %} product-feature__grid--reverse{% endif %}">
 
-      <!-- Image -->
+      <!-- Media (video takes priority over image) -->
       <div class="product-feature__media">
-        {%- if image != blank -%}
+        {%- if video_url != blank -%}
+          <video
+            src="{{ video_url }}"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            class="product-feature__video"
+            aria-label="{{ heading | escape }}"
+          ></video>
+        {%- elsif image != blank -%}
           <img
             src="{{ image | image_url: width: 900 }}"
             srcset="
@@ -104,11 +116,13 @@
     background-color: var(--color-bone-alt);
   }
 
-  .product-feature__media img {
+  .product-feature__media img,
+  .product-feature__video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
+    display: block;
   }
 
   .product-feature__media-placeholder {
@@ -192,9 +206,15 @@
   "name": "Product feature",
   "settings": [
     {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL (MP4)",
+      "info": "Paste a hosted MP4 URL. Takes priority over image. Plays silently on loop."
+    },
+    {
       "type": "image_picker",
       "id": "image",
-      "label": "Image"
+      "label": "Image (fallback if no video)"
     },
     {
       "type": "text",

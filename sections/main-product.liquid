@@ -1890,10 +1890,35 @@
   var link = document.querySelector('.rating-link[href^="#"]');
   if (!link) return;
   link.addEventListener('click', function (e) {
-    var target = document.querySelector(this.getAttribute('href'));
-    if (!target) return;
     e.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var href = this.getAttribute('href');
+    var target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      /* Target not in DOM yet — try id variants then fall back to hash */
+      var candidates = [
+        href.replace('#shopify-section-', '#'),
+        '#shopify-section-reviews_widget',
+        '#shopify-section-judgeme_reviews',
+        '#reviews',
+        '[data-section-type*="review"]',
+        '[id*="review"]'
+      ];
+      var found = null;
+      for (var i = 0; i < candidates.length; i++) {
+        try { found = document.querySelector(candidates[i]); } catch(err) {}
+        if (found) break;
+      }
+      if (found) {
+        found.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        /* Last resort: push hash and let browser handle it */
+        history.pushState(null, '', href);
+        var el = document.getElementById(href.slice(1));
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
   });
 }());
 </script>
