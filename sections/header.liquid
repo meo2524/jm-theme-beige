@@ -218,6 +218,13 @@
   aria-hidden="true"
   data-mobile-menu
 >
+  <!-- Close button -->
+  <button class="mobile-menu__close" aria-label="Close menu" data-menu-close>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </button>
+
   <!-- Wordmark inside drawer -->
   <div class="mobile-menu__brand">
     {%- assign clean_name = shop.name | replace: '&amp;', '&' -%}
@@ -700,6 +707,30 @@
     opacity: 1;
     pointer-events: all;
     transform: translateX(0);
+  }
+
+  /* Close button */
+  .mobile-menu__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(239,232,220,0.1);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(239,232,220,0.8);
+    transition: background 0.2s, color 0.2s;
+    flex-shrink: 0;
+  }
+
+  .mobile-menu__close:hover {
+    background: rgba(239,232,220,0.18);
+    color: var(--cream);
   }
 
   /* Brand row at top */

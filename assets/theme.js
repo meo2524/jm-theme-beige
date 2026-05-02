@@ -121,6 +121,9 @@
 
   if (navOverlay) navOverlay.addEventListener('click', closeMenu);
 
+  var menuCloseBtn = document.querySelector('[data-menu-close]');
+  if (menuCloseBtn) menuCloseBtn.addEventListener('click', closeMenu);
+
 
   /* ── CART COUNT BADGE ANIMATION ─────────────────────────── */
   /*
