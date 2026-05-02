@@ -155,32 +155,36 @@
     .card:active { box-shadow: 0 8px 32px rgba(43,43,43,0.14); }
   }
 
-  /* ── TOUCH DEVICES: show ATC overlay always, hide quick-view ──
-     On touch screens, :hover fires on first tap then click fires on
-     second tap — making it impossible to click through on first touch.
-     Fix: always render the overlay visible, hide the magnifying glass
-     (useless on touch), and ensure the image link can be tapped. */
+  /* ── TOUCH DEVICES: two-tap reveal ────────────────────────
+     Tap 1 on the image → JS adds .is-touched → overlays appear
+     Tap 2 on "Select Options" or magnifying glass → action fires
+     Overlays are invisible + pointer-events:none by default on touch
+     so they never intercept the first tap. */
   @media (hover: none) {
-    .card__qv-btn {
-      opacity: 0;
+    /* Default: invisible, non-blocking */
+    .card__qv-btn,
+    .card__atc-overlay {
       pointer-events: none;
+      opacity: 0 !important;
+    }
+    .card__qv-btn { transform: scale(0.85) !important; }
+    .card__atc-overlay { transform: translateX(-50%) translateY(6px) !important; }
+
+    /* After first tap: reveal overlays */
+    .card.is-touched .card__qv-btn {
+      pointer-events: auto;
+      opacity: 1 !important;
+      transform: scale(1) !important;
+    }
+    .card.is-touched .card__atc-overlay {
+      pointer-events: auto;
+      opacity: 1 !important;
+      transform: translateX(-50%) translateY(0) !important;
     }
 
-    .card__atc-overlay {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    /* Image link must not be blocked by overlay — overlay sits above
-       image but passes through pointer events to the link underneath
-       EXCEPT on the overlay button/link itself */
-    .card__media-link {
-      position: relative;
-      z-index: 1;
-    }
-
-    .card__atc-overlay {
-      z-index: 2;
+    /* Scale image slightly on reveal for feedback */
+    .card.is-touched .card__media img {
+      transform: scale(1.04);
     }
   }
 
@@ -460,6 +464,46 @@
 </style>
 
 <script>
+  /* ── TWO-TAP REVEAL on touch devices ───────────────────── */
+  (function () {
+    if (window.__mcCardTouchInit) return;
+    window.__mcCardTouchInit = true;
+
+    var isTouch = window.matchMedia('(hover: none)').matches;
+    if (!isTouch) return;
+
+    function clearTouched() {
+      document.querySelectorAll('.card.is-touched').forEach(function (c) {
+        c.classList.remove('is-touched');
+      });
+    }
+
+    /* Tap anywhere on image area */
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('.card__media-link');
+      if (!link) {
+        /* Tapped outside any card image — dismiss all */
+        if (!e.target.closest('.card__atc-overlay') && !e.target.closest('.card__qv-btn')) {
+          clearTouched();
+        }
+        return;
+      }
+
+      var card = link.closest('.card');
+      if (!card) return;
+
+      if (!card.classList.contains('is-touched')) {
+        /* First tap: reveal overlays, block navigation */
+        e.preventDefault();
+        clearTouched();
+        card.classList.add('is-touched');
+      }
+      /* Second tap on image: navigate normally (don't prevent) */
+    }, true); /* capture phase so we intercept before anchor fires */
+
+  })();
+
+  /* ── ADD TO CART ─────────────────────────────────────────── */
   (function () {
     if (window.__mcCardAtcInit) return;
     window.__mcCardAtcInit = true;
