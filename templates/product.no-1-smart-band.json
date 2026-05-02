@@ -107,6 +107,20 @@
         "trust_3_text": "No subscription — ever"
       }
     },
+    "custom_liquid_TgB6HE": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.name",
+      "settings": {
+        "show_on": "both",
+        "custom_liquid": "<style>\n  .mc-desc * { box-sizing: border-box; margin: 0; padding: 0; }\n  .mc-desc { font-family: 'Jost', sans-serif; color: #2C1A0E; padding: 0 0 20px; }\n  .mc-desc-pill {\n    font-size: 11px;\n    font-weight: 500;\n    letter-spacing: 0.14em;\n    text-transform: uppercase;\n    color: #7A5C3A;\n    background: #EDE0CE;\n    padding: 6px 16px;\n    border-radius: 20px;\n    display: inline-flex;\n    width: fit-content;\n    margin-bottom: 18px;\n  }\n  .mc-desc-product-label {\n    font-family: 'Jost', sans-serif;\n    font-size: 11px;\n    font-weight: 400;\n    letter-spacing: 0.18em;\n    text-transform: uppercase;\n    color: #9A8070;\n    margin-bottom: 8px;\n    display: block;\n  }\n  .mc-desc-h2 {\n    font-family: 'Cormorant Garamond', serif;\n    font-size: 2.6rem;\n    font-weight: 400;\n    line-height: 1.05;\n    color: #2C1A0E;\n    margin-bottom: 4px;\n  }\n  .mc-desc-h2-italic {\n    font-family: 'Cormorant Garamond', serif;\n    font-size: 2.6rem;\n    font-weight: 400;\n    font-style: italic;\n    line-height: 1.05;\n    color: #9C7A5A;\n    display: block;\n    margin-bottom: 20px;\n  }\n  .mc-desc-body {\n    border-left: 3px solid #D6C9B8;\n    padding-left: 14px;\n    margin-bottom: 20px;\n  }\n  .mc-desc-body p {\n    font-size: 13.5px;\n    font-weight: 300;\n    line-height: 1.75;\n    color: #6B5040;\n  }\n  .mc-desc-reviews {\n    display: flex;\n    align-items: center;\n    background: #F5F0EA;\n    border-radius: 10px;\n    border: 1px solid #E0D5C5;\n    overflow: hidden;\n    gap: 0;\n  }\n  .mc-desc-left {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    gap: 8px;\n    padding: 16px 20px;\n    border-right: 1px solid #E0D5C5;\n    flex-shrink: 0;\n  }\n  .mc-desc-stars {\n    color: #C0392B;\n    font-size: 14px;\n    letter-spacing: 2px;\n    line-height: 1;\n    white-space: nowrap;\n  }\n  .mc-desc-rating {\n    font-family: 'Cormorant Garamond', serif;\n    font-size: 26px;\n    font-style: italic;\n    font-weight: 400;\n    color: #2C1A0E;\n    line-height: 1;\n  }\n  .mc-desc-right {\n    padding: 16px 18px;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    gap: 3px;\n  }\n  .mc-desc-count-main {\n    font-size: 14px;\n    font-weight: 500;\n    color: #2C1A0E;\n    line-height: 1.3;\n  }\n  .mc-desc-count-sub {\n    font-size: 12px;\n    font-weight: 300;\n    color: #9A8070;\n    line-height: 1.4;\n  }\n</style>\n\n<div class=\"mc-desc\">\n  <span class=\"mc-desc-pill\">Mend &amp; Co&#8482; Official</span>\n  <span class=\"mc-desc-product-label\">N&#176;01 &mdash; The Smart Band</span>\n  <h2 class=\"mc-desc-h2\">Know your body.</h2>\n  <span class=\"mc-desc-h2-italic\">Before your body tells you first.</span>\n  <div class=\"mc-desc-body\">\n    <p>The Smart Band tracks sleep, heart rate, HRV, SpO₂ and recovery — continuously, without a subscription. Ceramic build. 5ATM waterproof. Designed to be worn everywhere, forgotten about, and trusted completely.</p>\n  </div>\n  <div class=\"mc-desc-reviews\">\n    <div class=\"mc-desc-left\">\n      <span class=\"mc-desc-stars\">★★★★★</span>\n      <span class=\"mc-desc-rating\">4.69</span>\n    </div>\n    <div class=\"mc-desc-right\">\n      <span class=\"mc-desc-count-main\">74 verified reviews</span>\n      <span class=\"mc-desc-count-sub\">Worn &amp; trusted by real customers</span>\n    </div>\n  </div>\n</div>",
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 36
+      }
+    },
     "testimonials": {
       "type": "testimonials",
       "blocks": {
@@ -510,6 +524,7 @@
   },
   "order": [
     "main",
+    "custom_liquid_TgB6HE",
     "testimonials",
     "177768635486c7de24",
     "benefit_pitch",
