@@ -1,0 +1,223 @@
+{% comment %} App Download — QRing setup guide + store badges {% endcomment %}
+
+<section class="app-dl">
+  <div class="app-dl__inner">
+
+    <div class="app-dl__rule" aria-hidden="true"></div>
+    <p class="app-dl__eyebrow">The App</p>
+    <h2 class="app-dl__heading">Everything your body tells you,<br>in one place.</h2>
+    <p class="app-dl__sub">Free forever. No subscription.</p>
+    <p class="app-dl__body">Sync your N°01 Smart Band with the QRing app to see your sleep stages, HRV trends, recovery score, blood oxygen, and daily activity — all on one clean dashboard.</p>
+
+    <ol class="app-dl__steps">
+      <li class="app-dl__step">
+        <span class="app-dl__num" aria-hidden="true">1</span>
+        <p><strong>Download QRing</strong> — free on the App Store or Google Play.</p>
+      </li>
+      <li class="app-dl__step">
+        <span class="app-dl__num" aria-hidden="true">2</span>
+        <p><strong>Open Bluetooth</strong> on your phone and power on the ring.</p>
+      </li>
+      <li class="app-dl__step">
+        <span class="app-dl__num" aria-hidden="true">3</span>
+        <p><strong>Tap 'Add Device'</strong> in the app — pairs in under 30 seconds.</p>
+      </li>
+      <li class="app-dl__step">
+        <span class="app-dl__num" aria-hidden="true">4</span>
+        <p><strong>Wear it to sleep</strong> — overnight data syncs automatically by morning.</p>
+      </li>
+    </ol>
+
+    <div class="app-dl__badges">
+      <a href="{{ section.settings.ios_url }}" target="_blank" rel="noopener" class="app-dl__badge">
+        <svg width="20" height="24" viewBox="0 0 20 24" fill="currentColor" aria-hidden="true">
+          <path d="M16.8 12.7c0-3 2.4-4.4 2.5-4.5-1.4-2-3.5-2.3-4.3-2.3-1.8-.2-3.6 1.1-4.5 1.1-.9 0-2.4-1-3.9-1-2 0-3.9 1.2-4.9 3-2.1 3.6-.5 9 1.5 11.9 1 1.4 2.2 3 3.7 3 1.5-.1 2.1-1 3.9-1 1.8 0 2.3 1 3.9 1 1.6 0 2.6-1.5 3.6-2.9 1.1-1.7 1.6-3.3 1.6-3.4-.1 0-3.1-1.2-3.1-4.9zM13.7 3.9C14.5 3 15 1.6 14.9 0c-1.4.1-3 .9-4 1.9-.9.9-1.6 2.4-1.4 3.8 1.5.1 3-.8 4.2-1.8z"/>
+        </svg>
+        <span class="app-dl__badge-copy">
+          <span class="app-dl__badge-sub">Download on the</span>
+          <span class="app-dl__badge-name">App Store</span>
+        </span>
+      </a>
+
+      <a href="{{ section.settings.android_url }}" target="_blank" rel="noopener" class="app-dl__badge">
+        <svg width="20" height="22" viewBox="0 0 20 22" fill="currentColor" aria-hidden="true">
+          <path d="M.7.4C.4.6.2 1 .2 1.6v18.8c0 .6.3 1 .6 1.2l.1.1L11.4 11v-.2L.8.3 .7.4zm14.3 14.5L11.4 11v-.3l3.6-3.6.1.1 4.2 2.4c1.2.7 1.2 1.8 0 2.5l-4.2 2.4-.1.1zM15 15.1L11.3 11.4 .7 22c.4.2.9.2 1.5-.2L15 15.1M15 6.9L2.2.2C1.6-.2 1.1-.1.7.3L15 6.9z"/>
+        </svg>
+        <span class="app-dl__badge-copy">
+          <span class="app-dl__badge-sub">Get it on</span>
+          <span class="app-dl__badge-name">Google Play</span>
+        </span>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.app-dl {
+  background: var(--color-bone, #f5efe4);
+  padding: 72px 24px;
+}
+
+.app-dl__inner {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.app-dl__rule {
+  width: 40px;
+  height: 1.5px;
+  background: var(--color-walnut, #8a6240);
+  opacity: 0.6;
+  margin: 0 auto 1.25rem;
+}
+
+.app-dl__eyebrow {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-walnut, #8a6240);
+  margin: 0 0 0.875rem;
+}
+
+.app-dl__heading {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(1.625rem, 3vw, 2.25rem);
+  font-weight: 400;
+  color: var(--color-black, #1f1d1a);
+  line-height: 1.2;
+  margin: 0 0 0.625rem;
+}
+
+.app-dl__sub {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: 1.0625rem;
+  font-style: italic;
+  color: var(--color-walnut, #8a6240);
+  margin: 0 0 1.125rem;
+}
+
+.app-dl__body {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.9375rem;
+  color: var(--color-olive, #5a5040);
+  line-height: 1.7;
+  margin: 0 auto 2rem;
+  max-width: 480px;
+}
+
+.app-dl__steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 2rem;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-align: left;
+}
+
+.app-dl__step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.875rem;
+  color: var(--color-olive, #5a5040);
+  line-height: 1.6;
+}
+
+.app-dl__step strong {
+  color: var(--color-black, #1f1d1a);
+  font-weight: 600;
+}
+
+.app-dl__step p { margin: 0; }
+
+.app-dl__num {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--color-walnut, #8a6240);
+  color: #f5efe4;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.1rem;
+}
+
+.app-dl__badges {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.app-dl__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  background: #1f1d1a;
+  color: #f5efe4;
+  text-decoration: none;
+  padding: 0.75rem 1.375rem;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+.app-dl__badge:hover { background: #3a3632; }
+
+.app-dl__badge-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  text-align: left;
+}
+
+.app-dl__badge-sub {
+  font-size: 0.5625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 3px;
+}
+
+.app-dl__badge-name {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 540px) {
+  .app-dl { padding: 48px 20px; }
+  .app-dl__badges { flex-direction: column; align-items: center; }
+  .app-dl__badge { width: 100%; max-width: 240px; justify-content: center; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "App Download",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "url",
+      "id": "ios_url",
+      "label": "App Store URL",
+      "default": "https://apps.apple.com/nz/app/qring/id6473672621"
+    },
+    {
+      "type": "url",
+      "id": "android_url",
+      "label": "Google Play URL"
+    }
+  ],
+  "presets": [{ "name": "App Download" }]
+}
+{% endschema %}
