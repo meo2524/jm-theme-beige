@@ -155,6 +155,35 @@
     .card:active { box-shadow: 0 8px 32px rgba(43,43,43,0.14); }
   }
 
+  /* ── TOUCH DEVICES: show ATC overlay always, hide quick-view ──
+     On touch screens, :hover fires on first tap then click fires on
+     second tap — making it impossible to click through on first touch.
+     Fix: always render the overlay visible, hide the magnifying glass
+     (useless on touch), and ensure the image link can be tapped. */
+  @media (hover: none) {
+    .card__qv-btn {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .card__atc-overlay {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Image link must not be blocked by overlay — overlay sits above
+       image but passes through pointer events to the link underneath
+       EXCEPT on the overlay button/link itself */
+    .card__media-link {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card__atc-overlay {
+      z-index: 2;
+    }
+  }
+
   /* ── MEDIA WRAP ─────────────────────────────────────────── */
   .card__media-wrap {
     position: relative;

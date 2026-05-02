@@ -395,6 +395,7 @@
     top: calc(100% + 12px);
     right: 0;
     width: 290px;
+    max-width: calc(100vw - 2rem);
     background: #2D2D2D;
     border: 1px solid rgba(242, 237, 228, 0.1);
     border-radius: 12px;
@@ -759,6 +760,20 @@
 
   @media (max-width: 1023px) {
     .header__nav { display: none; }
+  }
+
+  /* Account popup on narrow screens: pin it to a fixed position
+     under the header so it doesn't overflow the viewport */
+  @media (max-width: 480px) {
+    .account-popup {
+      position: fixed;
+      top: 84px;
+      right: 0.75rem;
+      left: 0.75rem;
+      width: auto;
+      max-width: none;
+      border-radius: 12px;
+    }
   }
 </style>
 

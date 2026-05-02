@@ -373,6 +373,9 @@
 
     .hero__inner {
       padding-block: var(--space-16) var(--space-20);
+      /* Raise above orb-stage (z-3) so orb never covers text */
+      position: relative;
+      z-index: 4;
     }
 
     .hero__heading {

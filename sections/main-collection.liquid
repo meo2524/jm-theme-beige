@@ -1151,6 +1151,11 @@
     padding-right: 1.25rem;
   }
 
+  /* Stick below the 84px header instead of overlapping it */
+  .collection-toolbar {
+    top: 84px;
+  }
+
   .collection-hero {
     height: 180px;
     border-radius: 0 0 10px 10px;
@@ -1166,7 +1171,14 @@
   }
 
   .sort-select {
-    min-width: 8rem;
+    min-width: 7rem;
+    font-size: 0.75rem;
+    padding: 0.4rem 1.75rem 0.4rem 0.625rem;
+  }
+
+  .filter-toggle {
+    padding: 0.4rem 0.625rem;
+    font-size: 0.6875rem;
   }
 }
 

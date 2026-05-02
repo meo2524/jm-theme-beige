@@ -198,6 +198,12 @@
     .product-feature__media {
       aspect-ratio: 4 / 3;
     }
+
+    /* Videos showing a desk/surface scene are cropped upward by default.
+       Shift object-position down so the desk (lower portion) is visible. */
+    .product-feature__video {
+      object-position: center 65%;
+    }
   }
 </style>
 
