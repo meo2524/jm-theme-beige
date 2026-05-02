@@ -355,11 +355,41 @@
     }
 
     /* ── Most Popular badge ─────────────────────────────────── */
+    /* Strip the starburst clip-path and inline shape, replace with a
+       flat mono pill that fits the brand. */
     .kaching-bundles__bar-most-popular,
     .kaching-bundles__bar-most-popular--fancy {
+      clip-path: none !important;
+      -webkit-clip-path: none !important;
+      shape-outside: none !important;
       background: #1f1d1a !important;
       color: #f5efe4 !important;
       border-color: #1f1d1a !important;
+      border-radius: 4px !important;
+      font-family: var(--font-mono, monospace) !important;
+      font-size: 9px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.18em !important;
+      text-transform: uppercase !important;
+      padding: 5px 10px !important;
+      width: auto !important;
+      height: auto !important;
+      aspect-ratio: auto !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      line-height: 1 !important;
+    }
+    /* Hide any star/icon SVG inside the badge */
+    .kaching-bundles__bar-most-popular svg,
+    .kaching-bundles__bar-most-popular--fancy svg,
+    .kaching-bundles__bar-most-popular img,
+    .kaching-bundles__bar-most-popular--fancy img,
+    .kaching-bundles__bar-most-popular::before,
+    .kaching-bundles__bar-most-popular--fancy::before,
+    .kaching-bundles__bar-most-popular::after,
+    .kaching-bundles__bar-most-popular--fancy::after {
+      display: none !important;
     }
 
     /* ── Free gift bar ──────────────────────────────────────── */
@@ -376,10 +406,14 @@
     /* ── Dropdowns (Color / Size selectors) ─────────────────── */
     .kaching-bundles__bar-variant-select,
     .kaching-bundles__swatch-dropdown {
+      height: 40px !important;
+      padding: 0 10px !important;
+      font-size: 13px !important;
       border-color: rgba(31,29,26,0.2) !important;
       background: #fff !important;
       color: #1f1d1a !important;
       border-radius: 6px !important;
+      min-width: 80px !important;
     }
   </style>
 
