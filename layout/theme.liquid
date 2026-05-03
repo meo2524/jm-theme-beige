@@ -416,14 +416,15 @@
     .qty-row { display: none !important; }
 
     /* ============================================================
-       KaChing Bundle — dark premium treatment
+       KaChing Bundle — dark premium treatment v2
+       Contrast hierarchy: white = primary, gold = accent only
        ============================================================ */
 
     /* Outer wrapper */
     .kaching-bundles {
-      background: #1f1d1a !important;
+      background: #161412 !important;
       border-radius: 14px !important;
-      padding: 0 6px 8px !important;
+      padding: 0 8px 12px !important;
       margin-block: 8px !important;
       overflow: visible !important;
     }
@@ -431,83 +432,87 @@
       overflow: visible !important;
     }
 
-    /* "BUNDLE & SAVE" header */
+    /* "BUNDLE & SAVE" header — cream white, not gold */
     .kaching-bundles__block-title {
-      color: #c9a97a !important;
+      color: #f5efe4 !important;
       font-family: var(--font-mono, monospace) !important;
       font-size: 10px !important;
-      font-weight: 600 !important;
-      letter-spacing: 0.22em !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.28em !important;
       text-transform: uppercase !important;
-      padding: 16px 0 12px !important;
+      padding: 18px 0 14px !important;
       display: flex !important;
       align-items: center !important;
-      gap: 12px !important;
+      gap: 14px !important;
     }
+    /* Dividers — neutral, not gold */
     .kaching-bundles__block-title::before,
     .kaching-bundles__block-title::after {
       content: '' !important;
       flex: 1 !important;
       height: 1px !important;
-      background: rgba(201,169,122,0.22) !important;
+      background: rgba(245,239,228,0.1) !important;
     }
 
-    /* Cards */
+    /* Cards — inactive slightly lighter than outer */
     .kaching-bundles__bar-container {
-      background: #2a2724 !important;
-      border: 1px solid rgba(255,255,255,0.07) !important;
+      background: #1e1c1a !important;
+      border: 1px solid rgba(245,239,228,0.08) !important;
       border-radius: 10px !important;
     }
+    /* Active card — gold border, no bg change */
     .kaching-bundles__bar--selected .kaching-bundles__bar-container {
-      background: #2a2724 !important;
-      border: 1.5px solid #9a7e57 !important;
+      background: #1e1c1a !important;
+      border: 1.5px solid rgba(201,169,122,0.65) !important;
     }
 
-    /* Free gift row — match card dark */
+    /* Free gift row */
     .kaching-bundles__free-gift,
     .kaching-bundles__free-gift__main,
     .kaching-bundles__free-gift__link {
       background: transparent !important;
-      border-top: 1px solid rgba(255,255,255,0.07) !important;
+      border-top: 1px solid rgba(245,239,228,0.08) !important;
     }
+    /* Free gift text — readable cream, not gold */
     .kaching-bundles__free-gift__text {
-      color: #c9a97a !important;
+      color: rgba(245,239,228,0.65) !important;
     }
 
     /* Radio */
     .kaching-bundles__bar-radio {
       background: transparent !important;
-      border: 2px solid rgba(255,255,255,0.2) !important;
+      border: 2px solid rgba(245,239,228,0.2) !important;
     }
     .kaching-bundles__bar--selected .kaching-bundles__bar-radio {
-      background: #9a7e57 !important;
-      border-color: #9a7e57 !important;
+      background: #c9a97a !important;
+      border-color: #c9a97a !important;
     }
 
-    /* Text */
+    /* Text — clear hierarchy */
     .kaching-bundles__bar-title  { color: #f5efe4 !important; font-weight: 600 !important; }
-    .kaching-bundles__bar-subtitle { color: rgba(245,239,228,0.5) !important; }
-    .kaching-bundles__bar-price { color: #f5efe4 !important; font-weight: 600 !important; }
-    .kaching-bundles__bar-full-price { color: rgba(245,239,228,0.3) !important; }
-    .kaching-bundles__bar-variant-names { color: rgba(245,239,228,0.4) !important; }
+    .kaching-bundles__bar-subtitle { color: rgba(245,239,228,0.45) !important; font-size: 13px !important; }
+    .kaching-bundles__bar-price { color: #f5efe4 !important; font-weight: 700 !important; }
+    .kaching-bundles__bar-full-price { color: rgba(245,239,228,0.28) !important; text-decoration: line-through !important; }
+    .kaching-bundles__bar-variant-names { color: rgba(245,239,228,0.38) !important; }
 
-    /* SAVE badge */
+    /* SAVE badge — white on solid walnut, no opacity games */
     .kaching-bundles__bar-label {
-      background: rgba(154,126,87,0.2) !important;
-      color: #c9a97a !important;
-      border: 1px solid rgba(154,126,87,0.45) !important;
+      background: #7a6245 !important;
+      color: #ffffff !important;
+      border: none !important;
       border-radius: 4px !important;
       font-size: 9px !important;
       font-weight: 700 !important;
-      letter-spacing: 0.1em !important;
+      letter-spacing: 0.12em !important;
+      padding: 3px 8px !important;
     }
 
     /* Dropdowns */
     .kaching-bundles__bar-variant-select,
     .kaching-bundles__swatch-dropdown {
-      background: #1a1815 !important;
+      background: #111010 !important;
       color: #f5efe4 !important;
-      border-color: rgba(255,255,255,0.12) !important;
+      border: 1px solid rgba(245,239,228,0.12) !important;
     }
 
     /* Most Popular badge — SVG pill replaced with CSS pseudo-element */
