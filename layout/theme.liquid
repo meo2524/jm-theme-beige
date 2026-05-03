@@ -412,148 +412,18 @@
   </button>
 
   <style>
-    /* Hide quantity selector — bundle handles qty */
-    .qty-row { display: none !important; }
-
-    /* ============================================================
-       KaChing Bundle — light clean treatment (IM8-style)
-       Light cards, dark text, full contrast throughout
-       ============================================================ */
-
-    /* Outer wrapper — matches site bone background */
-    .kaching-bundles {
-      background: #f5efe4 !important;
-      border-radius: 0 !important;
-      padding: 0 !important;
-      margin-block: 0 !important;
-      overflow: visible !important;
-    }
-    .kaching-bundles__block {
-      overflow: visible !important;
-    }
-
-    /* "BUNDLE & SAVE" header */
-    .kaching-bundles__block-title {
-      color: #1f1d1a !important;
-      font-family: var(--font-mono, monospace) !important;
-      font-size: 10px !important;
-      font-weight: 700 !important;
-      letter-spacing: 0.28em !important;
-      text-transform: uppercase !important;
-      padding: 4px 0 14px !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 14px !important;
-    }
-    .kaching-bundles__block-title::before,
-    .kaching-bundles__block-title::after {
-      content: '' !important;
-      flex: 1 !important;
-      height: 1px !important;
-      background: rgba(31,29,26,0.12) !important;
-    }
-
-    /* Cards — white with subtle border */
-    .kaching-bundles__bar-container {
-      background: #ffffff !important;
-      border: 1.5px solid rgba(31,29,26,0.14) !important;
-      border-radius: 10px !important;
-    }
-    /* Selected — solid charcoal border */
-    .kaching-bundles__bar--selected .kaching-bundles__bar-container {
-      background: #ffffff !important;
-      border: 2px solid #1f1d1a !important;
-    }
-
-    /* Free gift row */
-    .kaching-bundles__free-gift,
-    .kaching-bundles__free-gift__main,
-    .kaching-bundles__free-gift__link {
-      background: transparent !important;
-      border-top: 1px solid rgba(31,29,26,0.08) !important;
-    }
+    /* KaChing — free gift / perk text legibility */
     .kaching-bundles__free-gift__text {
-      color: #6b5c45 !important;
+      color: var(--color-black, #1f1d1a) !important;
     }
 
-    /* Radio */
-    .kaching-bundles__bar-radio {
-      background: #ffffff !important;
-      border: 2px solid rgba(31,29,26,0.25) !important;
+    /* KaChing — unselected card: warm bone instead of white */
+    .kaching-bundles__bar-container {
+      background: #ede8de !important;
     }
-    .kaching-bundles__bar--selected .kaching-bundles__bar-radio {
-      background: #1f1d1a !important;
-      border-color: #1f1d1a !important;
-    }
-
-    /* Text — dark on white */
-    .kaching-bundles__bar-title  { color: #1f1d1a !important; font-weight: 600 !important; }
-    .kaching-bundles__bar-subtitle { color: #7a7068 !important; font-size: 13px !important; }
-    .kaching-bundles__bar-price { color: #1f1d1a !important; font-weight: 700 !important; }
-    .kaching-bundles__bar-full-price { color: #a89e94 !important; text-decoration: line-through !important; }
-    .kaching-bundles__bar-variant-names { color: #7a7068 !important; }
-
-    /* SAVE badge — gold outline pill, dark gold text */
-    .kaching-bundles__bar-label {
-      background: #fdf6ea !important;
-      color: #7a5a28 !important;
-      border: 1px solid #c9a97a !important;
-      border-radius: 20px !important;
-      font-size: 9px !important;
-      font-weight: 700 !important;
-      letter-spacing: 0.12em !important;
-      padding: 3px 9px !important;
-    }
-
-    /* Dropdowns */
-    .kaching-bundles__bar-variant-select,
-    .kaching-bundles__swatch-dropdown {
-      background: #f5f0e8 !important;
-      color: #1f1d1a !important;
-      border: 1px solid rgba(31,29,26,0.2) !important;
-    }
-
-    /* Most Popular badge — SVG pill replaced with CSS pseudo-element */
-    .kaching-bundles__bar-most-popular,
-    .kaching-bundles__bar-most-popular--fancy {
-      clip-path: none !important;
-      -webkit-clip-path: none !important;
-      position: absolute !important;
-      top: 10px !important;
-      right: 10px !important;
-      bottom: auto !important;
-      left: auto !important;
-      background: transparent !important;
-      border: none !important;
-      padding: 0 !important;
-      width: auto !important;
-      height: auto !important;
-      aspect-ratio: auto !important;
-      z-index: 10 !important;
-      display: block !important;
-      overflow: visible !important;
-    }
-    /* Hide KaChing's SVG blob — text lives inside SVG paths, not HTML */
-    .kaching-bundles__bar-most-popular svg,
-    .kaching-bundles__bar-most-popular--fancy svg { display: none !important; }
-    /* Inject our own pill — dark charcoal, white text */
-    .kaching-bundles__bar-most-popular::after,
-    .kaching-bundles__bar-most-popular--fancy::after {
-      content: 'MOST POPULAR' !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      background: #1f1d1a !important;
-      color: #f5efe4 !important;
-      font-family: var(--font-mono, 'Courier New', monospace) !important;
-      font-size: 9px !important;
-      font-weight: 700 !important;
-      letter-spacing: 0.14em !important;
-      text-transform: uppercase !important;
-      padding: 5px 11px !important;
-      border-radius: 6px 10px 0 10px !important;
-      white-space: nowrap !important;
-      line-height: 1 !important;
+    /* Selected card stays lighter so the selection reads clearly */
+    .kaching-bundles__bar--selected .kaching-bundles__bar-container {
+      background: #f8f5f0 !important;
     }
 
     .back-to-top {
