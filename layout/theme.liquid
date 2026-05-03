@@ -510,11 +510,16 @@
       border-color: rgba(255,255,255,0.12) !important;
     }
 
-    /* Most Popular badge — solid gold pill, floats above card */
+    /* Most Popular badge — pinned inside top-right of card */
     .kaching-bundles__bar-most-popular,
     .kaching-bundles__bar-most-popular--fancy {
       clip-path: none !important;
       -webkit-clip-path: none !important;
+      position: absolute !important;
+      top: 10px !important;
+      right: 10px !important;
+      bottom: auto !important;
+      left: auto !important;
       background: #9a7e57 !important;
       color: #f5efe4 !important;
       border: none !important;
@@ -524,7 +529,7 @@
       font-weight: 700 !important;
       letter-spacing: 0.13em !important;
       text-transform: uppercase !important;
-      padding: 5px 12px !important;
+      padding: 4px 10px !important;
       width: auto !important;
       height: auto !important;
       aspect-ratio: auto !important;
