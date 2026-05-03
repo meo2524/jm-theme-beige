@@ -415,18 +415,134 @@
     /* Hide quantity selector — bundle handles qty */
     .qty-row { display: none !important; }
 
-    /* KaChing — free gift / perk text legibility */
-    .kaching-bundles__free-gift__text {
-      color: var(--color-black, #1f1d1a) !important;
+    /* ============================================================
+       KaChing Bundle — dark premium treatment
+       ============================================================ */
+
+    /* Outer wrapper: dark charcoal block */
+    .kaching-bundles {
+      background: #1f1d1a !important;
+      border-radius: 16px !important;
+      padding: 4px 4px 8px !important;
+      margin-block: 8px !important;
     }
 
-    /* KaChing — unselected card: warm bone instead of white */
-    .kaching-bundles__bar-container {
-      background: #ede8de !important;
+    /* "BUNDLE & SAVE" header */
+    .kaching-bundles__block-title {
+      color: #c9a97a !important;
+      font-family: var(--font-mono, monospace) !important;
+      font-size: 10px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.22em !important;
+      text-transform: uppercase !important;
+      padding: 14px 0 10px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 12px !important;
     }
-    /* Selected card stays lighter so the selection reads clearly */
+    .kaching-bundles__block-title::before,
+    .kaching-bundles__block-title::after {
+      content: '' !important;
+      flex: 1 !important;
+      height: 1px !important;
+      background: rgba(201, 169, 122, 0.25) !important;
+    }
+
+    /* Unselected card */
+    .kaching-bundles__bar-container {
+      background: #2a2724 !important;
+      border: 1px solid rgba(255,255,255,0.06) !important;
+      border-radius: 10px !important;
+      transition: border-color 0.2s ease !important;
+    }
+
+    /* Selected card — walnut gold accent */
     .kaching-bundles__bar--selected .kaching-bundles__bar-container {
-      background: #f8f5f0 !important;
+      background: #2a2724 !important;
+      border: 1.5px solid #9a7e57 !important;
+    }
+
+    /* Radio button */
+    .kaching-bundles__bar-radio {
+      border: 2px solid rgba(255,255,255,0.2) !important;
+      background: transparent !important;
+    }
+    .kaching-bundles__bar--selected .kaching-bundles__bar-radio {
+      background: #9a7e57 !important;
+      border-color: #9a7e57 !important;
+    }
+
+    /* Bundle name */
+    .kaching-bundles__bar-title {
+      color: #f5efe4 !important;
+      font-weight: 600 !important;
+    }
+
+    /* Description */
+    .kaching-bundles__bar-subtitle {
+      color: rgba(245,239,228,0.55) !important;
+    }
+
+    /* Price */
+    .kaching-bundles__bar-price {
+      color: #f5efe4 !important;
+      font-weight: 600 !important;
+    }
+
+    /* Strikethrough original price */
+    .kaching-bundles__bar-full-price {
+      color: rgba(245,239,228,0.35) !important;
+    }
+
+    /* SAVE badge */
+    .kaching-bundles__bar-label {
+      background: rgba(154,126,87,0.18) !important;
+      color: #c9a97a !important;
+      border: 1px solid rgba(154,126,87,0.4) !important;
+      border-radius: 4px !important;
+      font-size: 9px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.1em !important;
+    }
+
+    /* Variant labels & selects */
+    .kaching-bundles__bar-variant-names {
+      color: rgba(245,239,228,0.45) !important;
+    }
+    .kaching-bundles__bar-variant-select,
+    .kaching-bundles__swatch-dropdown {
+      background: #1f1d1a !important;
+      color: #f5efe4 !important;
+      border-color: rgba(255,255,255,0.15) !important;
+    }
+
+    /* Free gift text */
+    .kaching-bundles__free-gift__text {
+      color: #c9a97a !important;
+    }
+
+    /* Most Popular badge — keep existing pill style but re-skin for dark */
+    .kaching-bundles__bar-most-popular,
+    .kaching-bundles__bar-most-popular--fancy {
+      clip-path: none !important;
+      -webkit-clip-path: none !important;
+      background: #9a7e57 !important;
+      color: #1f1d1a !important;
+      border: none !important;
+      border-radius: 20px !important;
+      font-family: var(--font-mono, monospace) !important;
+      font-size: 9px !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.12em !important;
+      text-transform: uppercase !important;
+      padding: 5px 10px !important;
+      width: auto !important;
+      height: auto !important;
+      aspect-ratio: auto !important;
+    }
+    .kaching-bundles__bar-most-popular svg,
+    .kaching-bundles__bar-most-popular--fancy svg {
+      display: none !important;
     }
 
     .back-to-top {
