@@ -510,7 +510,7 @@
       border-color: rgba(255,255,255,0.12) !important;
     }
 
-    /* Most Popular badge — pinned inside top-right of card */
+    /* Most Popular badge — SVG pill replaced with CSS pseudo-element */
     .kaching-bundles__bar-most-popular,
     .kaching-bundles__bar-most-popular--fancy {
       clip-path: none !important;
@@ -520,23 +520,38 @@
       right: 10px !important;
       bottom: auto !important;
       left: auto !important;
-      background: #9a7e57 !important;
-      color: #f5efe4 !important;
+      background: transparent !important;
       border: none !important;
-      border-radius: 20px !important;
-      font-family: var(--font-mono, monospace) !important;
-      font-size: 9px !important;
-      font-weight: 700 !important;
-      letter-spacing: 0.13em !important;
-      text-transform: uppercase !important;
-      padding: 4px 10px !important;
+      padding: 0 !important;
       width: auto !important;
       height: auto !important;
       aspect-ratio: auto !important;
       z-index: 10 !important;
+      display: block !important;
+      overflow: visible !important;
     }
+    /* Hide KaChing's SVG blob — text lives inside SVG paths, not HTML */
     .kaching-bundles__bar-most-popular svg,
     .kaching-bundles__bar-most-popular--fancy svg { display: none !important; }
+    /* Inject our own pill */
+    .kaching-bundles__bar-most-popular::after,
+    .kaching-bundles__bar-most-popular--fancy::after {
+      content: 'MOST POPULAR' !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: #9a7e57 !important;
+      color: #f5efe4 !important;
+      font-family: var(--font-mono, 'Courier New', monospace) !important;
+      font-size: 9px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.14em !important;
+      text-transform: uppercase !important;
+      padding: 5px 11px !important;
+      border-radius: 20px !important;
+      white-space: nowrap !important;
+      line-height: 1 !important;
+    }
 
     .back-to-top {
       position: fixed;
