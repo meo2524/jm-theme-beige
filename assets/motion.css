@@ -1294,7 +1294,7 @@
   position: relative;
   overflow: hidden;
   box-shadow: 0 2px 10px -3px rgba(192, 57, 43, 0.45);
-  z-index: 60;
+  z-index: 1;
 }
 
 .motion-on .mc-scarcity-banner__inner {
