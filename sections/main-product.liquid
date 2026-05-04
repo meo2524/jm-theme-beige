@@ -1810,7 +1810,7 @@
     /* Only scroll on mobile where the track is a real scroll container */
     if (track && track.scrollWidth > track.clientWidth && slides[idx]) {
       programmaticScroll = true;
-      track.scrollTo({ left: track.offsetWidth * idx, behavior: 'smooth' });
+      track.scrollTo({ left: slides[idx].offsetLeft, behavior: 'smooth' });
       setTimeout(function () { programmaticScroll = false; }, 700);
     }
   }
@@ -1833,7 +1833,8 @@
   if (track) {
     track.addEventListener('scroll', function () {
       if (programmaticScroll) return;
-      var idx = Math.round(track.scrollLeft / track.offsetWidth);
+      var slideW = slides[0] ? slides[0].offsetWidth : track.offsetWidth;
+      var idx = Math.round(track.scrollLeft / slideW);
       if (idx !== active) activateSlide(idx);
     }, { passive: true });
   }
