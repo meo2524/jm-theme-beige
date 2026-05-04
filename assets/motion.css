@@ -7,8 +7,11 @@
 /* ── 0. Page-level layout safety ──────────────────────────── */
 
 /* Reserve scrollbar space always so the page doesn't shift left
-   when content grows tall enough to require a scrollbar. */
-.motion-on html {
+   when content grows tall enough to require a scrollbar.
+   Applied unconditionally — `.motion-on` is on body and can't be
+   used as a parent selector for html. This is a layout fix, not
+   motion-gated. */
+html {
   scrollbar-gutter: stable;
   /* Fallback for browsers without scrollbar-gutter — force scroll
      channel to always be present */
