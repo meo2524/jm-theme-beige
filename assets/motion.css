@@ -1925,44 +1925,40 @@ html {
   display: none !important;
 }
 
-/* Walnut accent strip at the top of each tile */
-.motion-on .product-feature__bullet::before,
-.motion-on .product-science__bullet::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--color-walnut, #8a6240) 0%, transparent 100%);
-  opacity: 0.55;
-  z-index: 2;
-}
-
-/* The data-viz layer base — content+position only. Per-type rules
-   below set the actual background-image / animation. Tile type is
-   set by motion.js classifyTile() based on each bullet's text. */
+/* The data-viz layer base — bottom-centred icon zone, ~80px tall.
+   Per-type rules below set background-image / animation. Tile type
+   is set by motion.js classifyTile() based on each bullet's text.
+   No more top accent strip — it caused visual noise + collided with
+   custom ::before pseudo-elements (e.g. battery fill bar). */
 .motion-on .product-feature__bullet::after,
 .motion-on .product-science__bullet::after {
   content: "";
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  height: 80px;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.4;
+  opacity: 0.55;
   background-repeat: no-repeat;
   background-position: center bottom;
+  background-size: contain;
 }
 
-/* — HRV — animated heartbeat waveform scrolling left */
+/* All tile-specific visuals are clean SVG icons centred in the
+   bottom-icon zone, ~64px tall, walnut stroke/fill. They render
+   instantly as the feature they represent. */
+
+/* — HRV — animated heartbeat / ECG line scrolling */
 .motion-on [data-tile-type="hrv"]::after {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' preserveAspectRatio='none'><path d='M0 30 L25 30 L30 18 L36 42 L42 30 L48 30 L52 24 L60 30 L80 30 L90 12 L96 48 L102 30 L120 30 L130 22 L138 30 L160 30 L168 16 L174 44 L180 30 L200 30' fill='none' stroke='%238a6240' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' preserveAspectRatio='none'><path d='M0 30 L25 30 L30 18 L36 42 L42 30 L48 30 L52 24 L60 30 L80 30 L90 12 L96 48 L102 30 L120 30 L130 22 L138 30 L160 30 L168 16 L174 44 L180 30 L200 30' fill='none' stroke='%238a6240' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/></svg>");
   background-repeat: repeat-x;
-  background-size: 200px 60px;
+  background-size: 200px 64px;
+  background-position: 0 center;
+  height: 64px;
   animation: mc-tile-pulse-x 3s linear infinite;
+  opacity: 0.7;
 }
 
 @keyframes mc-tile-pulse-x {
@@ -1972,240 +1968,214 @@ html {
 
 /* — SLEEP — 4 sleep-stage bars (deep / REM / light / awake) */
 .motion-on [data-tile-type="sleep"]::after {
-  background-image:
-    linear-gradient(90deg, var(--color-walnut, #8a6240) 0%, var(--color-walnut, #8a6240) 70%, transparent 70%),
-    linear-gradient(90deg, var(--color-walnut, #8a6240) 0%, var(--color-walnut, #8a6240) 50%, transparent 50%),
-    linear-gradient(90deg, var(--color-walnut, #8a6240) 0%, var(--color-walnut, #8a6240) 85%, transparent 85%),
-    linear-gradient(90deg, var(--color-walnut, #8a6240) 0%, var(--color-walnut, #8a6240) 35%, transparent 35%);
-  background-size: 100% 5px, 100% 5px, 100% 5px, 100% 5px;
-  background-position: 0 14px, 0 26px, 0 38px, 0 50px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'><rect x='0' y='10' width='84' height='5' rx='2' fill='%238a6240'/><rect x='0' y='22' width='60' height='5' rx='2' fill='%238a6240'/><rect x='0' y='34' width='102' height='5' rx='2' fill='%238a6240'/><rect x='0' y='46' width='42' height='5' rx='2' fill='%238a6240'/></svg>");
+  background-position: center;
+  background-size: contain;
+  height: 64px;
+  opacity: 0.7;
   animation: mc-tile-bars 3.4s ease-in-out infinite;
-  opacity: 0.5;
+  transform-origin: 0 50%;
 }
 
 @keyframes mc-tile-bars {
-  0%, 100% { transform: scaleX(1); transform-origin: 0 50%; }
-  50%      { transform: scaleX(0.93); }
+  0%, 100% { transform: scaleX(1); }
+  50%      { transform: scaleX(0.94); }
 }
 
-/* — OXYGEN / SpO₂ — pulsing concentric ring */
+/* — OXYGEN / SpO₂ — concentric ring icon, pulses */
 .motion-on [data-tile-type="oxygen"]::after {
-  height: 80px;
-  background-image:
-    radial-gradient(circle at 50% 100%, transparent 0, transparent 22px, var(--color-walnut, #8a6240) 23px, var(--color-walnut, #8a6240) 25px, transparent 26px),
-    radial-gradient(circle at 50% 100%, transparent 0, transparent 32px, rgba(138, 98, 64, 0.55) 33px, rgba(138, 98, 64, 0.55) 34px, transparent 35px);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><circle cx='30' cy='30' r='22' fill='none' stroke='%238a6240' stroke-width='2.4'/><circle cx='30' cy='30' r='14' fill='none' stroke='%238a6240' stroke-width='2.4' opacity='0.55'/><circle cx='30' cy='30' r='6' fill='%238a6240' opacity='0.7'/></svg>");
+  background-position: center;
+  background-size: contain;
+  height: 60px;
+  width: 60px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  opacity: 0.75;
   animation: mc-tile-ring 2.6s ease-in-out infinite;
-  opacity: 0.55;
 }
 
 @keyframes mc-tile-ring {
-  0%, 100% { transform: scale(1); opacity: 0.45; }
-  50%      { transform: scale(1.06); opacity: 0.65; }
+  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.65; }
+  50%      { transform: translateX(-50%) scale(1.07); opacity: 0.85; }
 }
 
-/* — STRESS — gradient meter walnut → red */
+/* — STRESS — half-circle gauge with needle */
 .motion-on [data-tile-type="stress"]::after {
-  height: 4px;
-  bottom: 1.2rem;
-  left: 0.95rem;
-  right: 0.95rem;
-  background: linear-gradient(90deg,
-    rgba(138, 98, 64, 0.85) 0%,
-    rgba(138, 98, 64, 0.85) 35%,
-    rgba(192, 57, 43, 0.65) 65%,
-    rgba(192, 57, 43, 0.9) 100%);
-  border-radius: 2px;
-  opacity: 0.7;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60'><path d='M10 50 A40 40 0 0 1 90 50' fill='none' stroke='%238a6240' stroke-width='3' stroke-linecap='round' opacity='0.4'/><path d='M10 50 A40 40 0 0 1 50 10' fill='none' stroke='%238a6240' stroke-width='3' stroke-linecap='round'/><line x1='50' y1='50' x2='62' y2='22' stroke='%23C0392B' stroke-width='2.5' stroke-linecap='round'/><circle cx='50' cy='50' r='3' fill='%238a6240'/></svg>");
+  background-position: center;
+  background-size: contain;
+  height: 64px;
+  opacity: 0.85;
 }
 
-.motion-on [data-tile-type="stress"]::before {
-  content: "";
-  position: absolute;
-  bottom: calc(1.2rem + 4px);
-  left: calc(35% + 0.95rem);
-  width: 2px;
-  height: 10px;
-  background: var(--color-espresso, #2D2D2D);
-  border-radius: 1px;
-  z-index: 1;
-  opacity: 0.6;
-}
-
-/* — STEPS / ACTIVITY — stepped bar chart 5 columns */
+/* — STEPS — figure walking icon */
 .motion-on [data-tile-type="steps"]::after {
-  height: 60px;
-  background-image:
-    linear-gradient(180deg, transparent 60%, var(--color-walnut, #8a6240) 60%),
-    linear-gradient(180deg, transparent 40%, var(--color-walnut, #8a6240) 40%),
-    linear-gradient(180deg, transparent 75%, var(--color-walnut, #8a6240) 75%),
-    linear-gradient(180deg, transparent 25%, var(--color-walnut, #8a6240) 25%),
-    linear-gradient(180deg, transparent 50%, var(--color-walnut, #8a6240) 50%);
-  background-size: 12% 100%, 12% 100%, 12% 100%, 12% 100%, 12% 100%;
-  background-position: 8% bottom, 25% bottom, 42% bottom, 59% bottom, 76% bottom;
-  opacity: 0.5;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60' fill='%238a6240'><path d='M30 8 a4 4 0 1 1 0 8 a4 4 0 0 1 0 -8z'/><path d='M22 18 c-2 1 -3 3 -3 5 l-2 12 c0 1 1 2 2 2 l2 0 l1 12 c0 1 1 2 2 2 l2 0 c1 0 2 -1 2 -2 l-1 -14 l3 -8 l2 8 l3 12 c0 1 1 2 2 2 l2 0 c1 0 2 -1 2 -2 l-3 -14 l-3 -10 c-1 -3 -3 -5 -6 -5 z' fill-rule='evenodd'/></svg>");
+  background-position: center;
+  background-size: contain;
+  height: 64px;
+  width: 64px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  opacity: 0.75;
 }
 
-/* — CAMERA — aperture / lens rings in corner */
+/* — CAMERA — aperture icon */
 .motion-on [data-tile-type="camera"]::after {
-  height: 70px;
-  background-image:
-    radial-gradient(circle at 82% 78%, var(--color-walnut, #8a6240) 0, var(--color-walnut, #8a6240) 5px, transparent 6px),
-    radial-gradient(circle at 82% 78%, transparent 0, transparent 12px, var(--color-walnut, #8a6240) 13px, var(--color-walnut, #8a6240) 14px, transparent 15px),
-    radial-gradient(circle at 82% 78%, transparent 0, transparent 20px, var(--color-walnut, #8a6240) 21px, var(--color-walnut, #8a6240) 22px, transparent 23px);
-  opacity: 0.55;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><circle cx='30' cy='30' r='22' fill='none' stroke='%238a6240' stroke-width='2.4'/><path d='M30 8 L30 30 L48 18 z' fill='%238a6240' opacity='0.55'/><path d='M52 30 L30 30 L42 48 z' fill='%238a6240' opacity='0.55'/><path d='M30 52 L30 30 L12 42 z' fill='%238a6240' opacity='0.55'/><path d='M8 30 L30 30 L18 12 z' fill='%238a6240' opacity='0.55'/><circle cx='30' cy='30' r='6' fill='%238a6240'/></svg>");
+  background-position: center;
+  background-size: contain;
+  height: 60px;
+  width: 60px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  opacity: 0.7;
   animation: mc-tile-aperture 4s ease-in-out infinite;
 }
 
 @keyframes mc-tile-aperture {
-  0%, 100% { transform: scale(1); }
-  50%      { transform: scale(1.08); }
+  0%, 100% { transform: translateX(-50%) rotate(0deg); }
+  100%     { transform: translateX(-50%) rotate(-30deg); }
 }
 
-/* — BATTERY — outline + animated fill bar that reads as a battery */
-.motion-on [data-tile-type="battery"] {
-  /* Battery body outline (::after sits at bottom-right, animation
-     happens via inner pseudo on the .product-feature__bullet itself) */
-}
-
+/* — BATTERY — proper battery icon with animated fill */
 .motion-on [data-tile-type="battery"]::after {
-  height: 26px;
-  bottom: 1rem;
-  left: auto;
-  right: 0.9rem;
-  width: 56px;
-  border: 1.5px solid var(--color-walnut, #8a6240);
-  border-radius: 4px;
-  background: transparent;
-  opacity: 0.7;
-  /* Battery terminal nub via box-shadow */
-  box-shadow:
-    3px 6px 0 -1px var(--color-walnut, #8a6240),
-    inset -50px 0 0 -1px transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 40'><rect x='2' y='6' width='66' height='28' rx='4' fill='none' stroke='%238a6240' stroke-width='2.5'/><rect x='70' y='14' width='6' height='12' rx='1.5' fill='%238a6240'/></svg>");
+  background-position: center;
+  background-size: contain;
+  height: 50px;
+  width: 100px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  opacity: 0.85;
 }
 
-/* Animated walnut fill inside the battery body */
+/* Animated walnut fill INSIDE the battery body */
 .motion-on [data-tile-type="battery"]::before {
   content: "";
   position: absolute;
-  bottom: calc(1rem + 3px);
-  right: calc(0.9rem + 3px);
+  top: auto;
+  left: 50%;
+  right: auto;
+  bottom: 18px;
   height: 20px;
+  width: 80px;
+  margin-left: -40px;
   background: var(--color-walnut, #8a6240);
   border-radius: 2px;
   z-index: 1;
-  opacity: 0.7;
+  opacity: 0.65;
   animation: mc-tile-battery 2.4s ease-in-out infinite alternate;
-  width: 50px;
-  transform-origin: right center;
+  transform-origin: left center;
 }
 
 @keyframes mc-tile-battery {
   0%   { transform: scaleX(0.25); opacity: 0.55; }
-  100% { transform: scaleX(0.95); opacity: 0.85; }
+  100% { transform: scaleX(0.95); opacity: 0.8; }
 }
 
-/* — NO-FEE / $0 — big "0" mark with circle through it (forever-zero) */
+/* — NO-FEE / $0 — big '$0' with infinity loop, the 'forever free' mark */
 .motion-on [data-tile-type="no-fee"]::after {
-  height: 80px;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><circle cx='40' cy='40' r='22' fill='none' stroke='%238a6240' stroke-width='3'/><line x1='22' y1='58' x2='58' y2='22' stroke='%238a6240' stroke-width='3' stroke-linecap='round'/></svg>");
-  background-position: 78% 80%;
-  background-size: 50px 50px;
-  opacity: 0.45;
-  animation: mc-tile-aperture 4s ease-in-out infinite;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60'><text x='50' y='44' font-family='Georgia, serif' font-size='36' font-weight='600' text-anchor='middle' fill='%238a6240'>$0</text><path d='M20 54 Q30 48 40 54 T60 54 T80 54' fill='none' stroke='%238a6240' stroke-width='1.5' opacity='0.6'/></svg>");
+  background-position: center;
+  background-size: contain;
+  height: 64px;
+  opacity: 0.85;
 }
 
-/* — WATERPROOF — concentric ripple rings */
+/* — WATERPROOF — water drop icon */
 .motion-on [data-tile-type="waterproof"]::after {
-  height: 80px;
-  background-image:
-    radial-gradient(circle at 50% 100%, transparent 0, transparent 12px, var(--color-walnut, #8a6240) 13px, var(--color-walnut, #8a6240) 14px, transparent 15px),
-    radial-gradient(circle at 50% 100%, transparent 0, transparent 22px, rgba(138, 98, 64, 0.65) 23px, rgba(138, 98, 64, 0.65) 24px, transparent 25px),
-    radial-gradient(circle at 50% 100%, transparent 0, transparent 32px, rgba(138, 98, 64, 0.4) 33px, rgba(138, 98, 64, 0.4) 34px, transparent 35px);
-  animation: mc-tile-ripple 2.8s ease-out infinite;
-}
-
-@keyframes mc-tile-ripple {
-  0%   { transform: scale(0.92); opacity: 0.3; }
-  100% { transform: scale(1.15); opacity: 0.6; }
-}
-
-/* — CERAMIC — diamond gem in the bottom-right corner, fully inside the tile */
-.motion-on [data-tile-type="ceramic"]::after {
-  height: 38px;
-  width: 38px;
-  bottom: 0.9rem;
-  right: 0.9rem;
-  left: auto;
-  background: linear-gradient(135deg,
-    rgba(138, 98, 64, 0.85) 0%,
-    rgba(138, 98, 64, 0.45) 50%,
-    rgba(138, 98, 64, 0.7) 100%);
-  /* Octagonal gem silhouette */
-  clip-path: polygon(50% 0%, 85% 18%, 100% 50%, 85% 82%, 50% 100%, 15% 82%, 0% 50%, 15% 18%);
-  opacity: 0.55;
-  animation: mc-tile-aperture 4.5s ease-in-out infinite;
-}
-
-/* — GESTURE — three swipe lines */
-.motion-on [data-tile-type="gesture"]::after {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 60'><path d='M25 6 C25 6 6 28 6 42 a19 19 0 0 0 38 0 C44 28 25 6 25 6 z' fill='%238a6240' opacity='0.85'/><ellipse cx='18' cy='34' rx='4' ry='6' fill='%23ffffff' opacity='0.45'/></svg>");
+  background-position: center;
+  background-size: contain;
   height: 60px;
-  background-image:
-    linear-gradient(90deg, transparent 0%, transparent 30%, var(--color-walnut, #8a6240) 30%, var(--color-walnut, #8a6240) 75%, transparent 75%),
-    linear-gradient(90deg, transparent 0%, transparent 40%, rgba(138, 98, 64, 0.7) 40%, rgba(138, 98, 64, 0.7) 70%, transparent 70%),
-    linear-gradient(90deg, transparent 0%, transparent 50%, rgba(138, 98, 64, 0.4) 50%, rgba(138, 98, 64, 0.4) 65%, transparent 65%);
-  background-size: 100% 2px, 100% 2px, 100% 2px;
-  background-position: 0 22px, 0 32px, 0 42px;
-  background-repeat: no-repeat;
+  width: 50px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  opacity: 0.85;
+  animation: mc-tile-drop 3s ease-in-out infinite;
+}
+
+@keyframes mc-tile-drop {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(-3px); }
+}
+
+/* — CERAMIC — gem icon (faceted diamond) */
+.motion-on [data-tile-type="ceramic"]::after {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><path d='M14 22 L30 8 L46 22 L30 52 z' fill='%238a6240' opacity='0.85'/><path d='M14 22 L46 22 M30 8 L30 22 M14 22 L30 52 M46 22 L30 52 M22 22 L30 32 M38 22 L30 32' stroke='%23ffffff' stroke-width='0.8' opacity='0.4'/></svg>");
+  background-position: center;
+  background-size: contain;
+  height: 60px;
+  width: 60px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  opacity: 0.85;
+}
+
+/* — GESTURE — hand swipe icon */
+.motion-on [data-tile-type="gesture"]::after {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60' fill='none' stroke='%238a6240' stroke-width='2.4' stroke-linecap='round'><path d='M14 30 h32'/><path d='M40 24 l6 6 l-6 6'/><path d='M14 22 h20' opacity='0.5'/><path d='M14 38 h20' opacity='0.5'/></svg>");
+  background-position: center;
+  background-size: contain;
+  height: 60px;
+  opacity: 0.75;
   animation: mc-tile-swipe 2.4s ease-in-out infinite;
-  opacity: 0.5;
 }
 
 @keyframes mc-tile-swipe {
-  0%, 100% { background-position-x: -10px, -10px, -10px; }
-  50%      { background-position-x: 10px, 10px, 10px; }
+  0%, 100% { transform: translateX(-3px); }
+  50%      { transform: translateX(3px); }
 }
 
-/* — TEMPERATURE — wavy thermal lines */
+/* — TEMPERATURE — thermometer icon */
 .motion-on [data-tile-type="temp"]::after {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' preserveAspectRatio='none'><path d='M0 30 Q25 10 50 30 T100 30 T150 30 T200 30' fill='none' stroke='%238a6240' stroke-width='2'/></svg>");
-  background-repeat: repeat-x;
-  background-size: 200px 60px;
-  animation: mc-tile-pulse-x 5s linear infinite;
-  opacity: 0.45;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 60' fill='none' stroke='%238a6240' stroke-width='2.5' stroke-linecap='round'><path d='M15 4 v34' /><circle cx='15' cy='44' r='8' fill='%238a6240'/><line x1='15' y1='30' x2='15' y2='44' stroke='%238a6240' stroke-width='4'/><line x1='20' y1='14' x2='24' y2='14' stroke-width='2'/><line x1='20' y1='22' x2='24' y2='22' stroke-width='2'/><line x1='20' y1='30' x2='24' y2='30' stroke-width='2'/></svg>");
+  background-position: center;
+  background-size: contain;
+  height: 60px;
+  width: 30px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  opacity: 0.75;
 }
 
-/* — MUSIC — 3 sound bars equalising */
+/* — MUSIC — equaliser bars */
 .motion-on [data-tile-type="music"]::after {
-  height: 50px;
-  bottom: 0.85rem;
-  left: auto;
-  right: 0.95rem;
-  width: 30px;
-  background-image:
-    linear-gradient(180deg, transparent 30%, var(--color-walnut, #8a6240) 30%),
-    linear-gradient(180deg, transparent 60%, var(--color-walnut, #8a6240) 60%),
-    linear-gradient(180deg, transparent 45%, var(--color-walnut, #8a6240) 45%);
-  background-size: 4px 100%, 4px 100%, 4px 100%;
-  background-position: 0 bottom, 12px bottom, 24px bottom;
-  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 60' fill='%238a6240'><rect x='2' y='30' width='6' height='28' rx='2'/><rect x='14' y='14' width='6' height='44' rx='2'/><rect x='26' y='22' width='6' height='36' rx='2'/><rect x='38' y='6' width='6' height='52' rx='2'/></svg>");
+  background-position: center;
+  background-size: contain;
+  height: 60px;
+  width: 50px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  opacity: 0.75;
   animation: mc-tile-eq 1.4s ease-in-out infinite;
-  opacity: 0.55;
+  transform-origin: center bottom;
 }
 
 @keyframes mc-tile-eq {
-  0%, 100% { transform: scaleY(1); transform-origin: center bottom; }
-  50%      { transform: scaleY(0.6); }
+  0%, 100% { transform: translateX(-50%) scaleY(1); }
+  50%      { transform: translateX(-50%) scaleY(0.6); }
 }
 
-/* — GENERIC fallback — simple walnut underline */
+/* — GENERIC fallback */
 .motion-on [data-tile-type="generic"]::after,
 .motion-on .product-feature__bullet:not([data-tile-type])::after,
 .motion-on .product-science__bullet:not([data-tile-type])::after {
-  height: 2px;
-  bottom: 1rem;
-  left: 0.95rem;
-  right: 0.95rem;
-  background: linear-gradient(90deg, var(--color-walnut, #8a6240) 0%, transparent 100%);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60' fill='none' stroke='%238a6240' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='15 30 27 42 45 18'/></svg>");
+  background-position: center;
+  background-size: contain;
+  height: 50px;
   opacity: 0.55;
 }
 
