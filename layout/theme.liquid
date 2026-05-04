@@ -552,7 +552,8 @@
     if (!window.matchMedia('(max-width: 767px)').matches) return;
     var gallery = document.querySelector('.product-gallery');
     if (!gallery) return;
-    var toMove = ['.product-eyebrow', '.product-title', '.product-rating', '.pdp-badges', '.price-block', '.product-blurb', '.spec-pills'];
+    /* Mobile order: eyebrow → title → reviews → photo → everything else */
+    var toMove = ['.product-eyebrow', '.product-title', '.product-rating'];
     var wrapper = document.createElement('div');
     wrapper.className = 'product-info-above-gallery';
     toMove.forEach(function (sel) {
