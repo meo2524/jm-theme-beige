@@ -39,13 +39,6 @@
     box-sizing: border-box;
   }
 
-  /* When the wrapper IS the full-bleed video hero, drop wrapper
-     padding so the hero can sit at viewport edges without needing
-     a negative margin (negative margins create overflow that iOS
-     handles asymmetrically on some viewports). */
-  .motion-on .product-info-above-gallery.mc-mobile-hero {
-    padding: 0 !important;
-  }
 }
 
 /* ── 1. Scroll progress bar (top of viewport) ─────────────── */
