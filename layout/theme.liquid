@@ -415,6 +415,16 @@
     /* ---- Variant selectors (Color / Size) — hidden everywhere ---- */
     .variant-fieldset { display: none !important; }
 
+    /* ---- Mobile: product info above photo gallery ---- */
+    @media (max-width: 767px) {
+      .product-container {
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      .product-info  { order: 1 !important; }
+      .product-gallery { order: 2 !important; }
+    }
+
     /* KaChing — free gift / perk text legibility */
     .kaching-bundles__free-gift__text {
       color: var(--color-black, #1f1d1a) !important;
