@@ -1610,7 +1610,7 @@
        full-bleed AND inside the viewport. */
     width: auto !important;
     margin-inline: -1.25rem !important;
-    padding: 6.5rem 1.5rem 4.5rem !important;
+    padding: 6.5rem 1.75rem 4.5rem !important;
     min-height: 100svh;
     min-height: 100vh; /* fallback for browsers without svh */
     box-sizing: border-box;
@@ -1717,9 +1717,36 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 12px !important;
-    padding: 0.85rem 1rem !important;
+    padding: 0.75rem 0.9rem !important;
     margin-top: 0.5rem !important;
     color: var(--color-bone, #f5efe6) !important;
+    /* Allow stars + count to wrap on narrow viewports so the box
+       can't overflow the hero's right edge. */
+    flex-wrap: wrap !important;
+    gap: 0.5rem 0.75rem !important;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .motion-on .mc-mobile-hero .product-rating .rating-stars-wrap {
+    flex-wrap: nowrap;
+  }
+
+  .motion-on .mc-mobile-hero .product-rating .star {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .motion-on .mc-mobile-hero .product-rating .rating-value-num {
+    font-size: 1.25rem !important;
+  }
+
+  .motion-on .mc-mobile-hero .product-rating .rating-count {
+    font-size: 0.8125rem !important;
+  }
+
+  .motion-on .mc-mobile-hero .product-rating .rating-subtext {
+    font-size: 0.6875rem !important;
   }
 
   .motion-on .mc-mobile-hero .product-rating .rating-value-num,
