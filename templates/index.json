@@ -22,6 +22,13 @@
         "show_scroll_cue": true
       }
     },
+    "mday_shipping_strip": {
+      "type": "mday-shipping-strip",
+      "settings": {
+        "cta_label": "Shop now",
+        "cta_url": "/products/smart-band"
+      }
+    },
     "stats-strip": {
       "type": "stats-strip",
       "settings": {
@@ -133,6 +140,7 @@
   },
   "order": [
     "hero",
+    "mday_shipping_strip",
     "stats-strip",
     "smart_band_spotlight",
     "founder_story",

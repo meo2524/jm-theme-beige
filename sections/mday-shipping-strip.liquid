@@ -1,0 +1,188 @@
+{%- comment -%}
+  Mother's Day — Free Shipping strip
+  Full-width warm banner below the hero. Auto-hides after 11 May 2026 23:59 NZT.
+{%- endcomment -%}
+
+<div class="mday-strip" id="MdayStrip" data-deadline="2026-05-11T23:59:00+12:00" aria-label="Mother's Day free shipping offer">
+  <div class="mday-strip__inner">
+
+    <span class="mday-strip__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M12 21s-7.5-4.7-9.6-9.4C1.1 8.3 3.4 5 6.7 5c1.9 0 3.7 1.1 4.6 2.7C12.2 6.1 14 5 16 5c3.3 0 5.6 3.3 4.3 6.6C19.5 16.3 12 21 12 21z"/>
+      </svg>
+    </span>
+
+    <p class="mday-strip__text">
+      <strong>Free Shipping</strong>
+      <span class="mday-strip__sep" aria-hidden="true">—</span>
+      Mother's Day
+      <span class="mday-strip__deadline">
+        &nbsp;·&nbsp;<span class="mday-strip__count">Ends Sunday</span>
+      </span>
+    </p>
+
+    <a class="mday-strip__cta" href="{{ section.settings.cta_url | default: '/products/smart-band' }}">
+      {{ section.settings.cta_label | default: 'Shop now' }}
+      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+  </div>
+</div>
+
+<style>
+  .mday-strip {
+    background: var(--color-walnut, #8a6240);
+    color: var(--color-bone, #f5efe6);
+    padding: 0.75rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mday-strip::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .mday-strip__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .mday-strip__icon {
+    display: flex;
+    align-items: center;
+    opacity: 0.85;
+    flex-shrink: 0;
+  }
+
+  .mday-strip__text {
+    font-family: var(--font-label, var(--font-body));
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .mday-strip__text strong {
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+
+  .mday-strip__sep {
+    opacity: 0.5;
+  }
+
+  .mday-strip__deadline {
+    opacity: 0.78;
+    font-size: 0.75rem;
+  }
+
+  .mday-strip__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-family: var(--font-label, var(--font-body));
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-bone, #f5efe6);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(245, 239, 230, 0.4);
+    transition: text-decoration-color 0.15s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding-left: 0.4rem;
+    border-left: 1px solid rgba(245,239,230,0.25);
+    margin-left: 0.2rem;
+  }
+
+  .mday-strip__cta:hover {
+    text-decoration-color: var(--color-bone, #f5efe6);
+  }
+
+  @media (max-width: 480px) {
+    .mday-strip {
+      padding: 0.65rem 1rem;
+    }
+    .mday-strip__cta {
+      border-left: none;
+      margin-left: 0;
+      padding-left: 0;
+    }
+  }
+</style>
+
+<script>
+(function () {
+  var strip = document.getElementById('MdayStrip');
+  if (!strip) return;
+  var deadline = new Date(strip.dataset.deadline);
+  var countEl = strip.querySelector('.mday-strip__count');
+
+  function update() {
+    var now = new Date();
+    var diff = deadline - now;
+    if (diff <= 0) {
+      strip.style.display = 'none';
+      return;
+    }
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor((diff % 86400000) / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    if (d > 1) {
+      countEl.textContent = d + ' days left';
+    } else if (d === 1) {
+      countEl.textContent = 'Tomorrow';
+    } else if (h > 0) {
+      countEl.textContent = h + 'h ' + m + 'm left';
+    } else {
+      countEl.textContent = m + 'm left';
+    }
+  }
+
+  update();
+  setInterval(update, 60000);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Mother's Day shipping strip",
+  "settings": [
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mother's Day shipping strip"
+    }
+  ]
+}
+{% endschema %}
