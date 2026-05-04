@@ -38,6 +38,14 @@
     padding: 1.25rem 1.25rem 0 !important;
     box-sizing: border-box;
   }
+
+  /* When the wrapper IS the full-bleed video hero, drop wrapper
+     padding so the hero can sit at viewport edges without needing
+     a negative margin (negative margins create overflow that iOS
+     handles asymmetrically on some viewports). */
+  .motion-on .product-info-above-gallery.mc-mobile-hero {
+    padding: 0 !important;
+  }
 }
 
 /* ── 1. Scroll progress bar (top of viewport) ─────────────── */
@@ -1604,12 +1612,12 @@
   .motion-on .mc-mobile-hero {
     /* Break out of the page's horizontal padding to go true
        full-bleed, then add our own internal padding. */
-    /* Break out of the page's horizontal padding without using 100vw,
-       which includes any scrollbar width and can push the layout off-axis.
-       Negative margin equal to known parent padding keeps the hero
-       full-bleed AND inside the viewport. */
-    width: auto !important;
-    margin-inline: -1.25rem !important;
+    /* Hero sits inside .product-container which has padding: 0 on
+       mobile, AND the wrapper has padding: 0 (override above). So
+       the hero naturally fills viewport width without any negative
+       margins or 100vw math — keeps layout perfectly symmetric. */
+    width: 100% !important;
+    margin-inline: 0 !important;
     padding: 6.5rem 1.75rem 4.5rem !important;
     min-height: 100svh;
     min-height: 100vh; /* fallback for browsers without svh */

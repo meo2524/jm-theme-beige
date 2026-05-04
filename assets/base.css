@@ -147,10 +147,8 @@ html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  /* Hard cap horizontal scroll for the entire page. Prevents any
-     rogue full-bleed section, marquee, or wide table from pushing
-     the layout off-axis on mobile. `clip` (vs `hidden`) doesn't
-     create a new scroll container, so position:sticky still works. */
+  /* Hard cap horizontal scroll. `clip` (vs `hidden`) doesn't create
+     a new scroll container, so position:sticky still works. */
   overflow-x: clip;
 }
 
@@ -163,9 +161,10 @@ body {
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Just clip overflow — don't set max-width or position:relative,
+     they create subtle horizontal alignment differences with iOS
+     Safari and the negative-margin full-bleed pattern. */
   overflow-x: clip;
-  max-width: 100%;
-  position: relative;
 }
 
 img,
