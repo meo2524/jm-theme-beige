@@ -558,6 +558,7 @@
     },
     "app_download": {
       "type": "custom-liquid",
+      "disabled": true,
       "name": "t:sections.custom-liquid.name",
       "settings": {
         "show_on": "both",
@@ -613,6 +614,7 @@
     "ring_size_modal",
     "product_faq",
     "tech_specs",
+    "app_download",
     "judgeme_reviews",
     "related",
     "countdown"
