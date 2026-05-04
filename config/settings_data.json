@@ -9,6 +9,7 @@
  */
 {
   "current": {
+    "motion_enabled": true,
     "color_espresso": "#2D2D2D",
     "color_amber": "#8A6240",
     "color_linen": "#F2EDE4",
