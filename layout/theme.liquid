@@ -415,14 +415,14 @@
     /* ---- Variant selectors (Color / Size) — hidden everywhere ---- */
     .variant-fieldset { display: none !important; }
 
-    /* ---- Mobile: product info above photo gallery ---- */
+    /* ---- Mobile: hero info panel above gallery ---- */
     @media (max-width: 767px) {
-      .product-container {
-        display: flex !important;
-        flex-direction: column !important;
+      .product-info-above-gallery {
+        padding: 20px 20px 0;
       }
-      .product-info  { order: 1 !important; }
-      .product-gallery { order: 2 !important; }
+      .product-info-above-gallery .product-eyebrow {
+        margin-bottom: 6px;
+      }
     }
 
     /* KaChing — free gift / perk text legibility */
@@ -520,6 +520,25 @@
   })();
   </script>
 
+
+  <script>
+  /* Mobile: move eyebrow/title/reviews/price above the gallery */
+  (function () {
+    if (!window.matchMedia('(max-width: 767px)').matches) return;
+    var gallery = document.querySelector('.product-gallery');
+    if (!gallery) return;
+    var toMove = ['.product-eyebrow', '.product-title', '.product-rating', '.pdp-badges', '.price-block'];
+    var wrapper = document.createElement('div');
+    wrapper.className = 'product-info-above-gallery';
+    toMove.forEach(function (sel) {
+      var el = document.querySelector(sel);
+      if (el) wrapper.appendChild(el);
+    });
+    if (wrapper.children.length) {
+      gallery.parentElement.insertBefore(wrapper, gallery);
+    }
+  })();
+  </script>
 
 </body>
 </html>
