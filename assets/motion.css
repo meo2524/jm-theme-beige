@@ -2002,14 +2002,14 @@ html {
   font-weight: 600 !important;
   line-height: 1.4 !important;
   color: var(--color-espresso, #2D2D2D) !important;
-  padding: 1rem 0.95rem !important;
+  padding: 1rem 0.95rem 104px !important;
   background: linear-gradient(180deg, rgba(138,98,64,0.06) 0%, rgba(138,98,64,0.02) 60%) !important;
   border: 1px solid rgba(138, 98, 64, 0.18) !important;
   border-radius: 12px !important;
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  min-height: 130px;
+  min-height: 170px;
   transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
               box-shadow 0.22s ease,
               border-color 0.22s ease;
@@ -2319,6 +2319,14 @@ html {
 @keyframes mc-tile-rise {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 540px) {
+  .motion-on .product-feature__bullet,
+  .motion-on .product-science__bullet {
+    font-size: 0.82rem !important;
+    line-height: 1.35 !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
