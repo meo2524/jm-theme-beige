@@ -547,19 +547,66 @@
 
 
   <script>
-  /* Mobile: move eyebrow/title/reviews/price above the gallery */
+  /* Mobile: move eyebrow/title/reviews above the gallery, and when
+     motion is on, wrap them in a full-bleed video hero (Apple/Oura
+     product-page style) using the smart-band hero clip. */
   (function () {
     if (!window.matchMedia('(max-width: 767px)').matches) return;
     var gallery = document.querySelector('.product-gallery');
     if (!gallery) return;
-    /* Mobile order: eyebrow → title → reviews → photo → everything else */
+
+    var motionOn = document.body.classList.contains('motion-on');
+    var isSmartBand = !!document.querySelector('[data-section-type="main-product"]') &&
+                      /smart[-_]?band/i.test(window.location.pathname);
+
     var toMove = ['.product-eyebrow', '.product-title', '.product-rating'];
     var wrapper = document.createElement('div');
-    wrapper.className = 'product-info-above-gallery';
-    toMove.forEach(function (sel) {
-      var el = document.querySelector(sel);
-      if (el) wrapper.appendChild(el);
-    });
+    wrapper.className = (motionOn && isSmartBand)
+      ? 'product-info-above-gallery mc-mobile-hero'
+      : 'product-info-above-gallery';
+
+    /* Build hero video first so it sits BEHIND the moved text */
+    if (motionOn && isSmartBand) {
+      var video = document.createElement('video');
+      video.className = 'mc-mobile-hero__video';
+      video.autoplay = true;
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.setAttribute('playsinline', '');
+      video.preload = 'metadata';
+      video.poster = 'https://cdn.shopify.com/s/files/1/0996/2451/7925/files/preview_images/ee10541771864ebc970ce82f9b7359bb.thumbnail.0000000000.jpg?v=1777765106';
+      video.innerHTML =
+        '<source src="https://cdn.shopify.com/videos/c/vp/ee10541771864ebc970ce82f9b7359bb/ee10541771864ebc970ce82f9b7359bb.SD-480p-1.5Mbps-83245518.mp4" type="video/mp4" media="(max-width: 750px)">' +
+        '<source src="https://cdn.shopify.com/videos/c/vp/ee10541771864ebc970ce82f9b7359bb/ee10541771864ebc970ce82f9b7359bb.HD-720p-4.5Mbps-83245518.mp4" type="video/mp4">';
+      wrapper.appendChild(video);
+
+      var overlay = document.createElement('div');
+      overlay.className = 'mc-mobile-hero__overlay';
+      overlay.setAttribute('aria-hidden', 'true');
+      wrapper.appendChild(overlay);
+
+      var content = document.createElement('div');
+      content.className = 'mc-mobile-hero__content';
+      toMove.forEach(function (sel) {
+        var el = document.querySelector(sel);
+        if (el) content.appendChild(el);
+      });
+      wrapper.appendChild(content);
+
+      /* Soft scroll cue at the bottom of the hero */
+      var scrollCue = document.createElement('div');
+      scrollCue.className = 'mc-mobile-hero__cue';
+      scrollCue.setAttribute('aria-hidden', 'true');
+      scrollCue.innerHTML = '<span></span>';
+      wrapper.appendChild(scrollCue);
+    } else {
+      toMove.forEach(function (sel) {
+        var el = document.querySelector(sel);
+        if (el) wrapper.appendChild(el);
+      });
+    }
+
     if (wrapper.children.length) {
       gallery.parentElement.insertBefore(wrapper, gallery);
     }

@@ -1591,6 +1591,187 @@ html {
   font-weight: 700;
 }
 
+/* ── 20b. Mobile video hero (Apple/Oura-style) ────────────── */
+/* Full-bleed video at the top of the smart-band PDP on mobile
+   only. Eyebrow / title / rating are moved into an overlay div
+   on top of a dark gradient. Video autoplays muted+looped. */
+
+@media (max-width: 767px) {
+  .motion-on .mc-mobile-hero {
+    /* Break out of the page's horizontal padding to go true
+       full-bleed, then add our own internal padding. */
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    padding: 6.5rem 1.5rem 4.5rem !important;
+    min-height: 78vh;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: stretch;
+    background: #14100d;
+  }
+
+  .motion-on .mc-mobile-hero__video {
+    position: absolute !important;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Gradient: subtle at top so video reads, deep at bottom for text contrast */
+  .motion-on .mc-mobile-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(20, 16, 13, 0.30) 0%,
+        rgba(20, 16, 13, 0.10) 25%,
+        rgba(20, 16, 13, 0.30) 55%,
+        rgba(20, 16, 13, 0.78) 85%,
+        rgba(20, 16, 13, 0.94) 100%
+      ),
+      radial-gradient(120% 70% at 50% 100%, rgba(20, 16, 13, 0.55), transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Content sits at bottom of hero, light-on-dark */
+  .motion-on .mc-mobile-hero__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    color: var(--color-bone, #f5efe6);
+    padding: 0;
+  }
+
+  /* Override eyebrow inside hero — bone, walnut underline still */
+  .motion-on .mc-mobile-hero .product-eyebrow {
+    color: var(--color-bone, #f5efe6) !important;
+    background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.22em !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    opacity: 0.95;
+  }
+
+  .motion-on .mc-mobile-hero .product-eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 1.5px;
+    background: var(--color-walnut, #b89376);
+    display: inline-block;
+    flex-shrink: 0;
+    opacity: 0.95;
+  }
+
+  .motion-on .mc-mobile-hero .product-eyebrow::after {
+    display: none;
+  }
+
+  /* Title — large serif, bone color, drop shadow for legibility */
+  .motion-on .mc-mobile-hero .product-title {
+    color: var(--color-bone, #f5efe6) !important;
+    font-size: clamp(2.4rem, 9.5vw, 3.2rem) !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.025em !important;
+    line-height: 1.05 !important;
+    margin: 0.25rem 0 0.75rem !important;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Model badge inside title — translucent walnut chip on dark */
+  .motion-on .mc-mobile-hero .product-title__model {
+    background: rgba(255, 255, 255, 0.14) !important;
+    color: var(--color-bone, #f5efe6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    box-shadow: none !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Rating block — translucent glass on dark */
+  .motion-on .mc-mobile-hero .product-rating {
+    background: rgba(20, 16, 13, 0.45) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px !important;
+    padding: 0.85rem 1rem !important;
+    margin-top: 0.5rem !important;
+    color: var(--color-bone, #f5efe6) !important;
+  }
+
+  .motion-on .mc-mobile-hero .product-rating .rating-value-num,
+  .motion-on .mc-mobile-hero .product-rating .rating-count {
+    color: var(--color-bone, #f5efe6) !important;
+  }
+
+  .motion-on .mc-mobile-hero .product-rating .rating-subtext {
+    color: rgba(245, 239, 230, 0.7) !important;
+  }
+
+  .motion-on .mc-mobile-hero .product-rating .star {
+    fill: #d6b08c !important;
+  }
+
+  /* Scroll cue — small bone line bouncing at the bottom centre */
+  .motion-on .mc-mobile-hero__cue {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 1px;
+    height: 28px;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  .motion-on .mc-mobile-hero__cue span {
+    display: block;
+    width: 1px;
+    height: 18px;
+    background: var(--color-bone, #f5efe6);
+    margin: 0 auto;
+    animation: mc-hero-cue 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+
+  @keyframes mc-hero-cue {
+    0%   { transform: translateY(-100%); opacity: 0; }
+    20%  { opacity: 1; }
+    80%  { opacity: 1; }
+    100% { transform: translateY(100%); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motion-on .mc-mobile-hero__cue span { animation: none; }
+  }
+}
+
+/* Desktop: hero is mobile-only, hide if it ever renders on desktop */
+@media (min-width: 768px) {
+  .motion-on .mc-mobile-hero { display: none !important; }
+}
+
 /* ── 21. Photo gallery — tighten + pad sides on mobile ────── */
 
 /* Kill the 1rem inner padding around the image so the photo fills
