@@ -1438,14 +1438,15 @@
 }
 
 .motion-on .kaching-bundles__bar-full-price {
-  font-size: 1.05rem !important;
-  font-weight: 500 !important;
-  color: var(--color-olive, #6f5d4d) !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  color: var(--color-espresso, #2D2D2D) !important;
   text-decoration: line-through !important;
   text-decoration-color: #C0392B !important;
   text-decoration-thickness: 2px !important;
-  opacity: 0.75;
+  opacity: 1 !important;
   display: inline-block;
+  font-variant-numeric: tabular-nums;
 }
 
 /* SAVE chip — louder, with pulse */
