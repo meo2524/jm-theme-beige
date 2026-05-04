@@ -4,6 +4,26 @@
    Palette-only — uses existing --color-walnut / --color-bone.
    ════════════════════════════════════════════════════════════ */
 
+/* ── 0. Page-level overflow safety ────────────────────────── */
+/* Prevent any rogue child element (gallery scroll-snap track,
+   marquee, banner) from causing horizontal page scroll on mobile. */
+
+@media (max-width: 767px) {
+  .motion-on body,
+  .motion-on html {
+    overflow-x: clip;
+    max-width: 100vw;
+  }
+
+  /* Align mobile-info-above-gallery + product-info to the same
+     1.25rem horizontal padding (was inconsistent — wrapper had
+     20px, product-info had 1.25rem, gallery was 0). */
+  .motion-on .product-info-above-gallery {
+    padding: 1.25rem 1.25rem 0 !important;
+    box-sizing: border-box;
+  }
+}
+
 /* ── 1. Scroll progress bar (top of viewport) ─────────────── */
 
 [data-scroll-progress] {
@@ -383,20 +403,24 @@
 .motion-on .product-eyebrow {
   font-size: 0.78rem !important;
   letter-spacing: 0.22em !important;
-  font-weight: 600;
+  font-weight: 600 !important;
   color: var(--color-walnut, #8a6240) !important;
   position: relative;
-  display: inline-block;
+  display: inline-block !important;
+  /* Kill base.css full-width walnut border that conflicted with our short accent */
+  border-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  margin: 0 0 0.75rem !important;
 }
 
 .motion-on .product-eyebrow::after {
   content: "";
   display: block;
   width: 32px;
-  height: 1px;
+  height: 1.5px;
   background: var(--color-walnut, #8a6240);
   margin-top: 6px;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .motion-on .product-title {
@@ -1147,7 +1171,7 @@
 
 /* Free gift / perk callout — reads like a bonus deal */
 .motion-on .kaching-bundles__free-gift {
-  margin: 0.85rem -0.4rem -0.4rem !important;
+  margin: 0.85rem 0 0 !important;
   padding: 0.7rem 0.85rem !important;
   border: 1px solid rgba(138, 98, 64, 0.32) !important;
   border-radius: 8px !important;
