@@ -904,52 +904,79 @@
   margin-bottom: 0.5rem !important;
 }
 
-/* Variant row container */
+/* Variant row — color picker grows full-width, size stays compact */
 .motion-on .kaching-bundles__bar-variant {
-  margin-bottom: 0.45rem !important;
+  margin-bottom: 0.5rem !important;
 }
 
-.motion-on .kaching-bundles__bar-variant__content {
-  gap: 0.55rem !important;
+.motion-on .kaching-bundles__bar-variant__content,
+.motion-on .kaching-bundles__bar-variant-selects {
+  gap: 0.6rem !important;
+  display: flex !important;
+  align-items: stretch !important;
+  width: 100% !important;
 }
 
-/* Variant selectors — kill the white, use warm walnut-tinted card */
+/* The color/swatch dropdown takes all the room; size dropdown stays small */
+.motion-on .kaching-bundles__swatch-dropdown {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+.motion-on .kaching-bundles__bar-variant-selects > .kaching-bundles__bar-variant-select:not(.kaching-bundles__swatch-dropdown) {
+  flex: 0 0 auto !important;
+  min-width: 80px !important;
+}
+
+/* Variant selectors — clean premium pill, no white, walnut hairline */
 .motion-on .kaching-bundles__swatch-dropdown,
 .motion-on .kaching-bundles__bar-variant-select {
-  background: rgba(245, 239, 230, 0.95) !important;
-  border: 1.25px solid rgba(138, 98, 64, 0.35) !important;
-  border-radius: 8px !important;
-  padding: 0.55rem 0.85rem !important;
-  font-size: 0.92rem !important;
+  background: #fdfaf4 !important;
+  border: 1px solid rgba(138, 98, 64, 0.28) !important;
+  border-radius: 10px !important;
+  padding: 0.7rem 0.95rem !important;
+  font-size: 0.95rem !important;
   font-weight: 600 !important;
   color: var(--color-espresso, #2D2D2D) !important;
   font-family: var(--font-body) !important;
-  min-height: 42px !important;
-  transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+  min-height: 46px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.6rem !important;
+  transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
   cursor: pointer;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.02), inset 0 0 0 0 rgba(138,98,64,0);
+  position: relative;
 }
 
 .motion-on .kaching-bundles__swatch-dropdown:hover,
 .motion-on .kaching-bundles__bar-variant-select:hover {
   border-color: var(--color-walnut, #8a6240) !important;
-  background: #f8f5f0 !important;
-  box-shadow: 0 3px 10px -4px rgba(138, 98, 64, 0.3) !important;
+  background: #fff !important;
+  box-shadow: 0 4px 14px -6px rgba(138, 98, 64, 0.35) !important;
+  transform: translateY(-1px);
+}
+
+.motion-on .kaching-bundles__swatch-dropdown:active,
+.motion-on .kaching-bundles__bar-variant-select:active {
+  transform: translateY(0);
 }
 
 .motion-on .kaching-bundles__swatch-dropdown:focus-within,
 .motion-on .kaching-bundles__bar-variant-select:focus-within {
   border-color: var(--color-walnut, #8a6240) !important;
-  box-shadow: 0 0 0 3px rgba(138, 98, 64, 0.18) !important;
+  box-shadow: 0 0 0 3px rgba(138, 98, 64, 0.16) !important;
   outline: none !important;
 }
 
-/* Color swatch dot — bigger */
+/* Color swatch dot — visible ring even on white/light colours */
 .motion-on .kaching-bundles__swatch {
-  width: 18px !important;
-  height: 18px !important;
+  width: 20px !important;
+  height: 20px !important;
   border-radius: 50% !important;
-  border: 1.25px solid rgba(138, 98, 64, 0.4) !important;
+  border: 1.5px solid rgba(138, 98, 64, 0.5) !important;
   flex-shrink: 0 !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6), 0 1px 2px rgba(0,0,0,0.05);
 }
 
 /* Variant row index (#1, #2) */
@@ -962,15 +989,27 @@
   letter-spacing: 0.02em;
 }
 
-/* Free gift / perk text under each card */
-.motion-on .kaching-bundles__free-gift__text,
-.motion-on [class*="kaching-bundles__free-gift"] {
+/* Free gift / perk text under each card — only the outer wrapper carries the divider */
+.motion-on .kaching-bundles__free-gift {
+  margin-top: 0.65rem !important;
+  padding-top: 0.65rem !important;
+  border-top: 1px solid rgba(138, 98, 64, 0.18);
+}
+
+.motion-on .kaching-bundles__free-gift__text {
   font-size: 0.85rem !important;
   font-weight: 500 !important;
   color: var(--color-walnut, #8a6240) !important;
-  margin-top: 0.65rem !important;
-  padding-top: 0.65rem !important;
-  border-top: 1px dashed rgba(138, 98, 64, 0.25);
+}
+
+/* Strip any inherited dashed/duplicate dividers on inner pieces */
+.motion-on .kaching-bundles__free-gift__main,
+.motion-on .kaching-bundles__free-gift__link,
+.motion-on .kaching-bundles__free-gift__image,
+.motion-on .kaching-bundles__free-gift__content {
+  border: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 /* "Most Popular" badge — keep position, amp the look */
