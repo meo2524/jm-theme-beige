@@ -242,6 +242,7 @@
       "block_order": [
         "judge_me_reviews_testimonials_carousel_WMGnUP"
       ],
+      "disabled": true,
       "settings": {
         "include_margins": true
       }
