@@ -527,7 +527,7 @@
     if (!window.matchMedia('(max-width: 767px)').matches) return;
     var gallery = document.querySelector('.product-gallery');
     if (!gallery) return;
-    var toMove = ['.product-eyebrow', '.product-title', '.product-rating', '.pdp-badges', '.price-block'];
+    var toMove = ['.product-eyebrow', '.product-title', '.product-rating', '.pdp-badges', '.price-block', '.product-blurb', '.spec-pills'];
     var wrapper = document.createElement('div');
     wrapper.className = 'product-info-above-gallery';
     toMove.forEach(function (sel) {
