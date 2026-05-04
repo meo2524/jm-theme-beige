@@ -378,7 +378,187 @@
   .motion-on .mc-trust-item--hero span::after { transform: scaleX(1); transition: none; }
 }
 
-/* ── 11. Magnetic press feedback on ATC ────────────────────── */
+/* ── 11. Header prominence (title + model badge + eyebrow) ── */
+
+.motion-on .product-eyebrow {
+  font-size: 0.78rem !important;
+  letter-spacing: 0.22em !important;
+  font-weight: 600;
+  color: var(--color-walnut, #8a6240) !important;
+  position: relative;
+  display: inline-block;
+}
+
+.motion-on .product-eyebrow::after {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--color-walnut, #8a6240);
+  margin-top: 6px;
+  opacity: 0.6;
+}
+
+.motion-on .product-title {
+  font-size: clamp(2.4rem, 7vw, 3.5rem) !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.05 !important;
+  margin-bottom: 1.25rem !important;
+}
+
+.motion-on .product-title__model {
+  font-size: 0.55em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.18em !important;
+  color: var(--color-bone, #f5efe6) !important;
+  background: var(--color-walnut, #8a6240) !important;
+  border: none !important;
+  padding: 5px 10px !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 12px -4px rgba(138, 98, 64, 0.5);
+  position: relative;
+  top: -0.18em;
+}
+
+@media (max-width: 749px) {
+  .motion-on .product-title {
+    font-size: clamp(2.1rem, 9vw, 2.8rem) !important;
+  }
+}
+
+/* ── 12. Spec pills — pop harder ──────────────────────────── */
+
+.motion-on .mc-spec-pill {
+  padding: 0.55rem 0.95rem !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  background: rgba(138, 98, 64, 0.11) !important;
+  border: 1px solid rgba(138, 98, 64, 0.3) !important;
+  color: var(--color-espresso, #2D2D2D) !important;
+  box-shadow: 0 2px 8px -4px rgba(138, 98, 64, 0.25);
+}
+
+.motion-on .mc-spec-pill svg.mc-spec-icon {
+  width: 14px !important;
+  height: 14px !important;
+  stroke-width: 2 !important;
+  color: var(--color-walnut, #8a6240);
+}
+
+.motion-on .mc-spec-pill--hero {
+  background: var(--color-walnut, #8a6240) !important;
+  border-color: var(--color-walnut, #8a6240) !important;
+  color: var(--color-bone, #f5efe6) !important;
+  box-shadow: 0 6px 20px -8px rgba(138, 98, 64, 0.7) !important;
+  padding: 0.6rem 1.05rem !important;
+}
+
+.motion-on .mc-spec-pill--hero svg.mc-spec-icon,
+.motion-on .mc-spec-pill--hero .mc-spec-num {
+  color: var(--color-bone, #f5efe6) !important;
+}
+
+.motion-on .mc-spec-pill--hero .mc-spec-num {
+  font-weight: 700;
+}
+
+.motion-on .mc-spec-pills,
+.motion-on .spec-pills {
+  gap: 0.6rem !important;
+}
+
+/* ── 13. Sale emphasis — make the discount sing ───────────── */
+
+.motion-on .pdp-badges .badge--amber {
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.16em !important;
+  padding: 0.4rem 0.85rem !important;
+  background: linear-gradient(135deg, #C0392B 0%, #8B2418 100%) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 14px -4px rgba(192, 57, 43, 0.5);
+  animation: mc-sale-pulse 2.4s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.motion-on .pdp-badges .badge--amber::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+  transform: translateX(-120%);
+  animation: mc-shine 3s ease-in-out infinite;
+}
+
+@keyframes mc-sale-pulse {
+  0%, 100% { box-shadow: 0 4px 14px -4px rgba(192, 57, 43, 0.5); }
+  50%      { box-shadow: 0 4px 22px -2px rgba(192, 57, 43, 0.85); }
+}
+
+.motion-on .price-now {
+  font-size: 2.4rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.025em !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.motion-on .price-now--on-sale {
+  color: #C0392B !important;
+  position: relative;
+}
+
+.motion-on .price-now--on-sale::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #C0392B, transparent);
+  border-radius: 2px;
+  opacity: 0.7;
+}
+
+.motion-on .price-was {
+  font-size: 1.15rem !important;
+  font-weight: 500 !important;
+  text-decoration: line-through !important;
+  text-decoration-color: #C0392B !important;
+  text-decoration-thickness: 2px !important;
+  opacity: 0.7 !important;
+  color: var(--color-olive, #6f5d4d) !important;
+}
+
+.motion-on .price-save {
+  font-size: 0.8rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
+  padding: 0.35rem 0.7rem !important;
+  background: linear-gradient(135deg, #C0392B 0%, #8B2418 100%) !important;
+  color: #fff !important;
+  border-radius: 4px !important;
+  box-shadow: 0 3px 10px -3px rgba(192, 57, 43, 0.55);
+  animation: mc-save-bob 3s ease-in-out infinite;
+}
+
+@keyframes mc-save-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-2px) rotate(-2deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-on .pdp-badges .badge--amber,
+  .motion-on .pdp-badges .badge--amber::after,
+  .motion-on .price-save {
+    animation: none !important;
+  }
+}
+
+/* ── 14. Magnetic press feedback on ATC ────────────────────── */
 
 .btn-atc,
 .sticky-atc__btn {
