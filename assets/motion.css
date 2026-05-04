@@ -2042,9 +2042,16 @@ html {
   100%     { transform: translateX(-50%) rotate(-30deg); }
 }
 
-/* — BATTERY — proper battery icon with animated fill */
+/* — BATTERY — body SVG centred in viewBox, fill bar matches inner box */
+
+/* Battery body (SVG): body rect 60x28 centred at viewBox x=40,
+   plus a small terminal nub to the right. Container is 100x50, so
+   body in container px is 75x35 centred horizontally. Inner area
+   (excluding the 2.5px stroke) is 70x30, sitting at:
+     vertical:   bottom 22px → top 52px (from tile bottom)
+     horizontal: centred on tile centre, 70px wide */
 .motion-on [data-tile-type="battery"]::after {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 40'><rect x='2' y='6' width='66' height='28' rx='4' fill='none' stroke='%238a6240' stroke-width='2.5'/><rect x='70' y='14' width='6' height='12' rx='1.5' fill='%238a6240'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 40'><rect x='10' y='6' width='60' height='28' rx='4' fill='none' stroke='%238a6240' stroke-width='2.5'/><rect x='72' y='14' width='6' height='12' rx='1.5' fill='%238a6240'/></svg>");
   background-position: center;
   background-size: contain;
   height: 50px;
@@ -2055,28 +2062,29 @@ html {
   opacity: 0.85;
 }
 
-/* Animated walnut fill INSIDE the battery body */
+/* Walnut fill bar that lives inside the body's inner 70×30 area.
+   Sits 1.5px in from each inner edge for a tidy gap, animates left→right. */
 .motion-on [data-tile-type="battery"]::before {
   content: "";
   position: absolute;
   top: auto;
-  left: 50%;
   right: auto;
-  bottom: 18px;
-  height: 20px;
-  width: 80px;
-  margin-left: -40px;
+  left: 50%;
+  margin-left: -33px;
+  bottom: 23.5px;
+  width: 66px;
+  height: 27px;
   background: var(--color-walnut, #8a6240);
   border-radius: 2px;
   z-index: 1;
-  opacity: 0.65;
+  opacity: 0.7;
   animation: mc-tile-battery 2.4s ease-in-out infinite alternate;
   transform-origin: left center;
 }
 
 @keyframes mc-tile-battery {
-  0%   { transform: scaleX(0.25); opacity: 0.55; }
-  100% { transform: scaleX(0.95); opacity: 0.8; }
+  0%   { transform: scaleX(0.22); opacity: 0.55; }
+  100% { transform: scaleX(1);    opacity: 0.85; }
 }
 
 /* — NO-FEE / $0 — big '$0' with infinity loop, the 'forever free' mark */
