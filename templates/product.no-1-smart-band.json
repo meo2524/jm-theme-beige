@@ -272,20 +272,13 @@
           "settings": {
             "text": "Ceramic build — jewelry that happens to be a lab"
           }
-        },
-        "bullet_gesture": {
-          "type": "bullet",
-          "settings": {
-            "text": "Gesture control — take remote photos, control music"
-          }
         }
       },
       "block_order": [
         "bullet_battery",
         "bullet_sub",
         "bullet_water",
-        "bullet_design",
-        "bullet_gesture"
+        "bullet_design"
       ],
       "settings": {
         "video_url": "https://cdn.shopify.com/videos/c/o/v/d608331275e34f7094cf1ad9555997d9.mp4",
@@ -393,7 +386,7 @@
         "video_url": "https://cdn.shopify.com/videos/c/vp/1977e33d2b2c4f7092f07b23f9fee5ff/1977e33d2b2c4f7092f07b23f9fee5ff.HD-1080p-2.5Mbps-83245266.mp4",
         "eyebrow": "What it tracks",
         "heading": "One ring. Everything that matters.",
-        "body": "Your body is always communicating. Most trackers catch one or two signals. The N°01 reads six, day and night, automatically — plus gesture control and remote camera so it pulls double duty.",
+        "body": "Your body is always communicating. Most trackers catch one or two signals. The N°01 reads six, day and night, automatically — plus remote camera so it pulls double duty.",
         "cta_label": "",
         "cta_url": "",
         "reverse": true
