@@ -786,7 +786,210 @@
   .motion-on .prc-dot { transition: none; }
 }
 
-/* ── 17. Magnetic press feedback on ATC ────────────────────── */
+/* ── 17. KaChing bundle widget — bigger + popping ─────────── */
+
+.motion-on .kaching-bundles__block {
+  margin-bottom: 1.5rem;
+}
+
+.motion-on .kaching-bundles__bars {
+  display: flex !important;
+  flex-direction: column;
+  gap: 0.75rem !important;
+}
+
+.motion-on .kaching-bundles__bar-container {
+  background: #ede8de !important;
+  border: 1.5px solid rgba(138, 98, 64, 0.18) !important;
+  border-radius: 12px !important;
+  padding: 1.1rem 1.2rem !important;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease !important;
+}
+
+.motion-on .kaching-bundles__bar--selected .kaching-bundles__bar-container {
+  background: #f8f5f0 !important;
+  border-color: var(--color-walnut, #8a6240) !important;
+  border-width: 2px !important;
+  box-shadow: 0 8px 26px -10px rgba(138, 98, 64, 0.4) !important;
+  transform: translateY(-1px);
+}
+
+.motion-on .kaching-bundles__bar-container:hover {
+  border-color: rgba(138, 98, 64, 0.45) !important;
+}
+
+/* Title — bigger, bolder */
+.motion-on .kaching-bundles__bar-title {
+  font-family: var(--font-heading) !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  color: var(--color-espresso, #2D2D2D) !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.2 !important;
+}
+
+.motion-on .kaching-bundles__bar-subtitle {
+  font-size: 0.92rem !important;
+  font-weight: 500 !important;
+  color: var(--color-walnut, #8a6240) !important;
+  margin-top: 0.2rem !important;
+}
+
+/* Pricing — bigger price, dramatic strikethrough */
+.motion-on .kaching-bundles__bar-pricing {
+  text-align: right;
+}
+
+.motion-on .kaching-bundles__bar-price {
+  font-family: var(--font-heading) !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: var(--color-espresso, #2D2D2D) !important;
+  letter-spacing: -0.02em !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.motion-on .kaching-bundles__bar-full-price {
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  color: var(--color-olive, #6f5d4d) !important;
+  text-decoration: line-through !important;
+  text-decoration-color: #C0392B !important;
+  text-decoration-thickness: 1.5px !important;
+  opacity: 0.75;
+}
+
+/* Discount/SAVE inline label (e.g. "SAVE $102.48") */
+.motion-on .kaching-bundles__block .kaching-bundles__discount,
+.motion-on [class*="kaching-bundles__bar-discount"],
+.motion-on [class*="kaching-bundles__bar-saving"] {
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  background: linear-gradient(135deg, #C0392B 0%, #8B2418 100%) !important;
+  color: #fff !important;
+  padding: 0.28rem 0.55rem !important;
+  border-radius: 4px !important;
+  box-shadow: 0 3px 10px -3px rgba(192, 57, 43, 0.5) !important;
+}
+
+/* Radio bullet — bigger and walnut */
+.motion-on .kaching-bundles__bar-radio {
+  width: 22px !important;
+  height: 22px !important;
+  border: 1.75px solid rgba(138, 98, 64, 0.45) !important;
+  background: #fff !important;
+}
+
+.motion-on .kaching-bundles__bar--selected .kaching-bundles__bar-radio {
+  border-color: var(--color-walnut, #8a6240) !important;
+  background: #fff !important;
+  box-shadow: 0 0 0 3px rgba(138, 98, 64, 0.18) !important;
+}
+
+.motion-on .kaching-bundles__bar--selected .kaching-bundles__bar-radio::after,
+.motion-on .kaching-bundles__bar--selected .kaching-bundles__bar-radio > * {
+  background: var(--color-walnut, #8a6240) !important;
+}
+
+/* "Color, Size" label */
+.motion-on .kaching-bundles__bar-variant-names {
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: var(--color-walnut, #8a6240) !important;
+  margin-top: 0.85rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Variant row container */
+.motion-on .kaching-bundles__bar-variant {
+  margin-bottom: 0.45rem !important;
+}
+
+.motion-on .kaching-bundles__bar-variant__content {
+  gap: 0.55rem !important;
+}
+
+/* Variant selectors — kill the white, use warm walnut-tinted card */
+.motion-on .kaching-bundles__swatch-dropdown,
+.motion-on .kaching-bundles__bar-variant-select {
+  background: rgba(245, 239, 230, 0.95) !important;
+  border: 1.25px solid rgba(138, 98, 64, 0.35) !important;
+  border-radius: 8px !important;
+  padding: 0.55rem 0.85rem !important;
+  font-size: 0.92rem !important;
+  font-weight: 600 !important;
+  color: var(--color-espresso, #2D2D2D) !important;
+  font-family: var(--font-body) !important;
+  min-height: 42px !important;
+  transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+  cursor: pointer;
+}
+
+.motion-on .kaching-bundles__swatch-dropdown:hover,
+.motion-on .kaching-bundles__bar-variant-select:hover {
+  border-color: var(--color-walnut, #8a6240) !important;
+  background: #f8f5f0 !important;
+  box-shadow: 0 3px 10px -4px rgba(138, 98, 64, 0.3) !important;
+}
+
+.motion-on .kaching-bundles__swatch-dropdown:focus-within,
+.motion-on .kaching-bundles__bar-variant-select:focus-within {
+  border-color: var(--color-walnut, #8a6240) !important;
+  box-shadow: 0 0 0 3px rgba(138, 98, 64, 0.18) !important;
+  outline: none !important;
+}
+
+/* Color swatch dot — bigger */
+.motion-on .kaching-bundles__swatch {
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  border: 1.25px solid rgba(138, 98, 64, 0.4) !important;
+  flex-shrink: 0 !important;
+}
+
+/* Variant row index (#1, #2) */
+.motion-on [class*="kaching-bundles__bar-variant"] [class*="index"],
+.motion-on .kaching-bundles__bar-variant-selector-wrapper > span:first-child {
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: var(--color-walnut, #8a6240) !important;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+/* Free gift / perk text under each card */
+.motion-on .kaching-bundles__free-gift__text,
+.motion-on [class*="kaching-bundles__free-gift"] {
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  color: var(--color-walnut, #8a6240) !important;
+  margin-top: 0.65rem !important;
+  padding-top: 0.65rem !important;
+  border-top: 1px dashed rgba(138, 98, 64, 0.25);
+}
+
+/* "Most Popular" badge — keep position, amp the look */
+.motion-on [class*="kaching-bundles"] [class*="popular"],
+.motion-on [class*="kaching-bundles"] [class*="badge"] {
+  filter: drop-shadow(0 4px 12px rgba(138, 98, 64, 0.4));
+}
+
+/* Select native dropdown chevron — walnut */
+.motion-on .kaching-bundles__bar-variant-select select,
+.motion-on .kaching-bundles__swatch-dropdown select {
+  color: var(--color-espresso, #2D2D2D) !important;
+  font-weight: 600 !important;
+  background: transparent !important;
+  border: none !important;
+  font-size: 0.92rem !important;
+}
+
+/* ── 18. Magnetic press feedback on ATC ────────────────────── */
 
 .btn-atc,
 .sticky-atc__btn {
