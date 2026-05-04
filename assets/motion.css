@@ -904,7 +904,11 @@
   margin-bottom: 0.5rem !important;
 }
 
-/* Variant row — color picker grows full-width, size stays compact */
+/* Variant row — colour picker grows full-width, size stays compact.
+   IMPORTANT: KaChing reuses the same class name on the closed-state
+   trigger AND on each option inside the open popover. We must scope
+   pill styling to the trigger only, not to .kaching-bundles-option. */
+
 .motion-on .kaching-bundles__bar-variant {
   margin-bottom: 0.5rem !important;
 }
@@ -917,20 +921,24 @@
   width: 100% !important;
 }
 
-/* The color/swatch dropdown takes all the room; size dropdown stays small */
+/* The wrapper is a positioning shell only — no styling on it */
 .motion-on .kaching-bundles__swatch-dropdown {
   flex: 1 1 auto !important;
   min-width: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  position: relative;
 }
 
-.motion-on .kaching-bundles__bar-variant-selects > .kaching-bundles__bar-variant-select:not(.kaching-bundles__swatch-dropdown) {
+.motion-on .kaching-bundles__bar-variant-selects > .kaching-bundles__bar-variant-select:not(.kaching-bundles__swatch-dropdown):not(.kaching-bundles-option) {
   flex: 0 0 auto !important;
   min-width: 80px !important;
 }
 
-/* Variant selectors — clean premium pill, no white, walnut hairline */
-.motion-on .kaching-bundles__swatch-dropdown,
-.motion-on .kaching-bundles__bar-variant-select {
+/* Trigger — clean premium pill (NOT options inside popover) */
+.motion-on .kaching-bundles__bar-variant-select:not(.kaching-bundles-option),
+.motion-on .kaching-bundles__swatch-dropdown > .kaching-bundles__bar-variant-select {
   background: #fdfaf4 !important;
   border: 1px solid rgba(138, 98, 64, 0.28) !important;
   border-radius: 10px !important;
@@ -945,34 +953,84 @@
   gap: 0.6rem !important;
   transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
   cursor: pointer;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.02), inset 0 0 0 0 rgba(138,98,64,0);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.02);
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.motion-on .kaching-bundles__swatch-dropdown:hover,
-.motion-on .kaching-bundles__bar-variant-select:hover {
+.motion-on .kaching-bundles__bar-variant-select:not(.kaching-bundles-option):hover,
+.motion-on .kaching-bundles__swatch-dropdown > .kaching-bundles__bar-variant-select:hover {
   border-color: var(--color-walnut, #8a6240) !important;
   background: #fff !important;
   box-shadow: 0 4px 14px -6px rgba(138, 98, 64, 0.35) !important;
   transform: translateY(-1px);
 }
 
-.motion-on .kaching-bundles__swatch-dropdown:active,
-.motion-on .kaching-bundles__bar-variant-select:active {
+.motion-on .kaching-bundles__bar-variant-select:not(.kaching-bundles-option):active,
+.motion-on .kaching-bundles__swatch-dropdown > .kaching-bundles__bar-variant-select:active {
   transform: translateY(0);
 }
 
-.motion-on .kaching-bundles__swatch-dropdown:focus-within,
-.motion-on .kaching-bundles__bar-variant-select:focus-within {
+.motion-on .kaching-bundles__bar-variant-select:not(.kaching-bundles-option):focus-within,
+.motion-on .kaching-bundles__swatch-dropdown > .kaching-bundles__bar-variant-select:focus-within {
   border-color: var(--color-walnut, #8a6240) !important;
   box-shadow: 0 0 0 3px rgba(138, 98, 64, 0.16) !important;
   outline: none !important;
 }
 
-/* Color swatch dot — visible ring even on white/light colours */
+/* OPEN POPOVER — find the option container KaChing renders */
+.motion-on .kaching-bundles__swatch-dropdown [class*="dropdown"]:not(.kaching-bundles__swatch-dropdown),
+.motion-on .kaching-bundles__swatch-dropdown [class*="options"],
+.motion-on .kaching-bundles__swatch-dropdown ul,
+.motion-on .kaching-bundles__swatch-dropdown [role="listbox"] {
+  background: #fff !important;
+  border: 1px solid rgba(138, 98, 64, 0.28) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.18), 0 4px 12px -6px rgba(138, 98, 64, 0.25) !important;
+  padding: 4px !important;
+  z-index: 50 !important;
+  margin-top: 4px !important;
+  overflow: hidden;
+}
+
+/* OPTION rows inside the open popover — flat list items, NOT pills */
+.motion-on .kaching-bundles-option,
+.motion-on .kaching-bundles__bar-variant-select.kaching-bundles-option,
+.motion-on .kaching-bundles__swatch-dropdown.kaching-bundles-option,
+.motion-on [role="option"][class*="kaching"] {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 6px !important;
+  padding: 0.55rem 0.7rem !important;
+  font-size: 0.92rem !important;
+  font-weight: 500 !important;
+  min-height: auto !important;
+  box-shadow: none !important;
+  transform: none !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.55rem !important;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.motion-on .kaching-bundles-option:hover,
+.motion-on [role="option"][class*="kaching"]:hover {
+  background: rgba(138, 98, 64, 0.08) !important;
+}
+
+.motion-on .kaching-bundles-option[aria-selected="true"],
+.motion-on [role="option"][aria-selected="true"][class*="kaching"] {
+  background: rgba(138, 98, 64, 0.12) !important;
+  color: var(--color-walnut, #8a6240) !important;
+  font-weight: 600 !important;
+}
+
+/* Colour swatch dot inside trigger AND options */
 .motion-on .kaching-bundles__swatch {
-  width: 20px !important;
-  height: 20px !important;
+  width: 18px !important;
+  height: 18px !important;
   border-radius: 50% !important;
   border: 1.5px solid rgba(138, 98, 64, 0.5) !important;
   flex-shrink: 0 !important;
@@ -1018,14 +1076,21 @@
   filter: drop-shadow(0 4px 12px rgba(138, 98, 64, 0.4));
 }
 
-/* Select native dropdown chevron — walnut */
+/* Native <select> fallback inside KaChing — keep solid background so the popover renders */
 .motion-on .kaching-bundles__bar-variant-select select,
 .motion-on .kaching-bundles__swatch-dropdown select {
   color: var(--color-espresso, #2D2D2D) !important;
   font-weight: 600 !important;
-  background: transparent !important;
-  border: none !important;
   font-size: 0.92rem !important;
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.motion-on .kaching-bundles__bar-variant-select select option,
+.motion-on .kaching-bundles__swatch-dropdown select option {
+  background: #fff !important;
+  color: var(--color-espresso, #2D2D2D) !important;
 }
 
 /* ── 18. Magnetic press feedback on ATC ────────────────────── */
