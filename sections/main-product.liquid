@@ -1612,6 +1612,13 @@
     padding: 2.5rem 0 5rem;
   }
 
+  /* When the mobile video hero is mounted, drop the top padding so
+     the hero butts up against the header with no gap. Bottom padding
+     stays for breathing room into the next section. */
+  .product-section:has(.mc-mobile-hero) {
+    padding-top: 0;
+  }
+
   .product-container {
     grid-template-columns: 1fr;
     gap: 2.25rem;

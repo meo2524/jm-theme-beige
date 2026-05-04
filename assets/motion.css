@@ -1682,13 +1682,7 @@
   }
 
   .motion-on .mc-mobile-hero .product-eyebrow::before {
-    content: "";
-    width: 22px;
-    height: 1.5px;
-    background: var(--color-walnut, #b89376);
-    display: inline-block;
-    flex-shrink: 0;
-    opacity: 0.95;
+    display: none;
   }
 
   .motion-on .mc-mobile-hero .product-eyebrow::after {
