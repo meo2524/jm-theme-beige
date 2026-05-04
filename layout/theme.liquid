@@ -412,22 +412,8 @@
   </button>
 
   <style>
-    /* ---- Variant selectors (Color / Size) ---- */
-    /* Hidden everywhere — on mobile they get moved above the gallery via JS */
+    /* ---- Variant selectors (Color / Size) — hidden everywhere ---- */
     .variant-fieldset { display: none !important; }
-    /* Show when repositioned above gallery on mobile */
-    .variant-top-mobile .variant-fieldset {
-      display: block !important;
-      padding: 12px 16px 0;
-    }
-    .variant-top-mobile .variant-legend {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--color-black, #1f1d1a);
-      margin-bottom: 8px;
-    }
 
     /* KaChing — free gift / perk text legibility */
     .kaching-bundles__free-gift__text {
@@ -524,19 +510,6 @@
   })();
   </script>
 
-  <script>
-  /* Move variant selectors (Color/Size) above the gallery on mobile */
-  (function () {
-    if (!window.matchMedia('(max-width: 767px)').matches) return;
-    var fieldsets = document.querySelectorAll('.variant-fieldset');
-    var gallery   = document.querySelector('.product-gallery');
-    if (!gallery || !fieldsets.length) return;
-    var wrapper = document.createElement('div');
-    wrapper.className = 'variant-top-mobile';
-    fieldsets.forEach(function (f) { wrapper.appendChild(f); });
-    gallery.parentElement.insertBefore(wrapper, gallery);
-  })();
-  </script>
 
 </body>
 </html>
