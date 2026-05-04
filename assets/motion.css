@@ -4,10 +4,19 @@
    Palette-only — uses existing --color-walnut / --color-bone.
    ════════════════════════════════════════════════════════════ */
 
-/* ── 0. Page-level overflow safety ────────────────────────── */
+/* ── 0. Page-level layout safety ──────────────────────────── */
+
+/* Reserve scrollbar space always so the page doesn't shift left
+   when content grows tall enough to require a scrollbar. */
+.motion-on html {
+  scrollbar-gutter: stable;
+  /* Fallback for browsers without scrollbar-gutter — force scroll
+     channel to always be present */
+  overflow-y: scroll;
+}
+
 /* Prevent any rogue child element (gallery scroll-snap track,
    marquee, banner) from causing horizontal page scroll on mobile. */
-
 @media (max-width: 767px) {
   .motion-on body,
   .motion-on html {
@@ -698,22 +707,18 @@
   font-weight: 700;
 }
 
-/* Dynamic per-slide height — quote takes its natural lines, no reserved
-   blank space. Card resizes between slides, but quotes never clip. */
+/* Fixed height — card stays consistent across slides. 12rem fits
+   stars (~0.45) + 4-line quote (~6.5) + footer (~2.6) + breathing. */
 .motion-on .prc-track {
-  height: auto !important;
-  min-height: 0 !important;
+  height: 12rem !important;
+  min-height: 12rem;
   position: relative !important;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .motion-on .prc-slide {
-  position: relative !important;
-  inset: auto !important;
-}
-
-.motion-on .prc-slide:not(.is-active) {
-  display: none !important;
+  position: absolute !important;
+  inset: 0 !important;
 }
 
 .motion-on .prc-stars {
@@ -730,9 +735,10 @@
   line-height: 1.55 !important;
   color: var(--color-espresso, #2D2D2D) !important;
   font-style: italic;
-  display: block !important;
-  overflow: visible !important;
-  -webkit-line-clamp: unset !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 4 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden;
   position: relative;
   padding-left: 0.85rem;
   border-left: 2px solid var(--color-walnut, #8a6240);
