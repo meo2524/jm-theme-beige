@@ -18,11 +18,11 @@ html {
   overflow-y: scroll;
 }
 
-/* Prevent any rogue child element (gallery scroll-snap track,
-   marquee, banner) from causing horizontal page scroll on mobile. */
+/* Prevent any rogue child element (marquee, banner) from causing
+   horizontal page scroll on mobile. Apply to body ONLY — not html —
+   so it doesn't interfere with html-level scrollbar-gutter. */
 @media (max-width: 767px) {
-  .motion-on body,
-  .motion-on html {
+  .motion-on body {
     overflow-x: clip;
     max-width: 100vw;
   }
@@ -1611,12 +1611,18 @@ html {
     box-sizing: border-box;
   }
 
-  /* Taller aspect to show more of the ring image, less bone space */
+  /* Taller aspect to show more of the ring image, less bone space.
+     Border-radius applied via clip-path so we don't kill the
+     overflow-x: auto that scroll-snap swipe depends on. */
   .motion-on .gallery-track {
     aspect-ratio: 4 / 5 !important;
     max-height: none !important;
     border-radius: 10px !important;
-    overflow: hidden;
+    /* DO NOT set overflow:hidden — base.css already sets overflow-x:auto
+       on .gallery-track for scroll-snap swipe. Hiding overflow breaks
+       the carousel. clip-path gives us rounded corners without
+       interfering with the scroll container. */
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
   }
 
   /* Arrows pulled inward so they don't look cropped at viewport edges */
