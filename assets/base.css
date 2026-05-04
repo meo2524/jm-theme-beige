@@ -1067,7 +1067,12 @@ p {
   to   { transform: translateX(-50%); }
 }
 .marquee {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
   display: flex;
+  align-items: center;
   width: max-content;
   animation: mend-marquee 60s linear infinite;
   gap: 64px;
