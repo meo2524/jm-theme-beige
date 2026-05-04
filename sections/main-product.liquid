@@ -1610,11 +1610,7 @@
 @media (max-width: 768px) {
   .product-section {
     padding: 2.5rem 0 5rem;
-    /* Hard containment: prevents any child (gallery images with large
-       intrinsic widths, third-party widgets) from expanding the iOS
-       layout viewport and shifting the whole page. */
-    overflow-x: clip;
-    contain: layout;
+    overflow-x: hidden;
   }
 
   /* When the mobile video hero is mounted, drop the top padding so
@@ -1726,7 +1722,16 @@
   }
 
   .product-info {
-    padding: 0 1.25rem;
+    padding: 0 1rem;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  /* All direct children of product-info must stay within the padded column */
+  .product-info > * {
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .product-title {
