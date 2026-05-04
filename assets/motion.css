@@ -674,18 +674,22 @@
   font-weight: 700;
 }
 
-/* Fixed height so card never reflows between slides regardless of quote length.
-   12rem fits stars (0.45) + 4-line quote @1.05rem/1.55lh (~6.5) + footer (~2.6) + breathing room. */
+/* Dynamic per-slide height — quote takes its natural lines, no reserved
+   blank space. Card resizes between slides, but quotes never clip. */
 .motion-on .prc-track {
-  height: 12rem !important;
-  min-height: 12rem;
+  height: auto !important;
+  min-height: 0 !important;
   position: relative !important;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .motion-on .prc-slide {
-  position: absolute !important;
-  inset: 0 !important;
+  position: relative !important;
+  inset: auto !important;
+}
+
+.motion-on .prc-slide:not(.is-active) {
+  display: none !important;
 }
 
 .motion-on .prc-stars {
@@ -702,15 +706,13 @@
   line-height: 1.55 !important;
   color: var(--color-espresso, #2D2D2D) !important;
   font-style: italic;
-  display: -webkit-box !important;
-  -webkit-line-clamp: 4 !important;
-  -webkit-box-orient: vertical !important;
-  overflow: hidden;
+  display: block !important;
+  overflow: visible !important;
+  -webkit-line-clamp: unset !important;
   position: relative;
   padding-left: 0.85rem;
   border-left: 2px solid var(--color-walnut, #8a6240);
-  /* Reserve a 4-line block so quotes of any 1–4 line length occupy the same height */
-  min-height: calc(1.05rem * 1.55 * 4);
+  margin: 0;
 }
 
 .motion-on .prc-footer {
