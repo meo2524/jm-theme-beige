@@ -1683,74 +1683,228 @@ html {
   margin: 0 0 1.4rem !important;
 }
 
-/* Bullet list — proper spacing, walnut bullet icon (not em-dash) */
+/* ── BENTO TILES — bullet list reimagined as live data tiles ─ */
+/* Each <li> becomes a tile with its own ambient data viz pseudo-
+   element. Original em-dash + text stays for SEO + a11y. */
+
 .motion-on .product-feature__bullets,
 .motion-on .product-science__bullets {
   list-style: none !important;
   padding: 0 !important;
-  margin: 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 0.85rem !important;
+  margin: 1.5rem 0 0 !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.7rem !important;
 }
 
+@media (min-width: 768px) {
+  .motion-on .product-feature__bullets,
+  .motion-on .product-science__bullets {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0.85rem !important;
+  }
+}
+
+/* Tile base */
 .motion-on .product-feature__bullet,
 .motion-on .product-science__bullet {
   display: flex !important;
-  align-items: flex-start !important;
-  gap: 0.85rem !important;
+  flex-direction: column !important;
+  gap: 0.6rem !important;
+  align-items: stretch !important;
   font-family: var(--font-body) !important;
-  font-size: 1rem !important;
-  font-weight: 500 !important;
-  line-height: 1.5 !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
   color: var(--color-espresso, #2D2D2D) !important;
-  padding: 0.7rem 0.9rem !important;
-  background: linear-gradient(135deg, rgba(138, 98, 64, 0.06) 0%, rgba(138, 98, 64, 0.02) 100%) !important;
-  border-left: 2px solid var(--color-walnut, #8a6240) !important;
-  border-radius: 0 6px 6px 0 !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  padding: 1rem 0.95rem !important;
+  background: linear-gradient(180deg, rgba(138,98,64,0.06) 0%, rgba(138,98,64,0.02) 60%) !important;
+  border: 1px solid rgba(138, 98, 64, 0.18) !important;
+  border-radius: 12px !important;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 130px;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.22s ease,
+              border-color 0.22s ease;
+  cursor: default;
 }
 
 .motion-on .product-feature__bullet:hover,
 .motion-on .product-science__bullet:hover {
-  transform: translateX(2px);
-  background: linear-gradient(135deg, rgba(138, 98, 64, 0.1) 0%, rgba(138, 98, 64, 0.04) 100%) !important;
-  box-shadow: 0 3px 12px -6px rgba(138, 98, 64, 0.3);
+  transform: translateY(-2px);
+  border-color: var(--color-walnut, #8a6240) !important;
+  box-shadow: 0 10px 26px -12px rgba(138, 98, 64, 0.45);
 }
 
-/* Replace the em-dash bullet icon with a walnut chevron mark */
+/* Hide the em-dash icon in bullets (we have richer visuals now) */
 .motion-on .product-feature__bullet-icon,
 .motion-on .product-science__bullet-icon {
-  flex-shrink: 0 !important;
-  color: var(--color-walnut, #8a6240) !important;
-  font-weight: 800 !important;
-  font-size: 1rem !important;
-  line-height: 1.5 !important;
-  font-family: var(--font-body) !important;
-  /* Replace text content via pseudo so original "—" stays accessible */
-  position: relative;
-  width: 1.1em;
-  text-align: center;
-  letter-spacing: 0;
-  font-size: 0;
+  display: none !important;
 }
 
-.motion-on .product-feature__bullet-icon::before,
-.motion-on .product-science__bullet-icon::before {
-  content: "›";
-  font-size: 1.4rem;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--color-walnut, #8a6240);
-  display: inline-block;
-  transform: translateY(-1px);
+/* Walnut accent strip at the top of each tile */
+.motion-on .product-feature__bullet::before,
+.motion-on .product-science__bullet::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-walnut, #8a6240) 0%, transparent 100%);
+  opacity: 0.55;
+  z-index: 2;
 }
 
-/* Highlight the part before the em-dash in each bullet — bolder so the
-   spec name reads first ("Sleep stages — deep, light, REM…") */
-.motion-on .product-feature__bullet,
-.motion-on .product-science__bullet {
+/* The data-viz layer — populated per-tile via :nth-child rules below.
+   Sits behind the text via opacity + low z-index. */
+.motion-on .product-feature__bullet::after,
+.motion-on .product-science__bullet::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* Tile 1 — HRV / Sleep stages: animated heartbeat waveform */
+.motion-on .product-feature__bullet:nth-child(1)::after,
+.motion-on .product-science__bullet:nth-child(1)::after {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' preserveAspectRatio='none'><path d='M0 30 L25 30 L30 18 L36 42 L42 30 L48 30 L52 24 L60 30 L80 30 L90 12 L96 48 L102 30 L120 30 L130 22 L138 30 L160 30 L168 16 L174 44 L180 30 L200 30' fill='none' stroke='%238a6240' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: repeat-x;
+  background-size: 200px 60px;
+  animation: mc-tile-pulse-x 3s linear infinite;
+}
+
+@keyframes mc-tile-pulse-x {
+  from { background-position: 0 center; }
+  to   { background-position: -200px center; }
+}
+
+/* Tile 2 — Sleep architecture: 4 stacked bars filling */
+.motion-on .product-feature__bullet:nth-child(2)::after,
+.motion-on .product-science__bullet:nth-child(2)::after {
+  background-image:
+    linear-gradient(90deg, var(--color-walnut, #8a6240) 0%, var(--color-walnut, #8a6240) 70%, transparent 70%),
+    linear-gradient(90deg, var(--color-walnut, #8a6240) 0%, var(--color-walnut, #8a6240) 50%, transparent 50%),
+    linear-gradient(90deg, var(--color-walnut, #8a6240) 0%, var(--color-walnut, #8a6240) 85%, transparent 85%),
+    linear-gradient(90deg, var(--color-walnut, #8a6240) 0%, var(--color-walnut, #8a6240) 35%, transparent 35%);
+  background-size: 100% 6px, 100% 6px, 100% 6px, 100% 6px;
+  background-position: 0 12px, 0 24px, 0 36px, 0 48px;
+  background-repeat: no-repeat;
+  animation: mc-tile-bars 3.4s ease-in-out infinite;
+  opacity: 0.45;
+}
+
+@keyframes mc-tile-bars {
+  0%, 100% { transform: scaleX(1); }
+  50%      { transform: scaleX(0.95); }
+}
+
+/* Tile 3 — SpO₂ / Recovery: pulsing ring */
+.motion-on .product-feature__bullet:nth-child(3)::after,
+.motion-on .product-science__bullet:nth-child(3)::after {
+  height: 80px;
+  background-image: radial-gradient(circle at 50% 100%, transparent 0, transparent 32px, var(--color-walnut, #8a6240) 33px, var(--color-walnut, #8a6240) 35px, transparent 36px);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  animation: mc-tile-ring 2.6s ease-in-out infinite;
+  opacity: 0.4;
+}
+
+@keyframes mc-tile-ring {
+  0%, 100% { transform: scale(1); opacity: 0.35; }
+  50%      { transform: scale(1.05); opacity: 0.55; }
+}
+
+/* Tile 4 — Stress / oxygen: gradient stress meter sweep */
+.motion-on .product-feature__bullet:nth-child(4)::after,
+.motion-on .product-science__bullet:nth-child(4)::after {
+  height: 4px;
+  bottom: 1.1rem;
+  left: 0.95rem;
+  right: 0.95rem;
+  background: linear-gradient(90deg,
+    var(--color-walnut, #8a6240) 0%,
+    var(--color-walnut, #8a6240) 35%,
+    rgba(192, 57, 43, 0.6) 65%,
+    rgba(192, 57, 43, 0.85) 100%);
+  border-radius: 2px;
+  opacity: 0.55;
+}
+
+.motion-on .product-feature__bullet:nth-child(4),
+.motion-on .product-science__bullet:nth-child(4) {
   position: relative;
+}
+
+/* Tile 5 — Steps / activity: stepped bars going up */
+.motion-on .product-feature__bullet:nth-child(5)::after,
+.motion-on .product-science__bullet:nth-child(5)::after {
+  height: 60px;
+  background-image:
+    linear-gradient(180deg, transparent 60%, var(--color-walnut, #8a6240) 60%),
+    linear-gradient(180deg, transparent 40%, var(--color-walnut, #8a6240) 40%),
+    linear-gradient(180deg, transparent 75%, var(--color-walnut, #8a6240) 75%),
+    linear-gradient(180deg, transparent 25%, var(--color-walnut, #8a6240) 25%),
+    linear-gradient(180deg, transparent 50%, var(--color-walnut, #8a6240) 50%);
+  background-size: 14% 100%, 14% 100%, 14% 100%, 14% 100%, 14% 100%;
+  background-position: 5% bottom, 22% bottom, 39% bottom, 56% bottom, 73% bottom;
+  background-repeat: no-repeat;
+  opacity: 0.42;
+}
+
+/* Tile 6 — Camera / extra: minimal corner flourish */
+.motion-on .product-feature__bullet:nth-child(6)::after,
+.motion-on .product-science__bullet:nth-child(6)::after {
+  height: 70px;
+  background-image:
+    radial-gradient(circle at 80% 80%, var(--color-walnut, #8a6240) 0, var(--color-walnut, #8a6240) 4px, transparent 5px),
+    radial-gradient(circle at 80% 80%, transparent 0, transparent 14px, var(--color-walnut, #8a6240) 15px, var(--color-walnut, #8a6240) 16px, transparent 17px);
+  opacity: 0.5;
+}
+
+/* Make the text content sit above the data-viz */
+.motion-on .product-feature__bullet > *,
+.motion-on .product-science__bullet > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* The bullet text — visual hierarchy: bold up to the em-dash via
+   first-letter trick won't work; instead bump the whole tile to
+   weight 600 espresso and color the after-em-dash text walnut.
+   We can target the text node via ::first-line approximation. */
+
+/* Stagger the data-viz reveals when the section enters the viewport */
+.motion-on [data-reveal].is-visible .product-feature__bullet,
+.motion-on [data-reveal].is-visible .product-science__bullet {
+  animation: mc-tile-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.motion-on .product-feature__bullet:nth-child(1) { animation-delay: 0ms !important; }
+.motion-on .product-feature__bullet:nth-child(2) { animation-delay: 80ms !important; }
+.motion-on .product-feature__bullet:nth-child(3) { animation-delay: 160ms !important; }
+.motion-on .product-feature__bullet:nth-child(4) { animation-delay: 240ms !important; }
+.motion-on .product-feature__bullet:nth-child(5) { animation-delay: 320ms !important; }
+.motion-on .product-feature__bullet:nth-child(6) { animation-delay: 400ms !important; }
+
+@keyframes mc-tile-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-on .product-feature__bullet,
+  .motion-on .product-science__bullet,
+  .motion-on .product-feature__bullet::after,
+  .motion-on .product-science__bullet::after { animation: none !important; }
 }
 
 /* ── 23. Magnetic press feedback on ATC ────────────────────── */
