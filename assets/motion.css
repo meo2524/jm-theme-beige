@@ -1758,8 +1758,9 @@ html {
   z-index: 2;
 }
 
-/* The data-viz layer — populated per-tile via :nth-child rules below.
-   Sits behind the text via opacity + low z-index. */
+/* The data-viz layer base — content+position only. Per-type rules
+   below set the actual background-image / animation. Tile type is
+   set by motion.js classifyTile() based on each bullet's text. */
 .motion-on .product-feature__bullet::after,
 .motion-on .product-science__bullet::after {
   content: "";
@@ -1770,12 +1771,13 @@ html {
   height: 60px;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.35;
+  opacity: 0.4;
+  background-repeat: no-repeat;
+  background-position: center bottom;
 }
 
-/* Tile 1 — HRV / Sleep stages: animated heartbeat waveform */
-.motion-on .product-feature__bullet:nth-child(1)::after,
-.motion-on .product-science__bullet:nth-child(1)::after {
+/* — HRV — animated heartbeat waveform scrolling left */
+.motion-on [data-tile-type="hrv"]::after {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' preserveAspectRatio='none'><path d='M0 30 L25 30 L30 18 L36 42 L42 30 L48 30 L52 24 L60 30 L80 30 L90 12 L96 48 L102 30 L120 30 L130 22 L138 30 L160 30 L168 16 L174 44 L180 30 L200 30' fill='none' stroke='%238a6240' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
   background-repeat: repeat-x;
   background-size: 200px 60px;
@@ -1787,66 +1789,69 @@ html {
   to   { background-position: -200px center; }
 }
 
-/* Tile 2 — Sleep architecture: 4 stacked bars filling */
-.motion-on .product-feature__bullet:nth-child(2)::after,
-.motion-on .product-science__bullet:nth-child(2)::after {
+/* — SLEEP — 4 sleep-stage bars (deep / REM / light / awake) */
+.motion-on [data-tile-type="sleep"]::after {
   background-image:
     linear-gradient(90deg, var(--color-walnut, #8a6240) 0%, var(--color-walnut, #8a6240) 70%, transparent 70%),
     linear-gradient(90deg, var(--color-walnut, #8a6240) 0%, var(--color-walnut, #8a6240) 50%, transparent 50%),
     linear-gradient(90deg, var(--color-walnut, #8a6240) 0%, var(--color-walnut, #8a6240) 85%, transparent 85%),
     linear-gradient(90deg, var(--color-walnut, #8a6240) 0%, var(--color-walnut, #8a6240) 35%, transparent 35%);
-  background-size: 100% 6px, 100% 6px, 100% 6px, 100% 6px;
-  background-position: 0 12px, 0 24px, 0 36px, 0 48px;
-  background-repeat: no-repeat;
+  background-size: 100% 5px, 100% 5px, 100% 5px, 100% 5px;
+  background-position: 0 14px, 0 26px, 0 38px, 0 50px;
   animation: mc-tile-bars 3.4s ease-in-out infinite;
-  opacity: 0.45;
+  opacity: 0.5;
 }
 
 @keyframes mc-tile-bars {
-  0%, 100% { transform: scaleX(1); }
-  50%      { transform: scaleX(0.95); }
+  0%, 100% { transform: scaleX(1); transform-origin: 0 50%; }
+  50%      { transform: scaleX(0.93); }
 }
 
-/* Tile 3 — SpO₂ / Recovery: pulsing ring */
-.motion-on .product-feature__bullet:nth-child(3)::after,
-.motion-on .product-science__bullet:nth-child(3)::after {
+/* — OXYGEN / SpO₂ — pulsing concentric ring */
+.motion-on [data-tile-type="oxygen"]::after {
   height: 80px;
-  background-image: radial-gradient(circle at 50% 100%, transparent 0, transparent 32px, var(--color-walnut, #8a6240) 33px, var(--color-walnut, #8a6240) 35px, transparent 36px);
-  background-repeat: no-repeat;
-  background-position: center bottom;
+  background-image:
+    radial-gradient(circle at 50% 100%, transparent 0, transparent 22px, var(--color-walnut, #8a6240) 23px, var(--color-walnut, #8a6240) 25px, transparent 26px),
+    radial-gradient(circle at 50% 100%, transparent 0, transparent 32px, rgba(138, 98, 64, 0.55) 33px, rgba(138, 98, 64, 0.55) 34px, transparent 35px);
   animation: mc-tile-ring 2.6s ease-in-out infinite;
-  opacity: 0.4;
-}
-
-@keyframes mc-tile-ring {
-  0%, 100% { transform: scale(1); opacity: 0.35; }
-  50%      { transform: scale(1.05); opacity: 0.55; }
-}
-
-/* Tile 4 — Stress / oxygen: gradient stress meter sweep */
-.motion-on .product-feature__bullet:nth-child(4)::after,
-.motion-on .product-science__bullet:nth-child(4)::after {
-  height: 4px;
-  bottom: 1.1rem;
-  left: 0.95rem;
-  right: 0.95rem;
-  background: linear-gradient(90deg,
-    var(--color-walnut, #8a6240) 0%,
-    var(--color-walnut, #8a6240) 35%,
-    rgba(192, 57, 43, 0.6) 65%,
-    rgba(192, 57, 43, 0.85) 100%);
-  border-radius: 2px;
   opacity: 0.55;
 }
 
-.motion-on .product-feature__bullet:nth-child(4),
-.motion-on .product-science__bullet:nth-child(4) {
-  position: relative;
+@keyframes mc-tile-ring {
+  0%, 100% { transform: scale(1); opacity: 0.45; }
+  50%      { transform: scale(1.06); opacity: 0.65; }
 }
 
-/* Tile 5 — Steps / activity: stepped bars going up */
-.motion-on .product-feature__bullet:nth-child(5)::after,
-.motion-on .product-science__bullet:nth-child(5)::after {
+/* — STRESS — gradient meter walnut → red */
+.motion-on [data-tile-type="stress"]::after {
+  height: 4px;
+  bottom: 1.2rem;
+  left: 0.95rem;
+  right: 0.95rem;
+  background: linear-gradient(90deg,
+    rgba(138, 98, 64, 0.85) 0%,
+    rgba(138, 98, 64, 0.85) 35%,
+    rgba(192, 57, 43, 0.65) 65%,
+    rgba(192, 57, 43, 0.9) 100%);
+  border-radius: 2px;
+  opacity: 0.7;
+}
+
+.motion-on [data-tile-type="stress"]::before {
+  content: "";
+  position: absolute;
+  bottom: calc(1.2rem + 4px);
+  left: calc(35% + 0.95rem);
+  width: 2px;
+  height: 10px;
+  background: var(--color-espresso, #2D2D2D);
+  border-radius: 1px;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+/* — STEPS / ACTIVITY — stepped bar chart 5 columns */
+.motion-on [data-tile-type="steps"]::after {
   height: 60px;
   background-image:
     linear-gradient(180deg, transparent 60%, var(--color-walnut, #8a6240) 60%),
@@ -1854,20 +1859,156 @@ html {
     linear-gradient(180deg, transparent 75%, var(--color-walnut, #8a6240) 75%),
     linear-gradient(180deg, transparent 25%, var(--color-walnut, #8a6240) 25%),
     linear-gradient(180deg, transparent 50%, var(--color-walnut, #8a6240) 50%);
-  background-size: 14% 100%, 14% 100%, 14% 100%, 14% 100%, 14% 100%;
-  background-position: 5% bottom, 22% bottom, 39% bottom, 56% bottom, 73% bottom;
-  background-repeat: no-repeat;
-  opacity: 0.42;
+  background-size: 12% 100%, 12% 100%, 12% 100%, 12% 100%, 12% 100%;
+  background-position: 8% bottom, 25% bottom, 42% bottom, 59% bottom, 76% bottom;
+  opacity: 0.5;
 }
 
-/* Tile 6 — Camera / extra: minimal corner flourish */
-.motion-on .product-feature__bullet:nth-child(6)::after,
-.motion-on .product-science__bullet:nth-child(6)::after {
+/* — CAMERA — aperture / lens rings in corner */
+.motion-on [data-tile-type="camera"]::after {
   height: 70px;
   background-image:
-    radial-gradient(circle at 80% 80%, var(--color-walnut, #8a6240) 0, var(--color-walnut, #8a6240) 4px, transparent 5px),
-    radial-gradient(circle at 80% 80%, transparent 0, transparent 14px, var(--color-walnut, #8a6240) 15px, var(--color-walnut, #8a6240) 16px, transparent 17px);
+    radial-gradient(circle at 82% 78%, var(--color-walnut, #8a6240) 0, var(--color-walnut, #8a6240) 5px, transparent 6px),
+    radial-gradient(circle at 82% 78%, transparent 0, transparent 12px, var(--color-walnut, #8a6240) 13px, var(--color-walnut, #8a6240) 14px, transparent 15px),
+    radial-gradient(circle at 82% 78%, transparent 0, transparent 20px, var(--color-walnut, #8a6240) 21px, var(--color-walnut, #8a6240) 22px, transparent 23px);
+  opacity: 0.55;
+  animation: mc-tile-aperture 4s ease-in-out infinite;
+}
+
+@keyframes mc-tile-aperture {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.08); }
+}
+
+/* — BATTERY — battery indicator filling left → right */
+.motion-on [data-tile-type="battery"]::after {
+  height: 36px;
+  bottom: 1rem;
+  left: 0.95rem;
+  right: 0.95rem;
+  border: 1.5px solid var(--color-walnut, #8a6240);
+  border-radius: 4px;
+  background: transparent;
+  opacity: 0.6;
+}
+
+.motion-on [data-tile-type="battery"]::before {
+  content: "";
+  position: absolute;
+  bottom: calc(1rem + 4px);
+  left: calc(0.95rem + 4px);
+  height: 28px;
+  width: 70%;
+  background: linear-gradient(90deg, var(--color-walnut, #8a6240) 0%, var(--color-walnut, #8a6240) 100%);
+  border-radius: 2px;
+  z-index: 1;
+  opacity: 0.6;
+  animation: mc-tile-battery 3.6s ease-in-out infinite;
+}
+
+@keyframes mc-tile-battery {
+  0%   { width: 18%; opacity: 0.4; }
+  100% { width: 78%; opacity: 0.7; }
+}
+
+/* — NO-FEE / $0 — big "0" mark with circle through it (forever-zero) */
+.motion-on [data-tile-type="no-fee"]::after {
+  height: 80px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><circle cx='40' cy='40' r='22' fill='none' stroke='%238a6240' stroke-width='3'/><line x1='22' y1='58' x2='58' y2='22' stroke='%238a6240' stroke-width='3' stroke-linecap='round'/></svg>");
+  background-position: 78% 80%;
+  background-size: 50px 50px;
+  opacity: 0.45;
+  animation: mc-tile-aperture 4s ease-in-out infinite;
+}
+
+/* — WATERPROOF — concentric ripple rings */
+.motion-on [data-tile-type="waterproof"]::after {
+  height: 80px;
+  background-image:
+    radial-gradient(circle at 50% 100%, transparent 0, transparent 12px, var(--color-walnut, #8a6240) 13px, var(--color-walnut, #8a6240) 14px, transparent 15px),
+    radial-gradient(circle at 50% 100%, transparent 0, transparent 22px, rgba(138, 98, 64, 0.65) 23px, rgba(138, 98, 64, 0.65) 24px, transparent 25px),
+    radial-gradient(circle at 50% 100%, transparent 0, transparent 32px, rgba(138, 98, 64, 0.4) 33px, rgba(138, 98, 64, 0.4) 34px, transparent 35px);
+  animation: mc-tile-ripple 2.8s ease-out infinite;
+}
+
+@keyframes mc-tile-ripple {
+  0%   { transform: scale(0.92); opacity: 0.3; }
+  100% { transform: scale(1.15); opacity: 0.6; }
+}
+
+/* — CERAMIC — diamond/facet pattern */
+.motion-on [data-tile-type="ceramic"]::after {
+  height: 70px;
+  background-image:
+    linear-gradient(45deg, transparent 48%, var(--color-walnut, #8a6240) 49%, var(--color-walnut, #8a6240) 50%, transparent 51%),
+    linear-gradient(-45deg, transparent 48%, var(--color-walnut, #8a6240) 49%, var(--color-walnut, #8a6240) 50%, transparent 51%);
+  background-size: 24px 24px;
+  background-position: 80% 70%, 80% 70%;
+  background-repeat: no-repeat;
+  opacity: 0.45;
+}
+
+/* — GESTURE — three swipe lines */
+.motion-on [data-tile-type="gesture"]::after {
+  height: 60px;
+  background-image:
+    linear-gradient(90deg, transparent 0%, transparent 30%, var(--color-walnut, #8a6240) 30%, var(--color-walnut, #8a6240) 75%, transparent 75%),
+    linear-gradient(90deg, transparent 0%, transparent 40%, rgba(138, 98, 64, 0.7) 40%, rgba(138, 98, 64, 0.7) 70%, transparent 70%),
+    linear-gradient(90deg, transparent 0%, transparent 50%, rgba(138, 98, 64, 0.4) 50%, rgba(138, 98, 64, 0.4) 65%, transparent 65%);
+  background-size: 100% 2px, 100% 2px, 100% 2px;
+  background-position: 0 22px, 0 32px, 0 42px;
+  background-repeat: no-repeat;
+  animation: mc-tile-swipe 2.4s ease-in-out infinite;
   opacity: 0.5;
+}
+
+@keyframes mc-tile-swipe {
+  0%, 100% { background-position-x: -10px, -10px, -10px; }
+  50%      { background-position-x: 10px, 10px, 10px; }
+}
+
+/* — TEMPERATURE — wavy thermal lines */
+.motion-on [data-tile-type="temp"]::after {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' preserveAspectRatio='none'><path d='M0 30 Q25 10 50 30 T100 30 T150 30 T200 30' fill='none' stroke='%238a6240' stroke-width='2'/></svg>");
+  background-repeat: repeat-x;
+  background-size: 200px 60px;
+  animation: mc-tile-pulse-x 5s linear infinite;
+  opacity: 0.45;
+}
+
+/* — MUSIC — 3 sound bars equalising */
+.motion-on [data-tile-type="music"]::after {
+  height: 50px;
+  bottom: 0.85rem;
+  left: auto;
+  right: 0.95rem;
+  width: 30px;
+  background-image:
+    linear-gradient(180deg, transparent 30%, var(--color-walnut, #8a6240) 30%),
+    linear-gradient(180deg, transparent 60%, var(--color-walnut, #8a6240) 60%),
+    linear-gradient(180deg, transparent 45%, var(--color-walnut, #8a6240) 45%);
+  background-size: 4px 100%, 4px 100%, 4px 100%;
+  background-position: 0 bottom, 12px bottom, 24px bottom;
+  background-repeat: no-repeat;
+  animation: mc-tile-eq 1.4s ease-in-out infinite;
+  opacity: 0.55;
+}
+
+@keyframes mc-tile-eq {
+  0%, 100% { transform: scaleY(1); transform-origin: center bottom; }
+  50%      { transform: scaleY(0.6); }
+}
+
+/* — GENERIC fallback — simple walnut underline */
+.motion-on [data-tile-type="generic"]::after,
+.motion-on .product-feature__bullet:not([data-tile-type])::after,
+.motion-on .product-science__bullet:not([data-tile-type])::after {
+  height: 2px;
+  bottom: 1rem;
+  left: 0.95rem;
+  right: 0.95rem;
+  background: linear-gradient(90deg, var(--color-walnut, #8a6240) 0%, transparent 100%);
+  opacity: 0.55;
 }
 
 /* Make the text content sit above the data-viz */

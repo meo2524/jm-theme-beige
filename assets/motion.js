@@ -263,7 +263,55 @@
     setInterval(update, 30000);
   }
 
-  /* ── 7. Boot ─────────────────────────────────────────────── */
+  /* ── 7. Bento tile classifier ────────────────────────────── */
+  /*
+   * Each .product-feature__bullet / .product-science__bullet is
+   * tagged with data-tile-type based on its text content. CSS
+   * then renders the right ambient data viz per tile.
+   *
+   * Keyword → type map. First match wins; check most specific
+   * patterns before generic ones.
+   */
+
+  var TILE_RULES = [
+    { type: 'hrv',        re: /\bhrv|heart\s*rate\s*variability/i },
+    { type: 'oxygen',     re: /\bspo[\s₂²]?2?\b|blood\s+oxygen|oxygen\s+saturation/i },
+    { type: 'sleep',      re: /\bsleep\b/i },
+    { type: 'stress',     re: /\bstress|recovery|push.+rest/i },
+    { type: 'steps',      re: /\bsteps?\b|distance|calor|workout/i },
+    { type: 'camera',     re: /\bcamera|photo|remote.+wrist/i },
+    { type: 'battery',    re: /\bbattery|day battery|never.+miss/i },
+    { type: 'no-fee',     re: /\bsubscription|\$0|per\s*month|own\s+your\s+(?:data|health)/i },
+    { type: 'waterproof', re: /\bwaterproof|water[\s-]?resistant|atm\b|swim|shower|sweat/i },
+    { type: 'ceramic',    re: /\bceramic|zirconia|jewel|sapphire|titanium/i },
+    { type: 'gesture',    re: /\bgesture|tap|swipe/i },
+    { type: 'music',      re: /\bmusic|playback|control music/i },
+    { type: 'gps',        re: /\bgps|location|map/i },
+    { type: 'temp',       re: /\btemperature|skin temp|overnight temp/i }
+  ];
+
+  function classifyTile(text) {
+    var t = (text || '').toLowerCase();
+    for (var i = 0; i < TILE_RULES.length; i++) {
+      if (TILE_RULES[i].re.test(t)) return TILE_RULES[i].type;
+    }
+    return 'generic';
+  }
+
+  function initBentoTiles() {
+    var tiles = document.querySelectorAll(
+      '.product-feature__bullet, .product-science__bullet'
+    );
+    if (!tiles.length) return;
+
+    tiles.forEach(function (tile) {
+      if (tile.dataset.tileType) return; // don't re-classify on re-init
+      var text = tile.textContent || '';
+      tile.dataset.tileType = classifyTile(text);
+    });
+  }
+
+  /* ── 8. Boot ─────────────────────────────────────────────── */
 
   function boot() {
     initReveal();
@@ -272,6 +320,7 @@
     initScrollProgress();
     initSpecTooltips();
     initMdayCountdown();
+    initBentoTiles();
   }
 
   if (document.readyState === 'loading') {
