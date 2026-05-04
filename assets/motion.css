@@ -637,23 +637,26 @@
 /* ── 15. Trust strip — make it pop ────────────────────────── */
 
 .motion-on .trust-strip {
-  gap: 0.4rem !important;
+  gap: 0 !important;
   padding: 0.85rem 1rem !important;
   background: rgba(138, 98, 64, 0.05);
   border: 1px solid rgba(138, 98, 64, 0.15);
   border-radius: 10px;
   margin-bottom: 1.5rem !important;
+  justify-content: space-between;
 }
 
 .motion-on .mc-trust-item {
-  font-size: 0.92rem !important;
+  font-size: 0.75rem !important;
   font-weight: 500 !important;
   color: var(--color-espresso, #2D2D2D) !important;
   padding: 0.35rem 0 !important;
   display: flex !important;
   align-items: center !important;
-  gap: 0.7rem !important;
+  gap: 0.5rem !important;
   transition: transform 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+  flex: 0 0 auto;
 }
 
 .motion-on .mc-trust-item .mc-trust-icon {
@@ -679,7 +682,7 @@
 }
 
 .motion-on .mc-trust-item--hero span {
-  font-size: 0.95rem !important;
+  font-size: 0.78rem !important;
   font-weight: 700 !important;
   color: var(--color-walnut, #8a6240) !important;
   letter-spacing: 0.005em;
