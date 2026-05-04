@@ -11,12 +11,16 @@
    Applied unconditionally — `.motion-on` is on body and can't be
    used as a parent selector for html. This is a layout fix, not
    motion-gated. */
-html {
-  scrollbar-gutter: stable;
-  /* Fallback for browsers without scrollbar-gutter — force scroll
-     channel to always be present */
-  overflow-y: scroll;
+@media (min-width: 768px) {
+  html {
+    scrollbar-gutter: stable;
+    /* Fallback for browsers without scrollbar-gutter — force scroll
+       channel to always be present */
+    overflow-y: scroll;
+  }
 }
+/* On mobile, scrollbars are overlay (zero width) so reserving a
+   gutter just shifts content left of centre. Skip it. */
 
 /* Prevent any rogue child element (marquee, banner) from causing
    horizontal page scroll on mobile. Apply to body ONLY — not html —
