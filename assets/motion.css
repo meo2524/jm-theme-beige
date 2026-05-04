@@ -675,10 +675,10 @@
 }
 
 /* Fixed height so card never reflows between slides regardless of quote length.
-   10rem fits stars (0.45) + 3-line quote @1.05rem/1.55lh (~4.9) + footer (~2.6) + breathing room. */
+   12rem fits stars (0.45) + 4-line quote @1.05rem/1.55lh (~6.5) + footer (~2.6) + breathing room. */
 .motion-on .prc-track {
-  height: 10rem !important;
-  min-height: 10rem;
+  height: 12rem !important;
+  min-height: 12rem;
   position: relative !important;
   overflow: hidden;
 }
@@ -703,14 +703,14 @@
   color: var(--color-espresso, #2D2D2D) !important;
   font-style: italic;
   display: -webkit-box !important;
-  -webkit-line-clamp: 3 !important;
+  -webkit-line-clamp: 4 !important;
   -webkit-box-orient: vertical !important;
   overflow: hidden;
   position: relative;
   padding-left: 0.85rem;
   border-left: 2px solid var(--color-walnut, #8a6240);
-  /* Reserve a 3-line block so 1- and 2-line quotes occupy the same height */
-  min-height: calc(1.05rem * 1.55 * 3);
+  /* Reserve a 4-line block so quotes of any 1–4 line length occupy the same height */
+  min-height: calc(1.05rem * 1.55 * 4);
 }
 
 .motion-on .prc-footer {
