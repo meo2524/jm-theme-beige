@@ -808,55 +808,10 @@
 
 .motion-on .kaching-bundles__bar--selected .kaching-bundles__bar-container {
   background: #f8f5f0 !important;
-  border: 2px solid transparent !important;
-  background-clip: padding-box !important;
+  border-color: var(--color-walnut, #8a6240) !important;
+  border-width: 2px !important;
   box-shadow: 0 8px 26px -10px rgba(138, 98, 64, 0.4) !important;
   transform: translateY(-1px);
-  position: relative;
-}
-
-/* Animated walnut conic border — runs around the selected card edge */
-.motion-on .kaching-bundles__bar--selected .kaching-bundles__bar-container::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  padding: 2px;
-  background: conic-gradient(
-    from 0deg,
-    var(--color-walnut, #8a6240) 0deg,
-    rgba(138, 98, 64, 0.15) 45deg,
-    var(--color-walnut, #8a6240) 90deg,
-    rgba(138, 98, 64, 0.15) 135deg,
-    var(--color-walnut, #8a6240) 180deg,
-    rgba(138, 98, 64, 0.15) 225deg,
-    var(--color-walnut, #8a6240) 270deg,
-    rgba(138, 98, 64, 0.15) 315deg,
-    var(--color-walnut, #8a6240) 360deg
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  animation: mc-bundle-border 6s linear infinite;
-  pointer-events: none;
-  z-index: 0;
-}
-
-@keyframes mc-bundle-border {
-  to { transform: rotate(360deg); }
-}
-
-/* Keep card content above the rotating border */
-.motion-on .kaching-bundles__bar--selected .kaching-bundles__bar-container > * {
-  position: relative;
-  z-index: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .motion-on .kaching-bundles__bar--selected .kaching-bundles__bar-container::before {
-    animation: none;
-    background: var(--color-walnut, #8a6240);
-  }
 }
 
 .motion-on .kaching-bundles__bar-container:hover {
@@ -1127,27 +1082,81 @@
   letter-spacing: 0.02em;
 }
 
-/* Free gift / perk text under each card — only the outer wrapper carries the divider */
+/* Free gift / perk callout — reads like a bonus deal */
 .motion-on .kaching-bundles__free-gift {
-  margin-top: 0.65rem !important;
-  padding-top: 0.65rem !important;
-  border-top: 1px solid rgba(138, 98, 64, 0.18);
+  margin: 0.85rem -0.4rem -0.4rem !important;
+  padding: 0.7rem 0.85rem !important;
+  border: 1px solid rgba(138, 98, 64, 0.32) !important;
+  border-radius: 8px !important;
+  background: linear-gradient(135deg, rgba(138, 98, 64, 0.10) 0%, rgba(138, 98, 64, 0.04) 100%) !important;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 8px -4px rgba(138, 98, 64, 0.25);
 }
 
-.motion-on .kaching-bundles__free-gift__text {
-  font-size: 0.85rem !important;
-  font-weight: 500 !important;
-  color: var(--color-walnut, #8a6240) !important;
+/* "+ FREE" chip top-left of the callout */
+.motion-on .kaching-bundles__free-gift::before {
+  content: "+ FREE";
+  display: inline-block;
+  font-family: var(--font-label, var(--font-body));
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: #fff;
+  background: var(--color-walnut, #8a6240);
+  padding: 0.18rem 0.45rem;
+  border-radius: 3px;
+  margin-right: 0.55rem;
+  vertical-align: 1px;
+  box-shadow: 0 2px 6px -2px rgba(138, 98, 64, 0.55);
+  animation: mc-free-pulse 2.6s ease-in-out infinite;
 }
 
-/* Strip any inherited dashed/duplicate dividers on inner pieces */
+@keyframes mc-free-pulse {
+  0%, 100% { box-shadow: 0 2px 6px -2px rgba(138, 98, 64, 0.55); }
+  50%      { box-shadow: 0 2px 12px 0 rgba(138, 98, 64, 0.85); }
+}
+
+/* The text itself — bigger, bolder, espresso so it reads as substantive */
+.motion-on .kaching-bundles__free-gift__text,
+.motion-on .kaching-bundles__free-gift__content {
+  font-family: var(--font-body) !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  color: var(--color-espresso, #2D2D2D) !important;
+  letter-spacing: -0.005em;
+  display: inline !important;
+}
+
+/* Strip any inherited dividers on inner pieces */
 .motion-on .kaching-bundles__free-gift__main,
 .motion-on .kaching-bundles__free-gift__link,
-.motion-on .kaching-bundles__free-gift__image,
-.motion-on .kaching-bundles__free-gift__content {
+.motion-on .kaching-bundles__free-gift__image {
   border: 0 !important;
   margin-top: 0 !important;
   padding-top: 0 !important;
+  display: inline !important;
+}
+
+/* Subtle shine sweep across the callout every 5s */
+.motion-on .kaching-bundles__free-gift::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 65%
+  );
+  transform: translateX(-130%);
+  animation: mc-shine 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-on .kaching-bundles__free-gift::before,
+  .motion-on .kaching-bundles__free-gift::after { animation: none; }
 }
 
 /* "Most Popular" badge — keep position, amp the look */
