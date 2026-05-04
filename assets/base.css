@@ -1072,6 +1072,7 @@ p {
   animation: mend-marquee 60s linear infinite;
   gap: 64px;
   padding-right: 64px;
+  will-change: transform;
 }
 @media (prefers-reduced-motion: reduce) {
   .marquee { animation: none; }
