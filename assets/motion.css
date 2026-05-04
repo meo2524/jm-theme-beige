@@ -1594,9 +1594,7 @@ html {
 /* ── 21. Photo gallery — tighten + pad sides on mobile ────── */
 
 /* Kill the 1rem inner padding around the image so the photo fills
-   the slide. Tighter aspect ratio (4:5) on mobile so the image
-   doesn't sit in a square box with letterbox bands. */
-
+   the slide. */
 .motion-on .gallery-slide__img {
   padding: 0 !important;
   object-fit: cover !important;
@@ -1604,25 +1602,13 @@ html {
 
 @media (max-width: 767px) {
   /* Pad the gallery sides to match the 1.25rem gutter used by the
-     rest of the page sections — no more flush-to-viewport edges. */
+     rest of the page sections. Padding goes on .product-gallery,
+     NOT on the inner track — the track must keep overflow-x: auto
+     and 100vw-relative widths intact for scroll-snap to work. */
   .motion-on .product-gallery {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
     box-sizing: border-box;
-  }
-
-  /* Taller aspect to show more of the ring image, less bone space.
-     Border-radius applied via clip-path so we don't kill the
-     overflow-x: auto that scroll-snap swipe depends on. */
-  .motion-on .gallery-track {
-    aspect-ratio: 4 / 5 !important;
-    max-height: none !important;
-    border-radius: 10px !important;
-    /* DO NOT set overflow:hidden — base.css already sets overflow-x:auto
-       on .gallery-track for scroll-snap swipe. Hiding overflow breaks
-       the carousel. clip-path gives us rounded corners without
-       interfering with the scroll container. */
-    -webkit-mask-image: -webkit-radial-gradient(white, black);
   }
 
   /* Arrows pulled inward so they don't look cropped at viewport edges */
