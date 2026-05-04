@@ -581,6 +581,25 @@
         '<source src="https://cdn.shopify.com/videos/c/vp/291540b377714ee29b2d878d6fa6ebf1/291540b377714ee29b2d878d6fa6ebf1.HD-720p-1.6Mbps-83318428.mp4" type="video/mp4">';
       wrapper.appendChild(video);
 
+      /* iOS Low Power Mode (and some Android browsers) block autoplay
+         even on muted+playsinline videos. Try to play immediately, and
+         retry on the first user interaction so the video kicks in as
+         soon as the user touches the screen. */
+      var tryPlay = function () {
+        var p = video.play();
+        if (p && typeof p.catch === 'function') p.catch(function () {});
+      };
+      tryPlay();
+      var resumeOnce = function () {
+        tryPlay();
+        document.removeEventListener('touchstart', resumeOnce);
+        document.removeEventListener('click', resumeOnce);
+        document.removeEventListener('scroll', resumeOnce);
+      };
+      document.addEventListener('touchstart', resumeOnce, { passive: true });
+      document.addEventListener('click', resumeOnce);
+      document.addEventListener('scroll', resumeOnce, { passive: true });
+
       var overlay = document.createElement('div');
       overlay.className = 'mc-mobile-hero__overlay';
       overlay.setAttribute('aria-hidden', 'true');
@@ -610,6 +629,32 @@
     if (wrapper.children.length) {
       gallery.parentElement.insertBefore(wrapper, gallery);
     }
+  })();
+  </script>
+
+  <script>
+  /* Global autoplay rescue: iOS Low Power Mode and some Android
+     browsers block muted-autoplay. Retry .play() on every <video
+     autoplay> on the page on first user interaction. */
+  (function () {
+    var nudge = function () {
+      document.querySelectorAll('video[autoplay]').forEach(function (v) {
+        if (v.paused) {
+          var p = v.play();
+          if (p && typeof p.catch === 'function') p.catch(function () {});
+        }
+      });
+    };
+    nudge();
+    var once = function () {
+      nudge();
+      document.removeEventListener('touchstart', once);
+      document.removeEventListener('click', once);
+      document.removeEventListener('scroll', once);
+    };
+    document.addEventListener('touchstart', once, { passive: true });
+    document.addEventListener('click', once);
+    document.addEventListener('scroll', once, { passive: true });
   })();
   </script>
 
