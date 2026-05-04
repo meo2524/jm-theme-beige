@@ -1,0 +1,398 @@
+/* ════════════════════════════════════════════════════════════
+   MOTION.CSS — Mend & Co
+   2026-tech motion accents. Companion to motion.js.
+   Palette-only — uses existing --color-walnut / --color-bone.
+   ════════════════════════════════════════════════════════════ */
+
+/* ── 1. Scroll progress bar (top of viewport) ─────────────── */
+
+[data-scroll-progress] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-walnut, #8a6240);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  z-index: 999;
+  pointer-events: none;
+  will-change: transform;
+  transition: transform 0.08s linear;
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-scroll-progress] { transition: none; }
+}
+
+/* ── 2. Word-reveal (hero headlines) ──────────────────────── */
+
+[data-word-reveal] {
+  /* reset any data-reveal opacity rule that might collide */
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+[data-word-reveal] .word-reveal__word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-word-reveal].is-visible .word-reveal__word {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger up to 12 words; rest catch up at 720ms */
+[data-word-reveal].is-visible .word-reveal__word:nth-child(1)  { transition-delay: 0ms; }
+[data-word-reveal].is-visible .word-reveal__word:nth-child(2)  { transition-delay: 60ms; }
+[data-word-reveal].is-visible .word-reveal__word:nth-child(3)  { transition-delay: 120ms; }
+[data-word-reveal].is-visible .word-reveal__word:nth-child(4)  { transition-delay: 180ms; }
+[data-word-reveal].is-visible .word-reveal__word:nth-child(5)  { transition-delay: 240ms; }
+[data-word-reveal].is-visible .word-reveal__word:nth-child(6)  { transition-delay: 300ms; }
+[data-word-reveal].is-visible .word-reveal__word:nth-child(7)  { transition-delay: 360ms; }
+[data-word-reveal].is-visible .word-reveal__word:nth-child(8)  { transition-delay: 420ms; }
+[data-word-reveal].is-visible .word-reveal__word:nth-child(9)  { transition-delay: 480ms; }
+[data-word-reveal].is-visible .word-reveal__word:nth-child(10) { transition-delay: 540ms; }
+[data-word-reveal].is-visible .word-reveal__word:nth-child(11) { transition-delay: 600ms; }
+[data-word-reveal].is-visible .word-reveal__word:nth-child(12) { transition-delay: 660ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-word-reveal] .word-reveal__word {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── 3. Count-up stat (no FOUC) ───────────────────────────── */
+
+[data-count-up] {
+  font-variant-numeric: tabular-nums;
+  display: inline-block;
+}
+
+/* ── 4. Live pulse dot (trust / in-stock cue) ─────────────── */
+
+.mc-pulse-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs, 0.75rem);
+  letter-spacing: 0.02em;
+  color: var(--color-taupe, #6f5d4d);
+}
+
+.mc-pulse-dot::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-walnut, #8a6240);
+  box-shadow: 0 0 0 0 rgba(138, 98, 64, 0.55);
+  animation: mc-pulse 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  flex-shrink: 0;
+}
+
+@keyframes mc-pulse {
+  0%   { box-shadow: 0 0 0 0   rgba(138, 98, 64, 0.55); }
+  70%  { box-shadow: 0 0 0 10px rgba(138, 98, 64, 0); }
+  100% { box-shadow: 0 0 0 0   rgba(138, 98, 64, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mc-pulse-dot::before { animation: none; }
+}
+
+/* ── 5. Shine sweep on ATC button ─────────────────────────── */
+/*
+ * Adds a slow diagonal highlight that runs across the button
+ * every ~4s. Applied via .mc-shine modifier so we can opt-in
+ * on btn-atc and sticky-atc__btn without affecting other buttons.
+ */
+
+.mc-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.mc-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  animation: mc-shine 4.2s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes mc-shine {
+  0%   { transform: translateX(-120%); }
+  60%  { transform: translateX(120%); }
+  100% { transform: translateX(120%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mc-shine::after { animation: none; opacity: 0; }
+}
+
+/* ── 6. Section numbers (01 / 02 / 03 in bronze) ──────────── */
+/*
+ * Drop on a heading/section: <h2 data-section-num="01">Title</h2>
+ * Number sits above the heading in tabular-nums, faint bronze.
+ */
+
+[data-section-num] {
+  position: relative;
+}
+
+[data-section-num]::before {
+  content: attr(data-section-num);
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--color-walnut, #8a6240);
+  opacity: 0.6;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 0.6em;
+  text-transform: uppercase;
+}
+
+/* ── 7. Sticky ATC: glass blur + shine overlay ───────────── */
+/*
+ * Augments the existing component-sticky-atc.css. We don't
+ * change colours — just add the 2026 glass texture and a
+ * subtle inward shadow at the top edge.
+ */
+
+.sticky-atc__bar {
+  background-color: rgba(20, 16, 13, 0.78) !important;
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  backdrop-filter: saturate(140%) blur(14px);
+  box-shadow: 0 -10px 30px -12px rgba(0, 0, 0, 0.35);
+}
+
+@supports not ((backdrop-filter: blur(14px)) or (-webkit-backdrop-filter: blur(14px))) {
+  .sticky-atc__bar {
+    background-color: var(--color-black) !important;
+  }
+}
+
+/* ── 8. Spec pills emphasis (mc-spec-pill) ────────────────── */
+
+.motion-on .mc-spec-pill {
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+  position: relative;
+  cursor: default;
+}
+
+.motion-on .mc-spec-pill:hover,
+.motion-on .mc-spec-pill:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px -6px rgba(138, 98, 64, 0.45);
+}
+
+.motion-on .mc-spec-pill:active {
+  transform: scale(0.97);
+}
+
+.motion-on .mc-spec-num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Hero pill — $0 / month — gets a slow conic accent */
+.motion-on .mc-spec-pill--hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.motion-on .mc-spec-pill--hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    var(--color-walnut, #8a6240) 60deg,
+    transparent 120deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  animation: mc-conic-rotate 6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes mc-conic-rotate {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-on .mc-spec-pill--hero::before { animation: none; }
+}
+
+/* Icon micro-animations on enter */
+.motion-on [data-reveal].is-visible .mc-spec-icon--battery {
+  animation: mc-spin-pulse 1.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s 1;
+}
+.motion-on [data-reveal].is-visible .mc-spec-icon--water {
+  animation: mc-bob 1.8s ease-in-out 0.2s 1;
+}
+.motion-on [data-reveal].is-visible .mc-spec-icon--zero {
+  animation: mc-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s 1;
+}
+
+@keyframes mc-spin-pulse {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.2) rotate(15deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+@keyframes mc-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+@keyframes mc-pop {
+  0% { transform: scale(0.7); }
+  60% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+
+/* ── 9. Spec pill tap tooltip ─────────────────────────────── */
+
+.motion-on .mc-spec-pill[data-spec-tip] {
+  cursor: pointer;
+}
+
+.motion-on .mc-spec-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--color-black, #14100d);
+  color: var(--color-bone, #f5efe6);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+  padding: 0.55em 0.8em;
+  border-radius: 6px;
+  white-space: nowrap;
+  max-width: min(80vw, 280px);
+  white-space: normal;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 30;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  box-shadow: 0 8px 24px -10px rgba(0, 0, 0, 0.4);
+}
+
+.motion-on .mc-spec-pill.is-tip-open .mc-spec-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.motion-on .mc-spec-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--color-black, #14100d);
+}
+
+/* ── 10. Trust strip emphasis (mc-trust-item) ─────────────── */
+
+.motion-on .mc-trust-pulse {
+  margin: 0 0 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-walnut, #8a6240);
+  letter-spacing: 0.01em;
+}
+
+.motion-on .mc-trust-item--hero span {
+  font-weight: 600;
+  color: var(--color-espresso, #2D2D2D);
+  position: relative;
+}
+
+.motion-on .mc-trust-item--hero span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--color-walnut, #8a6240);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.4s;
+}
+
+.motion-on [data-reveal].is-visible.mc-trust-item--hero span::after {
+  transform: scaleX(1);
+}
+
+/* SVG draw-in animation on trust icons */
+.motion-on .mc-trust-icon .mc-draw {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 1.1s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.motion-on [data-reveal].is-visible .mc-trust-icon .mc-draw {
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-on .mc-trust-icon .mc-draw {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+  .motion-on .mc-trust-item--hero span::after { transform: scaleX(1); transition: none; }
+}
+
+/* ── 11. Magnetic press feedback on ATC ────────────────────── */
+
+.btn-atc,
+.sticky-atc__btn {
+  transition:
+    background-color 0.18s ease,
+    transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-atc:active,
+.sticky-atc__btn:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-atc, .sticky-atc__btn { transition: background-color 0.18s ease; }
+  .btn-atc:active, .sticky-atc__btn:active { transform: none; }
+}

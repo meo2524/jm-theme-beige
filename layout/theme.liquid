@@ -247,6 +247,11 @@
 
   {{- 'component-cart-drawer.css' | asset_url | stylesheet_tag -}}
 
+  {%- if template.name == 'product' and settings.motion_enabled -%}
+    {{- 'component-sticky-atc.css' | asset_url | stylesheet_tag -}}
+    {{- 'motion.css' | asset_url | stylesheet_tag -}}
+  {%- endif -%}
+
   {{ content_for_header }}
 
   {%- comment -%} ── Google Analytics 4 ──────────────────────────── {%- endcomment -%}
@@ -364,7 +369,11 @@
 
 </head>
 
-<body class="template-{{ template.name | replace: '/', '-' }}{% if customer %} customer-logged-in{% endif %}">
+<body class="template-{{ template.name | replace: '/', '-' }}{% if customer %} customer-logged-in{% endif %}{% if settings.motion_enabled %} motion-on{% endif %}">
+
+  {%- if template.name == 'product' and settings.motion_enabled -%}
+    <div data-scroll-progress aria-hidden="true"></div>
+  {%- endif -%}
 
 
   <!-- ============================================================
@@ -403,6 +412,12 @@
 
   <!-- Core theme — mobile menu, quantity, variant switching -->
   <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+  <!-- Motion layer — reveals, counters, scroll progress (product page) -->
+  {%- if template.name == 'product' and settings.motion_enabled -%}
+    <script src="{{ 'motion.js' | asset_url }}" defer></script>
+    <script src="{{ 'component-sticky-atc.js' | asset_url }}" defer></script>
+  {%- endif -%}
 
   <!-- Back to top button — mobile only -->
   <button id="back-to-top" class="back-to-top" aria-label="Back to top" hidden>

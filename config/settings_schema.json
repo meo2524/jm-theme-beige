@@ -9,6 +9,26 @@
   },
 
   {
+    "name": "Motion (2026 PDP)",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Motion layer — kill switch"
+      },
+      {
+        "type": "paragraph",
+        "content": "Master toggle for the 2026-tech motion layer on the smart-band PDP (scroll reveals, sticky ATC, animated stat counters, hero word reveal, pulse dots, shine sweep). When OFF, no motion CSS/JS is loaded — fully reversible without redeploy."
+      },
+      {
+        "type": "checkbox",
+        "id": "motion_enabled",
+        "label": "Enable PDP motion layer",
+        "default": false
+      }
+    ]
+  },
+
+  {
     "name": "Brand colours",
     "settings": [
       {
