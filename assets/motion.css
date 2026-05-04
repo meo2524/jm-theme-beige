@@ -792,6 +792,32 @@
   margin-bottom: 1.5rem;
 }
 
+/* "BUNDLE & SAVE" header — pop and read instantly */
+.motion-on .kaching-bundles__block-title {
+  font-family: var(--font-label, var(--font-body)) !important;
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  color: var(--color-espresso, #2D2D2D) !important;
+  text-align: center;
+  margin: 0 0 0.85rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.85rem !important;
+  justify-content: center;
+}
+
+.motion-on .kaching-bundles__block-title::before,
+.motion-on .kaching-bundles__block-title::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--color-walnut, #8a6240) 50%, transparent);
+  max-width: 90px;
+  opacity: 0.85;
+}
+
 .motion-on .kaching-bundles__bars {
   display: flex !important;
   flex-direction: column;
@@ -915,15 +941,18 @@
   transform: translate(-50%, -50%) scale(1) !important;
 }
 
-/* "Color, Size" label */
+/* "Color, Size" label — clear header sitting above the variant rows */
 .motion-on .kaching-bundles__bar-variant-names {
-  font-size: 0.78rem !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.1em !important;
+  display: block !important;
+  font-family: var(--font-label, var(--font-body)) !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.18em !important;
   text-transform: uppercase !important;
-  color: var(--color-walnut, #8a6240) !important;
-  margin-top: 0.85rem !important;
-  margin-bottom: 0.5rem !important;
+  color: var(--color-espresso, #2D2D2D) !important;
+  margin: 1rem 0 0.6rem !important;
+  padding-bottom: 0.45rem !important;
+  border-bottom: 1px solid rgba(138, 98, 64, 0.22);
 }
 
 /* Variant row — single-line layout: [#N] [colour pill] [size pill]
