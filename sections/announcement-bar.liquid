@@ -50,6 +50,10 @@
     align-items: center;
     width: 100%;
     box-sizing: border-box;
+    /* contain: layout paint tells iOS Safari that nothing inside this
+       element affects external layout. Prevents the max-content marquee
+       from expanding the page layout viewport on mobile. */
+    contain: layout paint;
     font-family: var(--font-mono);
     font-size: 12px;
     letter-spacing: 0.16em;

@@ -364,6 +364,21 @@
       .jdgm-rev__header {
         flex-wrap: wrap;
       }
+
+      /* Judge.me v2 widget uses jm-* class names instead of jdgm-*.
+         These inner elements have hardcoded 1200px widths and must
+         be explicitly constrained so they don't expand the iOS
+         layout viewport and shift the entire page. */
+      .jm-review-widget,
+      .jm-review-widget__header-and-body,
+      .jm-stack,
+      .jm-media-preview,
+      .jm-media-grid {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+      }
     }
   </style>
 
