@@ -1872,6 +1872,159 @@ html {
   transform: translateY(0);
 }
 
+/* ── 20d. "Install the app" — sibling CTA box under size guide ── */
+/* Uses native <details>/<summary> so it expands inline to reveal
+   App Store + Google Play badges. Visual treatment mirrors the
+   size CTA but with a phone icon and a downward chevron. */
+
+.accordion__item--app {
+  border: 0 !important;
+  background: linear-gradient(135deg, rgba(138, 98, 64, 0.10) 0%, rgba(138, 98, 64, 0.04) 100%);
+  border-radius: 12px !important;
+  margin: 0.5rem 0 1.25rem !important;
+  box-shadow: 0 6px 20px -10px rgba(138, 98, 64, 0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+.accordion__item--app::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--color-walnut, #8a6240) 50%, transparent 100%);
+  opacity: 0.7;
+  z-index: 1;
+}
+
+.accordion__item--app > summary.accordion__trigger {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0.75rem !important;
+  padding: 1.1rem 1.25rem !important;
+  background: transparent !important;
+  border: 1.5px solid rgba(138, 98, 64, 0.35) !important;
+  border-radius: 12px !important;
+  font-family: var(--font-label, var(--font-body)) !important;
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--color-walnut, #8a6240) !important;
+  cursor: pointer;
+  list-style: none;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+/* Hide native disclosure marker */
+.accordion__item--app > summary::-webkit-details-marker { display: none; }
+.accordion__item--app > summary { list-style: none; }
+
+.accordion__item--app > summary > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Phone icon before label */
+.accordion__item--app > summary > span:first-child::before {
+  content: "";
+  width: 16px;
+  height: 18px;
+  flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='2' width='14' height='20' rx='2' ry='2'/><line x1='12' y1='18' x2='12' y2='18'/></svg>") no-repeat center / contain;
+          mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='2' width='14' height='20' rx='2' ry='2'/><line x1='12' y1='18' x2='12' y2='18'/></svg>") no-repeat center / contain;
+}
+
+.accordion__item--app .accordion__chevron {
+  width: 20px !important;
+  height: 20px !important;
+  transition: transform 0.25s ease;
+}
+
+.accordion__item--app[open] .accordion__chevron {
+  transform: rotate(180deg);
+}
+
+.accordion__item--app > summary:hover {
+  border-color: var(--color-walnut, #8a6240) !important;
+  background: rgba(138, 98, 64, 0.10) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -8px rgba(138, 98, 64, 0.5);
+}
+
+.accordion__item--app > summary:active {
+  transform: translateY(0);
+}
+
+.accordion__panel--app {
+  padding: 1rem 1.25rem 1.25rem !important;
+  display: block !important;
+  position: relative;
+  z-index: 0;
+}
+
+.accordion__app-blurb {
+  margin: 0 0 1rem !important;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--color-olive, #5a5040);
+  font-family: var(--font-label, var(--font-body));
+}
+
+.accordion__app-badges {
+  display: flex;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+}
+
+.accordion__app-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #1f1d1a;
+  color: #f5efe4;
+  text-decoration: none;
+  padding: 0.625rem 1rem;
+  border-radius: 10px;
+  flex: 1 1 0;
+  min-width: 140px;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.accordion__app-badge:hover {
+  background: #3a3632;
+  transform: translateY(-1px);
+}
+
+.accordion__app-badge svg { flex-shrink: 0; opacity: 0.95; }
+
+.accordion__app-badge-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  text-align: left;
+}
+
+.accordion__app-badge-sub {
+  font-size: 0.5625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 3px;
+}
+
+.accordion__app-badge-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
 /* Hide the empty panel — it never expands (modal is the real action) */
 .motion-on .accordion__item--size .accordion__panel {
   display: none !important;

@@ -570,6 +570,43 @@
           </div>
 
         {%- endfor -%}
+
+        {%- comment -%} -- Install the app CTA (smart-band only) -- {%- endcomment -%}
+        {%- if product.handle contains 'smart-band' -%}
+          <details class="accordion__item accordion__item--app">
+            <summary class="accordion__trigger">
+              <span>Install the app</span>
+              <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </summary>
+            <div class="accordion__panel accordion__panel--app">
+              <p class="accordion__app-blurb">Free forever. Sync your N&deg;01 to see sleep stages, HRV, recovery score and SpO&#8322; on one clean dashboard.</p>
+              <div class="accordion__app-badges">
+                <a href="https://apps.apple.com/nz/app/qring/id6473672621" target="_blank" rel="noopener" class="accordion__app-badge">
+                  <svg width="20" height="24" viewBox="0 0 22 26" fill="currentColor" aria-hidden="true">
+                    <path d="M18.05 13.77c-.03-3.2 2.62-4.75 2.74-4.82-1.5-2.19-3.82-2.49-4.64-2.52-1.97-.2-3.86 1.17-4.86 1.17-1.01 0-2.57-1.14-4.23-1.11C4.9 6.52 2.87 7.7 1.76 9.57c-2.27 3.94-.58 9.76 1.63 12.95 1.08 1.56 2.36 3.31 4.04 3.25 1.63-.07 2.24-1.05 4.2-1.05 1.96 0 2.52 1.05 4.24 1.02 1.75-.03 2.85-1.59 3.92-3.16 1.24-1.81 1.75-3.57 1.77-3.66-.04-.02-3.48-1.33-3.51-5.15zM14.78 4.28C15.67 3.2 16.27 1.7 16.1 0c-1.47.06-3.27.98-4.32 2.04-.95.99-1.77 2.57-1.55 4.08 1.63.13 3.3-.83 4.55-1.84z"/>
+                  </svg>
+                  <span class="accordion__app-badge-copy">
+                    <span class="accordion__app-badge-sub">Download on the</span>
+                    <span class="accordion__app-badge-name">App Store</span>
+                  </span>
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.app.cq.ring&amp;hl=en_NZ" target="_blank" rel="noopener" class="accordion__app-badge">
+                  <svg width="20" height="22" viewBox="0 0 22 24" fill="currentColor" aria-hidden="true">
+                    <path d="M1.22.48C.8.7.5 1.18.5 1.8v20.4c0 .62.3 1.1.72 1.32l.1.06 11.42-11.42v-.27L1.32.42l-.1.06zm15.56 15.7l-3.8-3.8v-.27l3.8-3.8.09.05 4.5 2.56c1.28.73 1.28 1.92 0 2.65l-4.5 2.56-.09.05zM16.88 16.28L13 12.39 1.22 24.17c.42.24.98.2 1.67-.2l14-7.69"/>
+                    <path d="M16.88 8.52L2.89.83C2.2.43 1.64.39 1.22.63L13 12.41l3.88-3.89z"/>
+                  </svg>
+                  <span class="accordion__app-badge-copy">
+                    <span class="accordion__app-badge-sub">Get it on</span>
+                    <span class="accordion__app-badge-name">Google Play</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </details>
+        {%- endif -%}
+
       </div>
       {%- comment -%} /accordion {%- endcomment -%}
 
