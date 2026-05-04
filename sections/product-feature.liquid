@@ -15,6 +15,7 @@
     <div class="product-feature__grid{% if reverse %} product-feature__grid--reverse{% endif %}">
 
       <!-- Media (video takes priority over image) -->
+      {%- assign video_y = section.settings.video_position_y | default: 50 -%}
       <div class="product-feature__media">
         {%- if video_url != blank -%}
           <video
@@ -25,6 +26,7 @@
             playsinline
             preload="metadata"
             class="product-feature__video"
+            style="object-position: 50% {{ video_y }}%;"
             aria-label="{{ heading | escape }}"
           ></video>
         {%- elsif image != blank -%}
@@ -224,6 +226,17 @@
       "id": "video_url",
       "label": "Video URL (MP4)",
       "info": "Paste a hosted MP4 URL. Takes priority over image. Plays silently on loop."
+    },
+    {
+      "type": "range",
+      "id": "video_position_y",
+      "label": "Video vertical crop position",
+      "info": "0 = show top of video, 50 = centred (default), 100 = show bottom. Lower this if too much of the bottom of the frame is showing.",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 50,
+      "unit": "%"
     },
     {
       "type": "image_picker",
