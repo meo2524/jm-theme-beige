@@ -1591,7 +1591,44 @@ html {
   font-weight: 700;
 }
 
-/* ── 21. Magnetic press feedback on ATC ────────────────────── */
+/* ── 21. Photo gallery — tighten + pad sides on mobile ────── */
+
+/* Kill the 1rem inner padding around the image so the photo fills
+   the slide. Tighter aspect ratio (4:5) on mobile so the image
+   doesn't sit in a square box with letterbox bands. */
+
+.motion-on .gallery-slide__img {
+  padding: 0 !important;
+  object-fit: cover !important;
+}
+
+@media (max-width: 767px) {
+  /* Pad the gallery sides to match the 1.25rem gutter used by the
+     rest of the page sections — no more flush-to-viewport edges. */
+  .motion-on .product-gallery {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    box-sizing: border-box;
+  }
+
+  /* Taller aspect to show more of the ring image, less bone space */
+  .motion-on .gallery-track {
+    aspect-ratio: 4 / 5 !important;
+    max-height: none !important;
+    border-radius: 10px !important;
+    overflow: hidden;
+  }
+
+  /* Arrows pulled inward so they don't look cropped at viewport edges */
+  .motion-on .gallery-arrow--prev {
+    left: 16px !important;
+  }
+  .motion-on .gallery-arrow--next {
+    right: 16px !important;
+  }
+}
+
+/* ── 22. Magnetic press feedback on ATC ────────────────────── */
 
 .btn-atc,
 .sticky-atc__btn {
