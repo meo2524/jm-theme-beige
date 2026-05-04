@@ -1335,11 +1335,81 @@
   .motion-on .mc-mday-banner__icon { animation: none; }
 }
 
-/* ── 19. Hide standalone quantity stepper ────────────────── */
-/* Bundle widget owns quantity now — the qty-row is redundant. */
+/* ── 19. Hide standalone quantity + duplicated price block ── */
+/* Bundle widget owns quantity AND price. The pdp-badges chip and
+   .price-block are now redundant — the Mother's Day banner sits at
+   the top of the buy box, and per-bundle prices live inside the
+   KaChing widget. Killing both removes visual duplication. */
 
-.motion-on .qty-row {
+.motion-on .qty-row,
+.motion-on .pdp-badges,
+.motion-on .price-block {
   display: none !important;
+}
+
+/* ── 19b. Bundle pricing — make the bargain SCREAM ────────── */
+
+/* Larger price + stronger red strikethrough on compare-at */
+.motion-on .kaching-bundles__bar-price {
+  font-size: 1.85rem !important;
+  font-weight: 700 !important;
+  color: var(--color-espresso, #2D2D2D) !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1 !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.motion-on .kaching-bundles__bar--selected .kaching-bundles__bar-price {
+  color: #C0392B !important;
+}
+
+.motion-on .kaching-bundles__bar-full-price {
+  font-size: 1.05rem !important;
+  font-weight: 500 !important;
+  color: var(--color-olive, #6f5d4d) !important;
+  text-decoration: line-through !important;
+  text-decoration-color: #C0392B !important;
+  text-decoration-thickness: 2px !important;
+  opacity: 0.75;
+  display: inline-block;
+}
+
+/* SAVE chip — louder, with pulse */
+.motion-on .kaching-bundles__block .kaching-bundles__discount,
+.motion-on [class*="kaching-bundles__bar-discount"],
+.motion-on [class*="kaching-bundles__bar-saving"] {
+  font-size: 0.74rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  background: linear-gradient(135deg, #C0392B 0%, #8B2418 100%) !important;
+  color: #fff !important;
+  padding: 0.32rem 0.6rem !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 12px -3px rgba(192, 57, 43, 0.55) !important;
+  animation: mc-save-bob 3.2s ease-in-out infinite;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shine sweep across the SAVE chip */
+.motion-on [class*="kaching-bundles__bar-discount"]::after,
+.motion-on [class*="kaching-bundles__bar-saving"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.32) 50%, transparent 65%);
+  transform: translateX(-130%);
+  animation: mc-shine 3.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-on [class*="kaching-bundles__bar-discount"],
+  .motion-on [class*="kaching-bundles__bar-saving"],
+  .motion-on [class*="kaching-bundles__bar-discount"]::after,
+  .motion-on [class*="kaching-bundles__bar-saving"]::after { animation: none; }
 }
 
 /* ── 20. Magnetic press feedback on ATC ────────────────────── */
