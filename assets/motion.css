@@ -558,7 +558,94 @@
   }
 }
 
-/* ── 14. Magnetic press feedback on ATC ────────────────────── */
+/* ── 14. Urgent pulse-dot variant (scarcity line) ─────────── */
+
+.motion-on .mc-pulse-dot--urgent {
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+  color: #C0392B !important;
+  margin: 0 0 0.85rem !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  padding: 0.45rem 0.85rem;
+  background: rgba(192, 57, 43, 0.08);
+  border: 1px solid rgba(192, 57, 43, 0.25);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px -8px rgba(192, 57, 43, 0.4);
+}
+
+.motion-on .mc-pulse-dot--urgent::before {
+  width: 9px !important;
+  height: 9px !important;
+  background: #C0392B !important;
+  box-shadow: 0 0 0 0 rgba(192, 57, 43, 0.65);
+  animation: mc-pulse-urgent 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+}
+
+@keyframes mc-pulse-urgent {
+  0%   { box-shadow: 0 0 0 0   rgba(192, 57, 43, 0.7); }
+  70%  { box-shadow: 0 0 0 12px rgba(192, 57, 43, 0); }
+  100% { box-shadow: 0 0 0 0   rgba(192, 57, 43, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-on .mc-pulse-dot--urgent::before { animation: none !important; }
+}
+
+/* ── 15. Trust strip — make it pop ────────────────────────── */
+
+.motion-on .trust-strip {
+  gap: 0.4rem !important;
+  padding: 0.85rem 1rem !important;
+  background: rgba(138, 98, 64, 0.05);
+  border: 1px solid rgba(138, 98, 64, 0.15);
+  border-radius: 10px;
+  margin-bottom: 1.5rem !important;
+}
+
+.motion-on .mc-trust-item {
+  font-size: 0.92rem !important;
+  font-weight: 500 !important;
+  color: var(--color-espresso, #2D2D2D) !important;
+  padding: 0.35rem 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.7rem !important;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.motion-on .mc-trust-item .mc-trust-icon {
+  width: 20px !important;
+  height: 20px !important;
+  color: var(--color-walnut, #8a6240);
+  flex-shrink: 0;
+  stroke-width: 1.75 !important;
+}
+
+.motion-on .mc-trust-item:hover {
+  transform: translateX(2px);
+  color: var(--color-walnut, #8a6240) !important;
+}
+
+.motion-on .mc-trust-item--hero {
+  position: relative;
+  padding-left: 0 !important;
+}
+
+.motion-on .mc-trust-item--hero .mc-trust-icon {
+  color: var(--color-walnut, #8a6240) !important;
+}
+
+.motion-on .mc-trust-item--hero span {
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  color: var(--color-walnut, #8a6240) !important;
+  letter-spacing: 0.005em;
+}
+
+/* ── 16. Magnetic press feedback on ATC ────────────────────── */
 
 .btn-atc,
 .sticky-atc__btn {
