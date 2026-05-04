@@ -143,6 +143,24 @@
     =========================================== {%- endcomment -%}
     <div class="product-info">
 
+      {%- comment -%} ============================================================
+        MOTHER'S DAY BANNER — gated by settings.motion_enabled.
+        Live countdown to Sunday 11 May 2026 23:59 NZT.
+      ============================================================ {%- endcomment -%}
+      {%- if settings.motion_enabled -%}
+        <div class="mc-mday-banner" data-mday-deadline="2026-05-11T23:59:00+12:00" data-reveal data-reveal-delay="0">
+          <span class="mc-mday-banner__shine" aria-hidden="true"></span>
+          <div class="mc-mday-banner__inner">
+            <span class="mc-mday-banner__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 21s-7.5-4.7-9.6-9.4C1.1 8.3 3.4 5 6.7 5c1.9 0 3.7 1.1 4.6 2.7C12.2 6.1 14 5 16 5c3.3 0 5.6 3.3 4.3 6.6C19.5 16.3 12 21 12 21z"/></svg>
+            </span>
+            <span class="mc-mday-banner__title">Mother's Day Sale</span>
+            <span class="mc-mday-banner__sep" aria-hidden="true">·</span>
+            <span class="mc-mday-banner__count" aria-live="polite">Ends Sunday</span>
+          </div>
+        </div>
+      {%- endif -%}
+
       {%- comment -%} -- Eyebrow -- {%- endcomment -%}
       <p class="product-eyebrow">
         {%- if section.settings.eyebrow_text != blank -%}
@@ -215,7 +233,7 @@
       {%- if pdp_on_sale or pdp_is_hot -%}
         <div class="pdp-badges" data-reveal data-reveal-delay="0">
           {%- if pdp_on_sale -%}
-            <span class="badge badge--amber">Sale</span>
+            <span class="badge badge--amber">{% if settings.motion_enabled %}Mother's Day Deal{% else %}Sale{% endif %}</span>
           {%- endif -%}
           {%- if pdp_is_hot -%}
             <span class="badge badge--hot">Hot</span>
@@ -445,7 +463,7 @@
 
       {%- comment -%} -- Live status pulse (mc-pulse-dot) -- {%- endcomment -%}
       <p class="mc-pulse-dot mc-pulse-dot--urgent mc-trust-pulse" data-reveal data-reveal-delay="0" aria-live="polite">
-        Only 47 left at this price
+        Only 47 left for Mother's Day
       </p>
 
       {%- comment -%} -- Trust strip -- {%- endcomment -%}

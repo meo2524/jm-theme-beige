@@ -220,7 +220,50 @@
     });
   }
 
-  /* ── 6. Boot ─────────────────────────────────────────────── */
+  /* ── 6. Mother's Day countdown ───────────────────────────── */
+  /*
+   * Markup: <div class="mc-mday-banner" data-mday-deadline="ISO-string">
+   *   <span class="mc-mday-banner__count">…</span>
+   * </div>
+   * Updates the count text every 30s. Handles d/h/m/s formatting.
+   * If past deadline, hides the banner.
+   */
+
+  function initMdayCountdown() {
+    var banners = document.querySelectorAll('.mc-mday-banner[data-mday-deadline]');
+    if (!banners.length) return;
+
+    function format(diffMs) {
+      if (diffMs <= 0) return null;
+      var s = Math.floor(diffMs / 1000);
+      var d = Math.floor(s / 86400);
+      var h = Math.floor((s % 86400) / 3600);
+      var m = Math.floor((s % 3600) / 60);
+      if (d >= 2) return d + ' DAYS LEFT';
+      if (d === 1) return '1 DAY · ' + String(h).padStart(2, '0') + 'H';
+      if (h >= 1) return 'ENDS IN ' + h + 'H ' + String(m).padStart(2, '0') + 'M';
+      return 'ENDS IN ' + m + ' MIN';
+    }
+
+    function update() {
+      var now = Date.now();
+      banners.forEach(function (banner) {
+        var deadline = new Date(banner.getAttribute('data-mday-deadline')).getTime();
+        var label = format(deadline - now);
+        var countEl = banner.querySelector('.mc-mday-banner__count');
+        if (label === null) {
+          banner.style.display = 'none';
+          return;
+        }
+        if (countEl) countEl.textContent = label;
+      });
+    }
+
+    update();
+    setInterval(update, 30000);
+  }
+
+  /* ── 7. Boot ─────────────────────────────────────────────── */
 
   function boot() {
     initReveal();
@@ -228,6 +271,7 @@
     initCountUp();
     initScrollProgress();
     initSpecTooltips();
+    initMdayCountdown();
   }
 
   if (document.readyState === 'loading') {

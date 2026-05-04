@@ -1097,7 +1097,99 @@
   color: var(--color-espresso, #2D2D2D) !important;
 }
 
-/* ── 18. Magnetic press feedback on ATC ────────────────────── */
+/* ── 18. Mother's Day banner — make it scream ─────────────── */
+
+.motion-on .mc-mday-banner {
+  position: relative;
+  display: block;
+  margin: 0 0 0.95rem;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  background: linear-gradient(110deg,
+    var(--color-walnut, #8a6240) 0%,
+    #6b4a2e 50%,
+    var(--color-walnut, #8a6240) 100%);
+  color: var(--color-bone, #f5efe6);
+  font-family: var(--font-label, var(--font-body));
+  overflow: hidden;
+  box-shadow: 0 6px 20px -8px rgba(138, 98, 64, 0.55);
+  isolation: isolate;
+}
+
+.motion-on .mc-mday-banner__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.motion-on .mc-mday-banner__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  flex-shrink: 0;
+  animation: mc-mday-heart-pulse 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.motion-on .mc-mday-banner__title {
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+}
+
+.motion-on .mc-mday-banner__sep {
+  opacity: 0.55;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.motion-on .mc-mday-banner__count {
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Shimmer sweep across the whole banner */
+.motion-on .mc-mday-banner__shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 65%
+  );
+  transform: translateX(-120%);
+  animation: mc-shine 4s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes mc-mday-heart-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.12); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-on .mc-mday-banner__shine,
+  .motion-on .mc-mday-banner__icon { animation: none; }
+}
+
+/* ── 19. Magnetic press feedback on ATC ────────────────────── */
 
 .btn-atc,
 .sticky-atc__btn {
