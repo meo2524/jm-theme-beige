@@ -26,10 +26,9 @@
    horizontal page scroll on mobile. Apply to body ONLY — not html —
    so it doesn't interfere with html-level scrollbar-gutter. */
 @media (max-width: 767px) {
-  .motion-on body {
-    overflow-x: clip;
-    max-width: 100vw;
-  }
+  /* overflow-x: clip is set unconditionally on body in base.css.
+     max-width: 100vw removed — on iOS it can create a content-width
+     mismatch when the browser chrome resizes (e.g. scroll / keyboard). */
 
   /* Align mobile-info-above-gallery + product-info to the same
      1.25rem horizontal padding (was inconsistent — wrapper had
