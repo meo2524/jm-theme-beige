@@ -1600,8 +1600,12 @@ html {
   .motion-on .mc-mobile-hero {
     /* Break out of the page's horizontal padding to go true
        full-bleed, then add our own internal padding. */
-    width: 100vw !important;
-    margin-left: calc(-50vw + 50%) !important;
+    /* Break out of the page's horizontal padding without using 100vw,
+       which includes any scrollbar width and can push the layout off-axis.
+       Negative margin equal to known parent padding keeps the hero
+       full-bleed AND inside the viewport. */
+    width: auto !important;
+    margin-inline: -1.25rem !important;
     padding: 6.5rem 1.5rem 4.5rem !important;
     min-height: 100svh;
     min-height: 100vh; /* fallback for browsers without svh */
