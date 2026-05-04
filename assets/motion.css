@@ -1772,6 +1772,110 @@ html {
   .motion-on .mc-mobile-hero { display: none !important; }
 }
 
+/* ── 20c. "Find your size" accordion — solo CTA treatment ────── */
+/* When this accordion item carries .accordion__item--size, render
+   it as a prominent CTA button rather than a bog-standard accordion
+   row. The click is intercepted by ring-size-modal.js to open the
+   size guide modal. */
+
+.motion-on .accordion__item--size {
+  border: 0 !important;
+  background: linear-gradient(135deg, rgba(138, 98, 64, 0.10) 0%, rgba(138, 98, 64, 0.04) 100%);
+  border-radius: 12px !important;
+  margin: 1.25rem 0 0.5rem !important;
+  box-shadow: 0 6px 20px -10px rgba(138, 98, 64, 0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top walnut accent bar */
+.motion-on .accordion__item--size::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--color-walnut, #8a6240) 50%, transparent 100%);
+  opacity: 0.7;
+}
+
+.motion-on .accordion__item--size .accordion__trigger {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0.75rem !important;
+  padding: 1.1rem 1.25rem !important;
+  background: transparent !important;
+  border: 1.5px solid rgba(138, 98, 64, 0.35) !important;
+  border-radius: 12px !important;
+  font-family: var(--font-label, var(--font-body)) !important;
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--color-walnut, #8a6240) !important;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+/* Add a small ruler icon before the label */
+.motion-on .accordion__item--size .accordion__trigger > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.motion-on .accordion__item--size .accordion__trigger > span:first-child::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21.3 8.7L8.7 21.3a2.4 2.4 0 0 1-3.4 0L2.7 18.7a2.4 2.4 0 0 1 0-3.4L15.3 2.7a2.4 2.4 0 0 1 3.4 0l2.6 2.6a2.4 2.4 0 0 1 0 3.4z'/><line x1='6.5' y1='13.5' x2='9' y2='16'/><line x1='10' y1='10' x2='12.5' y2='12.5'/><line x1='13.5' y1='6.5' x2='16' y2='9'/></svg>") no-repeat center / contain;
+          mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21.3 8.7L8.7 21.3a2.4 2.4 0 0 1-3.4 0L2.7 18.7a2.4 2.4 0 0 1 0-3.4L15.3 2.7a2.4 2.4 0 0 1 3.4 0l2.6 2.6a2.4 2.4 0 0 1 0 3.4z'/><line x1='6.5' y1='13.5' x2='9' y2='16'/><line x1='10' y1='10' x2='12.5' y2='12.5'/><line x1='13.5' y1='6.5' x2='16' y2='9'/></svg>") no-repeat center / contain;
+}
+
+/* Replace the chevron with an arrow → since this opens a modal */
+.motion-on .accordion__item--size .accordion__chevron {
+  width: 22px !important;
+  height: 22px !important;
+  transition: transform 0.2s ease;
+}
+
+.motion-on .accordion__item--size .accordion__chevron polyline {
+  display: none;
+}
+
+.motion-on .accordion__item--size .accordion__chevron::after {
+  content: "→";
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transform: translateX(0);
+  transition: transform 0.2s ease;
+}
+
+.motion-on .accordion__item--size .accordion__trigger:hover {
+  border-color: var(--color-walnut, #8a6240) !important;
+  background: rgba(138, 98, 64, 0.10) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -8px rgba(138, 98, 64, 0.5);
+}
+
+.motion-on .accordion__item--size .accordion__trigger:hover .accordion__chevron {
+  transform: translateX(3px);
+}
+
+.motion-on .accordion__item--size .accordion__trigger:active {
+  transform: translateY(0);
+}
+
+/* Hide the empty panel — it never expands (modal is the real action) */
+.motion-on .accordion__item--size .accordion__panel {
+  display: none !important;
+}
+
 /* ── 21. Photo gallery — tighten + pad sides on mobile ────── */
 
 /* Kill the 1rem inner padding around the image so the photo fills

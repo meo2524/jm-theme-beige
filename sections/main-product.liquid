@@ -501,6 +501,7 @@
           {%- assign panel_id   = 'AccordionPanel-'   | append: section.id | append: '-' | append: forloop.index -%}
           {%- assign trigger_id = 'AccordionTrigger-' | append: section.id | append: '-' | append: forloop.index -%}
           {%- comment -%} Per-product metafield overrides section setting {%- endcomment -%}
+          {%- assign mf_panel = '' -%}
           {%- if forloop.index0 == 0 -%}
             {%- assign mf_panel = product.metafields.custom.whats_included -%}
           {%- elsif forloop.index0 == 1 -%}
@@ -509,7 +510,24 @@
             {%- assign mf_panel = product.metafields.custom.ingredients_certifications -%}
           {%- endif -%}
 
-          <div class="accordion__item">
+          {%- comment -%}
+            Decide if this accordion item should render.
+            - If body content (metafield OR section setting) is blank AND
+              the label doesn't reference a size guide, skip the item
+              entirely. This lets templates (e.g. smart-band) opt out
+              of items by leaving their content blank.
+            - Items whose label contains "size" or "size guide" still
+              render even with blank content because the size-modal JS
+              intercepts the click and opens the modal instead.
+          {%- endcomment -%}
+          {%- assign label_lower = label | downcase -%}
+          {%- assign is_size_trigger = false -%}
+          {%- if label_lower contains 'size' -%}{%- assign is_size_trigger = true -%}{%- endif -%}
+          {%- assign has_content = false -%}
+          {%- if mf_panel != blank or section.settings[setting_id] != blank -%}{%- assign has_content = true -%}{%- endif -%}
+          {%- unless has_content or is_size_trigger -%}{%- continue -%}{%- endunless -%}
+
+          <div class="accordion__item{% if is_size_trigger %} accordion__item--size{% endif %}">
             <button
               class="accordion__trigger"
               type="button"

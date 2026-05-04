@@ -91,9 +91,9 @@
         "accordion_label_1": "What's in the box",
         "accordion_label_2": "Find your size",
         "accordion_label_3": "Specs & certifications",
-        "accordion_whats-included": "<p>1× N°01 Smart Band (your chosen colour)<br/>1× Magnetic charging case<br/>1× USB-C charging cable<br/>1× Quick start guide</p>",
-        "accordion_how-it-works": "<p><strong>How to measure your ring size</strong><br/><br/>Wrap a thin strip of paper around the finger you plan to wear the ring on. Mark where the paper overlaps, then measure the length in millimetres. Match to the chart below.<br/><br/><strong>Size chart</strong><br/><br/>Size 8 — 18.3 mm inner diameter (57.5 mm circumference)<br/>Size 9 — 19.1 mm inner diameter (60.0 mm circumference)<br/>Size 10 — 20.0 mm inner diameter (62.8 mm circumference)<br/>Size 11 — 20.8 mm inner diameter (65.3 mm circumference)<br/>Size 12 — 21.6 mm inner diameter (67.9 mm circumference)<br/>Size 13 — 22.4 mm inner diameter (70.4 mm circumference)<br/><br/><strong>Tips</strong><br/>Measure at the end of the day — fingers are slightly larger then.<br/>If you're between sizes, go up one size.<br/>The ring should slide on snugly but come off without effort.<br/>Recommended finger: index or middle finger for best sensor accuracy.</p>",
-        "accordion_ingredients-certifications": "<p><strong>Material</strong><br/>Ceramic body · Polished chrome inner band<br/><br/><strong>Chipset</strong><br/>Realtek RTL8762 ESF<br/><br/><strong>Bluetooth</strong><br/>5.2<br/><br/><strong>Waterproof</strong><br/>5ATM<br/><br/><strong>Battery</strong><br/>14 mAh (18 mAh — sizes 11 and above)<br/><br/><strong>Charge time</strong><br/>~1.5 hours (magnetic charging case)<br/><br/><strong>Battery life</strong><br/>5–7 days active use · 15 days standby<br/><br/><strong>Weight</strong><br/>3.5 g (size 11)<br/><br/><strong>Compatibility</strong><br/>iOS 9.0+ · Android 5.1+<br/><br/><strong>App</strong><br/>QRing (free — no subscription)<br/><br/><strong>Certifications</strong><br/>CE · No display screen · No NFC<br/><br/><strong>Subscription</strong><br/>None. Ever.</p>",
+        "accordion_whats-included": "",
+        "accordion_how-it-works": "",
+        "accordion_ingredients-certifications": "",
         "rating_show": true,
         "rating_value": "4.9",
         "rating_count_text": "2,100+ verified reviews",
@@ -530,6 +530,72 @@
         "padding___bottom": "large",
         "custom_padding_bottom": 72
       }
+    },
+    "tech_specs": {
+      "type": "tech-specs",
+      "blocks": {
+        "spec_sensors": {
+          "type": "spec_group",
+          "settings": {
+            "icon": "heart",
+            "heading": "Sensors",
+            "body": "<ul><li>Red and infrared LEDs measure blood oxygen levels</li><li>Green and infrared LEDs alternate to measure heart rate and heart rate variability 24/7 and respiration rate</li><li>Digital sensor measures temperature trends</li><li>Accelerometer tracks movement and activity 24/7</li></ul>"
+          }
+        },
+        "spec_compatibility": {
+          "type": "spec_group",
+          "settings": {
+            "icon": "check",
+            "heading": "Compatibility",
+            "body": "<ul><li>QRing app for iOS and Android (free, no subscription)</li><li>iOS 9.0+ · Android 5.1+</li><li>Bluetooth 5.2 · supports metric and imperial units</li></ul>"
+          }
+        },
+        "spec_dimensions": {
+          "type": "spec_group",
+          "settings": {
+            "icon": "weight",
+            "heading": "Weight & dimensions",
+            "body": "<ul><li>Width: 7.90 mm</li><li>Thickness: 2.88 mm</li><li>Weight: 3.3 to 5.2 g (varies with size)</li><li>Available sizes 6 — 13</li></ul>"
+          }
+        },
+        "spec_battery": {
+          "type": "spec_group",
+          "settings": {
+            "icon": "battery",
+            "heading": "Battery life",
+            "body": "<ul><li>5 — 7 days active use · 15 days standby</li><li>Charges in 1 — 1.5 hours via magnetic charging case</li><li>14 mAh battery (18 mAh on size 11 and above)</li></ul>"
+          }
+        },
+        "spec_materials": {
+          "type": "spec_group",
+          "settings": {
+            "icon": "ring",
+            "heading": "Quality materials",
+            "body": "<ul><li>Zirconia ceramic body</li><li>Polished chrome inner band</li><li>5ATM water-resistant — wear it in the shower, pool, or sauna</li><li>Hypoallergenic, scratch-resistant ceramic finish</li></ul>"
+          }
+        },
+        "spec_certifications": {
+          "type": "spec_group",
+          "settings": {
+            "icon": "shield",
+            "heading": "Certifications & inclusions",
+            "body": "<ul><li>CE certified · no display screen · no NFC</li><li>Realtek RTL8762 ESF chipset</li><li>Subscription: none, ever — own your health data outright</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "spec_sensors",
+        "spec_compatibility",
+        "spec_dimensions",
+        "spec_battery",
+        "spec_materials",
+        "spec_certifications"
+      ],
+      "settings": {
+        "included_heading": "What's Included",
+        "included_items": "Mend N°01 Smart Band\nMagnetic charging case\nUSB-C charging cable\nQuick start guide",
+        "specs_heading": "Tech Specifications"
+      }
     }
   },
   "order": [
@@ -543,6 +609,7 @@
     "product_science",
     "reviews_widget",
     "ring_size_modal",
+    "tech_specs",
     "product_faq",
     "app_download",
     "judgeme_reviews",
