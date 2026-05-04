@@ -1620,7 +1620,140 @@ html {
   }
 }
 
-/* ── 22. Magnetic press feedback on ATC ────────────────────── */
+/* ── 22. Product feature + science sections — amp readability ─ */
+
+/* Container padding so text isn't tight to viewport edges on mobile */
+@media (max-width: 767px) {
+  .motion-on .product-feature .container,
+  .motion-on .product-science .container,
+  .motion-on .product-feature__copy,
+  .motion-on .product-science__copy {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+    box-sizing: border-box;
+  }
+}
+
+/* Eyebrow — bolder, walnut, with accent line */
+.motion-on .product-feature__eyebrow,
+.motion-on .product-science__eyebrow {
+  font-family: var(--font-label, var(--font-body)) !important;
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  color: var(--color-walnut, #8a6240) !important;
+  margin: 0 0 0.85rem !important;
+  display: inline-block !important;
+  position: relative;
+}
+
+.motion-on .product-feature__eyebrow::after,
+.motion-on .product-science__eyebrow::after {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 1.5px;
+  background: var(--color-walnut, #8a6240);
+  margin-top: 6px;
+  opacity: 0.7;
+}
+
+/* Heading — larger, weight 500, tighter tracking */
+.motion-on .product-feature__heading,
+.motion-on .product-science__heading {
+  font-size: clamp(1.75rem, 5.5vw, 2.4rem) !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.1 !important;
+  color: var(--color-espresso, #2D2D2D) !important;
+  margin: 0 0 1rem !important;
+}
+
+/* Body paragraph — bigger, espresso, more comfortable line-height */
+.motion-on .product-feature__body,
+.motion-on .product-feature__body p,
+.motion-on .product-science__body,
+.motion-on .product-science__body p {
+  font-family: var(--font-body) !important;
+  font-size: 1.05rem !important;
+  font-weight: 500 !important;
+  line-height: 1.65 !important;
+  color: var(--color-espresso, #2D2D2D) !important;
+  margin: 0 0 1.4rem !important;
+}
+
+/* Bullet list — proper spacing, walnut bullet icon (not em-dash) */
+.motion-on .product-feature__bullets,
+.motion-on .product-science__bullets {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.85rem !important;
+}
+
+.motion-on .product-feature__bullet,
+.motion-on .product-science__bullet {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 0.85rem !important;
+  font-family: var(--font-body) !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+  color: var(--color-espresso, #2D2D2D) !important;
+  padding: 0.7rem 0.9rem !important;
+  background: linear-gradient(135deg, rgba(138, 98, 64, 0.06) 0%, rgba(138, 98, 64, 0.02) 100%) !important;
+  border-left: 2px solid var(--color-walnut, #8a6240) !important;
+  border-radius: 0 6px 6px 0 !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.motion-on .product-feature__bullet:hover,
+.motion-on .product-science__bullet:hover {
+  transform: translateX(2px);
+  background: linear-gradient(135deg, rgba(138, 98, 64, 0.1) 0%, rgba(138, 98, 64, 0.04) 100%) !important;
+  box-shadow: 0 3px 12px -6px rgba(138, 98, 64, 0.3);
+}
+
+/* Replace the em-dash bullet icon with a walnut chevron mark */
+.motion-on .product-feature__bullet-icon,
+.motion-on .product-science__bullet-icon {
+  flex-shrink: 0 !important;
+  color: var(--color-walnut, #8a6240) !important;
+  font-weight: 800 !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  font-family: var(--font-body) !important;
+  /* Replace text content via pseudo so original "—" stays accessible */
+  position: relative;
+  width: 1.1em;
+  text-align: center;
+  letter-spacing: 0;
+  font-size: 0;
+}
+
+.motion-on .product-feature__bullet-icon::before,
+.motion-on .product-science__bullet-icon::before {
+  content: "›";
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-walnut, #8a6240);
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
+/* Highlight the part before the em-dash in each bullet — bolder so the
+   spec name reads first ("Sleep stages — deep, light, REM…") */
+.motion-on .product-feature__bullet,
+.motion-on .product-science__bullet {
+  position: relative;
+}
+
+/* ── 23. Magnetic press feedback on ATC ────────────────────── */
 
 .btn-atc,
 .sticky-atc__btn {
