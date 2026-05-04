@@ -461,11 +461,6 @@
 
       {%- endform -%}
 
-      {%- comment -%} -- Live status pulse (mc-pulse-dot) -- {%- endcomment -%}
-      <p class="mc-pulse-dot mc-pulse-dot--urgent mc-trust-pulse" data-reveal data-reveal-delay="0" aria-live="polite">
-        Only 47 left for Mother's Day
-      </p>
-
       {%- comment -%} -- Trust strip -- {%- endcomment -%}
       <ul class="trust-strip" role="list">
         <li class="trust-item mc-trust-item" data-reveal data-reveal-delay="80">
@@ -566,64 +561,6 @@
   </div>
   {%- content_for 'blocks' -%}
 </section>
-
-
-{%- comment -%} ============================================================
-   STICKY ATC — mobile-only, glass-blur, shows after main ATC scrolls out.
-   Gated by settings.motion_enabled (kill switch). Component lives in
-   assets/component-sticky-atc.js (custom element <mc-sticky-atc>).
-============================================================ {%- endcomment -%}
-{%- if settings.motion_enabled -%}
-  <mc-sticky-atc data-show-on="mobile-only" aria-label="Sticky add to cart">
-    <div class="sticky-atc__bar">
-      <div class="page-width">
-        <div class="sticky-atc__inner">
-          <div class="sticky-atc__left">
-            {%- if product.featured_image -%}
-              <img
-                class="sticky-atc__img"
-                src="{{ product.featured_image | image_url: width: 120 }}"
-                alt="{{ product.title | escape }}"
-                width="52" height="52" loading="lazy">
-            {%- endif -%}
-            <div class="sticky-atc__info">
-              <p class="sticky-atc__title">{{ product.title | escape }}</p>
-              <p class="sticky-atc__price">
-                {%- if current_variant.compare_at_price > current_variant.price -%}
-                  <s>{{ current_variant.compare_at_price | money }}</s>
-                {%- endif -%}
-                {{ current_variant.price | money }}
-              </p>
-            </div>
-          </div>
-          <div class="sticky-atc__right">
-            <form action="/cart/add" method="post" enctype="multipart/form-data" data-type="sticky-atc-form">
-              {%- if product.has_only_default_variant -%}
-                <input type="hidden" name="id" value="{{ current_variant.id }}">
-              {%- else -%}
-                <div class="sticky-atc__select-wrap">
-                  <select name="id" class="sticky-atc__select" aria-label="Choose variant">
-                    {%- for v in product.variants -%}
-                      <option value="{{ v.id }}"{% if v.id == current_variant.id %} selected{% endif %}{% unless v.available %} disabled{% endunless %}>
-                        {{ v.title }}{% unless v.available %} — sold out{% endunless %}
-                      </option>
-                    {%- endfor -%}
-                  </select>
-                  <svg class="sticky-atc__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-                </div>
-              {%- endif -%}
-              <button type="submit" class="sticky-atc__btn mc-shine"{% unless current_variant.available %} disabled{% endunless %}>
-                <span class="sticky-atc__btn-text">
-                  {%- if current_variant.available -%}{{ section.settings.atc_label | default: 'Add to Cart' | escape }}{%- else -%}{{ section.settings.atc_sold_out_label | default: 'Sold Out' | escape }}{%- endif -%}
-                </span>
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </mc-sticky-atc>
-{%- endif -%}
 
 
 <style>

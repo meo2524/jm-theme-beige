@@ -373,6 +373,16 @@
 
   {%- if template.name == 'product' and settings.motion_enabled -%}
     <div data-scroll-progress aria-hidden="true"></div>
+
+    {%- comment -%} Top-of-page scarcity banner — Mother's Day / limited stock {%- endcomment -%}
+    <div class="mc-scarcity-banner" role="status" aria-live="polite">
+      <div class="mc-scarcity-banner__inner">
+        <span class="mc-scarcity-banner__dot" aria-hidden="true"></span>
+        <span class="mc-scarcity-banner__text">
+          <strong>Only 47 left</strong> for Mother's Day &mdash; ends Sunday
+        </span>
+      </div>
+    </div>
   {%- endif -%}
 
 

@@ -1243,6 +1243,80 @@
   color: var(--color-espresso, #2D2D2D) !important;
 }
 
+/* ── 17b. Top-of-page scarcity banner ─────────────────────── */
+/* Sits above the announcement bar on smart-band PDP. Red urgency,
+   pulsing dot, gentle shimmer. Sticky-feel without being position:fixed. */
+
+.motion-on .mc-scarcity-banner {
+  width: 100%;
+  background: linear-gradient(90deg, #C0392B 0%, #8B2418 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 10px -3px rgba(192, 57, 43, 0.45);
+  z-index: 60;
+}
+
+.motion-on .mc-scarcity-banner__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.55rem 1rem;
+  font-family: var(--font-label, var(--font-body));
+  font-size: 0.78rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.motion-on .mc-scarcity-banner__text strong {
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.motion-on .mc-scarcity-banner__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  animation: mc-scarcity-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  flex-shrink: 0;
+}
+
+@keyframes mc-scarcity-pulse {
+  0%   { box-shadow: 0 0 0 0   rgba(255, 255, 255, 0.85); }
+  70%  { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+  100% { box-shadow: 0 0 0 0   rgba(255, 255, 255, 0); }
+}
+
+/* Diagonal shimmer sweep */
+.motion-on .mc-scarcity-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 65%
+  );
+  transform: translateX(-130%);
+  animation: mc-shine 4.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-on .mc-scarcity-banner__dot,
+  .motion-on .mc-scarcity-banner::after { animation: none; }
+}
+
 /* ── 18. Mother's Day banner — make it scream ─────────────── */
 
 .motion-on .mc-mday-banner {
