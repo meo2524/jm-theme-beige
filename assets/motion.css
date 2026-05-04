@@ -645,7 +645,145 @@
   letter-spacing: 0.005em;
 }
 
-/* ── 16. Magnetic press feedback on ATC ────────────────────── */
+/* ── 16. Mini review carousel — make it pop ───────────────── */
+
+.motion-on .pdp-review-carousel {
+  background: linear-gradient(180deg, rgba(138,98,64,0.05) 0%, rgba(138,98,64,0.02) 100%) !important;
+  border: 1px solid rgba(138,98,64,0.18) !important;
+  border-top: 1px solid rgba(138,98,64,0.18) !important;
+  border-radius: 12px !important;
+  padding: 1.6rem 1.6rem 1.2rem !important;
+  margin-top: 0.75rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 22px -14px rgba(138, 98, 64, 0.35);
+}
+
+/* Decorative oversized opening quote mark */
+.motion-on .pdp-review-carousel::before {
+  content: "\201C";
+  position: absolute;
+  top: 0.4rem;
+  right: 1.2rem;
+  font-family: var(--font-heading, Georgia, serif);
+  font-size: 7rem;
+  line-height: 1;
+  color: var(--color-walnut, #8a6240);
+  opacity: 0.13;
+  pointer-events: none;
+  font-weight: 700;
+}
+
+.motion-on .prc-track {
+  height: auto !important;
+  min-height: 7.5rem;
+  position: static;
+}
+
+.motion-on .prc-slide {
+  position: static !important;
+  inset: auto;
+}
+
+.motion-on .prc-slide:not(.is-active) {
+  display: none !important;
+}
+
+.motion-on .prc-stars {
+  gap: 3px !important;
+  margin-bottom: 0.45rem;
+}
+
+.motion-on .prc-star {
+  font-size: 16px !important;
+}
+
+.motion-on .prc-quote {
+  font-size: 1.05rem !important;
+  line-height: 1.55 !important;
+  color: var(--color-espresso, #2D2D2D) !important;
+  font-style: italic;
+  -webkit-line-clamp: unset !important;
+  display: block !important;
+  position: relative;
+  padding-left: 0.85rem;
+  border-left: 2px solid var(--color-walnut, #8a6240);
+}
+
+.motion-on .prc-footer {
+  padding-top: 0.85rem !important;
+  border-top: 1px solid rgba(138, 98, 64, 0.18) !important;
+  margin-top: 0.85rem;
+}
+
+.motion-on .prc-name {
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: var(--color-espresso, #2D2D2D) !important;
+}
+
+.motion-on .prc-badge {
+  font-size: 0.58rem !important;
+  letter-spacing: 1.4px !important;
+  padding: 3px 7px !important;
+  border-radius: 3px !important;
+  background: rgba(74, 123, 114, 0.95) !important;
+  color: #fff !important;
+}
+
+.motion-on .prc-detail {
+  font-size: 0.78rem !important;
+  font-weight: 500 !important;
+  color: var(--color-walnut, #8a6240) !important;
+  opacity: 0.85 !important;
+}
+
+.motion-on .prc-controls {
+  margin-top: 1.1rem !important;
+}
+
+.motion-on .prc-arrow {
+  width: 36px !important;
+  height: 36px !important;
+  border: 1px solid var(--color-walnut, #8a6240) !important;
+  background: rgba(138, 98, 64, 0.06) !important;
+  color: var(--color-walnut, #8a6240) !important;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.motion-on .prc-arrow:hover,
+.motion-on .prc-arrow:focus-visible {
+  background: var(--color-walnut, #8a6240) !important;
+  color: var(--color-bone, #f5efe6) !important;
+  transform: scale(1.06);
+}
+
+.motion-on .prc-arrow:active {
+  transform: scale(0.94);
+}
+
+.motion-on .prc-dots {
+  gap: 7px !important;
+}
+
+.motion-on .prc-dot {
+  width: 7px !important;
+  height: 7px !important;
+  background: rgba(138, 98, 64, 0.3) !important;
+}
+
+.motion-on .prc-dot.is-active {
+  background: var(--color-walnut, #8a6240) !important;
+  transform: scale(1.5) !important;
+  box-shadow: 0 0 0 3px rgba(138, 98, 64, 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-on .prc-arrow,
+  .motion-on .prc-dot { transition: none; }
+}
+
+/* ── 17. Magnetic press feedback on ATC ────────────────────── */
 
 .btn-atc,
 .sticky-atc__btn {
