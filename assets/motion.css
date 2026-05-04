@@ -926,24 +926,46 @@
   margin-bottom: 0.5rem !important;
 }
 
-/* Variant row — colour picker grows full-width, size stays compact.
-   IMPORTANT: KaChing reuses the same class name on the closed-state
-   trigger AND on each option inside the open popover. We must scope
-   pill styling to the trigger only, not to .kaching-bundles-option. */
+/* Variant row — single-line layout: [#N] [colour pill] [size pill]
+   No wrapping; colour grows; size is compact. */
 
 .motion-on .kaching-bundles__bar-variant {
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 0.4rem !important;
 }
 
-.motion-on .kaching-bundles__bar-variant__content,
-.motion-on .kaching-bundles__bar-variant-selects {
-  gap: 0.6rem !important;
+.motion-on .kaching-bundles__bar-variant__content {
   display: flex !important;
-  align-items: stretch !important;
+  align-items: center !important;
+  gap: 0.55rem !important;
+  flex-wrap: nowrap !important;
   width: 100% !important;
 }
 
-/* The wrapper is a positioning shell only — no styling on it */
+/* "#1" / "#2" label — inline with the row, walnut, readable */
+.motion-on .kaching-bundles__bar-variant-number {
+  flex: 0 0 auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  color: var(--color-walnut, #8a6240) !important;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  min-width: auto !important;
+  width: auto !important;
+}
+
+.motion-on .kaching-bundles__bar-variant-selects {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
+  flex: 1 1 auto !important;
+  flex-wrap: nowrap !important;
+  min-width: 0 !important;
+  width: auto !important;
+}
+
+/* Colour wrapper — transparent positioning shell that grows */
 .motion-on .kaching-bundles__swatch-dropdown {
   flex: 1 1 auto !important;
   min-width: 0 !important;
@@ -953,9 +975,12 @@
   position: relative;
 }
 
-.motion-on .kaching-bundles__bar-variant-selects > .kaching-bundles__bar-variant-select:not(.kaching-bundles__swatch-dropdown):not(.kaching-bundles-option) {
-  flex: 0 0 auto !important;
-  min-width: 80px !important;
+/* Size dropdown — fixed compact width */
+.motion-on .kaching-bundles__bar-variant-selects > select.kaching-bundles__bar-variant-select {
+  flex: 0 0 72px !important;
+  min-width: 72px !important;
+  max-width: 72px !important;
+  width: 72px !important;
 }
 
 /* Trigger — clean premium pill. Targets only the closed-state triggers
@@ -968,17 +993,17 @@
   /* No shorthand `background` here — KaChing paints the chevron as a
      background-image data URI on this element. */
   border: 1px solid rgba(138, 98, 64, 0.28) !important;
-  border-radius: 10px !important;
+  border-radius: 8px !important;
   /* Right padding gives the chevron its own zone so text never crowds it */
-  padding: 0.7rem 2.2rem 0.7rem 1rem !important;
-  font-size: 0.95rem !important;
+  padding: 0.45rem 1.7rem 0.45rem 0.7rem !important;
+  font-size: 0.9rem !important;
   font-weight: 600 !important;
   color: var(--color-espresso, #2D2D2D) !important;
   font-family: var(--font-body) !important;
-  min-height: 46px !important;
+  min-height: 38px !important;
   display: flex !important;
   align-items: center !important;
-  gap: 0.6rem !important;
+  gap: 0.5rem !important;
   transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
   cursor: pointer;
   box-shadow: 0 1px 0 rgba(0,0,0,0.02);
@@ -989,6 +1014,13 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
+
+/* Size pill — even tighter padding since just a number */
+.motion-on .kaching-bundles__bar-variant-selects > select.kaching-bundles__bar-variant-select {
+  padding: 0.45rem 1.5rem 0.45rem 0.55rem !important;
+  text-align: center;
+  text-align-last: center;
 }
 
 .motion-on .kaching-bundles__swatch-dropdown > .kaching-bundles__bar-variant-select:hover,
