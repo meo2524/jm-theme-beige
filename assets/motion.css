@@ -936,16 +936,19 @@
   min-width: 80px !important;
 }
 
-/* Trigger — clean premium pill (NOT options inside popover) */
-.motion-on .kaching-bundles__bar-variant-select:not(.kaching-bundles-option),
-.motion-on .kaching-bundles__swatch-dropdown > .kaching-bundles__bar-variant-select {
+/* Trigger — clean premium pill. Targets only the closed-state triggers
+   by exact DOM path (not by class blacklist), since both the wrapper
+   AND the popover options share .kaching-bundles-option. */
+.motion-on .kaching-bundles__swatch-dropdown > .kaching-bundles__bar-variant-select,
+.motion-on .kaching-bundles__bar-variant-selects > select.kaching-bundles__bar-variant-select,
+.motion-on .kaching-bundles__bar-variant-selects > .kaching-bundles__bar-variant-select:not([role="option"]) {
   background-color: #fdfaf4 !important;
-  /* IMPORTANT: do NOT use the `background` shorthand here — KaChing
-     paints the dropdown chevron as a background-image URL on this
-     element, and shorthand wipes it out (chevron disappears on hover). */
+  /* No shorthand `background` here — KaChing paints the chevron as a
+     background-image data URI on this element. */
   border: 1px solid rgba(138, 98, 64, 0.28) !important;
   border-radius: 10px !important;
-  padding: 0.7rem 0.95rem !important;
+  /* Right padding gives the chevron its own zone so text never crowds it */
+  padding: 0.7rem 2.2rem 0.7rem 1rem !important;
   font-size: 0.95rem !important;
   font-weight: 600 !important;
   color: var(--color-espresso, #2D2D2D) !important;
@@ -960,24 +963,30 @@
   position: relative;
   width: 100%;
   box-sizing: border-box;
+  /* Native <select> needs an explicit appearance reset to render our pill */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
-.motion-on .kaching-bundles__bar-variant-select:not(.kaching-bundles-option):hover,
-.motion-on .kaching-bundles__swatch-dropdown > .kaching-bundles__bar-variant-select:hover {
+.motion-on .kaching-bundles__swatch-dropdown > .kaching-bundles__bar-variant-select:hover,
+.motion-on .kaching-bundles__bar-variant-selects > select.kaching-bundles__bar-variant-select:hover,
+.motion-on .kaching-bundles__bar-variant-selects > .kaching-bundles__bar-variant-select:not([role="option"]):hover {
   border-color: var(--color-walnut, #8a6240) !important;
   background-color: #fff !important;
-  /* shorthand `background` would wipe KaChing's chevron data-URI bg-image */
   box-shadow: 0 4px 14px -6px rgba(138, 98, 64, 0.35) !important;
   transform: translateY(-1px);
 }
 
-.motion-on .kaching-bundles__bar-variant-select:not(.kaching-bundles-option):active,
-.motion-on .kaching-bundles__swatch-dropdown > .kaching-bundles__bar-variant-select:active {
+.motion-on .kaching-bundles__swatch-dropdown > .kaching-bundles__bar-variant-select:active,
+.motion-on .kaching-bundles__bar-variant-selects > select.kaching-bundles__bar-variant-select:active,
+.motion-on .kaching-bundles__bar-variant-selects > .kaching-bundles__bar-variant-select:not([role="option"]):active {
   transform: translateY(0);
 }
 
-.motion-on .kaching-bundles__bar-variant-select:not(.kaching-bundles-option):focus-within,
-.motion-on .kaching-bundles__swatch-dropdown > .kaching-bundles__bar-variant-select:focus-within {
+.motion-on .kaching-bundles__swatch-dropdown > .kaching-bundles__bar-variant-select:focus-within,
+.motion-on .kaching-bundles__bar-variant-selects > select.kaching-bundles__bar-variant-select:focus,
+.motion-on .kaching-bundles__bar-variant-selects > .kaching-bundles__bar-variant-select:not([role="option"]):focus-within {
   border-color: var(--color-walnut, #8a6240) !important;
   box-shadow: 0 0 0 3px rgba(138, 98, 64, 0.16) !important;
   outline: none !important;
@@ -1189,7 +1198,14 @@
   .motion-on .mc-mday-banner__icon { animation: none; }
 }
 
-/* ── 19. Magnetic press feedback on ATC ────────────────────── */
+/* ── 19. Hide standalone quantity stepper ────────────────── */
+/* Bundle widget owns quantity now — the qty-row is redundant. */
+
+.motion-on .qty-row {
+  display: none !important;
+}
+
+/* ── 20. Magnetic press feedback on ATC ────────────────────── */
 
 .btn-atc,
 .sticky-atc__btn {
