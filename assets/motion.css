@@ -939,7 +939,10 @@
 /* Trigger — clean premium pill (NOT options inside popover) */
 .motion-on .kaching-bundles__bar-variant-select:not(.kaching-bundles-option),
 .motion-on .kaching-bundles__swatch-dropdown > .kaching-bundles__bar-variant-select {
-  background: #fdfaf4 !important;
+  background-color: #fdfaf4 !important;
+  /* IMPORTANT: do NOT use the `background` shorthand here — KaChing
+     paints the dropdown chevron as a background-image URL on this
+     element, and shorthand wipes it out (chevron disappears on hover). */
   border: 1px solid rgba(138, 98, 64, 0.28) !important;
   border-radius: 10px !important;
   padding: 0.7rem 0.95rem !important;
@@ -951,7 +954,7 @@
   display: flex !important;
   align-items: center !important;
   gap: 0.6rem !important;
-  transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+  transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
   cursor: pointer;
   box-shadow: 0 1px 0 rgba(0,0,0,0.02);
   position: relative;
@@ -962,7 +965,8 @@
 .motion-on .kaching-bundles__bar-variant-select:not(.kaching-bundles-option):hover,
 .motion-on .kaching-bundles__swatch-dropdown > .kaching-bundles__bar-variant-select:hover {
   border-color: var(--color-walnut, #8a6240) !important;
-  background: #fff !important;
+  background-color: #fff !important;
+  /* shorthand `background` would wipe KaChing's chevron data-URI bg-image */
   box-shadow: 0 4px 14px -6px rgba(138, 98, 64, 0.35) !important;
   transform: translateY(-1px);
 }
