@@ -1611,8 +1611,8 @@
     width: 100% !important;
     margin-inline: 0 !important;
     padding: 6.5rem 1.75rem 4.5rem !important;
+    min-height: 100vh;
     min-height: 100svh;
-    min-height: 100vh; /* fallback for browsers without svh */
     box-sizing: border-box;
     position: relative;
     overflow: hidden;

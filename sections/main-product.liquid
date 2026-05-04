@@ -56,8 +56,8 @@
                 <img
                   src="{{ image | image_url: width: 960 }}"
                   alt="{{ image.alt | escape | default: product.title }}"
-                  width="{{ image.width }}"
-                  height="{{ image.height }}"
+                  width="960"
+                  height="{{ image.height | times: 960 | divided_by: image.width }}"
                   loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
                   class="gallery-slide__img"
                 >
@@ -1610,6 +1610,11 @@
 @media (max-width: 768px) {
   .product-section {
     padding: 2.5rem 0 5rem;
+    /* Hard containment: prevents any child (gallery images with large
+       intrinsic widths, third-party widgets) from expanding the iOS
+       layout viewport and shifting the whole page. */
+    overflow-x: clip;
+    contain: layout;
   }
 
   /* When the mobile video hero is mounted, drop the top padding so
