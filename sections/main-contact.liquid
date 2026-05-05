@@ -2,7 +2,7 @@
 
 {%- liquid
   assign heading_text = section.settings.heading | default: 'Get in touch'
-  assign subtext      = section.settings.subtext | default: 'Questions about your order, the filter, or the science behind it - we read every message.'
+  assign subtext      = section.settings.subtext | default: 'Questions about your order, sizing, or the science behind it — we read every message.'
   assign btn_label    = section.settings.btn_label | default: 'Send message'
 -%}
 
@@ -392,7 +392,7 @@ a.contact__detail-value:hover { text-decoration: underline; }
       "type": "textarea",
       "id": "subtext",
       "label": "Subtext",
-      "default": "Questions about your order, the filter, or the science behind it - we read every message."
+      "default": "Questions about your order, sizing, or the science behind it — we read every message."
     },
     {
       "type": "text",
