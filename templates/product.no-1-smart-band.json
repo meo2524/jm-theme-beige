@@ -11,76 +11,8 @@
   "sections": {
     "main": {
       "type": "main-product",
-      "blocks": {
-        "mini_review_1": {
-          "type": "mini_testimonial",
-          "settings": {
-            "quote": "I've been telling my doctor something was wrong for two years. I brought in my HRV charts and she finally listened.",
-            "author": "Sarah M.",
-            "author_detail": "White · Size 9",
-            "verified": true,
-            "stars": 5
-          }
-        },
-        "mini_review_2": {
-          "type": "mini_testimonial",
-          "settings": {
-            "quote": "This showed me I was recovered enough to train hard exactly 11 times in 2 months. Finally broke a plateau.",
-            "author": "Keelan R.",
-            "author_detail": "Black · Size 11",
-            "verified": true,
-            "stars": 5
-          }
-        },
-        "mini_review_3": {
-          "type": "mini_testimonial",
-          "settings": {
-            "quote": "Looks like a ring because it is one. Nobody at work even knows what it is.",
-            "author": "David H.",
-            "author_detail": "Black · Size 12",
-            "verified": true,
-            "stars": 5
-          }
-        },
-        "mini_review_4": {
-          "type": "mini_testimonial",
-          "settings": {
-            "quote": "I finally understand why I'm exhausted — my deep sleep is basically non-existent. Two weeks in and I've already changed my routine.",
-            "author": "Amy T.",
-            "author_detail": "Pink · Size 8",
-            "verified": true,
-            "stars": 5
-          }
-        },
-        "mini_review_5": {
-          "type": "mini_testimonial",
-          "settings": {
-            "quote": "Battery lasts nearly a week with 24/7 tracking. My Apple Watch needed charging every night — I was never wearing it to sleep.",
-            "author": "James L.",
-            "author_detail": "Black · Size 10",
-            "verified": true,
-            "stars": 5
-          }
-        },
-        "mini_review_6": {
-          "type": "mini_testimonial",
-          "settings": {
-            "quote": "Way cheaper than Oura and does the same thing. No subscription is a huge deal.",
-            "author": "Priya K.",
-            "author_detail": "White · Size 9",
-            "verified": true,
-            "stars": 5
-          }
-        }
-      },
-      "block_order": [
-        "mini_review_1",
-        "mini_review_2",
-        "mini_review_3",
-        "mini_review_4",
-        "mini_review_5",
-        "mini_review_6"
-      ],
+      "blocks": {},
+      "block_order": [],
       "settings": {
         "eyebrow_text": "A second sense",
         "model_badge": "",
@@ -94,10 +26,10 @@
         "accordion_whats-included": "",
         "accordion_how-it-works": "",
         "accordion_ingredients-certifications": "",
-        "rating_show": true,
-        "rating_value": "4.9",
-        "rating_count_text": "2,100+ verified reviews",
-        "rating_subtext": "Trusted by thousands of customers",
+        "rating_show": false,
+        "rating_value": "",
+        "rating_count_text": "",
+        "rating_subtext": "",
         "toggle_onetime_label": "One-time",
         "toggle_subscribe_label": "Subscribe & Save",
         "toggle_subscribe_savings": "10% off",
@@ -116,7 +48,7 @@
       "name": "t:sections.custom-liquid.name",
       "settings": {
         "show_on": "both",
-        "custom_liquid": "<style>\n  .mc-desc * { box-sizing: border-box; margin: 0; padding: 0; }\n  .mc-desc { font-family: 'Jost', sans-serif; color: #2C1A0E; padding: 0 0 20px; }\n  .mc-desc-pill {\n    font-size: 11px;\n    font-weight: 500;\n    letter-spacing: 0.14em;\n    text-transform: uppercase;\n    color: #7A5C3A;\n    background: #EDE0CE;\n    padding: 6px 16px;\n    border-radius: 20px;\n    display: inline-flex;\n    width: fit-content;\n    margin-bottom: 18px;\n  }\n  .mc-desc-product-label {\n    font-family: 'Jost', sans-serif;\n    font-size: 11px;\n    font-weight: 400;\n    letter-spacing: 0.18em;\n    text-transform: uppercase;\n    color: #9A8070;\n    margin-bottom: 8px;\n    display: block;\n  }\n  .mc-desc-h2 {\n    font-family: 'Cormorant Garamond', serif;\n    font-size: 2.6rem;\n    font-weight: 400;\n    line-height: 1.05;\n    color: #2C1A0E;\n    margin-bottom: 4px;\n  }\n  .mc-desc-h2-italic {\n    font-family: 'Cormorant Garamond', serif;\n    font-size: 2.6rem;\n    font-weight: 400;\n    font-style: italic;\n    line-height: 1.05;\n    color: #9C7A5A;\n    display: block;\n    margin-bottom: 20px;\n  }\n  .mc-desc-body {\n    border-left: 3px solid #D6C9B8;\n    padding-left: 14px;\n    margin-bottom: 20px;\n  }\n  .mc-desc-body p {\n    font-size: 13.5px;\n    font-weight: 300;\n    line-height: 1.75;\n    color: #6B5040;\n  }\n  .mc-desc-reviews {\n    display: flex;\n    align-items: center;\n    background: #F5F0EA;\n    border-radius: 10px;\n    border: 1px solid #E0D5C5;\n    overflow: hidden;\n    gap: 0;\n  }\n  .mc-desc-left {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    gap: 8px;\n    padding: 16px 20px;\n    border-right: 1px solid #E0D5C5;\n    flex-shrink: 0;\n  }\n  .mc-desc-stars {\n    color: #C0392B;\n    font-size: 14px;\n    letter-spacing: 2px;\n    line-height: 1;\n    white-space: nowrap;\n  }\n  .mc-desc-rating {\n    font-family: 'Cormorant Garamond', serif;\n    font-size: 26px;\n    font-style: italic;\n    font-weight: 400;\n    color: #2C1A0E;\n    line-height: 1;\n  }\n  .mc-desc-right {\n    padding: 16px 18px;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    gap: 3px;\n  }\n  .mc-desc-count-main {\n    font-size: 14px;\n    font-weight: 500;\n    color: #2C1A0E;\n    line-height: 1.3;\n  }\n  .mc-desc-count-sub {\n    font-size: 12px;\n    font-weight: 300;\n    color: #9A8070;\n    line-height: 1.4;\n  }\n</style>\n\n<div class=\"mc-desc\">\n  <span class=\"mc-desc-pill\">Mend &amp; Co&#8482; Official</span>\n  <span class=\"mc-desc-product-label\">N&#176;01 &mdash; The Smart Band</span>\n  <h2 class=\"mc-desc-h2\">Know your body.</h2>\n  <span class=\"mc-desc-h2-italic\">Before your body tells you first.</span>\n  <div class=\"mc-desc-body\">\n    <p>The Smart Band tracks sleep, heart rate, HRV, SpO₂ and recovery — continuously, without a subscription. Ceramic build. 5ATM waterproof. Designed to be worn everywhere, forgotten about, and trusted completely.</p>\n  </div>\n  <div class=\"mc-desc-reviews\">\n    <div class=\"mc-desc-left\">\n      <span class=\"mc-desc-stars\">★★★★★</span>\n      <span class=\"mc-desc-rating\">4.69</span>\n    </div>\n    <div class=\"mc-desc-right\">\n      <span class=\"mc-desc-count-main\">74 verified reviews</span>\n      <span class=\"mc-desc-count-sub\">Worn &amp; trusted by real customers</span>\n    </div>\n  </div>\n</div>",
+        "custom_liquid": "<style>\n  .mc-desc * { box-sizing: border-box; margin: 0; padding: 0; }\n  .mc-desc { font-family: 'Jost', sans-serif; color: #2C1A0E; padding: 0 0 20px; }\n  .mc-desc-pill {\n    font-size: 11px;\n    font-weight: 500;\n    letter-spacing: 0.14em;\n    text-transform: uppercase;\n    color: #7A5C3A;\n    background: #EDE0CE;\n    padding: 6px 16px;\n    border-radius: 20px;\n    display: inline-flex;\n    width: fit-content;\n    margin-bottom: 18px;\n  }\n  .mc-desc-product-label {\n    font-family: 'Jost', sans-serif;\n    font-size: 11px;\n    font-weight: 400;\n    letter-spacing: 0.18em;\n    text-transform: uppercase;\n    color: #9A8070;\n    margin-bottom: 8px;\n    display: block;\n  }\n  .mc-desc-h2 {\n    font-family: 'Cormorant Garamond', serif;\n    font-size: 2.6rem;\n    font-weight: 400;\n    line-height: 1.05;\n    color: #2C1A0E;\n    margin-bottom: 4px;\n  }\n  .mc-desc-h2-italic {\n    font-family: 'Cormorant Garamond', serif;\n    font-size: 2.6rem;\n    font-weight: 400;\n    font-style: italic;\n    line-height: 1.05;\n    color: #9C7A5A;\n    display: block;\n    margin-bottom: 20px;\n  }\n  .mc-desc-body {\n    border-left: 3px solid #D6C9B8;\n    padding-left: 14px;\n    margin-bottom: 20px;\n  }\n  .mc-desc-body p {\n    font-size: 13.5px;\n    font-weight: 300;\n    line-height: 1.75;\n    color: #6B5040;\n  }\n  </style>\n\n<div class=\"mc-desc\">\n  <span class=\"mc-desc-pill\">Mend &amp; Co&#8482; Official</span>\n  <span class=\"mc-desc-product-label\">N&#176;01 &mdash; The Smart Ring</span>\n  <h2 class=\"mc-desc-h2\">Know your body.</h2>\n  <span class=\"mc-desc-h2-italic\">Before your body tells you first.</span>\n  <div class=\"mc-desc-body\">\n    <p>The Smart Ring tracks sleep, heart rate, HRV, SpO₂ and recovery — continuously, without a subscription. Ceramic build. 5ATM waterproof. Designed to be worn everywhere, forgotten about, and trusted completely.</p>\n  </div>",
         "color_scheme": "scheme-1",
         "custom_color_scheme": "",
         "padding___top": "inherit",
@@ -127,76 +59,8 @@
     },
     "testimonials": {
       "type": "testimonials",
-      "blocks": {
-        "testimonial_sarah": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "I've been telling my doctor something was wrong for two years. I brought in my HRV and temperature charts and she finally listened. First thing that's ever given me proof.",
-            "author": "Sarah M.",
-            "author_detail": "Verified buyer · White · Size 9",
-            "verified": true,
-            "stars": 5
-          }
-        },
-        "testimonial_keelan": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "Been lifting for 4 years. This showed me I was recovered enough to train hard exactly 11 times in 2 months. Stopped overtraining, finally broke a plateau.",
-            "author": "Keelan R.",
-            "author_detail": "Verified buyer · Black · Size 11",
-            "verified": true,
-            "stars": 5
-          }
-        },
-        "testimonial_david": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "I've rejected every smartwatch my wife has bought me. This is different — looks like a ring because it is one. Nobody at work even knows what it is.",
-            "author": "David H.",
-            "author_detail": "Verified buyer · Black · Size 12",
-            "verified": true,
-            "stars": 5
-          }
-        },
-        "testimonial_amy": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "The sleep data alone is worth it. I finally understand why I'm exhausted — my deep sleep is basically non-existent. Two weeks in and I've already changed my evening routine.",
-            "author": "Amy T.",
-            "author_detail": "Verified buyer · Pink · Size 8",
-            "verified": true,
-            "stars": 5
-          }
-        },
-        "testimonial_james": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "Battery lasts me nearly a week with 24/7 tracking on. My Apple Watch needed charging every night — I was never wearing it to sleep. This fixed the whole problem.",
-            "author": "James L.",
-            "author_detail": "Verified buyer · Black · Size 10",
-            "verified": true,
-            "stars": 5
-          }
-        },
-        "testimonial_priya": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "Bought it for cycle tracking and the temperature data is surprisingly accurate. Way cheaper than Oura and does the same thing. No subscription is a huge deal.",
-            "author": "Priya K.",
-            "author_detail": "Verified buyer · White · Size 9",
-            "verified": true,
-            "stars": 5
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_sarah",
-        "testimonial_keelan",
-        "testimonial_david",
-        "testimonial_amy",
-        "testimonial_james",
-        "testimonial_priya"
-      ],
+      "blocks": {},
+      "block_order": [],
       "disabled": true,
       "settings": {
         "eyebrow": "83 reviews · 4.9 stars",
@@ -286,7 +150,7 @@
         "video_position_y": 25,
         "eyebrow": "Why N°01",
         "heading": "Everything your watch can't tell you.",
-        "body": "Your smartwatch counts steps and celebrates effort. The N°01 Smart Band tracks what actually matters — how recovered you are. HRV, sleep architecture, blood oxygen, overnight temperature. The numbers that decide whether tomorrow builds you up or breaks you down.",
+        "body": "Your smartwatch counts steps and celebrates effort. The N°01 Smart Ring tracks what actually matters — how recovered you are. HRV, sleep architecture, blood oxygen, overnight temperature. The numbers that decide whether tomorrow builds you up or breaks you down.",
         "cta_label": "",
         "cta_url": "",
         "reverse": false
@@ -417,7 +281,8 @@
       ],
       "settings": {
         "include_margins": true
-      }
+      },
+      "disabled": true
     },
     "ring_size_modal": {
       "type": "ring-size-modal",
@@ -451,7 +316,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Can I wear it in the shower or pool?",
-            "answer": "<p>Yes. The N°01 Smart Band is rated IP68 — waterproof to 100 metres. Shower, swim, sauna — wear it without thinking twice.</p>"
+            "answer": "<p>Yes. The N°01 Smart Ring is rated 5 ATM — fine for shower, swim, and sauna at typical exposure. Not designed for high-velocity activities like scuba diving or jet-skiing.</p>"
           }
         },
         "faq_5": {
@@ -553,7 +418,7 @@
       ],
       "settings": {
         "included_heading": "What's Included",
-        "included_items": "Mend N°01 Smart Band\nMagnetic charging case\nUSB-C charging cable\nQuick start guide",
+        "included_items": "Mend N°01 Smart Ring\nMagnetic charging case\nUSB-C charging cable\nQuick start guide",
         "specs_heading": "Tech Specifications"
       }
     },
@@ -563,7 +428,7 @@
       "name": "t:sections.custom-liquid.name",
       "settings": {
         "show_on": "both",
-        "custom_liquid": "<style>.mc-app{background:var(--color-bone,#f5efe4);padding:56px 24px;font-family:var(--font-label,'Inter',sans-serif)}.mc-app__inner{max-width:640px;margin:0 auto;text-align:center}.mc-app__rule{width:40px;height:1.5px;background:var(--color-walnut,#8a6240);opacity:.6;margin:0 auto 1.25rem}.mc-app__eyebrow{font-size:.6875rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--color-walnut,#8a6240);margin:0 0 .875rem}.mc-app__heading{font-family:var(--font-heading,'Playfair Display',serif);font-size:clamp(1.625rem,3vw,2.25rem);font-weight:400;color:var(--color-black,#1f1d1a);line-height:1.2;margin:0 0 .75rem}.mc-app__sub{font-family:var(--font-heading,'Playfair Display',serif);font-size:1.0625rem;font-style:italic;color:var(--color-walnut,#8a6240);margin:0 0 1.25rem}.mc-app__body{font-size:.9375rem;color:var(--color-olive,#5a5040);line-height:1.7;margin:0 0 2rem;max-width:480px;margin-left:auto;margin-right:auto}.mc-app__steps{display:flex;flex-direction:column;gap:.625rem;margin:0 0 2rem;text-align:left;max-width:420px;margin-left:auto;margin-right:auto}.mc-app__step{display:flex;align-items:flex-start;gap:.875rem}.mc-app__step-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--color-walnut,#8a6240);color:#f5efe4;font-size:.6875rem;font-weight:700;letter-spacing:.05em;display:flex;align-items:center;justify-content:center;margin-top:.1rem}.mc-app__step-text{font-size:.875rem;color:var(--color-olive,#5a5040);line-height:1.6}.mc-app__step-text strong{color:var(--color-black,#1f1d1a);font-weight:600}.mc-app__badges{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}.mc-app__badge{display:inline-flex;align-items:center;gap:.625rem;background:#1f1d1a;color:#f5efe4;text-decoration:none;padding:.75rem 1.375rem;border-radius:10px;transition:background .2s ease}.mc-app__badge:hover{background:#3a3632}.mc-app__badge-icon{flex-shrink:0;opacity:.9}.mc-app__badge-copy{display:flex;flex-direction:column;line-height:1}.mc-app__badge-sub{font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-bottom:2px}.mc-app__badge-name{font-size:.9375rem;font-weight:600;letter-spacing:-.01em}@media(max-width:540px){.mc-app{padding:40px 20px}.mc-app__badges{flex-direction:column;align-items:center}.mc-app__badge{width:100%;max-width:240px;justify-content:center}}</style><div class=\"mc-app\"><div class=\"mc-app__inner\"><div class=\"mc-app__rule\"></div><p class=\"mc-app__eyebrow\">The App</p><h2 class=\"mc-app__heading\">Everything your body tells you,<br>in one place.</h2><p class=\"mc-app__sub\">Free forever. No subscription.</p><p class=\"mc-app__body\">Sync your N°01 Smart Band with the QRing app to see your sleep stages, HRV trends, recovery score, blood oxygen, and daily activity — all on one clean dashboard.</p><div class=\"mc-app__steps\"><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">1</span><p class=\"mc-app__step-text\"><strong>Download QRing</strong> — free on the App Store or Google Play.</p></div><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">2</span><p class=\"mc-app__step-text\"><strong>Open Bluetooth</strong> on your phone and power on the ring.</p></div><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">3</span><p class=\"mc-app__step-text\"><strong>Tap 'Add Device'</strong> in the app — the ring pairs in under 30 seconds.</p></div><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">4</span><p class=\"mc-app__step-text\"><strong>Wear it to sleep</strong> — your overnight data syncs automatically by morning.</p></div></div><div class=\"mc-app__badges\"><a href=\"https://apps.apple.com/nz/app/qring/id6473672621\" target=\"_blank\" rel=\"noopener\" class=\"mc-app__badge\"><svg class=\"mc-app__badge-icon\" width=\"22\" height=\"26\" viewBox=\"0 0 22 26\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M18.05 13.77c-.03-3.2 2.62-4.75 2.74-4.82-1.5-2.19-3.82-2.49-4.64-2.52-1.97-.2-3.86 1.17-4.86 1.17-1.01 0-2.57-1.14-4.23-1.11C4.9 6.52 2.87 7.7 1.76 9.57c-2.27 3.94-.58 9.76 1.63 12.95 1.08 1.56 2.36 3.31 4.04 3.25 1.63-.07 2.24-1.05 4.2-1.05 1.96 0 2.52 1.05 4.24 1.02 1.75-.03 2.85-1.59 3.92-3.16 1.24-1.81 1.75-3.57 1.77-3.66-.04-.02-3.48-1.33-3.51-5.15zM14.78 4.28C15.67 3.2 16.27 1.7 16.1 0c-1.47.06-3.27.98-4.32 2.04-.95.99-1.77 2.57-1.55 4.08 1.63.13 3.3-.83 4.55-1.84z\"/></svg><span class=\"mc-app__badge-copy\"><span class=\"mc-app__badge-sub\">Download on the</span><span class=\"mc-app__badge-name\">App Store</span></span></a><a href=\"https://play.google.com/store/apps/details?id=com.app.cq.ring&hl=en_NZ\" target=\"_blank\" rel=\"noopener\" class=\"mc-app__badge\"><svg class=\"mc-app__badge-icon\" width=\"22\" height=\"24\" viewBox=\"0 0 22 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M1.22.48C.8.7.5 1.18.5 1.8v20.4c0 .62.3 1.1.72 1.32l.1.06 11.42-11.42v-.27L1.32.42l-.1.06zm15.56 15.7l-3.8-3.8v-.27l3.8-3.8.09.05 4.5 2.56c1.28.73 1.28 1.92 0 2.65l-4.5 2.56-.09.05zM16.88 16.28L13 12.39 1.22 24.17c.42.24.98.2 1.67-.2l14-7.69\"/><path d=\"M16.88 8.52L2.89.83C2.2.43 1.64.39 1.22.63L13 12.41l3.88-3.89z\"/></svg><span class=\"mc-app__badge-copy\"><span class=\"mc-app__badge-sub\">Get it on</span><span class=\"mc-app__badge-name\">Google Play</span></span></a></div></div></div>",
+        "custom_liquid": "<style>.mc-app{background:var(--color-bone,#f5efe4);padding:56px 24px;font-family:var(--font-label,'Inter',sans-serif)}.mc-app__inner{max-width:640px;margin:0 auto;text-align:center}.mc-app__rule{width:40px;height:1.5px;background:var(--color-walnut,#8a6240);opacity:.6;margin:0 auto 1.25rem}.mc-app__eyebrow{font-size:.6875rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--color-walnut,#8a6240);margin:0 0 .875rem}.mc-app__heading{font-family:var(--font-heading,'Playfair Display',serif);font-size:clamp(1.625rem,3vw,2.25rem);font-weight:400;color:var(--color-black,#1f1d1a);line-height:1.2;margin:0 0 .75rem}.mc-app__sub{font-family:var(--font-heading,'Playfair Display',serif);font-size:1.0625rem;font-style:italic;color:var(--color-walnut,#8a6240);margin:0 0 1.25rem}.mc-app__body{font-size:.9375rem;color:var(--color-olive,#5a5040);line-height:1.7;margin:0 0 2rem;max-width:480px;margin-left:auto;margin-right:auto}.mc-app__steps{display:flex;flex-direction:column;gap:.625rem;margin:0 0 2rem;text-align:left;max-width:420px;margin-left:auto;margin-right:auto}.mc-app__step{display:flex;align-items:flex-start;gap:.875rem}.mc-app__step-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--color-walnut,#8a6240);color:#f5efe4;font-size:.6875rem;font-weight:700;letter-spacing:.05em;display:flex;align-items:center;justify-content:center;margin-top:.1rem}.mc-app__step-text{font-size:.875rem;color:var(--color-olive,#5a5040);line-height:1.6}.mc-app__step-text strong{color:var(--color-black,#1f1d1a);font-weight:600}.mc-app__badges{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}.mc-app__badge{display:inline-flex;align-items:center;gap:.625rem;background:#1f1d1a;color:#f5efe4;text-decoration:none;padding:.75rem 1.375rem;border-radius:10px;transition:background .2s ease}.mc-app__badge:hover{background:#3a3632}.mc-app__badge-icon{flex-shrink:0;opacity:.9}.mc-app__badge-copy{display:flex;flex-direction:column;line-height:1}.mc-app__badge-sub{font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-bottom:2px}.mc-app__badge-name{font-size:.9375rem;font-weight:600;letter-spacing:-.01em}@media(max-width:540px){.mc-app{padding:40px 20px}.mc-app__badges{flex-direction:column;align-items:center}.mc-app__badge{width:100%;max-width:240px;justify-content:center}}</style><div class=\"mc-app\"><div class=\"mc-app__inner\"><div class=\"mc-app__rule\"></div><p class=\"mc-app__eyebrow\">The App</p><h2 class=\"mc-app__heading\">Everything your body tells you,<br>in one place.</h2><p class=\"mc-app__sub\">Free forever. No subscription.</p><p class=\"mc-app__body\">Sync your N°01 Smart Ring with the QRing app to see your sleep stages, HRV trends, recovery score, blood oxygen, and daily activity — all on one clean dashboard.</p><div class=\"mc-app__steps\"><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">1</span><p class=\"mc-app__step-text\"><strong>Download QRing</strong> — free on the App Store or Google Play.</p></div><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">2</span><p class=\"mc-app__step-text\"><strong>Open Bluetooth</strong> on your phone and power on the ring.</p></div><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">3</span><p class=\"mc-app__step-text\"><strong>Tap 'Add Device'</strong> in the app — the ring pairs in under 30 seconds.</p></div><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">4</span><p class=\"mc-app__step-text\"><strong>Wear it to sleep</strong> — your overnight data syncs automatically by morning.</p></div></div><div class=\"mc-app__badges\"><a href=\"https://apps.apple.com/nz/app/qring/id6473672621\" target=\"_blank\" rel=\"noopener\" class=\"mc-app__badge\"><svg class=\"mc-app__badge-icon\" width=\"22\" height=\"26\" viewBox=\"0 0 22 26\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M18.05 13.77c-.03-3.2 2.62-4.75 2.74-4.82-1.5-2.19-3.82-2.49-4.64-2.52-1.97-.2-3.86 1.17-4.86 1.17-1.01 0-2.57-1.14-4.23-1.11C4.9 6.52 2.87 7.7 1.76 9.57c-2.27 3.94-.58 9.76 1.63 12.95 1.08 1.56 2.36 3.31 4.04 3.25 1.63-.07 2.24-1.05 4.2-1.05 1.96 0 2.52 1.05 4.24 1.02 1.75-.03 2.85-1.59 3.92-3.16 1.24-1.81 1.75-3.57 1.77-3.66-.04-.02-3.48-1.33-3.51-5.15zM14.78 4.28C15.67 3.2 16.27 1.7 16.1 0c-1.47.06-3.27.98-4.32 2.04-.95.99-1.77 2.57-1.55 4.08 1.63.13 3.3-.83 4.55-1.84z\"/></svg><span class=\"mc-app__badge-copy\"><span class=\"mc-app__badge-sub\">Download on the</span><span class=\"mc-app__badge-name\">App Store</span></span></a><a href=\"https://play.google.com/store/apps/details?id=com.app.cq.ring&hl=en_NZ\" target=\"_blank\" rel=\"noopener\" class=\"mc-app__badge\"><svg class=\"mc-app__badge-icon\" width=\"22\" height=\"24\" viewBox=\"0 0 22 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M1.22.48C.8.7.5 1.18.5 1.8v20.4c0 .62.3 1.1.72 1.32l.1.06 11.42-11.42v-.27L1.32.42l-.1.06zm15.56 15.7l-3.8-3.8v-.27l3.8-3.8.09.05 4.5 2.56c1.28.73 1.28 1.92 0 2.65l-4.5 2.56-.09.05zM16.88 16.28L13 12.39 1.22 24.17c.42.24.98.2 1.67-.2l14-7.69\"/><path d=\"M16.88 8.52L2.89.83C2.2.43 1.64.39 1.22.63L13 12.41l3.88-3.89z\"/></svg><span class=\"mc-app__badge-copy\"><span class=\"mc-app__badge-sub\">Get it on</span><span class=\"mc-app__badge-name\">Google Play</span></span></a></div></div></div>",
         "color_scheme": "scheme-1",
         "custom_color_scheme": "",
         "padding___top": "inherit",

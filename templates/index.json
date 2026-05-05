@@ -16,8 +16,8 @@
         "heading": "Know before",
         "heading_em": "your body",
         "heading_2": "breaks down.",
-        "subtext": "The Smart Band tracks HRV, sleep stages, and recovery — every morning, no subscription.",
-        "cta_label": "Shop the N°01 Smart Band",
+        "subtext": "The Smart Ring tracks HRV, sleep stages, and recovery — every morning, no subscription.",
+        "cta_label": "Shop the N°01 Smart Ring",
         "cta_url": "/products/smart-band",
         "show_scroll_cue": true
       }
@@ -34,8 +34,8 @@
       "settings": {
         "stat_1_value": "5–7 days",
         "stat_1_label": "Battery life",
-        "stat_2_value": "4.9 ★",
-        "stat_2_label": "2,100+ reviews",
+        "stat_2_value": "5 ATM",
+        "stat_2_label": "Shower & swim",
         "stat_3_value": "$0",
         "stat_3_label": "Subscription, ever"
       }
@@ -78,8 +78,8 @@
         "video_url": "https://cdn.shopify.com/videos/c/o/v/1a268f935d3f46c086e8e2eb7abeab0b.mp4",
         "eyebrow": "Now available",
         "heading": "Know how recovered you actually are.",
-        "body": "The N°01 Smart Band tracks what your body is doing while you sleep — HRV, blood oxygen, sleep architecture, overnight temperature — and tells you in the morning whether to push or rest.",
-        "cta_label": "Shop the N°01 Smart Band",
+        "body": "The N°01 Smart Ring tracks what your body is doing while you sleep — HRV, blood oxygen, sleep architecture, overnight temperature — and tells you in the morning whether to push or rest.",
+        "cta_label": "Shop the N°01 Smart Ring",
         "cta_url": "/products/smart-band",
         "reverse": false
       }
@@ -105,7 +105,8 @@
         "eyebrow": "Real results",
         "heading": "What people are saying.",
         "reviews_count": 6
-      }
+      },
+      "disabled": true
     },
     "177700770423191747": {
       "type": "apps",
