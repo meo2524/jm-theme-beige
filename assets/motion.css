@@ -2539,3 +2539,20 @@
   .btn-atc, .sticky-atc__btn { transition: background-color 0.18s ease; }
   .btn-atc:active, .sticky-atc__btn:active { transform: none; }
 }
+
+/* ── Bento tile classifier — disabled on benefit_pitch bullets ────────
+   The keyword classifier in motion.js auto-tags each bullet (HRV, sleep,
+   ceramic, steps, etc.) and motion.css renders a different ambient SVG
+   per tile-type via ::after. On the benefit_pitch list this reads as
+   "icons are broken" rather than intentional — different motifs per
+   bullet (walking-figure on activity, diamond on ceramic, etc.) with no
+   shared visual language. The per-bullet em-dash icon (.product-
+   feature__bullet-icon) already provides a unified marker, so we hide
+   the per-tile pseudo-element here.
+   product_science cards keep their per-tile visualizations — those are
+   intentional and the layout (one sensor per card) supports it.
+   ────────────────────────────────────────────────────────────────── */
+.product-feature__bullet::after {
+  display: none !important;
+}
+

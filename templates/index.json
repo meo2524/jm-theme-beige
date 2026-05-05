@@ -89,7 +89,7 @@
       "settings": {
         "eyebrow": "Brand origin",
         "heading_pre": "Built to",
-        "heading_em": "actually mend.",
+        "heading_em": "actually mend",
         "heading_post": "",
         "paragraph_1": "Mend & Co builds tools that earn their place — bought once, owned forever, designed to make recovery measurable. The N°01 Smart Ring is the first. There will be more, each one quietly built to mend something we have been told to ignore.",
         "paragraph_2": "",
@@ -131,7 +131,7 @@
       "type": "newsletter",
       "settings": {
         "heading": "The mend starts here.",
-        "subtext": "Research, rituals, and offers worth your time. About once a fortnight.",
+        "subtext": "Research, rituals, and offers worth your time. About every two weeks.",
         "btn_label": "Subscribe",
         "success_message": "You're in. We'll be in touch.",
         "privacy_note": "We respect your privacy. Unsubscribe any time.",

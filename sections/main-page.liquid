@@ -147,10 +147,13 @@
 /* ── RICH TEXT ─────────────────────────────────────────── */
 
 .pg__rte {
-  /* Typography */
-  font-family: var(--font-label);
-  font-size: 1rem;
-  line-height: 1.75;
+  /* Typography — brand serif for prose pages (About, policies, journal).
+     Was previously --font-label (JetBrains Mono), which made long-form
+     copy read like a developer's README rather than editorial wellness
+     writing. */
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1.7;
   color: var(--color-black);
 }
 
