@@ -496,38 +496,38 @@
         "feature_sleep": {
           "type": "feature",
           "settings": {
-            "heading": "Sleep stages",
-            "body": "Deep, light, REM — tracked overnight, summarised by morning.",
-            "image_url": "https://qringstore.com/cdn/shop/files/jiezhi-31.png?v=1727282464&width=600"
+            "heading": "Sleep",
+            "body": "How well you slept. Plus the breakdown — light, deep, awake.",
+            "image_filename": "app-sleep.jpg"
+          }
+        },
+        "feature_heart": {
+          "type": "feature",
+          "settings": {
+            "heading": "Heart rate",
+            "body": "Your beat-by-beat all day. The reads you'd never catch yourself.",
+            "image_filename": "app-heart-rate.jpg"
           }
         },
         "feature_activity": {
           "type": "feature",
           "settings": {
-            "heading": "Heart rate & activity",
-            "body": "24/7 heart rate, daily steps, calories, dozens of sport modes.",
-            "image_url": "https://qringstore.com/cdn/shop/files/jiezhi-30.png?v=1727281208&width=600"
-          }
-        },
-        "feature_spo2": {
-          "type": "feature",
-          "settings": {
-            "heading": "Blood oxygen & HRV",
-            "body": "SpO₂, heart rate variability, stress score — overnight and on demand.",
-            "image_url": "https://qringstore.com/cdn/shop/files/jiezhi-28.png?v=1727281207&width=600"
+            "heading": "Activity",
+            "body": "Walks, workouts, and the small movement you'd otherwise forget.",
+            "image_filename": "app-activity.jpg"
           }
         }
       },
       "block_order": [
         "feature_sleep",
-        "feature_activity",
-        "feature_spo2"
+        "feature_heart",
+        "feature_activity"
       ],
       "settings": {
         "eyebrow": "The app",
-        "heading": "See your data, every morning.",
-        "body": "Sync the N°01 to the free QRing app. Sleep stages, heart rate, HRV, blood oxygen, recovery — on one clean dashboard. iOS and Android. No registration. No subscription.",
-        "hero_image_url": "https://qringstore.com/cdn/shop/files/jiezhi-08_eaff9b99-3e86-4b13-96fd-be52b9b2a560.jpg?v=1726586159&width=2000",
+        "heading": "See what your body did last night.",
+        "body": "Sync the N°01 to the free QRing app. Your sleep, your heart, your daily movement — on one clean dashboard. iOS and Android. No registration. No subscription.",
+        "hero_image_url": "",
         "apple_url": "https://apps.apple.com/nz/app/qring/id6473672621",
         "google_url": "https://play.google.com/store/apps/details?id=com.app.cq.ring&hl=en_NZ",
         "privacy_text": "Your health data stays on your device."

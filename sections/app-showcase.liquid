@@ -8,13 +8,28 @@
 
 {%- liquid
   assign eyebrow = section.settings.eyebrow | default: 'The app'
-  assign heading = section.settings.heading | default: 'See your data, every morning.'
-  assign body = section.settings.body | default: 'Sync the N°01 to the free QRing app. Sleep stages, heart rate, HRV, blood oxygen, recovery — on one clean dashboard. iOS and Android. No registration. No subscription.'
+  assign heading = section.settings.heading | default: 'See what your body did last night.'
+  assign body = section.settings.body | default: 'Sync the N°01 to the free QRing app. Your sleep, your heart, your daily movement — on one clean dashboard. iOS and Android. No registration. No subscription.'
   assign hero_image = section.settings.hero_image
-  assign hero_image_url_default = section.settings.hero_image_url | default: 'https://qringstore.com/cdn/shop/files/jiezhi-08_eaff9b99-3e86-4b13-96fd-be52b9b2a560.jpg?v=1726586159&width=2000'
+  assign hero_image_filename = section.settings.hero_image_filename
+  assign hero_image_url = section.settings.hero_image_url
   assign privacy_text = section.settings.privacy_text | default: 'Your health data stays on your device.'
   assign apple_url = section.settings.apple_url | default: 'https://apps.apple.com/nz/app/qring/id6473672621'
   assign google_url = section.settings.google_url | default: 'https://play.google.com/store/apps/details?id=com.app.cq.ring&hl=en_NZ'
+
+  comment
+    Only render the hero composite if the merchant has set ONE of:
+    - hero_image (Shopify Files picker)
+    - hero_image_filename (theme asset filename, resolved via asset_url)
+    - hero_image_url (external URL)
+    Without any of these we skip the standalone hero — the per-feature
+    composites below already include phone mockups, so a separate hero
+    phone reads as redundant.
+  endcomment
+  assign show_hero = false
+  if hero_image != blank or hero_image_filename != blank or hero_image_url != blank
+    assign show_hero = true
+  endif
 -%}
 
 <section class="app-showcase section" data-section-id="{{ section.id }}">
@@ -29,35 +44,38 @@
       {%- endif -%}
     </header>
 
-    {%- comment -%} ───────── Hero phone screenshot ───────── {%- endcomment -%}
-    <div class="app-showcase__hero">
-      {%- if hero_image != blank -%}
-        <img
-          src="{{ hero_image | image_url: width: 1600 }}"
-          srcset="
-            {{ hero_image | image_url: width: 800 }} 800w,
-            {{ hero_image | image_url: width: 1200 }} 1200w,
-            {{ hero_image | image_url: width: 1600 }} 1600w,
-            {{ hero_image | image_url: width: 2000 }} 2000w
-          "
-          sizes="(max-width: 767px) 100vw, 90vw"
-          alt="{{ hero_image.alt | default: 'QRing app sleep view' | escape }}"
-          loading="lazy"
-          width="1600"
-          height="1067"
-        >
-      {%- else -%}
-        <img
-          src="{{ hero_image_url_default }}"
-          alt="QRing app sleep view — two phones showing sleep stages dashboard"
-          loading="lazy"
-          width="1600"
-          height="1067"
-        >
-      {%- endif -%}
-    </div>
+    {%- comment -%} ───────── Hero composite (only if explicitly set) ───────── {%- endcomment -%}
+    {%- if show_hero -%}
+      <div class="app-showcase__hero">
+        {%- if hero_image != blank -%}
+          <img
+            src="{{ hero_image | image_url: width: 1600 }}"
+            srcset="
+              {{ hero_image | image_url: width: 800 }} 800w,
+              {{ hero_image | image_url: width: 1200 }} 1200w,
+              {{ hero_image | image_url: width: 1600 }} 1600w
+            "
+            sizes="(max-width: 767px) 100vw, 90vw"
+            alt="{{ hero_image.alt | default: 'QRing app sleep view' | escape }}"
+            loading="lazy"
+          >
+        {%- elsif hero_image_filename != blank -%}
+          <img
+            src="{{ hero_image_filename | asset_url }}"
+            alt="QRing app — sleep tracking dashboard"
+            loading="lazy"
+          >
+        {%- else -%}
+          <img
+            src="{{ hero_image_url }}"
+            alt="QRing app — sleep tracking dashboard"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
+    {%- endif -%}
 
-    {%- comment -%} ───────── 3-feature grid ───────── {%- endcomment -%}
+    {%- comment -%} ───────── Feature grid (square composites) ───────── {%- endcomment -%}
     {%- if section.blocks.size > 0 -%}
       <div class="app-showcase__features">
         {%- for block in section.blocks -%}
@@ -66,11 +84,22 @@
               {%- if block.settings.image != blank -%}
                 <img
                   class="app-showcase__feature-img"
-                  src="{{ block.settings.image | image_url: width: 600 }}"
+                  src="{{ block.settings.image | image_url: width: 1200 }}"
+                  srcset="
+                    {{ block.settings.image | image_url: width: 600 }} 600w,
+                    {{ block.settings.image | image_url: width: 900 }} 900w,
+                    {{ block.settings.image | image_url: width: 1200 }} 1200w
+                  "
+                  sizes="(max-width: 767px) 90vw, 360px"
                   alt="{{ block.settings.image.alt | default: block.settings.heading | escape }}"
                   loading="lazy"
-                  width="300"
-                  height="600"
+                >
+              {%- elsif block.settings.image_filename != blank -%}
+                <img
+                  class="app-showcase__feature-img"
+                  src="{{ block.settings.image_filename | asset_url }}"
+                  alt="{{ block.settings.heading | escape }}"
+                  loading="lazy"
                 >
               {%- elsif block.settings.image_url != blank -%}
                 <img
@@ -78,8 +107,6 @@
                   src="{{ block.settings.image_url }}"
                   alt="{{ block.settings.heading | escape }}"
                   loading="lazy"
-                  width="300"
-                  height="600"
                 >
               {%- endif -%}
               <h3 class="app-showcase__feature-heading">{{ block.settings.heading }}</h3>
@@ -166,7 +193,7 @@
     color: var(--color-olive, #4a4640);
   }
 
-  /* ── Hero phone screenshot ── */
+  /* ── Hero composite (optional) ── */
   .app-showcase__hero {
     margin: 0 auto 3rem;
     max-width: 980px;
@@ -175,44 +202,47 @@
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 12px;
+    border-radius: 16px;
   }
 
-  /* ── 3-feature grid ── */
+  /* ── Feature grid (square composites) ── */
   .app-showcase__features {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin: 0 auto 2.5rem;
-    max-width: 980px;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    margin: 0 auto 3rem;
+    max-width: 1100px;
   }
   .app-showcase__feature {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .app-showcase__feature-img {
     width: 100%;
-    max-width: 260px;
-    height: auto;
-    border-radius: 22px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 18px;
     display: block;
-    margin: 0 auto 1rem;
+    margin: 0 0 1.25rem;
     background: var(--color-bone-alt, #ece5d6);
-    box-shadow: 0 8px 24px rgba(26, 24, 20, 0.08);
+    box-shadow: 0 10px 28px rgba(26, 24, 20, 0.06), 0 2px 6px rgba(26, 24, 20, 0.04);
   }
   .app-showcase__feature-heading {
     font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: 1.25rem;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
     font-weight: 500;
     color: var(--color-ink, #1a1814);
     margin: 0 0 0.4rem;
+    letter-spacing: -0.01em;
   }
   .app-showcase__feature-body {
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     line-height: 1.55;
     color: var(--color-olive, #4a4640);
     margin: 0;
-    max-width: 28ch;
-    margin-inline: auto;
+    max-width: 32ch;
   }
 
   /* ── App store buttons ── */
@@ -317,21 +347,30 @@
       "type": "textarea",
       "id": "body",
       "label": "Body",
-      "default": "Sync the N°01 to the free QRing app. Sleep stages, heart rate, HRV, blood oxygen, recovery — on one clean dashboard. iOS and Android. No registration. No subscription."
+      "default": "Sync the N°01 to the free QRing app. Your sleep, your heart, your daily movement — on one clean dashboard. iOS and Android. No registration. No subscription."
     },
 
-    { "type": "header", "content": "Hero screenshot" },
+    { "type": "header", "content": "Hero composite (optional)" },
+    {
+      "type": "paragraph",
+      "content": "Leave all three blank to skip the hero — the per-feature composites already include phone mockups."
+    },
     {
       "type": "image_picker",
       "id": "hero_image",
-      "label": "Hero phone screenshot",
-      "info": "Wide app screenshot (recommended: two-phone composite). If left blank, falls back to URL below."
+      "label": "Hero composite (Shopify Files)"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_filename",
+      "label": "Hero composite — theme asset filename",
+      "info": "e.g. app-sleep.jpg — file must exist in /assets/. Used if no Shopify Files image set."
     },
     {
       "type": "url",
       "id": "hero_image_url",
-      "label": "Hero image URL (fallback)",
-      "info": "Used if no image uploaded. Can hotlink an external CDN."
+      "label": "Hero composite — external URL",
+      "info": "Last-resort fallback. Hotlinking external CDNs is discouraged."
     },
 
     { "type": "header", "content": "App store links" },
@@ -363,25 +402,31 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Phone screenshot"
+          "label": "Composite image (Shopify Files)"
+        },
+        {
+          "type": "text",
+          "id": "image_filename",
+          "label": "Theme asset filename",
+          "info": "e.g. app-sleep.jpg — file must exist in /assets/. Used if no Shopify Files image set."
         },
         {
           "type": "url",
           "id": "image_url",
-          "label": "Image URL (fallback)",
-          "info": "Used if no image uploaded."
+          "label": "External image URL (fallback)",
+          "info": "Last-resort fallback."
         },
         {
           "type": "text",
           "id": "heading",
           "label": "Heading",
-          "default": "Sleep stages"
+          "default": "Sleep"
         },
         {
           "type": "textarea",
           "id": "body",
           "label": "Body",
-          "default": "Deep, light, REM — tracked overnight, summarised by morning."
+          "default": "How well you slept. Plus the breakdown — light, deep, awake."
         }
       ]
     }
@@ -393,25 +438,25 @@
         {
           "type": "feature",
           "settings": {
-            "heading": "Sleep stages",
-            "body": "Deep, light, REM — tracked overnight, summarised by morning.",
-            "image_url": "https://qringstore.com/cdn/shop/files/jiezhi-31.png?v=1727282464&width=600"
+            "heading": "Sleep",
+            "body": "How well you slept. Plus the breakdown — light, deep, awake.",
+            "image_filename": "app-sleep.jpg"
           }
         },
         {
           "type": "feature",
           "settings": {
-            "heading": "Heart rate & activity",
-            "body": "24/7 heart rate, daily steps, calories, dozens of sport modes.",
-            "image_url": "https://qringstore.com/cdn/shop/files/jiezhi-30.png?v=1727281208&width=600"
+            "heading": "Heart rate",
+            "body": "Your beat-by-beat all day. The reads you'd never catch yourself.",
+            "image_filename": "app-heart-rate.jpg"
           }
         },
         {
           "type": "feature",
           "settings": {
-            "heading": "Blood oxygen & HRV",
-            "body": "SpO₂, heart rate variability, stress score — overnight and on demand.",
-            "image_url": "https://qringstore.com/cdn/shop/files/jiezhi-28.png?v=1727281207&width=600"
+            "heading": "Activity",
+            "body": "Walks, workouts, and the small movement you'd otherwise forget.",
+            "image_filename": "app-activity.jpg"
           }
         }
       ]
