@@ -86,6 +86,12 @@
             "text": "Walks, workouts, even the small movement that adds up"
           }
         },
+        "bullet_subscription": {
+          "type": "bullet",
+          "settings": {
+            "text": "No subscription, ever — own your data outright"
+          }
+        },
         "bullet_ceramic": {
           "type": "bullet",
           "settings": {
@@ -98,6 +104,7 @@
         "bullet_heart",
         "bullet_recovery",
         "bullet_activity",
+        "bullet_subscription",
         "bullet_ceramic"
       ],
       "settings": {

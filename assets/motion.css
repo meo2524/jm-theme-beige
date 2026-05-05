@@ -2551,8 +2551,19 @@
    the per-tile pseudo-element here.
    product_science cards keep their per-tile visualizations — those are
    intentional and the layout (one sensor per card) supports it.
+
+   With the ::after hidden, the original 104px bottom padding (reserved
+   for the ambient viz) makes the cards read tall and lopsided. Reset
+   padding to symmetric and force a square aspect-ratio so the tiles
+   read as a clean grid.
    ────────────────────────────────────────────────────────────────── */
 .product-feature__bullet::after {
   display: none !important;
+}
+.motion-on .product-feature__bullet {
+  aspect-ratio: 1 / 1 !important;
+  padding: 1rem !important;
+  min-height: 0 !important;
+  justify-content: flex-start !important;
 }
 
