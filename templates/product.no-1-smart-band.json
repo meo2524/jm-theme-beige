@@ -395,7 +395,7 @@
           "type": "spec_group",
           "settings": {
             "icon": "ring",
-            "heading": "Quality materials",
+            "heading": "Materials",
             "body": "<ul><li>Zirconia ceramic body</li><li>Polished chrome inner band</li><li>5ATM water-resistant — wear it in the shower, pool, or sauna</li><li>Hypoallergenic, scratch-resistant ceramic finish</li></ul>"
           }
         },
@@ -403,7 +403,7 @@
           "type": "spec_group",
           "settings": {
             "icon": "shield",
-            "heading": "Certifications & inclusions",
+            "heading": "Certifications",
             "body": "<ul><li>CE certified · no display screen · no NFC</li><li>Realtek RTL8762 ESF chipset</li><li>Subscription: none, ever — own your health data outright</li></ul>"
           }
         }

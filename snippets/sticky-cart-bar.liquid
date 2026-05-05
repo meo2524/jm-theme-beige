@@ -1,0 +1,173 @@
+{%- comment -%}
+  Sticky mobile add-to-cart bar.
+  Shown on PDP only, mobile only (≤767px). Slides in from bottom when
+  the main #AddToCart-{section_id} button leaves the viewport. Tapping
+  the sticky button scrolls smoothly back to the main form so the user
+  picks variant/quantity in one place — avoids duplicate state.
+
+  Required: caller passes `section_id` (matches main ATC button id).
+  Usage: {% render 'sticky-cart-bar', product: product, section_id: section.id, current_variant: current_variant %}
+{%- endcomment -%}
+
+{%- assign sb_variant = current_variant | default: product.selected_or_first_available_variant -%}
+
+<div
+  class="mc-sticky-cart"
+  id="StickyCart-{{ section_id }}"
+  data-watch="#AddToCart-{{ section_id }}"
+  data-target="#product-form-{{ section_id }}"
+  aria-hidden="true"
+  hidden
+>
+  <a class="mc-sticky-cart__inner" href="#product-form-{{ section_id }}">
+    <span class="mc-sticky-cart__media" aria-hidden="true">
+      {%- if product.featured_image -%}
+        <img
+          src="{{ product.featured_image | image_url: width: 80 }}"
+          alt=""
+          width="40"
+          height="40"
+          loading="lazy"
+        >
+      {%- endif -%}
+    </span>
+    <span class="mc-sticky-cart__copy">
+      <span class="mc-sticky-cart__title">{{ product.title }}</span>
+      <span class="mc-sticky-cart__price">
+        {%- if sb_variant.compare_at_price > sb_variant.price -%}
+          <span class="mc-sticky-cart__price-now">{{ sb_variant.price | money }}</span>
+          <span class="mc-sticky-cart__price-was">{{ sb_variant.compare_at_price | money }}</span>
+        {%- else -%}
+          {{ sb_variant.price | money }}
+        {%- endif -%}
+      </span>
+    </span>
+    <span class="mc-sticky-cart__btn">
+      {%- if sb_variant.available -%}Add to cart{%- else -%}Sold out{%- endif -%}
+    </span>
+  </a>
+</div>
+
+<style>
+  .mc-sticky-cart {
+    display: none;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 90;
+    padding: 0.5rem 0.75rem max(0.5rem, env(safe-area-inset-bottom));
+    background: rgba(31, 29, 26, 0.96);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.18);
+    transform: translateY(110%);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+  .mc-sticky-cart.is-visible {
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .mc-sticky-cart__inner {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    text-decoration: none;
+    color: var(--color-bone, #f5efe6);
+    min-height: 52px;
+  }
+  .mc-sticky-cart__media {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: rgba(245, 239, 230, 0.08);
+  }
+  .mc-sticky-cart__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .mc-sticky-cart__copy {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+  .mc-sticky-cart__title {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--color-bone, #f5efe6);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .mc-sticky-cart__price {
+    font-family: var(--font-mono, 'Inter', sans-serif);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: rgba(245, 239, 230, 0.78);
+    margin-top: 2px;
+  }
+  .mc-sticky-cart__price-was {
+    text-decoration: line-through;
+    opacity: 0.55;
+    margin-left: 6px;
+  }
+  .mc-sticky-cart__btn {
+    flex-shrink: 0;
+    min-height: 44px;
+    padding: 0 1rem;
+    background: var(--color-walnut, #8a6240);
+    color: var(--color-bone, #f5efe6);
+    border-radius: 4px;
+    font-family: var(--font-mono, 'Inter', sans-serif);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Show on mobile only — desktop has sticky gallery + persistent CTA */
+  @media (max-width: 767px) {
+    .mc-sticky-cart { display: block; }
+  }
+</style>
+
+<script>
+  (function() {
+    var bar = document.getElementById('StickyCart-{{ section_id }}');
+    if (!bar) return;
+    var watchSel = bar.getAttribute('data-watch');
+    var watch = watchSel ? document.querySelector(watchSel) : null;
+    if (!watch) return;
+    if (!('IntersectionObserver' in window)) {
+      // Fallback: always show after first scroll
+      var shown = false;
+      window.addEventListener('scroll', function() {
+        if (!shown && window.scrollY > 400) {
+          bar.hidden = false;
+          bar.classList.add('is-visible');
+          bar.setAttribute('aria-hidden', 'false');
+          shown = true;
+        }
+      }, { passive: true });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        var visible = !e.isIntersecting && e.boundingClientRect.top < 0;
+        bar.hidden = false;
+        bar.classList.toggle('is-visible', visible);
+        bar.setAttribute('aria-hidden', visible ? 'false' : 'true');
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+    io.observe(watch);
+  })();
+</script>
