@@ -20,6 +20,9 @@
         {%- if video_url != blank -%}
           <video
             src="{{ video_url }}"
+            {%- if image != blank %}
+            poster="{{ image | image_url: width: 1200 }}"
+            {%- endif %}
             autoplay
             muted
             loop
@@ -28,7 +31,17 @@
             class="product-feature__video"
             style="object-position: 50% {{ video_y }}%;"
             aria-label="{{ heading | escape }}"
-          ></video>
+          >
+            {%- if image != blank -%}
+              <img
+                src="{{ image | image_url: width: 1200 }}"
+                alt="{{ image.alt | default: heading | escape }}"
+                width="1200"
+                height="1467"
+                loading="lazy"
+              >
+            {%- endif -%}
+          </video>
         {%- elsif image != blank -%}
           <img
             src="{{ image | image_url: width: 900 }}"
@@ -241,7 +254,8 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Image (fallback if no video)"
+      "label": "Image",
+      "info": "Used as poster (shown before/while video loads) when a video URL is set. Used as the visual when no video URL is set. Recommended size: 1200×1467 (tall portrait)."
     },
     {
       "type": "text",
