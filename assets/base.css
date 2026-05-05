@@ -1075,8 +1075,8 @@ p {
   align-items: center;
   width: max-content;
   animation: mend-marquee 60s linear infinite;
-  gap: 64px;
-  padding-right: 64px;
+  gap: 48px;
+  padding-right: 48px;
   will-change: transform;
 }
 @media (prefers-reduced-motion: reduce) {
