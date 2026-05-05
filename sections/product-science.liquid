@@ -158,7 +158,12 @@
     color: #9a7e57;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    margin: 0 0 28px;
+    /* margin auto + max-width:none override the global `p { max-width:
+       68ch }` rule. Without this, the label inherited a 482px cap and
+       sat at the parent's left edge instead of centring under the
+       badge below it. */
+    margin: 0 auto 28px;
+    max-width: none;
   }
 
   .ps-sources-row {
