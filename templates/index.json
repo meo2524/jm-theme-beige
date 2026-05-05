@@ -16,7 +16,7 @@
         "heading": "Know before",
         "heading_em": "your body",
         "heading_2": "breaks down.",
-        "subtext": "Wear it to sleep. Wake up knowing how rested you actually are — and whether today calls for push or rest. No subscription. Ever.",
+        "subtext": "Wear it always. Sleep, heart, recovery, movement — read continuously and translated into clear answers, every morning. No subscription. Ever.",
         "cta_label": "Shop the N°01 Smart Ring",
         "cta_url": "/products/smart-band",
         "show_scroll_cue": true
@@ -46,13 +46,13 @@
         "bullet_hrv": {
           "type": "bullet",
           "settings": {
-            "text": "Know how you slept and whether to push today — every morning"
+            "text": "Sleep, heart, movement, recovery — read continuously, decoded daily"
           }
         },
         "bullet_battery": {
           "type": "bullet",
           "settings": {
-            "text": "5–7 day battery. Wear it to sleep, every night."
+            "text": "5–7 day battery. Wear it always — even in the shower."
           }
         },
         "bullet_sub": {
@@ -77,8 +77,8 @@
       "settings": {
         "video_url": "https://cdn.shopify.com/videos/c/o/v/1a268f935d3f46c086e8e2eb7abeab0b.mp4",
         "eyebrow": "Now available",
-        "heading": "Know how recovered you actually are.",
-        "body": "The N°01 Smart Ring listens to what your body is doing while you sleep — your heartbeat, your breath, the depth of your rest, your overnight temperature — and tells you in the morning whether to push or rest.",
+        "heading": "Know what your body knows.",
+        "body": "The N°01 Smart Ring reads your body around the clock — sleep at night, heart all day, movement when you move, recovery between — and translates the lot into clear answers every morning. Push or rest? You'll know.",
         "cta_label": "Shop the N°01 Smart Ring",
         "cta_url": "/products/smart-band",
         "reverse": false

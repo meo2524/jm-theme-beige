@@ -14,9 +14,9 @@
       "settings": {
         "eyebrow_text": "A second sense",
         "model_badge": "",
-        "blurb_heading": "Wake up knowing.",
-        "blurb_subheading": "How you slept. How rested you really are. Whether to push or rest today.",
-        "short_description": "Wear it to bed. By morning you'll know how deeply you slept, how rested you actually are, and whether your body's ready for what's ahead — without a subscription.",
+        "blurb_heading": "Know what your body knows.",
+        "blurb_subheading": "Sleep at night. Heart all day. Movement when you move. All translated, every morning.",
+        "short_description": "Wear it always. The N°01 reads your body around the clock — your sleep, your heart, your movement, your recovery — then translates the lot into clear answers. No subscription.",
         "per_use_text": "",
         "accordion_label_1": "What's in the box",
         "accordion_label_2": "Find your size",
@@ -65,25 +65,25 @@
         "bullet_sleep": {
           "type": "bullet",
           "settings": {
-            "text": "How deeply you slept — and one clean number that says how good a night it really was"
+            "text": "How deeply you slept — and one clean number for the night"
           }
         },
-        "bullet_hrv": {
+        "bullet_heart": {
+          "type": "bullet",
+          "settings": {
+            "text": "Your heart, all day — resting, working, recovering"
+          }
+        },
+        "bullet_recovery": {
           "type": "bullet",
           "settings": {
             "text": "How recovered you actually are — the signal beneath how you feel"
           }
         },
-        "bullet_spo2": {
+        "bullet_activity": {
           "type": "bullet",
           "settings": {
-            "text": "What your breath and body temperature did while you slept — caught automatically"
-          }
-        },
-        "bullet_stress": {
-          "type": "bullet",
-          "settings": {
-            "text": "A clear read on stress — so you know when to push and when to ease up"
+            "text": "Walks, workouts, even the small movement that adds up"
           }
         },
         "bullet_ceramic": {
@@ -95,9 +95,9 @@
       },
       "block_order": [
         "bullet_sleep",
-        "bullet_hrv",
-        "bullet_spo2",
-        "bullet_stress",
+        "bullet_heart",
+        "bullet_recovery",
+        "bullet_activity",
         "bullet_ceramic"
       ],
       "settings": {
@@ -105,7 +105,7 @@
         "video_position_y": 25,
         "eyebrow": "Why N°01",
         "heading": "Everything your watch can't tell you.",
-        "body": "Your smartwatch counts steps. The N°01 listens to what your body is doing while you sleep — your heartbeat, your breath, the shape of your rest — and gives you one clear answer every morning: are you ready, or do you need to ease up?",
+        "body": "Your smartwatch counts steps. The N°01 listens to your body around the clock — your heartbeat all day, your breath while you sleep, your movement when you move — and translates the lot into clear answers. Are you rested? Recovered? Ready to push?",
         "cta_label": "",
         "cta_url": "",
         "reverse": false
