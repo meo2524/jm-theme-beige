@@ -8,7 +8,10 @@
 {%- if section.settings.show -%}
   {%- assign items = section.blocks -%}
 
-  {%- comment -%} Default items when no blocks are configured in the theme editor {%- endcomment -%}
+  {%- comment -%}
+    Default items when no blocks are configured in the theme editor.
+    Distilled 2026-05-05 from 5 entries to 2 — concrete value beats poetry.
+  {%- endcomment -%}
   {%- assign default_marks = '◐|—' | split: '|' -%}
   {%- assign default_texts = 'Trusted by 30,000+ customers|Free returns within 30 days' | split: '|' -%}
 
