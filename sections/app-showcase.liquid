@@ -1,0 +1,421 @@
+{%- comment -%}
+  app-showcase.liquid
+  Mend & Co — Smart Ring app showcase.
+  Real QRing app screenshots from qringstore.com/pages/app-info.
+  Hero phone (Sleep view) + 3-feature grid + App Store / Google Play buttons.
+  Honest copy — only mentions features the R12 hardware actually supports.
+{%- endcomment -%}
+
+{%- liquid
+  assign eyebrow = section.settings.eyebrow | default: 'The app'
+  assign heading = section.settings.heading | default: 'See your data, every morning.'
+  assign body = section.settings.body | default: 'Sync the N°01 to the free QRing app. Sleep stages, heart rate, HRV, blood oxygen, recovery — on one clean dashboard. iOS and Android. No registration. No subscription.'
+  assign hero_image = section.settings.hero_image
+  assign hero_image_url_default = section.settings.hero_image_url | default: 'https://qringstore.com/cdn/shop/files/jiezhi-08_eaff9b99-3e86-4b13-96fd-be52b9b2a560.jpg?v=1726586159&width=2000'
+  assign privacy_text = section.settings.privacy_text | default: 'Your health data stays on your device.'
+  assign apple_url = section.settings.apple_url | default: 'https://apps.apple.com/nz/app/qring/id6473672621'
+  assign google_url = section.settings.google_url | default: 'https://play.google.com/store/apps/details?id=com.app.cq.ring&hl=en_NZ'
+-%}
+
+<section class="app-showcase section" data-section-id="{{ section.id }}">
+  <div class="app-showcase__inner">
+
+    <header class="app-showcase__head">
+      <span class="app-showcase__rule" aria-hidden="true"></span>
+      <p class="app-showcase__eyebrow">{{ eyebrow }}</p>
+      <h2 class="app-showcase__heading">{{ heading }}</h2>
+      {%- if body != blank -%}
+        <p class="app-showcase__body">{{ body }}</p>
+      {%- endif -%}
+    </header>
+
+    {%- comment -%} ───────── Hero phone screenshot ───────── {%- endcomment -%}
+    <div class="app-showcase__hero">
+      {%- if hero_image != blank -%}
+        <img
+          src="{{ hero_image | image_url: width: 1600 }}"
+          srcset="
+            {{ hero_image | image_url: width: 800 }} 800w,
+            {{ hero_image | image_url: width: 1200 }} 1200w,
+            {{ hero_image | image_url: width: 1600 }} 1600w,
+            {{ hero_image | image_url: width: 2000 }} 2000w
+          "
+          sizes="(max-width: 767px) 100vw, 90vw"
+          alt="{{ hero_image.alt | default: 'QRing app sleep view' | escape }}"
+          loading="lazy"
+          width="1600"
+          height="1067"
+        >
+      {%- else -%}
+        <img
+          src="{{ hero_image_url_default }}"
+          alt="QRing app sleep view — two phones showing sleep stages dashboard"
+          loading="lazy"
+          width="1600"
+          height="1067"
+        >
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ───────── 3-feature grid ───────── {%- endcomment -%}
+    {%- if section.blocks.size > 0 -%}
+      <div class="app-showcase__features">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'feature' -%}
+            <div class="app-showcase__feature" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                <img
+                  class="app-showcase__feature-img"
+                  src="{{ block.settings.image | image_url: width: 600 }}"
+                  alt="{{ block.settings.image.alt | default: block.settings.heading | escape }}"
+                  loading="lazy"
+                  width="300"
+                  height="600"
+                >
+              {%- elsif block.settings.image_url != blank -%}
+                <img
+                  class="app-showcase__feature-img"
+                  src="{{ block.settings.image_url }}"
+                  alt="{{ block.settings.heading | escape }}"
+                  loading="lazy"
+                  width="300"
+                  height="600"
+                >
+              {%- endif -%}
+              <h3 class="app-showcase__feature-heading">{{ block.settings.heading }}</h3>
+              {%- if block.settings.body != blank -%}
+                <p class="app-showcase__feature-body">{{ block.settings.body }}</p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ───────── App store buttons ───────── {%- endcomment -%}
+    <div class="app-showcase__cta">
+      <a class="app-showcase__btn app-showcase__btn--apple" href="{{ apple_url }}" target="_blank" rel="noopener" aria-label="Download QRing on the App Store">
+        <svg viewBox="0 0 22 26" width="20" height="22" fill="currentColor" aria-hidden="true"><path d="M18.05 13.77c-.03-3.2 2.62-4.75 2.74-4.82-1.5-2.19-3.82-2.49-4.64-2.52-1.97-.2-3.86 1.17-4.86 1.17-1.01 0-2.57-1.14-4.23-1.11C4.9 6.52 2.87 7.7 1.76 9.57c-2.27 3.94-.58 9.76 1.63 12.95 1.08 1.56 2.36 3.31 4.04 3.25 1.63-.07 2.24-1.05 4.2-1.05 1.96 0 2.52 1.05 4.24 1.02 1.75-.03 2.85-1.59 3.92-3.16 1.24-1.81 1.75-3.57 1.77-3.66-.04-.02-3.48-1.33-3.51-5.15zM14.78 4.28C15.67 3.2 16.27 1.7 16.1 0c-1.47.06-3.27.98-4.32 2.04-.95.99-1.77 2.57-1.55 4.08 1.63.13 3.3-.83 4.55-1.84z"/></svg>
+        <span>
+          <span class="app-showcase__btn-sub">Download on the</span>
+          <span class="app-showcase__btn-name">App Store</span>
+        </span>
+      </a>
+      <a class="app-showcase__btn app-showcase__btn--google" href="{{ google_url }}" target="_blank" rel="noopener" aria-label="Get QRing on Google Play">
+        <svg viewBox="0 0 22 24" width="20" height="22" fill="currentColor" aria-hidden="true"><path d="M1.22.48C.8.7.5 1.18.5 1.8v20.4c0 .62.3 1.1.72 1.32l.1.06 11.42-11.42v-.27L1.32.42l-.1.06zm15.56 15.7l-3.8-3.8v-.27l3.8-3.8.09.05 4.5 2.56c1.28.73 1.28 1.92 0 2.65l-4.5 2.56-.09.05zM16.88 16.28L13 12.39 1.22 24.17c.42.24.98.2 1.67-.2l14-7.69"/><path d="M16.88 8.52L2.89.83C2.2.43 1.64.39 1.22.63L13 12.41l3.88-3.89z"/></svg>
+        <span>
+          <span class="app-showcase__btn-sub">Get it on</span>
+          <span class="app-showcase__btn-name">Google Play</span>
+        </span>
+      </a>
+    </div>
+
+    {%- if privacy_text != blank -%}
+      <p class="app-showcase__privacy">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.5C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg>
+        {{ privacy_text }}
+      </p>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<style>
+  .app-showcase {
+    background: var(--color-bone, #f5efe6);
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+  .app-showcase__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding-inline: clamp(1rem, 4vw, 2rem);
+    text-align: center;
+  }
+
+  /* ── Header ── */
+  .app-showcase__rule {
+    display: inline-block;
+    width: 2.5rem;
+    height: 1.5px;
+    background: var(--color-walnut, #8a6240);
+    margin: 0 auto 1.25rem;
+  }
+  .app-showcase__eyebrow {
+    font-family: var(--font-mono, 'Inter', sans-serif);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-walnut, #8a6240);
+    margin: 0 0 0.875rem;
+  }
+  .app-showcase__heading {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--color-ink, #1a1814);
+    margin: 0 0 1rem;
+  }
+  .app-showcase__body {
+    max-width: 56ch;
+    margin: 0 auto 2.5rem;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-olive, #4a4640);
+  }
+
+  /* ── Hero phone screenshot ── */
+  .app-showcase__hero {
+    margin: 0 auto 3rem;
+    max-width: 980px;
+  }
+  .app-showcase__hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+  }
+
+  /* ── 3-feature grid ── */
+  .app-showcase__features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 0 auto 2.5rem;
+    max-width: 980px;
+  }
+  .app-showcase__feature {
+    text-align: center;
+  }
+  .app-showcase__feature-img {
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+    border-radius: 22px;
+    display: block;
+    margin: 0 auto 1rem;
+    background: var(--color-bone-alt, #ece5d6);
+    box-shadow: 0 8px 24px rgba(26, 24, 20, 0.08);
+  }
+  .app-showcase__feature-heading {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-ink, #1a1814);
+    margin: 0 0 0.4rem;
+  }
+  .app-showcase__feature-body {
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--color-olive, #4a4640);
+    margin: 0;
+    max-width: 28ch;
+    margin-inline: auto;
+  }
+
+  /* ── App store buttons ── */
+  .app-showcase__cta {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 0 auto 1.25rem;
+  }
+  .app-showcase__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--color-ink, #1a1814);
+    color: var(--color-bone, #f5efe6);
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background 0.18s ease;
+    min-height: 56px;
+  }
+  .app-showcase__btn:hover {
+    background: var(--color-walnut, #8a6240);
+  }
+  .app-showcase__btn span {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+    text-align: left;
+  }
+  .app-showcase__btn-sub {
+    font-family: var(--font-mono, 'Inter', sans-serif);
+    font-size: 0.5625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.78;
+    margin-bottom: 3px;
+  }
+  .app-showcase__btn-name {
+    font-family: var(--font-mono, 'Inter', sans-serif);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── Privacy callout ── */
+  .app-showcase__privacy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 auto;
+    font-family: var(--font-mono, 'Inter', sans-serif);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-olive, #4a4640);
+    opacity: 0.85;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 767px) {
+    .app-showcase__features {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      max-width: 360px;
+    }
+    .app-showcase__feature-img {
+      max-width: 220px;
+    }
+    .app-showcase__cta {
+      flex-direction: column;
+      align-items: center;
+    }
+    .app-showcase__btn {
+      width: 100%;
+      max-width: 260px;
+      justify-content: center;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "App showcase",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Header" },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The app"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "See your data, every morning."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Sync the N°01 to the free QRing app. Sleep stages, heart rate, HRV, blood oxygen, recovery — on one clean dashboard. iOS and Android. No registration. No subscription."
+    },
+
+    { "type": "header", "content": "Hero screenshot" },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero phone screenshot",
+      "info": "Wide app screenshot (recommended: two-phone composite). If left blank, falls back to URL below."
+    },
+    {
+      "type": "url",
+      "id": "hero_image_url",
+      "label": "Hero image URL (fallback)",
+      "info": "Used if no image uploaded. Can hotlink an external CDN."
+    },
+
+    { "type": "header", "content": "App store links" },
+    {
+      "type": "url",
+      "id": "apple_url",
+      "label": "App Store URL"
+    },
+    {
+      "type": "url",
+      "id": "google_url",
+      "label": "Google Play URL"
+    },
+
+    { "type": "header", "content": "Footer" },
+    {
+      "type": "text",
+      "id": "privacy_text",
+      "label": "Privacy callout",
+      "default": "Your health data stays on your device."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature card",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Phone screenshot"
+        },
+        {
+          "type": "url",
+          "id": "image_url",
+          "label": "Image URL (fallback)",
+          "info": "Used if no image uploaded."
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Sleep stages"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "Deep, light, REM — tracked overnight, summarised by morning."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "App showcase",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "heading": "Sleep stages",
+            "body": "Deep, light, REM — tracked overnight, summarised by morning.",
+            "image_url": "https://qringstore.com/cdn/shop/files/jiezhi-31.png?v=1727282464&width=600"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "heading": "Heart rate & activity",
+            "body": "24/7 heart rate, daily steps, calories, dozens of sport modes.",
+            "image_url": "https://qringstore.com/cdn/shop/files/jiezhi-30.png?v=1727281208&width=600"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "heading": "Blood oxygen & HRV",
+            "body": "SpO₂, heart rate variability, stress score — overnight and on demand.",
+            "image_url": "https://qringstore.com/cdn/shop/files/jiezhi-28.png?v=1727281207&width=600"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
