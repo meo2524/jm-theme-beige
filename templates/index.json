@@ -34,8 +34,8 @@
       "settings": {
         "stat_1_value": "5–7 days",
         "stat_1_label": "Battery life",
-        "stat_2_value": "5 ATM",
-        "stat_2_label": "Shower & swim",
+        "stat_2_value": "Swim-safe",
+        "stat_2_label": "Pool · ocean · sauna",
         "stat_3_value": "$0",
         "stat_3_label": "Subscription, ever"
       }
@@ -144,9 +144,9 @@
     "mday_shipping_strip",
     "stats-strip",
     "smart_band_spotlight",
+    "177700770423191747",
     "founder_story",
     "testimonials",
-    "177700770423191747",
     "newsletter"
   ]
 }
