@@ -116,7 +116,9 @@
           "settings": {
             "product": "smart-band",
             "review_data": "real_data",
-            "max_width": 900
+            "max_width": 900,
+            "star_rating": "5",
+            "min_rating": 5
           }
         }
       },

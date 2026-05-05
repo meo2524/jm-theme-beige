@@ -13,10 +13,7 @@
       {%- comment -%} ─────────── Filled cart ─────────── {%- endcomment -%}
       <header class="cart-page__header">
         <p class="cart-page__eyebrow">Your cart</p>
-        <h1 class="cart-page__heading">
-          {{ cart.item_count }}
-          {%- if cart.item_count == 1 %} item{% else %} items{% endif -%}
-        </h1>
+        <h1 class="cart-page__heading">{{ cart.item_count }}{%- if cart.item_count == 1 %} item{%- else %} items{%- endif -%}</h1>
       </header>
 
       <form action="{{ routes.cart_url }}" method="post" novalidate class="cart-page__form">

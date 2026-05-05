@@ -10,10 +10,23 @@
        ============================================================ -->
 
   {%- comment -%} ── Page title ──────────────────────────────────── {%- endcomment -%}
+  {%- comment -%}
+    Title-format hardening:
+    - On the home page Shopify's `page_title` already returns the shop
+      name, so appending `shop.name` again produced "Mend&Co – Mend&Co".
+    - On product pages with an SEO title that already references the
+      brand ("… | Mend & Co"), the unless-contains check could still
+      miss because the brand mark in SEO ("Mend & Co") differs from the
+      Shopify shop name ("Mend&Co"). We normalize both sides for the
+      contains check (lowercase, strip ampersand spaces) so the dedupe
+      catches both variants.
+  {%- endcomment -%}
+  {%- assign _norm_title = page_title | downcase | replace: ' & ', '&' | replace: ' ', '' -%}
+  {%- assign _norm_shop  = shop.name  | downcase | replace: ' & ', '&' | replace: ' ', '' -%}
   <title>{{ page_title -}}
     {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
     {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    {%- unless _norm_title contains _norm_shop %} &ndash; {{ shop.name }}{% endunless -%}
   </title>
 
   {%- comment -%} ── Meta description ────────────────────────────── {%- endcomment -%}
@@ -388,12 +401,18 @@
   {%- if template.name == 'product' and settings.motion_enabled -%}
     <div data-scroll-progress aria-hidden="true"></div>
 
-    {%- comment -%} Top-of-page scarcity banner — Mother's Day / limited stock {%- endcomment -%}
+    {%- comment -%}
+      Top-of-page Mother's Day banner. Was previously "Only 47 left" —
+      a static fake-scarcity number that doesn't reflect real inventory
+      and erodes trust on refresh. Replaced with a real shipping-cutoff
+      message that creates legitimate urgency without lying. Matches
+      the Mday strip's deadline (11 May 2026 23:59 NZT, hidden after).
+    {%- endcomment -%}
     <div class="mc-scarcity-banner" role="status" aria-live="polite">
       <div class="mc-scarcity-banner__inner">
         <span class="mc-scarcity-banner__dot" aria-hidden="true"></span>
         <span class="mc-scarcity-banner__text">
-          <strong>Only 47 left</strong> for Mother's Day &mdash; ends Sunday
+          <strong>Free Mother's Day shipping</strong> &mdash; order by Sunday
         </span>
       </div>
     </div>

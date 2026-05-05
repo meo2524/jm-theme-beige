@@ -62,6 +62,15 @@
             </p>
           {%- endif -%}
 
+          {%- comment -%}
+            Origin + reach line. Adds the "where are we" cue without
+            making NZ-origin a shipping-time negative. Designed-in
+            language reads as positioning, not logistics.
+          {%- endcomment -%}
+          <p class="footer__origin">
+            Designed in New Zealand &middot; Ships worldwide &middot; Free 30-day returns
+          </p>
+
           {%- if section.settings.show_social -%}
             <nav class="footer__social" aria-label="Social media links">
               {%- if settings.social_instagram_link != blank -%}
@@ -224,6 +233,15 @@
   background: var(--gold-light);
 }
 .footer__tagline-text { display: inline-block; }
+.footer__origin {
+  margin: 0 0 24px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--gold-light);
+  opacity: 0.78;
+  line-height: 1.6;
+}
 .footer__social {
   display: flex;
   gap: 0.5rem;
