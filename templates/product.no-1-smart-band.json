@@ -14,9 +14,9 @@
       "settings": {
         "eyebrow_text": "A second sense",
         "model_badge": "",
-        "blurb_heading": "Biometric health. Decoded nightly.",
-        "blurb_subheading": "Recovery that speaks for itself.",
-        "short_description": "Tracks sleep stages, heart rate, HRV, SpO₂ and recovery score — every night, automatically.",
+        "blurb_heading": "Wake up knowing.",
+        "blurb_subheading": "How you slept. How rested you really are. Whether to push or rest today.",
+        "short_description": "Wear it to bed. By morning you'll know how deeply you slept, how rested you actually are, and whether your body's ready for what's ahead — without a subscription.",
         "per_use_text": "",
         "accordion_label_1": "What's in the box",
         "accordion_label_2": "Find your size",
@@ -65,31 +65,31 @@
         "bullet_sleep": {
           "type": "bullet",
           "settings": {
-            "text": "Sleep stages — deep, light, REM + a single sleep score"
+            "text": "How deeply you slept — and one clean number that says how good a night it really was"
           }
         },
         "bullet_hrv": {
           "type": "bullet",
           "settings": {
-            "text": "Heart rate variability — the true recovery signal"
+            "text": "How recovered you actually are — the signal beneath how you feel"
           }
         },
         "bullet_spo2": {
           "type": "bullet",
           "settings": {
-            "text": "Blood oxygen + skin temperature — overnight, automatically"
+            "text": "What your breath and body temperature did while you slept — caught automatically"
           }
         },
         "bullet_stress": {
           "type": "bullet",
           "settings": {
-            "text": "Stress score — know when to push, when to rest"
+            "text": "A clear read on stress — so you know when to push and when to ease up"
           }
         },
         "bullet_ceramic": {
           "type": "bullet",
           "settings": {
-            "text": "Ceramic build — feels like jewelry, reads like a lab"
+            "text": "Ceramic build — feels like jewelry, works like a lab"
           }
         }
       },
@@ -105,7 +105,7 @@
         "video_position_y": 25,
         "eyebrow": "Why N°01",
         "heading": "Everything your watch can't tell you.",
-        "body": "Your smartwatch counts steps. The N°01 reads what your body is doing while you sleep — heart rate variability, sleep architecture, blood oxygen, skin temperature — and translates it into a single morning readiness score.",
+        "body": "Your smartwatch counts steps. The N°01 listens to what your body is doing while you sleep — your heartbeat, your breath, the shape of your rest — and gives you one clear answer every morning: are you ready, or do you need to ease up?",
         "cta_label": "",
         "cta_url": "",
         "reverse": false
@@ -537,13 +537,13 @@
   "order": [
     "main",
     "custom_liquid_TgB6HE",
-    "product_science",
     "benefit_pitch",
-    "ring_size_modal",
-    "product_faq",
-    "17779692662038a0a0",
+    "product_science",
     "app_showcase",
+    "17779692662038a0a0",
     "tech_specs",
+    "product_faq",
+    "ring_size_modal",
     "app_download",
     "testimonials",
     "177768635486c7de24",

@@ -16,7 +16,7 @@
         "heading": "Know before",
         "heading_em": "your body",
         "heading_2": "breaks down.",
-        "subtext": "The Smart Ring tracks HRV, sleep stages, and recovery — every morning, no subscription.",
+        "subtext": "Wear it to sleep. Wake up knowing how rested you actually are — and whether today calls for push or rest. No subscription. Ever.",
         "cta_label": "Shop the N°01 Smart Ring",
         "cta_url": "/products/smart-band",
         "show_scroll_cue": true
@@ -46,7 +46,7 @@
         "bullet_hrv": {
           "type": "bullet",
           "settings": {
-            "text": "HRV, sleep stages & recovery score — every morning"
+            "text": "Know how you slept and whether to push today — every morning"
           }
         },
         "bullet_battery": {
@@ -78,7 +78,7 @@
         "video_url": "https://cdn.shopify.com/videos/c/o/v/1a268f935d3f46c086e8e2eb7abeab0b.mp4",
         "eyebrow": "Now available",
         "heading": "Know how recovered you actually are.",
-        "body": "The N°01 Smart Ring tracks what your body is doing while you sleep — HRV, blood oxygen, sleep architecture, overnight temperature — and tells you in the morning whether to push or rest.",
+        "body": "The N°01 Smart Ring listens to what your body is doing while you sleep — your heartbeat, your breath, the depth of your rest, your overnight temperature — and tells you in the morning whether to push or rest.",
         "cta_label": "Shop the N°01 Smart Ring",
         "cta_url": "/products/smart-band",
         "reverse": false
