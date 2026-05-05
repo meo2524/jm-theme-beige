@@ -649,10 +649,17 @@
   font-size: 0.72rem !important;
   font-weight: 500 !important;
   color: var(--color-espresso, #2D2D2D) !important;
-  padding: 0.35rem 0 !important;
+  padding: 0.5rem 0.5rem !important;
+  /* Stack icon on top, text below, both centred. The previous
+     horizontal layout cramped the icon hard against the cell's left
+     border in the middle column because the span flex-grew to fill
+     remaining width — leaving justify-content nothing to centre. */
   display: flex !important;
+  flex-direction: column !important;
   align-items: center !important;
-  gap: 0.5rem !important;
+  justify-content: center !important;
+  gap: 0.4rem !important;
+  text-align: center !important;
   transition: transform 0.2s ease, color 0.2s ease;
   flex: 1 !important;
 }
