@@ -221,13 +221,13 @@
     <div class="ps-grid">
 
       <div class="ps-stat ps-anim" style="transition-delay:0s">
-        <p class="ps-number" data-count="99.6" data-suffix="%">0%</p>
+        <p class="ps-number">99.6%</p>
         <p class="ps-stat-desc">Heart rate correlation vs. medical-grade ECG devices</p>
         <p class="ps-source-label">NIH · PubMed Central</p>
       </div>
 
       <div class="ps-stat ps-anim" style="transition-delay:0.1s">
-        <p class="ps-number" data-count="98" data-suffix="%">0%</p>
+        <p class="ps-number">98%</p>
         <p class="ps-stat-desc">HRV accuracy against gold-standard electrocardiography</p>
         <p class="ps-source-label">NIH · PubMed Central</p>
       </div>
@@ -239,7 +239,7 @@
       </div>
 
       <div class="ps-stat ps-anim" style="transition-delay:0.3s">
-        <p class="ps-number" data-count="82" data-suffix="%">0%</p>
+        <p class="ps-number">82%</p>
         <p class="ps-stat-desc">Detecting illness 2.75 days before symptoms appear</p>
         <p class="ps-source-label">NIH · 63,153 participants</p>
       </div>
@@ -283,40 +283,18 @@
 
 <script>
 (function() {
-  var animEls   = document.querySelectorAll('.section-product-science .ps-anim');
-  var countEls  = document.querySelectorAll('.section-product-science [data-count]');
-
-  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
-
-  function countUp(el) {
-    var target   = parseFloat(el.dataset.count);
-    var suffix   = el.dataset.suffix || '';
-    var decimals = target % 1 !== 0 ? 1 : 0;
-    var duration = 1400;
-    var start    = performance.now();
-    (function tick(now) {
-      var elapsed = Math.min((now - start) / duration, 1);
-      el.textContent = (easeOut(elapsed) * target).toFixed(decimals) + suffix;
-      if (elapsed < 1) requestAnimationFrame(tick);
-    })(start);
-  }
-
-  var counted = new WeakSet();
-
+  // Reveal-on-scroll only. Count-up removed 2026-05-05 — static numbers
+  // read more authoritatively for credibility data, and prevent screenshots
+  // from catching the animation mid-frame (UX audit finding).
+  var animEls = document.querySelectorAll('.section-product-science .ps-anim');
   var io = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (!e.isIntersecting) return;
       e.target.classList.add('ps-visible');
-      if (e.target.dataset.count && !counted.has(e.target)) {
-        counted.add(e.target);
-        countUp(e.target);
-      }
       io.unobserve(e.target);
     });
   }, { threshold: 0.15 });
-
   animEls.forEach(function(el) { io.observe(el); });
-  countEls.forEach(function(el) { io.observe(el); });
 })();
 </script>
 
