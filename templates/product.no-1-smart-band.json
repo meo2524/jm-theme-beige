@@ -18,7 +18,7 @@
         "model_badge": "",
         "blurb_heading": "Biometric health. Decoded nightly.",
         "blurb_subheading": "Recovery that speaks for itself.",
-        "short_description": "Tracks sleep stages, heart rate, HRV, SpO₂ and recovery score — every night, automatically. No subscription, ever. Own your data outright.",
+        "short_description": "Tracks sleep stages, heart rate, HRV, SpO₂ and recovery score — every night, automatically.",
         "per_use_text": "",
         "accordion_label_1": "What's in the box",
         "accordion_label_2": "Find your size",
@@ -114,43 +114,50 @@
     "benefit_pitch": {
       "type": "product-feature",
       "blocks": {
-        "bullet_battery": {
+        "bullet_sleep": {
           "type": "bullet",
           "settings": {
-            "text": "5–7 day battery — never miss a night's data"
+            "text": "Sleep stages — deep, light, REM + a single sleep score"
           }
         },
-        "bullet_sub": {
+        "bullet_hrv": {
           "type": "bullet",
           "settings": {
-            "text": "$0/month. Own your health data outright."
+            "text": "Heart rate variability — the true recovery signal"
           }
         },
-        "bullet_water": {
+        "bullet_spo2": {
           "type": "bullet",
           "settings": {
-            "text": "5ATM waterproof — shower, swim, sweat"
+            "text": "Blood oxygen + skin temperature — overnight, automatically"
           }
         },
-        "bullet_design": {
+        "bullet_stress": {
           "type": "bullet",
           "settings": {
-            "text": "Ceramic build — jewelry that happens to be a lab"
+            "text": "Stress score — know when to push, when to rest"
+          }
+        },
+        "bullet_ceramic": {
+          "type": "bullet",
+          "settings": {
+            "text": "Ceramic build — feels like jewelry, reads like a lab"
           }
         }
       },
       "block_order": [
-        "bullet_battery",
-        "bullet_sub",
-        "bullet_water",
-        "bullet_design"
+        "bullet_sleep",
+        "bullet_hrv",
+        "bullet_spo2",
+        "bullet_stress",
+        "bullet_ceramic"
       ],
       "settings": {
         "video_url": "https://cdn.shopify.com/videos/c/vp/1977e33d2b2c4f7092f07b23f9fee5ff/1977e33d2b2c4f7092f07b23f9fee5ff.HD-1080p-2.5Mbps-83245266.mp4",
         "video_position_y": 25,
         "eyebrow": "Why N°01",
         "heading": "Everything your watch can't tell you.",
-        "body": "Your smartwatch counts steps and celebrates effort. The N°01 Smart Ring tracks what actually matters — how recovered you are. HRV, sleep architecture, blood oxygen, overnight temperature. The numbers that decide whether tomorrow builds you up or breaks you down.",
+        "body": "Your smartwatch counts steps. The N°01 reads what your body is doing while you sleep — heart rate variability, sleep architecture, blood oxygen, skin temperature — and translates it into a single morning readiness score.",
         "cta_label": "",
         "cta_url": "",
         "reverse": false
@@ -257,7 +264,8 @@
         "cta_label": "",
         "cta_url": "",
         "reverse": true
-      }
+      },
+      "disabled": true
     },
     "product_science": {
       "type": "product-science",
