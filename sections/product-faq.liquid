@@ -16,17 +16,11 @@
     <div class="faq-list">
       {%- for block in section.blocks -%}
         {%- if block.settings.question != blank -%}
-          {%- comment -%} Default-expand the privacy FAQ — top objection for biometric tracking {%- endcomment -%}
-          {%- assign q_lower = block.settings.question | downcase -%}
-          {%- assign default_open = false -%}
-          {%- if q_lower contains 'private' or q_lower contains 'data privacy' -%}
-            {%- assign default_open = true -%}
-          {%- endif -%}
           <div class="faq-item" {{ block.shopify_attributes }}>
             <button
               class="faq-trigger"
               type="button"
-              aria-expanded="{% if default_open %}true{% else %}false{% endif %}"
+              aria-expanded="false"
               aria-controls="faq-panel-{{ block.id }}"
             >
               <span>{{ block.settings.question }}</span>
@@ -34,7 +28,7 @@
                 <polyline points="6 9 12 15 18 9"/>
               </svg>
             </button>
-            <div class="faq-panel" id="faq-panel-{{ block.id }}"{% unless default_open %} hidden{% endunless %}>
+            <div class="faq-panel" id="faq-panel-{{ block.id }}" hidden>
               <div class="faq-answer">{{ block.settings.answer }}</div>
             </div>
           </div>
