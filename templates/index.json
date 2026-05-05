@@ -87,13 +87,13 @@
     "founder_story": {
       "type": "story",
       "settings": {
-        "eyebrow": "Meet the founder",
-        "heading_pre": "Hi, I'm",
-        "heading_em": "Claire Whitmore",
+        "eyebrow": "Brand origin",
+        "heading_pre": "Built to",
+        "heading_em": "actually mend.",
         "heading_post": "",
-        "paragraph_1": "After ten years as a physiotherapist, I burned out at 32 — disconnected from the signals my own body was sending. Biometric tracking gave me clarity. Mend & Co exists so everyone gets that clarity — no subscription, no complexity.",
+        "paragraph_1": "Mend & Co builds tools that earn their place — bought once, owned forever, designed to make recovery measurable. The N°01 Smart Ring is the first. There will be more, each one quietly built to mend something we have been told to ignore.",
         "paragraph_2": "",
-        "link_label": "Read the full story →",
+        "link_label": "About Mend & Co →",
         "link_url": "/pages/about-us",
         "image": "shopify://shop_images/hf_20260502_003823_d5bf6f7e-54ca-48d2-84a4-8a0ab685d425_1.png",
         "image_label": "hands · oil · linen"
