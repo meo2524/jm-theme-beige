@@ -37,14 +37,13 @@
           srcset="
             {{ hero_image | image_url: width: 800 }} 800w,
             {{ hero_image | image_url: width: 1200 }} 1200w,
-            {{ hero_image | image_url: width: 1600 }} 1600w,
-            {{ hero_image | image_url: width: 2000 }} 2000w
+            {{ hero_image | image_url: width: 1600 }} 1600w
           "
           sizes="(max-width: 767px) 100vw, 90vw"
           alt="{{ hero_image.alt | default: 'QRing app sleep view' | escape }}"
           loading="lazy"
           width="1600"
-          height="1067"
+          height="700"
         >
       {%- else -%}
         <img
@@ -52,7 +51,7 @@
           alt="QRing app sleep view — two phones showing sleep stages dashboard"
           loading="lazy"
           width="1600"
-          height="1067"
+          height="700"
         >
       {%- endif -%}
     </div>
@@ -70,7 +69,7 @@
                   alt="{{ block.settings.image.alt | default: block.settings.heading | escape }}"
                   loading="lazy"
                   width="300"
-                  height="600"
+                  height="533"
                 >
               {%- elsif block.settings.image_url != blank -%}
                 <img
@@ -79,7 +78,7 @@
                   alt="{{ block.settings.heading | escape }}"
                   loading="lazy"
                   width="300"
-                  height="600"
+                  height="533"
                 >
               {%- endif -%}
               <h3 class="app-showcase__feature-heading">{{ block.settings.heading }}</h3>
@@ -166,16 +165,30 @@
     color: var(--color-olive, #4a4640);
   }
 
-  /* ── Hero phone screenshot ── */
+  /* ── Hero phone screenshot ──
+     Container has a fixed aspect ratio + object-fit: cover so the surrounding
+     QRing source background gets cropped out. Phones fill the frame. */
   .app-showcase__hero {
     margin: 0 auto 3rem;
-    max-width: 980px;
+    max-width: 920px;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+    border-radius: 14px;
+    background: var(--color-ink, #1a1814);
   }
   .app-showcase__hero img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
     display: block;
-    border-radius: 12px;
+  }
+  @media (max-width: 767px) {
+    .app-showcase__hero {
+      aspect-ratio: 4 / 3;
+      max-width: 100%;
+      border-radius: 10px;
+    }
   }
 
   /* ── 3-feature grid ── */
@@ -189,14 +202,19 @@
   .app-showcase__feature {
     text-align: center;
   }
+  /* Feature card images: tall phone aspect ratio (9:16-ish). object-fit:cover
+     crops the QRing source's surrounding marketing background, leaving just
+     the phone screen content. */
   .app-showcase__feature-img {
     width: 100%;
     max-width: 260px;
-    height: auto;
-    border-radius: 22px;
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 18px;
     display: block;
     margin: 0 auto 1rem;
-    background: var(--color-bone-alt, #ece5d6);
+    background: var(--color-ink, #1a1814);
     box-shadow: 0 8px 24px rgba(26, 24, 20, 0.08);
   }
   .app-showcase__feature-heading {
