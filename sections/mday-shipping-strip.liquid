@@ -75,6 +75,9 @@
     gap: 0.45rem;
     flex-wrap: wrap;
     justify-content: center;
+    /* Override the global p { max-width: 68ch } so the flex row spans
+       the strip width and stays centred under justify-content. */
+    max-width: none;
   }
 
   .mday-strip__text strong {
