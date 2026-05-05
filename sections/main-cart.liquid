@@ -1,0 +1,315 @@
+{%- comment -%}
+  main-cart.liquid
+  Mend & Co — Cart page (used when user navigates directly to /cart).
+  Most cart interactions go through the off-canvas drawer; this is the
+  fallback page for direct visits, share-link visits, or users with JS
+  disabled. Branded empty state + simple line-item view + checkout CTA.
+{%- endcomment -%}
+
+<section class="cart-page" data-section-id="{{ section.id }}">
+  <div class="cart-page__inner">
+
+    {%- if cart.item_count > 0 -%}
+      {%- comment -%} ─────────── Filled cart ─────────── {%- endcomment -%}
+      <header class="cart-page__header">
+        <p class="cart-page__eyebrow">Your cart</p>
+        <h1 class="cart-page__heading">
+          {{ cart.item_count }}
+          {%- if cart.item_count == 1 %} item{% else %} items{% endif -%}
+        </h1>
+      </header>
+
+      <form action="{{ routes.cart_url }}" method="post" novalidate class="cart-page__form">
+        <ul class="cart-page__items" role="list">
+          {%- for item in cart.items -%}
+            <li class="cart-line">
+              <a href="{{ item.url }}" class="cart-line__media" aria-hidden="true" tabindex="-1">
+                {%- if item.image -%}
+                  <img
+                    src="{{ item.image | image_url: width: 200 }}"
+                    alt="{{ item.image.alt | default: item.product.title | escape }}"
+                    width="100"
+                    height="100"
+                    loading="lazy"
+                  >
+                {%- endif -%}
+              </a>
+              <div class="cart-line__body">
+                <a href="{{ item.url }}" class="cart-line__title">{{ item.product.title }}</a>
+                {%- unless item.product.has_only_default_variant -%}
+                  <p class="cart-line__variant">{{ item.variant.title }}</p>
+                {%- endunless -%}
+                <div class="cart-line__row">
+                  <label class="cart-line__qty-label" for="qty-{{ item.key }}">Qty</label>
+                  <input
+                    type="number"
+                    id="qty-{{ item.key }}"
+                    name="updates[{{ item.key }}]"
+                    value="{{ item.quantity }}"
+                    min="0"
+                    class="cart-line__qty"
+                    aria-label="Quantity for {{ item.product.title | escape }}"
+                  >
+                  <a href="{{ item.url_to_remove }}" class="cart-line__remove" aria-label="Remove {{ item.product.title | escape }}">Remove</a>
+                </div>
+              </div>
+              <div class="cart-line__price">
+                {{ item.final_line_price | money }}
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        <div class="cart-page__totals">
+          <div class="cart-page__totals-row">
+            <span>Subtotal</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+          <p class="cart-page__totals-note">Shipping and taxes calculated at checkout.</p>
+        </div>
+
+        <div class="cart-page__actions">
+          <button type="submit" name="update" class="cart-page__btn cart-page__btn--ghost">Update cart</button>
+          <button type="submit" name="checkout" class="cart-page__btn cart-page__btn--primary">Checkout</button>
+        </div>
+      </form>
+
+    {%- else -%}
+      {%- comment -%} ─────────── Empty cart ─────────── {%- endcomment -%}
+      <div class="cart-page__empty">
+        <span class="cart-page__rule" aria-hidden="true"></span>
+        <p class="cart-page__eyebrow">Your cart</p>
+        <h1 class="cart-page__heading">Empty for now.</h1>
+        <p class="cart-page__subtext">
+          Nothing here yet. Start with the N°01 Smart Band — sleep, HRV, and recovery, no subscription.
+        </p>
+        <div class="cart-page__actions cart-page__actions--center">
+          <a href="/products/smart-band" class="cart-page__btn cart-page__btn--primary">Shop the N°01 Smart Band</a>
+          <a href="{{ routes.root_url }}" class="cart-page__btn cart-page__btn--ghost">Back to home</a>
+        </div>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<style>
+  .cart-page {
+    background: var(--color-bone, #F2EDE4);
+    min-height: 70vh;
+    padding-block: var(--space-16, 4rem);
+  }
+  .cart-page__inner {
+    max-width: 880px;
+    margin: 0 auto;
+    padding-inline: var(--space-6, 1.5rem);
+  }
+
+  /* ─────────── Shared header ─────────── */
+  .cart-page__rule {
+    display: block;
+    width: 2.5rem;
+    height: 1.5px;
+    background-color: var(--color-walnut, #8a6240);
+    margin-bottom: var(--space-5, 1.25rem);
+  }
+  .cart-page__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-walnut, #8a6240);
+    margin-bottom: var(--space-3, 0.75rem);
+  }
+  .cart-page__heading {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--color-ink, #1a1814);
+    margin: 0 0 var(--space-8, 2rem) 0;
+  }
+  .cart-page__subtext {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    line-height: 1.55;
+    color: var(--color-olive, #4a4640);
+    max-width: 52ch;
+    margin: 0 0 var(--space-8, 2rem) 0;
+  }
+
+  /* ─────────── Filled cart ─────────── */
+  .cart-page__header {
+    margin-bottom: var(--space-8, 2rem);
+  }
+  .cart-page__items {
+    list-style: none;
+    margin: 0 0 var(--space-8, 2rem) 0;
+    padding: 0;
+    border-top: 1px solid rgba(26, 24, 20, 0.08);
+  }
+  .cart-line {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: var(--space-4, 1rem);
+    padding-block: var(--space-5, 1.25rem);
+    border-bottom: 1px solid rgba(26, 24, 20, 0.08);
+    align-items: start;
+  }
+  .cart-line__media img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    background: var(--color-bone-alt, #ece5d6);
+  }
+  .cart-line__title {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    color: var(--color-ink, #1a1814);
+    text-decoration: none;
+  }
+  .cart-line__title:hover { text-decoration: underline; }
+  .cart-line__variant {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-olive, #4a4640);
+    margin: 0.25rem 0 0.5rem;
+    letter-spacing: 0.04em;
+  }
+  .cart-line__row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4, 1rem);
+    margin-top: 0.5rem;
+  }
+  .cart-line__qty-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--color-olive, #4a4640);
+  }
+  .cart-line__qty {
+    width: 56px;
+    padding: 0.4rem 0.5rem;
+    border: 1px solid rgba(26, 24, 20, 0.18);
+    background: transparent;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    border-radius: 4px;
+  }
+  .cart-line__remove {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--color-olive, #4a4640);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .cart-line__price {
+    font-family: var(--font-serif);
+    font-size: 1.0625rem;
+    color: var(--color-ink, #1a1814);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .cart-page__totals {
+    margin-top: var(--space-6, 1.5rem);
+    padding-top: var(--space-6, 1.5rem);
+    border-top: 1px solid rgba(26, 24, 20, 0.08);
+  }
+  .cart-page__totals-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--color-ink, #1a1814);
+  }
+  .cart-page__totals-note {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--color-olive, #4a4640);
+    opacity: 0.78;
+    margin: 0.5rem 0 0 0;
+  }
+
+  /* ─────────── Empty state ─────────── */
+  .cart-page__empty {
+    text-align: left;
+    padding-block: var(--space-12, 3rem);
+  }
+
+  /* ─────────── Actions ─────────── */
+  .cart-page__actions {
+    display: flex;
+    gap: var(--space-4, 1rem);
+    margin-top: var(--space-8, 2rem);
+    flex-wrap: wrap;
+  }
+  .cart-page__actions--center { justify-content: flex-start; }
+  .cart-page__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 32px;
+    min-height: 56px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .cart-page__btn--primary {
+    background-color: var(--color-ink, #1a1814);
+    color: var(--color-bone, #F2EDE4);
+    border: 1px solid var(--color-ink, #1a1814);
+  }
+  .cart-page__btn--primary:hover {
+    background-color: var(--color-walnut, #8a6240);
+    border-color: var(--color-walnut, #8a6240);
+  }
+  .cart-page__btn--ghost {
+    background-color: transparent;
+    color: var(--color-ink, #1a1814);
+    border: 1px solid rgba(26, 24, 20, 0.25);
+  }
+  .cart-page__btn--ghost:hover {
+    background-color: rgba(26, 24, 20, 0.04);
+    border-color: var(--color-ink, #1a1814);
+  }
+
+  /* ─────────── Mobile ─────────── */
+  @media (max-width: 767px) {
+    .cart-page { padding-block: var(--space-12, 3rem); }
+    .cart-line {
+      grid-template-columns: 80px 1fr;
+      gap: 0.875rem;
+    }
+    .cart-line__price {
+      grid-column: 2 / 3;
+      text-align: left;
+      padding-top: 0.25rem;
+    }
+    .cart-page__actions { flex-direction: column; }
+    .cart-page__btn { width: 100%; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Cart",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

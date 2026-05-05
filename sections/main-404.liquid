@@ -17,15 +17,15 @@
     </h1>
 
     <p class="e404__subtext">
-      {{ section.settings.subtext | default: 'Neither did the idea that your shower was fine. Start at the real source \u2014 your water.' }}
+      {{ section.settings.subtext | default: 'The link broke before your body did. Start with the basics \u2014 your sleep, your recovery, your data.' }}
     </p>
 
     <div class="e404__actions">
       <a href="{{ routes.root_url }}" class="e404__btn e404__btn--primary">
         {{ section.settings.cta_home | default: 'Back to home' }}
       </a>
-      <a href="{{ routes.all_products_collection_url }}" class="e404__btn e404__btn--ghost">
-        {{ section.settings.cta_shop | default: 'Shop the filter' }}
+      <a href="/products/smart-band" class="e404__btn e404__btn--ghost">
+        {{ section.settings.cta_shop | default: 'Shop the N\u00b001 Smart Band' }}
       </a>
     </div>
 
@@ -182,7 +182,7 @@
       "type": "textarea",
       "id": "subtext",
       "label": "Subtext",
-      "default": "Neither did the idea that your shower was fine. Start at the real source \u2014 your water."
+      "default": "The link broke before your body did. Start with the basics \u2014 your sleep, your recovery, your data."
     },
     {
       "type": "text",
@@ -194,7 +194,7 @@
       "type": "text",
       "id": "cta_shop",
       "label": "Secondary CTA label",
-      "default": "Shop the filter"
+      "default": "Shop the N°01 Smart Band"
     }
   ],
   "presets": [{ "name": "404 page" }]
