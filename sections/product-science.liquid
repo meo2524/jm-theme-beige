@@ -91,13 +91,13 @@
   }
   .ps-stat-desc {
     font-size: 13px;
-    color: #8a7d6e;
+    color: #b8aa92;          /* was #8a7d6e — tightened contrast on dark bg */
     margin: 0 0 16px;
     line-height: 1.65;
   }
   .ps-source-label {
     font-size: 10px;
-    color: rgba(154,126,87,0.6);
+    color: #9a7e57;          /* was rgba(154,126,87,0.6) — full opacity for readability */
     letter-spacing: 0.12em;
     text-transform: uppercase;
     margin: 0;
@@ -141,18 +141,24 @@
     padding-left: 20px;
   }
 
-  /* ── Sources ── */
-  .ps-sources { }
+  /* ── Sources ──
+     Refactored 2026-05-05 for readability — earlier colours sat at #4a423a
+     on near-black bg which dropped under WCAG AA. Now uses warm-bone tones
+     consistent with the quote-attr (#9a7e57) and stat-desc (#b8aa92). */
+  .ps-sources {
+    margin-top: 64px;
+    border-top: 1px solid rgba(239,232,220,0.14);
+    padding-top: 44px;
+  }
 
   .ps-sources-label {
     text-align: center;
-    font-size: 10px;
-    color: #4a423a;
-    letter-spacing: 0.18em;
+    font-size: 11px;
+    font-weight: 500;
+    color: #9a7e57;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    margin: 0 0 24px;
-    border-top: 1px solid rgba(239,232,220,0.08);
-    padding-top: 32px;
+    margin: 0 0 28px;
   }
 
   .ps-sources-row {
@@ -166,28 +172,34 @@
   .ps-source-badge {
     text-decoration: none;
     display: block;
-    background: rgba(239,232,220,0.03);
-    padding: 14px 22px;
-    border-radius: 10px;
-    border: 1px solid rgba(239,232,220,0.08);
+    background: rgba(239,232,220,0.05);
+    padding: 22px 32px;
+    border-radius: 12px;
+    border: 1px solid rgba(239,232,220,0.14);
     transition: border-color 0.25s, background 0.25s, transform 0.25s;
+    min-width: 280px;
+    text-align: center;
   }
   .ps-source-badge:hover {
-    border-color: rgba(154,126,87,0.4);
-    background: rgba(154,126,87,0.06);
+    border-color: rgba(154,126,87,0.5);
+    background: rgba(154,126,87,0.08);
     transform: translateY(-2px);
   }
   .ps-source-name {
     margin: 0;
-    font-size: 12px;
-    font-weight: 700;
-    color: #c4b89e;
-    letter-spacing: 0.04em;
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 18px;
+    font-weight: 500;
+    color: #e8dec5;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
   }
   .ps-source-sub {
-    margin: 3px 0 0;
-    font-size: 10px;
-    color: #4a423a;
+    margin: 6px 0 0;
+    font-size: 12px;
+    color: #b8aa92;
+    letter-spacing: 0.02em;
+    line-height: 1.45;
   }
 
   @media (max-width: 600px) {
