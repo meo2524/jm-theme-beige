@@ -1399,36 +1399,34 @@
   text-align: center;
 }
 
-.motion-on .mc-mday-banner__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
+.motion-on .mc-mday-banner__score {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.01em;
   color: #fff;
-  flex-shrink: 0;
-  animation: mc-mday-heart-pulse 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-.motion-on .mc-mday-banner__title {
-  font-size: 0.88rem;
-  letter-spacing: 0.08em;
+.motion-on .mc-mday-banner__stars {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1;
 }
 
 .motion-on .mc-mday-banner__sep {
-  opacity: 0.55;
+  opacity: 0.45;
   font-weight: 400;
   letter-spacing: 0;
 }
 
-.motion-on .mc-mday-banner__count {
-  font-variant-numeric: tabular-nums;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: 0.04em;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+.motion-on .mc-mday-banner__reviews {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* Shimmer sweep across the whole banner */
@@ -1447,14 +1445,8 @@
   pointer-events: none;
 }
 
-@keyframes mc-mday-heart-pulse {
-  0%, 100% { transform: scale(1); }
-  50%      { transform: scale(1.12); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .motion-on .mc-mday-banner__shine,
-  .motion-on .mc-mday-banner__icon { animation: none; }
+  .motion-on .mc-mday-banner__shine { animation: none; }
 }
 
 /* ── 19. Hide standalone quantity + duplicated price block ── */
