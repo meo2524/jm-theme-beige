@@ -186,6 +186,7 @@
         },
         "faq_3": {
           "type": "faq_item",
+          "disabled": true,
           "settings": {
             "question": "How do I find my ring size?",
             "answer": "<p>Measure the circumference of the finger you'll wear it on using a strip of paper. Wrap it snugly (not tightly), mark where it overlaps, and measure in millimetres. Most people wear a size 10 on their index finger. Use the size guide above for the full chart.</p>"
