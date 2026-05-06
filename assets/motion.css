@@ -2540,48 +2540,6 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 767px) {
-  /* Pill list on mobile — matches spec-pill style, no cards */
-  .motion-on .product-feature__bullets,
-  .motion-on .product-science__bullets {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    grid-template-columns: unset !important;
-    gap: 0.5rem !important;
-    margin: 1rem 0 0 !important;
-  }
-
-  .motion-on .product-feature__bullet,
-  .motion-on .product-science__bullet {
-    display: inline-flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    padding: 0.35rem 0.75rem !important;
-    background: rgba(138, 98, 64, 0.07) !important;
-    border: 1px solid rgba(138, 98, 64, 0.18) !important;
-    border-radius: 100px !important;
-    font-size: 0.75rem !important;
-    font-weight: 500 !important;
-    line-height: 1.3 !important;
-    min-height: 0 !important;
-    transform: none !important;
-    box-shadow: none !important;
-    cursor: default !important;
-  }
-
-  .motion-on .product-feature__bullet:hover,
-  .motion-on .product-science__bullet:hover {
-    transform: none !important;
-    box-shadow: none !important;
-  }
-
-  .motion-on .product-feature__bullet::after,
-  .motion-on .product-science__bullet::after,
-  .motion-on .product-feature__bullet::before,
-  .motion-on .product-science__bullet::before {
-    display: none !important;
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
   .motion-on .product-feature__bullet,
@@ -2609,30 +2567,60 @@
   .btn-atc:active, .sticky-atc__btn:active { transform: none; }
 }
 
-/* ── Bento tile classifier — disabled on benefit_pitch bullets ────────
-   The keyword classifier in motion.js auto-tags each bullet (HRV, sleep,
-   ceramic, steps, etc.) and motion.css renders a different ambient SVG
-   per tile-type via ::after. On the benefit_pitch list this reads as
-   "icons are broken" rather than intentional — different motifs per
-   bullet (walking-figure on activity, diamond on ceramic, etc.) with no
-   shared visual language. The per-bullet em-dash icon (.product-
-   feature__bullet-icon) already provides a unified marker, so we hide
-   the per-tile pseudo-element here.
-   product_science cards keep their per-tile visualizations — those are
-   intentional and the layout (one sensor per card) supports it.
-
-   With the ::after hidden, the original 104px bottom padding (reserved
-   for the ambient viz) makes the cards read tall and lopsided. Reset
-   padding to symmetric and force a square aspect-ratio so the tiles
-   read as a clean grid.
-   ────────────────────────────────────────────────────────────────── */
-.product-feature__bullet::after {
-  display: none !important;
+/* Desktop: square bento tiles, no per-tile SVG on benefit_pitch */
+@media (min-width: 768px) {
+  .product-feature__bullet::after {
+    display: none !important;
+  }
+  .motion-on .product-feature__bullet {
+    aspect-ratio: 1 / 1 !important;
+    padding: 1rem !important;
+    min-height: 0 !important;
+    justify-content: flex-start !important;
+  }
 }
-.motion-on .product-feature__bullet {
-  aspect-ratio: 1 / 1 !important;
-  padding: 1rem !important;
-  min-height: 0 !important;
-  justify-content: flex-start !important;
+
+/* Mobile: pill chips — must be last to win the cascade */
+@media (max-width: 767px) {
+  .motion-on .product-feature__bullets,
+  .motion-on .product-science__bullets {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    grid-template-columns: unset !important;
+    gap: 0.5rem !important;
+    margin: 1rem 0 0 !important;
+  }
+
+  .motion-on .product-feature__bullet,
+  .motion-on .product-science__bullet {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 0.35rem 0.75rem !important;
+    background: rgba(138, 98, 64, 0.07) !important;
+    border: 1px solid rgba(138, 98, 64, 0.18) !important;
+    border-radius: 100px !important;
+    aspect-ratio: unset !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    line-height: 1.3 !important;
+    min-height: 0 !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .motion-on .product-feature__bullet:hover,
+  .motion-on .product-science__bullet:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: rgba(138, 98, 64, 0.18) !important;
+  }
+
+  .motion-on .product-feature__bullet::after,
+  .motion-on .product-science__bullet::after,
+  .motion-on .product-feature__bullet::before,
+  .motion-on .product-science__bullet::before {
+    display: none !important;
+  }
 }
 
