@@ -605,6 +605,21 @@
           </button>
         </div>
 
+        {%- comment -%} The app — opens app-modal.liquid {% endcomment -%}
+        <div class="accordion__item">
+          <button
+            class="accordion__trigger"
+            type="button"
+            id="AccordionTrigger-{{ section.id }}-app"
+            aria-haspopup="dialog"
+          >
+            <span>The app</span>
+            <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+        </div>
+
       </div>
       {%- comment -%} /accordion {%- endcomment -%}
 

@@ -126,6 +126,10 @@
       "type": "science-modal",
       "settings": {}
     },
+    "app_modal": {
+      "type": "app-modal",
+      "settings": {}
+    },
     "product_faq": {
       "type": "product-faq",
       "blocks": {
@@ -556,6 +560,7 @@
     "product_faq",
     "ring_size_modal",
     "science_modal",
+    "app_modal",
     "app_download",
     "testimonials",
     "177768635486c7de24",
