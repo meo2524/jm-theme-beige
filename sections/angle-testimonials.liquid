@@ -1,8 +1,8 @@
-{% comment %} angle-testimonials.liquid — categorised testimonials by use case {% endcomment %}
+{% comment %} angle-testimonials.liquid — categorised testimonials, carousel per tab {% endcomment %}
 
 {%- liquid
-  assign eyebrow = section.settings.eyebrow | default: 'Real people. Real results.'
-  assign heading = section.settings.heading | default: 'What the ring changed for them.'
+  assign eyebrow = section.settings.eyebrow | default: 'Stories'
+  assign heading = section.settings.heading | default: 'How the ring mended them.'
 -%}
 
 <section class="at-wrap" data-section-id="{{ section.id }}">
@@ -19,7 +19,6 @@
       <button class="at-tab is-active" role="tab" aria-selected="true"  data-tab="sleep"    aria-controls="at-panel-sleep">Sleep</button>
       <button class="at-tab"           role="tab" aria-selected="false" data-tab="recovery" aria-controls="at-panel-recovery">Recovery</button>
       <button class="at-tab"           role="tab" aria-selected="false" data-tab="fitness"  aria-controls="at-panel-fitness">Fitness</button>
-      <button class="at-tab"           role="tab" aria-selected="false" data-tab="mend"     aria-controls="at-panel-mend">Mend</button>
       <button class="at-tab"           role="tab" aria-selected="false" data-tab="stress"   aria-controls="at-panel-stress">Stress</button>
     </div>
 
@@ -28,336 +27,313 @@
 
       <!-- SLEEP -->
       <div class="at-panel is-active" id="at-panel-sleep" role="tabpanel" data-panel="sleep">
-        <div class="at-grid">
+        <div class="at-carousel">
+          <div class="at-track">
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">I finally know why I'm tired.</p>
-            <p class="at-card__body">I used to think eight hours was eight hours. The ring showed me I was getting maybe forty minutes of deep sleep on a good night. Changed my whole evening routine — no screens after nine, no alcohol. Deep sleep went from 42 minutes to over an hour in three weeks.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Jess M.</span>
-              <span class="at-card__detail">Wore it for 6 weeks</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">I finally know why I'm tired.</p>
+              <p class="at-card__body">I used to think eight hours was eight hours. The ring showed me I was getting maybe forty minutes of deep sleep on a good night. Changed my whole evening routine — no screens after nine, no alcohol. Deep sleep went from 42 minutes to over an hour in three weeks.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Jess M.</span>
+                <span class="at-card__detail">Wore it for 6 weeks</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">My sleep score is the first thing I check.</p>
-            <p class="at-card__body">Before this I had no idea if I was sleeping well or just lying in bed long enough. Now I can see exactly how much REM I get and when my sleep quality drops. Figured out that late coffee is ruining my deep sleep. Small change, big difference.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Daniel K.</span>
-              <span class="at-card__detail">Verified purchase</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">My sleep score is the first thing I check.</p>
+              <p class="at-card__body">Before this I had no idea if I was sleeping well or just lying in bed long enough. Now I can see exactly how much REM I get and when my sleep quality drops. Figured out that late coffee is ruining my deep sleep. Small change, big difference.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Daniel K.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Caught my sleep apnea before my doctor did.</p>
-            <p class="at-card__body">The SpO₂ readings kept dipping to 91–92% and I had no idea why. Brought the data to my GP, she ordered a sleep study, and sure enough — mild sleep apnea. I had no symptoms I could identify myself. The ring flagged it first.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Brian T.</span>
-              <span class="at-card__detail">Verified purchase</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Caught my sleep apnea before my doctor did.</p>
+              <p class="at-card__body">The SpO₂ readings kept dipping to 91–92% and I had no idea why. Brought the data to my GP, she ordered a sleep study, and sure enough — mild sleep apnea. I had no symptoms I could identify myself. The ring flagged it first.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Brian T.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Shifted my sleep window, changed my life.</p>
-            <p class="at-card__body">Data showed my best deep sleep happened between 11pm and 3am — I was going to bed at 1am and missing half of it. Moved bedtime earlier by 90 minutes. My morning readiness scores jumped by about 15 points on average. I feel like a different person.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Natalie R.</span>
-              <span class="at-card__detail">Wore it for 3 months</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Shifted my sleep window, changed my life.</p>
+              <p class="at-card__body">Data showed my best deep sleep happened between 11pm and 3am — I was going to bed at 1am and missing half of it. Moved bedtime earlier by 90 minutes. My morning readiness scores jumped by about 15 points on average. I feel like a different person.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Natalie R.</span>
+                <span class="at-card__detail">Wore it for 3 months</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">My husband laughs at how obsessed I am.</p>
-            <p class="at-card__body">Every morning I'm comparing last night's score to the week's average. It's become a genuine habit. The sleep staging is detailed enough to be useful and simple enough to understand. I've recommended it to everyone I know who complains about being tired.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Priya L.</span>
-              <span class="at-card__detail">Verified purchase</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Tracked jet lag recovery for the first time.</p>
+              <p class="at-card__body">I fly from the US to Japan for work every quarter. Used to just white-knuckle through the first few days. Now I can see exactly when my body has adjusted — usually day four. I time my meetings accordingly. The data gave me an edge I didn't know I needed.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Marcus W.</span>
+                <span class="at-card__detail">Frequent traveler</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Tracked jet lag recovery for the first time.</p>
-            <p class="at-card__body">I fly from the US to Japan for work every quarter. Used to just white-knuckle through the first few days. Now I can see exactly when my body has adjusted — usually day four. I time my meetings accordingly. The data gave me an edge I didn't know I needed.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Marcus W.</span>
-              <span class="at-card__detail">Frequent traveler</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">My husband laughs at how obsessed I am.</p>
+              <p class="at-card__body">Every morning I'm comparing last night's score to the week's average. The sleep staging is detailed enough to be useful and simple enough to understand. I've recommended it to everyone I know who complains about being tired.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Priya L.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
 
+          </div>
+          <div class="at-nav">
+            <button class="at-nav__btn at-nav__btn--prev" aria-label="Previous review">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div class="at-dots"></div>
+            <button class="at-nav__btn at-nav__btn--next" aria-label="Next review">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- RECOVERY -->
       <div class="at-panel" id="at-panel-recovery" role="tabpanel" data-panel="recovery" hidden>
-        <div class="at-grid">
+        <div class="at-carousel">
+          <div class="at-track">
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Stopped overtraining. Finally.</p>
-            <p class="at-card__body">I used to train six days a week regardless of how I felt. My HRV was chronically suppressed and I just thought that was normal. The ring showed me it wasn't. Now I take actual rest days when the data says to. My lifts have gone up and I haven't had a nagging injury in four months.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Tyler B.</span>
-              <span class="at-card__detail">Powerlifter, 3 months</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Stopped overtraining. Finally.</p>
+              <p class="at-card__body">I used to train six days a week regardless of how I felt. My HRV was chronically suppressed and I just thought that was normal. The ring showed me it wasn't. Now I take actual rest days when the data says to. My lifts have gone up and I haven't had a nagging injury in four months.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Tyler B.</span>
+                <span class="at-card__detail">Powerlifter, 3 months</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">The HRV data is genuinely reliable.</p>
-            <p class="at-card__body">I've compared it against my Polar H10 chest strap for three weeks. The trends match consistently even if the exact numbers differ slightly — which is expected from different measurement methods. For day-to-day recovery guidance the ring is more than accurate enough. And I don't have to wear a chest strap to bed.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Connor H.</span>
-              <span class="at-card__detail">Verified purchase</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">The HRV data is genuinely reliable.</p>
+              <p class="at-card__body">I've compared it against my Polar H10 chest strap for three weeks. The trends match consistently even if the exact numbers differ slightly — which is expected from different measurement methods. For day-to-day recovery guidance the ring is more than accurate enough.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Connor H.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Guided my recovery after surgery.</p>
-            <p class="at-card__body">Had a knee procedure in February and used the ring to monitor my recovery. Watching my readiness score climb back toward normal over six weeks was motivating. My physical therapist was interested in the HRV trends as a secondary marker alongside my in-clinic assessments.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Samantha O.</span>
-              <span class="at-card__detail">Verified purchase</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Guided my recovery after surgery.</p>
+              <p class="at-card__body">Had a knee procedure in February and used the ring to monitor my recovery. Watching my readiness score climb back toward normal over six weeks was motivating. My physical therapist was interested in the HRV trends as a secondary marker alongside in-clinic assessments.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Samantha O.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Replaced my Whoop — no subscription required.</p>
-            <p class="at-card__body">I used Whoop for two years for recovery monitoring. The N°01 gives me similar HRV and readiness data for a one-time cost. Saved $288 in the first year alone. The ring itself looks better too. I was hesitant but the data quality speaks for itself.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Ryan C.</span>
-              <span class="at-card__detail">Former Whoop user</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Replaced my Whoop. No subscription required.</p>
+              <p class="at-card__body">I used Whoop for two years for recovery monitoring. The N°01 gives me similar HRV and readiness data for a one-time cost. Saved $288 in the first year alone. The ring itself looks better too. I was hesitant but the data quality speaks for itself.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Ryan C.</span>
+                <span class="at-card__detail">Former Whoop user</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Marathon training just got smarter.</p>
-            <p class="at-card__body">Training for my third marathon and recovery management is everything at this distance. The ring tells me the morning after a long run whether my body has processed the load. I've backed off on scheduled hard sessions three times based on the data and avoided what felt like the beginning of overuse injuries each time.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Adrienne F.</span>
-              <span class="at-card__detail">Marathon runner</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Marathon training just got smarter.</p>
+              <p class="at-card__body">Training for my third marathon and recovery management is everything at this distance. The ring tells me the morning after a long run whether my body has processed the load. I've backed off on scheduled hard sessions three times based on the data and avoided overuse injuries each time.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Adrienne F.</span>
+                <span class="at-card__detail">Marathon runner</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Body temperature flagged illness two days early.</p>
-            <p class="at-card__body">My temperature readings spiked by 0.6°C above my baseline for two nights in a row. I felt fine. Day three I woke up sick. The ring had seen it coming. I've started trusting the temperature data as an early warning system and it's accurate enough to act on.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Owen S.</span>
-              <span class="at-card__detail">Verified purchase</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Body temperature flagged illness two days early.</p>
+              <p class="at-card__body">My temperature readings spiked by 0.6°C above my baseline for two nights in a row. I felt fine. Day three I woke up sick. The ring had seen it coming. I've started trusting the temperature data as an early warning system and it's accurate enough to act on.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Owen S.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
 
+          </div>
+          <div class="at-nav">
+            <button class="at-nav__btn at-nav__btn--prev" aria-label="Previous review">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div class="at-dots"></div>
+            <button class="at-nav__btn at-nav__btn--next" aria-label="Next review">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- FITNESS -->
       <div class="at-panel" id="at-panel-fitness" role="tabpanel" data-panel="fitness" hidden>
-        <div class="at-grid">
+        <div class="at-carousel">
+          <div class="at-track">
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">I can actually see my fitness improving.</p>
-            <p class="at-card__body">My resting heart rate has dropped from 68 to 61 bpm over four months of consistent training. Watching that number trend down week by week is more motivating than any before-and-after photo. Concrete evidence that what I'm doing is working.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Logan P.</span>
-              <span class="at-card__detail">Verified purchase</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">I can actually see my fitness improving.</p>
+              <p class="at-card__body">My resting heart rate has dropped from 68 to 61 bpm over four months of consistent training. Watching that number trend down week by week is more motivating than any before-and-after photo. Concrete evidence that what I'm doing is working.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Logan P.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Best no-screen workout tracker I've found.</p>
-            <p class="at-card__body">I lift and run and I don't want to stare at a watch during either. The ring tracks passively and gives me the summary in the app afterward. Heart rate, active time, estimated effort — all there without interrupting my session. Exactly how I want a tracker to work.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Elijah M.</span>
-              <span class="at-card__detail">Gym owner</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Best no-screen workout tracker I've found.</p>
+              <p class="at-card__body">I lift and run and I don't want to stare at a watch during either. The ring tracks passively and gives me the summary in the app afterward. Heart rate, active time, estimated effort — all there without interrupting my session. Exactly how I want a tracker to work.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Elijah M.</span>
+                <span class="at-card__detail">Gym owner</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Swam with it. Surfed with it. Zero problems.</p>
-            <p class="at-card__body">I'm in the water at least four days a week — ocean swimming and surfing. The ring has been through it all. No fogging, no seal issues, no performance degradation. The ceramic has a couple of micro-scratches from rocks but nothing through the outer layer. Built properly.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Caleb N.</span>
-              <span class="at-card__detail">Surfer, 4 months</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Swam with it. Surfed with it. Zero problems.</p>
+              <p class="at-card__body">I'm in the water at least four days a week — ocean swimming and surfing. The ring has been through it all. No fogging, no seal issues, no performance degradation. The ceramic has a couple of micro-scratches from rocks but nothing through the outer layer. Built properly.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Caleb N.</span>
+                <span class="at-card__detail">Surfer, 4 months</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Passive tracking is underrated.</p>
-            <p class="at-card__body">The ring automatically detected when I went for a run and categorized it correctly three out of three times last week without me pressing anything. My Apple Watch needed me to start a workout manually. This just watches and learns. Much less friction.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Harper G.</span>
-              <span class="at-card__detail">Verified purchase</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Passive tracking is underrated.</p>
+              <p class="at-card__body">The ring automatically detected when I went for a run and categorized it correctly three out of three times last week without me pressing anything. My Apple Watch needed me to start a workout manually. This just watches and learns. Much less friction.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Harper G.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Tracks what actually matters for performance.</p>
-            <p class="at-card__body">As a personal trainer I care about three things: resting heart rate trends, HRV, and sleep quality. This ring delivers all three accurately and consistently. I've now recommended it to eleven clients as a more accessible alternative to Whoop. Every one of them is happy with it.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Dominic A.</span>
-              <span class="at-card__detail">Personal trainer</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Tracks what actually matters for performance.</p>
+              <p class="at-card__body">As a personal trainer I care about three things: resting heart rate trends, HRV, and sleep quality. This ring delivers all three accurately and consistently. I've now recommended it to eleven clients as a more accessible alternative to Whoop. Every one of them is happy with it.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Dominic A.</span>
+                <span class="at-card__detail">Personal trainer</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Six days of battery on a fitness ring is wild.</p>
-            <p class="at-card__body">I charge it Sunday morning while I have coffee. That's it. The whole week covered. I've tried other rings that die after three days and need to be charged daily like a phone. Six days is the number that makes a tracker actually wearable for life.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Isabella R.</span>
-              <span class="at-card__detail">Verified purchase</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Six days of battery on a fitness ring is wild.</p>
+              <p class="at-card__body">I charge it Sunday morning while I have coffee. That's it. The whole week covered. I've tried other rings that die after three days. Six days is the number that makes a tracker actually wearable for life.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Isabella R.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
 
-        </div>
-      </div>
-
-      <!-- MEND -->
-      <div class="at-panel" id="at-panel-mend" role="tabpanel" data-panel="mend" hidden>
-        <div class="at-grid">
-
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Started taking my health seriously at 44.</p>
-            <p class="at-card__body">I'd been ignoring warning signs for years — always tired, irregular sleep, high resting heart rate. This ring gave me the data I needed to have a real conversation with myself. Six months later my resting heart rate is down, my sleep quality is up, and I feel ten years younger. It started with seeing the numbers.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Greg F.</span>
-              <span class="at-card__detail">Verified purchase</span>
-            </footer>
-          </blockquote>
-
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Recovering from burnout — this helped.</p>
-            <p class="at-card__body">After a rough year at work I hit a wall. My doctor said I needed to rest but it's hard to rest when you can't measure it. The ring showed me my HRV climbing back toward normal over twelve weeks of deliberately slowing down. Seeing that upward trend kept me on track when I wanted to push too soon.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Mia K.</span>
-              <span class="at-card__detail">Wore it through recovery</span>
-            </footer>
-          </blockquote>
-
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Gave one to my mum. She calls it her health ring.</p>
-            <p class="at-card__body">She's 68 and uses it to monitor her resting heart rate and sleep. She doesn't care about HRV or readiness scores — she just checks her heart rate and sleep duration each morning. Simple enough for her to use independently and she loves it. She's shown it to her whole bridge club.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Zoe H.</span>
-              <span class="at-card__detail">Bought for family</span>
-            </footer>
-          </blockquote>
-
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">My relationship with my body changed.</p>
-            <p class="at-card__body">That sounds dramatic but it's true. I used to push through everything — sickness, tiredness, stress — and call it resilience. The ring showed me the damage that was doing to my recovery metrics. Learning to rest isn't weakness. The data made that real for me in a way that willpower coaching never could.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Liam D.</span>
-              <span class="at-card__detail">Verified purchase</span>
-            </footer>
-          </blockquote>
-
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Used it during cancer recovery.</p>
-            <p class="at-card__body">I finished chemo in December and used the ring through my recovery to track how my body was responding. My oncologist was curious about the HRV and sleep data as supplementary markers. Watching the numbers slowly improve gave me something concrete to focus on during a very uncertain time.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Patricia W.</span>
-              <span class="at-card__detail">Verified purchase</span>
-            </footer>
-          </blockquote>
-
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">It looks like jewelry. That matters.</p>
-            <p class="at-card__body">I work in a creative field and I care what I wear. The ceramic ring looks considered and intentional. People ask if it's a design piece. When I tell them it tracks my sleep and heart rate they're always surprised. A health tracker that doesn't look like a health tracker is the dream.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Ava C.</span>
-              <span class="at-card__detail">Verified purchase</span>
-            </footer>
-          </blockquote>
-
+          </div>
+          <div class="at-nav">
+            <button class="at-nav__btn at-nav__btn--prev" aria-label="Previous review">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div class="at-dots"></div>
+            <button class="at-nav__btn at-nav__btn--next" aria-label="Next review">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- STRESS -->
       <div class="at-panel" id="at-panel-stress" role="tabpanel" data-panel="stress" hidden>
-        <div class="at-grid">
+        <div class="at-carousel">
+          <div class="at-track">
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">HRV doesn't lie about stress.</p>
-            <p class="at-card__body">My HRV tanks during deadline weeks even when I think I'm handling it fine. The ring catches what my conscious mind denies. It's become a way of holding myself accountable — if the number is low I know I need to do something about it, not just say I'm fine.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Noah B.</span>
-              <span class="at-card__detail">Works in finance</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">HRV doesn't lie about stress.</p>
+              <p class="at-card__body">My HRV tanks during deadline weeks even when I think I'm handling it fine. The ring catches what my conscious mind denies. It's become a way of holding myself accountable — if the number is low I know I need to do something about it, not just say I'm fine.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Noah B.</span>
+                <span class="at-card__detail">Works in finance</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Started meditating because of this ring.</p>
-            <p class="at-card__body">I noticed my readiness scores were consistently low on weekdays despite sleeping the same hours as weekends. The difference was stress. Started doing ten minutes of breathing in the morning and within two weeks my weekday HRV improved noticeably. The data gave me the motivation to actually do it.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Sofia V.</span>
-              <span class="at-card__detail">Verified purchase</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Started meditating because of this ring.</p>
+              <p class="at-card__body">I noticed my readiness scores were consistently low on weekdays despite sleeping the same hours as weekends. The difference was stress. Started doing ten minutes of breathing in the morning and within two weeks my weekday HRV improved noticeably. The data gave me the motivation to actually do it.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Sofia V.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">The ring helped me recognize burnout patterns.</p>
-            <p class="at-card__body">I'm a teacher and term four is brutal. This year I watched my HRV trend down for three weeks straight before the school holidays. By the time I got the break I was already depleted. This year I have the data ahead of time and I'm managing workload differently. Prevention is better than cure.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Emma T.</span>
-              <span class="at-card__detail">High school teacher</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">The ring helped me recognize burnout patterns.</p>
+              <p class="at-card__body">I'm a teacher and term four is brutal. This year I watched my HRV trend down for three weeks straight before the school holidays. By the time I got the break I was already depleted. Now I have the data ahead of time and I'm managing workload differently. Prevention is better than cure.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Emma T.</span>
+                <span class="at-card__detail">High school teacher</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Used it alongside therapy for anxiety.</p>
-            <p class="at-card__body">My therapist suggested using objective data alongside our sessions to track how my nervous system was responding to different interventions. The HRV data became a useful conversation starter — we could see which weeks were harder and what was different about them. Data plus therapy is more powerful than either alone.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Charlotte E.</span>
-              <span class="at-card__detail">Verified purchase</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Used it alongside therapy for anxiety.</p>
+              <p class="at-card__body">My therapist suggested using objective data alongside our sessions to track how my nervous system was responding to different interventions. The HRV data became a useful conversation starter — we could see which weeks were harder and what was different about them. Data plus therapy is more powerful than either alone.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Charlotte E.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Sleep quality drops before I realize I'm stressed.</p>
-            <p class="at-card__body">The ring sees stress in my sleep data before I consciously notice it. Fragmented sleep, lower deep sleep percentages, earlier waking — the pattern is consistent. It's become an early warning system for when I need to slow down, which is usually before I think I do.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Isabelle M.</span>
-              <span class="at-card__detail">Verified purchase</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Sleep quality drops before I realize I'm stressed.</p>
+              <p class="at-card__body">The ring sees stress in my sleep data before I consciously notice it. Fragmented sleep, lower deep sleep percentages, earlier waking — the pattern is consistent. It's become an early warning system for when I need to slow down, which is usually before I think I do.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Isabelle M.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
 
-          <blockquote class="at-card">
-            <div class="at-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="at-card__title">Quantified my stress for the first time.</p>
-            <p class="at-card__body">I always knew certain situations stressed me out but I couldn't measure it. Now I can. A bad meeting shows up in my heart rate data. A difficult conversation shows up in my overnight HRV. Having numbers attached to stress makes it easier to address and easier to discuss with my doctor.</p>
-            <footer class="at-card__footer">
-              <span class="at-card__name">Ethan J.</span>
-              <span class="at-card__detail">Verified purchase</span>
-            </footer>
-          </blockquote>
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Quantified my stress for the first time.</p>
+              <p class="at-card__body">I always knew certain situations stressed me out but I couldn't measure it. Now I can. A bad meeting shows up in my heart rate data. A difficult conversation shows up in my overnight HRV. Having numbers attached to stress makes it easier to address and discuss with my doctor.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Ethan J.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
 
+          </div>
+          <div class="at-nav">
+            <button class="at-nav__btn at-nav__btn--prev" aria-label="Previous review">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div class="at-dots"></div>
+            <button class="at-nav__btn at-nav__btn--next" aria-label="Next review">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -370,188 +346,142 @@
   background: var(--color-bone, #f5efe6);
   padding: 5rem 0 6rem;
 }
-
 .at-inner {
-  max-width: 1180px;
+  max-width: 860px;
   margin: 0 auto;
   padding-inline: clamp(1rem, 4vw, 2rem);
 }
 
 /* Header */
 .at-head { margin-bottom: 2.5rem; }
-
 .at-head__rule {
-  width: 40px;
-  height: 1.5px;
+  width: 40px; height: 1.5px;
   background: var(--color-walnut, #8a6240);
-  opacity: 0.6;
-  margin-bottom: 1.25rem;
+  opacity: 0.6; margin-bottom: 1.25rem;
 }
-
 .at-head__eyebrow {
   font-family: var(--font-label, 'Inter', sans-serif);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+  font-size: 0.6875rem; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase;
   color: var(--color-walnut, #8a6240);
-  margin: 0 0 0.75rem;
-  max-width: none;
+  margin: 0 0 0.75rem; max-width: none;
 }
-
 .at-head__heading {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
   font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-  font-weight: 400;
-  color: var(--color-black, #1f1d1a);
-  line-height: 1.15;
-  margin: 0;
-  max-width: 22ch;
+  font-weight: 400; color: var(--color-black, #1f1d1a);
+  line-height: 1.15; margin: 0;
 }
 
 /* Tabs */
 .at-tabs {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 2.5rem;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding-bottom: 2px;
+  display: flex; gap: 0.5rem; margin-bottom: 2rem;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; padding-bottom: 2px;
 }
 .at-tabs::-webkit-scrollbar { display: none; }
-
 .at-tab {
-  flex-shrink: 0;
-  padding: 0.5rem 1.25rem;
-  border-radius: 100px;
-  border: 1.5px solid rgba(138,98,64,0.25);
+  flex-shrink: 0; padding: 0.45rem 1.125rem;
+  border-radius: 100px; border: 1.5px solid rgba(138,98,64,0.25);
   background: transparent;
   font-family: var(--font-label, 'Inter', sans-serif);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--color-olive, #5a4a3a);
-  cursor: pointer;
+  font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.04em;
+  color: var(--color-olive, #5a4a3a); cursor: pointer;
   transition: background 0.18s, border-color 0.18s, color 0.18s;
   white-space: nowrap;
 }
-
-.at-tab:hover {
-  border-color: var(--color-walnut, #8a6240);
-  background: rgba(138,98,64,0.06);
-}
-
-.at-tab.is-active {
-  background: var(--color-walnut, #8a6240);
-  border-color: var(--color-walnut, #8a6240);
-  color: #f5efe6;
-}
+.at-tab:hover { border-color: var(--color-walnut, #8a6240); background: rgba(138,98,64,0.06); }
+.at-tab.is-active { background: var(--color-walnut, #8a6240); border-color: var(--color-walnut, #8a6240); color: #f5efe6; }
 
 /* Panels */
 .at-panel[hidden] { display: none; }
-
-.at-panel {
-  animation: atFadeIn 0.3s ease;
-}
-
+.at-panel { animation: atFadeIn 0.28s ease; }
 @keyframes atFadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: none; }
 }
 
-/* Grid */
-.at-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5px;
+/* Carousel */
+.at-carousel { position: relative; }
+
+.at-track {
+  display: flex;
+  transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
 /* Cards */
 .at-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding: 2rem 1.75rem;
+  min-width: 100%; width: 100%;
+  display: flex; flex-direction: column; gap: 1rem;
+  padding: 2.25rem 2.5rem;
   background: rgba(43,43,43,0.05);
   border: 1px solid rgba(43,43,43,0.1);
-  border-radius: 3px;
-  margin: 0;
-  quotes: none;
-  transition: background 0.2s, border-color 0.2s;
-}
-
-.at-card:hover {
-  background: rgba(43,43,43,0.09);
-  border-color: rgba(138,98,64,0.28);
+  border-radius: 6px; margin: 0; quotes: none;
+  box-sizing: border-box;
 }
 
 .at-stars {
   color: var(--color-walnut, #8a6240);
-  font-size: 12px;
-  letter-spacing: 1px;
-  line-height: 1;
+  font-size: 13px; letter-spacing: 2px; line-height: 1;
 }
-
 .at-card__title {
   font-family: var(--font-label, 'Inter', sans-serif);
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: var(--color-black, #1f1d1a);
-  margin: 0;
-  line-height: 1.3;
+  font-size: 1rem; font-weight: 700;
+  color: var(--color-black, #1f1d1a); margin: 0; line-height: 1.3;
 }
-
 .at-card__body {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: 1.0625rem;
-  font-style: italic;
-  font-weight: 400;
-  line-height: 1.65;
-  color: var(--color-black, #1f1d1a);
-  flex: 1;
-  margin: 0;
+  font-size: 1.125rem; font-style: italic; font-weight: 400;
+  line-height: 1.7; color: var(--color-black, #1f1d1a); flex: 1; margin: 0;
 }
-
 .at-card__footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  padding-top: 0.875rem;
-  border-top: 1px solid rgba(43,43,43,0.1);
-  flex-wrap: wrap;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0.5rem; padding-top: 1rem;
+  border-top: 1px solid rgba(43,43,43,0.1); flex-wrap: wrap;
 }
-
 .at-card__name {
   font-family: var(--font-label, 'Inter', sans-serif);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  color: var(--color-black, #1f1d1a);
+  font-size: 0.8125rem; font-weight: 700; color: var(--color-black, #1f1d1a);
 }
-
 .at-card__detail {
   font-family: var(--font-label, 'Inter', sans-serif);
-  font-size: 0.75rem;
-  color: var(--color-olive, #5a4a3a);
-  opacity: 0.8;
+  font-size: 0.75rem; color: var(--color-olive, #5a4a3a); opacity: 0.75;
 }
 
-/* Responsive */
-@media (max-width: 1023px) {
-  .at-grid { grid-template-columns: repeat(2, 1fr); }
+/* Nav */
+.at-nav {
+  display: flex; align-items: center; justify-content: center;
+  gap: 1.25rem; margin-top: 1.5rem;
 }
+.at-nav__btn {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1.5px solid rgba(138,98,64,0.3);
+  background: transparent; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-walnut, #8a6240);
+  transition: background 0.18s, border-color 0.18s;
+}
+.at-nav__btn:hover { background: rgba(138,98,64,0.1); border-color: var(--color-walnut, #8a6240); }
+.at-nav__btn:disabled { opacity: 0.25; cursor: default; pointer-events: none; }
+
+/* Dots */
+.at-dots { display: flex; gap: 6px; align-items: center; }
+.at-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(138,98,64,0.25);
+  transition: background 0.2s, transform 0.2s;
+  cursor: pointer; border: none; padding: 0;
+}
+.at-dot.is-active { background: var(--color-walnut, #8a6240); transform: scale(1.3); }
 
 @media (max-width: 599px) {
   .at-wrap { padding: 3rem 0 4rem; }
-  .at-grid { grid-template-columns: 1fr; gap: 1px; }
-  .at-card { padding: 1.5rem 1.25rem; }
-  .at-head__heading { max-width: none; }
+  .at-card { padding: 1.75rem 1.25rem; }
 }
-
 @media (prefers-reduced-motion: reduce) {
+  .at-track { transition: none; }
   .at-panel { animation: none; }
-  .at-card { transition: none; }
 }
 </style>
 
@@ -563,26 +493,65 @@
   var tabs   = section.querySelectorAll('.at-tab');
   var panels = section.querySelectorAll('.at-panel');
 
+  /* ── Carousel init for one panel ── */
+  function initCarousel(panel) {
+    if (panel._atInit) return;
+    panel._atInit = true;
+
+    var track   = panel.querySelector('.at-track');
+    var dotsWrap = panel.querySelector('.at-dots');
+    var btnPrev = panel.querySelector('.at-nav__btn--prev');
+    var btnNext = panel.querySelector('.at-nav__btn--next');
+    var cards   = panel.querySelectorAll('.at-card');
+    var total   = cards.length;
+    var current = 0;
+
+    /* Build dots */
+    for (var i = 0; i < total; i++) {
+      var dot = document.createElement('button');
+      dot.className = 'at-dot' + (i === 0 ? ' is-active' : '');
+      dot.setAttribute('aria-label', 'Review ' + (i + 1));
+      dot.dataset.idx = i;
+      dotsWrap.appendChild(dot);
+    }
+
+    function goTo(idx) {
+      current = (idx + total) % total;
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dotsWrap.querySelectorAll('.at-dot').forEach(function(d, i) {
+        d.classList.toggle('is-active', i === current);
+      });
+      btnPrev.disabled = current === 0;
+      btnNext.disabled = current === total - 1;
+    }
+
+    btnPrev.addEventListener('click', function() { goTo(current - 1); });
+    btnNext.addEventListener('click', function() { goTo(current + 1); });
+    dotsWrap.addEventListener('click', function(e) {
+      var dot = e.target.closest('.at-dot');
+      if (dot) goTo(parseInt(dot.dataset.idx));
+    });
+
+    goTo(0);
+  }
+
+  /* Init the default active panel */
+  var activePanel = section.querySelector('.at-panel.is-active');
+  if (activePanel) initCarousel(activePanel);
+
+  /* ── Tab switching ── */
   tabs.forEach(function(tab) {
     tab.addEventListener('click', function() {
       var target = tab.dataset.tab;
-
-      tabs.forEach(function(t) {
-        t.classList.remove('is-active');
-        t.setAttribute('aria-selected', 'false');
-      });
-      panels.forEach(function(p) {
-        p.hidden = true;
-        p.classList.remove('is-active');
-      });
-
+      tabs.forEach(function(t) { t.classList.remove('is-active'); t.setAttribute('aria-selected','false'); });
+      panels.forEach(function(p) { p.hidden = true; p.classList.remove('is-active'); });
       tab.classList.add('is-active');
-      tab.setAttribute('aria-selected', 'true');
-
+      tab.setAttribute('aria-selected','true');
       var panel = section.querySelector('[data-panel="' + target + '"]');
       if (panel) {
         panel.hidden = false;
         panel.classList.add('is-active');
+        initCarousel(panel);
       }
     });
   });
@@ -595,18 +564,8 @@
   "tag": "section",
   "class": "section-angle-testimonials",
   "settings": [
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "Real people. Real results."
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "What the ring changed for them."
-    }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Stories" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How the ring mended them." }
   ],
   "presets": [{ "name": "Angle testimonials" }]
 }
