@@ -826,16 +826,19 @@
 /* Title */
 .product-title {
   font-family: var(--font-heading);
-  font-size: clamp(1.875rem, 3vw, 2.625rem);
-  font-weight: 400;
-  color: var(--color-black);
-  line-height: 1.18;
-  letter-spacing: -0.015em;
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
   margin: 0 0 1.125rem;
   display: flex;
   align-items: baseline;
   gap: 0.5rem;
   flex-wrap: wrap;
+  background: linear-gradient(135deg, #efe8dc 0%, #c4a882 55%, #9a7e57 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .product-title__model {
