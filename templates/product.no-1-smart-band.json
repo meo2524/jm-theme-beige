@@ -311,6 +311,10 @@
         "subheading": ""
       }
     },
+    "angle_testimonials": {
+      "type": "angle-testimonials",
+      "settings": {}
+    },
     "17779692662038a0a0": {
       "type": "apps",
       "blocks": {
@@ -639,6 +643,7 @@
     "product_science",
     "app_showcase",
     "product_faq",
+    "angle_testimonials",
     "17779692662038a0a0",
     "tech_specs",
     "ring_size_modal",
