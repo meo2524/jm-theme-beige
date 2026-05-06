@@ -22,13 +22,6 @@
         "show_scroll_cue": true
       }
     },
-    "mday_shipping_strip": {
-      "type": "mday-shipping-strip",
-      "settings": {
-        "cta_label": "Shop now",
-        "cta_url": "/products/smart-band"
-      }
-    },
     "stats-strip": {
       "type": "stats-strip",
       "settings": {
@@ -101,12 +94,12 @@
     },
     "testimonials": {
       "type": "testimonials",
+      "disabled": true,
       "settings": {
         "eyebrow": "Real results",
         "heading": "What people are saying.",
         "reviews_count": 6
-      },
-      "disabled": true
+      }
     },
     "177700770423191747": {
       "type": "apps",
@@ -116,9 +109,7 @@
           "settings": {
             "product": "smart-band",
             "review_data": "real_data",
-            "max_width": 900,
-            "star_rating": "5",
-            "min_rating": 5
+            "max_width": 900
           }
         }
       },
@@ -143,7 +134,6 @@
   },
   "order": [
     "hero",
-    "mday_shipping_strip",
     "stats-strip",
     "smart_band_spotlight",
     "177700770423191747",
