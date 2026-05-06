@@ -1,8 +1,8 @@
 {% comment %} angle-testimonials.liquid — categorised testimonials, carousel per tab {% endcomment %}
 
 {%- liquid
-  assign eyebrow = section.settings.eyebrow | default: 'Stories'
-  assign heading = section.settings.heading | default: 'How the ring mended them.'
+  assign eyebrow = section.settings.eyebrow | default: 'The Mender Community'
+  assign heading = section.settings.heading | default: 'Meet the Menders.'
 -%}
 
 <section class="at-wrap" data-section-id="{{ section.id }}">
@@ -16,10 +16,12 @@
 
     <!-- Category tabs -->
     <div class="at-tabs" role="tablist" aria-label="Review categories">
-      <button class="at-tab is-active" role="tab" aria-selected="true"  data-tab="sleep"    aria-controls="at-panel-sleep">Sleep</button>
-      <button class="at-tab"           role="tab" aria-selected="false" data-tab="recovery" aria-controls="at-panel-recovery">Recovery</button>
-      <button class="at-tab"           role="tab" aria-selected="false" data-tab="fitness"  aria-controls="at-panel-fitness">Fitness</button>
-      <button class="at-tab"           role="tab" aria-selected="false" data-tab="stress"   aria-controls="at-panel-stress">Stress</button>
+      <button class="at-tab is-active" role="tab" aria-selected="true"  data-tab="sleep"          aria-controls="at-panel-sleep">Sleep</button>
+      <button class="at-tab"           role="tab" aria-selected="false" data-tab="recovery"       aria-controls="at-panel-recovery">Recovery</button>
+      <button class="at-tab"           role="tab" aria-selected="false" data-tab="fitness"        aria-controls="at-panel-fitness">Fitness</button>
+      <button class="at-tab"           role="tab" aria-selected="false" data-tab="womens-health"  aria-controls="at-panel-womens-health">Women's Health</button>
+      <button class="at-tab"           role="tab" aria-selected="false" data-tab="stress"         aria-controls="at-panel-stress">Stress</button>
+      <button class="at-tab"           role="tab" aria-selected="false" data-tab="anxiety"        aria-controls="at-panel-anxiety">Anxiety</button>
     </div>
 
     <!-- Panels -->
@@ -259,6 +261,84 @@
         </div>
       </div>
 
+      <!-- WOMEN'S HEALTH -->
+      <div class="at-panel" id="at-panel-womens-health" role="tabpanel" data-panel="womens-health" hidden>
+        <div class="at-carousel">
+          <div class="at-track">
+
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">I can see my cycle in the data.</p>
+              <p class="at-card__body">My basal temp shifts confirm my luteal phase every single time. I no longer track my period by counting days — I track it by temperature. The spike is consistent within 0.2°C and happens 24–48 hours after ovulation. First time I've had objective data on my own body.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Claire B.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
+
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">The ring caught something my OB didn't.</p>
+              <p class="at-card__body">My temp readings sat 0.4°C above baseline for three weeks straight. On a hunch I called my doctor. Low-grade infection I hadn't felt at all. Continuous monitoring caught a deviation that a one-off appointment would have missed entirely. I'll never not wear this now.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Rachel S.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
+
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Perimenopause, finally made legible.</p>
+              <p class="at-card__body">I'm 47 and my sleep has been unpredictable for two years. Having data on exactly when I wake up, how fragmented my sleep is, and whether it correlates with temperature spikes has helped me have much more specific conversations with my gynecologist. It gave me language for what I was experiencing.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Diane W.</span>
+                <span class="at-card__detail">Wore it 5 months</span>
+              </footer>
+            </blockquote>
+
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">I finally understand my energy fluctuations.</p>
+              <p class="at-card__body">Some weeks I feel unstoppable, others I can barely get off the couch. The ring showed me the pattern — my readiness scores follow my cycle almost perfectly. Low energy in the luteal phase isn't laziness, it's physiology. The data made me stop fighting my body and start working with it.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Maya K.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
+
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Better than any period tracking app I've tried.</p>
+              <p class="at-card__body">I've used Clue, Natural Cycles, and Ovia. All of them rely on me inputting data. This ring collects it passively — I can see my actual basal temp trend without a thermometer every morning. For fertility awareness it's the most accurate passive tool I've ever used.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Hannah F.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
+
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Tracked my sleep through postpartum.</p>
+              <p class="at-card__body">Wore it through my third trimester and the first four months after delivery. Being able to show my midwife actual sleep data — not just "I'm exhausted" — meant she took my sleep deprivation seriously. We discussed it as a health issue, not a lifestyle inconvenience. Postpartum care needs more data like this.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Zoe A.</span>
+                <span class="at-card__detail">New mom</span>
+              </footer>
+            </blockquote>
+
+          </div>
+          <div class="at-nav">
+            <button class="at-nav__btn at-nav__btn--prev" aria-label="Previous review">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div class="at-dots"></div>
+            <button class="at-nav__btn at-nav__btn--next" aria-label="Next review">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
       <!-- STRESS -->
       <div class="at-panel" id="at-panel-stress" role="tabpanel" data-panel="stress" hidden>
         <div class="at-carousel">
@@ -320,6 +400,84 @@
               <p class="at-card__body">I always knew certain situations stressed me out but I couldn't measure it. Now I can. A bad meeting shows up in my heart rate data. A difficult conversation shows up in my overnight HRV. Having numbers attached to stress makes it easier to address and discuss with my doctor.</p>
               <footer class="at-card__footer">
                 <span class="at-card__name">Ethan J.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
+
+          </div>
+          <div class="at-nav">
+            <button class="at-nav__btn at-nav__btn--prev" aria-label="Previous review">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div class="at-dots"></div>
+            <button class="at-nav__btn at-nav__btn--next" aria-label="Next review">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANXIETY -->
+      <div class="at-panel" id="at-panel-anxiety" role="tabpanel" data-panel="anxiety" hidden>
+        <div class="at-carousel">
+          <div class="at-track">
+
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">My ring shows anxiety before I feel it.</p>
+              <p class="at-card__body">My HRV drops 15–20% on the mornings before a panic attack. I've seen the pattern repeat five times now. On low-HRV mornings I cancel anything optional, skip coffee, and leave buffer in my schedule. It doesn't explain why — but it warns me. That's everything.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Mia L.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
+
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">First objective view of my nervous system.</p>
+              <p class="at-card__body">I have generalized anxiety disorder and I've spent years trying to understand what's happening in my body. HRV is the first metric I've found that visibly correlates with my anxiety levels. High-anxiety weeks look different in the data. It's not a cure — it's the most useful tool I've added to my management toolkit.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Jordan P.</span>
+                <span class="at-card__detail">Wears it daily</span>
+              </footer>
+            </blockquote>
+
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Breathing exercises actually work. Now I have proof.</p>
+              <p class="at-card__body">My therapist recommended box breathing for years and I did it inconsistently because I couldn't tell if it worked. The ring showed me that 10 minutes of slow breathing raises my HRV measurably. That evidence was the motivation I needed. Six weeks in, my baseline HRV is up 18%.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Lily T.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
+
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">I stopped gaslighting myself about being stressed.</p>
+              <p class="at-card__body">I used to tell myself I was fine when I wasn't. My HRV told a different story — consistently suppressed during periods I claimed were "under control." Having the data forced honesty, with myself and eventually my therapist. I started a medication review based partly on what the ring showed me over three months.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Alex D.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
+
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Helps me tell anxiety from tiredness.</p>
+              <p class="at-card__body">Both feel the same in the morning — flat, heavy, slow. The ring data helps me distinguish them. Low HRV + low readiness + good sleep = anxiety. Low HRV + low readiness + bad sleep = tired. Different problem, different response. It sounds small but it's changed how I treat myself on hard mornings.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Sadie R.</span>
+                <span class="at-card__detail">Verified purchase</span>
+              </footer>
+            </blockquote>
+
+            <blockquote class="at-card">
+              <div class="at-stars">★★★★★</div>
+              <p class="at-card__title">Data gave me agency over my anxiety.</p>
+              <p class="at-card__body">Before this I felt like anxiety just happened to me. Now I can see the conditions that precede it — poor sleep two nights running, back-to-back social events, alcohol. The ring doesn't reduce my anxiety directly. It gives me enough signal to intercept it early. That distinction is everything.</p>
+              <footer class="at-card__footer">
+                <span class="at-card__name">Elena V.</span>
                 <span class="at-card__detail">Verified purchase</span>
               </footer>
             </blockquote>
@@ -402,7 +560,7 @@
 }
 
 /* Carousel */
-.at-carousel { position: relative; }
+.at-carousel { position: relative; overflow: hidden; }
 
 .at-track {
   display: flex;
@@ -498,13 +656,13 @@
     if (panel._atInit) return;
     panel._atInit = true;
 
-    var track   = panel.querySelector('.at-track');
+    var track    = panel.querySelector('.at-track');
     var dotsWrap = panel.querySelector('.at-dots');
-    var btnPrev = panel.querySelector('.at-nav__btn--prev');
-    var btnNext = panel.querySelector('.at-nav__btn--next');
-    var cards   = panel.querySelectorAll('.at-card');
-    var total   = cards.length;
-    var current = 0;
+    var btnPrev  = panel.querySelector('.at-nav__btn--prev');
+    var btnNext  = panel.querySelector('.at-nav__btn--next');
+    var cards    = panel.querySelectorAll('.at-card');
+    var total    = cards.length;
+    var current  = 0;
 
     /* Build dots */
     for (var i = 0; i < total; i++) {
@@ -516,7 +674,7 @@
     }
 
     function goTo(idx) {
-      current = (idx + total) % total;
+      current = Math.max(0, Math.min(idx, total - 1));
       track.style.transform = 'translateX(-' + (current * 100) + '%)';
       dotsWrap.querySelectorAll('.at-dot').forEach(function(d, i) {
         d.classList.toggle('is-active', i === current);
@@ -564,8 +722,8 @@
   "tag": "section",
   "class": "section-angle-testimonials",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Stories" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "How the ring mended them." }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Mender Community" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Meet the Menders." }
   ],
   "presets": [{ "name": "Angle testimonials" }]
 }
