@@ -2541,20 +2541,20 @@
 }
 
 @media (max-width: 767px) {
+  /* Text-only tiles on mobile — drop the data-viz zone entirely */
   .motion-on .product-feature__bullet,
   .motion-on .product-science__bullet {
-    padding: 0.75rem 0.8rem 64px !important;
-    min-height: 110px !important;
+    padding: 0.8rem 0.85rem !important;
+    min-height: 0 !important;
     font-size: 0.82rem !important;
     line-height: 1.35 !important;
   }
 
   .motion-on .product-feature__bullet::after,
-  .motion-on .product-science__bullet::after {
-    height: 48px !important;
-    bottom: 8px !important;
-    left: 8px !important;
-    right: 8px !important;
+  .motion-on .product-science__bullet::after,
+  .motion-on .product-feature__bullet::before,
+  .motion-on .product-science__bullet::before {
+    display: none !important;
   }
 
   .motion-on .product-feature__bullets,
