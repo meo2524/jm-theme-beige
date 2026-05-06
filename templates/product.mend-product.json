@@ -21,7 +21,6 @@
         "rating_show": true,
         "rating_value": "",
         "rating_count_text": "",
-        "rating_link": "",
         "toggle_onetime_label": "",
         "toggle_subscribe_label": "",
         "toggle_subscribe_savings": "",
@@ -317,4 +316,3 @@
     "countdown"
   ]
 }
-
