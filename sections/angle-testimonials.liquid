@@ -641,6 +641,20 @@
   .at-track { transition: none; }
   .at-panel { animation: none; }
 }
+
+/* Desktop: show 3 testimonials side-by-side, drop the carousel UI */
+@media (min-width: 1024px) {
+  .at-carousel { overflow: visible; }
+  .at-track {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    transform: none !important;
+    transition: none;
+  }
+  .at-card { min-width: 0; width: auto; }
+  .at-nav, .at-dots { display: none; }
+}
 </style>
 
 <script>
