@@ -1658,7 +1658,7 @@
 
   .product-container {
     grid-template-columns: 1fr;
-    gap: 2.25rem;
+    gap: 1rem;
     padding: 0;
   }
 
@@ -1785,12 +1785,20 @@
   }
 
   .trust-strip {
-    flex-direction: column;
-    gap: 0.75rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
   }
 
   .trust-item {
     flex: none;
+    justify-content: flex-start;
+  }
+
+  /* Third item spans full width */
+  .mc-trust-item--hero {
+    grid-column: 1 / -1;
+    justify-content: center;
   }
 
   /* Override the desktop sibling separator -- same specificity so must come after */
