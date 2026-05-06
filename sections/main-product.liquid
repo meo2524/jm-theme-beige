@@ -590,6 +590,36 @@
           install path once, on the section dedicated to it.
         {%- endcomment -%}
 
+        {%- comment -%} See the science — Harvard quote accordion item {%- endcomment -%}
+        <div class="accordion__item">
+          <button
+            class="accordion__trigger"
+            type="button"
+            id="AccordionTrigger-{{ section.id }}-science"
+            aria-expanded="false"
+            aria-controls="AccordionPanel-{{ section.id }}-science"
+          >
+            <span>See the science</span>
+            <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+          <div
+            class="accordion__panel"
+            id="AccordionPanel-{{ section.id }}-science"
+            role="region"
+            aria-labelledby="AccordionTrigger-{{ section.id }}-science"
+            hidden
+          >
+            <div class="accordion__body">
+              <blockquote class="science-quote">
+                <p>"Smart rings may be more accurate for sleep tracking than smartwatches — and their finger-based sensors offer better signal quality than wrist-worn devices."</p>
+                <footer>Harvard Health Publishing · Harvard Medical School</footer>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+
       </div>
       {%- comment -%} /accordion {%- endcomment -%}
 
@@ -1633,6 +1663,28 @@
 
 .accordion__body li + li {
   margin-top: 0.4rem;
+}
+
+.science-quote {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.science-quote p {
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--color-black);
+  margin: 0 0 0.625rem;
+}
+.science-quote footer {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-walnut, #8A6240);
 }
 
 
