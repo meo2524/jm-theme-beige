@@ -21,8 +21,8 @@
   --paper:                #f5efe4;   /* Lightest paper */
   --char:                 #1f1d1a;   /* Primary text, dark sections */
   --char-2:               #2a2622;
-  --char-soft:            #4a423a;   /* Secondary text */
-  --ink-mute:             #6a6258;   /* Mono labels, captions */
+  --char-soft:            #33302b;   /* Secondary text — darkened from #4a423a (was AA Large only on cream; now ~10:1) */
+  --ink-mute:             #4a423a;   /* Mono labels, captions — darkened from #6a6258 (was failing AA for small text) */
   --gold:                 #9a7e57;   /* Bronze — accents (less orange) */
   --gold-deep:            #735b3f;   /* Deep bronze — italic accent word */
   --gold-light:           #c4b89e;   /* Warm cream — on-dark labels (was amber) */
