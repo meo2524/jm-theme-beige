@@ -636,11 +636,11 @@
 
 /* -- GALLERY --------------------------------------- */
 
-/* Non-sticky gallery — scrolls with the rest of the page so the cream
-   left column doesn't sit empty next to pitch/science/FAQ sections.
-   Audit 2026-05-05: void filled ~50% of desktop real estate past the fold. */
+/* Sticky gallery — the photo follows scroll through the hero section
+   so it stays visible while the longer right column scrolls past. */
 .product-gallery {
-  position: relative;
+  position: sticky;
+  top: 6rem;
   display: flex;
   flex-direction: row;
   gap: 0.75rem;
