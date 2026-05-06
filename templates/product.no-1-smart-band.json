@@ -123,7 +123,9 @@
             "icon": "💳",
             "feature": "No subscription. Ever.",
             "ours_yes": true,
-            "theirs_yes": false
+            "ours_value": "",
+            "theirs_yes": false,
+            "theirs_value": ""
           }
         },
         "row_ceramic": {
@@ -132,7 +134,9 @@
             "icon": "💍",
             "feature": "Ceramic body, not plastic",
             "ours_yes": true,
-            "theirs_yes": false
+            "ours_value": "",
+            "theirs_yes": false,
+            "theirs_value": ""
           }
         },
         "row_battery": {
@@ -141,7 +145,9 @@
             "icon": "⚡",
             "feature": "5–7 day battery",
             "ours_yes": true,
-            "theirs_yes": false
+            "ours_value": "",
+            "theirs_yes": false,
+            "theirs_value": ""
           }
         },
         "row_swim": {
@@ -150,7 +156,9 @@
             "icon": "💧",
             "feature": "Swimproof — 50m / 5 ATM",
             "ours_yes": true,
-            "theirs_yes": false
+            "ours_value": "",
+            "theirs_yes": false,
+            "theirs_value": ""
           }
         },
         "row_metrics": {
@@ -159,7 +167,9 @@
             "icon": "🧠",
             "feature": "Sleep, HRV, SpO₂, temp",
             "ours_yes": true,
-            "theirs_yes": false
+            "ours_value": "",
+            "theirs_yes": false,
+            "theirs_value": ""
           }
         },
         "row_design": {
@@ -168,7 +178,9 @@
             "icon": "✨",
             "feature": "Jewelry-first design",
             "ours_yes": true,
-            "theirs_yes": false
+            "ours_value": "",
+            "theirs_yes": false,
+            "theirs_value": ""
           }
         }
       },
@@ -242,6 +254,13 @@
         "privacy_text": "Your health data stays on your device."
       }
     },
+    "angle_testimonials": {
+      "type": "angle-testimonials",
+      "settings": {
+        "eyebrow": "Stories",
+        "heading": "How the ring mended them."
+      }
+    },
     "product_faq": {
       "type": "product-faq",
       "blocks": {
@@ -310,10 +329,6 @@
         "heading": "Everything you want to know.",
         "subheading": ""
       }
-    },
-    "angle_testimonials": {
-      "type": "angle-testimonials",
-      "settings": {}
     },
     "17779692662038a0a0": {
       "type": "apps",
@@ -639,11 +654,11 @@
     "main",
     "custom_liquid_TgB6HE",
     "benefit_pitch",
+    "angle_testimonials",
     "ring_comparison",
     "product_science",
     "app_showcase",
     "product_faq",
-    "angle_testimonials",
     "17779692662038a0a0",
     "tech_specs",
     "ring_size_modal",
