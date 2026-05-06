@@ -31,9 +31,10 @@
         <div class="footer__col footer__col--brand">
 
           <a href="{{ routes.root_url }}" class="footer__logo-link" aria-label="{{ shop.name }}">
-            {%- if section.settings.logo != blank -%}
+            {%- assign footer_logo = section.settings.logo | default: sections['header'].settings.logo -%}
+            {%- if footer_logo != blank -%}
               <img
-                src="{{ section.settings.logo | image_url: width: 160 }}"
+                src="{{ footer_logo | image_url: width: 160 }}"
                 width="160"
                 height="auto"
                 alt="{{ shop.name }}"
@@ -209,11 +210,11 @@
 .footer__brand-statement {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 24px;
-  line-height: 1.35;
-  color: rgba(239, 232, 220, 0.85);
-  max-width: 360px;
-  margin: 0 0 28px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(239, 232, 220, 0.7);
+  max-width: 320px;
+  margin: 0 0 20px;
 }
 
 /* Pulse-dot row — secondary tagline like "Mended in small batches · Brooklyn" */
