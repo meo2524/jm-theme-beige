@@ -154,7 +154,7 @@
 /* Column header row */
 .rc-col-headers {
   display: grid;
-  grid-template-columns: 1fr 120px 100px;
+  grid-template-columns: 1fr 155px 130px;
   background: var(--color-paper, #f5efe4);
   border-bottom: 1px solid var(--color-line, rgba(31,29,26,0.12));
 }
@@ -177,9 +177,9 @@
 
 .rc-col-ours__name {
   font-family: var(--font-label, monospace);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-bone, #f5efe4);
   text-align: center;
@@ -211,9 +211,9 @@
 
 .rc-col-theirs__name {
   font-family: var(--font-label, monospace);
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--color-olive, #6a6258);
   text-align: center;
@@ -222,7 +222,7 @@
 
 .rc-col-theirs__sub {
   font-family: var(--font-body, Inter, sans-serif);
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   color: var(--color-olive, #6a6258);
   opacity: 0.7;
   text-align: center;
@@ -231,7 +231,7 @@
 /* Data rows */
 .rc-row {
   display: grid;
-  grid-template-columns: 1fr 120px 100px;
+  grid-template-columns: 1fr 155px 130px;
   border-top: 1px solid var(--color-line, rgba(31,29,26,0.08));
   align-items: center;
 }
@@ -241,7 +241,7 @@
 }
 
 .rc-cell {
-  padding: 0.875rem 0.75rem;
+  padding: 1rem 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -272,7 +272,7 @@
 
 .rc-row-label {
   font-family: var(--font-body, Inter, sans-serif);
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
   color: var(--color-black, #1f1d1a);
   line-height: 1.35;
 }
@@ -317,20 +317,23 @@
   }
 
   .rc-col-headers {
-    grid-template-columns: 1fr 90px 80px;
+    grid-template-columns: 1fr 110px 95px;
   }
 
   .rc-row {
-    grid-template-columns: 1fr 90px 80px;
+    grid-template-columns: 1fr 110px 95px;
   }
 
-  .rc-col-ours__name,
+  .rc-col-ours__name {
+    font-size: 0.6875rem;
+  }
+
   .rc-col-theirs__name {
-    font-size: 0.5625rem;
+    font-size: 0.625rem;
   }
 
   .rc-cell {
-    padding: 0.75rem 0.5rem;
+    padding: 0.875rem 0.5rem;
   }
 
   .rc-cell--feature {
@@ -338,7 +341,7 @@
   }
 
   .rc-row-label {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
   }
 }
 </style>
