@@ -55,10 +55,6 @@
         "custom_padding_bottom": 36
       }
     },
-    "product_science": {
-      "type": "product-science",
-      "settings": {}
-    },
     "benefit_pitch": {
       "type": "product-feature",
       "blocks": {
@@ -118,84 +114,57 @@
         "reverse": false
       }
     },
-    "ring_size_modal": {
-      "type": "ring-size-modal",
+    "product_science": {
+      "type": "product-science",
+      "disabled": true,
       "settings": {}
     },
-    "science_modal": {
-      "type": "science-modal",
-      "settings": {}
-    },
-    "app_modal": {
-      "type": "app-modal",
-      "settings": {}
-    },
-    "product_faq": {
-      "type": "product-faq",
+    "app_showcase": {
+      "type": "app-showcase",
       "blocks": {
-        "faq_1": {
-          "type": "faq_item",
+        "feature_sleep": {
+          "type": "feature",
           "settings": {
-            "question": "Which finger should I wear it on?",
-            "answer": "<p>The index or middle finger gives the most accurate readings. Avoid the dominant hand's pinky — it moves too much during sleep. The ring should sit comfortably snug, not tight.</p>"
+            "image_filename": "app-sleep.jpg",
+            "image_url": "",
+            "heading": "Sleep",
+            "body": "How well you slept. Plus the breakdown — light, deep, awake."
           }
         },
-        "faq_2": {
-          "type": "faq_item",
+        "feature_heart": {
+          "type": "feature",
           "settings": {
-            "question": "Is there really no subscription?",
-            "answer": "<p>Correct. You pay once and you own everything — the ring, the app, and all your data. Oura charges $5.99/month. We don't. Your health data belongs to you.</p>"
+            "image_filename": "app-heart-rate.jpg",
+            "image_url": "",
+            "heading": "Heart rate",
+            "body": "Your beat-by-beat all day. The reads you'd never catch yourself."
           }
         },
-        "faq_3": {
-          "type": "faq_item",
+        "feature_activity": {
+          "type": "feature",
           "settings": {
-            "question": "How do I find my ring size?",
-            "answer": "<p>Measure the circumference of the finger you'll wear it on using a strip of paper. Wrap it snugly (not tightly), mark where it overlaps, and measure in millimetres. Most people wear a size 10 on their index finger. Use the size guide above for the full chart.</p>"
-          }
-        },
-        "faq_4": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Can I wear it in the shower or pool?",
-            "answer": "<p>Yes. The N°01 Smart Ring is rated 5 ATM — fine for shower, swim, and sauna at typical exposure. Not designed for high-velocity activities like scuba diving or jet-skiing.</p>"
-          }
-        },
-        "faq_5": {
-          "type": "faq_item",
-          "settings": {
-            "question": "How accurate is the sleep tracking?",
-            "answer": "<p>The ring's PPG sensors track heart rate and blood oxygen continuously overnight. Sleep stage detection (deep, light, REM) is derived from HRV and movement patterns — the same method used by clinical-grade sleep monitors. It won't replace a sleep study, but it will show you the patterns your body produces night after night.</p>"
-          }
-        },
-        "faq_6": {
-          "type": "faq_item",
-          "settings": {
-            "question": "What's the battery life like in real use?",
-            "answer": "<p>Up to 7 days on a full charge with 24/7 tracking active. Most people charge it every 5–6 days in about 60–90 minutes. Charge it while you eat breakfast — you'll never miss a night's data.</p>"
-          }
-        },
-        "faq_7": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Is my health data private?",
-            "answer": "<p>Your data is stored locally on your device and only synced to your own account. We do not sell health data to third parties. Your N°01 data stays yours — always.</p>"
+            "image_filename": "app-activity.jpg",
+            "image_url": "",
+            "heading": "Activity",
+            "body": "Walks, workouts, and the small movement you'd otherwise forget."
           }
         }
       },
       "block_order": [
-        "faq_1",
-        "faq_2",
-        "faq_3",
-        "faq_4",
-        "faq_5",
-        "faq_6",
-        "faq_7"
+        "feature_sleep",
+        "feature_heart",
+        "feature_activity"
       ],
+      "disabled": true,
       "settings": {
-        "eyebrow": "Questions",
-        "heading": "Everything you want to know.",
-        "subheading": ""
+        "eyebrow": "The app",
+        "heading": "See what your body did last night.",
+        "body": "Sync the N°01 to the free QRing app. Your sleep, your heart, your daily movement — on one clean dashboard. iOS and Android. No registration. No subscription.",
+        "hero_image_filename": "",
+        "hero_image_url": "",
+        "apple_url": "https://apps.apple.com/nz/app/qring/id6473672621",
+        "google_url": "https://play.google.com/store/apps/details?id=com.app.cq.ring&hl=en_NZ",
+        "privacy_text": "Your health data stays on your device."
       }
     },
     "17779692662038a0a0": {
@@ -283,6 +252,86 @@
         "included_items": "Mend N°01 Smart Ring\nMagnetic charging case\nUSB-C charging cable\nQuick start guide",
         "specs_heading": "Tech Specifications"
       }
+    },
+    "product_faq": {
+      "type": "product-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Which finger should I wear it on?",
+            "answer": "<p>The index or middle finger gives the most accurate readings. Avoid the dominant hand's pinky — it moves too much during sleep. The ring should sit comfortably snug, not tight.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is there really no subscription?",
+            "answer": "<p>Correct. You pay once and you own everything — the ring, the app, and all your data. Oura charges $5.99/month. We don't. Your health data belongs to you.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I find my ring size?",
+            "answer": "<p>Measure the circumference of the finger you'll wear it on using a strip of paper. Wrap it snugly (not tightly), mark where it overlaps, and measure in millimetres. Most people wear a size 10 on their index finger. Use the size guide above for the full chart.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I wear it in the shower or pool?",
+            "answer": "<p>Yes. The N°01 Smart Ring is rated 5 ATM — fine for shower, swim, and sauna at typical exposure. Not designed for high-velocity activities like scuba diving or jet-skiing.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How accurate is the sleep tracking?",
+            "answer": "<p>The ring's PPG sensors track heart rate and blood oxygen continuously overnight. Sleep stage detection (deep, light, REM) is derived from HRV and movement patterns — the same method used by clinical-grade sleep monitors. It won't replace a sleep study, but it will show you the patterns your body produces night after night.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's the battery life like in real use?",
+            "answer": "<p>Up to 7 days on a full charge with 24/7 tracking active. Most people charge it every 5–6 days in about 60–90 minutes. Charge it while you eat breakfast — you'll never miss a night's data.</p>"
+          }
+        },
+        "faq_7": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is my health data private?",
+            "answer": "<p>Your data is stored locally on your device and only synced to your own account. We do not sell health data to third parties. Your N°01 data stays yours — always.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7"
+      ],
+      "settings": {
+        "eyebrow": "Questions",
+        "heading": "Everything you want to know.",
+        "subheading": ""
+      }
+    },
+    "ring_size_modal": {
+      "type": "ring-size-modal",
+      "settings": {}
+    },
+    "science_modal": {
+      "type": "science-modal",
+      "settings": {}
+    },
+    "app_modal": {
+      "type": "app-modal",
+      "settings": {}
     },
     "app_download": {
       "type": "custom-liquid",
@@ -504,49 +553,6 @@
         "padding___bottom": "large",
         "custom_padding_bottom": 72
       }
-    },
-    "app_showcase": {
-      "type": "app-showcase",
-      "blocks": {
-        "feature_sleep": {
-          "type": "feature",
-          "settings": {
-            "heading": "Sleep",
-            "body": "How well you slept. Plus the breakdown — light, deep, awake.",
-            "image_filename": "app-sleep.jpg"
-          }
-        },
-        "feature_heart": {
-          "type": "feature",
-          "settings": {
-            "heading": "Heart rate",
-            "body": "Your beat-by-beat all day. The reads you'd never catch yourself.",
-            "image_filename": "app-heart-rate.jpg"
-          }
-        },
-        "feature_activity": {
-          "type": "feature",
-          "settings": {
-            "heading": "Activity",
-            "body": "Walks, workouts, and the small movement you'd otherwise forget.",
-            "image_filename": "app-activity.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "feature_sleep",
-        "feature_heart",
-        "feature_activity"
-      ],
-      "settings": {
-        "eyebrow": "The app",
-        "heading": "See what your body did last night.",
-        "body": "Sync the N°01 to the free QRing app. Your sleep, your heart, your daily movement — on one clean dashboard. iOS and Android. No registration. No subscription.",
-        "hero_image_url": "",
-        "apple_url": "https://apps.apple.com/nz/app/qring/id6473672621",
-        "google_url": "https://play.google.com/store/apps/details?id=com.app.cq.ring&hl=en_NZ",
-        "privacy_text": "Your health data stays on your device."
-      }
     }
   },
   "order": [
@@ -556,8 +562,8 @@
     "product_science",
     "app_showcase",
     "17779692662038a0a0",
-    "tech_specs",
     "product_faq",
+    "tech_specs",
     "ring_size_modal",
     "science_modal",
     "app_modal",
