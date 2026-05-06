@@ -31,7 +31,11 @@
         <div class="footer__col footer__col--brand">
 
           <a href="{{ routes.root_url }}" class="footer__logo-link" aria-label="{{ shop.name }}">
-            {%- assign footer_logo = section.settings.logo | default: sections['header'].settings.logo -%}
+            {%- if section.settings.logo != blank -%}
+              {%- assign footer_logo = section.settings.logo -%}
+            {%- elsif sections['header'].settings.logo != blank -%}
+              {%- assign footer_logo = sections['header'].settings.logo -%}
+            {%- endif -%}
             {%- if footer_logo != blank -%}
               <img
                 src="{{ footer_logo | image_url: width: 160 }}"
