@@ -393,6 +393,29 @@
       }
     }
 
+    /* ── Judge.me widget heading overrides ── */
+
+    /* Hide "Customer Reviews" and replace with branded text */
+    .jm-review-widget-minimal-header__title {
+      font-size: 0 !important;
+      line-height: 0 !important;
+    }
+    .jm-review-widget-minimal-header__title::after {
+      content: "What real Menders are saying.";
+      display: block;
+      font-family: var(--font-heading, 'Cormorant Garamond', serif);
+      font-size: clamp(1.75rem, 5vw, 2.75rem);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--color-black, #1f1d1a);
+    }
+
+    /* Make the rating line (5.0 · 3,544 reviews) bigger */
+    .jm-average-rating-display {
+      font-size: 1.125rem !important;
+    }
+
   </style>
 
 </head>
