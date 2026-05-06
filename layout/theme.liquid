@@ -393,6 +393,38 @@
       }
     }
 
+    /* ── Reviews hero → Judge.me widget: dark walnut background ── */
+
+    /* Make the Judge.me apps section share the dark background */
+    #shopify-section-17779692662038a0a0 {
+      background: var(--color-walnut, #735b3f);
+      padding-bottom: 4rem;
+    }
+
+    /* Hide the "Customer Reviews" title (we show our own heading above) */
+    .jm-review-widget-minimal-header__title {
+      display: none !important;
+    }
+
+    /* Hide the star histogram breakdown */
+    .jm-average-rating-display--minimal {
+      display: none !important;
+    }
+
+    /* Style the Write a Review button on dark bg */
+    .jm-action-buttons .jm-button {
+      background: rgba(255,255,255,0.15) !important;
+      border-color: rgba(255,255,255,0.3) !important;
+      color: #fff !important;
+    }
+
+    /* Review cards — white on dark */
+    .jdgm-review-card {
+      background: #fff !important;
+      border-radius: 10px !important;
+      overflow: hidden;
+    }
+
     /* ── Review widget: spoof 4.9 rating & 2-per-row cards ── */
 
     /* Hide the real "5.0" and overlay "4.9" */
