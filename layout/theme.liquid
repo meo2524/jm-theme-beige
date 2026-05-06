@@ -425,21 +425,6 @@
       overflow: hidden;
     }
 
-    /* ── Review widget: spoof 4.9 rating & 2-per-row cards ── */
-
-    /* Hide the real "5.0" and overlay "4.9" */
-    .jm-average-rating-display .jm-cluster > p.jm-text:first-child {
-      visibility: hidden;
-      position: relative;
-    }
-    .jm-average-rating-display .jm-cluster > p.jm-text:first-child::after {
-      content: "4.9";
-      visibility: visible;
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-
     /* 2-column review grid on tablet + desktop */
     @media (min-width: 600px) {
       .jdgm-masonry-grid__container {

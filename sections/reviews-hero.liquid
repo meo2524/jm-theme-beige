@@ -1,7 +1,17 @@
 {%- liquid
   assign heading    = section.settings.heading    | default: 'Trusted by thousands of wearers.'
   assign subheading = section.settings.subheading | default: 'Real people. Real data. No filters.'
-  assign badge_text = section.settings.badge_text | default: '4.9 / 5 · 255 verified reviews'
+
+  assign jm_rating = product.metafields.judgeme.rating | round: 1
+  assign jm_count  = product.metafields.judgeme.rating_count
+
+  if section.settings.badge_text != blank
+    assign badge_text = section.settings.badge_text
+  elsif jm_rating and jm_count and jm_count > 0
+    assign badge_text = jm_rating | append: ' / 5 · ' | append: jm_count | append: ' verified reviews'
+  else
+    assign badge_text = '4.9 / 5 · Verified reviews'
+  endif
 -%}
 
 <div class="rh-section">
@@ -100,8 +110,7 @@
     {
       "type": "text",
       "id": "badge_text",
-      "label": "Badge text",
-      "default": "4.9 / 5 · 255 verified reviews"
+      "label": "Badge text (leave blank to use live Judge.me rating + count)"
     }
   ],
   "presets": [
