@@ -143,20 +143,6 @@
     =========================================== {%- endcomment -%}
     <div class="product-info">
 
-      {%- comment -%} ============================================================
-        SOCIAL PROOF BANNER — rating + review count
-      ============================================================ {%- endcomment -%}
-      {%- if settings.motion_enabled -%}
-        <div class="mc-mday-banner" data-reveal data-reveal-delay="0">
-          <span class="mc-mday-banner__shine" aria-hidden="true"></span>
-          <div class="mc-mday-banner__inner">
-            <span class="mc-mday-banner__score">4.9</span>
-            <span class="mc-mday-banner__stars" aria-label="5 stars">★★★★★</span>
-            <span class="mc-mday-banner__sep" aria-hidden="true">·</span>
-            <span class="mc-mday-banner__reviews">3,500+ verified reviews</span>
-          </div>
-        </div>
-      {%- endif -%}
 
       {%- comment -%} -- Eyebrow -- {%- endcomment -%}
       <p class="product-eyebrow">
@@ -420,6 +406,23 @@
           <span class="mc-no-sub-badge__icon" aria-hidden="true">$0</span>
           <span class="mc-no-sub-badge__text"><strong>One-time purchase.</strong> No subscription, ever. Own your data.</span>
         </p>
+
+        {%- comment -%} Mother's Day banner — below no-sub badge {%- endcomment -%}
+        {%- if settings.motion_enabled -%}
+          <div class="mc-mday-banner" data-mday-deadline="2026-05-11T23:59:00+12:00" data-reveal data-reveal-delay="0">
+            <span class="mc-mday-banner__shine" aria-hidden="true"></span>
+            <div class="mc-mday-banner__inner">
+              <span class="mc-mday-banner__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 21s-7.5-4.7-9.6-9.4C1.1 8.3 3.4 5 6.7 5c1.9 0 3.7 1.1 4.6 2.7C12.2 6.1 14 5 16 5c3.3 0 5.6 3.3 4.3 6.6C19.5 16.3 12 21 12 21z"/></svg>
+              </span>
+              <span class="mc-mday-banner__title">Free Shipping</span>
+              <span class="mc-mday-banner__sep" aria-hidden="true">·</span>
+              <span class="mc-mday-banner__title mc-mday-banner__title--sub">Mother's Day</span>
+              <span class="mc-mday-banner__sep" aria-hidden="true">·</span>
+              <span class="mc-mday-banner__count" aria-live="polite">Ends Sunday</span>
+            </div>
+          </div>
+        {%- endif -%}
 
         {%- comment -%} Add to cart {%- endcomment -%}
         <button
