@@ -2541,13 +2541,38 @@
 }
 
 @media (max-width: 767px) {
-  /* Text-only tiles on mobile — drop the data-viz zone entirely */
+  /* Pill list on mobile — matches spec-pill style, no cards */
+  .motion-on .product-feature__bullets,
+  .motion-on .product-science__bullets {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    grid-template-columns: unset !important;
+    gap: 0.5rem !important;
+    margin: 1rem 0 0 !important;
+  }
+
   .motion-on .product-feature__bullet,
   .motion-on .product-science__bullet {
-    padding: 0.8rem 0.85rem !important;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 0.35rem 0.75rem !important;
+    background: rgba(138, 98, 64, 0.07) !important;
+    border: 1px solid rgba(138, 98, 64, 0.18) !important;
+    border-radius: 100px !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    line-height: 1.3 !important;
     min-height: 0 !important;
-    font-size: 0.82rem !important;
-    line-height: 1.35 !important;
+    transform: none !important;
+    box-shadow: none !important;
+    cursor: default !important;
+  }
+
+  .motion-on .product-feature__bullet:hover,
+  .motion-on .product-science__bullet:hover {
+    transform: none !important;
+    box-shadow: none !important;
   }
 
   .motion-on .product-feature__bullet::after,
@@ -2555,12 +2580,6 @@
   .motion-on .product-feature__bullet::before,
   .motion-on .product-science__bullet::before {
     display: none !important;
-  }
-
-  .motion-on .product-feature__bullets,
-  .motion-on .product-science__bullets {
-    gap: 0.5rem !important;
-    margin: 1rem 0 0 !important;
   }
 }
 
