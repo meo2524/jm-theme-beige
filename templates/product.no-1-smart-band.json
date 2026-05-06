@@ -114,6 +114,81 @@
         "reverse": false
       }
     },
+    "ring_comparison": {
+      "type": "ring-comparison",
+      "blocks": {
+        "row_nosub": {
+          "type": "row",
+          "settings": {
+            "icon": "💳",
+            "feature": "No subscription. Ever.",
+            "ours_yes": true,
+            "theirs_yes": false
+          }
+        },
+        "row_ceramic": {
+          "type": "row",
+          "settings": {
+            "icon": "💍",
+            "feature": "Ceramic body, not plastic",
+            "ours_yes": true,
+            "theirs_yes": false
+          }
+        },
+        "row_battery": {
+          "type": "row",
+          "settings": {
+            "icon": "⚡",
+            "feature": "5–7 day battery",
+            "ours_yes": true,
+            "theirs_yes": false
+          }
+        },
+        "row_swim": {
+          "type": "row",
+          "settings": {
+            "icon": "💧",
+            "feature": "Swimproof — 50m / 5 ATM",
+            "ours_yes": true,
+            "theirs_yes": false
+          }
+        },
+        "row_metrics": {
+          "type": "row",
+          "settings": {
+            "icon": "🧠",
+            "feature": "Sleep, HRV, SpO₂, temp",
+            "ours_yes": true,
+            "theirs_yes": false
+          }
+        },
+        "row_design": {
+          "type": "row",
+          "settings": {
+            "icon": "✨",
+            "feature": "Jewelry-first design",
+            "ours_yes": true,
+            "theirs_yes": false
+          }
+        }
+      },
+      "block_order": [
+        "row_nosub",
+        "row_ceramic",
+        "row_battery",
+        "row_swim",
+        "row_metrics",
+        "row_design"
+      ],
+      "settings": {
+        "heading": "The N°01 vs the rest.",
+        "subheading": "Six reasons people who've tried both don't go back.",
+        "our_label": "Mend N°01",
+        "our_badge": "Original",
+        "them_label": "Other Smart Rings",
+        "them_sub": "& Knock-offs"
+      }
+    },
     "product_science": {
       "type": "product-science",
       "disabled": true,
@@ -560,6 +635,7 @@
     "main",
     "custom_liquid_TgB6HE",
     "benefit_pitch",
+    "ring_comparison",
     "product_science",
     "app_showcase",
     "product_faq",
