@@ -330,14 +330,6 @@
         "subheading": ""
       }
     },
-    "reviews_hero": {
-      "type": "reviews-hero",
-      "settings": {
-        "heading": "Trusted by thousands of wearers.",
-        "subheading": "Real people. Real data. No filters.",
-        "badge_text": ""
-      }
-    },
     "17779692662038a0a0": {
       "type": "apps",
       "blocks": {
@@ -667,7 +659,6 @@
     "product_science",
     "app_showcase",
     "product_faq",
-    "reviews_hero",
     "17779692662038a0a0",
     "tech_specs",
     "ring_size_modal",
