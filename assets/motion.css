@@ -1406,8 +1406,7 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
   flex-shrink: 0;
   animation: mc-mday-heart-pulse 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
