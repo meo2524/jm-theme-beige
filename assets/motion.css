@@ -2078,6 +2078,33 @@
 }
 
 @media (max-width: 767px) {
+  /* KaChing bundle card — strip fat on mobile */
+  .motion-on .kaching-bundles__block {
+    margin-bottom: 0.75rem !important;
+  }
+  .motion-on .kaching-bundles__bars {
+    gap: 0.5rem !important;
+  }
+  .motion-on .kaching-bundles__bar-container {
+    padding: 0.65rem 0.85rem !important;
+  }
+  .motion-on .kaching-bundles__bar-variant-names {
+    margin: 0.5rem 0 0.35rem !important;
+    padding-bottom: 0.3rem !important;
+  }
+  .motion-on .kaching-bundles__bar-variant {
+    margin-bottom: 0.25rem !important;
+  }
+  .motion-on .kaching-bundles__block-title {
+    margin: 0 0 0.5rem !important;
+  }
+  .motion-on .kaching-bundles__free-gift {
+    padding: 0.5rem 0.75rem !important;
+    margin-top: 0.4rem !important;
+  }
+}
+
+@media (max-width: 767px) {
   /* Pad the gallery sides to match the 1.25rem gutter used by the
      rest of the page sections. Padding goes on .product-gallery,
      NOT on the inner track — the track must keep overflow-x: auto
