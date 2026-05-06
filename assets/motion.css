@@ -2589,6 +2589,7 @@
     grid-template-columns: unset !important;
     gap: 0.5rem !important;
     margin: 1rem 0 0 !important;
+    counter-reset: feat-pill !important;
   }
 
   .motion-on .product-feature__bullet,
@@ -2596,6 +2597,7 @@
     display: inline-flex !important;
     flex-direction: row !important;
     align-items: center !important;
+    gap: 0.3rem !important;
     padding: 0.35rem 0.75rem !important;
     background: rgba(138, 98, 64, 0.07) !important;
     border: 1px solid rgba(138, 98, 64, 0.18) !important;
@@ -2607,6 +2609,7 @@
     min-height: 0 !important;
     transform: none !important;
     box-shadow: none !important;
+    counter-increment: feat-pill !important;
   }
 
   .motion-on .product-feature__bullet:hover,
@@ -2617,10 +2620,27 @@
   }
 
   .motion-on .product-feature__bullet::after,
-  .motion-on .product-science__bullet::after,
+  .motion-on .product-science__bullet::after {
+    display: none !important;
+  }
+
+  /* Number badge — repurpose ::before for counter */
   .motion-on .product-feature__bullet::before,
   .motion-on .product-science__bullet::before {
-    display: none !important;
+    content: counter(feat-pill, decimal-leading-zero) !important;
+    display: inline !important;
+    position: static !important;
+    top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
+    width: auto !important; height: auto !important;
+    background: none !important;
+    color: var(--color-walnut, #8a6240) !important;
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.02em !important;
+    font-variant-numeric: tabular-nums !important;
+    animation: none !important;
+    border-radius: 0 !important;
+    opacity: 1 !important;
   }
 }
 
