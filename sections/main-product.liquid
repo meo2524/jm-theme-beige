@@ -357,6 +357,10 @@
           <svg class="mc-spec-icon mc-spec-icon--bt" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12" aria-hidden="true"><path d="M5 4l6 4-6 4 4-3-4-3 4-3 6 4-6 4"/></svg>
           Bluetooth 5.2
         </span>
+        <span class="spec-pill mc-spec-pill" role="listitem" data-reveal data-reveal-delay="320" data-spec-tip="No recurring fees. Your data stays yours.">
+          <svg class="mc-spec-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M5.5 8h5M8 5.5v5"/><line x1="4" y1="4" x2="12" y2="12" stroke-width="1.5"/></svg>
+          No subscription
+        </span>
       </div>
 
       {%- comment -%} -- Variant picker -- {%- endcomment -%}
@@ -1823,10 +1827,7 @@
   }
 
   .trust-strip {
-    display: flex;
-    flex-direction: row;
-    gap: 0;
-    flex-wrap: nowrap;
+    display: none;
   }
 
   .trust-item {
