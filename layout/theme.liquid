@@ -393,51 +393,6 @@
       }
     }
 
-    /* ── Judge.me widget heading overrides ── */
-
-    /* Inject heading above the whole header using full-width container */
-    .jm-review-widget__header {
-      padding-top: 2rem !important;
-    }
-    .jm-review-widget__header::before {
-      content: "What real Menders are saying.";
-      display: block;
-      width: 100%;
-      font-family: var(--font-heading, 'Cormorant Garamond', serif);
-      font-size: clamp(2rem, 6vw, 3.25rem);
-      font-weight: 300;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      color: var(--color-black, #1f1d1a);
-      margin-bottom: 0.75rem;
-    }
-
-    /* Hide the default "Customer Reviews" title */
-    .jm-review-widget-minimal-header__title {
-      display: none !important;
-    }
-
-    /* Spoof 5.0 → 4.9 */
-    .jm-average-rating-display .jm-cluster > p.jm-text:first-child {
-      visibility: hidden;
-      position: relative;
-    }
-    .jm-average-rating-display .jm-cluster > p.jm-text:first-child::after {
-      content: "★ 4.9";
-      visibility: visible;
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-
-    /* Make the rating number and review count bigger */
-    .jm-average-rating-display {
-      font-size: 1.25rem !important;
-    }
-    .jm-average-rating-display .jm-text {
-      font-size: 1.125rem !important;
-    }
-
   </style>
 
 </head>
