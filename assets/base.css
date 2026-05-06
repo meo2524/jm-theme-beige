@@ -55,14 +55,18 @@
   --color-badge:          var(--cream-3);
 
   /* ----------------------------------------------------------
-     Typography — Cormorant Garamond (display) + Inter (body)
-                + JetBrains Mono (eyebrows / labels / utility)
+     Typography — Inter (reading) + JetBrains Mono (labels).
+     Decision: drop Cormorant Garamond (too thin, too literary for
+     audience scan-reading). Inter handles heading + body with
+     weight-based hierarchy. JetBrains Mono handles eyebrows,
+     buttons, CTAs, and section labels — the uppercase-tracked
+     mono treatment is Mend-distinctive on its own.
      ---------------------------------------------------------- */
-  --font-heading:         'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-heading:         'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
   --font-body:            'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
-  --font-label:           'JetBrains Mono', ui-monospace, 'Menlo', monospace;
-  --font-mono:            'JetBrains Mono', ui-monospace, 'Menlo', monospace;
-  --font-serif:           'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-label:           'JetBrains Mono', ui-monospace, 'SF Mono', 'Menlo', monospace;
+  --font-mono:            'JetBrains Mono', ui-monospace, 'SF Mono', 'Menlo', monospace;
+  --font-serif:           'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
 
   --font-size-xs:         0.75rem;    /* 12px */
   --font-size-sm:         0.875rem;   /* 14px */
@@ -77,6 +81,8 @@
 
   --font-weight-normal:   400;
   --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
 
   --line-height-tight:    1.15;
   --line-height-heading:  1.25;
@@ -199,7 +205,7 @@ button {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-heading);
   letter-spacing: var(--letter-spacing-tight);
   color: var(--color-text);
@@ -222,7 +228,7 @@ p {
 .t-display-xl {
   font-family: var(--font-heading);
   font-size: clamp(var(--font-size-3xl), 6vw, var(--font-size-5xl));
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
   letter-spacing: var(--letter-spacing-tight);
 }
@@ -230,7 +236,7 @@ p {
 .t-display-lg {
   font-family: var(--font-heading);
   font-size: clamp(var(--font-size-2xl), 4.5vw, var(--font-size-4xl));
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-heading);
   letter-spacing: var(--letter-spacing-tight);
 }
@@ -238,28 +244,28 @@ p {
 .t-display-md {
   font-family: var(--font-heading);
   font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-3xl));
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-heading);
 }
 
 .t-display-sm {
   font-family: var(--font-heading);
   font-size: clamp(var(--font-size-lg), 2vw, var(--font-size-2xl));
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-heading);
 }
 
 .t-heading {
   font-family: var(--font-heading);
   font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-heading);
 }
 
 .t-subheading {
   font-family: var(--font-body);
   font-size: var(--font-size-md);
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-body);
   color: var(--color-text-muted);
 }
