@@ -590,34 +590,19 @@
           install path once, on the section dedicated to it.
         {%- endcomment -%}
 
-        {%- comment -%} See the science — Harvard quote accordion item {%- endcomment -%}
+        {%- comment -%} See the science — opens science-modal.liquid {% endcomment -%}
         <div class="accordion__item">
           <button
             class="accordion__trigger"
             type="button"
             id="AccordionTrigger-{{ section.id }}-science"
-            aria-expanded="false"
-            aria-controls="AccordionPanel-{{ section.id }}-science"
+            aria-haspopup="dialog"
           >
             <span>See the science</span>
             <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
               <polyline points="6 9 12 15 18 9"/>
             </svg>
           </button>
-          <div
-            class="accordion__panel"
-            id="AccordionPanel-{{ section.id }}-science"
-            role="region"
-            aria-labelledby="AccordionTrigger-{{ section.id }}-science"
-            hidden
-          >
-            <div class="accordion__body">
-              <blockquote class="science-quote">
-                <p>"Smart rings may be more accurate for sleep tracking than smartwatches — and their finger-based sensors offer better signal quality than wrist-worn devices."</p>
-                <footer>Harvard Health Publishing · Harvard Medical School</footer>
-              </blockquote>
-            </div>
-          </div>
         </div>
 
       </div>
