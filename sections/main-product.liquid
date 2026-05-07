@@ -416,7 +416,7 @@
 
         {%- comment -%} Mother's Day banner — below no-sub badge {%- endcomment -%}
         {%- if settings.motion_enabled -%}
-          <div class="mc-mday-banner" data-mday-deadline="2026-05-11T23:59:00+12:00" data-reveal data-reveal-delay="0">
+          <div class="mc-mday-banner" data-reveal data-reveal-delay="0">
             <span class="mc-mday-banner__shine" aria-hidden="true"></span>
             <div class="mc-mday-banner__inner">
               <span class="mc-mday-banner__icon" aria-hidden="true">
@@ -425,8 +425,6 @@
               <span class="mc-mday-banner__title">Sale Ending Tonight</span>
               <span class="mc-mday-banner__sep" aria-hidden="true">·</span>
               <span class="mc-mday-banner__title">Free Shipping</span>
-              <span class="mc-mday-banner__sep" aria-hidden="true">·</span>
-              <span class="mc-mday-banner__count" aria-live="polite">Ends Midnight</span>
             </div>
           </div>
         {%- endif -%}
@@ -447,6 +445,12 @@
             {%- endif -%}
           </span>
         </button>
+
+        {%- comment -%} Low stock urgency indicator {%- endcomment -%}
+        <div class="pdp-stock-urgency" aria-live="polite">
+          <span class="pdp-stock-urgency__pulse" aria-hidden="true"></span>
+          <span class="pdp-stock-urgency__text">Only <strong>9 left in stock</strong> &mdash; selling fast tonight</span>
+        </div>
 
         {%- comment -%} Accelerated checkout (Shop Pay, Apple Pay, etc.) {%- endcomment -%}
         <div class="pdp-payment-btns">
@@ -1438,6 +1442,44 @@ body.lightbox-open { overflow: hidden; }
 
 .pdp-payment-btns {
   margin-bottom: 0.875rem;
+}
+
+/* Low-stock urgency indicator — sits between ATC and Shop Pay */
+.pdp-stock-urgency {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.75rem 0 0.875rem;
+  padding: 0.55rem 0.875rem;
+  background: rgba(185, 28, 28, 0.06);
+  border: 1px solid rgba(185, 28, 28, 0.2);
+  border-radius: 8px;
+  font-family: var(--font-label, var(--font-body));
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #7f1d1d;
+  letter-spacing: 0.01em;
+}
+.pdp-stock-urgency strong {
+  font-weight: 800;
+  color: #b91c1c;
+}
+.pdp-stock-urgency__pulse {
+  width: 8px; height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #b91c1c;
+  box-shadow: 0 0 0 0 rgba(185, 28, 28, 0.65);
+  animation: pdp-stock-pulse 1.6s ease-out infinite;
+}
+@keyframes pdp-stock-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(185, 28, 28, 0.65); }
+  70%  { box-shadow: 0 0 0 8px rgba(185, 28, 28, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(185, 28, 28, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pdp-stock-urgency__pulse { animation: none; }
 }
 
 .pdp-payment-btns .shopify-payment-button__button {
