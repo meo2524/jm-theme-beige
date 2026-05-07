@@ -1411,6 +1411,22 @@
   animation: mc-mday-heart-pulse 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+/* Pulsing live-stock dot for the low-stock banner variant */
+.motion-on .mc-mday-banner__pulse {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.8);
+  animation: mc-mday-stock-pulse 1.4s ease-out infinite;
+}
+@keyframes mc-mday-stock-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.85); }
+  70%  { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
 .motion-on .mc-mday-banner__title {
   font-size: 0.88rem;
   letter-spacing: 0.08em;
