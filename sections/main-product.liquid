@@ -445,14 +445,14 @@
         {%- comment -%}
           Force "Buy with Shop" everywhere. The hidden payment_button is required
           to make Shopify load the Shop Pay SDK on the page so the
-          <shop-pay-button> custom element can register and render.
+          <shop-pay-wallet-button> custom element can register and render.
         {%- endcomment -%}
         <div class="pdp-payment-btns">
-          <shop-pay-button
+          <shop-pay-wallet-button
             store-url="{{ shop.url }}"
             variant-ids="{{ current_variant.id }}:1"
             class="pdp-shop-pay-btn">
-          </shop-pay-button>
+          </shop-pay-wallet-button>
           <div class="pdp-payment-btns__sdk-loader" aria-hidden="true">
             {{ form | payment_button }}
           </div>
@@ -1450,11 +1450,11 @@ body.lightbox-open { overflow: hidden; }
 .pdp-shop-pay-btn {
   display: block !important;
   width: 100% !important;
-  --shop-pay-button-width: 100%;
+  --shop-pay-wallet-button-width: 100%;
   height: 48px;
 }
 /* Hidden loader — keeps Shopify's Shop Pay SDK on the page so the
-   <shop-pay-button> custom element registers, but never shown. */
+   <shop-pay-wallet-button> custom element registers, but never shown. */
 .pdp-payment-btns__sdk-loader {
   position: absolute;
   width: 1px;
