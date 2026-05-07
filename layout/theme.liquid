@@ -393,6 +393,19 @@
       }
     }
 
+    /* KaChing size dropdown — add a chevron so it matches the colour dropdown. */
+    .kaching-bundles__bar-variant-select,
+    select.kaching-bundles__bar-variant-select {
+      appearance: none !important;
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%238a6240' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><polyline points='1.5 2 6 6.5 10.5 2'/></svg>") !important;
+      background-repeat: no-repeat !important;
+      background-position: right 0.65rem center !important;
+      background-size: 10px 6px !important;
+      padding-right: 1.6rem !important;
+    }
+
     /* Inject a glowing low-stock urgency line above the KaChing bundle picker. */
     .kaching-bundles__block {
       position: relative;
