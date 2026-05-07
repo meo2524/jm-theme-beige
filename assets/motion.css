@@ -2067,13 +2067,13 @@
   display: none !important;
 }
 
-/* ── 21. Photo gallery — tighten + pad sides on mobile ────── */
+/* ── 21. Photo gallery — show full image, no crop ────── */
 
-/* Kill the 1rem inner padding around the image so the photo fills
-   the slide. */
+/* Show the entire photo (letterboxed against the cream background)
+   so source images of varied aspect ratios aren't cropped. */
 .motion-on .gallery-slide__img {
   padding: 0 !important;
-  object-fit: cover !important;
+  object-fit: contain !important;
 }
 
 @media (max-width: 767px) {
