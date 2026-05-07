@@ -393,7 +393,7 @@
       }
     }
 
-    /* Inject a small low-stock urgency line above the KaChing bundle picker. */
+    /* Inject a glowing low-stock urgency line above the KaChing bundle picker. */
     .kaching-bundles__block {
       position: relative;
     }
@@ -401,13 +401,38 @@
       content: "● Only 9 left in stock";
       display: block;
       font-family: var(--font-label, 'Inter', monospace);
-      font-size: 0.6875rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: #b91c1c;
+      font-size: 0.875rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ef4444;
       line-height: 1.2;
       text-align: center;
-      margin-bottom: 0.625rem;
+      margin-bottom: 0.75rem;
+      text-shadow:
+        0 0 6px rgba(239, 68, 68, 0.55),
+        0 0 14px rgba(239, 68, 68, 0.4),
+        0 0 22px rgba(239, 68, 68, 0.25);
+      animation: mc-stock-glow 1.6s ease-in-out infinite;
+    }
+    @keyframes mc-stock-glow {
+      0%, 100% {
+        text-shadow:
+          0 0 6px rgba(239, 68, 68, 0.55),
+          0 0 14px rgba(239, 68, 68, 0.4),
+          0 0 22px rgba(239, 68, 68, 0.25);
+        opacity: 0.95;
+      }
+      50% {
+        text-shadow:
+          0 0 10px rgba(239, 68, 68, 0.85),
+          0 0 22px rgba(239, 68, 68, 0.6),
+          0 0 34px rgba(239, 68, 68, 0.4);
+        opacity: 1;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .kaching-bundles__block::before { animation: none; }
     }
 
     /* Spoof 5.0 → 4.9 in Judge.me widget */
