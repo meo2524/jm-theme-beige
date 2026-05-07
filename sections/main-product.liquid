@@ -612,6 +612,32 @@
 {%- comment -%} Sticky mobile add-to-cart bar — slides in when main ATC leaves viewport {%- endcomment -%}
 {%- render 'sticky-cart-bar', product: product, section_id: section.id, current_variant: current_variant -%}
 
+{%- comment -%} Lightbox: click any gallery image to open at full resolution {%- endcomment -%}
+{%- if product.images.size > 0 -%}
+  <div class="gallery-lightbox" id="GalleryLightbox-{{ section.id }}" aria-hidden="true" role="dialog" aria-label="Product image viewer">
+    <button class="gallery-lightbox__close" type="button" aria-label="Close" data-lightbox-close>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button class="gallery-lightbox__nav gallery-lightbox__nav--prev" type="button" aria-label="Previous image" data-lightbox-prev>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="gallery-lightbox__nav gallery-lightbox__nav--next" type="button" aria-label="Next image" data-lightbox-next>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="gallery-lightbox__stage" data-lightbox-stage>
+      {%- for image in product.images limit: 8 -%}
+        <img
+          class="gallery-lightbox__img"
+          data-index="{{ forloop.index0 }}"
+          src="{{ image | image_url: width: 1800 }}"
+          alt="{{ image.alt | escape | default: product.title }}"
+          loading="lazy"
+        >
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
 
 <style>
 /* ============================================================
@@ -738,7 +764,79 @@
   object-fit: contain;
   display: block;
   padding: 1rem;
+  cursor: zoom-in;
 }
+
+
+/* -- LIGHTBOX --------------------------------------- */
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(20, 18, 16, 0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.gallery-lightbox.is-open {
+  display: flex;
+}
+.gallery-lightbox__stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gallery-lightbox__img {
+  display: none;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  cursor: zoom-out;
+  user-select: none;
+}
+.gallery-lightbox__img.is-active {
+  display: block;
+}
+.gallery-lightbox__close,
+.gallery-lightbox__nav {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  z-index: 2;
+}
+.gallery-lightbox__close:hover,
+.gallery-lightbox__nav:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+.gallery-lightbox__close {
+  top: 1.25rem;
+  right: 1.25rem;
+}
+.gallery-lightbox__nav--prev { left: 1.25rem; top: 50%; transform: translateY(-50%); }
+.gallery-lightbox__nav--next { right: 1.25rem; top: 50%; transform: translateY(-50%); }
+@media (max-width: 599px) {
+  .gallery-lightbox { padding: 1rem; }
+  .gallery-lightbox__close { top: 0.75rem; right: 0.75rem; width: 38px; height: 38px; }
+  .gallery-lightbox__nav { width: 38px; height: 38px; }
+  .gallery-lightbox__nav--prev { left: 0.5rem; }
+  .gallery-lightbox__nav--next { right: 0.5rem; }
+}
+body.lightbox-open { overflow: hidden; }
 
 
 /* Prev / next arrows — inside .gallery-track so z-index is unambiguous */
@@ -1978,6 +2076,61 @@
       var idx = Math.round(track.scrollLeft / slideW);
       if (idx !== active) activateSlide(idx);
     }, { passive: true });
+  }
+
+
+  /* -- LIGHTBOX ---------------------------------------------- */
+  var lightbox = document.getElementById('GalleryLightbox-' + sid);
+  if (lightbox) {
+    var lbImgs   = lightbox.querySelectorAll('.gallery-lightbox__img');
+    var lbClose  = lightbox.querySelector('[data-lightbox-close]');
+    var lbPrev   = lightbox.querySelector('[data-lightbox-prev]');
+    var lbNext   = lightbox.querySelector('[data-lightbox-next]');
+    var lbActive = 0;
+
+    function lbShow(idx) {
+      idx = (idx + lbImgs.length) % lbImgs.length;
+      lbImgs[lbActive] && lbImgs[lbActive].classList.remove('is-active');
+      lbActive = idx;
+      lbImgs[lbActive] && lbImgs[lbActive].classList.add('is-active');
+    }
+    function lbOpen(idx) {
+      lbShow(idx);
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('lightbox-open');
+    }
+    function lbCloseFn() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('lightbox-open');
+    }
+
+    /* Click any main gallery image → open lightbox at that index */
+    root.querySelectorAll('.gallery-slide__img').forEach(function (img, i) {
+      img.addEventListener('click', function () { lbOpen(i); });
+    });
+
+    if (lbClose) lbClose.addEventListener('click', lbCloseFn);
+    if (lbPrev)  lbPrev.addEventListener('click', function () { lbShow(lbActive - 1); });
+    if (lbNext)  lbNext.addEventListener('click', function () { lbShow(lbActive + 1); });
+
+    /* Backdrop click closes (but not clicks on the image itself) */
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox || e.target.classList.contains('gallery-lightbox__stage')) lbCloseFn();
+    });
+    /* Click the active image to close (zoom-out cursor signals this) */
+    lbImgs.forEach(function (img) {
+      img.addEventListener('click', lbCloseFn);
+    });
+
+    /* Keyboard: ESC closes, arrows navigate */
+    document.addEventListener('keydown', function (e) {
+      if (!lightbox.classList.contains('is-open')) return;
+      if (e.key === 'Escape') lbCloseFn();
+      if (e.key === 'ArrowLeft')  lbShow(lbActive - 1);
+      if (e.key === 'ArrowRight') lbShow(lbActive + 1);
+    });
   }
 
 
