@@ -393,35 +393,21 @@
       }
     }
 
-    /* Replace the KaChing Bundles title text. Hide the original glyphs and
-       overlay our own copy via pseudo-elements — original markup stays for app JS.
-       ::before = small low-stock urgency, ::after = brand tagline. */
-    .kaching-bundles__block-title {
-      font-size: 0 !important;
-      line-height: 1 !important;
+    /* Inject a small low-stock urgency line above the KaChing bundle picker. */
+    .kaching-bundles__block {
       position: relative;
-      text-align: center;
     }
-    .kaching-bundles__block-title::before {
+    .kaching-bundles__block::before {
       content: "● Only 9 left in stock";
       display: block;
       font-family: var(--font-label, 'Inter', monospace);
       font-size: 0.6875rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      font-weight: 700;
+      letter-spacing: 0.1em;
       color: #b91c1c;
       line-height: 1.2;
-      margin-bottom: 0.5rem;
-    }
-    .kaching-bundles__block-title::after {
-      content: "THE QUIET FLEX";
-      font-family: var(--font-label, 'Inter', monospace);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      color: var(--color-walnut, #8a6240);
-      display: inline-block;
-      line-height: 1.2;
+      text-align: center;
+      margin-bottom: 0.625rem;
     }
 
     /* Spoof 5.0 → 4.9 in Judge.me widget */
