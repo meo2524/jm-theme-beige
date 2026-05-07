@@ -1,7 +1,7 @@
 {%- comment -%}
   Floating mini orbs — site-wide ambient background.
-  Position: fixed above content with mix-blend-mode multiply, very low opacity.
-  Each orb drifts in a slow 2D loop (not falling). Pointer-events: none.
+  Position: fixed behind all content. Pointer-events: none so they never block clicks.
+  Reduced motion: animations disabled, orbs static.
   Brand rule: real 3D sphere via radial-gradient + box-shadow. Never filter:blur.
 {%- endcomment -%}
 
@@ -18,9 +18,17 @@
   <span class="mc-orb mc-orb--10"></span>
   <span class="mc-orb mc-orb--11"></span>
   <span class="mc-orb mc-orb--12"></span>
+  <span class="mc-orb mc-orb--13"></span>
+  <span class="mc-orb mc-orb--14"></span>
 </div>
 
 <style>
+  /* Orbs sit behind ALL content. Body bg is transparent here so they peek
+     through wherever a section/card isn't covering them. The cream page
+     colour is moved to <html>. */
+  html { background: var(--color-bone, #F2EDE4); }
+  body { background: transparent !important; }
+
   .mc-orbs {
     position: fixed;
     inset: 0;
@@ -28,8 +36,7 @@
     height: 100%;
     overflow: hidden;
     pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: multiply;
+    z-index: -1;
   }
 
   .mc-orb {
@@ -44,55 +51,37 @@
       inset 0 0 12px 2px rgba(239,232,220,0.10),
       0 8px 24px -6px rgba(168,129,79,0.25),
       0 0 30px 4px rgba(217,160,95,0.18);
-    opacity: 0.06;
+    opacity: 0.18;
     will-change: transform;
   }
 
-  /* Six different drift loops — orbs roam in 2D rather than fall */
-  @keyframes mc-orb-roam-a {
-    0%   { transform: translate3d(0,    0,    0); }
-    25%  { transform: translate3d(60px, -80px, 0); }
-    50%  { transform: translate3d(-40px, -30px, 0); }
-    75%  { transform: translate3d(30px, 50px, 0); }
-    100% { transform: translate3d(0,    0,    0); }
-  }
-  @keyframes mc-orb-roam-b {
-    0%   { transform: translate3d(0,    0,    0); }
-    33%  { transform: translate3d(-70px, 60px, 0); }
-    66%  { transform: translate3d(40px, -50px, 0); }
-    100% { transform: translate3d(0,    0,    0); }
-  }
-  @keyframes mc-orb-roam-c {
-    0%   { transform: translate3d(0,    0,    0); }
-    25%  { transform: translate3d(-50px, -70px, 0); }
-    50%  { transform: translate3d(80px, 20px, 0); }
-    75%  { transform: translate3d(-20px, 60px, 0); }
-    100% { transform: translate3d(0,    0,    0); }
-  }
-  @keyframes mc-orb-roam-d {
-    0%   { transform: translate3d(0,    0,    0); }
-    50%  { transform: translate3d(50px, 70px, 0); }
-    100% { transform: translate3d(0,    0,    0); }
+  /* Drift animation — slow vertical fall + slight horizontal sway */
+  @keyframes mc-orb-drift {
+    0%   { transform: translate3d(0, -10vh, 0); }
+    50%  { transform: translate3d(8px, 50vh, 0); }
+    100% { transform: translate3d(-6px, 110vh, 0); }
   }
 
-  /* Each orb: position pinned to a viewport %, slow roam loop, varied delays */
-  .mc-orb--1  { width: 28px; height: 28px; top: 12%; left:  8%; animation: mc-orb-roam-a 38s ease-in-out infinite; animation-delay:  -2s; }
-  .mc-orb--2  { width: 18px; height: 18px; top: 28%; left: 18%; animation: mc-orb-roam-b 32s ease-in-out infinite; animation-delay:  -8s; }
-  .mc-orb--3  { width: 44px; height: 44px; top: 44%; left: 28%; animation: mc-orb-roam-c 46s ease-in-out infinite; animation-delay: -14s; }
-  .mc-orb--4  { width: 22px; height: 22px; top: 64%; left: 12%; animation: mc-orb-roam-d 36s ease-in-out infinite; animation-delay: -20s; }
-  .mc-orb--5  { width: 32px; height: 32px; top: 82%; left: 22%; animation: mc-orb-roam-a 42s ease-in-out infinite; animation-delay:  -5s; }
-  .mc-orb--6  { width: 24px; height: 24px; top: 18%; left: 46%; animation: mc-orb-roam-b 34s ease-in-out infinite; animation-delay: -11s; }
-  .mc-orb--7  { width: 38px; height: 38px; top: 38%; left: 56%; animation: mc-orb-roam-c 48s ease-in-out infinite; animation-delay: -17s; }
-  .mc-orb--8  { width: 20px; height: 20px; top: 58%; left: 48%; animation: mc-orb-roam-d 30s ease-in-out infinite; animation-delay: -23s; }
-  .mc-orb--9  { width: 36px; height: 36px; top: 76%; left: 64%; animation: mc-orb-roam-a 44s ease-in-out infinite; animation-delay:  -3s; }
-  .mc-orb--10 { width: 26px; height: 26px; top: 14%; left: 78%; animation: mc-orb-roam-b 33s ease-in-out infinite; animation-delay: -10s; }
-  .mc-orb--11 { width: 30px; height: 30px; top: 42%; left: 86%; animation: mc-orb-roam-c 40s ease-in-out infinite; animation-delay: -16s; }
-  .mc-orb--12 { width: 16px; height: 16px; top: 70%; left: 90%; animation: mc-orb-roam-d 28s ease-in-out infinite; animation-delay: -25s; }
+  /* Each orb: random size, start position, duration, delay */
+  .mc-orb--1  { width: 32px; height: 32px; left:  6%; animation: mc-orb-drift 32s linear infinite;        animation-delay:  -2s; opacity: 0.16; }
+  .mc-orb--2  { width: 18px; height: 18px; left: 14%; animation: mc-orb-drift 24s linear infinite;        animation-delay:  -8s; opacity: 0.12; }
+  .mc-orb--3  { width: 44px; height: 44px; left: 22%; animation: mc-orb-drift 40s linear infinite;        animation-delay: -14s; opacity: 0.20; }
+  .mc-orb--4  { width: 24px; height: 24px; left: 30%; animation: mc-orb-drift 28s linear infinite;        animation-delay: -20s; opacity: 0.14; }
+  .mc-orb--5  { width: 36px; height: 36px; left: 38%; animation: mc-orb-drift 36s linear infinite;        animation-delay:  -5s; opacity: 0.18; }
+  .mc-orb--6  { width: 20px; height: 20px; left: 46%; animation: mc-orb-drift 26s linear infinite;        animation-delay: -11s; opacity: 0.12; }
+  .mc-orb--7  { width: 50px; height: 50px; left: 54%; animation: mc-orb-drift 44s linear infinite;        animation-delay: -17s; opacity: 0.22; }
+  .mc-orb--8  { width: 28px; height: 28px; left: 62%; animation: mc-orb-drift 30s linear infinite;        animation-delay: -23s; opacity: 0.15; }
+  .mc-orb--9  { width: 40px; height: 40px; left: 70%; animation: mc-orb-drift 38s linear infinite;        animation-delay:  -3s; opacity: 0.18; }
+  .mc-orb--10 { width: 22px; height: 22px; left: 78%; animation: mc-orb-drift 27s linear infinite;        animation-delay: -10s; opacity: 0.13; }
+  .mc-orb--11 { width: 34px; height: 34px; left: 84%; animation: mc-orb-drift 34s linear infinite;        animation-delay: -16s; opacity: 0.17; }
+  .mc-orb--12 { width: 16px; height: 16px; left: 90%; animation: mc-orb-drift 22s linear infinite;        animation-delay: -25s; opacity: 0.10; }
+  .mc-orb--13 { width: 46px; height: 46px; left: 96%; animation: mc-orb-drift 42s linear infinite;        animation-delay:  -7s; opacity: 0.20; }
+  .mc-orb--14 { width: 26px; height: 26px; left:  2%; animation: mc-orb-drift 29s linear infinite;        animation-delay: -19s; opacity: 0.14; }
 
-  /* Mobile: half the orbs, smaller */
+  /* Mobile: fewer, smaller orbs */
   @media (max-width: 767px) {
     .mc-orb { transform: scale(0.7); }
-    .mc-orb--1, .mc-orb--3, .mc-orb--5, .mc-orb--7, .mc-orb--9, .mc-orb--11 {
+    .mc-orb--1, .mc-orb--3, .mc-orb--5, .mc-orb--7, .mc-orb--9, .mc-orb--11, .mc-orb--13 {
       display: none;
     }
   }
