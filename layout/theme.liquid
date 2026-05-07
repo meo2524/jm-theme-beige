@@ -757,5 +757,27 @@
   })();
   </script>
 
+  <script>
+  /* Add a chevron to KaChing bundle size <select>s — beats their CSS via inline style. */
+  (function () {
+    var chevron = "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%238a6240' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><polyline points='1.5 2 6 6.5 10.5 2'/></svg>\")";
+    function paint() {
+      document.querySelectorAll('select.kaching-bundles__bar-variant-select').forEach(function (s) {
+        if (s.dataset.mcChevron) return;
+        s.dataset.mcChevron = '1';
+        s.style.setProperty('background-image', chevron, 'important');
+        s.style.setProperty('background-repeat', 'no-repeat', 'important');
+        s.style.setProperty('background-position', 'right 0.6rem center', 'important');
+        s.style.setProperty('background-size', '10px 6px', 'important');
+        s.style.setProperty('padding-right', '1.5rem', 'important');
+        s.style.setProperty('appearance', 'none', 'important');
+        s.style.setProperty('-webkit-appearance', 'none', 'important');
+      });
+    }
+    paint();
+    new MutationObserver(paint).observe(document.body, { childList: true, subtree: true });
+  })();
+  </script>
+
 </body>
 </html>
