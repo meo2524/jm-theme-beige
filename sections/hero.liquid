@@ -376,17 +376,23 @@
     display: block;
     filter: drop-shadow(0 32px 80px rgba(120, 90, 50, 0.30));
   }
+  /* Below 1600px: keep the heading column clear of the ring stage. */
+  @media (max-width: 1600px) {
+    .hero__content { max-width: calc(70vw - 320px); }
+    .hero__subtext { max-width: calc(70vw - 320px); }
+    .hero__heading { font-size: clamp(2.75rem, 6vw, 5.5rem); }
+  }
   @media (max-width: 1280px) {
     .hero__ring-stage { width: 460px; height: 460px; margin-left: -230px; margin-top: -230px; }
-    /* Stop heading column before it overlaps the ring */
     .hero__content { max-width: calc(70vw - 280px); }
-    .hero__heading { font-size: clamp(2.75rem, 7vw, 5rem); }
+    .hero__subtext { max-width: calc(70vw - 280px); }
+    .hero__heading { font-size: clamp(2.5rem, 6vw, 4.5rem); }
   }
   @media (max-width: 1024px) {
     .hero__ring-stage { width: 360px; height: 360px; margin-left: -180px; margin-top: -180px; }
     .hero__content { max-width: calc(70vw - 230px); }
-    .hero__heading { font-size: clamp(2.5rem, 6.5vw, 4.25rem); }
-    .hero__subtext { max-width: calc(70vw - 240px); }
+    .hero__subtext { max-width: calc(70vw - 230px); }
+    .hero__heading { font-size: clamp(2.25rem, 5.5vw, 3.75rem); }
   }
   @media (max-width: 767px) {
     /* Pull out of absolute positioning — becomes a block at the top of the column */
