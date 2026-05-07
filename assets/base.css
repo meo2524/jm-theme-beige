@@ -62,11 +62,11 @@
      buttons, CTAs, and section labels — the uppercase-tracked
      mono treatment is Mend-distinctive on its own.
      ---------------------------------------------------------- */
-  --font-heading:         'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
-  --font-body:            'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-heading:         'JetBrains Mono', ui-monospace, 'SF Mono', 'Menlo', monospace;
+  --font-body:            'JetBrains Mono', ui-monospace, 'SF Mono', 'Menlo', monospace;
   --font-label:           'JetBrains Mono', ui-monospace, 'SF Mono', 'Menlo', monospace;
   --font-mono:            'JetBrains Mono', ui-monospace, 'SF Mono', 'Menlo', monospace;
-  --font-serif:           'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-serif:           'JetBrains Mono', ui-monospace, 'SF Mono', 'Menlo', monospace;
 
   --font-size-xs:         0.75rem;    /* 12px */
   --font-size-sm:         0.875rem;   /* 14px */
