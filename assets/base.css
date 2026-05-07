@@ -68,21 +68,25 @@
   --font-mono:            'JetBrains Mono', ui-monospace, 'SF Mono', 'Menlo', monospace;
   --font-serif:           'JetBrains Mono', ui-monospace, 'SF Mono', 'Menlo', monospace;
 
-  --font-size-xs:         0.75rem;    /* 12px */
-  --font-size-sm:         0.875rem;   /* 14px */
-  --font-size-base:       1rem;       /* 16px */
-  --font-size-md:         1.125rem;   /* 18px */
-  --font-size-lg:         1.375rem;   /* 22px */
-  --font-size-xl:         1.75rem;    /* 28px */
-  --font-size-2xl:        2.25rem;    /* 36px */
-  --font-size-3xl:        3rem;       /* 48px */
-  --font-size-4xl:        3.75rem;    /* 60px */
-  --font-size-5xl:        5rem;       /* 80px */
+  /* Sizes bumped 12.5% for JetBrains Mono — monospace has a smaller
+     x-height than Inter, so body copy at the old 16px felt cramped. */
+  --font-size-xs:         0.8125rem;  /* 13px */
+  --font-size-sm:         0.9375rem;  /* 15px */
+  --font-size-base:       1.0625rem;  /* 17px */
+  --font-size-md:         1.1875rem;  /* 19px */
+  --font-size-lg:         1.4375rem;  /* 23px */
+  --font-size-xl:         1.875rem;   /* 30px */
+  --font-size-2xl:        2.375rem;   /* 38px */
+  --font-size-3xl:        3.125rem;   /* 50px */
+  --font-size-4xl:        3.875rem;   /* 62px */
+  --font-size-5xl:        5.125rem;   /* 82px */
 
-  --font-weight-normal:   400;
-  --font-weight-medium:   500;
-  --font-weight-semibold: 600;
-  --font-weight-bold:     700;
+  /* Bumped one step for JetBrains Mono — monospace at 400 reads thinner
+     than a sans at 400, so we anchor "normal" copy at 500. */
+  --font-weight-normal:   500;
+  --font-weight-medium:   600;
+  --font-weight-semibold: 700;
+  --font-weight-bold:     800;
 
   --line-height-tight:    1.15;
   --line-height-heading:  1.25;
