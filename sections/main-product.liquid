@@ -410,7 +410,7 @@
 
         {%- comment -%} Mother's Day sale banner {%- endcomment -%}
         {%- if settings.motion_enabled -%}
-          <div class="mc-mday-banner mc-mday-banner--sale" data-reveal data-reveal-delay="0">
+          <div class="mc-mday-banner" data-reveal data-reveal-delay="0">
             <span class="mc-mday-banner__shine" aria-hidden="true"></span>
             <div class="mc-mday-banner__inner">
               <span class="mc-mday-banner__icon" aria-hidden="true">
@@ -419,17 +419,6 @@
               <span class="mc-mday-banner__title">Mother's Day Sale</span>
               <span class="mc-mday-banner__sep" aria-hidden="true">·</span>
               <span class="mc-mday-banner__title">Free Shipping</span>
-            </div>
-          </div>
-        {%- endif -%}
-
-        {%- comment -%} Low-stock urgency banner {%- endcomment -%}
-        {%- if settings.motion_enabled -%}
-          <div class="mc-mday-banner" data-reveal data-reveal-delay="0">
-            <span class="mc-mday-banner__shine" aria-hidden="true"></span>
-            <div class="mc-mday-banner__inner">
-              <span class="mc-mday-banner__pulse" aria-hidden="true"></span>
-              <span class="mc-mday-banner__title">Only 9 Left In Stock</span>
             </div>
           </div>
         {%- endif -%}
