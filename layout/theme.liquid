@@ -393,8 +393,23 @@
       }
     }
 
-    /* Hide the KaChing Bundles "SAVE MORE FOR YOUR LOVED ONE" title bar */
-    .kaching-bundles__block-title { display: none !important; }
+    /* Replace the KaChing Bundles title text. Hide the original glyphs and
+       overlay our own copy via ::after — original markup stays for app JS. */
+    .kaching-bundles__block-title {
+      font-size: 0 !important;
+      line-height: 1 !important;
+      position: relative;
+    }
+    .kaching-bundles__block-title::after {
+      content: "YOUR FIRST STEP TO BECOMING A MENDER";
+      font-family: var(--font-label, 'Inter', monospace);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--color-walnut, #8a6240);
+      display: inline-block;
+      line-height: 1.2;
+    }
 
     /* Spoof 5.0 → 4.9 in Judge.me widget */
     .jm-average-rating-display .jm-cluster > p.jm-text:first-child {
