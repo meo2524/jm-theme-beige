@@ -442,9 +442,13 @@
           </span>
         </button>
 
-        {%- comment -%} Accelerated checkout (Shop Pay, Apple Pay, etc.) {%- endcomment -%}
+        {%- comment -%} Force Shop Pay (consistent across visitors). {%- endcomment -%}
         <div class="pdp-payment-btns">
-          {{ form | payment_button }}
+          <shop-pay-button
+            store-url="{{ shop.url }}"
+            variant-ids="{{ current_variant.id }}:1"
+            class="pdp-shop-pay-btn">
+          </shop-pay-button>
         </div>
 
       {%- endform -%}
@@ -1432,6 +1436,15 @@ body.lightbox-open { overflow: hidden; }
 
 .pdp-payment-btns {
   margin-bottom: 0.875rem;
+  display: block;
+  width: 100%;
+}
+/* Force Shop Pay component to render full width on every viewport */
+.pdp-shop-pay-btn {
+  display: block !important;
+  width: 100% !important;
+  --shop-pay-button-width: 100%;
+  height: 48px;
 }
 
 /* Low-stock urgency indicator — sits between ATC and Shop Pay */
@@ -2211,6 +2224,10 @@ body.lightbox-open { overflow: hidden; }
   function applyVariant(variant) {
     if (!variant) return;
     if (variantIdInput) variantIdInput.value = variant.id;
+
+    /* Keep the Shop Pay button in sync with the selected variant */
+    var shopPayBtn = root.querySelector('.pdp-shop-pay-btn');
+    if (shopPayBtn) shopPayBtn.setAttribute('variant-ids', variant.id + ':1');
 
     if (variant.featured_image && variant.featured_image.position) {
       goTo(variant.featured_image.position - 1);
