@@ -420,8 +420,6 @@
 
 <body class="template-{{ template.name | replace: '/', '-' }}{% if customer %} customer-logged-in{% endif %}{% if settings.motion_enabled %} motion-on{% endif %}">
 
-  {%- render 'floating-orbs' -%}
-
   {%- if template.name == 'product' and settings.motion_enabled -%}
     <div data-scroll-progress aria-hidden="true"></div>
 
