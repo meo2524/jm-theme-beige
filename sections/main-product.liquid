@@ -442,20 +442,9 @@
           </span>
         </button>
 
-        {%- comment -%}
-          Force "Buy with Shop" everywhere. The hidden payment_button is required
-          to make Shopify load the Shop Pay SDK on the page so the
-          <shop-pay-wallet-button> custom element can register and render.
-        {%- endcomment -%}
+        {%- comment -%} Accelerated checkout (Shop Pay / Apple Pay / Google Pay). {%- endcomment -%}
         <div class="pdp-payment-btns">
-          <shop-pay-wallet-button
-            store-url="{{ shop.url }}"
-            variant-ids="{{ current_variant.id }}:1"
-            class="pdp-shop-pay-btn">
-          </shop-pay-wallet-button>
-          <div class="pdp-payment-btns__sdk-loader" aria-hidden="true">
-            {{ form | payment_button }}
-          </div>
+          {{ form | payment_button }}
         </div>
 
       {%- endform -%}
