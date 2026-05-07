@@ -30,16 +30,8 @@
     height: 100%;
     overflow: hidden;
     pointer-events: none;
-    z-index: 0;
-  }
-
-  /* Ensure all section/content above orbs by giving them a stacking context */
-  body > main,
-  body > header,
-  body > footer,
-  body > .shopify-section {
-    position: relative;
-    z-index: 1;
+    z-index: 9999;
+    mix-blend-mode: multiply;
   }
 
   .mc-orb {
