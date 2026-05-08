@@ -265,9 +265,9 @@
     "photo_reviews": {
       "type": "photo-reviews",
       "settings": {
-        "eyebrow": "Verified Reviews",
+        "eyebrow": "Verified Menders",
         "heading": "Real people. Real results.",
-        "subheading": "Join thousands who track their health from their finger."
+        "subheading": "Join thousands of Menders who track their health from their finger."
       }
     },
     "product_faq": {
