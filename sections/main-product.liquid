@@ -443,7 +443,26 @@
         </button>
 
         <div class="pdp-payment-btns">
-          {{ form | payment_button }}
+          {%- comment -%} Native Shop Pay express renders here but is hidden — it
+            only carries a single variant which breaks KaChing bundles. The
+            custom button below routes through ATC (KaChing intercepts) →
+            /checkout where Shop Pay accelerated still shows up. {%- endcomment -%}
+          <div class="pdp-payment-btns__native">
+            {{ form | payment_button }}
+          </div>
+          <button
+            type="button"
+            class="pdp-shoppay-bundle"
+            data-pdp-shoppay
+            aria-label="Buy with Shop Pay"
+          >
+            <span class="pdp-shoppay-bundle__prefix">Buy with</span>
+            <svg viewBox="0 0 78 28" class="pdp-shoppay-bundle__logo" aria-hidden="true" focusable="false">
+              <path fill="#fff" d="M21.46 9.95c-2.13 0-3.65 1-4.34 2.32V6.45h-2.65v15.1h2.65v-5.25c0-2.13 1.13-3.42 2.93-3.42 1.7 0 2.65 1.13 2.65 3.05v5.62h2.65v-6.13c0-3.16-1.7-5.47-4.89-5.47zM33.9 9.9c-3.42 0-5.95 2.5-5.95 5.95s2.53 5.95 5.95 5.95c3.42 0 5.95-2.5 5.95-5.95S37.32 9.9 33.9 9.9zm0 9.4c-1.95 0-3.3-1.42-3.3-3.45s1.35-3.45 3.3-3.45 3.3 1.42 3.3 3.45-1.35 3.45-3.3 3.45zM48.49 9.95c-1.7 0-3 .73-3.84 1.93v-1.66h-2.5v15.43h2.65v-5.86c.84 1.13 2.07 1.8 3.69 1.8 3.05 0 5.42-2.5 5.42-5.95s-2.37-5.69-5.42-5.69zm-.5 9.4c-1.92 0-3.3-1.42-3.3-3.45s1.38-3.45 3.3-3.45 3.27 1.4 3.27 3.45-1.36 3.45-3.27 3.45zM61.06 14.66c-1.5-.32-2.78-.6-2.78-1.45 0-.78.84-1.13 1.84-1.13 1.1 0 1.96.5 2.04 1.45h2.6c-.18-2.04-1.83-3.63-4.61-3.63-2.7 0-4.5 1.4-4.5 3.42 0 2.4 2.18 2.93 4.16 3.34 1.55.34 2.84.62 2.84 1.55 0 .8-.83 1.2-1.95 1.2-1.27 0-2.18-.6-2.27-1.55h-2.65c.16 2.07 1.92 3.7 4.85 3.7 2.81 0 4.66-1.42 4.66-3.55 0-2.5-2.21-3.05-4.23-3.45zM73.49 10.22l-2.85 7.65-2.65-7.65h-2.85l4.13 10.93-1.83 4.5h2.78l5.95-15.43z"/>
+              <circle cx="6.5" cy="14" r="6" fill="#fff"/>
+              <path fill="#5a31f5" d="M6.5 9.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm-.13 6.95l-1.6-1.61.7-.7 1.05 1.06 2.65-2.66.7.71-3.35 3.36z"/>
+            </svg>
+          </button>
         </div>
 
       {%- endform -%}
@@ -1425,21 +1444,53 @@ body.lightbox-open { overflow: hidden; }
   animation: breathe 2.4s ease-in-out infinite;
 }
 
-/* Native dynamic checkout button. Note: clicking it bypasses any KaChing
-   bundle (only the base variant goes to checkout, no free gift/discount). */
+/* Payment buttons block. Native Shopify dynamic checkout is hidden
+   (incompatible with KaChing bundles); custom Shop Pay button below
+   routes through cart-aware checkout. */
 .pdp-payment-btns {
   margin: 0.75rem 0;
   display: block;
   width: 100%;
 }
-/* Force the dynamic checkout button to render even when KaChing tries
-   to hide it (KaChing's JS attaches display:none after page load). */
-.pdp-payment-btns .shopify-payment-button,
-.pdp-payment-btns .shopify-payment-button__button {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  width: 100% !important;
+.pdp-payment-btns__native {
+  display: none;
+}
+
+/* Custom Shop Pay button — bundle-aware. Uses Shop Pay brand purple
+   and the same shape as Shopify's native button. */
+.pdp-shoppay-bundle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 1rem;
+  background: #5a31f5;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.05s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.pdp-shoppay-bundle:hover { background: #4a26d4; }
+.pdp-shoppay-bundle:active { transform: scale(0.99); }
+.pdp-shoppay-bundle:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+.pdp-shoppay-bundle__prefix {
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.pdp-shoppay-bundle__logo {
+  width: 60px;
+  height: 22px;
+  flex-shrink: 0;
 }
 
 /* -- Money-back guarantee strip -- */
@@ -2478,6 +2529,56 @@ body.lightbox-open { overflow: hidden; }
     }
   });
 }());
+</script>
+
+<script>
+/* Bundle-aware Buy with Shop button.
+   Native Shop Pay express only takes a single variant — bypasses KaChing's
+   bundle (free travel case + bundle pricing). This intercepts the click,
+   routes through ATC (which KaChing intercepts to add bundle line items),
+   then redirects to /checkout where Shop Pay accelerated checkout appears. */
+(function() {
+  var btn = document.querySelector('[data-pdp-shoppay]');
+  if (!btn) return;
+  var atc = document.querySelector('button[name="add"]');
+  if (!atc) return;
+
+  function getCartItemCount() {
+    return fetch('/cart.js', { credentials: 'same-origin' })
+      .then(function(r) { return r.json(); })
+      .then(function(c) { return c.item_count; })
+      .catch(function() { return null; });
+  }
+
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (btn.disabled) return;
+    btn.disabled = true;
+    var originalLabel = btn.innerHTML;
+    btn.setAttribute('aria-busy', 'true');
+
+    getCartItemCount().then(function(startCount) {
+      var baseline = startCount == null ? 0 : startCount;
+
+      /* Trigger ATC — KaChing's form intercept adds bundle line items */
+      atc.click();
+
+      /* Poll cart for changes, then redirect. Cap at 6s. */
+      var attempts = 0;
+      var maxAttempts = 30;
+      var poll = setInterval(function() {
+        attempts++;
+        getCartItemCount().then(function(count) {
+          var done = (count != null && count > baseline) || attempts >= maxAttempts;
+          if (done) {
+            clearInterval(poll);
+            window.location.href = '/checkout';
+          }
+        });
+      }, 200);
+    });
+  });
+})();
 </script>
 
 {% schema %}
