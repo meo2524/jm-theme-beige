@@ -443,16 +443,8 @@
         </button>
 
         <div class="pdp-payment-btns">
-          <shop-pay-button
-            store-url="{{ shop.url }}"
-            variants="{{ current_variant.id }}"
-            class="pdp-shop-pay-btn">
-          </shop-pay-button>
-          <div class="pdp-payment-btns__sdk-loader" aria-hidden="true">
-            {{ form | payment_button }}
-          </div>
+          {{ form | payment_button }}
         </div>
-        <script src="https://cdn.shopify.com/shopifycloud/shop-js/v0.1/client.js" async></script>
 
       {%- endform -%}
 
@@ -1442,24 +1434,6 @@ body.lightbox-open { overflow: hidden; }
   display: block;
   width: 100%;
 }
-/* Force Shop Pay component to render full width on every viewport */
-.pdp-shop-pay-btn {
-  display: block !important;
-  width: 100% !important;
-  max-width: 100%;
-  --shop-pay-button-width: 100%;
-}
-/* Hidden loader — keeps Shopify's Shop Pay SDK on the page so the
-   <shop-pay-wallet-button> custom element registers, but never shown. */
-.pdp-payment-btns__sdk-loader {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  pointer-events: none;
-  opacity: 0;
-}
 
 /* Low-stock urgency indicator — sits between ATC and Shop Pay */
 .pdp-stock-urgency {
@@ -2238,10 +2212,6 @@ body.lightbox-open { overflow: hidden; }
   function applyVariant(variant) {
     if (!variant) return;
     if (variantIdInput) variantIdInput.value = variant.id;
-
-    /* Keep the Shop Pay button in sync with the selected variant */
-    var shopPayBtn = root.querySelector('.pdp-shop-pay-btn');
-    if (shopPayBtn) shopPayBtn.setAttribute('variant-ids', variant.id + ':1');
 
     if (variant.featured_image && variant.featured_image.position) {
       goTo(variant.featured_image.position - 1);
