@@ -442,11 +442,6 @@
           </span>
         </button>
 
-        {%- comment -%}
-          Force "Buy with Shop" everywhere. The hidden payment_button is required
-          to make Shopify load the Shop Pay SDK on the page so the
-          <shop-pay-wallet-button> custom element can register and render.
-        {%- endcomment -%}
         <div class="pdp-payment-btns">
           <shop-pay-wallet-button
             store-url="{{ shop.url }}"
@@ -457,6 +452,7 @@
             {{ form | payment_button }}
           </div>
         </div>
+        <script src="https://cdn.shopify.com/shopifycloud/shop-js/v0.1/client.js" async></script>
 
       {%- endform -%}
 
