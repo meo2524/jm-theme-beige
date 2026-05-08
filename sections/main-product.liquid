@@ -661,21 +661,21 @@
   position: sticky;
   top: 6rem;
   display: flex;
-  flex-direction: row;
-  gap: 0.75rem;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.625rem;
+  align-items: stretch;
 }
+.product-gallery .gallery-main { order: 1; }
+.product-gallery .gallery-thumbs { order: 2; }
 
-/* Left: vertical thumbnail strip */
+/* Thumbnails sit below main photo so the photo can use full column width */
 .gallery-thumbs {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 0.5rem;
-  width: 76px;
+  width: 100%;
   flex-shrink: 0;
-  /* Clamp to photo-track height only (1:1 ratio, track-width = col - 76px - 0.75rem gap) */
-  max-height: calc(((min(100vw, 1280px) - 15rem) / 2) - 76px - 0.75rem);
-  overflow-y: auto;
+  overflow-x: auto;
   scrollbar-width: none;
 }
 .gallery-thumbs::-webkit-scrollbar { display: none; }
