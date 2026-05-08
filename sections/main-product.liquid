@@ -1431,8 +1431,19 @@ body.lightbox-open { overflow: hidden; }
 
 .pdp-payment-btns {
   margin-bottom: 0.875rem;
-  display: block;
+  display: block !important;
   width: 100%;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+/* KaChing bundles app hides the native dynamic checkout button.
+   Force it visible — customer chose bundle-bypass behavior intentionally. */
+.pdp-payment-btns .shopify-payment-button,
+.pdp-payment-btns .shopify-payment-button__button {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
 }
 
 /* Low-stock urgency indicator — sits between ATC and Shop Pay */
