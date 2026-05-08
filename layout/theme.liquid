@@ -592,17 +592,23 @@
         font-size: 0.75rem !important;
         line-height: 1.2 !important;
       }
-      .kaching-bundles__bar-pricing {
+      .kaching-bundles__bar-pricing,
+      .kaching-bundles .kaching-bundles__bar-pricing {
         flex-shrink: 0;
         gap: 0 !important;
       }
+      /* Specificity-matched override for KaChing's .kaching-bundles .x selector.
+         Also reset the CSS variable they use so we win regardless. */
+      .kaching-bundles .kaching-bundles__bar-price,
       .kaching-bundles__bar-price {
-        font-size: 0.6875rem !important;
+        --bar-title-font-size: 11px !important;
+        font-size: 11px !important;
         line-height: 1.15 !important;
         font-weight: 700 !important;
       }
+      .kaching-bundles .kaching-bundles__bar-full-price,
       .kaching-bundles__bar-full-price {
-        font-size: 0.5625rem !important;
+        font-size: 9px !important;
         line-height: 1.15 !important;
       }
       /* Title gets more breathing room so "Mend Starter" stays on one line */
