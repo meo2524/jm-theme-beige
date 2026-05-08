@@ -448,31 +448,6 @@
 
       {%- endform -%}
 
-      {%- comment -%} -- Trust strip -- {%- endcomment -%}
-      <ul class="trust-strip" role="list">
-        <li class="trust-item mc-trust-item" data-reveal data-reveal-delay="80">
-          <svg class="trust-icon mc-trust-icon mc-trust-icon--ship" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
-            <path class="mc-draw" d="M1 3h4l2.5 11.5h11L21 7H6"/>
-            <circle cx="9" cy="20" r="1.5" fill="currentColor" stroke="none"/>
-            <circle cx="18" cy="20" r="1.5" fill="currentColor" stroke="none"/>
-          </svg>
-          <span>{{ section.settings.trust_1_text | default: 'Free shipping over $60' | escape }}</span>
-        </li>
-        <li class="trust-item mc-trust-item" data-reveal data-reveal-delay="160">
-          <svg class="trust-icon mc-trust-icon mc-trust-icon--return" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
-            <polyline class="mc-draw" points="1 4 1 10 7 10"/>
-            <path class="mc-draw" d="M3.51 15a9 9 0 1 0 .49-4.17"/>
-          </svg>
-          <span>{{ section.settings.trust_2_text | default: '30-day returns' | escape }}</span>
-        </li>
-        <li class="trust-item mc-trust-item mc-trust-item--hero" data-reveal data-reveal-delay="240">
-          <svg class="trust-icon mc-trust-icon mc-trust-icon--shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
-            <path class="mc-draw" d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.5C17.25 22.15 21 17.25 21 12V7L12 2z"/>
-          </svg>
-          <span>{{ section.settings.trust_3_text | default: '2-year warranty' | escape }}</span>
-        </li>
-      </ul>
-
       {%- comment -%} -- Guarantee + payment methods strip -- {%- endcomment -%}
       <div class="pdp-guarantee" data-reveal data-reveal-delay="320">
         <svg class="pdp-guarantee__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">

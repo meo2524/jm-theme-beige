@@ -250,23 +250,24 @@
   .pr-card { flex: 0 0 calc(33.333% - 0.875rem); max-width: none; }
 }
 
-/* Photo — square ratio keeps card height manageable */
+/* Photo — 1:1 only. Subtle inner border for separation from body. */
 .pr-card__photo-wrap {
   width: 100%; aspect-ratio: 1 / 1;
   overflow: hidden; background: #e8e1d9;
+  border-bottom: 1px solid rgba(43,43,43,0.06);
 }
 .pr-card__photo {
   width: 100%; height: 100%;
-  object-fit: cover; object-position: center top;
+  object-fit: cover; object-position: center center;
   display: block;
   transition: transform 0.5s ease;
 }
 .pr-card:hover .pr-card__photo { transform: scale(1.03); }
 
-/* Body */
+/* Body — tighter padding for cleaner frame around square photos */
 .pr-card__body {
-  padding: 1.375rem 1.375rem 1.125rem;
-  display: flex; flex-direction: column; gap: 0.6rem; flex: 1;
+  padding: 1.125rem 1.25rem 1rem;
+  display: flex; flex-direction: column; gap: 0.5rem; flex: 1;
 }
 .pr-stars {
   color: var(--color-walnut, #8a6240);
