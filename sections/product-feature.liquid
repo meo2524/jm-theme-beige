@@ -180,18 +180,28 @@
 
   /* ---- Bullets ---- */
   .product-feature__bullets {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
+    display: flex !important;
+    flex-direction: column !important;
+    gap: var(--space-3);
     margin-bottom: var(--space-6);
+    list-style: none;
+    padding: 0;
+    grid-template-columns: unset !important;
   }
 
   .product-feature__bullet {
-    display: flex;
-    gap: var(--space-4);
+    display: flex !important;
+    align-items: flex-start;
+    gap: var(--space-3);
     font-size: var(--font-size-sm);
     color: var(--color-olive);
     line-height: var(--line-height-body);
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    min-height: unset !important;
   }
 
   .product-feature__bullet-icon {
