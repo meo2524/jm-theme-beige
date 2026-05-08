@@ -45,13 +45,9 @@
         {%- unless item.product.has_only_default_variant -%}
           <p class="cart-item__variant">{{ item.variant.title }}</p>
         {%- endunless -%}
-        <p class="cart-item__sub">
-          {%- if item.selling_plan_allocation -%}
-            {{ item.selling_plan_allocation.selling_plan.name }}
-          {%- else -%}
-            One-time purchase
-          {%- endif -%}
-        </p>
+        {%- if item.selling_plan_allocation -%}
+          <p class="cart-item__sub">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+        {%- endif -%}
       </div>
       <button
         class="cart-item__remove"
