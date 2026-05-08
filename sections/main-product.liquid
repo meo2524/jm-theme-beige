@@ -442,29 +442,8 @@
           </span>
         </button>
 
-        <div class="pdp-payment-btns">
-          {%- comment -%} Native Shop Pay express renders here but is hidden — it
-            only carries a single variant which breaks KaChing bundles. The
-            custom button below routes through ATC (KaChing intercepts) →
-            /checkout where Shop Pay accelerated still shows up. {%- endcomment -%}
-          <div class="pdp-payment-btns__native">
-            {{ form | payment_button }}
-          </div>
-          <button
-            type="button"
-            class="pdp-shoppay-bundle"
-            data-pdp-shoppay
-            aria-label="Buy with Shop Pay"
-          >
-            <span class="pdp-shoppay-bundle__prefix">Buy with</span>
-            <span class="pdp-shoppay-bundle__brand">
-              <svg viewBox="0 0 14 14" class="pdp-shoppay-bundle__check" aria-hidden="true" focusable="false">
-                <circle cx="7" cy="7" r="7" fill="#fff"/>
-                <path d="M3.6 7.2l2.2 2.2 4.6-4.6" stroke="#5a31f5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              </svg>
-              <span class="pdp-shoppay-bundle__word">shop</span>
-            </span>
-          </button>
+        <div class="pdp-payment-btns" data-pdp-payment-btns>
+          {{ form | payment_button }}
         </div>
 
       {%- endform -%}
@@ -1446,64 +1425,38 @@ body.lightbox-open { overflow: hidden; }
   animation: breathe 2.4s ease-in-out infinite;
 }
 
-/* Payment buttons block. Native Shopify dynamic checkout is hidden
-   (incompatible with KaChing bundles); custom Shop Pay button below
-   routes through cart-aware checkout. */
+/* Native Shopify Shop Pay button rendered as-is (real Shop Pay branding).
+   We force it visible (KaChing tries to hide it) and intercept its click
+   to route through the bundle-aware checkout flow. */
 .pdp-payment-btns {
   margin: 0.75rem 0;
+  display: block !important;
+  width: 100%;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.pdp-payment-btns .shopify-payment-button,
+.pdp-payment-btns .shopify-payment-button__button,
+.pdp-payment-btns shop-pay-button {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+}
+.pdp-payment-btns shop-pay-button {
+  --shop-pay-button-width: 100%;
+}
+.pdp-payment-btns--busy { pointer-events: none; }
+.pdp-payment-btns--busy::after {
+  content: 'Adding bundle to cart…';
   display: block;
-  width: 100%;
-}
-.pdp-payment-btns__native {
-  display: none;
-}
-
-/* Custom Shop Pay button — bundle-aware. Uses Shop Pay brand purple
-   and the same shape as Shopify's native button. */
-.pdp-shoppay-bundle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  width: 100%;
-  min-height: 44px;
-  padding: 0 1rem;
-  background: #5a31f5;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-family: var(--font-label, 'Inter', sans-serif);
-  font-size: 0.9375rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.15s ease, transform 0.05s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-.pdp-shoppay-bundle:hover { background: #4a26d4; }
-.pdp-shoppay-bundle:active { transform: scale(0.99); }
-.pdp-shoppay-bundle:disabled {
-  opacity: 0.6;
-  cursor: progress;
-}
-.pdp-shoppay-bundle__prefix {
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
-.pdp-shoppay-bundle__brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-}
-.pdp-shoppay-bundle__check {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-}
-.pdp-shoppay-bundle__word {
-  font-style: italic;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  font-size: 1.0625rem;
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--color-walnut, #8a6240);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 /* -- Money-back guarantee strip -- */
@@ -2545,35 +2498,31 @@ body.lightbox-open { overflow: hidden; }
 </script>
 
 <script>
-/* Bundle-aware Buy with Shop button.
-   Native Shop Pay express only takes a single variant — bypasses KaChing's
-   bundle (free travel case + bundle pricing). This intercepts the click,
-   routes through ATC (which KaChing intercepts to add bundle line items),
-   then redirects to /checkout where Shop Pay accelerated checkout appears. */
+/* Bundle-aware Shop Pay click interceptor.
+   Native Shop Pay express checkout only carries a single variant — that
+   bypasses any KaChing bundle (free travel case, bundle pricing, multi-
+   variant rings). We capture the click on Shopify's native Shop Pay button
+   BEFORE its handler runs, route through KaChing's form-submit ATC flow,
+   then redirect to /checkout where Shop Pay accelerated checkout appears
+   at the top of the page for users who have it enabled. */
 (function() {
-  var btn = document.querySelector('[data-pdp-shoppay]');
-  if (!btn) return;
+  var container = document.querySelector('[data-pdp-payment-btns]');
+  if (!container) { console.warn('[pdp-shoppay] no container'); return; }
   var atc = document.querySelector('button[name="add"]');
-  if (!atc) return;
+  if (!atc) { console.warn('[pdp-shoppay] no atc'); return; }
 
   function getCartItemCount() {
-    return fetch('/cart.js', { credentials: 'same-origin' })
+    return fetch('/cart.js', { credentials: 'same-origin', cache: 'no-store' })
       .then(function(r) { return r.json(); })
       .then(function(c) { return c.item_count; })
       .catch(function() { return null; });
   }
 
-  btn.addEventListener('click', function(e) {
-    e.preventDefault();
-    if (btn.disabled) return;
-    btn.disabled = true;
-    btn.setAttribute('aria-busy', 'true');
-
+  function runBundleCheckout() {
+    if (container.classList.contains('pdp-payment-btns--busy')) return;
+    container.classList.add('pdp-payment-btns--busy');
     getCartItemCount().then(function(startCount) {
       var baseline = startCount == null ? 0 : startCount;
-
-      /* Trigger the form submission — KaChing intercepts the form's submit
-         event and adds the full bundle of line items to the cart. */
       var form = atc.closest('form') || document.querySelector('form[action*="/cart/add"]');
       if (form && typeof form.requestSubmit === 'function') {
         form.requestSubmit(atc);
@@ -2582,27 +2531,45 @@ body.lightbox-open { overflow: hidden; }
       } else {
         atc.click();
       }
-
-      /* Poll cart for changes, then redirect. Cap at 6s. */
       var attempts = 0;
-      var maxAttempts = 30;
+      var max = 40;
       var poll = setInterval(function() {
         attempts++;
         getCartItemCount().then(function(count) {
-          var done = (count != null && count > baseline) || attempts >= maxAttempts;
-          if (done) {
+          if (count != null && count > baseline) {
             clearInterval(poll);
-            if (count != null && count > baseline) {
-              window.location.href = '/checkout';
-            } else {
-              /* ATC didn't add anything — re-enable button so user can retry */
-              btn.disabled = false;
-              btn.removeAttribute('aria-busy');
-            }
+            window.location.href = '/checkout';
+          } else if (attempts >= max) {
+            clearInterval(poll);
+            container.classList.remove('pdp-payment-btns--busy');
+            console.warn('[pdp-shoppay] cart did not update in 8s');
           }
         });
       }, 200);
     });
+  }
+
+  /* Capture-phase listener fires BEFORE Shop Pay's own click handler. */
+  container.addEventListener('click', function(e) {
+    /* Ignore clicks that aren't on a button-like element */
+    var btn = e.target.closest('button, shop-pay-button, [role="button"], a');
+    if (!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    runBundleCheckout();
+  }, true);
+
+  /* Some Shop Pay implementations dispatch on pointerdown / mousedown.
+     Catch those too in capture phase. */
+  ['pointerdown', 'mousedown'].forEach(function(evt) {
+    container.addEventListener(evt, function(e) {
+      var btn = e.target.closest('button, shop-pay-button, [role="button"], a');
+      if (!btn) return;
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+    }, true);
   });
 })();
 </script>
