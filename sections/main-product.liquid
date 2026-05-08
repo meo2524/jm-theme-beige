@@ -457,11 +457,13 @@
             aria-label="Buy with Shop Pay"
           >
             <span class="pdp-shoppay-bundle__prefix">Buy with</span>
-            <svg viewBox="0 0 78 28" class="pdp-shoppay-bundle__logo" aria-hidden="true" focusable="false">
-              <path fill="#fff" d="M21.46 9.95c-2.13 0-3.65 1-4.34 2.32V6.45h-2.65v15.1h2.65v-5.25c0-2.13 1.13-3.42 2.93-3.42 1.7 0 2.65 1.13 2.65 3.05v5.62h2.65v-6.13c0-3.16-1.7-5.47-4.89-5.47zM33.9 9.9c-3.42 0-5.95 2.5-5.95 5.95s2.53 5.95 5.95 5.95c3.42 0 5.95-2.5 5.95-5.95S37.32 9.9 33.9 9.9zm0 9.4c-1.95 0-3.3-1.42-3.3-3.45s1.35-3.45 3.3-3.45 3.3 1.42 3.3 3.45-1.35 3.45-3.3 3.45zM48.49 9.95c-1.7 0-3 .73-3.84 1.93v-1.66h-2.5v15.43h2.65v-5.86c.84 1.13 2.07 1.8 3.69 1.8 3.05 0 5.42-2.5 5.42-5.95s-2.37-5.69-5.42-5.69zm-.5 9.4c-1.92 0-3.3-1.42-3.3-3.45s1.38-3.45 3.3-3.45 3.27 1.4 3.27 3.45-1.36 3.45-3.27 3.45zM61.06 14.66c-1.5-.32-2.78-.6-2.78-1.45 0-.78.84-1.13 1.84-1.13 1.1 0 1.96.5 2.04 1.45h2.6c-.18-2.04-1.83-3.63-4.61-3.63-2.7 0-4.5 1.4-4.5 3.42 0 2.4 2.18 2.93 4.16 3.34 1.55.34 2.84.62 2.84 1.55 0 .8-.83 1.2-1.95 1.2-1.27 0-2.18-.6-2.27-1.55h-2.65c.16 2.07 1.92 3.7 4.85 3.7 2.81 0 4.66-1.42 4.66-3.55 0-2.5-2.21-3.05-4.23-3.45zM73.49 10.22l-2.85 7.65-2.65-7.65h-2.85l4.13 10.93-1.83 4.5h2.78l5.95-15.43z"/>
-              <circle cx="6.5" cy="14" r="6" fill="#fff"/>
-              <path fill="#5a31f5" d="M6.5 9.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm-.13 6.95l-1.6-1.61.7-.7 1.05 1.06 2.65-2.66.7.71-3.35 3.36z"/>
-            </svg>
+            <span class="pdp-shoppay-bundle__brand">
+              <svg viewBox="0 0 14 14" class="pdp-shoppay-bundle__check" aria-hidden="true" focusable="false">
+                <circle cx="7" cy="7" r="7" fill="#fff"/>
+                <path d="M3.6 7.2l2.2 2.2 4.6-4.6" stroke="#5a31f5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+              <span class="pdp-shoppay-bundle__word">shop</span>
+            </span>
           </button>
         </div>
 
@@ -1487,10 +1489,21 @@ body.lightbox-open { overflow: hidden; }
   font-weight: 500;
   letter-spacing: 0.01em;
 }
-.pdp-shoppay-bundle__logo {
-  width: 60px;
-  height: 22px;
+.pdp-shoppay-bundle__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.pdp-shoppay-bundle__check {
+  width: 16px;
+  height: 16px;
   flex-shrink: 0;
+}
+.pdp-shoppay-bundle__word {
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-size: 1.0625rem;
 }
 
 /* -- Money-back guarantee strip -- */
@@ -2554,14 +2567,21 @@ body.lightbox-open { overflow: hidden; }
     e.preventDefault();
     if (btn.disabled) return;
     btn.disabled = true;
-    var originalLabel = btn.innerHTML;
     btn.setAttribute('aria-busy', 'true');
 
     getCartItemCount().then(function(startCount) {
       var baseline = startCount == null ? 0 : startCount;
 
-      /* Trigger ATC — KaChing's form intercept adds bundle line items */
-      atc.click();
+      /* Trigger the form submission — KaChing intercepts the form's submit
+         event and adds the full bundle of line items to the cart. */
+      var form = atc.closest('form') || document.querySelector('form[action*="/cart/add"]');
+      if (form && typeof form.requestSubmit === 'function') {
+        form.requestSubmit(atc);
+      } else if (form) {
+        form.submit();
+      } else {
+        atc.click();
+      }
 
       /* Poll cart for changes, then redirect. Cap at 6s. */
       var attempts = 0;
@@ -2572,7 +2592,13 @@ body.lightbox-open { overflow: hidden; }
           var done = (count != null && count > baseline) || attempts >= maxAttempts;
           if (done) {
             clearInterval(poll);
-            window.location.href = '/checkout';
+            if (count != null && count > baseline) {
+              window.location.href = '/checkout';
+            } else {
+              /* ATC didn't add anything — re-enable button so user can retry */
+              btn.disabled = false;
+              btn.removeAttribute('aria-busy');
+            }
           }
         });
       }, 200);
