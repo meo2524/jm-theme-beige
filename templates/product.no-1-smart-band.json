@@ -42,6 +42,7 @@
     },
     "custom_liquid_TgB6HE": {
       "type": "custom-liquid",
+      "disabled": true,
       "name": "t:sections.custom-liquid.name",
       "settings": {
         "show_on": "both",
@@ -52,6 +53,14 @@
         "custom_padding_top": 36,
         "padding___bottom": "inherit",
         "custom_padding_bottom": 36
+      }
+    },
+    "photo_reviews": {
+      "type": "photo-reviews",
+      "settings": {
+        "eyebrow": "Verified Menders",
+        "heading": "Real people. Real results.",
+        "subheading": "Join thousands of Menders who track their health from their finger."
       }
     },
     "benefit_pitch": {
@@ -111,6 +120,14 @@
         "cta_label": "",
         "cta_url": "",
         "reverse": false
+      }
+    },
+    "angle_testimonials": {
+      "type": "angle-testimonials",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "The Mender Community",
+        "heading": "Meet the Menders."
       }
     },
     "ring_comparison": {
@@ -251,22 +268,6 @@
         "apple_url": "https://apps.apple.com/nz/app/qring/id6473672621",
         "google_url": "https://play.google.com/store/apps/details?id=com.app.cq.ring&hl=en_NZ",
         "privacy_text": "Your health data stays on your device."
-      }
-    },
-    "angle_testimonials": {
-      "type": "angle-testimonials",
-      "disabled": true,
-      "settings": {
-        "eyebrow": "The Mender Community",
-        "heading": "Meet the Menders."
-      }
-    },
-    "photo_reviews": {
-      "type": "photo-reviews",
-      "settings": {
-        "eyebrow": "Verified Menders",
-        "heading": "Real people. Real results.",
-        "subheading": "Join thousands of Menders who track their health from their finger."
       }
     },
     "product_faq": {
@@ -661,8 +662,8 @@
   "order": [
     "main",
     "custom_liquid_TgB6HE",
-    "photo_reviews",
     "benefit_pitch",
+    "photo_reviews",
     "angle_testimonials",
     "ring_comparison",
     "product_science",
