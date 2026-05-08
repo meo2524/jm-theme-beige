@@ -397,11 +397,11 @@
     var vis    = getVisible();
     dots.forEach(function(d, i) { d.classList.toggle('is-active', i === active); });
     btnPrev.disabled = active === 0;
-    btnNext.disabled = active >= total - vis;
+    btnNext.disabled = active >= total - 1;
   }
 
   btnPrev.addEventListener('click', function() { scrollTo(Math.max(0, getActive() - 1)); });
-  btnNext.addEventListener('click', function() { scrollTo(Math.min(total - 1, getActive() + getVisible())); });
+  btnNext.addEventListener('click', function() { scrollTo(Math.min(total - 1, getActive() + 1)); });
 
   dotsWrap.addEventListener('click', function(e) {
     var d = e.target.closest('.pr-dot');
