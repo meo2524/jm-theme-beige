@@ -443,11 +443,11 @@
         </button>
 
         <div class="pdp-payment-btns">
-          <shop-pay-wallet-button
+          <shop-pay-button
             store-url="{{ shop.url }}"
-            variant-ids="{{ current_variant.id }}:1"
+            variants="{{ current_variant.id }}"
             class="pdp-shop-pay-btn">
-          </shop-pay-wallet-button>
+          </shop-pay-button>
           <div class="pdp-payment-btns__sdk-loader" aria-hidden="true">
             {{ form | payment_button }}
           </div>
@@ -1446,7 +1446,7 @@ body.lightbox-open { overflow: hidden; }
 .pdp-shop-pay-btn {
   display: block !important;
   width: 100% !important;
-  --shop-pay-wallet-button-width: 100%;
+  --shop-pay-button-width: 100%;
   height: 48px;
 }
 /* Hidden loader — keeps Shopify's Shop Pay SDK on the page so the
