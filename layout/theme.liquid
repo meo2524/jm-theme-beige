@@ -555,19 +555,26 @@
     /* KaChing — aggressive mobile compression. Every bundle visible without
        eating the screen. Cut marketing fluff (subtitle), tighten everything. */
     @media (max-width: 480px) {
-      .kaching-bundles__block { margin: 4px 0 2px !important; }
-      .kaching-bundles__bar { margin: 2px 0 !important; }
-      .kaching-bundles__bar-wrapper { gap: 2px !important; }
+      .kaching-bundles,
+      .kaching-bundles-block { padding: 0 !important; margin: 0 !important; }
+      .kaching-bundles__block { margin: 0 !important; padding: 0 !important; }
+      .kaching-bundles__bars { gap: 4px !important; }
+      .kaching-bundles__bar { margin: 0 !important; }
+      .kaching-bundles__bar-wrapper { gap: 0 !important; padding: 0 !important; }
+      .kaching-bundles .kaching-bundles__bar-container,
       .kaching-bundles__bar-container {
-        padding: 8px 10px !important;
+        padding: 6px 10px !important;
       }
-      /* Radio button: shrink the gap on its right */
+      /* Radio button: shrink everything around it */
       .kaching-bundles__bar-radio {
+        margin: 0 !important;
         margin-right: 2px !important;
       }
+      .kaching-bundles .kaching-bundles__bar-main,
       .kaching-bundles__bar-main {
-        gap: 6px !important;
+        gap: 4px !important;
         align-items: center !important;
+        padding: 0 !important;
       }
       .kaching-bundles__bar-content {
         gap: 0 !important;
@@ -622,11 +629,11 @@
       /* Variant rows (Color/Size for Mend Couple) — kill the wasted padding */
       .kaching-bundles__bar-variants {
         margin-top: 2px !important;
-        padding-top: 4px !important;
+        padding-top: 2px !important;
         gap: 0 !important;
       }
       .kaching-bundles__bar-variant {
-        padding: 2px 0 !important;
+        padding: 1px 0 !important;
         gap: 6px !important;
       }
       .kaching-bundles__bar-variant-names {
@@ -635,18 +642,24 @@
         padding-bottom: 0 !important;
         letter-spacing: 0.06em !important;
       }
+      .kaching-bundles__bar-variant-selector-wrapper {
+        padding: 0 !important;
+      }
+      .kaching-bundles__bar-variant__content {
+        padding: 0 !important;
+      }
       .kaching-bundles__bar-variant-selects {
         gap: 6px !important;
       }
       .kaching-bundles__bar-variant-selects select,
       .kaching-bundles__bar-variant-selects span {
         font-size: 0.8125rem !important;
-        padding: 4px 8px !important;
+        padding: 3px 8px !important;
         min-height: 0 !important;
       }
       /* Free-gift row */
       .kaching-bundles__free-gift {
-        padding: 4px 10px !important;
+        padding: 3px 10px !important;
         gap: 6px !important;
         min-height: 0 !important;
         margin-top: 2px !important;
