@@ -2549,23 +2549,20 @@ body.lightbox-open { overflow: hidden; }
     });
   }
 
-  /* Capture-phase listener fires BEFORE Shop Pay's own click handler. */
+  /* Capture-phase listener fires BEFORE Shop Pay's own click handler.
+     The container holds only the Shop Pay wallet button + "More payment
+     options" link — both bypass bundles, so we hijack all clicks inside. */
   container.addEventListener('click', function(e) {
-    /* Ignore clicks that aren't on a button-like element */
-    var btn = e.target.closest('button, shop-pay-button, [role="button"], a');
-    if (!btn) return;
     e.preventDefault();
     e.stopPropagation();
     e.stopImmediatePropagation();
     runBundleCheckout();
   }, true);
 
-  /* Some Shop Pay implementations dispatch on pointerdown / mousedown.
-     Catch those too in capture phase. */
-  ['pointerdown', 'mousedown'].forEach(function(evt) {
+  /* Shop Pay attaches handlers on pointerdown/mousedown too — block them
+     in capture phase so they can't fire their own checkout flow. */
+  ['pointerdown', 'mousedown', 'touchstart'].forEach(function(evt) {
     container.addEventListener(evt, function(e) {
-      var btn = e.target.closest('button, shop-pay-button, [role="button"], a');
-      if (!btn) return;
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
