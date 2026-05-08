@@ -1425,10 +1425,21 @@ body.lightbox-open { overflow: hidden; }
   animation: breathe 2.4s ease-in-out infinite;
 }
 
-/* Native dynamic checkout button hidden — incompatible with KaChing
-   bundles (Shop Pay's single-variant API can't carry bundle line items). */
+/* Native dynamic checkout button. Note: clicking it bypasses any KaChing
+   bundle (only the base variant goes to checkout, no free gift/discount). */
 .pdp-payment-btns {
-  display: none !important;
+  margin: 0.75rem 0;
+  display: block;
+  width: 100%;
+}
+/* Force the dynamic checkout button to render even when KaChing tries
+   to hide it (KaChing's JS attaches display:none after page load). */
+.pdp-payment-btns .shopify-payment-button,
+.pdp-payment-btns .shopify-payment-button__button {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
 }
 
 /* -- Money-back guarantee strip -- */
