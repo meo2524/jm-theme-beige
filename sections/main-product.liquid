@@ -463,8 +463,12 @@
       <div class="pdp-payments" aria-label="Accepted payment methods">
         <span class="pdp-payments__label">Secure checkout</span>
         <ul class="pdp-payments__icons" role="list">
-          {%- assign payment_methods = 'visa,master,american_express,discover,apple_pay,google_pay,shopify_pay,paypal' | split: ',' -%}
-          {%- for method in payment_methods -%}
+          {%- comment -%}
+            shop.enabled_payment_types reflects exactly what's enabled in
+            Shopify Admin → Settings → Payments. No Apple Pay if you're not
+            on a payment provider that supports it, etc.
+          {%- endcomment -%}
+          {%- for method in shop.enabled_payment_types -%}
             <li class="pdp-payments__icon">{{ method | payment_type_svg_tag }}</li>
           {%- endfor -%}
         </ul>
