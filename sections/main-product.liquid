@@ -473,6 +473,28 @@
         </li>
       </ul>
 
+      {%- comment -%} -- Guarantee + payment methods strip -- {%- endcomment -%}
+      <div class="pdp-guarantee" data-reveal data-reveal-delay="320">
+        <svg class="pdp-guarantee__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+        <span class="pdp-guarantee__text">
+          <strong>30-day money-back guarantee.</strong>
+          Wear it for 30 nights. If it's not for you, send it back for a full refund — no questions.
+        </span>
+      </div>
+
+      <div class="pdp-payments" aria-label="Accepted payment methods">
+        <span class="pdp-payments__label">Secure checkout</span>
+        <ul class="pdp-payments__icons" role="list">
+          {%- assign payment_methods = 'visa,master,american_express,discover,apple_pay,google_pay,shopify_pay,paypal' | split: ',' -%}
+          {%- for method in payment_methods -%}
+            <li class="pdp-payments__icon">{{ method | payment_type_svg_tag }}</li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
       {%- comment -%} -- Accordion -- {%- endcomment -%}
       <div class="accordion" id="Accordion-{{ section.id }}">
 
@@ -1433,6 +1455,69 @@ body.lightbox-open { overflow: hidden; }
    bundles (Shop Pay's single-variant API can't carry bundle line items). */
 .pdp-payment-btns {
   display: none !important;
+}
+
+/* -- Money-back guarantee strip -- */
+.pdp-guarantee {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  margin: 1rem 0 0.75rem;
+  padding: 0.75rem 0.875rem;
+  background: rgba(122, 92, 58, 0.06);
+  border: 1px solid rgba(122, 92, 58, 0.18);
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--color-olive, #5a5040);
+}
+.pdp-guarantee__icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: var(--color-walnut, #8a6240);
+  margin-top: 1px;
+}
+.pdp-guarantee__text strong {
+  color: var(--color-black, #1f1d1a);
+  font-weight: 600;
+  margin-right: 0.25rem;
+}
+
+/* -- Payment-method icons strip -- */
+.pdp-payments {
+  margin: 0.625rem 0 0.875rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.pdp-payments__label {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-walnut, #8a6240);
+  opacity: 0.78;
+}
+.pdp-payments__icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pdp-payments__icon {
+  display: inline-flex;
+}
+.pdp-payments__icon svg {
+  width: 32px;
+  height: 20px;
+  border-radius: 3px;
+  display: block;
 }
 
 /* Low-stock urgency indicator — sits between ATC and Shop Pay */
