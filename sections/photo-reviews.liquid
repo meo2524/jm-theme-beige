@@ -1,0 +1,380 @@
+{% comment %} photo-reviews.liquid — Photo-driven social proof grid {% endcomment %}
+
+{%- liquid
+  assign eyebrow = section.settings.eyebrow | default: 'Verified Reviews'
+  assign heading = section.settings.heading | default: 'Real people. Real results.'
+  assign subheading = section.settings.subheading | default: 'Join thousands who track their health from their finger.'
+-%}
+
+<section class="pr-wrap" data-section-id="{{ section.id }}">
+  <div class="pr-inner">
+
+    <header class="pr-head">
+      <div class="pr-head__rule" aria-hidden="true"></div>
+      <p class="pr-head__eyebrow">{{ eyebrow }}</p>
+      <h2 class="pr-head__heading">{{ heading }}</h2>
+      <p class="pr-head__sub">{{ subheading }}</p>
+    </header>
+
+    <div class="pr-grid">
+
+      <!-- Card 1 — Keisha M. -->
+      <article class="pr-card">
+        <div class="pr-card__photo-wrap">
+          <img
+            src="{{ 'Social_Proof_1.png' | file_url }}"
+            alt="Keisha M. wearing Marrow Ring N°01"
+            class="pr-card__photo"
+            loading="lazy"
+            width="600"
+            height="750"
+          />
+        </div>
+        <div class="pr-card__body">
+          <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="pr-card__title">Finally sleeping through the night again.</p>
+          <p class="pr-card__text">I've had fragmented sleep for years. Wore this for two weeks and started understanding my patterns. Changed my wind-down routine based on the data. I'm getting almost 90 minutes of deep sleep now. My whole mood has shifted.</p>
+          <footer class="pr-card__footer">
+            <div class="pr-card__meta">
+              <span class="pr-card__name">Keisha M.</span>
+              <span class="pr-verified">
+                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Verified Purchase
+              </span>
+            </div>
+            <span class="pr-card__date">March 14, 2025</span>
+          </footer>
+        </div>
+      </article>
+
+      <!-- Card 2 — Sarah T. -->
+      <article class="pr-card">
+        <div class="pr-card__photo-wrap">
+          <img
+            src="{{ 'Social_Proof_2.png' | file_url }}"
+            alt="Sarah T. wearing Marrow Ring N°01"
+            class="pr-card__photo"
+            loading="lazy"
+            width="600"
+            height="750"
+          />
+        </div>
+        <div class="pr-card__body">
+          <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="pr-card__title">My morning readiness score changed everything.</p>
+          <p class="pr-card__text">I check my score before I check anything else. On low days I walk instead of pushing a workout. On high days I go hard. I've stopped feeling guilty about rest days. The data gave me permission to actually listen to my body.</p>
+          <footer class="pr-card__footer">
+            <div class="pr-card__meta">
+              <span class="pr-card__name">Sarah T.</span>
+              <span class="pr-verified">
+                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Verified Purchase
+              </span>
+            </div>
+            <span class="pr-card__date">January 28, 2025</span>
+          </footer>
+        </div>
+      </article>
+
+      <!-- Card 3 — Kayla R. -->
+      <article class="pr-card">
+        <div class="pr-card__photo-wrap">
+          <img
+            src="{{ 'Social_Proof_3.png' | file_url }}"
+            alt="Kayla R. wearing Marrow Ring N°01"
+            class="pr-card__photo"
+            loading="lazy"
+            width="600"
+            height="750"
+          />
+        </div>
+        <div class="pr-card__body">
+          <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="pr-card__title">The only tracker that keeps up with me.</p>
+          <p class="pr-card__text">I train six days a week. Everything else I've tried either falls off, reads wrong, or looks ridiculous in the gym. This ring stays put, tracks accurately, and I forget I'm wearing it. My coach uses my HRV data in our programming sessions now.</p>
+          <footer class="pr-card__footer">
+            <div class="pr-card__meta">
+              <span class="pr-card__name">Kayla R.</span>
+              <span class="pr-verified">
+                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Verified Purchase
+              </span>
+            </div>
+            <span class="pr-card__date">February 3, 2025</span>
+          </footer>
+        </div>
+      </article>
+
+      <!-- Card 4 — Jessica H. -->
+      <article class="pr-card">
+        <div class="pr-card__photo-wrap">
+          <img
+            src="{{ 'Social_Proof_4.png' | file_url }}"
+            alt="Jessica H. wearing Marrow Ring N°01"
+            class="pr-card__photo"
+            loading="lazy"
+            width="600"
+            height="750"
+          />
+        </div>
+        <div class="pr-card__body">
+          <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="pr-card__title">Three months in and I'm not going back.</p>
+          <p class="pr-card__text">Started wearing it to track sleep. Ended up using it for everything — stress, activity, cycle. My doctor asked what changed because my resting heart rate dropped 7 bpm in a quarter. I told her I finally started listening to my body.</p>
+          <footer class="pr-card__footer">
+            <div class="pr-card__meta">
+              <span class="pr-card__name">Jessica H.</span>
+              <span class="pr-verified">
+                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Verified Purchase
+              </span>
+            </div>
+            <span class="pr-card__date">December 9, 2024</span>
+          </footer>
+        </div>
+      </article>
+
+      <!-- Card 5 — Amanda W. -->
+      <article class="pr-card">
+        <div class="pr-card__photo-wrap">
+          <img
+            src="{{ 'Social_Proof_5.png' | file_url }}"
+            alt="Amanda W. wearing Marrow Ring N°01"
+            class="pr-card__photo"
+            loading="lazy"
+            width="600"
+            height="750"
+          />
+        </div>
+        <div class="pr-card__body">
+          <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="pr-card__title">Six days of battery. I charge it while I brush my teeth.</p>
+          <p class="pr-card__text">My only routine is charging it in the morning while I get ready. Six days of battery actually means six days — I've tested it. The sleep data is detailed without being overwhelming. I finally understand what quality sleep feels like.</p>
+          <footer class="pr-card__footer">
+            <div class="pr-card__meta">
+              <span class="pr-card__name">Amanda W.</span>
+              <span class="pr-verified">
+                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Verified Purchase
+              </span>
+            </div>
+            <span class="pr-card__date">November 22, 2024</span>
+          </footer>
+        </div>
+      </article>
+
+      <!-- Card 6 — Mei L. -->
+      <article class="pr-card">
+        <div class="pr-card__photo-wrap">
+          <img
+            src="{{ 'Social_Proof_6.png' | file_url }}"
+            alt="Mei L. wearing Marrow Ring N°01"
+            class="pr-card__photo"
+            loading="lazy"
+            width="600"
+            height="750"
+          />
+        </div>
+        <div class="pr-card__body">
+          <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="pr-card__title">Postpartum sleep tracking that actually helped.</p>
+          <p class="pr-card__text">I bought this at 36 weeks. Having data on my fragmented postpartum sleep — how much rest I was getting despite waking every two hours — helped me talk seriously with my midwife about recovery. It made an invisible problem visible.</p>
+          <footer class="pr-card__footer">
+            <div class="pr-card__meta">
+              <span class="pr-card__name">Mei L.</span>
+              <span class="pr-verified">
+                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Verified Purchase
+              </span>
+            </div>
+            <span class="pr-card__date">April 2, 2025</span>
+          </footer>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.pr-wrap {
+  background: var(--color-bone, #f5efe6);
+  padding: 5rem 0 6rem;
+}
+.pr-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+/* Header */
+.pr-head {
+  margin-bottom: 3rem;
+  max-width: 560px;
+}
+.pr-head__rule {
+  width: 40px; height: 1.5px;
+  background: var(--color-walnut, #8a6240);
+  opacity: 0.6; margin-bottom: 1.25rem;
+}
+.pr-head__eyebrow {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.6875rem; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--color-walnut, #8a6240);
+  margin: 0 0 0.75rem;
+}
+.pr-head__heading {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 400; color: var(--color-black, #1f1d1a);
+  line-height: 1.15; margin: 0 0 0.75rem;
+}
+.pr-head__sub {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.9375rem; color: var(--color-olive, #5a4a3a);
+  opacity: 0.8; margin: 0;
+}
+
+/* Grid */
+.pr-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 600px) {
+  .pr-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .pr-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+}
+
+/* Card */
+.pr-card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(43,43,43,0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.pr-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(31,29,26,0.1);
+}
+
+/* Photo */
+.pr-card__photo-wrap {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #e8e1d9;
+}
+.pr-card__photo {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.pr-card:hover .pr-card__photo {
+  transform: scale(1.03);
+}
+
+/* Body */
+.pr-card__body {
+  padding: 1.5rem 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  flex: 1;
+}
+
+/* Stars */
+.pr-stars {
+  color: var(--color-walnut, #8a6240);
+  font-size: 12px;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.pr-card__title {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-black, #1f1d1a);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.pr-card__text {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 1.0625rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--color-black, #1f1d1a);
+  margin: 0;
+  flex: 1;
+}
+
+/* Footer */
+.pr-card__footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(43,43,43,0.08);
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+.pr-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.pr-card__name {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-black, #1f1d1a);
+}
+.pr-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #5a8a60;
+  letter-spacing: 0.02em;
+}
+.pr-card__date {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.6875rem;
+  color: var(--color-olive, #5a4a3a);
+  opacity: 0.55;
+  text-align: right;
+}
+
+@media (max-width: 599px) {
+  .pr-wrap { padding: 3rem 0 4rem; }
+  .pr-card__body { padding: 1.25rem 1.25rem 1rem; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Photo reviews",
+  "tag": "section",
+  "class": "section-photo-reviews",
+  "settings": [
+    { "type": "text", "id": "eyebrow",    "label": "Eyebrow",    "default": "Verified Reviews" },
+    { "type": "text", "id": "heading",    "label": "Heading",    "default": "Real people. Real results." },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Join thousands who track their health from their finger." }
+  ],
+  "presets": [{ "name": "Photo reviews" }]
+}
+{% endschema %}
