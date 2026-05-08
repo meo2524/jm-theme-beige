@@ -261,6 +261,14 @@
         "heading": "Meet the Menders."
       }
     },
+    "photo_reviews": {
+      "type": "photo-reviews",
+      "settings": {
+        "eyebrow": "Verified Reviews",
+        "heading": "Real people. Real results.",
+        "subheading": "Join thousands who track their health from their finger."
+      }
+    },
     "product_faq": {
       "type": "product-faq",
       "blocks": {
@@ -655,6 +663,7 @@
     "custom_liquid_TgB6HE",
     "benefit_pitch",
     "angle_testimonials",
+    "photo_reviews",
     "ring_comparison",
     "product_science",
     "app_showcase",
