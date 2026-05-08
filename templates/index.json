@@ -79,6 +79,21 @@
         "reverse": false
       }
     },
+    "founder_story": {
+      "type": "story",
+      "settings": {
+        "eyebrow": "Brand origin",
+        "heading_pre": "Built to",
+        "heading_em": "actually mend",
+        "heading_post": "",
+        "paragraph_1": "Mend & Co builds tools that earn their place — bought once, owned forever, designed to make recovery measurable. The N°01 Smart Ring is the first. There will be more, each one quietly built to mend something we have been told to ignore.",
+        "paragraph_2": "",
+        "link_label": "About Mend & Co →",
+        "link_url": "/pages/about-us",
+        "image": "shopify://shop_images/hf_20260508_095321_e6c3ea7d-b274-4488-a745-042539f5f110.png",
+        "image_label": "hands · oil · linen"
+      }
+    },
     "177700770423191747": {
       "type": "apps",
       "blocks": {
@@ -96,21 +111,6 @@
       ],
       "settings": {
         "include_margins": true
-      }
-    },
-    "founder_story": {
-      "type": "story",
-      "settings": {
-        "eyebrow": "Brand origin",
-        "heading_pre": "Built to",
-        "heading_em": "actually mend",
-        "heading_post": "",
-        "paragraph_1": "Mend & Co builds tools that earn their place — bought once, owned forever, designed to make recovery measurable. The N°01 Smart Ring is the first. There will be more, each one quietly built to mend something we have been told to ignore.",
-        "paragraph_2": "",
-        "link_label": "About Mend & Co →",
-        "link_url": "/pages/about-us",
-        "image": "shopify://shop_images/hf_20260508_095321_e6c3ea7d-b274-4488-a745-042539f5f110.png",
-        "image_label": "hands · oil · linen"
       }
     },
     "testimonials": {
@@ -138,8 +138,8 @@
     "hero",
     "stats-strip",
     "smart_band_spotlight",
-    "177700770423191747",
     "founder_story",
+    "177700770423191747",
     "testimonials",
     "newsletter"
   ]
