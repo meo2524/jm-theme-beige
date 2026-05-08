@@ -662,28 +662,46 @@
       .kaching-bundles__bar-most-popular { transform: scale(0.7) !important; transform-origin: top right !important; }
     }
 
-    /* KaChing variant dropdown — must float above the Mother's Day banner,
-       ATC, and Shop Pay buttons that sit below the bundle picker. Apply
-       at all viewports, not just mobile. */
+    /* KaChing variant dropdown — must float above ATC, Shop Pay, and the
+       Mother's Day banner. Strategy: give the entire bundle block its own
+       stacking context with a high z-index, then strip every stacking
+       context that gets created on the elements below it. */
+    .kaching-bundles__block {
+      position: relative !important;
+      z-index: 500 !important;
+      isolation: auto !important;
+    }
     .kaching-bundles__swatch-dropdown,
     .kaching-bundles .kaching-bundles__swatch-dropdown,
     .kaching-bundles__bar-variant-selector-wrapper,
     .kaching-bundles .kaching-bundles__bar-variant-selector-wrapper {
-      z-index: 200 !important;
+      z-index: 9999 !important;
       position: relative;
     }
-    .kaching-bundles__bar-variant-select[aria-expanded="true"] + *,
-    .kaching-bundles__bar--selected .kaching-bundles__swatch-dropdown {
-      z-index: 250 !important;
-    }
-    /* Make sure parent stacking contexts don't trap the dropdown */
+    /* Strip overflow:hidden from parents so dropdown can escape the card */
     .kaching-bundles__bar-variant,
     .kaching-bundles__bar-variants,
     .kaching-bundles__bar-wrapper,
     .kaching-bundles__bar,
     .kaching-bundles__bars,
-    .kaching-bundles__block {
+    .kaching-bundles__block,
+    .kaching-bundles__bar-container {
       overflow: visible !important;
+    }
+    /* Kill the stacking contexts on elements below the bundle picker so
+       the dropdown can render over them. */
+    .btn-atc,
+    .pdp-guarantee,
+    .pdp-payments,
+    .pdp-shoppay-bundle,
+    .pdp-payment-btns {
+      isolation: auto !important;
+      z-index: auto !important;
+    }
+    /* The reveal animation on .pdp-guarantee leaves a transform that creates
+       a stacking context. Reset once the page is interactive. */
+    .pdp-guarantee[data-reveal] {
+      transform: none !important;
     }
 
     .back-to-top {
