@@ -662,6 +662,30 @@
       .kaching-bundles__bar-most-popular { transform: scale(0.7) !important; transform-origin: top right !important; }
     }
 
+    /* KaChing variant dropdown — must float above the Mother's Day banner,
+       ATC, and Shop Pay buttons that sit below the bundle picker. Apply
+       at all viewports, not just mobile. */
+    .kaching-bundles__swatch-dropdown,
+    .kaching-bundles .kaching-bundles__swatch-dropdown,
+    .kaching-bundles__bar-variant-selector-wrapper,
+    .kaching-bundles .kaching-bundles__bar-variant-selector-wrapper {
+      z-index: 200 !important;
+      position: relative;
+    }
+    .kaching-bundles__bar-variant-select[aria-expanded="true"] + *,
+    .kaching-bundles__bar--selected .kaching-bundles__swatch-dropdown {
+      z-index: 250 !important;
+    }
+    /* Make sure parent stacking contexts don't trap the dropdown */
+    .kaching-bundles__bar-variant,
+    .kaching-bundles__bar-variants,
+    .kaching-bundles__bar-wrapper,
+    .kaching-bundles__bar,
+    .kaching-bundles__bars,
+    .kaching-bundles__block {
+      overflow: visible !important;
+    }
+
     .back-to-top {
       position: fixed;
       bottom: 24px;
