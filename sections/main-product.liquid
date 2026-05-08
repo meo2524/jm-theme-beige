@@ -1907,21 +1907,28 @@ body.lightbox-open { overflow: hidden; }
     padding: 0;
   }
 
-  /* Mobile: unstick gallery, stack vertically */
+  /* Mobile: unstick gallery, stack vertically. Hard-constrain to viewport
+     so the swipe carousel can't push the section past its container. */
   .product-gallery {
     position: static;
     flex-direction: column;
     gap: 0;
     align-items: stretch;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
   }
 
   .gallery-thumbs {
     max-height: none;
     width: 100%;
+    max-width: 100%;
     flex-direction: row;
     overflow-x: auto;
     overflow-y: visible;
     padding: 0.75rem 1rem;
+    box-sizing: border-box;
   }
 
   .gallery-thumb {
@@ -1933,18 +1940,25 @@ body.lightbox-open { overflow: hidden; }
 
   .gallery-main {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    box-shadow: none;
   }
 
   .gallery-track {
     display: flex;
+    width: 100%;
+    max-width: 100%;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    /* Use proper aspect ratio instead of fixed height so ring photos
-       aren't squashed — 1:1 works for square/portrait product shots */
     aspect-ratio: 1 / 1;
     height: auto;
-    max-height: 520px;
+    max-height: 100vw;
     border-left: none;
     border-right: none;
     border-radius: 0;
