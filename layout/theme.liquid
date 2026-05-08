@@ -552,58 +552,88 @@
       background: #f8f5f0 !important;
     }
 
-    /* KaChing — mobile layout: title + SAVE badge were sharing a row,
-       crushing both into 2-line wraps. Stack them so each gets full width. */
+    /* KaChing — mobile compression. Goal: every bundle visible without
+       eating the screen. Tight padding, smaller fonts, no wasted gaps. */
     @media (max-width: 480px) {
+      .kaching-bundles__block { margin: 8px 0 6px !important; }
+      .kaching-bundles__bar { margin: 4px 0 !important; }
       .kaching-bundles__bar-container {
-        padding: 14px 12px !important;
+        padding: 10px 12px !important;
       }
       .kaching-bundles__bar-main {
-        gap: 10px !important;
+        gap: 8px !important;
       }
       .kaching-bundles__bar-content {
-        gap: 6px !important;
+        gap: 2px !important;
       }
       .kaching-bundles__bar-first-line {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 4px !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        gap: 6px !important;
       }
       .kaching-bundles__bar-title {
-        font-size: 1rem !important;
-        line-height: 1.2 !important;
-        white-space: nowrap;
+        font-size: 0.9375rem !important;
+        line-height: 1.15 !important;
       }
       .kaching-bundles__bar-label {
-        font-size: 0.7rem !important;
-        padding: 2px 6px !important;
-      }
-      .kaching-bundles__bar-subtitle {
-        font-size: 0.8125rem !important;
+        font-size: 0.625rem !important;
+        padding: 1px 6px !important;
         line-height: 1.3 !important;
       }
-      /* Tighter pricing column gives subtitle more room */
+      .kaching-bundles__bar-subtitle {
+        font-size: 0.75rem !important;
+        line-height: 1.25 !important;
+      }
       .kaching-bundles__bar-pricing {
         flex-shrink: 0;
       }
       .kaching-bundles__bar-price {
-        font-size: 1.125rem !important;
+        font-size: 1rem !important;
+        line-height: 1.15 !important;
       }
       .kaching-bundles__bar-full-price {
-        font-size: 0.8125rem !important;
+        font-size: 0.75rem !important;
+        line-height: 1.15 !important;
       }
-      /* Free-gift row: tighten so it stops feeling cramped */
+      /* Variant rows (Color/Size for Mend Couple) — tighter rows */
+      .kaching-bundles__bar-variants {
+        margin-top: 6px !important;
+      }
+      .kaching-bundles__bar-variant {
+        padding: 4px 0 !important;
+      }
+      .kaching-bundles__bar-variant-names {
+        font-size: 0.6875rem !important;
+        margin-bottom: 2px !important;
+      }
+      .kaching-bundles__bar-variant-selects select,
+      .kaching-bundles__bar-variant-selects span {
+        font-size: 0.8125rem !important;
+        padding: 6px 10px !important;
+      }
+      /* Free-gift row */
       .kaching-bundles__free-gift {
-        padding: 10px 12px !important;
+        padding: 6px 10px !important;
+        gap: 8px !important;
+        min-height: 0 !important;
+      }
+      .kaching-bundles__free-gift__main {
         gap: 8px !important;
       }
+      .kaching-bundles__free-gift__image {
+        width: 24px !important;
+        height: 24px !important;
+      }
       .kaching-bundles__free-gift__text {
-        font-size: 0.8125rem !important;
-        line-height: 1.3 !important;
+        font-size: 0.75rem !important;
+        line-height: 1.2 !important;
       }
       .kaching-bundles__free-gift__full-price {
-        font-size: 0.75rem !important;
+        font-size: 0.6875rem !important;
       }
+      /* "Most Popular" sticker is huge on mobile — shrink it */
+      .kaching-bundles__bar-most-popular { transform: scale(0.78) !important; transform-origin: top right !important; }
     }
 
     .back-to-top {
