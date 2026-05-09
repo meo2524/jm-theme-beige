@@ -359,9 +359,7 @@
   outline-offset: 2px;
 }
 
-/* Track visibility for the active set */
-.pr-track { display: none; }
-.pr-track.is-active { display: flex; }
+/* Track visibility — actual rules below the original .pr-track block */
 .pr-head__rule {
   width: 40px; height: 1.5px;
   background: var(--color-walnut, #8a6240);
@@ -403,6 +401,10 @@
   scroll-padding-inline: clamp(1rem, 4vw, 2rem);
 }
 .pr-track::-webkit-scrollbar { display: none; }
+
+/* Toggle visibility — only the active set renders. Placed AFTER the
+   .pr-track display:flex rule so source-order cascade wins. */
+.pr-track:not(.is-active) { display: none !important; }
 
 /* Cards */
 .pr-card {
