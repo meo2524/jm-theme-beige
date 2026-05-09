@@ -7,7 +7,7 @@
 .cart-drawer {
   position: fixed;
   inset: 0;
-  z-index: var(--z-modal, 50);
+  z-index: 10001; /* above Kaching Bundles (9999) */
   pointer-events: none;
 }
 
