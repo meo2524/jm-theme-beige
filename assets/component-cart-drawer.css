@@ -958,3 +958,13 @@
     width: 100vw;
   }
 }
+
+/* ── DYNAMIC CHECKOUT (Shop Pay / Apple Pay) ───────────── */
+
+.cart-drawer__dynamic-checkout {
+  padding: 0.75rem 1.25rem 0;
+}
+
+.cart-drawer__dynamic-checkout .shopify-cleanslate > div {
+  border-radius: 0 !important;
+}
