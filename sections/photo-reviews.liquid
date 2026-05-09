@@ -16,8 +16,14 @@
       <p class="pr-head__sub">{{ subheading }}</p>
     </header>
 
+    <!-- Tabs: women / men -->
+    <div class="pr-tabs" role="tablist" aria-label="Filter reviews">
+      <button class="pr-tab is-active" type="button" role="tab" aria-selected="true" data-set="women">Women</button>
+      <button class="pr-tab" type="button" role="tab" aria-selected="false" data-set="men">Men</button>
+    </div>
+
     <div class="pr-carousel-wrap">
-      <div class="pr-track" id="pr-track-{{ section.id }}">
+      <div class="pr-track is-active" id="pr-track-women-{{ section.id }}" data-set="women" role="tabpanel">
 
         <!-- Card 1 — Keisha M. -->
         <article class="pr-card">
@@ -153,6 +159,143 @@
 
       </div>
 
+      <!-- MEN track -->
+      <div class="pr-track" id="pr-track-men-{{ section.id }}" data-set="men" role="tabpanel" hidden>
+
+        <!-- Card 1 — Marcus T. -->
+        <article class="pr-card">
+          <div class="pr-card__photo-wrap">
+            <img src="{{ 'Social_Proof_Men_1.png' | file_url }}" alt="Marcus T. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
+          </div>
+          <div class="pr-card__body">
+            <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="pr-card__title">Stopped overtraining once I could see the score.</p>
+            <p class="pr-card__text">Used to crush leg day twice a week and wonder why I felt destroyed. Recovery was always low. Lift smarter not just harder, turns out.</p>
+            <footer class="pr-card__footer">
+              <div class="pr-card__meta">
+                <span class="pr-card__name">Marcus T.</span>
+                <span class="pr-verified">
+                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Verified Purchase
+                </span>
+              </div>
+              <span class="pr-card__date">February 6, 2026</span>
+            </footer>
+          </div>
+        </article>
+
+        <!-- Card 2 — James L. -->
+        <article class="pr-card">
+          <div class="pr-card__photo-wrap">
+            <img src="{{ 'Social_Proof_Men_2.png' | file_url }}" alt="James L. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
+          </div>
+          <div class="pr-card__body">
+            <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="pr-card__title">Two kids under 4. The data confirms I'm not crazy.</p>
+            <p class="pr-card__text">Haven't had real sleep in a year. Now my wife actually believes me when I say I'm running on fumes lol. Useful for setting expectations honestly.</p>
+            <footer class="pr-card__footer">
+              <div class="pr-card__meta">
+                <span class="pr-card__name">James L.</span>
+                <span class="pr-verified">
+                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Verified Purchase
+                </span>
+              </div>
+              <span class="pr-card__date">January 28, 2026</span>
+            </footer>
+          </div>
+        </article>
+
+        <!-- Card 3 — Daniel K. -->
+        <article class="pr-card">
+          <div class="pr-card__photo-wrap">
+            <img src="{{ 'Social_Proof_Men_3.png' | file_url }}" alt="Daniel K. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
+          </div>
+          <div class="pr-card__body">
+            <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="pr-card__title">My HRV tanked every Sunday night. Took weeks to figure out why.</p>
+            <p class="pr-card__text">Connected it to Monday meetings I dreaded. Started saying no to half of them. Numbers actually went back up. Feel less like garbage.</p>
+            <footer class="pr-card__footer">
+              <div class="pr-card__meta">
+                <span class="pr-card__name">Daniel K.</span>
+                <span class="pr-verified">
+                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Verified Purchase
+                </span>
+              </div>
+              <span class="pr-card__date">March 4, 2026</span>
+            </footer>
+          </div>
+        </article>
+
+        <!-- Card 4 — Trevor P. -->
+        <article class="pr-card">
+          <div class="pr-card__photo-wrap">
+            <img src="{{ 'Social_Proof_Men_4.png' | file_url }}" alt="Trevor P. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
+          </div>
+          <div class="pr-card__body">
+            <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="pr-card__title">Backed off training and PR'd anyway.</p>
+            <p class="pr-card__text">Marathon block was wrecking my HRV. Cut volume by 20% based on what the ring was showing. PR'd by 3 minutes. Wouldn't have caught it without this.</p>
+            <footer class="pr-card__footer">
+              <div class="pr-card__meta">
+                <span class="pr-card__name">Trevor P.</span>
+                <span class="pr-verified">
+                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Verified Purchase
+                </span>
+              </div>
+              <span class="pr-card__date">March 22, 2026</span>
+            </footer>
+          </div>
+        </article>
+
+        <!-- Card 5 — Kevin M. -->
+        <article class="pr-card">
+          <div class="pr-card__photo-wrap">
+            <img src="{{ 'Social_Proof_Men_5.png' | file_url }}" alt="Kevin M. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
+          </div>
+          <div class="pr-card__body">
+            <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="pr-card__title">First time my doctor actually engaged with my data.</p>
+            <p class="pr-card__text">Wore it a month before my checkup. Brought him resting HR and BP trends. He adjusted my meds based on what I showed him. Felt heard for once.</p>
+            <footer class="pr-card__footer">
+              <div class="pr-card__meta">
+                <span class="pr-card__name">Kevin M.</span>
+                <span class="pr-verified">
+                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Verified Purchase
+                </span>
+              </div>
+              <span class="pr-card__date">February 19, 2026</span>
+            </footer>
+          </div>
+        </article>
+
+        <!-- Card 6 — Jordan B. -->
+        <article class="pr-card">
+          <div class="pr-card__photo-wrap">
+            <img src="{{ 'Social_Proof_Men_6.png' | file_url }}" alt="Jordan B. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
+          </div>
+          <div class="pr-card__body">
+            <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="pr-card__title">Wife got hers first. Made fun of her until I caved.</p>
+            <p class="pr-card__text">Two months later she's making fun of me. Looks like a regular ring not a gadget — wear it to the office without anyone noticing.</p>
+            <footer class="pr-card__footer">
+              <div class="pr-card__meta">
+                <span class="pr-card__name">Jordan B.</span>
+                <span class="pr-verified">
+                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Verified Purchase
+                </span>
+              </div>
+              <span class="pr-card__date">April 5, 2026</span>
+            </footer>
+          </div>
+        </article>
+
+      </div>
+
       <!-- Nav buttons -->
       <button class="pr-btn pr-btn--prev" id="pr-prev-{{ section.id }}" aria-label="Previous review">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><polyline points="15 18 9 12 15 6"/></svg>
@@ -181,7 +324,44 @@
 }
 
 /* Header */
-.pr-head { margin-bottom: 2.5rem; max-width: 560px; }
+.pr-head { margin-bottom: 1.75rem; max-width: 560px; }
+
+/* Tabs (Women / Men) */
+.pr-tabs {
+  display: inline-flex;
+  gap: 4px;
+  background: rgba(43,43,43,0.06);
+  border-radius: 999px;
+  padding: 4px;
+  margin-bottom: 1.5rem;
+}
+.pr-tab {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--color-olive, #5a4a3a);
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.5rem 1.125rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+.pr-tab.is-active {
+  background: #fff;
+  color: var(--color-black, #1f1d1a);
+  box-shadow: 0 2px 6px rgba(31,29,26,0.08);
+}
+.pr-tab:focus-visible {
+  outline: 2px solid var(--color-walnut, #8a6240);
+  outline-offset: 2px;
+}
+
+/* Track visibility for the active set */
+.pr-track { display: none; }
+.pr-track.is-active { display: flex; }
 .pr-head__rule {
   width: 40px; height: 1.5px;
   background: var(--color-walnut, #8a6240);
@@ -373,40 +553,39 @@
   var section  = document.querySelector('[data-section-id="{{ section.id }}"]');
   if (!section) return;
 
-  var track    = document.getElementById('pr-track-{{ section.id }}');
   var dotsWrap = document.getElementById('pr-dots-{{ section.id }}');
   var btnPrev  = document.getElementById('pr-prev-{{ section.id }}');
   var btnNext  = document.getElementById('pr-next-{{ section.id }}');
-  var cards    = Array.from(track.querySelectorAll('.pr-card'));
-  var total    = cards.length;
+  var tabs     = section.querySelectorAll('.pr-tab');
+  var tracks   = section.querySelectorAll('.pr-track');
 
-  /* Build dots */
-  cards.forEach(function(_, i) {
-    var d = document.createElement('button');
-    d.className = 'pr-dot' + (i === 0 ? ' is-active' : '');
-    d.setAttribute('aria-label', 'Review ' + (i + 1));
-    d.dataset.idx = i;
-    dotsWrap.appendChild(d);
-  });
-  var dots = Array.from(dotsWrap.querySelectorAll('.pr-dot'));
+  /* State for the active track. Rebuilt when user switches tabs. */
+  var current = { track: null, cards: [], dots: [] };
 
-  function getVisible() {
-    var w = track.clientWidth;
-    var cw = cards[0] ? cards[0].offsetWidth + 20 : w; /* card + gap */
-    return Math.max(1, Math.round(w / cw));
+  function buildDots(count) {
+    dotsWrap.innerHTML = '';
+    for (var i = 0; i < count; i++) {
+      var d = document.createElement('button');
+      d.className = 'pr-dot' + (i === 0 ? ' is-active' : '');
+      d.setAttribute('aria-label', 'Review ' + (i + 1));
+      d.dataset.idx = i;
+      dotsWrap.appendChild(d);
+    }
+    return Array.from(dotsWrap.querySelectorAll('.pr-dot'));
   }
 
   function scrollTo(idx) {
-    var card = cards[idx];
-    if (!card) return;
-    track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+    var card = current.cards[idx];
+    if (!card || !current.track) return;
+    current.track.scrollTo({ left: card.offsetLeft - current.track.offsetLeft, behavior: 'smooth' });
   }
 
   function getActive() {
-    var scrollLeft = track.scrollLeft;
+    if (!current.track) return 0;
+    var scrollLeft = current.track.scrollLeft;
     var best = 0, bestDist = Infinity;
-    cards.forEach(function(c, i) {
-      var dist = Math.abs(c.offsetLeft - track.offsetLeft - scrollLeft);
+    current.cards.forEach(function(c, i) {
+      var dist = Math.abs(c.offsetLeft - current.track.offsetLeft - scrollLeft);
       if (dist < bestDist) { bestDist = dist; best = i; }
     });
     return best;
@@ -414,24 +593,52 @@
 
   function update() {
     var active = getActive();
-    var vis    = getVisible();
-    dots.forEach(function(d, i) { d.classList.toggle('is-active', i === active); });
+    current.dots.forEach(function(d, i) { d.classList.toggle('is-active', i === active); });
     btnPrev.disabled = active === 0;
-    btnNext.disabled = active >= total - 1;
+    btnNext.disabled = active >= current.cards.length - 1;
   }
 
-  btnPrev.addEventListener('click', function() { scrollTo(Math.max(0, getActive() - 1)); });
-  btnNext.addEventListener('click', function() { scrollTo(Math.min(total - 1, getActive() + 1)); });
+  function activateTrack(set) {
+    tracks.forEach(function(t) {
+      var match = t.dataset.set === set;
+      t.classList.toggle('is-active', match);
+      t.hidden = !match;
+    });
+    tabs.forEach(function(b) {
+      var match = b.dataset.set === set;
+      b.classList.toggle('is-active', match);
+      b.setAttribute('aria-selected', match ? 'true' : 'false');
+    });
+    var newTrack = section.querySelector('.pr-track[data-set="' + set + '"]');
+    if (!newTrack) return;
+    current.track = newTrack;
+    current.cards = Array.from(newTrack.querySelectorAll('.pr-card'));
+    current.dots  = buildDots(current.cards.length);
+    newTrack.scrollLeft = 0;
+    update();
+  }
 
+  /* Wire tabs */
+  tabs.forEach(function(b) {
+    b.addEventListener('click', function() { activateTrack(b.dataset.set); });
+  });
+
+  /* Wire prev/next + dots (use current state) */
+  btnPrev.addEventListener('click', function() { scrollTo(Math.max(0, getActive() - 1)); });
+  btnNext.addEventListener('click', function() { scrollTo(Math.min(current.cards.length - 1, getActive() + 1)); });
   dotsWrap.addEventListener('click', function(e) {
     var d = e.target.closest('.pr-dot');
     if (d) scrollTo(parseInt(d.dataset.idx));
   });
 
-  track.addEventListener('scroll', update, { passive: true });
+  /* Listen for scroll on whichever track is active */
+  tracks.forEach(function(t) {
+    t.addEventListener('scroll', function() { if (t === current.track) update(); }, { passive: true });
+  });
   window.addEventListener('resize', update, { passive: true });
 
-  update();
+  /* Initialize on the women set */
+  activateTrack('women');
 })();
 </script>
 
