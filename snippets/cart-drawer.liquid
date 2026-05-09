@@ -318,12 +318,6 @@
         </a>
       </div>
 
-      {%- if additional_checkout_buttons -%}
-        <div class="cart-drawer__dynamic-checkout">
-          {{ content_for_additional_checkout_buttons }}
-        </div>
-      {%- endif -%}
-
       <div class="cart-drawer__payments" aria-label="Accepted payment methods">
         {%- assign payment_types = 'visa,master,american_express,apple_pay,shopify_pay,paypal,google_pay' | split: ',' -%}
         {%- for type in payment_types -%}

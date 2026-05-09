@@ -70,11 +70,6 @@
           <button type="submit" name="checkout" class="cart-page__btn cart-page__btn--primary">Checkout</button>
         </div>
 
-        {%- if additional_checkout_buttons -%}
-          <div class="cart-page__dynamic-checkout">
-            {{ content_for_additional_checkout_buttons }}
-          </div>
-        {%- endif -%}
       </form>
 
     {%- else -%}
@@ -257,9 +252,6 @@
     flex-wrap: wrap;
   }
   .cart-page__actions--center { justify-content: flex-start; }
-  .cart-page__dynamic-checkout {
-    margin-top: var(--space-4, 1rem);
-  }
   .cart-page__btn {
     display: inline-flex;
     align-items: center;
