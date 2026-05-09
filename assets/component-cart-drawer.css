@@ -37,6 +37,9 @@
   background: #fff;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   transform: translateX(100%);
   transition: transform 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   border-left: 1px solid rgba(43, 43, 43, 0.08);
@@ -288,12 +291,8 @@
 /* ── BODY ──────────────────────────────────────────────── */
 
 .cart-drawer__body {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(43, 43, 43, 0.12) transparent;
+  flex: 1 0 auto;
+  overflow: visible;
 }
 
 .cart-drawer__body::-webkit-scrollbar {
@@ -646,12 +645,11 @@
 /* ── FOOTER ────────────────────────────────────────────── */
 
 .cart-drawer__footer {
-  padding: 1rem 1.5rem 1.25rem;
+  padding: 1rem 1.5rem 1.5rem;
   border-top: 1px solid rgba(43, 43, 43, 0.09);
   display: flex;
   flex-direction: column;
   gap: 0.875rem;
-  flex-shrink: 0;
   background: #fff;
 }
 
@@ -962,19 +960,25 @@
 /* ── DYNAMIC CHECKOUT (Shop Pay / Apple Pay) ───────────── */
 
 .cart-drawer__dynamic-checkout {
-  padding: 0.75rem 1.25rem 0;
+  padding: 0.5rem 0 0;
 }
 
-.cart-drawer__dynamic-checkout [data-shopify-buttongroup],
-.cart-drawer__dynamic-checkout [data-testid="Checkmark"] {
-  min-height: 52px !important;
+/* Force buttons into a 2-column grid to reduce footer height */
+.cart-drawer__dynamic-checkout > div,
+.cart-drawer__dynamic-checkout [data-shopify-buttongroup] {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.5rem !important;
 }
 
 .cart-drawer__dynamic-checkout iframe {
-  min-height: 52px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  width: 100% !important;
 }
 
 .cart-drawer__dynamic-checkout .shopify-cleanslate > div {
-  min-height: 52px !important;
+  height: 44px !important;
+  min-height: 44px !important;
   border-radius: 0 !important;
 }
