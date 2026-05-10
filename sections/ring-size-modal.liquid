@@ -75,9 +75,9 @@
         <h3 class="rsm-sizer-heading">Pick the circle that fits your ring.</h3>
         <p class="rsm-sizer-note">Hold a ring to your screen. Each circle is the inside-diameter at actual size.</p>
         <div class="rsm-sizer-row">
-          {%- assign sizes      = "5,6,7,8,9,10,11,12,13"                                           | split: "," -%}
-          {%- assign dias_mm    = "15.7,16.5,17.3,18.3,19.1,20.0,20.8,21.6,22.4"                   | split: "," -%}
-          {%- assign dias_in    = "0.618,0.650,0.681,0.720,0.752,0.787,0.819,0.850,0.882"           | split: "," -%}
+          {%- assign sizes      = "6,7,8,9,10,11,12,13"                                               | split: "," -%}
+          {%- assign dias_mm    = "16.5,17.3,18.3,19.1,20.0,20.8,21.6,22.4"                        | split: "," -%}
+          {%- assign dias_in    = "0.650,0.681,0.720,0.752,0.787,0.819,0.850,0.882"                 | split: "," -%}
           {%- for size in sizes -%}
             {%- assign dia_mm = dias_mm[forloop.index0] | times: 1.0 -%}
             {%- assign dia_in = dias_in[forloop.index0] -%}
