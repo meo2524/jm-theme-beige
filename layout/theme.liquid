@@ -616,35 +616,6 @@
         min-height: 0 !important;
         margin-top: 2px !important;
       }
-      /* Move the + FREE badge from left of the row to under the
-         strikethrough price so the gift name fits on one line. */
-      .kaching-bundles__free-gift::before {
-        display: none !important;
-        content: none !important;
-      }
-      .kaching-bundles .kaching-bundles__free-gift__full-price,
-      .kaching-bundles__free-gift__full-price {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-end !important;
-        gap: 3px !important;
-        text-align: right !important;
-      }
-      .kaching-bundles__free-gift__full-price::after {
-        content: "+ FREE" !important;
-        display: inline-block !important;
-        font-size: 9px !important;
-        font-weight: 700 !important;
-        letter-spacing: 0.06em !important;
-        line-height: 1.2 !important;
-        background: #5a4a37 !important;
-        color: #f5efe4 !important;
-        padding: 2px 6px !important;
-        border-radius: 4px !important;
-        font-style: normal !important;
-        text-decoration: none !important;
-        white-space: nowrap !important;
-      }
       .kaching-bundles__free-gift__main {
         gap: 8px !important;
       }
@@ -656,6 +627,39 @@
       /* Gift text/price restored to KaChing default size */
       /* "Most Popular" sticker — shrink and pull in tight */
       .kaching-bundles__bar-most-popular { transform: scale(0.7) !important; transform-origin: top right !important; }
+    }
+
+    /* KaChing free-gift row: move +FREE badge from left of row to under the
+       strikethrough price so the gift name fits on one line. Applies at all
+       viewports. */
+    .kaching-bundles .kaching-bundles__free-gift::before,
+    .kaching-bundles__free-gift::before {
+      display: none !important;
+      content: none !important;
+    }
+    .kaching-bundles .kaching-bundles__free-gift__full-price,
+    .kaching-bundles__free-gift__full-price {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-end !important;
+      gap: 4px !important;
+      text-align: right !important;
+    }
+    .kaching-bundles .kaching-bundles__free-gift__full-price::after,
+    .kaching-bundles__free-gift__full-price::after {
+      content: "+ FREE" !important;
+      display: inline-block !important;
+      font-size: 9px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.06em !important;
+      line-height: 1.2 !important;
+      background: #5a4a37 !important;
+      color: #f5efe4 !important;
+      padding: 2px 6px !important;
+      border-radius: 4px !important;
+      font-style: normal !important;
+      text-decoration: none !important;
+      white-space: nowrap !important;
     }
 
     /* KaChing variant dropdown — must float above ATC, Shop Pay, and the
