@@ -78,25 +78,9 @@
       </button>
     </div>
 
-    {%- comment -%} Social proof bar {%- endcomment -%}
-    <div class="cart-drawer__proof">
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-      </svg>
-      JOIN OVER 5,000 HAPPY CUSTOMERS
-    </div>
+    {%- comment -%} Social proof bar removed — not needed at cart stage {%- endcomment -%}
 
-    {%- comment -%} Savings banner (always in DOM; JS toggles [hidden]) {%- endcomment -%}
-    <div
-      class="cart-drawer__savings"
-      data-cart-savings
-      {% if cart_savings <= 0 or cart.item_count == 0 %}hidden{% endif %}
-    >
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-      </svg>
-      <span>You&rsquo;re saving <strong data-cart-savings-amount>{{ cart_savings | money }}</strong> on this order</span>
-    </div>
+    {%- comment -%} Savings banner moved to below checkout button {%- endcomment -%}
 
     {%- comment -%} Cart goals progress bar (0, 1, or 2 milestones) — always in DOM; JS toggles [hidden] {%- endcomment -%}
     {%- if milestone_count > 0 -%}
@@ -316,6 +300,18 @@
         <a href="/checkout" class="cart-drawer__checkout" id="CartDrawerCheckout">
           CHECKOUT &bull; <span data-cart-total>{{ cart.total_price | money }}</span>
         </a>
+      </div>
+
+      {%- comment -%} Savings line — sits below checkout as a motivating nudge {%- endcomment -%}
+      <div
+        class="cart-drawer__savings"
+        data-cart-savings
+        {% if cart_savings <= 0 or cart.item_count == 0 %}hidden{% endif %}
+      >
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+        </svg>
+        <span>You&rsquo;re saving <strong data-cart-savings-amount>{{ cart_savings | money }}</strong> on this order</span>
       </div>
 
       <div class="cart-drawer__payments" aria-label="Accepted payment methods">
