@@ -609,9 +609,11 @@
         padding: 3px 8px !important;
         min-height: 0 !important;
       }
-      /* Free-gift row */
+      /* Free-gift row — keep padding-bottom on mobile so the absolute
+         +FREE chip below the price column has room and doesn't float
+         outside the card. */
       .kaching-bundles__free-gift {
-        padding: 3px 10px !important;
+        padding: 3px 10px 30px !important;
         gap: 6px !important;
         min-height: 0 !important;
         margin-top: 2px !important;
