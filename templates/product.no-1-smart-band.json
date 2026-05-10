@@ -69,37 +69,37 @@
         "bullet_sleep": {
           "type": "bullet",
           "settings": {
-            "text": "Wake up tired and don't know why? See the night your body actually had — light, deep, REM, every wake-up you don't remember."
+            "text": "Sleep that actually restores you. See the night your body actually had — stop wondering why 8 hours feels like 5."
           }
         },
         "bullet_heart": {
           "type": "bullet",
           "settings": {
-            "text": "HRV, trended over weeks. The number your doctor wishes you had — the early signal of stress, illness, overtraining, or hormones shifting."
+            "text": "Catch what your body is hiding. The early signal of stress, illness, or hormones shifting — weeks before you'd feel anything."
           }
         },
         "bullet_recovery": {
           "type": "bullet",
           "settings": {
-            "text": "One readiness score in the morning. Not 14 metrics. The single number that tells you \"go\" or \"rest today.\""
+            "text": "Wake up knowing what to do. One readiness score in the morning. Push hard, or take it easy — no guesswork."
           }
         },
         "bullet_activity": {
           "type": "bullet",
           "settings": {
-            "text": "Your heart, even when you're not paying attention. The quiet 3am rate, the silent stress spike, the rhythm before you notice."
+            "text": "Track your heart in the quiet moments. The 3am readings, the silent stress spikes, the rhythm changes you'd never notice on a watch."
           }
         },
         "bullet_subscription": {
           "type": "bullet",
           "settings": {
-            "text": "Body temperature, mapped night by night. Cycle patterns, fevers before symptoms, the recovery clues your wrist can't see."
+            "text": "Cycle and recovery clues your watch can't see. Body temperature, mapped night by night — the pattern your wrist can't read."
           }
         },
         "bullet_ceramic": {
           "type": "bullet",
           "settings": {
-            "text": "No subscription. No paywall. No \"upgrade to see your sleep score.\" You buy it once. You own your data forever."
+            "text": "Yours forever. No subscription. No paywall. No \"upgrade to see your sleep score.\" You buy it once."
           }
         }
       },
@@ -115,8 +115,8 @@
         "video_url": "https://cdn.shopify.com/videos/c/vp/f12216a2ff264544862d886fee41129a/f12216a2ff264544862d886fee41129a.HD-1080p-4.8Mbps-83316595.mp4",
         "video_position_y": 25,
         "eyebrow": "Why N°01",
-        "heading": "Your watch tracks what you did. The N°01 tracks what you've recovered from.",
-        "body": "Steps and calories tell you about yesterday. HRV, sleep depth and overnight temperature tell you about tomorrow — whether you're building, breaking down, or quietly heading for a cold. The numbers your wrist can't see, on the finger that runs quiet all night.",
+        "heading": "Six things your watch can't tell you.",
+        "body": "A smart ring on your finger reads what a watch on your wrist can't — overnight, while you sleep, while you sit still. Then it translates the lot into one clear answer in the morning: are you rested, recovered, or running on empty?",
         "cta_label": "",
         "cta_url": "",
         "reverse": false
