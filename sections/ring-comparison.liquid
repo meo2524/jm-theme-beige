@@ -1,13 +1,20 @@
 {%- liquid
-  assign heading    = section.settings.heading    | default: 'The N°01 vs the rest.'
-  assign subheading = section.settings.subheading | default: "Six reasons people who've tried both don't go back."
-  assign our_label  = section.settings.our_label  | default: 'Mend N°01'
-  assign our_badge  = section.settings.our_badge  | default: 'Original'
-  assign them_label = section.settings.them_label | default: 'Other Smart Rings'
-  assign them_sub   = section.settings.them_sub   | default: '& Knock-offs'
+  assign heading       = section.settings.heading       | default: 'The N°01 vs the rest.'
+  assign subheading    = section.settings.subheading    | default: "Six reasons people who've tried both don't go back."
+  assign our_label     = section.settings.our_label     | default: 'Mend N°01'
+  assign our_badge     = section.settings.our_badge     | default: 'Original'
+  assign them_label    = section.settings.them_label    | default: 'Other Smart Rings'
+  assign them_sub      = section.settings.them_sub      | default: '& Knock-offs'
+  assign watches_label = section.settings.watches_label | default: ''
+  assign watches_sub   = section.settings.watches_sub   | default: ''
+  assign caption       = section.settings.caption       | default: ''
+  assign show_watches  = false
+  if watches_label != blank
+    assign show_watches = true
+  endif
 -%}
 
-<section class="rc-section" aria-label="{{ heading | escape }}">
+<section class="rc-section{% if show_watches %} rc-section--3col{% endif %}" aria-label="{{ heading | escape }}">
   <div class="rc-inner">
 
     <header class="rc-header">
@@ -17,85 +24,123 @@
       {%- endif -%}
     </header>
 
-    <div class="rc-table" role="table" aria-label="Ring comparison">
+    <div class="rc-scroll">
+      <div class="rc-table" role="table" aria-label="Ring comparison">
 
-      {%- comment -%} Column headers {%- endcomment -%}
-      <div class="rc-col-headers" role="row">
-        <div class="rc-col-feature" role="columnheader" aria-label="Feature"></div>
-        <div class="rc-col-ours" role="columnheader">
-          <span class="rc-col-ours__name">{{ our_label }}</span>
-          {%- if our_badge != blank -%}
-            <span class="rc-badge">{{ our_badge }}</span>
-          {%- endif -%}
-        </div>
-        <div class="rc-col-theirs" role="columnheader">
-          <span class="rc-col-theirs__name">{{ them_label }}</span>
-          {%- if them_sub != blank -%}
-            <span class="rc-col-theirs__sub">{{ them_sub }}</span>
-          {%- endif -%}
-        </div>
-      </div>
-
-      {%- comment -%} Rows {%- endcomment -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'row' -%}
-          {%- assign ours_val   = block.settings.ours_value   | default: '' -%}
-          {%- assign theirs_val = block.settings.theirs_value | default: '' -%}
-          {%- assign ours_yes   = block.settings.ours_yes -%}
-          {%- assign theirs_yes = block.settings.theirs_yes -%}
-          <div class="rc-row" role="row" {{ block.shopify_attributes }}>
-            <div class="rc-cell rc-cell--feature" role="cell">
-              {%- if block.settings.icon != blank -%}
-                <span class="rc-row-icon" aria-hidden="true">{{ block.settings.icon }}</span>
-              {%- endif -%}
-              <span class="rc-row-label">{{ block.settings.feature }}</span>
-            </div>
-            <div class="rc-cell rc-cell--ours" role="cell">
-              {%- if ours_val != blank -%}
-                <span class="rc-value">{{ ours_val }}</span>
-              {%- elsif ours_yes -%}
-                <span class="rc-check" aria-label="Yes">
-                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                    <circle cx="10" cy="10" r="9" fill="rgba(72,200,120,0.2)" stroke="rgba(72,200,120,0.5)" stroke-width="1"/>
-                    <polyline points="6,10.5 9,13.5 14,7.5" stroke="#48c878" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
-              {%- else -%}
-                <span class="rc-cross rc-cross--ours" aria-label="No">
-                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                    <circle cx="10" cy="10" r="9" fill="rgba(220,80,80,0.15)" stroke="rgba(220,80,80,0.35)" stroke-width="1"/>
-                    <line x1="7" y1="7" x2="13" y2="13" stroke="rgba(220,80,80,0.75)" stroke-width="1.75" stroke-linecap="round"/>
-                    <line x1="13" y1="7" x2="7" y2="13" stroke="rgba(220,80,80,0.75)" stroke-width="1.75" stroke-linecap="round"/>
-                  </svg>
-                </span>
-              {%- endif -%}
-            </div>
-            <div class="rc-cell rc-cell--theirs" role="cell">
-              {%- if theirs_val != blank -%}
-                <span class="rc-value rc-value--theirs">{{ theirs_val }}</span>
-              {%- elsif theirs_yes -%}
-                <span class="rc-check rc-check--theirs" aria-label="Yes">
-                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                    <circle cx="10" cy="10" r="9" fill="rgba(138,98,64,0.12)" stroke="rgba(138,98,64,0.3)" stroke-width="1"/>
-                    <polyline points="6,10.5 9,13.5 14,7.5" stroke="#8A6240" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
-              {%- else -%}
-                <span class="rc-cross" aria-label="No">
-                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                    <circle cx="10" cy="10" r="9" fill="rgba(220,80,80,0.08)" stroke="rgba(220,80,80,0.25)" stroke-width="1"/>
-                    <line x1="7" y1="7" x2="13" y2="13" stroke="rgba(220,80,80,0.65)" stroke-width="1.75" stroke-linecap="round"/>
-                    <line x1="13" y1="7" x2="7" y2="13" stroke="rgba(220,80,80,0.65)" stroke-width="1.75" stroke-linecap="round"/>
-                  </svg>
-                </span>
-              {%- endif -%}
-            </div>
+        {%- comment -%} Column headers {%- endcomment -%}
+        <div class="rc-col-headers" role="row">
+          <div class="rc-col-feature" role="columnheader" aria-label="Feature"></div>
+          <div class="rc-col-ours" role="columnheader">
+            <span class="rc-col-ours__name">{{ our_label }}</span>
+            {%- if our_badge != blank -%}
+              <span class="rc-badge">{{ our_badge }}</span>
+            {%- endif -%}
           </div>
-        {%- endif -%}
-      {%- endfor -%}
+          <div class="rc-col-theirs" role="columnheader">
+            <span class="rc-col-theirs__name">{{ them_label }}</span>
+            {%- if them_sub != blank -%}
+              <span class="rc-col-theirs__sub">{{ them_sub }}</span>
+            {%- endif -%}
+          </div>
+          {%- if show_watches -%}
+            <div class="rc-col-theirs rc-col-watches" role="columnheader">
+              <span class="rc-col-theirs__name">{{ watches_label }}</span>
+              {%- if watches_sub != blank -%}
+                <span class="rc-col-theirs__sub">{{ watches_sub }}</span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
 
+        {%- comment -%} Rows {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'row' -%}
+            {%- assign ours_val    = block.settings.ours_value    | default: '' -%}
+            {%- assign theirs_val  = block.settings.theirs_value  | default: '' -%}
+            {%- assign watches_val = block.settings.watches_value | default: '' -%}
+            {%- assign ours_yes    = block.settings.ours_yes -%}
+            {%- assign theirs_yes  = block.settings.theirs_yes -%}
+            {%- assign watches_yes = block.settings.watches_yes -%}
+            <div class="rc-row" role="row" {{ block.shopify_attributes }}>
+              <div class="rc-cell rc-cell--feature" role="cell">
+                {%- if block.settings.icon != blank -%}
+                  <span class="rc-row-icon" aria-hidden="true">{{ block.settings.icon }}</span>
+                {%- endif -%}
+                <span class="rc-row-label">{{ block.settings.feature }}</span>
+              </div>
+              <div class="rc-cell rc-cell--ours" role="cell">
+                {%- if ours_val != blank -%}
+                  <span class="rc-value">{{ ours_val }}</span>
+                {%- elsif ours_yes -%}
+                  <span class="rc-check" aria-label="Yes">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <circle cx="10" cy="10" r="9" fill="rgba(72,200,120,0.2)" stroke="rgba(72,200,120,0.5)" stroke-width="1"/>
+                      <polyline points="6,10.5 9,13.5 14,7.5" stroke="#48c878" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                {%- else -%}
+                  <span class="rc-cross rc-cross--ours" aria-label="No">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <circle cx="10" cy="10" r="9" fill="rgba(220,80,80,0.15)" stroke="rgba(220,80,80,0.35)" stroke-width="1"/>
+                      <line x1="7" y1="7" x2="13" y2="13" stroke="rgba(220,80,80,0.75)" stroke-width="1.75" stroke-linecap="round"/>
+                      <line x1="13" y1="7" x2="7" y2="13" stroke="rgba(220,80,80,0.75)" stroke-width="1.75" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                {%- endif -%}
+              </div>
+              <div class="rc-cell rc-cell--theirs" role="cell">
+                {%- if theirs_val != blank -%}
+                  <span class="rc-value rc-value--theirs">{{ theirs_val }}</span>
+                {%- elsif theirs_yes -%}
+                  <span class="rc-check rc-check--theirs" aria-label="Yes">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <circle cx="10" cy="10" r="9" fill="rgba(138,98,64,0.12)" stroke="rgba(138,98,64,0.3)" stroke-width="1"/>
+                      <polyline points="6,10.5 9,13.5 14,7.5" stroke="#8A6240" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                {%- else -%}
+                  <span class="rc-cross" aria-label="No">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <circle cx="10" cy="10" r="9" fill="rgba(220,80,80,0.08)" stroke="rgba(220,80,80,0.25)" stroke-width="1"/>
+                      <line x1="7" y1="7" x2="13" y2="13" stroke="rgba(220,80,80,0.65)" stroke-width="1.75" stroke-linecap="round"/>
+                      <line x1="13" y1="7" x2="7" y2="13" stroke="rgba(220,80,80,0.65)" stroke-width="1.75" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                {%- endif -%}
+              </div>
+              {%- if show_watches -%}
+                <div class="rc-cell rc-cell--theirs rc-cell--watches" role="cell">
+                  {%- if watches_val != blank -%}
+                    <span class="rc-value rc-value--theirs">{{ watches_val }}</span>
+                  {%- elsif watches_yes -%}
+                    <span class="rc-check rc-check--theirs" aria-label="Yes">
+                      <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                        <circle cx="10" cy="10" r="9" fill="rgba(138,98,64,0.12)" stroke="rgba(138,98,64,0.3)" stroke-width="1"/>
+                        <polyline points="6,10.5 9,13.5 14,7.5" stroke="#8A6240" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                  {%- else -%}
+                    <span class="rc-cross" aria-label="No">
+                      <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                        <circle cx="10" cy="10" r="9" fill="rgba(220,80,80,0.08)" stroke="rgba(220,80,80,0.25)" stroke-width="1"/>
+                        <line x1="7" y1="7" x2="13" y2="13" stroke="rgba(220,80,80,0.65)" stroke-width="1.75" stroke-linecap="round"/>
+                        <line x1="13" y1="7" x2="7" y2="13" stroke="rgba(220,80,80,0.65)" stroke-width="1.75" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+
+      </div>
+      {%- comment -%} /rc-table {%- endcomment -%}
     </div>
-    {%- comment -%} /rc-table {%- endcomment -%}
+
+    {%- if caption != blank -%}
+      <p class="rc-caption">{{ caption }}</p>
+    {%- endif -%}
 
   </div>
 </section>
@@ -103,7 +148,7 @@
 <style>
 /* ============================================================
    RING COMPARISON — Mend & Co
-   Mend N°01 vs other smart rings
+   Mend N°01 vs other smart rings (and optionally smart watches)
    ============================================================ */
 
 .rc-section {
@@ -143,20 +188,43 @@
   margin-inline: auto;
 }
 
+/* Scroll wrapper — keeps page from horizontal-scrolling on mobile;
+   lets the table itself scroll inside the wrapper if needed. */
+.rc-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 12px;
+}
+
 /* Table shell */
 .rc-table {
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid var(--color-line, rgba(31,29,26,0.12));
   box-shadow: 0 4px 24px rgba(31,29,26,0.06);
+  min-width: 100%;
 }
 
-/* Column header row */
+/* Column header row — 2-col default */
 .rc-col-headers {
   display: grid;
   grid-template-columns: 1fr 220px 200px;
   background: var(--color-paper, #f5efe4);
   border-bottom: 1px solid var(--color-line, rgba(31,29,26,0.12));
+}
+
+/* Data rows — 2-col default */
+.rc-row {
+  display: grid;
+  grid-template-columns: 1fr 220px 200px;
+  border-top: 1px solid var(--color-line, rgba(31,29,26,0.08));
+  align-items: stretch;
+}
+
+/* 3-col variant: feature column shrinks, three competitor cols share space */
+.rc-section--3col .rc-col-headers,
+.rc-section--3col .rc-row {
+  grid-template-columns: minmax(180px, 1fr) 200px 180px 180px;
 }
 
 .rc-col-feature {
@@ -228,12 +296,8 @@
   text-align: center;
 }
 
-/* Data rows */
-.rc-row {
-  display: grid;
-  grid-template-columns: 1fr 220px 200px;
-  border-top: 1px solid var(--color-line, rgba(31,29,26,0.08));
-  align-items: center;
+.rc-col-watches {
+  border-left: 1px solid var(--color-line, rgba(31,29,26,0.08));
 }
 
 .rc-row:first-of-type {
@@ -261,6 +325,10 @@
 
 .rc-cell--theirs {
   background: transparent;
+}
+
+.rc-cell--watches {
+  border-left: 1px solid var(--color-line, rgba(31,29,26,0.08));
 }
 
 /* Feature label */
@@ -297,7 +365,7 @@
   text-transform: uppercase;
   color: var(--color-bone, #f5efe4);
   text-align: center;
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
 .rc-value--theirs {
@@ -310,18 +378,38 @@
   background: rgba(31,29,26,0.025);
 }
 
+/* Caption beneath the table */
+.rc-caption {
+  font-family: var(--font-body, Inter, sans-serif);
+  font-size: 0.875rem;
+  color: var(--color-olive, #6a6258);
+  text-align: center;
+  margin: 1.5rem auto 0;
+  max-width: 56ch;
+  line-height: 1.55;
+  font-style: italic;
+}
+
 /* Mobile */
 @media (max-width: 767px) {
   .rc-section {
     padding: 3rem 1rem;
   }
 
-  .rc-col-headers {
+  .rc-col-headers,
+  .rc-row {
     grid-template-columns: 1fr 110px 95px;
   }
 
-  .rc-row {
-    grid-template-columns: 1fr 110px 95px;
+  /* 3-col on mobile: shrink everything; the rc-scroll wrapper allows
+     horizontal scroll if combined width exceeds viewport. */
+  .rc-section--3col .rc-col-headers,
+  .rc-section--3col .rc-row {
+    grid-template-columns: minmax(140px, 1.1fr) 95px 90px 90px;
+  }
+
+  .rc-section--3col .rc-table {
+    min-width: 460px;
   }
 
   .rc-col-ours__name {
@@ -342,6 +430,10 @@
 
   .rc-row-label {
     font-size: 0.8125rem;
+  }
+
+  .rc-value {
+    font-size: 0.5625rem;
   }
 }
 </style>
@@ -386,6 +478,30 @@
       "id": "them_sub",
       "label": "Competitor column sub-label",
       "default": "& Knock-offs"
+    },
+    {
+      "type": "header",
+      "content": "Third column (optional)"
+    },
+    {
+      "type": "text",
+      "id": "watches_label",
+      "label": "Third column label",
+      "info": "Leave blank to hide the third column entirely (2-column layout)."
+    },
+    {
+      "type": "text",
+      "id": "watches_sub",
+      "label": "Third column sub-label"
+    },
+    {
+      "type": "header",
+      "content": "Caption"
+    },
+    {
+      "type": "textarea",
+      "id": "caption",
+      "label": "Caption (under table)"
     }
   ],
   "blocks": [
@@ -428,6 +544,18 @@
           "id": "theirs_value",
           "label": "Competitors — custom text (overrides check/cross)",
           "info": "Leave blank to use the check/cross above."
+        },
+        {
+          "type": "checkbox",
+          "id": "watches_yes",
+          "label": "Third column — check or cross",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "watches_value",
+          "label": "Third column — custom text (overrides check/cross)",
+          "info": "Leave blank to use the check/cross above. Only renders if the third column label is set on the section."
         }
       ]
     }
