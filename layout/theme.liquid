@@ -609,11 +609,9 @@
         padding: 3px 8px !important;
         min-height: 0 !important;
       }
-      /* Free-gift row — keep padding-bottom on mobile so the absolute
-         +FREE chip below the price column has room and doesn't float
-         outside the card. */
+      /* Free-gift row */
       .kaching-bundles__free-gift {
-        padding: 3px 10px 30px !important;
+        padding: 3px 10px !important;
         gap: 6px !important;
         min-height: 0 !important;
         margin-top: 2px !important;
@@ -629,68 +627,6 @@
       /* Gift text/price restored to KaChing default size */
       /* "Most Popular" sticker — shrink and pull in tight */
       .kaching-bundles__bar-most-popular { transform: scale(0.7) !important; transform-origin: top right !important; }
-    }
-
-    /* KaChing free-gift row: hide left badge, move it under the strikethrough
-       price as an absolutely-positioned pseudo on the GIFT container (not on
-       __full-price, which has line-through that would propagate through). */
-    .kaching-bundles .kaching-bundles__free-gift::before,
-    .kaching-bundles__free-gift::before {
-      display: none !important;
-      content: none !important;
-    }
-    .kaching-bundles .kaching-bundles__free-gift,
-    .kaching-bundles__free-gift {
-      position: relative !important;
-      padding-bottom: 30px !important;
-      overflow: visible !important;
-    }
-    .kaching-bundles .kaching-bundles__free-gift::after,
-    .kaching-bundles__free-gift::after {
-      content: "+ FREE" !important;
-      position: absolute !important;
-      right: 10px !important;
-      bottom: 6px !important;
-      top: auto !important;
-      left: auto !important;
-      width: max-content !important;
-      max-width: max-content !important;
-      height: max-content !important;
-      max-height: max-content !important;
-      align-self: flex-end !important;
-      display: inline-block !important;
-      font-size: 10px !important;
-      font-weight: 800 !important;
-      letter-spacing: 0.08em !important;
-      line-height: 1.2 !important;
-      background: #1f1d1a !important;
-      color: #f5efe4 !important;
-      padding: 3px 8px !important;
-      border-radius: 4px !important;
-      font-style: normal !important;
-      text-decoration: none !important;
-      white-space: nowrap !important;
-      box-sizing: border-box !important;
-      z-index: 2 !important;
-    }
-    /* Make the icon + text row a proper flex layout so wrapped lines indent
-       under the first character of text (not back under the icon), and the
-       icon centers vertically with the text instead of sitting at the top. */
-    .kaching-bundles .kaching-bundles__free-gift__main,
-    .kaching-bundles__free-gift__main {
-      display: flex !important;
-      align-items: center !important;
-      gap: 10px !important;
-    }
-    .kaching-bundles .kaching-bundles__free-gift__link,
-    .kaching-bundles__free-gift__link {
-      flex-shrink: 0 !important;
-      align-self: center !important;
-    }
-    .kaching-bundles .kaching-bundles__free-gift__content,
-    .kaching-bundles__free-gift__content {
-      flex: 1 1 auto !important;
-      min-width: 0 !important;
     }
 
     /* KaChing variant dropdown — must float above ATC, Shop Pay, and the
