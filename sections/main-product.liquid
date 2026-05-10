@@ -708,39 +708,35 @@
   opacity: 0.85;
 }
 
-/* Mobile-only top 3 benefits — first card inside product-info on ≤749px.
-   Width is governed by parent .product-info padding (0 1rem); no side
-   margin so it sits flush with sibling cards (rating / variant / starter). */
-.pdp-mobile-benefits { display: none; }
-@media (max-width: 749px) {
-  .pdp-mobile-benefits {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    list-style: none;
-    margin: 1rem 0 0.5rem;
-    padding: 1rem 1.25rem;
-    background: var(--color-bone, #F2EDE4);
-    border-radius: 10px;
-    border: 1px solid rgba(31,29,26,0.08);
-    box-sizing: border-box;
-  }
-  .pdp-mobile-benefits__item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    font-size: 0.8125rem;
-    line-height: 1.5;
-    color: var(--color-black, #1f1d1a);
-  }
-  .pdp-mobile-benefits__icon {
-    flex-shrink: 0;
-    color: var(--color-walnut, #8a6240);
-    display: inline-flex;
-    margin-top: 2px;
-  }
-  .pdp-mobile-benefits__item strong { font-weight: 600; }
+/* Top 3 key benefits — first card inside product-info, all viewports.
+   Sits flush with sibling cards (rating / variant / starter). */
+.pdp-mobile-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  list-style: none;
+  margin: 1rem 0 0.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--color-bone, #F2EDE4);
+  border-radius: 10px;
+  border: 1px solid rgba(31,29,26,0.08);
+  box-sizing: border-box;
 }
+.pdp-mobile-benefits__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--color-black, #1f1d1a);
+}
+.pdp-mobile-benefits__icon {
+  flex-shrink: 0;
+  color: var(--color-walnut, #8a6240);
+  display: inline-flex;
+  margin-top: 2px;
+}
+.pdp-mobile-benefits__item strong { font-weight: 600; }
 
 .product-section {
   background: var(--color-bone, #F2EDE4);
