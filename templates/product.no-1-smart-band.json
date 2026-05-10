@@ -55,14 +55,6 @@
         "custom_padding_bottom": 36
       }
     },
-    "photo_reviews": {
-      "type": "photo-reviews",
-      "settings": {
-        "eyebrow": "Verified Menders",
-        "heading": "Real people. Real results.",
-        "subheading": "Join thousands of Menders who track their health from their finger."
-      }
-    },
     "benefit_pitch": {
       "type": "product-feature",
       "blocks": {
@@ -134,14 +126,6 @@
         "reverse": false
       }
     },
-    "angle_testimonials": {
-      "type": "angle-testimonials",
-      "disabled": true,
-      "settings": {
-        "eyebrow": "The Mender Community",
-        "heading": "Meet the Menders."
-      }
-    },
     "ring_comparison": {
       "type": "ring-comparison",
       "blocks": {
@@ -150,8 +134,12 @@
           "settings": {
             "icon": "",
             "feature": "Upfront price",
+            "ours_yes": true,
             "ours_value": "$109",
-            "theirs_value": "$269–349"
+            "theirs_yes": false,
+            "theirs_value": "$269–349",
+            "watches_yes": false,
+            "watches_value": ""
           }
         },
         "row_subscription": {
@@ -159,8 +147,12 @@
           "settings": {
             "icon": "",
             "feature": "Subscription",
+            "ours_yes": true,
             "ours_value": "None, ever",
-            "theirs_value": "Often $5.99+/mo"
+            "theirs_yes": false,
+            "theirs_value": "Often $5.99+/mo",
+            "watches_yes": false,
+            "watches_value": ""
           }
         },
         "row_3yr": {
@@ -168,8 +160,12 @@
           "settings": {
             "icon": "",
             "feature": "3-year cost",
+            "ours_yes": true,
             "ours_value": "$109",
-            "theirs_value": "$500+"
+            "theirs_yes": false,
+            "theirs_value": "$500+",
+            "watches_yes": false,
+            "watches_value": ""
           }
         },
         "row_battery": {
@@ -177,8 +173,12 @@
           "settings": {
             "icon": "",
             "feature": "Battery life",
+            "ours_yes": true,
             "ours_value": "5–7 days",
-            "theirs_value": "4–7 days"
+            "theirs_yes": false,
+            "theirs_value": "4–7 days",
+            "watches_yes": false,
+            "watches_value": ""
           }
         },
         "row_ceramic": {
@@ -186,10 +186,12 @@
           "settings": {
             "icon": "",
             "feature": "Ceramic body, not plastic",
-            "ours_value": "",
-            "theirs_value": "",
             "ours_yes": true,
-            "theirs_yes": false
+            "ours_value": "",
+            "theirs_yes": false,
+            "theirs_value": "",
+            "watches_yes": false,
+            "watches_value": ""
           }
         },
         "row_data": {
@@ -197,10 +199,12 @@
           "settings": {
             "icon": "",
             "feature": "You own your data",
-            "ours_value": "",
-            "theirs_value": "",
             "ours_yes": true,
-            "theirs_yes": false
+            "ours_value": "",
+            "theirs_yes": false,
+            "theirs_value": "",
+            "watches_yes": false,
+            "watches_value": ""
           }
         }
       },
@@ -222,6 +226,22 @@
         "watches_label": "",
         "watches_sub": "",
         "caption": "Over 3 years, the N°01 saves you ~$400 vs typical smart rings. No subscription means once you buy it, that's it."
+      }
+    },
+    "photo_reviews": {
+      "type": "photo-reviews",
+      "settings": {
+        "eyebrow": "Verified Menders",
+        "heading": "Real people. Real results.",
+        "subheading": "Join thousands of Menders who track their health from their finger."
+      }
+    },
+    "angle_testimonials": {
+      "type": "angle-testimonials",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "The Mender Community",
+        "heading": "Meet the Menders."
       }
     },
     "product_science": {
@@ -475,37 +495,49 @@
         "bullet_sleep": {
           "type": "bullet",
           "settings": {
-            "text": "Sleep stages — deep, light, REM + sleep score"
+            "icon": "",
+            "text": "Sleep stages — deep, light, REM + sleep score",
+            "caption": ""
           }
         },
         "bullet_hrv": {
           "type": "bullet",
           "settings": {
-            "text": "Heart rate variability (HRV) — true recovery signal"
+            "icon": "",
+            "text": "Heart rate variability (HRV) — true recovery signal",
+            "caption": ""
           }
         },
         "bullet_spo2": {
           "type": "bullet",
           "settings": {
-            "text": "Blood oxygen (SpO₂) — overnight saturation monitoring"
+            "icon": "",
+            "text": "Blood oxygen (SpO₂) — overnight saturation monitoring",
+            "caption": ""
           }
         },
         "bullet_stress": {
           "type": "bullet",
           "settings": {
-            "text": "Stress score — know when to push, when to rest"
+            "icon": "",
+            "text": "Stress score — know when to push, when to rest",
+            "caption": ""
           }
         },
         "bullet_activity": {
           "type": "bullet",
           "settings": {
-            "text": "Steps, distance, calories — automatic workout detection"
+            "icon": "",
+            "text": "Steps, distance, calories — automatic workout detection",
+            "caption": ""
           }
         },
         "bullet_camera": {
           "type": "bullet",
           "settings": {
-            "text": "Remote camera control — snap photos from your wrist"
+            "icon": "",
+            "text": "Remote camera control — snap photos from your wrist",
+            "caption": ""
           }
         }
       },
@@ -545,7 +577,6 @@
       "block_order": [
         "judge_me_reviews_review_widget_QD8Ut3"
       ],
-      "disabled": true,
       "settings": {
         "include_margins": true
       }
