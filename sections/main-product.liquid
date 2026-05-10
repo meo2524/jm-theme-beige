@@ -135,7 +135,16 @@
       </div>
       {%- comment -%} /gallery-main {%- endcomment -%}
 
-      {%- comment -%} Mobile-only top 3 benefits — visible under photo carousel on ≤749px {%- endcomment -%}
+    </div>
+    {%- comment -%} /product-gallery {%- endcomment -%}
+
+
+    {%- comment -%} ===========================================
+      PRODUCT INFO
+    =========================================== {%- endcomment -%}
+    <div class="product-info">
+
+      {%- comment -%} Mobile-only top 3 benefits — first card in product-info on ≤749px so it inherits the same horizontal padding as sibling cards (rating / variant / starter). Hidden on desktop. {%- endcomment -%}
       <ul class="pdp-mobile-benefits" role="list" aria-label="Top benefits">
         <li class="pdp-mobile-benefits__item">
           <span class="pdp-mobile-benefits__icon" aria-hidden="true">
@@ -156,15 +165,6 @@
           <span><strong>No subscription, ever</strong> — buy it once, own your data forever.</span>
         </li>
       </ul>
-
-    </div>
-    {%- comment -%} /product-gallery {%- endcomment -%}
-
-
-    {%- comment -%} ===========================================
-      PRODUCT INFO
-    =========================================== {%- endcomment -%}
-    <div class="product-info">
 
 
       {%- comment -%} -- Eyebrow -- {%- endcomment -%}
@@ -430,13 +430,18 @@
           </div>
         </div>
 
-        {%- comment -%} Find your size CTA — opens ring-size modal {%- endcomment -%}
+        {%- comment -%} Find your size CTA — primary-styled, opens ring-size modal {%- endcomment -%}
         <button type="button" class="pdp-find-size-cta" data-size-guide data-open-size-modal aria-label="Open ring size guide">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-            <path d="M3 8l4-4 14 14-4 4z"/>
-            <path d="M7 12l2 2M11 8l2 2M15 4l2 2"/>
+          <span class="pdp-find-size-cta__inner">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M3 8l4-4 14 14-4 4z"/>
+              <path d="M7 12l2 2M11 8l2 2M15 4l2 2"/>
+            </svg>
+            <span>Find your size</span>
+          </span>
+          <svg class="pdp-find-size-cta__chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polyline points="9 6 15 12 9 18"/>
           </svg>
-          <span>Find your size</span>
         </button>
 
         {%- comment -%} Add to cart {%- endcomment -%}
@@ -492,9 +497,17 @@
       <div class="accordion" id="Accordion-{{ section.id }}">
 
         {%- assign accordion_keys = "whats-included,how-it-works,ingredients-certifications" | split: "," -%}
-        {%- assign label_1 = section.settings.accordion_label_1 | default: "What's included" -%}
-        {%- assign label_2 = section.settings.accordion_label_2 | default: "How it works" -%}
-        {%- assign label_3 = section.settings.accordion_label_3 | default: "Ingredients & certifications" -%}
+        {%- comment -%}
+          Use a sentinel for blank labels so the loop can detect "skip this entry"
+          after the split. Templates set a setting to "" to remove that accordion
+          item entirely (label-based skip — see filter below).
+        {%- endcomment -%}
+        {%- assign label_1 = section.settings.accordion_label_1 -%}
+        {%- if label_1 == blank -%}{%- assign label_1 = "What's included" -%}{%- endif -%}
+        {%- assign label_2 = section.settings.accordion_label_2 -%}
+        {%- if label_2 == blank -%}{%- assign label_2 = "__SKIP__" -%}{%- endif -%}
+        {%- assign label_3 = section.settings.accordion_label_3 -%}
+        {%- if label_3 == blank -%}{%- assign label_3 = "Ingredients & certifications" -%}{%- endif -%}
         {%- assign accordion_labels = label_1 | append: "|||" | append: label_2 | append: "|||" | append: label_3 | split: "|||" -%}
 
         {%- for label in accordion_labels -%}
@@ -522,6 +535,8 @@
               render even with blank content because the size-modal JS
               intercepts the click and opens the modal instead.
           {%- endcomment -%}
+          {%- comment -%} Sentinel from blank setting → skip this accordion entry entirely. {%- endcomment -%}
+          {%- if label == "__SKIP__" -%}{%- continue -%}{%- endif -%}
           {%- assign label_lower = label | downcase -%}
           {%- assign is_size_trigger = false -%}
           {%- if label_lower contains 'size' -%}{%- assign is_size_trigger = true -%}{%- endif -%}
@@ -655,35 +670,47 @@
    MAIN PRODUCT -- Mend & Co
    ============================================================ */
 
-/* Find your size CTA — sits between qty and ATC, opens ring-size modal */
+/* Find your size CTA — primary-styled, sits between qty and ATC, opens ring-size modal */
 .pdp-find-size-cta {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
+  justify-content: space-between;
+  gap: 0.75rem;
   width: 100%;
-  padding: 14px 20px;
+  padding: 16px 20px;
   margin: 16px 0;
-  background: var(--color-bone, #F2EDE4);
-  border: 1px solid rgba(31,29,26,0.18);
+  background: var(--color-walnut, #8a6240);
+  color: var(--color-bone, #F2EDE4);
+  border: none;
   border-radius: 10px;
   font-family: var(--font-label, monospace);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-walnut, #8a6240);
   cursor: pointer;
   transition: background 0.2s ease, transform 0.15s ease;
+  box-shadow: 0 2px 8px rgba(31,29,26,0.08);
 }
-.pdp-find-size-cta:hover { background: #ECE3D2; }
+.pdp-find-size-cta:hover { background: #6f4e32; }
 .pdp-find-size-cta:active { transform: translateY(1px); }
 .pdp-find-size-cta:focus-visible {
   outline: 1.5px solid var(--color-walnut, #8A6240);
   outline-offset: 2px;
 }
+.pdp-find-size-cta__inner {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.pdp-find-size-cta__chev {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
 
-/* Mobile-only top 3 benefits under photo carousel */
+/* Mobile-only top 3 benefits — first card inside product-info on ≤749px.
+   Width is governed by parent .product-info padding (0 1rem); no side
+   margin so it sits flush with sibling cards (rating / variant / starter). */
 .pdp-mobile-benefits { display: none; }
 @media (max-width: 749px) {
   .pdp-mobile-benefits {
@@ -691,11 +718,12 @@
     flex-direction: column;
     gap: 0.75rem;
     list-style: none;
-    margin: 1rem 1rem 0.5rem;
+    margin: 1rem 0 0.5rem;
     padding: 1rem 1.25rem;
     background: var(--color-bone, #F2EDE4);
     border-radius: 10px;
     border: 1px solid rgba(31,29,26,0.08);
+    box-sizing: border-box;
   }
   .pdp-mobile-benefits__item {
     display: flex;
