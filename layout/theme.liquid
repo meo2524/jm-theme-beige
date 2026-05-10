@@ -616,6 +616,35 @@
         min-height: 0 !important;
         margin-top: 2px !important;
       }
+      /* Move the + FREE badge from left of the row to under the
+         strikethrough price so the gift name fits on one line. */
+      .kaching-bundles__free-gift::before {
+        display: none !important;
+        content: none !important;
+      }
+      .kaching-bundles .kaching-bundles__free-gift__full-price,
+      .kaching-bundles__free-gift__full-price {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-end !important;
+        gap: 3px !important;
+        text-align: right !important;
+      }
+      .kaching-bundles__free-gift__full-price::after {
+        content: "+ FREE" !important;
+        display: inline-block !important;
+        font-size: 9px !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.06em !important;
+        line-height: 1.2 !important;
+        background: #5a4a37 !important;
+        color: #f5efe4 !important;
+        padding: 2px 6px !important;
+        border-radius: 4px !important;
+        font-style: normal !important;
+        text-decoration: none !important;
+        white-space: nowrap !important;
+      }
       .kaching-bundles__free-gift__main {
         gap: 8px !important;
       }
