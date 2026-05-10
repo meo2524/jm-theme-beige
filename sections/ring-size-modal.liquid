@@ -65,13 +65,18 @@
                 <text x="100" y="160" font-family="inherit" font-size="9" fill="#9a7e57" stroke="none" text-anchor="middle" font-weight="600">SIZE 8</text>
               </svg>
             </div>
-            <p class="rsm-diagram-title">Sizing app <span class="rsm-tag-ios">iOS</span></p>
+            <p class="rsm-diagram-title">Sizing app</p>
             <p class="rsm-diagram-caption">Free, no in-app purchases. Place a ring you already own on the screen, slide to match the inside diameter, the app reads your US size.</p>
-            <a href="https://apps.apple.com/app/id1644578569" target="_blank" rel="noopener" class="rsm-app-btn">
-              <svg viewBox="0 0 22 26" width="14" height="16" fill="currentColor" aria-hidden="true"><path d="M18.05 13.77c-.03-3.2 2.62-4.75 2.74-4.82-1.5-2.19-3.82-2.49-4.64-2.52-1.97-.2-3.86 1.17-4.86 1.17-1.01 0-2.57-1.14-4.23-1.11C4.9 6.52 2.87 7.7 1.76 9.57c-2.27 3.94-.58 9.76 1.63 12.95 1.08 1.56 2.36 3.31 4.04 3.25 1.63-.07 2.24-1.05 4.2-1.05 1.96 0 2.52 1.05 4.24 1.02 1.75-.03 2.85-1.59 3.92-3.16 1.24-1.81 1.75-3.57 1.77-3.66-.04-.02-3.48-1.33-3.51-5.15zM14.78 4.28C15.67 3.2 16.27 1.7 16.1 0c-1.47.06-3.27.98-4.32 2.04-.95.99-1.77 2.57-1.55 4.08 1.63.13 3.3-.83 4.55-1.84z"/></svg>
-              Download on App Store
-            </a>
-            <p class="rsm-app-note">Android? Switch to the String tab — it's just as accurate.</p>
+            <div class="rsm-app-btns">
+              <a href="https://apps.apple.com/app/id1644578569" target="_blank" rel="noopener" class="rsm-app-btn">
+                <svg viewBox="0 0 22 26" width="14" height="16" fill="currentColor" aria-hidden="true"><path d="M18.05 13.77c-.03-3.2 2.62-4.75 2.74-4.82-1.5-2.19-3.82-2.49-4.64-2.52-1.97-.2-3.86 1.17-4.86 1.17-1.01 0-2.57-1.14-4.23-1.11C4.9 6.52 2.87 7.7 1.76 9.57c-2.27 3.94-.58 9.76 1.63 12.95 1.08 1.56 2.36 3.31 4.04 3.25 1.63-.07 2.24-1.05 4.2-1.05 1.96 0 2.52 1.05 4.24 1.02 1.75-.03 2.85-1.59 3.92-3.16 1.24-1.81 1.75-3.57 1.77-3.66-.04-.02-3.48-1.33-3.51-5.15zM14.78 4.28C15.67 3.2 16.27 1.7 16.1 0c-1.47.06-3.27.98-4.32 2.04-.95.99-1.77 2.57-1.55 4.08 1.63.13 3.3-.83 4.55-1.84z"/></svg>
+                App Store
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=ring.sizer" target="_blank" rel="noopener" class="rsm-app-btn">
+                <svg viewBox="0 0 22 24" width="14" height="16" fill="currentColor" aria-hidden="true"><path d="M1.22.48C.8.7.5 1.18.5 1.8v20.4c0 .62.3 1.1.72 1.32l.1.06 11.42-11.42v-.27L1.32.42l-.1.06zm15.56 15.7l-3.8-3.8v-.27l3.8-3.8.09.05 4.5 2.56c1.28.73 1.28 1.92 0 2.65l-4.5 2.56-.09.05zM16.88 16.28L13 12.39 1.22 24.17c.42.24.98.2 1.67-.2l14-7.69"/><path d="M16.88 8.52L2.89.83C2.2.43 1.64.39 1.22.63L13 12.41l3.88-3.89z"/></svg>
+                Google Play
+              </a>
+            </div>
           </div>
         </div>
 
@@ -429,31 +434,36 @@
     max-width: 420px;
   }
   .rsm-diagram-card .rsm-diagram-caption:last-child { margin-bottom: 0; }
+  .rsm-app-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
   .rsm-app-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
     background: #1f1d1a;
     color: #f5efe4;
     text-decoration: none;
-    padding: 12px 22px;
+    padding: 12px 18px;
     border-radius: 8px;
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.04em;
     transition: background 0.18s, transform 0.15s;
     box-sizing: border-box;
+    min-width: 140px;
   }
   .rsm-app-btn:hover {
     background: #2a2622;
     transform: translateY(-1px);
   }
-  .rsm-app-note {
-    font-size: 12px;
-    color: #9a7e57;
-    margin: 12px 0 0;
-    font-style: italic;
+  @media (max-width: 380px) {
+    .rsm-app-btns { flex-direction: column; width: 100%; }
+    .rsm-app-btn { width: 100%; min-width: 0; }
   }
   .rsm-diagram-footer {
     text-align: center;
