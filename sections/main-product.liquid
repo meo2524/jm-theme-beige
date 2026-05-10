@@ -135,6 +135,28 @@
       </div>
       {%- comment -%} /gallery-main {%- endcomment -%}
 
+      {%- comment -%} Mobile-only top 3 benefits — visible under photo carousel on ≤749px {%- endcomment -%}
+      <ul class="pdp-mobile-benefits" role="list" aria-label="Top benefits">
+        <li class="pdp-mobile-benefits__item">
+          <span class="pdp-mobile-benefits__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          </span>
+          <span><strong>Wake up to one readiness score</strong> — go or rest, no guesswork.</span>
+        </li>
+        <li class="pdp-mobile-benefits__item">
+          <span class="pdp-mobile-benefits__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
+          </span>
+          <span><strong>HRV trended over weeks</strong> — the number your doctor wishes you had.</span>
+        </li>
+        <li class="pdp-mobile-benefits__item">
+          <span class="pdp-mobile-benefits__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
+          </span>
+          <span><strong>No subscription, ever</strong> — buy it once, own your data forever.</span>
+        </li>
+      </ul>
+
     </div>
     {%- comment -%} /product-gallery {%- endcomment -%}
 
@@ -408,22 +430,14 @@
           </div>
         </div>
 
-        {%- comment -%} Mother's Day sale banner {%- endcomment -%}
-        {%- if settings.motion_enabled -%}
-          <div class="mc-mday-banner" data-reveal data-reveal-delay="0">
-            <span class="mc-mday-banner__shine" aria-hidden="true"></span>
-            <div class="mc-mday-banner__inner">
-              <span class="mc-mday-banner__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="#ff85a1"><path d="M12 21s-7.5-4.7-9.6-9.4C1.1 8.3 3.4 5 6.7 5c1.9 0 3.7 1.1 4.6 2.7C12.2 6.1 14 5 16 5c3.3 0 5.6 3.3 4.3 6.6C19.5 16.3 12 21 12 21z"/></svg>
-              </span>
-              <span class="mc-mday-banner__title">Mother's Day Sale</span>
-              <span class="mc-mday-banner__sep" aria-hidden="true">·</span>
-              <span class="mc-mday-banner__title">Free Shipping</span>
-              <span class="mc-mday-banner__sep" aria-hidden="true">·</span>
-              <span class="mc-mday-banner__title">Ends Tonight</span>
-            </div>
-          </div>
-        {%- endif -%}
+        {%- comment -%} Find your size CTA — opens ring-size modal {%- endcomment -%}
+        <button type="button" class="pdp-find-size-cta" data-size-guide data-open-size-modal aria-label="Open ring size guide">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M3 8l4-4 14 14-4 4z"/>
+            <path d="M7 12l2 2M11 8l2 2M15 4l2 2"/>
+          </svg>
+          <span>Find your size</span>
+        </button>
 
         {%- comment -%} Add to cart {%- endcomment -%}
         <button
@@ -640,6 +654,65 @@
 /* ============================================================
    MAIN PRODUCT -- Mend & Co
    ============================================================ */
+
+/* Find your size CTA — sits between qty and ATC, opens ring-size modal */
+.pdp-find-size-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 14px 20px;
+  margin: 16px 0;
+  background: var(--color-bone, #F2EDE4);
+  border: 1px solid rgba(31,29,26,0.18);
+  border-radius: 10px;
+  font-family: var(--font-label, monospace);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-walnut, #8a6240);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.pdp-find-size-cta:hover { background: #ECE3D2; }
+.pdp-find-size-cta:active { transform: translateY(1px); }
+.pdp-find-size-cta:focus-visible {
+  outline: 1.5px solid var(--color-walnut, #8A6240);
+  outline-offset: 2px;
+}
+
+/* Mobile-only top 3 benefits under photo carousel */
+.pdp-mobile-benefits { display: none; }
+@media (max-width: 749px) {
+  .pdp-mobile-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    list-style: none;
+    margin: 1rem 1rem 0.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--color-bone, #F2EDE4);
+    border-radius: 10px;
+    border: 1px solid rgba(31,29,26,0.08);
+  }
+  .pdp-mobile-benefits__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--color-black, #1f1d1a);
+  }
+  .pdp-mobile-benefits__icon {
+    flex-shrink: 0;
+    color: var(--color-walnut, #8a6240);
+    display: inline-flex;
+    margin-top: 2px;
+  }
+  .pdp-mobile-benefits__item strong { font-weight: 600; }
+}
 
 .product-section {
   background: var(--color-bone, #F2EDE4);
