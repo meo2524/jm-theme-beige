@@ -69,37 +69,49 @@
         "bullet_sleep": {
           "type": "bullet",
           "settings": {
-            "text": "Sleep that actually restores you. See the night your body actually had — stop wondering why 8 hours feels like 5."
+            "icon": "moon",
+            "text": "Sleep, in detail.",
+            "caption": "Light, deep, REM — every wake-up you don't remember."
           }
         },
         "bullet_heart": {
           "type": "bullet",
           "settings": {
-            "text": "Catch what your body is hiding. The early signal of stress, illness, or hormones shifting — weeks before you'd feel anything."
+            "icon": "heart-alert",
+            "text": "Early warnings.",
+            "caption": "Stress, illness, hormones — caught weeks before symptoms."
           }
         },
         "bullet_recovery": {
           "type": "bullet",
           "settings": {
-            "text": "Wake up knowing what to do. One readiness score in the morning. Push hard, or take it easy — no guesswork."
+            "icon": "gauge",
+            "text": "One score, every morning.",
+            "caption": "Push hard, or take it easy. No guesswork."
           }
         },
         "bullet_activity": {
           "type": "bullet",
           "settings": {
-            "text": "Track your heart in the quiet moments. The 3am readings, the silent stress spikes, the rhythm changes you'd never notice on a watch."
+            "icon": "pulse-night",
+            "text": "Heart, even at 3am.",
+            "caption": "The quiet readings your watch never sees."
           }
         },
         "bullet_subscription": {
           "type": "bullet",
           "settings": {
-            "text": "Cycle and recovery clues your watch can't see. Body temperature, mapped night by night — the pattern your wrist can't read."
+            "icon": "temp-wave",
+            "text": "Cycle and recovery clues.",
+            "caption": "Body temperature, mapped night by night."
           }
         },
         "bullet_ceramic": {
           "type": "bullet",
           "settings": {
-            "text": "Yours forever. No subscription. No paywall. No \"upgrade to see your sleep score.\" You buy it once."
+            "icon": "infinity",
+            "text": "Yours forever.",
+            "caption": "No subscription. No paywall. Buy once."
           }
         }
       },
@@ -116,7 +128,7 @@
         "video_position_y": 25,
         "eyebrow": "Why N°01",
         "heading": "Six things your watch can't tell you.",
-        "body": "A smart ring on your finger reads what a watch on your wrist can't — overnight, while you sleep, while you sit still. Then it translates the lot into one clear answer in the morning: are you rested, recovered, or running on empty?",
+        "body": "What your wrist can't catch — your finger can.",
         "cta_label": "",
         "cta_url": "",
         "reverse": false

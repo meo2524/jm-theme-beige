@@ -84,8 +84,53 @@
             {%- for block in section.blocks -%}
               {%- if block.type == 'bullet' -%}
                 <li class="product-feature__bullet" {{ block.shopify_attributes }}>
-                  <span class="product-feature__bullet-icon" aria-hidden="true">—</span>
-                  <span>{{ block.settings.text }}</span>
+                  {%- if block.settings.icon != blank -%}
+                    <span class="product-feature__bullet-icon" aria-hidden="true">
+                      {%- case block.settings.icon -%}
+                        {%- when 'moon' -%}
+                          <svg viewBox="0 0 48 48" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M30 6a18 18 0 1012 22A14 14 0 0130 6z"/>
+                            <path d="M14 36c2-2 4-2 6 0s4 2 6 0"/>
+                          </svg>
+                        {%- when 'heart-alert' -%}
+                          <svg viewBox="0 0 48 48" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M24 40s-12-8-12-18a8 8 0 0112-7 8 8 0 0112 7c0 10-12 18-12 18z"/>
+                            <line x1="24" y1="20" x2="24" y2="26"/>
+                            <circle cx="24" cy="30" r="0.5" fill="currentColor"/>
+                          </svg>
+                        {%- when 'gauge' -%}
+                          <svg viewBox="0 0 48 48" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M8 32a16 16 0 0132 0"/>
+                            <line x1="24" y1="32" x2="34" y2="20"/>
+                            <circle cx="24" cy="32" r="2" fill="currentColor"/>
+                            <line x1="14" y1="32" x2="12" y2="32"/>
+                            <line x1="34" y1="32" x2="36" y2="32"/>
+                          </svg>
+                        {%- when 'pulse-night' -%}
+                          <svg viewBox="0 0 48 48" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 28h8l4-10 6 18 4-12 4 4h14"/>
+                            <circle cx="40" cy="10" r="3"/>
+                          </svg>
+                        {%- when 'temp-wave' -%}
+                          <svg viewBox="0 0 48 48" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 6v22a6 6 0 1012 0V6a3 3 0 00-12 0z"/>
+                            <line x1="18" y1="14" x2="22" y2="14"/>
+                            <line x1="18" y1="20" x2="22" y2="20"/>
+                            <circle cx="24" cy="34" r="3" fill="currentColor"/>
+                          </svg>
+                        {%- when 'infinity' -%}
+                          <svg viewBox="0 0 48 48" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 24c0-4 3-8 8-8s8 8 12 8 8-4 8-8-3-8-8-8-8 8-12 8-8 4-8 8z" transform="translate(-2,0)"/>
+                          </svg>
+                      {%- endcase -%}
+                    </span>
+                  {%- endif -%}
+                  {%- if block.settings.text != blank -%}
+                    <h3 class="product-feature__bullet-headline">{{ block.settings.text }}</h3>
+                  {%- endif -%}
+                  {%- if block.settings.caption != blank -%}
+                    <p class="product-feature__bullet-caption">{{ block.settings.caption }}</p>
+                  {%- endif -%}
                 </li>
               {%- endif -%}
             {%- endfor -%}
@@ -178,37 +223,71 @@
     max-width: 52ch;
   }
 
-  /* ---- Bullets ---- */
-  .product-feature__bullets {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: var(--space-3);
-    margin-bottom: var(--space-6);
+  /* ---- Bullets (visual icon cards) ---- */
+  .product-feature .product-feature__bullets,
+  .motion-on .product-feature .product-feature__bullets {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1rem;
     list-style: none;
+    margin: 1.5rem 0 0;
     padding: 0;
-    grid-template-columns: unset !important;
   }
 
-  .product-feature__bullet {
+  .product-feature .product-feature__bullet,
+  .motion-on .product-feature .product-feature__bullet {
+    background: var(--color-bone, #F2EDE4) !important;
+    border-radius: 12px !important;
+    padding: 1.5rem 1.25rem !important;
     display: flex !important;
-    align-items: flex-start;
-    gap: var(--space-3);
-    font-size: var(--font-size-sm);
-    color: var(--color-olive);
-    line-height: var(--line-height-body);
-    background: none !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem;
+    text-align: left;
     border: none !important;
-    border-radius: 0 !important;
-    padding: 0 !important;
     box-shadow: none !important;
     min-height: unset !important;
   }
 
-  .product-feature__bullet-icon {
-    color: var(--color-walnut);
-    flex-shrink: 0;
-    font-size: var(--font-size-md);
-    line-height: 1.4;
+  .product-feature .product-feature__bullet-icon,
+  .motion-on .product-feature .product-feature__bullet-icon {
+    color: var(--color-walnut, #8a6240);
+    display: inline-flex !important;
+    margin-bottom: 0.25rem;
+    line-height: 0;
+  }
+  .product-feature__bullet-icon svg {
+    width: 52px;
+    height: 52px;
+    display: block;
+  }
+
+  .product-feature__bullet-headline {
+    font-family: var(--font-heading, 'Cormorant Garamond', serif);
+    font-size: 1.15rem;
+    line-height: 1.2;
+    color: var(--color-black, #1f1d1a);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .product-feature__bullet-caption {
+    font-family: var(--font-body, Inter, sans-serif);
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: var(--color-olive, #6a6258);
+    margin: 0;
+  }
+
+  @media (max-width: 749px) {
+    .product-feature .product-feature__bullets,
+    .motion-on .product-feature .product-feature__bullets {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 0.75rem;
+    }
+    .product-feature .product-feature__bullet { padding: 1rem 1rem !important; }
+    .product-feature__bullet-headline { font-size: 1rem; }
+    .product-feature__bullet-caption { font-size: 0.8rem; }
   }
 
   /* ---- Responsive ---- */
@@ -309,10 +388,29 @@
       "name": "Bullet point",
       "settings": [
         {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "", "label": "None" },
+            { "value": "moon", "label": "Moon (sleep)" },
+            { "value": "heart-alert", "label": "Heart with alert" },
+            { "value": "gauge", "label": "Gauge / score" },
+            { "value": "pulse-night", "label": "Pulse at night" },
+            { "value": "temp-wave", "label": "Temperature wave" },
+            { "value": "infinity", "label": "Infinity (forever)" }
+          ]
+        },
+        {
           "type": "text",
           "id": "text",
-          "label": "Text",
-          "default": "5–7 day battery. Wear it to sleep, every night."
+          "label": "Headline",
+          "default": "5–7 day battery."
+        },
+        {
+          "type": "textarea",
+          "id": "caption",
+          "label": "Caption (under headline)"
         }
       ]
     }
