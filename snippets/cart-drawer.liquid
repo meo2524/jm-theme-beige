@@ -294,9 +294,6 @@
       </div>
 
       <div class="cart-drawer__checkout-row">
-        <span class="cart-drawer__item-total" data-cart-item-total>
-          {{ cart.item_count }} item{%- if cart.item_count != 1 -%}s{%- endif -%}
-        </span>
         <a href="/checkout" class="cart-drawer__checkout" id="CartDrawerCheckout">
           CHECKOUT &bull; <span data-cart-total>{{ cart.total_price | money }}</span>
         </a>

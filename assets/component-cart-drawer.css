@@ -548,6 +548,12 @@
   border-top: 1px solid rgba(43, 43, 43, 0.07);
 }
 
+@media (max-width: 767px) {
+  .cart-upsells {
+    display: none;
+  }
+}
+
 .cart-upsells__heading {
   font-family: var(--font-label);
   font-size: 0.75rem;
