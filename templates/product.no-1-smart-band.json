@@ -136,81 +136,59 @@
         "row_price": {
           "type": "row",
           "settings": {
-            "icon": "💵",
+            "icon": "",
             "feature": "Upfront price",
             "ours_value": "$109",
-            "theirs_value": "$269–349",
-            "watches_value": "$249–799"
+            "theirs_value": "$269–349"
           }
         },
         "row_subscription": {
           "type": "row",
           "settings": {
-            "icon": "🔓",
+            "icon": "",
             "feature": "Subscription",
             "ours_value": "None, ever",
-            "theirs_value": "Often $5.99+/mo",
-            "watches_value": "Optional"
+            "theirs_value": "Often $5.99+/mo"
           }
         },
         "row_3yr": {
           "type": "row",
           "settings": {
-            "icon": "📊",
-            "feature": "3-year total cost",
+            "icon": "",
+            "feature": "3-year cost",
             "ours_value": "$109",
-            "theirs_value": "$500+",
-            "watches_value": "$249+"
-          }
-        },
-        "row_sleep": {
-          "type": "row",
-          "settings": {
-            "icon": "🌙",
-            "feature": "Sleep tracking, all night",
-            "ours_value": "✅ Finger PPG",
-            "theirs_value": "✅ Finger PPG",
-            "watches_value": "❌ Battery dies overnight"
-          }
-        },
-        "row_hrv": {
-          "type": "row",
-          "settings": {
-            "icon": "❤️",
-            "feature": "HRV / recovery score",
-            "ours_value": "✅",
-            "theirs_value": "✅",
-            "watches_value": "Indirect only"
+            "theirs_value": "$500+"
           }
         },
         "row_battery": {
           "type": "row",
           "settings": {
-            "icon": "🔋",
+            "icon": "",
             "feature": "Battery life",
             "ours_value": "5–7 days",
-            "theirs_value": "4–7 days",
-            "watches_value": "~18 hours"
+            "theirs_value": "4–7 days"
           }
         },
-        "row_jewellery": {
+        "row_ceramic": {
           "type": "row",
           "settings": {
-            "icon": "✨",
-            "feature": "Looks like jewellery",
-            "ours_value": "✅ Ceramic, 3 colours",
-            "theirs_value": "✅",
-            "watches_value": "❌"
+            "icon": "",
+            "feature": "Ceramic body, not plastic",
+            "ours_value": "",
+            "theirs_value": "",
+            "ours_yes": true,
+            "theirs_yes": false
           }
         },
         "row_data": {
           "type": "row",
           "settings": {
-            "icon": "🗝",
+            "icon": "",
             "feature": "You own your data",
-            "ours_value": "✅ No paywall",
-            "theirs_value": "Often behind paywall",
-            "watches_value": "In manufacturer's ecosystem"
+            "ours_value": "",
+            "theirs_value": "",
+            "ours_yes": true,
+            "theirs_yes": false
           }
         }
       },
@@ -218,21 +196,19 @@
         "row_price",
         "row_subscription",
         "row_3yr",
-        "row_sleep",
-        "row_hrv",
         "row_battery",
-        "row_jewellery",
+        "row_ceramic",
         "row_data"
       ],
       "settings": {
         "heading": "The N°01 vs the rest.",
-        "subheading": "No spin. Where they win, they win.",
+        "subheading": "What you get with us. What you don't get elsewhere.",
         "our_label": "N°01 Smart Ring",
         "our_badge": "Original",
         "them_label": "Other Smart Rings",
         "them_sub": "(typical)",
-        "watches_label": "Smart Watches",
-        "watches_sub": "(typical)",
+        "watches_label": "",
+        "watches_sub": "",
         "caption": "Over 3 years, the N°01 saves you ~$400 vs typical smart rings. No subscription means once you buy it, that's it."
       }
     },
