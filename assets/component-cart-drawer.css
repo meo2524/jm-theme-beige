@@ -37,9 +37,7 @@
   background: #fff;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden; /* body handles its own scroll; panel must NOT scroll */
   transform: translateX(100%);
   transition: transform 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   border-left: 1px solid rgba(43, 43, 43, 0.08);
@@ -289,8 +287,10 @@
 /* ── BODY ──────────────────────────────────────────────── */
 
 .cart-drawer__body {
-  flex: 1 0 auto;
-  overflow: visible;
+  flex: 1 1 auto; /* grow to fill remaining height, shrink if footer needs room */
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .cart-drawer__body::-webkit-scrollbar {
@@ -655,6 +655,7 @@
   flex-direction: column;
   gap: 0.875rem;
   background: #fff;
+  flex-shrink: 0; /* never compress — always visible at bottom */
 }
 
 .cart-drawer__footer.is-hidden {
@@ -824,18 +825,11 @@
   margin: 0;
 }
 
-/* Checkout row */
+/* Checkout row — footer is always in viewport so no sticky needed */
 .cart-drawer__checkout-row {
   display: flex;
   flex-direction: column;
   gap: var(--space-2, 8px);
-  position: sticky;
-  bottom: 0;
-  background: #fff;
-  padding: 0.875rem 1.5rem 1rem;
-  margin: 0 -1.5rem -1rem; /* bleed past footer padding so bg fills edge to edge */
-  z-index: 2;
-  border-top: 1px solid rgba(43, 43, 43, 0.08);
 }
 
 .cart-drawer__item-total {
