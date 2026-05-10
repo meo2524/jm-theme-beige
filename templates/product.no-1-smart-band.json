@@ -126,6 +126,14 @@
         "reverse": false
       }
     },
+    "photo_reviews": {
+      "type": "photo-reviews",
+      "settings": {
+        "eyebrow": "Verified Menders",
+        "heading": "Real people. Real results.",
+        "subheading": "Join thousands of Menders who track their health from their finger."
+      }
+    },
     "ring_comparison": {
       "type": "ring-comparison",
       "blocks": {
@@ -226,14 +234,6 @@
         "watches_label": "",
         "watches_sub": "",
         "caption": "Over 3 years, the N°01 saves you ~$400 vs typical smart rings. No subscription means once you buy it, that's it."
-      }
-    },
-    "photo_reviews": {
-      "type": "photo-reviews",
-      "settings": {
-        "eyebrow": "Verified Menders",
-        "heading": "Real people. Real results.",
-        "subheading": "Join thousands of Menders who track their health from their finger."
       }
     },
     "angle_testimonials": {
@@ -615,8 +615,8 @@
     "main",
     "custom_liquid_TgB6HE",
     "benefit_pitch",
-    "ring_comparison",
     "photo_reviews",
+    "ring_comparison",
     "angle_testimonials",
     "product_science",
     "app_showcase",
