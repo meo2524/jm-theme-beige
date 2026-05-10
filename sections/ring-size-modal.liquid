@@ -713,23 +713,84 @@
     });
   });
 
-  /* Use this size — close modal; attempt to select size variant if a clean selector is present */
+  /* Use this size — synchronise both the theme variant picker and any
+     Kaching Bundles app pickers, then close the modal and scroll the
+     theme picker into view. Defensive: each selector pass is wrapped so
+     a missing pattern can't break the others. */
+  function applySizeToPage(size) {
+    var sizeStr = String(size);
+
+    /* 1. Theme .variant-fieldset radio (Dawn-style: input[type=radio] inside <label class="variant-card">) */
+    try {
+      var fieldsets = document.querySelectorAll('fieldset.variant-fieldset');
+      fieldsets.forEach(function(fs) {
+        var legend = fs.querySelector('legend');
+        if (!legend || legend.textContent.trim().toLowerCase() !== 'size') return;
+        var radio = fs.querySelector('input[type="radio"][value="' + sizeStr + '"]');
+        if (radio) {
+          if (!radio.checked) {
+            radio.checked = true;
+            radio.dispatchEvent(new Event('input',  { bubbles: true }));
+            radio.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+          /* Visual state — Dawn applies is-selected on the parent <label> */
+          var labels = fs.querySelectorAll('label.variant-card');
+          labels.forEach(function(l) { l.classList.remove('is-selected'); });
+          var lbl = radio.closest('label.variant-card');
+          if (lbl) lbl.classList.add('is-selected');
+        } else {
+          /* Fallback: text match on a button/label inside the fieldset */
+          var clickable = Array.from(fs.querySelectorAll('button, label, [role="button"]'))
+            .filter(function(el) { return el.textContent.trim() === sizeStr; });
+          if (clickable[0]) clickable[0].click();
+        }
+      });
+    } catch(err) { /* noop */ }
+
+    /* 2. Kaching Bundles native <select> pickers — set value + fire change */
+    try {
+      var kSelects = document.querySelectorAll('select.kaching-bundles__bar-variant-select');
+      kSelects.forEach(function(s) {
+        var name = s.getAttribute('data-name') || '';
+        if (name && name.toLowerCase() !== 'size') return;
+        var match = Array.from(s.options).find(function(o) { return o.value === sizeStr; });
+        if (!match) return;
+        s.value = sizeStr;
+        s.dispatchEvent(new Event('input',  { bubbles: true }));
+        s.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    } catch(err) { /* noop */ }
+
+    /* 3. Kaching button-style size pickers (if a future template uses them) */
+    try {
+      var kBtns = Array.from(document.querySelectorAll(
+        '.kaching-bundles__bar-variants button, ' +
+        '.kaching-bundles__bar-variants [role="button"], ' +
+        '.kaching-bundles__bar-variants label, ' +
+        '.kaching-bundles__bar-variants [data-value]'
+      )).filter(function(el) {
+        if (el.tagName === 'OPTION') return false;
+        if (el.dataset && el.dataset.value === sizeStr) return true;
+        return el.textContent.trim() === sizeStr;
+      });
+      kBtns.forEach(function(el) { try { el.click(); } catch(e) {} });
+    } catch(err) { /* noop */ }
+  }
+
   if (useSizeBtn) {
     useSizeBtn.addEventListener('click', function() {
-      if (selectedSize) {
-        try {
-          var sel = document.querySelector('input[name="options[Size]"][value="' + selectedSize + '"], select[name="options[Size]"]');
-          if (sel) {
-            if (sel.tagName === 'SELECT') {
-              sel.value = selectedSize;
-            } else if (sel.type === 'radio') {
-              sel.checked = true;
-            }
-            sel.dispatchEvent(new Event('change', { bubbles: true }));
-          }
-        } catch(err) {}
-      }
+      if (selectedSize) applySizeToPage(selectedSize);
       closeModal();
+      /* Scroll theme size fieldset into view so the user sees it highlighted */
+      try {
+        var fieldsets = document.querySelectorAll('fieldset.variant-fieldset');
+        fieldsets.forEach(function(fs) {
+          var legend = fs.querySelector('legend');
+          if (legend && legend.textContent.trim().toLowerCase() === 'size') {
+            fs.scrollIntoView({ block: 'center', behavior: 'smooth' });
+          }
+        });
+      } catch(err) {}
     });
   }
 })();
