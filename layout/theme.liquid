@@ -630,36 +630,38 @@
     }
 
     /* KaChing free-gift row: move +FREE badge from left of row to under the
-       strikethrough price so the gift name fits on one line. Applies at all
-       viewports. */
+       strikethrough price so the gift name fits on one line. Pseudo is
+       attached to the gift container (NOT the price element) so the
+       price's line-through doesn't propagate into the badge. */
     .kaching-bundles .kaching-bundles__free-gift::before,
     .kaching-bundles__free-gift::before {
       display: none !important;
       content: none !important;
     }
-    .kaching-bundles .kaching-bundles__free-gift__full-price,
-    .kaching-bundles__free-gift__full-price {
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: flex-end !important;
-      gap: 4px !important;
-      text-align: right !important;
+    .kaching-bundles .kaching-bundles__free-gift,
+    .kaching-bundles__free-gift {
+      position: relative !important;
+      padding-bottom: 28px !important;
     }
-    .kaching-bundles .kaching-bundles__free-gift__full-price::after,
-    .kaching-bundles__free-gift__full-price::after {
+    .kaching-bundles .kaching-bundles__free-gift::after,
+    .kaching-bundles__free-gift::after {
       content: "+ FREE" !important;
+      position: absolute !important;
+      right: 10px !important;
+      bottom: 6px !important;
       display: inline-block !important;
-      font-size: 9px !important;
-      font-weight: 700 !important;
-      letter-spacing: 0.06em !important;
+      font-size: 10px !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.08em !important;
       line-height: 1.2 !important;
-      background: #5a4a37 !important;
+      background: #1f1d1a !important;
       color: #f5efe4 !important;
-      padding: 2px 6px !important;
+      padding: 3px 8px !important;
       border-radius: 4px !important;
       font-style: normal !important;
       text-decoration: none !important;
       white-space: nowrap !important;
+      z-index: 1 !important;
     }
 
     /* KaChing variant dropdown — must float above ATC, Shop Pay, and the
