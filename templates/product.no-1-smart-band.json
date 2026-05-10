@@ -12,7 +12,7 @@
     "main": {
       "type": "main-product",
       "settings": {
-        "eyebrow_text": "A second sense",
+        "eyebrow_text": "",
         "model_badge": "",
         "blurb_heading": "",
         "blurb_subheading": "",
@@ -334,92 +334,6 @@
         "subheading": ""
       }
     },
-    "17779692662038a0a0": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_iFrc3R": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 900,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_iFrc3R"
-      ],
-      "settings": {
-        "include_margins": true
-      }
-    },
-    "tech_specs": {
-      "type": "tech-specs",
-      "blocks": {
-        "spec_sensors": {
-          "type": "spec_group",
-          "settings": {
-            "icon": "heart",
-            "heading": "Sensors",
-            "body": "<ul><li>Red and infrared LEDs measure blood oxygen levels</li><li>Green and infrared LEDs alternate to measure heart rate and heart rate variability 24/7 and respiration rate</li><li>Digital sensor measures temperature trends</li><li>Accelerometer tracks movement and activity 24/7</li></ul>"
-          }
-        },
-        "spec_compatibility": {
-          "type": "spec_group",
-          "settings": {
-            "icon": "check",
-            "heading": "Compatibility",
-            "body": "<ul><li>QRing app for iOS and Android (free, no subscription)</li><li>iOS 9.0+ · Android 5.1+</li><li>Bluetooth 5.2 · supports metric and imperial units</li></ul>"
-          }
-        },
-        "spec_dimensions": {
-          "type": "spec_group",
-          "settings": {
-            "icon": "weight",
-            "heading": "Weight & dimensions",
-            "body": "<ul><li>Width: 7.90 mm</li><li>Thickness: 2.88 mm</li><li>Weight: 3.3 to 5.2 g (varies with size)</li><li>Available sizes 6 — 13</li></ul>"
-          }
-        },
-        "spec_battery": {
-          "type": "spec_group",
-          "settings": {
-            "icon": "battery",
-            "heading": "Battery life",
-            "body": "<ul><li>5 — 7 days active use · 15 days standby</li><li>Charges in 1 — 1.5 hours via magnetic charging case</li><li>14 mAh battery (18 mAh on size 11 and above)</li></ul>"
-          }
-        },
-        "spec_materials": {
-          "type": "spec_group",
-          "settings": {
-            "icon": "ring",
-            "heading": "Materials",
-            "body": "<ul><li>Zirconia ceramic body</li><li>Polished chrome inner band</li><li>5ATM water-resistant — wear it in the shower, pool, or sauna</li><li>Hypoallergenic, scratch-resistant ceramic finish</li></ul>"
-          }
-        },
-        "spec_certifications": {
-          "type": "spec_group",
-          "settings": {
-            "icon": "shield",
-            "heading": "Certifications",
-            "body": "<ul><li>CE certified · no display screen · no NFC</li><li>Realtek RTL8762 ESF chipset</li><li>Subscription: none, ever — own your health data outright</li></ul>"
-          }
-        }
-      },
-      "block_order": [
-        "spec_sensors",
-        "spec_compatibility",
-        "spec_dimensions",
-        "spec_battery",
-        "spec_materials",
-        "spec_certifications"
-      ],
-      "settings": {
-        "included_heading": "What's Included",
-        "included_items": "Mend N°01 Smart Ring\nMagnetic charging case\nUSB-C charging cable\nQuick start guide",
-        "specs_heading": "Tech Specifications"
-      }
-    },
     "ring_size_modal": {
       "type": "ring-size-modal",
       "settings": {}
@@ -658,14 +572,12 @@
     "main",
     "custom_liquid_TgB6HE",
     "benefit_pitch",
+    "ring_comparison",
     "photo_reviews",
     "angle_testimonials",
-    "ring_comparison",
     "product_science",
     "app_showcase",
     "product_faq",
-    "17779692662038a0a0",
-    "tech_specs",
     "ring_size_modal",
     "science_modal",
     "app_modal",
