@@ -638,6 +638,24 @@
       display: none !important;
       content: none !important;
     }
+    /* Make the icon + text row a proper flex layout so wrapped lines
+       indent under the first character of text, not back under the icon. */
+    .kaching-bundles .kaching-bundles__free-gift__main,
+    .kaching-bundles__free-gift__main {
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+    }
+    .kaching-bundles .kaching-bundles__free-gift__link,
+    .kaching-bundles__free-gift__link {
+      flex-shrink: 0 !important;
+      align-self: flex-start !important;
+    }
+    .kaching-bundles .kaching-bundles__free-gift__content,
+    .kaching-bundles__free-gift__content {
+      flex: 1 1 auto !important;
+      min-width: 0 !important;
+    }
     .kaching-bundles .kaching-bundles__free-gift,
     .kaching-bundles__free-gift {
       position: relative !important;
