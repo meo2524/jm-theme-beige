@@ -304,13 +304,16 @@
     }
 
     .product-feature__media {
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 9 / 11;
+      background-color: var(--color-bone-alt);
     }
 
-    /* Videos showing a desk/surface scene are cropped upward by default.
-       Shift object-position down so the desk (lower portion) is visible. */
-    .product-feature__video {
-      object-position: center 65%;
+    /* Mobile: show the whole video (don't crop). Container letterboxes to
+       brand-bone if the video aspect doesn't match exactly. */
+    .product-feature__video,
+    .product-feature__media img {
+      object-fit: contain !important;
+      object-position: center center !important;
     }
 
     /* Extra bottom padding on mobile so the next section has breathing room */
