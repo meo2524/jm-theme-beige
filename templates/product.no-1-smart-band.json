@@ -12,14 +12,14 @@
     "main": {
       "type": "main-product",
       "settings": {
-        "eyebrow_text": "",
+        "eyebrow_text": "A second sense",
         "model_badge": "",
         "blurb_heading": "",
         "blurb_subheading": "",
         "short_description": "Wear it always. The N°01 reads your body around the clock — your sleep, your heart, your movement, your recovery — then translates the lot into clear answers. No subscription.",
         "per_use_text": "",
         "accordion_label_1": "What's in the box",
-        "accordion_label_2": "",
+        "accordion_label_2": "Find your size",
         "accordion_label_3": "Specs & certifications",
         "accordion_whats-included": "",
         "accordion_how-it-works": "",
@@ -55,55 +55,51 @@
         "custom_padding_bottom": 36
       }
     },
+    "photo_reviews": {
+      "type": "photo-reviews",
+      "settings": {
+        "eyebrow": "Verified Menders",
+        "heading": "Real people. Real results.",
+        "subheading": "Join thousands of Menders who track their health from their finger."
+      }
+    },
     "benefit_pitch": {
       "type": "product-feature",
       "blocks": {
         "bullet_sleep": {
           "type": "bullet",
           "settings": {
-            "icon": "moon",
-            "text": "Sleep, in detail.",
-            "caption": "Light, deep, REM — every wake-up you don't remember."
+            "text": "Wake up tired and don't know why? See the night your body actually had — light, deep, REM, every wake-up you don't remember."
           }
         },
         "bullet_heart": {
           "type": "bullet",
           "settings": {
-            "icon": "heart-alert",
-            "text": "Early warnings.",
-            "caption": "Stress, illness, hormones — caught weeks before symptoms."
+            "text": "HRV, trended over weeks. The number your doctor wishes you had — the early signal of stress, illness, overtraining, or hormones shifting."
           }
         },
         "bullet_recovery": {
           "type": "bullet",
           "settings": {
-            "icon": "gauge",
-            "text": "One score, every morning.",
-            "caption": "Push hard, or take it easy. No guesswork."
+            "text": "One readiness score in the morning. Not 14 metrics. The single number that tells you \"go\" or \"rest today.\""
           }
         },
         "bullet_activity": {
           "type": "bullet",
           "settings": {
-            "icon": "pulse-night",
-            "text": "Heart, even at 3am.",
-            "caption": "The quiet readings your watch never sees."
+            "text": "Your heart, even when you're not paying attention. The quiet 3am rate, the silent stress spike, the rhythm before you notice."
           }
         },
         "bullet_subscription": {
           "type": "bullet",
           "settings": {
-            "icon": "temp-wave",
-            "text": "Cycle and recovery clues.",
-            "caption": "Body temperature, mapped night by night."
+            "text": "Body temperature, mapped night by night. Cycle patterns, fevers before symptoms, the recovery clues your wrist can't see."
           }
         },
         "bullet_ceramic": {
           "type": "bullet",
           "settings": {
-            "icon": "infinity",
-            "text": "Yours forever.",
-            "caption": "No subscription. No paywall. Buy once."
+            "text": "No subscription. No paywall. No \"upgrade to see your sleep score.\" You buy it once. You own your data forever."
           }
         }
       },
@@ -119,121 +115,11 @@
         "video_url": "https://cdn.shopify.com/videos/c/vp/f12216a2ff264544862d886fee41129a/f12216a2ff264544862d886fee41129a.HD-1080p-4.8Mbps-83316595.mp4",
         "video_position_y": 25,
         "eyebrow": "Why N°01",
-        "heading": "Six things your watch can't tell you.",
-        "body": "What your wrist can't catch — your finger can.",
+        "heading": "Your watch tracks what you did. The N°01 tracks what you've recovered from.",
+        "body": "Steps and calories tell you about yesterday. HRV, sleep depth and overnight temperature tell you about tomorrow — whether you're building, breaking down, or quietly heading for a cold. The numbers your wrist can't see, on the finger that runs quiet all night.",
         "cta_label": "",
         "cta_url": "",
         "reverse": false
-      }
-    },
-    "photo_reviews": {
-      "type": "photo-reviews",
-      "settings": {
-        "eyebrow": "Verified Menders",
-        "heading": "Real people. Real results.",
-        "subheading": "Join thousands of Menders who track their health from their finger."
-      }
-    },
-    "ring_comparison": {
-      "type": "ring-comparison",
-      "blocks": {
-        "row_price": {
-          "type": "row",
-          "settings": {
-            "icon": "",
-            "feature": "Upfront price",
-            "ours_yes": true,
-            "ours_value": "$109",
-            "theirs_yes": false,
-            "theirs_value": "$269–349",
-            "watches_yes": false,
-            "watches_value": ""
-          }
-        },
-        "row_subscription": {
-          "type": "row",
-          "settings": {
-            "icon": "",
-            "feature": "Subscription",
-            "ours_yes": true,
-            "ours_value": "None, ever",
-            "theirs_yes": false,
-            "theirs_value": "Often $5.99+/mo",
-            "watches_yes": false,
-            "watches_value": ""
-          }
-        },
-        "row_3yr": {
-          "type": "row",
-          "settings": {
-            "icon": "",
-            "feature": "3-year cost",
-            "ours_yes": true,
-            "ours_value": "$109",
-            "theirs_yes": false,
-            "theirs_value": "$500+",
-            "watches_yes": false,
-            "watches_value": ""
-          }
-        },
-        "row_battery": {
-          "type": "row",
-          "settings": {
-            "icon": "",
-            "feature": "Battery life",
-            "ours_yes": true,
-            "ours_value": "5–7 days",
-            "theirs_yes": false,
-            "theirs_value": "4–7 days",
-            "watches_yes": false,
-            "watches_value": ""
-          }
-        },
-        "row_ceramic": {
-          "type": "row",
-          "settings": {
-            "icon": "",
-            "feature": "Ceramic body, not plastic",
-            "ours_yes": true,
-            "ours_value": "",
-            "theirs_yes": false,
-            "theirs_value": "",
-            "watches_yes": false,
-            "watches_value": ""
-          }
-        },
-        "row_data": {
-          "type": "row",
-          "settings": {
-            "icon": "",
-            "feature": "You own your data",
-            "ours_yes": true,
-            "ours_value": "",
-            "theirs_yes": false,
-            "theirs_value": "",
-            "watches_yes": false,
-            "watches_value": ""
-          }
-        }
-      },
-      "block_order": [
-        "row_price",
-        "row_subscription",
-        "row_3yr",
-        "row_battery",
-        "row_ceramic",
-        "row_data"
-      ],
-      "settings": {
-        "heading": "The N°01 vs the rest.",
-        "subheading": "What you get with us. What you don't get elsewhere.",
-        "our_label": "N°01 Smart Ring",
-        "our_badge": "Original",
-        "them_label": "Other Smart Rings",
-        "them_sub": "(typical)",
-        "watches_label": "",
-        "watches_sub": "",
-        "caption": "Over 3 years, the N°01 saves you ~$400 vs typical smart rings. No subscription means once you buy it, that's it."
       }
     },
     "angle_testimonials": {
@@ -242,6 +128,93 @@
       "settings": {
         "eyebrow": "The Mender Community",
         "heading": "Meet the Menders."
+      }
+    },
+    "ring_comparison": {
+      "type": "ring-comparison",
+      "blocks": {
+        "row_nosub": {
+          "type": "row",
+          "settings": {
+            "icon": "💳",
+            "feature": "No subscription. Ever.",
+            "ours_yes": true,
+            "ours_value": "",
+            "theirs_yes": false,
+            "theirs_value": ""
+          }
+        },
+        "row_ceramic": {
+          "type": "row",
+          "settings": {
+            "icon": "💍",
+            "feature": "Ceramic body, not plastic",
+            "ours_yes": true,
+            "ours_value": "",
+            "theirs_yes": false,
+            "theirs_value": ""
+          }
+        },
+        "row_battery": {
+          "type": "row",
+          "settings": {
+            "icon": "⚡",
+            "feature": "5–7 day battery",
+            "ours_yes": true,
+            "ours_value": "",
+            "theirs_yes": false,
+            "theirs_value": ""
+          }
+        },
+        "row_swim": {
+          "type": "row",
+          "settings": {
+            "icon": "💧",
+            "feature": "Swimproof — 50m / 5 ATM",
+            "ours_yes": true,
+            "ours_value": "",
+            "theirs_yes": false,
+            "theirs_value": ""
+          }
+        },
+        "row_metrics": {
+          "type": "row",
+          "settings": {
+            "icon": "🧠",
+            "feature": "Sleep, HRV, SpO₂, temp",
+            "ours_yes": true,
+            "ours_value": "",
+            "theirs_yes": false,
+            "theirs_value": ""
+          }
+        },
+        "row_design": {
+          "type": "row",
+          "settings": {
+            "icon": "✨",
+            "feature": "Jewelry-first design",
+            "ours_yes": true,
+            "ours_value": "",
+            "theirs_yes": false,
+            "theirs_value": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_nosub",
+        "row_ceramic",
+        "row_battery",
+        "row_swim",
+        "row_metrics",
+        "row_design"
+      ],
+      "settings": {
+        "heading": "The N°01 vs the rest.",
+        "subheading": "Six reasons people who've tried both don't go back.",
+        "our_label": "N°01 Smart Ring",
+        "our_badge": "Original",
+        "them_label": "Other Smart Rings",
+        "them_sub": "& Knock-offs"
       }
     },
     "product_science": {
@@ -364,6 +337,92 @@
         "eyebrow": "Questions",
         "heading": "Everything you want to know.",
         "subheading": ""
+      }
+    },
+    "17779692662038a0a0": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_iFrc3R": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 900,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_iFrc3R"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "tech_specs": {
+      "type": "tech-specs",
+      "blocks": {
+        "spec_sensors": {
+          "type": "spec_group",
+          "settings": {
+            "icon": "heart",
+            "heading": "Sensors",
+            "body": "<ul><li>Red and infrared LEDs measure blood oxygen levels</li><li>Green and infrared LEDs alternate to measure heart rate and heart rate variability 24/7 and respiration rate</li><li>Digital sensor measures temperature trends</li><li>Accelerometer tracks movement and activity 24/7</li></ul>"
+          }
+        },
+        "spec_compatibility": {
+          "type": "spec_group",
+          "settings": {
+            "icon": "check",
+            "heading": "Compatibility",
+            "body": "<ul><li>QRing app for iOS and Android (free, no subscription)</li><li>iOS 9.0+ · Android 5.1+</li><li>Bluetooth 5.2 · supports metric and imperial units</li></ul>"
+          }
+        },
+        "spec_dimensions": {
+          "type": "spec_group",
+          "settings": {
+            "icon": "weight",
+            "heading": "Weight & dimensions",
+            "body": "<ul><li>Width: 7.90 mm</li><li>Thickness: 2.88 mm</li><li>Weight: 3.3 to 5.2 g (varies with size)</li><li>Available sizes 6 — 13</li></ul>"
+          }
+        },
+        "spec_battery": {
+          "type": "spec_group",
+          "settings": {
+            "icon": "battery",
+            "heading": "Battery life",
+            "body": "<ul><li>5 — 7 days active use · 15 days standby</li><li>Charges in 1 — 1.5 hours via magnetic charging case</li><li>14 mAh battery (18 mAh on size 11 and above)</li></ul>"
+          }
+        },
+        "spec_materials": {
+          "type": "spec_group",
+          "settings": {
+            "icon": "ring",
+            "heading": "Materials",
+            "body": "<ul><li>Zirconia ceramic body</li><li>Polished chrome inner band</li><li>5ATM water-resistant — wear it in the shower, pool, or sauna</li><li>Hypoallergenic, scratch-resistant ceramic finish</li></ul>"
+          }
+        },
+        "spec_certifications": {
+          "type": "spec_group",
+          "settings": {
+            "icon": "shield",
+            "heading": "Certifications",
+            "body": "<ul><li>CE certified · no display screen · no NFC</li><li>Realtek RTL8762 ESF chipset</li><li>Subscription: none, ever — own your health data outright</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "spec_sensors",
+        "spec_compatibility",
+        "spec_dimensions",
+        "spec_battery",
+        "spec_materials",
+        "spec_certifications"
+      ],
+      "settings": {
+        "included_heading": "What's Included",
+        "included_items": "Mend N°01 Smart Ring\nMagnetic charging case\nUSB-C charging cable\nQuick start guide",
+        "specs_heading": "Tech Specifications"
       }
     },
     "ring_size_modal": {
@@ -495,49 +554,37 @@
         "bullet_sleep": {
           "type": "bullet",
           "settings": {
-            "icon": "",
-            "text": "Sleep stages — deep, light, REM + sleep score",
-            "caption": ""
+            "text": "Sleep stages — deep, light, REM + sleep score"
           }
         },
         "bullet_hrv": {
           "type": "bullet",
           "settings": {
-            "icon": "",
-            "text": "Heart rate variability (HRV) — true recovery signal",
-            "caption": ""
+            "text": "Heart rate variability (HRV) — true recovery signal"
           }
         },
         "bullet_spo2": {
           "type": "bullet",
           "settings": {
-            "icon": "",
-            "text": "Blood oxygen (SpO₂) — overnight saturation monitoring",
-            "caption": ""
+            "text": "Blood oxygen (SpO₂) — overnight saturation monitoring"
           }
         },
         "bullet_stress": {
           "type": "bullet",
           "settings": {
-            "icon": "",
-            "text": "Stress score — know when to push, when to rest",
-            "caption": ""
+            "text": "Stress score — know when to push, when to rest"
           }
         },
         "bullet_activity": {
           "type": "bullet",
           "settings": {
-            "icon": "",
-            "text": "Steps, distance, calories — automatic workout detection",
-            "caption": ""
+            "text": "Steps, distance, calories — automatic workout detection"
           }
         },
         "bullet_camera": {
           "type": "bullet",
           "settings": {
-            "icon": "",
-            "text": "Remote camera control — snap photos from your wrist",
-            "caption": ""
+            "text": "Remote camera control — snap photos from your wrist"
           }
         }
       },
@@ -577,6 +624,7 @@
       "block_order": [
         "judge_me_reviews_review_widget_QD8Ut3"
       ],
+      "disabled": true,
       "settings": {
         "include_margins": true
       }
@@ -616,11 +664,13 @@
     "custom_liquid_TgB6HE",
     "benefit_pitch",
     "photo_reviews",
-    "ring_comparison",
     "angle_testimonials",
+    "ring_comparison",
     "product_science",
     "app_showcase",
     "product_faq",
+    "17779692662038a0a0",
+    "tech_specs",
     "ring_size_modal",
     "science_modal",
     "app_modal",
