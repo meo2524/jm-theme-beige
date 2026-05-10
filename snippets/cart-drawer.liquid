@@ -275,25 +275,7 @@
         </div>
       </label>
 
-      <div class="cart-drawer__discount" data-discount-wrap>
-        <form class="cart-drawer__discount-form" data-discount-form>
-          <input
-            type="text"
-            class="cart-drawer__discount-input"
-            placeholder="Discount code"
-            aria-label="Discount code"
-            data-discount-input
-            autocomplete="off"
-            spellcheck="false"
-          >
-          <button type="submit" class="cart-drawer__discount-btn" data-discount-apply>
-            Apply
-          </button>
-        </form>
-        <p class="cart-drawer__discount-msg" data-discount-msg hidden></p>
-      </div>
-
-      <div class="cart-drawer__checkout-row">
+<div class="cart-drawer__checkout-row">
         <a href="/checkout" class="cart-drawer__checkout" id="CartDrawerCheckout">
           CHECKOUT &bull; <span data-cart-total>{{ cart.total_price | money }}</span>
         </a>
