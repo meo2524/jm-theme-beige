@@ -393,7 +393,41 @@
       }
     }
 
-/* Spoof 5.0 → 4.9 in Judge.me widget */
+    /* Tough-love hook injected above the KaChing bundle picker (same
+       pattern as the previous "Only 9 left in stock" line). */
+    .kaching-bundles__block {
+      position: relative;
+    }
+    .kaching-bundles__block::before {
+      content: "● Stop being a bitch and change your life around for once.";
+      display: block;
+      font-family: var(--font-label, 'Inter', monospace);
+      font-size: 0.875rem;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: #ef4444;
+      line-height: 1.25;
+      text-align: center;
+      margin-bottom: 0.75rem;
+      text-shadow: 0 0 14px rgba(239, 68, 68, 0.28);
+      animation: mc-hook-glow 2s ease-in-out infinite;
+    }
+    @keyframes mc-hook-glow {
+      0%, 100% {
+        text-shadow: 0 0 12px rgba(239, 68, 68, 0.22);
+        opacity: 0.94;
+      }
+      50% {
+        text-shadow: 0 0 18px rgba(239, 68, 68, 0.4);
+        opacity: 1;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .kaching-bundles__block::before { animation: none; }
+    }
+
+    /* Spoof 5.0 → 4.9 in Judge.me widget */
     .jm-average-rating-display .jm-cluster > p.jm-text:first-child {
       visibility: hidden;
       position: relative;
