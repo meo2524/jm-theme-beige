@@ -415,6 +415,13 @@
           </svg>
         </button>
 
+        {%- comment -%} Sale-ends countdown above ATC {%- endcomment -%}
+        <div class="pdp-countdown" role="status" aria-live="polite">
+          <span class="pdp-countdown__dot" aria-hidden="true"></span>
+          <span class="pdp-countdown__label">Sale ends in</span>
+          <span class="pdp-countdown__clock" data-pdp-countdown>--:--:--</span>
+        </div>
+
         {%- comment -%} Add to cart {%- endcomment -%}
         <button
           type="submit"
@@ -1518,6 +1525,47 @@ body.lightbox-open { overflow: hidden; }
 }
 
 /* -- Money-back guarantee strip -- */
+/* Sale-ends countdown — sits directly above ATC for max urgency */
+.pdp-countdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+  padding: 0.55rem 0.875rem;
+  background: rgba(192, 57, 43, 0.08);
+  border: 1px solid rgba(192, 57, 43, 0.28);
+  border-radius: 8px;
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8B2418;
+}
+.pdp-countdown__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #C0392B;
+  flex-shrink: 0;
+  animation: pdpCountdownPulse 1.4s ease-in-out infinite;
+}
+@keyframes pdpCountdownPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+.pdp-countdown__clock {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.875rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #C0392B;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pdp-countdown__dot { animation: none; }
+}
+
 .pdp-shipping,
 .pdp-guarantee {
   display: flex;
