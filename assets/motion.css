@@ -1299,17 +1299,11 @@
   width: 100%;
   background: linear-gradient(90deg, #C0392B 0%, #8B2418 100%);
   color: #fff;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative;
   overflow: hidden;
   box-shadow: 0 2px 10px -3px rgba(192, 57, 43, 0.45);
-  z-index: 10001;
+  z-index: 1;
 }
-/* Push the rest of the page down so the fixed banner doesn't cover the
-   announcement bar / header on initial load. ~40px banner height. */
-body:has(.mc-scarcity-banner) { padding-top: 42px; }
 .mc-scarcity-banner__clock {
   font-variant-numeric: tabular-nums;
   font-weight: 800;
