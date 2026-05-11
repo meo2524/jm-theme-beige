@@ -12,12 +12,12 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "eyebrow": "Introducing the N°01.",
-        "heading": "Know before",
+        "eyebrow": "Meet the N°01.",
+        "heading": "Know how",
         "heading_em": "your body",
-        "heading_2": "breaks down.",
-        "subtext": "Wear it always. Sleep, heart, recovery, movement — read continuously and translated into clear answers, every morning. No subscription. Ever.",
-        "cta_label": "Shop the N°01 Smart Ring",
+        "heading_2": "is doing.",
+        "subtext": "Wear it all day and night. It tracks your sleep, heart, and steps. Each morning, you get clear answers. No monthly fees. Ever.",
+        "cta_label": "Get the Smart Ring",
         "cta_url": "/products/smart-band",
         "hero_video_url": "",
         "show_scroll_cue": true
@@ -29,9 +29,9 @@
         "stat_1_value": "5–7 days",
         "stat_1_label": "Battery life",
         "stat_2_value": "Swim-safe",
-        "stat_2_label": "Pool · ocean · sauna",
+        "stat_2_label": "Pool, ocean, sauna",
         "stat_3_value": "$0",
-        "stat_3_label": "Subscription, ever"
+        "stat_3_label": "No fees ever"
       }
     },
     "smart_band_spotlight": {
@@ -40,25 +40,25 @@
         "bullet_hrv": {
           "type": "bullet",
           "settings": {
-            "text": "Sleep, heart, movement, recovery — read continuously, decoded daily"
+            "text": "Tracks sleep, heart, steps, and recovery"
           }
         },
         "bullet_battery": {
           "type": "bullet",
           "settings": {
-            "text": "5–7 day battery. Wear it always — even in the shower."
+            "text": "5 to 7 day battery. Wear it in the shower too."
           }
         },
         "bullet_sub": {
           "type": "bullet",
           "settings": {
-            "text": "No subscription — ever. Own your data outright."
+            "text": "No monthly fees. Ever. Your data is yours."
           }
         },
         "bullet_look": {
           "type": "bullet",
           "settings": {
-            "text": "Ceramic ring. Nobody knows it's a tracker."
+            "text": "Looks like a ring. No one knows it tracks you."
           }
         }
       },
@@ -72,9 +72,9 @@
         "video_url": "https://cdn.shopify.com/videos/c/vp/f12216a2ff264544862d886fee41129a/f12216a2ff264544862d886fee41129a.HD-1080p-4.8Mbps-83316595.mp4",
         "video_position_y": 50,
         "eyebrow": "Now available",
-        "heading": "Know what your body knows.",
-        "body": "The N°01 Smart Ring reads your body around the clock — sleep at night, heart all day, movement when you move, recovery between — and translates the lot into clear answers every morning. Push or rest? You'll know.",
-        "cta_label": "Shop the N°01 Smart Ring",
+        "heading": "See what your body tells you.",
+        "body": "The N°01 Smart Ring watches your body all day and night. It tracks your sleep, heart rate, and steps. Each morning, you see a clear report. It tells you if you should push hard or take a break.",
+        "cta_label": "Get the Smart Ring",
         "cta_url": "/products/smart-band",
         "reverse": false
       }
@@ -82,11 +82,11 @@
     "founder_story": {
       "type": "story",
       "settings": {
-        "eyebrow": "Brand origin",
-        "heading_pre": "Built to",
-        "heading_em": "actually mend",
-        "heading_post": "",
-        "paragraph_1": "Mend & Co builds tools that earn their place — bought once, owned forever, designed to make recovery measurable. The N°01 Smart Ring is the first. There will be more, each one quietly built to mend something we have been told to ignore.",
+        "eyebrow": "Our story",
+        "heading_pre": "Made to",
+        "heading_em": "help you",
+        "heading_post": "feel better.",
+        "paragraph_1": "Mend & Co makes tools you buy once and keep. The N°01 Smart Ring is our first. It helps you track your health every day. More tools are coming. Each one is made to fix something most people ignore.",
         "paragraph_2": "",
         "link_label": "About Mend & Co →",
         "link_url": "/pages/about-us",
@@ -118,18 +118,18 @@
       "disabled": true,
       "settings": {
         "eyebrow": "Real results",
-        "heading": "What people are saying.",
+        "heading": "What people say.",
         "reviews_count": 6
       }
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "heading": "The mend starts here.",
-        "subtext": "Research, rituals, and offers worth your time. About every two weeks.",
+        "heading": "Stay in the loop.",
+        "subtext": "Tips, deals, and news. We send emails every two weeks.",
         "btn_label": "Subscribe",
-        "success_message": "You're in. We'll be in touch.",
-        "privacy_note": "We respect your privacy. Unsubscribe any time.",
+        "success_message": "You're in! Talk soon.",
+        "privacy_note": "We keep your info safe. Leave any time.",
         "privacy_link_label": "Privacy Policy"
       }
     }

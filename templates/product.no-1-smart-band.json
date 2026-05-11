@@ -12,11 +12,11 @@
     "main": {
       "type": "main-product",
       "settings": {
-        "eyebrow_text": "Aesthetic Health Care",
+        "eyebrow_text": "Smart Health Tracking",
         "model_badge": "",
         "blurb_heading": "",
         "blurb_subheading": "",
-        "short_description": "Wear it always. The N°01 reads your body around the clock — your sleep, your heart, your movement, your recovery — then translates the lot into clear answers. No subscription.",
+        "short_description": "Wear it all day. The N°01 tracks your sleep, heart rate, steps, and recovery. Each morning, you get clear answers. No monthly fees.",
         "per_use_text": "",
         "accordion_label_1": "What's in the box",
         "accordion_label_2": "",
@@ -46,7 +46,7 @@
       "name": "t:sections.custom-liquid.name",
       "settings": {
         "show_on": "both",
-        "custom_liquid": "<style>\n  .mc-desc * { box-sizing: border-box; margin: 0; padding: 0; }\n  .mc-desc { font-family: 'Jost', sans-serif; color: #2C1A0E; padding: 0 0 20px; }\n  .mc-desc-pill {\n    font-size: 11px;\n    font-weight: 500;\n    letter-spacing: 0.14em;\n    text-transform: uppercase;\n    color: #7A5C3A;\n    background: #EDE0CE;\n    padding: 6px 16px;\n    border-radius: 20px;\n    display: inline-flex;\n    width: fit-content;\n    margin-bottom: 18px;\n  }\n  .mc-desc-product-label {\n    font-family: 'Jost', sans-serif;\n    font-size: 11px;\n    font-weight: 400;\n    letter-spacing: 0.18em;\n    text-transform: uppercase;\n    color: #9A8070;\n    margin-bottom: 8px;\n    display: block;\n  }\n  .mc-desc-h2 {\n    font-family: 'Cormorant Garamond', serif;\n    font-size: 2.6rem;\n    font-weight: 400;\n    line-height: 1.05;\n    color: #2C1A0E;\n    margin-bottom: 4px;\n  }\n  .mc-desc-h2-italic {\n    font-family: 'Cormorant Garamond', serif;\n    font-size: 2.6rem;\n    font-weight: 400;\n    font-style: italic;\n    line-height: 1.05;\n    color: #9C7A5A;\n    display: block;\n    margin-bottom: 20px;\n  }\n  .mc-desc-body {\n    border-left: 3px solid #D6C9B8;\n    padding-left: 14px;\n    margin-bottom: 20px;\n  }\n  .mc-desc-body p {\n    font-size: 13.5px;\n    font-weight: 300;\n    line-height: 1.75;\n    color: #6B5040;\n  }\n  </style>\n\n<div class=\"mc-desc\">\n  <span class=\"mc-desc-pill\">Mend &amp; Co&#8482; Official</span>\n  <span class=\"mc-desc-product-label\">N&#176;01 &mdash; The Smart Ring</span>\n  <h2 class=\"mc-desc-h2\">Know your body.</h2>\n  <span class=\"mc-desc-h2-italic\">Before your body tells you first.</span>\n  <div class=\"mc-desc-body\">\n    <p>The Smart Ring tracks sleep, heart rate, HRV, SpO₂ and recovery — continuously, without a subscription. Ceramic build. 5ATM waterproof. Designed to be worn everywhere, forgotten about, and trusted completely.</p>\n  </div>",
+        "custom_liquid": "<style>\n  .mc-desc * { box-sizing: border-box; margin: 0; padding: 0; }\n  .mc-desc { font-family: 'Jost', sans-serif; color: #2C1A0E; padding: 0 0 20px; }\n  .mc-desc-pill {\n    font-size: 11px;\n    font-weight: 500;\n    letter-spacing: 0.14em;\n    text-transform: uppercase;\n    color: #7A5C3A;\n    background: #EDE0CE;\n    padding: 6px 16px;\n    border-radius: 20px;\n    display: inline-flex;\n    width: fit-content;\n    margin-bottom: 18px;\n  }\n  .mc-desc-product-label {\n    font-family: 'Jost', sans-serif;\n    font-size: 11px;\n    font-weight: 400;\n    letter-spacing: 0.18em;\n    text-transform: uppercase;\n    color: #9A8070;\n    margin-bottom: 8px;\n    display: block;\n  }\n  .mc-desc-h2 {\n    font-family: 'Cormorant Garamond', serif;\n    font-size: 2.6rem;\n    font-weight: 400;\n    line-height: 1.05;\n    color: #2C1A0E;\n    margin-bottom: 4px;\n  }\n  .mc-desc-h2-italic {\n    font-family: 'Cormorant Garamond', serif;\n    font-size: 2.6rem;\n    font-weight: 400;\n    font-style: italic;\n    line-height: 1.05;\n    color: #9C7A5A;\n    display: block;\n    margin-bottom: 20px;\n  }\n  .mc-desc-body {\n    border-left: 3px solid #D6C9B8;\n    padding-left: 14px;\n    margin-bottom: 20px;\n  }\n  .mc-desc-body p {\n    font-size: 13.5px;\n    font-weight: 300;\n    line-height: 1.75;\n    color: #6B5040;\n  }\n  </style>\n\n<div class=\"mc-desc\">\n  <span class=\"mc-desc-pill\">Mend &amp; Co&#8482; Official</span>\n  <span class=\"mc-desc-product-label\">N&#176;01 &mdash; The Smart Ring</span>\n  <h2 class=\"mc-desc-h2\">Know your body.</h2>\n  <span class=\"mc-desc-h2-italic\">See it before it tells you first.</span>\n  <div class=\"mc-desc-body\">\n    <p>The Smart Ring tracks sleep, heart rate, blood oxygen, and recovery. It works all day and night. No monthly fees. Water safe. Made to be worn and trusted.</p>\n  </div>",
         "color_scheme": "scheme-1",
         "custom_color_scheme": "",
         "padding___top": "inherit",
@@ -62,7 +62,7 @@
           "type": "bullet",
           "settings": {
             "icon": "moon",
-            "text": "Sleep — light, deep, REM, every wake-up.",
+            "text": "Sleep — light, deep, REM, and every time you woke up.",
             "caption": ""
           }
         },
@@ -70,7 +70,7 @@
           "type": "bullet",
           "settings": {
             "icon": "heart-alert",
-            "text": "HRV trended over weeks. Stress, illness, overtraining — caught early.",
+            "text": "Heart rate tracked weekly. Catch stress or illness early.",
             "caption": ""
           }
         },
@@ -78,7 +78,7 @@
           "type": "bullet",
           "settings": {
             "icon": "gauge",
-            "text": "One readiness score. Go or rest today.",
+            "text": "One daily score. Should you push hard or rest today?",
             "caption": ""
           }
         },
@@ -86,7 +86,7 @@
           "type": "bullet",
           "settings": {
             "icon": "pulse-night",
-            "text": "Resting heart rate, 24/7. The quiet 3am number your wrist can't see.",
+            "text": "Heart rate tracked all night. Even while you sleep.",
             "caption": ""
           }
         },
@@ -94,7 +94,7 @@
           "type": "bullet",
           "settings": {
             "icon": "temp-wave",
-            "text": "Overnight temperature. Cycle shifts, fevers before symptoms.",
+            "text": "Body temp tracked overnight. Know before you feel sick.",
             "caption": ""
           }
         },
@@ -102,7 +102,7 @@
           "type": "bullet",
           "settings": {
             "icon": "infinity",
-            "text": "No subscription. Ever. Own your data outright.",
+            "text": "No monthly fees. Ever. Your data is yours.",
             "caption": ""
           }
         }
@@ -119,8 +119,8 @@
         "video_url": "https://cdn.shopify.com/videos/c/vp/f12216a2ff264544862d886fee41129a/f12216a2ff264544862d886fee41129a.HD-1080p-4.8Mbps-83316595.mp4",
         "video_position_y": 25,
         "eyebrow": "Why N°01",
-        "heading": "Everything your watch can't tell you.",
-        "body": "Your smartwatch counts steps. The N°01 listens to your body around the clock — heart, breath, movement, temperature — and translates it into clear answers. Rested? Recovered? Ready to push?",
+        "heading": "More than any watch can do.",
+        "body": "Your watch counts steps. The N°01 does much more. It tracks your heart, breath, and body heat all day and night. Each morning, it tells you: am I rested? Am I ready to work out?",
         "cta_label": "",
         "cta_url": "",
         "reverse": false
@@ -131,7 +131,7 @@
       "settings": {
         "eyebrow": "Verified Menders",
         "heading": "Real people. Real results.",
-        "subheading": "Join thousands of Menders who track their health from their finger."
+        "subheading": "Join thousands of people who track their health with us."
       }
     },
     "angle_testimonials": {
@@ -188,7 +188,7 @@
           "type": "row",
           "settings": {
             "icon": "💧",
-            "feature": "Swimproof — 50m / 5 ATM",
+            "feature": "Safe in water — pool and ocean",
             "ours_yes": true,
             "ours_value": "",
             "theirs_yes": false,
@@ -201,7 +201,7 @@
           "type": "row",
           "settings": {
             "icon": "🧠",
-            "feature": "Sleep, HRV, SpO₂, temp",
+            "feature": "Tracks sleep, heart, oxygen, and temp",
             "ours_yes": true,
             "ours_value": "",
             "theirs_yes": false,
@@ -214,7 +214,7 @@
           "type": "row",
           "settings": {
             "icon": "✨",
-            "feature": "Jewelry-first design",
+            "feature": "Looks like jewelry",
             "ours_yes": true,
             "ours_value": "",
             "theirs_yes": false,
@@ -233,8 +233,8 @@
         "row_design"
       ],
       "settings": {
-        "heading": "The N°01 vs the rest.",
-        "subheading": "Six reasons people who've tried both don't go back.",
+        "heading": "How we compare.",
+        "subheading": "Six reasons people choose us and stay.",
         "our_label": "N°01 Smart Ring",
         "our_badge": "Original",
         "them_label": "Other Smart Rings",
@@ -258,7 +258,7 @@
             "image_filename": "app-sleep.jpg",
             "image_url": "",
             "heading": "Sleep",
-            "body": "How well you slept. Plus the breakdown — light, deep, awake."
+            "body": "See how well you slept. Light sleep, deep sleep, and how many times you woke up."
           }
         },
         "feature_heart": {
@@ -267,7 +267,7 @@
             "image_filename": "app-heart-rate.jpg",
             "image_url": "",
             "heading": "Heart rate",
-            "body": "Your beat-by-beat all day. The reads you'd never catch yourself."
+            "body": "Your heart rate all day. Numbers you would never know without the ring."
           }
         },
         "feature_activity": {
@@ -276,7 +276,7 @@
             "image_filename": "app-activity.jpg",
             "image_url": "",
             "heading": "Activity",
-            "body": "Walks, workouts, and the small movement you'd otherwise forget."
+            "body": "Walks, workouts, and every bit of movement you make."
           }
         }
       },
@@ -288,8 +288,8 @@
       "disabled": true,
       "settings": {
         "eyebrow": "The app",
-        "heading": "See what your body did last night.",
-        "body": "Sync the N°01 to the free QRing app. Your sleep, your heart, your daily movement — on one clean dashboard. iOS and Android. No registration. No subscription.",
+        "heading": "See what your body did overnight.",
+        "body": "Sync the N°01 to the free QRing app. See your sleep, heart rate, and steps in one place. Works on iPhone and Android. No sign-up. No fees.",
         "hero_image_filename": "",
         "hero_image_url": "",
         "apple_url": "https://apps.apple.com/nz/app/qring/id6473672621",
@@ -304,14 +304,14 @@
           "type": "faq_item",
           "settings": {
             "question": "Which finger should I wear it on?",
-            "answer": "<p>The index or middle finger gives the most accurate readings. Avoid the dominant hand's pinky — it moves too much during sleep. The ring should sit comfortably snug, not tight.</p>"
+            "answer": "<p>The index or middle finger works best. Keep it off the pinky on your writing hand — it moves too much at night. The ring should feel snug but not tight.</p>"
           }
         },
         "faq_2": {
           "type": "faq_item",
           "settings": {
             "question": "Is there really no subscription?",
-            "answer": "<p>Correct. You pay once and you own everything — the ring, the app, and all your data. Oura charges $5.99/month. We don't. Your health data belongs to you.</p>"
+            "answer": "<p>Yes, really. You pay once and you own it all — the ring, the app, and your data. Oura charges $5.99 a month. We never charge you again. Your health data belongs to you.</p>"
           }
         },
         "faq_3": {
@@ -319,35 +319,35 @@
           "disabled": true,
           "settings": {
             "question": "How do I find my ring size?",
-            "answer": "<p>Measure the circumference of the finger you'll wear it on using a strip of paper. Wrap it snugly (not tightly), mark where it overlaps, and measure in millimetres. Most people wear a size 10 on their index finger. Use the size guide above for the full chart.</p>"
+            "answer": "<p>Wrap a thin strip of paper around the finger you will wear it on. Mark where it overlaps and measure in millimetres. Most people wear a size 10 on their index finger. Use the size guide above for the full chart.</p>"
           }
         },
         "faq_4": {
           "type": "faq_item",
           "settings": {
             "question": "Can I wear it in the shower or pool?",
-            "answer": "<p>Yes. The N°01 Smart Ring is rated 5 ATM — fine for shower, swim, and sauna at typical exposure. Not designed for high-velocity activities like scuba diving or jet-skiing.</p>"
+            "answer": "<p>Yes. The N°01 is safe in the shower, pool, and sauna. Do not use it for scuba diving or jet skiing.</p>"
           }
         },
         "faq_5": {
           "type": "faq_item",
           "settings": {
             "question": "How accurate is the sleep tracking?",
-            "answer": "<p>The ring's PPG sensors track heart rate and blood oxygen continuously overnight. Sleep stage detection (deep, light, REM) is derived from HRV and movement patterns — the same method used by clinical-grade sleep monitors. It won't replace a sleep study, but it will show you the patterns your body produces night after night.</p>"
+            "answer": "<p>The ring tracks your heart rate and blood oxygen all night. It can tell the difference between light sleep, deep sleep, and REM sleep. It will not replace a sleep study, but it shows your patterns every single night.</p>"
           }
         },
         "faq_6": {
           "type": "faq_item",
           "settings": {
             "question": "What's the battery life like in real use?",
-            "answer": "<p>Up to 7 days on a full charge with 24/7 tracking active. Most people charge it every 5–6 days in about 60–90 minutes. Charge it while you eat breakfast — you'll never miss a night's data.</p>"
+            "answer": "<p>Up to 7 days on one charge. Most people charge it every 5 to 6 days. It takes about 60 to 90 minutes to charge. Charge it at breakfast — you will never miss a night of data.</p>"
           }
         },
         "faq_7": {
           "type": "faq_item",
           "settings": {
             "question": "Is my health data private?",
-            "answer": "<p>Your data is stored locally on your device and only synced to your own account. We do not sell health data to third parties. Your N°01 data stays yours — always.</p>"
+            "answer": "<p>Yes. Your data stays on your phone. We do not sell it to anyone. Your health info is yours. Always.</p>"
           }
         }
       },
@@ -362,7 +362,7 @@
       ],
       "settings": {
         "eyebrow": "Questions",
-        "heading": "Everything you want to know.",
+        "heading": "Got questions?",
         "subheading": ""
       }
     },
@@ -394,7 +394,7 @@
           "settings": {
             "icon": "heart",
             "heading": "Sensors",
-            "body": "<ul><li>Red and infrared LEDs measure blood oxygen levels</li><li>Green and infrared LEDs alternate to measure heart rate and heart rate variability 24/7 and respiration rate</li><li>Digital sensor measures temperature trends</li><li>Accelerometer tracks movement and activity 24/7</li></ul>"
+            "body": "<ul><li>Red and infrared LEDs measure blood oxygen levels</li><li>Green and infrared LEDs measure heart rate and heart rate variability all day and night</li><li>Digital sensor measures body temperature trends</li><li>Accelerometer tracks movement and activity 24/7</li></ul>"
           }
         },
         "spec_compatibility": {
@@ -402,7 +402,7 @@
           "settings": {
             "icon": "check",
             "heading": "Compatibility",
-            "body": "<ul><li>QRing app for iOS and Android (free, no subscription)</li><li>iOS 9.0+ · Android 5.1+</li><li>Bluetooth 5.2 · supports metric and imperial units</li></ul>"
+            "body": "<ul><li>QRing app for iOS and Android (free, no subscription)</li><li>iOS 9.0+ · Android 5.1+</li><li>Bluetooth 5.2 · works in metric and imperial units</li></ul>"
           }
         },
         "spec_dimensions": {
@@ -426,7 +426,7 @@
           "settings": {
             "icon": "ring",
             "heading": "Materials",
-            "body": "<ul><li>Zirconia ceramic body</li><li>Polished chrome inner band</li><li>5ATM water-resistant — wear it in the shower, pool, or sauna</li><li>Hypoallergenic, scratch-resistant ceramic finish</li></ul>"
+            "body": "<ul><li>Zirconia ceramic body</li><li>Polished chrome inner band</li><li>5ATM water resistant — wear it in the shower, pool, or sauna</li><li>Safe for sensitive skin · scratch-resistant ceramic finish</li></ul>"
           }
         },
         "spec_certifications": {
@@ -434,7 +434,7 @@
           "settings": {
             "icon": "shield",
             "heading": "Certifications",
-            "body": "<ul><li>CE certified · no display screen · no NFC</li><li>Realtek RTL8762 ESF chipset</li><li>Subscription: none, ever — own your health data outright</li></ul>"
+            "body": "<ul><li>CE certified · no display screen · no NFC</li><li>Realtek RTL8762 ESF chipset</li><li>No subscription, ever — your health data is yours to keep</li></ul>"
           }
         }
       },
@@ -470,7 +470,7 @@
       "name": "t:sections.custom-liquid.name",
       "settings": {
         "show_on": "both",
-        "custom_liquid": "<style>.mc-app{background:var(--color-bone,#f5efe4);padding:56px 24px;font-family:var(--font-label,'Inter',sans-serif)}.mc-app__inner{max-width:640px;margin:0 auto;text-align:center}.mc-app__rule{width:40px;height:1.5px;background:var(--color-walnut,#8a6240);opacity:.6;margin:0 auto 1.25rem}.mc-app__eyebrow{font-size:.6875rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--color-walnut,#8a6240);margin:0 0 .875rem}.mc-app__heading{font-family:var(--font-heading,'Playfair Display',serif);font-size:clamp(1.625rem,3vw,2.25rem);font-weight:400;color:var(--color-black,#1f1d1a);line-height:1.2;margin:0 0 .75rem}.mc-app__sub{font-family:var(--font-heading,'Playfair Display',serif);font-size:1.0625rem;font-style:italic;color:var(--color-walnut,#8a6240);margin:0 0 1.25rem}.mc-app__body{font-size:.9375rem;color:var(--color-olive,#5a5040);line-height:1.7;margin:0 0 2rem;max-width:480px;margin-left:auto;margin-right:auto}.mc-app__steps{display:flex;flex-direction:column;gap:.625rem;margin:0 0 2rem;text-align:left;max-width:420px;margin-left:auto;margin-right:auto}.mc-app__step{display:flex;align-items:flex-start;gap:.875rem}.mc-app__step-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--color-walnut,#8a6240);color:#f5efe4;font-size:.6875rem;font-weight:700;letter-spacing:.05em;display:flex;align-items:center;justify-content:center;margin-top:.1rem}.mc-app__step-text{font-size:.875rem;color:var(--color-olive,#5a5040);line-height:1.6}.mc-app__step-text strong{color:var(--color-black,#1f1d1a);font-weight:600}.mc-app__badges{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}.mc-app__badge{display:inline-flex;align-items:center;gap:.625rem;background:#1f1d1a;color:#f5efe4;text-decoration:none;padding:.75rem 1.375rem;border-radius:10px;transition:background .2s ease}.mc-app__badge:hover{background:#3a3632}.mc-app__badge-icon{flex-shrink:0;opacity:.9}.mc-app__badge-copy{display:flex;flex-direction:column;line-height:1}.mc-app__badge-sub{font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-bottom:2px}.mc-app__badge-name{font-size:.9375rem;font-weight:600;letter-spacing:-.01em}@media(max-width:540px){.mc-app{padding:40px 20px}.mc-app__badges{flex-direction:column;align-items:center}.mc-app__badge{width:100%;max-width:240px;justify-content:center}}</style><div class=\"mc-app\"><div class=\"mc-app__inner\"><div class=\"mc-app__rule\"></div><p class=\"mc-app__eyebrow\">The App</p><h2 class=\"mc-app__heading\">Everything your body tells you,<br>in one place.</h2><p class=\"mc-app__sub\">Free forever. No subscription.</p><p class=\"mc-app__body\">Sync your N°01 Smart Ring with the QRing app to see your sleep stages, HRV trends, recovery score, blood oxygen, and daily activity — all on one clean dashboard.</p><div class=\"mc-app__steps\"><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">1</span><p class=\"mc-app__step-text\"><strong>Download QRing</strong> — free on the App Store or Google Play.</p></div><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">2</span><p class=\"mc-app__step-text\"><strong>Open Bluetooth</strong> on your phone and power on the ring.</p></div><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">3</span><p class=\"mc-app__step-text\"><strong>Tap 'Add Device'</strong> in the app — the ring pairs in under 30 seconds.</p></div><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">4</span><p class=\"mc-app__step-text\"><strong>Wear it to sleep</strong> — your overnight data syncs automatically by morning.</p></div></div><div class=\"mc-app__badges\"><a href=\"https://apps.apple.com/nz/app/qring/id6473672621\" target=\"_blank\" rel=\"noopener\" class=\"mc-app__badge\"><svg class=\"mc-app__badge-icon\" width=\"22\" height=\"26\" viewBox=\"0 0 22 26\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M18.05 13.77c-.03-3.2 2.62-4.75 2.74-4.82-1.5-2.19-3.82-2.49-4.64-2.52-1.97-.2-3.86 1.17-4.86 1.17-1.01 0-2.57-1.14-4.23-1.11C4.9 6.52 2.87 7.7 1.76 9.57c-2.27 3.94-.58 9.76 1.63 12.95 1.08 1.56 2.36 3.31 4.04 3.25 1.63-.07 2.24-1.05 4.2-1.05 1.96 0 2.52 1.05 4.24 1.02 1.75-.03 2.85-1.59 3.92-3.16 1.24-1.81 1.75-3.57 1.77-3.66-.04-.02-3.48-1.33-3.51-5.15zM14.78 4.28C15.67 3.2 16.27 1.7 16.1 0c-1.47.06-3.27.98-4.32 2.04-.95.99-1.77 2.57-1.55 4.08 1.63.13 3.3-.83 4.55-1.84z\"/></svg><span class=\"mc-app__badge-copy\"><span class=\"mc-app__badge-sub\">Download on the</span><span class=\"mc-app__badge-name\">App Store</span></span></a><a href=\"https://play.google.com/store/apps/details?id=com.app.cq.ring&hl=en_NZ\" target=\"_blank\" rel=\"noopener\" class=\"mc-app__badge\"><svg class=\"mc-app__badge-icon\" width=\"22\" height=\"24\" viewBox=\"0 0 22 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M1.22.48C.8.7.5 1.18.5 1.8v20.4c0 .62.3 1.1.72 1.32l.1.06 11.42-11.42v-.27L1.32.42l-.1.06zm15.56 15.7l-3.8-3.8v-.27l3.8-3.8.09.05 4.5 2.56c1.28.73 1.28 1.92 0 2.65l-4.5 2.56-.09.05zM16.88 16.28L13 12.39 1.22 24.17c.42.24.98.2 1.67-.2l14-7.69\"/><path d=\"M16.88 8.52L2.89.83C2.2.43 1.64.39 1.22.63L13 12.41l3.88-3.89z\"/></svg><span class=\"mc-app__badge-copy\"><span class=\"mc-app__badge-sub\">Get it on</span><span class=\"mc-app__badge-name\">Google Play</span></span></a></div></div></div>",
+        "custom_liquid": "<style>.mc-app{background:var(--color-bone,#f5efe4);padding:56px 24px;font-family:var(--font-label,'Inter',sans-serif)}.mc-app__inner{max-width:640px;margin:0 auto;text-align:center}.mc-app__rule{width:40px;height:1.5px;background:var(--color-walnut,#8a6240);opacity:.6;margin:0 auto 1.25rem}.mc-app__eyebrow{font-size:.6875rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--color-walnut,#8a6240);margin:0 0 .875rem}.mc-app__heading{font-family:var(--font-heading,'Playfair Display',serif);font-size:clamp(1.625rem,3vw,2.25rem);font-weight:400;color:var(--color-black,#1f1d1a);line-height:1.2;margin:0 0 .75rem}.mc-app__sub{font-family:var(--font-heading,'Playfair Display',serif);font-size:1.0625rem;font-style:italic;color:var(--color-walnut,#8a6240);margin:0 0 1.25rem}.mc-app__body{font-size:.9375rem;color:var(--color-olive,#5a5040);line-height:1.7;margin:0 0 2rem;max-width:480px;margin-left:auto;margin-right:auto}.mc-app__steps{display:flex;flex-direction:column;gap:.625rem;margin:0 0 2rem;text-align:left;max-width:420px;margin-left:auto;margin-right:auto}.mc-app__step{display:flex;align-items:flex-start;gap:.875rem}.mc-app__step-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--color-walnut,#8a6240);color:#f5efe4;font-size:.6875rem;font-weight:700;letter-spacing:.05em;display:flex;align-items:center;justify-content:center;margin-top:.1rem}.mc-app__step-text{font-size:.875rem;color:var(--color-olive,#5a5040);line-height:1.6}.mc-app__step-text strong{color:var(--color-black,#1f1d1a);font-weight:600}.mc-app__badges{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}.mc-app__badge{display:inline-flex;align-items:center;gap:.625rem;background:#1f1d1a;color:#f5efe4;text-decoration:none;padding:.75rem 1.375rem;border-radius:10px;transition:background .2s ease}.mc-app__badge:hover{background:#3a3632}.mc-app__badge-icon{flex-shrink:0;opacity:.9}.mc-app__badge-copy{display:flex;flex-direction:column;line-height:1}.mc-app__badge-sub{font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-bottom:2px}.mc-app__badge-name{font-size:.9375rem;font-weight:600;letter-spacing:-.01em}@media(max-width:540px){.mc-app{padding:40px 20px}.mc-app__badges{flex-direction:column;align-items:center}.mc-app__badge{width:100%;max-width:240px;justify-content:center}}</style><div class=\"mc-app\"><div class=\"mc-app__inner\"><div class=\"mc-app__rule\"></div><p class=\"mc-app__eyebrow\">The App</p><h2 class=\"mc-app__heading\">All your body data,<br>in one place.</h2><p class=\"mc-app__sub\">Free forever. No subscription.</p><p class=\"mc-app__body\">Sync your N°01 Smart Ring with the QRing app. See your sleep, heart rate, recovery score, blood oxygen, and daily steps — all in one clean view.</p><div class=\"mc-app__steps\"><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">1</span><p class=\"mc-app__step-text\"><strong>Download QRing</strong> — free on the App Store or Google Play.</p></div><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">2</span><p class=\"mc-app__step-text\"><strong>Turn on Bluetooth</strong> on your phone and power on the ring.</p></div><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">3</span><p class=\"mc-app__step-text\"><strong>Tap 'Add Device'</strong> in the app — the ring pairs in under 30 seconds.</p></div><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">4</span><p class=\"mc-app__step-text\"><strong>Wear it to sleep</strong> — your data syncs by morning.</p></div></div><div class=\"mc-app__badges\"><a href=\"https://apps.apple.com/nz/app/qring/id6473672621\" target=\"_blank\" rel=\"noopener\" class=\"mc-app__badge\"><svg class=\"mc-app__badge-icon\" width=\"22\" height=\"26\" viewBox=\"0 0 22 26\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M18.05 13.77c-.03-3.2 2.62-4.75 2.74-4.82-1.5-2.19-3.82-2.49-4.64-2.52-1.97-.2-3.86 1.17-4.86 1.17-1.01 0-2.57-1.14-4.23-1.11C4.9 6.52 2.87 7.7 1.76 9.57c-2.27 3.94-.58 9.76 1.63 12.95 1.08 1.56 2.36 3.31 4.04 3.25 1.63-.07 2.24-1.05 4.2-1.05 1.96 0 2.52 1.05 4.24 1.02 1.75-.03 2.85-1.59 3.92-3.16 1.24-1.81 1.75-3.57 1.77-3.66-.04-.02-3.48-1.33-3.51-5.15zM14.78 4.28C15.67 3.2 16.27 1.7 16.1 0c-1.47.06-3.27.98-4.32 2.04-.95.99-1.77 2.57-1.55 4.08 1.63.13 3.3-.83 4.55-1.84z\"/></svg><span class=\"mc-app__badge-copy\"><span class=\"mc-app__badge-sub\">Download on the</span><span class=\"mc-app__badge-name\">App Store</span></span></a><a href=\"https://play.google.com/store/apps/details?id=com.app.cq.ring&hl=en_NZ\" target=\"_blank\" rel=\"noopener\" class=\"mc-app__badge\"><svg class=\"mc-app__badge-icon\" width=\"22\" height=\"24\" viewBox=\"0 0 22 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M1.22.48C.8.7.5 1.18.5 1.8v20.4c0 .62.3 1.1.72 1.32l.1.06 11.42-11.42v-.27L1.32.42l-.1.06zm15.56 15.7l-3.8-3.8v-.27l3.8-3.8.09.05 4.5 2.56c1.28.73 1.28 1.92 0 2.65l-4.5 2.56-.09.05zM16.88 16.28L13 12.39 1.22 24.17c.42.24.98.2 1.67-.2l14-7.69\"/><path d=\"M16.88 8.52L2.89.83C2.2.43 1.64.39 1.22.63L13 12.41l3.88-3.89z\"/></svg><span class=\"mc-app__badge-copy\"><span class=\"mc-app__badge-sub\">Get it on</span><span class=\"mc-app__badge-name\">Google Play</span></span></a></div></div></div>",
         "color_scheme": "scheme-1",
         "custom_color_scheme": "",
         "padding___top": "inherit",
@@ -582,7 +582,7 @@
           "type": "bullet",
           "settings": {
             "icon": "",
-            "text": "Sleep stages — deep, light, REM + sleep score",
+            "text": "Sleep stages — deep, light, REM, and a sleep score",
             "caption": ""
           }
         },
@@ -590,7 +590,7 @@
           "type": "bullet",
           "settings": {
             "icon": "",
-            "text": "Heart rate variability (HRV) — true recovery signal",
+            "text": "Heart rate variability — shows how well you recovered",
             "caption": ""
           }
         },
@@ -598,7 +598,7 @@
           "type": "bullet",
           "settings": {
             "icon": "",
-            "text": "Blood oxygen (SpO₂) — overnight saturation monitoring",
+            "text": "Blood oxygen — tracked all night while you sleep",
             "caption": ""
           }
         },
@@ -606,7 +606,7 @@
           "type": "bullet",
           "settings": {
             "icon": "",
-            "text": "Stress score — know when to push, when to rest",
+            "text": "Stress score — know when to push and when to rest",
             "caption": ""
           }
         },
@@ -614,7 +614,7 @@
           "type": "bullet",
           "settings": {
             "icon": "",
-            "text": "Steps, distance, calories — automatic workout detection",
+            "text": "Steps, distance, calories — workouts detected on their own",
             "caption": ""
           }
         },
@@ -622,7 +622,7 @@
           "type": "bullet",
           "settings": {
             "icon": "",
-            "text": "Remote camera control — snap photos from your wrist",
+            "text": "Remote camera control — take photos from your finger",
             "caption": ""
           }
         }
@@ -641,7 +641,7 @@
         "video_position_y": 50,
         "eyebrow": "What it tracks",
         "heading": "One ring. Everything that matters.",
-        "body": "Your body is always communicating. Most trackers catch one or two signals. The N°01 reads six, day and night, automatically — plus remote camera so it pulls double duty.",
+        "body": "Your body is always sending signals. Most trackers only catch one or two. The N°01 reads six, all day and night. It even works as a remote camera.",
         "cta_label": "",
         "cta_url": "",
         "reverse": true
