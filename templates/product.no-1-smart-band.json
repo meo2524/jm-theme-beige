@@ -12,7 +12,7 @@
     "main": {
       "type": "main-product",
       "settings": {
-        "eyebrow_text": "A second sense",
+        "eyebrow_text": "Sexy Health",
         "model_badge": "",
         "blurb_heading": "",
         "blurb_subheading": "",
@@ -55,51 +55,55 @@
         "custom_padding_bottom": 36
       }
     },
-    "photo_reviews": {
-      "type": "photo-reviews",
-      "settings": {
-        "eyebrow": "Verified Menders",
-        "heading": "Real people. Real results.",
-        "subheading": "Join thousands of Menders who track their health from their finger."
-      }
-    },
     "benefit_pitch": {
       "type": "product-feature",
       "blocks": {
         "bullet_sleep": {
           "type": "bullet",
           "settings": {
-            "text": "Wake up tired and don't know why? See the night your body actually had — light, deep, REM, every wake-up you don't remember."
+            "icon": "",
+            "text": "Wake up tired and don't know why? See the night your body actually had — light, deep, REM, every wake-up you don't remember.",
+            "caption": ""
           }
         },
         "bullet_heart": {
           "type": "bullet",
           "settings": {
-            "text": "HRV, trended over weeks. The number your doctor wishes you had — the early signal of stress, illness, overtraining, or hormones shifting."
+            "icon": "",
+            "text": "HRV, trended over weeks. The number your doctor wishes you had — the early signal of stress, illness, overtraining, or hormones shifting.",
+            "caption": ""
           }
         },
         "bullet_recovery": {
           "type": "bullet",
           "settings": {
-            "text": "One readiness score in the morning. Not 14 metrics. The single number that tells you \"go\" or \"rest today.\""
+            "icon": "",
+            "text": "One readiness score in the morning. Not 14 metrics. The single number that tells you \"go\" or \"rest today.\"",
+            "caption": ""
           }
         },
         "bullet_activity": {
           "type": "bullet",
           "settings": {
-            "text": "Your heart, even when you're not paying attention. The quiet 3am rate, the silent stress spike, the rhythm before you notice."
+            "icon": "",
+            "text": "Your heart, even when you're not paying attention. The quiet 3am rate, the silent stress spike, the rhythm before you notice.",
+            "caption": ""
           }
         },
         "bullet_subscription": {
           "type": "bullet",
           "settings": {
-            "text": "Body temperature, mapped night by night. Cycle patterns, fevers before symptoms, the recovery clues your wrist can't see."
+            "icon": "",
+            "text": "Body temperature, mapped night by night. Cycle patterns, fevers before symptoms, the recovery clues your wrist can't see.",
+            "caption": ""
           }
         },
         "bullet_ceramic": {
           "type": "bullet",
           "settings": {
-            "text": "No subscription. No paywall. No \"upgrade to see your sleep score.\" You buy it once. You own your data forever."
+            "icon": "",
+            "text": "No subscription. No paywall. No \"upgrade to see your sleep score.\" You buy it once. You own your data forever.",
+            "caption": ""
           }
         }
       },
@@ -122,6 +126,14 @@
         "reverse": false
       }
     },
+    "photo_reviews": {
+      "type": "photo-reviews",
+      "settings": {
+        "eyebrow": "Verified Menders",
+        "heading": "Real people. Real results.",
+        "subheading": "Join thousands of Menders who track their health from their finger."
+      }
+    },
     "angle_testimonials": {
       "type": "angle-testimonials",
       "disabled": true,
@@ -141,7 +153,9 @@
             "ours_yes": true,
             "ours_value": "",
             "theirs_yes": false,
-            "theirs_value": ""
+            "theirs_value": "",
+            "watches_yes": false,
+            "watches_value": ""
           }
         },
         "row_ceramic": {
@@ -152,7 +166,9 @@
             "ours_yes": true,
             "ours_value": "",
             "theirs_yes": false,
-            "theirs_value": ""
+            "theirs_value": "",
+            "watches_yes": false,
+            "watches_value": ""
           }
         },
         "row_battery": {
@@ -163,7 +179,9 @@
             "ours_yes": true,
             "ours_value": "",
             "theirs_yes": false,
-            "theirs_value": ""
+            "theirs_value": "",
+            "watches_yes": false,
+            "watches_value": ""
           }
         },
         "row_swim": {
@@ -174,7 +192,9 @@
             "ours_yes": true,
             "ours_value": "",
             "theirs_yes": false,
-            "theirs_value": ""
+            "theirs_value": "",
+            "watches_yes": false,
+            "watches_value": ""
           }
         },
         "row_metrics": {
@@ -185,7 +205,9 @@
             "ours_yes": true,
             "ours_value": "",
             "theirs_yes": false,
-            "theirs_value": ""
+            "theirs_value": "",
+            "watches_yes": false,
+            "watches_value": ""
           }
         },
         "row_design": {
@@ -196,7 +218,9 @@
             "ours_yes": true,
             "ours_value": "",
             "theirs_yes": false,
-            "theirs_value": ""
+            "theirs_value": "",
+            "watches_yes": false,
+            "watches_value": ""
           }
         }
       },
@@ -214,7 +238,10 @@
         "our_label": "N°01 Smart Ring",
         "our_badge": "Original",
         "them_label": "Other Smart Rings",
-        "them_sub": "& Knock-offs"
+        "them_sub": "& Knock-offs",
+        "watches_label": "",
+        "watches_sub": "",
+        "caption": ""
       }
     },
     "product_science": {
@@ -554,37 +581,49 @@
         "bullet_sleep": {
           "type": "bullet",
           "settings": {
-            "text": "Sleep stages — deep, light, REM + sleep score"
+            "icon": "",
+            "text": "Sleep stages — deep, light, REM + sleep score",
+            "caption": ""
           }
         },
         "bullet_hrv": {
           "type": "bullet",
           "settings": {
-            "text": "Heart rate variability (HRV) — true recovery signal"
+            "icon": "",
+            "text": "Heart rate variability (HRV) — true recovery signal",
+            "caption": ""
           }
         },
         "bullet_spo2": {
           "type": "bullet",
           "settings": {
-            "text": "Blood oxygen (SpO₂) — overnight saturation monitoring"
+            "icon": "",
+            "text": "Blood oxygen (SpO₂) — overnight saturation monitoring",
+            "caption": ""
           }
         },
         "bullet_stress": {
           "type": "bullet",
           "settings": {
-            "text": "Stress score — know when to push, when to rest"
+            "icon": "",
+            "text": "Stress score — know when to push, when to rest",
+            "caption": ""
           }
         },
         "bullet_activity": {
           "type": "bullet",
           "settings": {
-            "text": "Steps, distance, calories — automatic workout detection"
+            "icon": "",
+            "text": "Steps, distance, calories — automatic workout detection",
+            "caption": ""
           }
         },
         "bullet_camera": {
           "type": "bullet",
           "settings": {
-            "text": "Remote camera control — snap photos from your wrist"
+            "icon": "",
+            "text": "Remote camera control — snap photos from your wrist",
+            "caption": ""
           }
         }
       },
