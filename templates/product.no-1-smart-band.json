@@ -62,7 +62,7 @@
           "type": "bullet",
           "settings": {
             "icon": "",
-            "text": "Wake up tired and don't know why? See the night your body actually had — light, deep, REM, every wake-up you don't remember.",
+            "text": "Sleep — light, deep, REM, every wake-up.",
             "caption": ""
           }
         },
@@ -70,7 +70,7 @@
           "type": "bullet",
           "settings": {
             "icon": "",
-            "text": "HRV, trended over weeks. The number your doctor wishes you had — the early signal of stress, illness, overtraining, or hormones shifting.",
+            "text": "HRV trended over weeks. Stress, illness, overtraining — caught early.",
             "caption": ""
           }
         },
@@ -78,7 +78,7 @@
           "type": "bullet",
           "settings": {
             "icon": "",
-            "text": "One readiness score in the morning. Not 14 metrics. The single number that tells you \"go\" or \"rest today.\"",
+            "text": "One readiness score. Go or rest today.",
             "caption": ""
           }
         },
@@ -86,7 +86,7 @@
           "type": "bullet",
           "settings": {
             "icon": "",
-            "text": "Your heart, even when you're not paying attention. The quiet 3am rate, the silent stress spike, the rhythm before you notice.",
+            "text": "Resting heart rate, 24/7. The quiet 3am number your wrist can't see.",
             "caption": ""
           }
         },
@@ -94,7 +94,7 @@
           "type": "bullet",
           "settings": {
             "icon": "",
-            "text": "Body temperature, mapped night by night. Cycle patterns, fevers before symptoms, the recovery clues your wrist can't see.",
+            "text": "Overnight temperature. Cycle shifts, fevers before symptoms.",
             "caption": ""
           }
         },
@@ -102,7 +102,7 @@
           "type": "bullet",
           "settings": {
             "icon": "",
-            "text": "No subscription. No paywall. No \"upgrade to see your sleep score.\" You buy it once. You own your data forever.",
+            "text": "No subscription. Ever. Own your data outright.",
             "caption": ""
           }
         }
@@ -119,8 +119,8 @@
         "video_url": "https://cdn.shopify.com/videos/c/vp/f12216a2ff264544862d886fee41129a/f12216a2ff264544862d886fee41129a.HD-1080p-4.8Mbps-83316595.mp4",
         "video_position_y": 25,
         "eyebrow": "Why N°01",
-        "heading": "Your watch tracks what you did. The N°01 tracks what you've recovered from.",
-        "body": "Steps and calories tell you about yesterday. HRV, sleep depth and overnight temperature tell you about tomorrow — whether you're building, breaking down, or quietly heading for a cold. The numbers your wrist can't see, on the finger that runs quiet all night.",
+        "heading": "Everything your watch can't tell you.",
+        "body": "Your smartwatch counts steps. The N°01 listens to your body around the clock — heart, breath, movement, temperature — and translates it into clear answers. Rested? Recovered? Ready to push?",
         "cta_label": "",
         "cta_url": "",
         "reverse": false
