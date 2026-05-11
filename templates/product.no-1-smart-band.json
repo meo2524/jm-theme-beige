@@ -62,7 +62,7 @@
           "type": "bullet",
           "settings": {
             "icon": "moon",
-            "text": "Sleep — light, deep, REM, and every time you woke up.",
+            "text": "Sleep — light, deep, dream sleep, and every time you woke up.",
             "caption": ""
           }
         },
@@ -333,7 +333,7 @@
           "type": "faq_item",
           "settings": {
             "question": "How accurate is the sleep tracking?",
-            "answer": "<p>The ring tracks your heart rate and blood oxygen all night. It can tell the difference between light sleep, deep sleep, and REM sleep. It will not replace a sleep study, but it shows your patterns every single night.</p>"
+            "answer": "<p>The ring tracks your heart rate and blood oxygen all night. It can tell the difference between light sleep, deep sleep, and dream sleep. It will not replace a sleep study, but it shows your patterns every single night.</p>"
           }
         },
         "faq_6": {
@@ -582,7 +582,7 @@
           "type": "bullet",
           "settings": {
             "icon": "",
-            "text": "Sleep stages — deep, light, REM, and a sleep score",
+            "text": "Sleep stages — deep, light, dream sleep, and a sleep score",
             "caption": ""
           }
         },
@@ -590,7 +590,7 @@
           "type": "bullet",
           "settings": {
             "icon": "",
-            "text": "Heart rate variability — shows how well you recovered",
+            "text": "Heart rate changes — shows how well you recovered",
             "caption": ""
           }
         },
