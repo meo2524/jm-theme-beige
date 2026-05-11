@@ -37,43 +37,63 @@
     "smart_band_spotlight": {
       "type": "product-feature",
       "blocks": {
-        "bullet_hrv": {
+        "bullet_sleep": {
           "type": "bullet",
           "settings": {
-            "text": "Tracks sleep, heart, steps, and recovery"
+            "icon": "moon",
+            "text": "Sleep — light, deep, dream sleep, and every time you woke up."
           }
         },
-        "bullet_battery": {
+        "bullet_heart": {
           "type": "bullet",
           "settings": {
-            "text": "5 to 7 day battery. Wear it in the shower too."
+            "icon": "heart-alert",
+            "text": "Heart rate tracked weekly. Catch stress or illness early."
+          }
+        },
+        "bullet_recovery": {
+          "type": "bullet",
+          "settings": {
+            "icon": "gauge",
+            "text": "One daily score. Should you push hard or rest today?"
+          }
+        },
+        "bullet_activity": {
+          "type": "bullet",
+          "settings": {
+            "icon": "pulse-night",
+            "text": "Heart rate tracked all night. Even while you sleep."
+          }
+        },
+        "bullet_temp": {
+          "type": "bullet",
+          "settings": {
+            "icon": "temp-wave",
+            "text": "Body temp tracked overnight. Know before you feel sick."
           }
         },
         "bullet_sub": {
           "type": "bullet",
           "settings": {
+            "icon": "infinity",
             "text": "No monthly fees. Ever. Your data is yours."
-          }
-        },
-        "bullet_look": {
-          "type": "bullet",
-          "settings": {
-            "text": "Looks like a ring. No one knows it tracks you."
           }
         }
       },
       "block_order": [
-        "bullet_hrv",
-        "bullet_battery",
-        "bullet_sub",
-        "bullet_look"
+        "bullet_sleep",
+        "bullet_heart",
+        "bullet_recovery",
+        "bullet_activity",
+        "bullet_temp",
+        "bullet_sub"
       ],
       "settings": {
         "video_url": "https://cdn.shopify.com/videos/c/vp/f12216a2ff264544862d886fee41129a/f12216a2ff264544862d886fee41129a.HD-1080p-4.8Mbps-83316595.mp4",
-        "video_position_y": 50,
+        "video_position_y": 25,
         "eyebrow": "Now available",
-        "heading": "See what your body tells you.",
-        "body": "The N°01 Smart Ring watches your body all day and night. It tracks your sleep, heart rate, and steps. Each morning, you see a clear report. It tells you if you should push hard or take a break.",
+        "heading": "More than any watch can do.",
+        "body": "Your watch counts steps. The N°01 does much more. It tracks your heart, breath, and body heat all day and night. Each morning, it tells you: am I rested? Am I ready to work out?",
         "cta_label": "Get the Smart Ring",
         "cta_url": "/products/smart-band",
         "reverse": false
