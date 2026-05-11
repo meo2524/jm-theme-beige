@@ -439,6 +439,20 @@
       {%- endform -%}
 
       {%- comment -%} -- Guarantee + payment methods strip -- {%- endcomment -%}
+      {%- comment -%} -- Free shipping urgency strip -- {%- endcomment -%}
+      <div class="pdp-shipping" data-reveal data-reveal-delay="300">
+        <svg class="pdp-shipping__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <rect x="1" y="6" width="14" height="11" rx="1"/>
+          <path d="M15 9h4l3 3v5h-7"/>
+          <circle cx="6" cy="19" r="2"/>
+          <circle cx="18" cy="19" r="2"/>
+        </svg>
+        <span class="pdp-shipping__text">
+          <strong>Free US shipping.</strong>
+          Ships within 24 hours. Order today to clear Mother's Day stock.
+        </span>
+      </div>
+
       <div class="pdp-guarantee" data-reveal data-reveal-delay="320">
         <svg class="pdp-guarantee__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
           <circle cx="12" cy="12" r="10"/>
@@ -1504,11 +1518,12 @@ body.lightbox-open { overflow: hidden; }
 }
 
 /* -- Money-back guarantee strip -- */
+.pdp-shipping,
 .pdp-guarantee {
   display: flex;
   align-items: flex-start;
   gap: 0.625rem;
-  margin: 1rem 0 0.75rem;
+  margin: 0.75rem 0 0.5rem;
   padding: 0.75rem 0.875rem;
   background: rgba(122, 92, 58, 0.06);
   border: 1px solid rgba(122, 92, 58, 0.18);
@@ -1516,6 +1531,19 @@ body.lightbox-open { overflow: hidden; }
   font-size: 0.8125rem;
   line-height: 1.45;
   color: var(--color-olive, #5a5040);
+}
+.pdp-shipping { margin-top: 1rem; }
+.pdp-shipping__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--color-walnut, #8a6240);
+  margin-top: 1px;
+}
+.pdp-shipping__text strong {
+  color: var(--color-black, #1f1d1a);
+  font-weight: 600;
+  margin-right: 0.25rem;
 }
 .pdp-guarantee__icon {
   flex-shrink: 0;
