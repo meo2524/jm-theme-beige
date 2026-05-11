@@ -473,27 +473,31 @@
         </span>
       </div>
     </div>
-    <script>
-    (function() {
+  {%- endif -%}
+
+  <script>
+  /* Countdown ticker — updates every [data-mc-countdown] and
+     [data-pdp-countdown] clock to midnight visitor-local time. Runs
+     outside the scarcity-banner conditional so the ATC chip still ticks. */
+  (function() {
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+    function tick() {
       var clocks = document.querySelectorAll('[data-mc-countdown], [data-pdp-countdown]');
       if (!clocks.length) return;
-      function pad(n) { return n < 10 ? '0' + n : '' + n; }
-      function tick() {
-        var now = new Date();
-        var end = new Date(now);
-        end.setHours(24, 0, 0, 0); // tonight at midnight (visitor local time)
-        var diff = Math.max(0, end - now);
-        var hh = Math.floor(diff / 3600000);
-        var mm = Math.floor((diff % 3600000) / 60000);
-        var ss = Math.floor((diff % 60000) / 1000);
-        var txt = pad(hh) + ':' + pad(mm) + ':' + pad(ss);
-        clocks.forEach(function(c) { c.textContent = txt; });
-      }
-      tick();
-      setInterval(tick, 1000);
-    })();
-    </script>
-  {%- endif -%}
+      var now = new Date();
+      var end = new Date(now);
+      end.setHours(24, 0, 0, 0);
+      var diff = Math.max(0, end - now);
+      var hh = Math.floor(diff / 3600000);
+      var mm = Math.floor((diff % 3600000) / 60000);
+      var ss = Math.floor((diff % 60000) / 1000);
+      var txt = pad(hh) + ':' + pad(mm) + ':' + pad(ss);
+      clocks.forEach(function(c) { c.textContent = txt; });
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+  </script>
 
 
   <!-- ============================================================
