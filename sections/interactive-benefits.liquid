@@ -1,0 +1,400 @@
+{%- comment -%}
+  ──────────────────────────────────────────────────────────────────
+  sections/interactive-benefits.liquid
+  Mend & Co — Interactive product benefits diagram
+
+  Drop this file into your theme's /sections/ folder and add the
+  section to a product (or any) template:
+
+      {%- section 'interactive-benefits' -%}
+   …or use as a JSON-template block via the theme editor.
+
+  Customisation lives in the {% schema %} block at the bottom of
+  this file — merchants can edit copy, swap the image, and move the
+  hotspot positions through theme settings.
+  ──────────────────────────────────────────────────────────────────
+{%- endcomment -%}
+
+{%- liquid
+  assign uid = section.id
+  assign img = section.settings.image
+  assign benefit_blocks = section.blocks | where: 'type', 'benefit'
+  assign total = benefit_blocks.size
+-%}
+
+<section class="mcib" aria-label="{{ section.settings.aria_label | escape }}" id="mcib-{{ uid }}">
+  <div class="mcib-inner">
+
+    <header class="mcib-head">
+      {%- if section.settings.kicker != blank -%}
+        <div class="mcib-kicker">{{ section.settings.kicker | escape }}</div>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="mcib-title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.lede != blank -%}
+        <p class="mcib-lede">{{ section.settings.lede | escape }}</p>
+      {%- endif -%}
+    </header>
+
+    <div class="mcib-stage" data-mcib-stage>
+
+      {%- comment -%} LEFT — image + hotspots {%- endcomment -%}
+      <div class="mcib-canvas" data-mcib-canvas>
+        {%- if img != blank -%}
+          {{ img | image_url: width: 1200 | image_tag:
+                loading: 'lazy',
+                widths: '480,640,960,1200,1600',
+                sizes: '(min-width: 880px) 50vw, 100vw',
+                alt: img.alt | default: section.settings.title }}
+        {%- else -%}
+          <div class="mcib-ph" aria-hidden="true"></div>
+        {%- endif -%}
+
+        {%- if section.settings.canvas_tag != blank -%}
+          <span class="mcib-canvas-tag">{{ section.settings.canvas_tag | escape }}</span>
+        {%- endif -%}
+
+        {%- for block in benefit_blocks -%}
+          {%- assign n = forloop.index | prepend: '0' | slice: -2, 2 -%}
+          <button
+            class="mcib-spot"
+            type="button"
+            data-target="b{{ block.id }}"
+            data-x="{{ block.settings.spot_x | default: 50 }}"
+            data-y="{{ block.settings.spot_y | default: 50 }}"
+            aria-label="{{ block.settings.label | escape }}"
+            aria-pressed="{%- if forloop.first -%}true{%- else -%}false{%- endif -%}"
+            {{ block.shopify_attributes }}
+          >{{ n }}</button>
+        {%- endfor -%}
+      </div>
+
+      {%- comment -%} Leader line {%- endcomment -%}
+      <svg class="mcib-leader" data-mcib-leader aria-hidden="true">
+        <path data-mcib-leader-path d=""></path>
+        <circle data-mcib-leader-end r="3"></circle>
+      </svg>
+
+      {%- comment -%} RIGHT — callouts {%- endcomment -%}
+      <ol class="mcib-list" data-mcib-list>
+        {%- for block in benefit_blocks -%}
+          {%- assign n = forloop.index | prepend: '0' | slice: -2, 2 -%}
+          <li class="mcib-row"
+              id="b{{ block.id }}"
+              data-spot="{{ n }}"
+              tabindex="0"
+              aria-selected="{%- if forloop.first -%}true{%- else -%}false{%- endif -%}"
+              {{ block.shopify_attributes }}>
+            <span class="mcib-num">{{ n }}</span>
+            <div class="mcib-body">
+              <span class="mcib-label">{{ block.settings.label | escape }}</span>
+              <p class="mcib-text">{{ block.settings.summary | escape }}</p>
+              {%- if block.settings.detail != blank -%}
+                <div class="mcib-detail"><p>{{ block.settings.detail | escape }}</p></div>
+              {%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+
+    {%- if section.settings.show_controls -%}
+      <div class="mcib-foot">
+        <button class="mcib-prev" data-mcib-prev><span class="mcib-arr"></span>{{ 'general.prev' | t | default: 'Prev' }}</button>
+        <div class="mcib-progress"><span data-mcib-progress></span></div>
+        <div class="mcib-dots" data-mcib-dots role="tablist" aria-label="Benefit indicator"></div>
+        <button class="mcib-next" data-mcib-next>{{ 'general.next' | t | default: 'Next' }}<span class="mcib-arr"></span></button>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{%- comment -%} ─── Section CSS (use {% style %} so Shopify auto-bundles) ─── {%- endcomment -%}
+{%- style -%}
+  .mcib {
+    --mcib-cream: {{ section.settings.bg_color | default: '#efe8dc' }};
+    --mcib-char: #1f1d1a;
+    --mcib-char-soft: #4a423a;
+    --mcib-ink-mute: #6a6258;
+    --mcib-gold: #8a663b;
+    --mcib-gold-light: #c9a16b;
+    --mcib-line: rgba(31,29,26,0.14);
+    background: var(--mcib-cream);
+    padding: 96px 56px 120px;
+    color: var(--mcib-char);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  .mcib-inner { max-width: 1280px; margin: 0 auto; }
+  .mcib-head { max-width: 580px; margin-bottom: 64px; }
+  .mcib-kicker {
+    font: 500 11px/1 'JetBrains Mono', ui-monospace, monospace;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--mcib-gold); display: inline-flex; align-items: center; gap: 14px; margin-bottom: 18px;
+  }
+  .mcib-kicker::before { content: ""; width: 28px; height: 1px; background: currentColor; opacity: 0.5; }
+  .mcib-title { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 44px; line-height: 1.08; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 22px; color: var(--mcib-char); text-wrap: balance; }
+  .mcib-lede { font-size: 15px; line-height: 1.7; color: var(--mcib-char-soft); margin: 0; max-width: 50ch; }
+
+  .mcib-stage { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 72px; position: relative; align-items: start; }
+  .mcib-canvas { position: relative; aspect-ratio: 1/1; background: var(--mcib-cream-2, #e7dfd0); overflow: hidden; }
+  .mcib-canvas img, .mcib-canvas .mcib-ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mcib-ph { background-color: var(--mcib-cream-2, #e7dfd0); background-image: radial-gradient(60% 50% at 50% 50%, rgba(168,129,79,0.10), transparent 70%), repeating-linear-gradient(135deg, transparent 0 10px, rgba(31,29,26,0.04) 10px 11px); display: flex; align-items: center; justify-content: center; }
+  .mcib-ph::after { content: "RING · IMAGE"; font-size: 11px; letter-spacing: 0.32em; color: var(--mcib-ink-mute); border: 1px solid var(--mcib-line); padding: 8px 16px; }
+  .mcib-canvas::before, .mcib-canvas::after { content: ""; position: absolute; width: 16px; height: 16px; pointer-events: none; }
+  .mcib-canvas::before { top: 10px; left: 10px; border-top: 1px solid rgba(31,29,26,0.4); border-left: 1px solid rgba(31,29,26,0.4); }
+  .mcib-canvas::after { bottom: 10px; right: 10px; border-bottom: 1px solid rgba(31,29,26,0.4); border-right: 1px solid rgba(31,29,26,0.4); }
+  .mcib-canvas-tag { position: absolute; left: 14px; bottom: 12px; font-size: 9px; letter-spacing: 0.32em; color: var(--mcib-ink-mute); text-transform: uppercase; z-index: 2; background: rgba(247,239,227,0.7); padding: 4px 8px; }
+
+  .mcib-spot { position: absolute; width: 36px; height: 36px; border-radius: 50%; background: rgba(247,239,227,0.92); backdrop-filter: blur(4px); border: 1px solid var(--mcib-char); color: var(--mcib-char); font-family: inherit; font-size: 10px; letter-spacing: 0.06em; display: flex; align-items: center; justify-content: center; cursor: pointer; transform: translate(-50%, -50%); transition: background .25s, border-color .25s, color .25s, box-shadow .25s, transform .25s; z-index: 3; }
+  .mcib-spot::before { content: ""; position: absolute; inset: -8px; border-radius: 50%; border: 1px solid transparent; transition: border-color .25s, transform .25s, opacity .25s; }
+  .mcib-spot:hover { background: var(--mcib-gold); border-color: var(--mcib-gold); color: #f7efe3; }
+  .mcib-spot[aria-pressed="true"] { background: var(--mcib-char); border-color: var(--mcib-char); color: #f7efe3; box-shadow: 0 0 0 2px rgba(247,239,227,0.85), 0 0 24px rgba(168,129,79,0.45); transform: translate(-50%, -50%) scale(1.08); }
+  .mcib-spot[aria-pressed="true"]::before { border-color: rgba(168,129,79,0.45); transform: scale(1.5); opacity: 0.7; animation: mcib-pulse 2.4s ease-in-out infinite; }
+  @keyframes mcib-pulse { 0%,100% { transform: scale(1.3); opacity: 0.6; } 50% { transform: scale(1.7); opacity: 0; } }
+
+  .mcib-leader { position: absolute; inset: 0; pointer-events: none; z-index: 4; overflow: visible; }
+  .mcib-leader path { fill: none; stroke: var(--mcib-gold-light); stroke-width: 1; stroke-dasharray: 3 4; opacity: 0; transition: opacity .35s ease; }
+  .mcib-leader.is-on path { opacity: 0.9; }
+  .mcib-leader circle { fill: var(--mcib-gold-light); opacity: 0; transition: opacity .35s ease; }
+  .mcib-leader.is-on circle { opacity: 1; }
+
+  .mcib-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .mcib-row { border-top: 1px solid var(--mcib-line); padding: 22px 0 22px 28px; position: relative; cursor: pointer; display: grid; grid-template-columns: 64px 1fr; gap: 20px; transition: padding-left .35s ease, background .35s ease; }
+  .mcib-row:last-child { border-bottom: 1px solid var(--mcib-line); }
+  .mcib-row::before { content: ""; position: absolute; left: 0; top: 50%; width: 4px; height: 0; background: var(--mcib-gold); transform: translateY(-50%); transition: height .35s ease; }
+  .mcib-row .mcib-num { font-size: 11px; letter-spacing: 0.18em; color: var(--mcib-ink-mute); align-self: start; padding-top: 4px; transition: color .25s ease; }
+  .mcib-row .mcib-body { min-width: 0; }
+  .mcib-row .mcib-label { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mcib-ink-mute); display: block; margin-bottom: 6px; transition: color .25s ease; }
+  .mcib-row .mcib-text { font-size: 14px; line-height: 1.55; color: var(--mcib-char-soft); margin: 0; transition: color .35s ease; }
+  .mcib-row .mcib-detail { display: none; }
+  .mcib-row:hover { background: rgba(168,129,79,0.04); }
+  .mcib-row:hover .mcib-label, .mcib-row:hover .mcib-num { color: var(--mcib-gold); }
+  .mcib-row[aria-selected="true"] { background: rgba(168,129,79,0.06); padding-left: 36px; }
+  .mcib-row[aria-selected="true"]::before { height: calc(100% - 16px); }
+  .mcib-row[aria-selected="true"] .mcib-label, .mcib-row[aria-selected="true"] .mcib-num { color: var(--mcib-gold); }
+  .mcib-row[aria-selected="true"] .mcib-text { color: var(--mcib-char); }
+
+  .mcib-dots { display: none; gap: 10px; justify-content: center; align-items: center; flex: 1; }
+  .mcib-dot { width: 7px; height: 7px; padding: 0; border: 0; cursor: pointer; appearance: none; background: rgba(31,29,26,0.18); border-radius: 50%; transition: background .25s, transform .25s; }
+  .mcib-dot.is-active { background: var(--mcib-gold); transform: scale(1.4); }
+
+  .mcib-foot { margin-top: 28px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--mcib-ink-mute); }
+  .mcib-foot .mcib-progress { flex: 1; margin: 0 24px; height: 1px; background: var(--mcib-line); position: relative; overflow: hidden; }
+  .mcib-foot .mcib-progress span { position: absolute; top: 0; left: 0; height: 1px; background: var(--mcib-gold); width: {{ 100.0 | divided_by: total | default: 16.66 }}%; transition: transform .5s cubic-bezier(.4,.0,.2,1), width .5s ease; }
+  .mcib-prev, .mcib-next { background: transparent; border: 0; cursor: pointer; font: inherit; color: var(--mcib-char-soft); padding: 8px 0; display: inline-flex; align-items: center; gap: 8px; letter-spacing: inherit; text-transform: inherit; }
+  .mcib-prev:hover, .mcib-next:hover { color: var(--mcib-gold); }
+  .mcib-arr { width: 18px; height: 1px; background: currentColor; position: relative; }
+  .mcib-arr::after { content: ""; position: absolute; width: 6px; height: 6px; border-top: 1px solid currentColor; border-right: 1px solid currentColor; top: -3px; transform: rotate(45deg); }
+  .mcib-next .mcib-arr::after { right: 0; }
+  .mcib-prev .mcib-arr { transform: scaleX(-1); }
+
+  @media (max-width: 880px) {
+    .mcib { padding: 48px 20px 56px; }
+    .mcib-head { margin-bottom: 24px; }
+    .mcib-title { font-size: 28px; letter-spacing: -0.005em; }
+    .mcib-lede { font-size: 13.5px; line-height: 1.65; }
+    .mcib-stage { grid-template-columns: 1fr; gap: 16px; }
+    .mcib-leader { display: none; }
+    .mcib-canvas-tag { display: none; }
+    .mcib-spot { width: 44px; height: 44px; font-size: 11px; background: var(--mcib-cream); border-width: 1.5px; box-shadow: 0 2px 8px rgba(31,29,26,0.18); }
+    .mcib-list { position: relative; border-top: 1px solid var(--mcib-line); border-bottom: 1px solid var(--mcib-line); padding: 22px 4px; height: 132px; min-height: 132px; touch-action: pan-y; }
+    .mcib-row { display: none; border: 0; padding: 0; grid-template-columns: 44px 1fr; gap: 14px; background: transparent; animation: mcib-fade .3s ease; cursor: default; }
+    .mcib-row[aria-selected="true"] { display: grid; padding-left: 0; background: transparent; }
+    .mcib-row::before, .mcib-row[aria-selected="true"]::before { display: none; }
+    .mcib-row .mcib-num { font-size: 13px; padding-top: 2px; }
+    .mcib-row .mcib-label { font-size: 11px; }
+    .mcib-row .mcib-text { font-size: 15px; line-height: 1.5; color: var(--mcib-char); }
+    .mcib-row[aria-selected="true"] .mcib-detail { display: none; }
+    .mcib-foot { margin-top: 16px; gap: 8px; font-size: 11px; }
+    .mcib-foot .mcib-progress { display: none; }
+    .mcib-dots { display: flex; }
+    .mcib-prev, .mcib-next { border: 1px solid var(--mcib-line); padding: 12px 14px; letter-spacing: 0.18em; color: var(--mcib-char); gap: 8px; min-width: 78px; justify-content: center; transition: border-color .2s, color .2s, background .2s; }
+    .mcib-prev:active, .mcib-next:active { background: var(--mcib-char); color: var(--mcib-cream); border-color: var(--mcib-char); }
+  }
+  @keyframes mcib-fade { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 480px) {
+    .mcib { padding: 36px 14px 48px; }
+    .mcib-title { font-size: 22px; }
+    .mcib-lede { font-size: 13px; }
+    .mcib-spot { width: 40px; height: 40px; font-size: 10px; }
+    .mcib-prev, .mcib-next { min-width: 64px; padding: 11px 10px; font-size: 10px; }
+    .mcib-row .mcib-text { font-size: 14px; }
+  }
+{%- endstyle -%}
+
+{%- comment -%} ─── JS — vanilla, no deps. Re-init on Shopify section reload. ─── {%- endcomment -%}
+<script>
+(function initMcib(scope){
+  scope = scope || document;
+  scope.querySelectorAll('[data-mcib-stage]').forEach(function(stage){
+    if (stage._mcibReady) return;
+    stage._mcibReady = true;
+    var canvas  = stage.querySelector('[data-mcib-canvas]');
+    var spots   = Array.prototype.slice.call(stage.querySelectorAll('.mcib-spot'));
+    var rows    = Array.prototype.slice.call(stage.querySelectorAll('.mcib-row'));
+    var leader  = stage.querySelector('[data-mcib-leader]');
+    var leaderP = stage.querySelector('[data-mcib-leader-path]');
+    var leaderE = stage.querySelector('[data-mcib-leader-end]');
+    var progress= stage.parentElement.querySelector('[data-mcib-progress]');
+    var dotsHost= stage.parentElement.querySelector('[data-mcib-dots]');
+    var prev    = stage.parentElement.querySelector('[data-mcib-prev]');
+    var next    = stage.parentElement.querySelector('[data-mcib-next]');
+    var list    = stage.querySelector('.mcib-list');
+    var current = 0, total = rows.length;
+    if (!total) return;
+
+    // Build mobile dot indicators
+    var dots = [];
+    if (dotsHost && !dotsHost.hasChildNodes()) {
+      for (var di = 0; di < total; di++) {
+        (function(i){
+          var d = document.createElement('button');
+          d.type = 'button';
+          d.className = 'mcib-dot';
+          d.setAttribute('role', 'tab');
+          d.setAttribute('aria-label', 'Benefit ' + (i+1) + ' of ' + total);
+          d.addEventListener('click', function(){ activate(i); });
+          dotsHost.appendChild(d);
+          dots.push(d);
+        })(di);
+      }
+    }
+
+    spots.forEach(function(s){
+      s.style.left = (s.dataset.x || 50) + '%';
+      s.style.top  = (s.dataset.y || 50) + '%';
+    });
+
+    function activate(idx){
+      if (idx < 0) idx = total - 1;
+      if (idx >= total) idx = 0;
+      current = idx;
+      rows.forEach(function(r, i){ r.setAttribute('aria-selected', i === idx ? 'true' : 'false'); });
+      spots.forEach(function(s, i){ s.setAttribute('aria-pressed', i === idx ? 'true' : 'false'); });
+      dots.forEach(function(d, i){ d.classList.toggle('is-active', i === idx); });
+      drawLeader();
+      if (progress) {
+        var w = 100 / total;
+        progress.style.width = w + '%';
+        progress.style.transform = 'translateX(' + (idx * 100) + '%)';
+      }
+    }
+    function drawLeader(){
+      if (!leader || !leaderP || !canvas) return;
+      var stageR = stage.getBoundingClientRect();
+      var spot = spots[current];
+      var row  = rows[current];
+      if (!spot || !row) return;
+      leader.setAttribute('width',  stageR.width);
+      leader.setAttribute('height', stageR.height);
+      leader.setAttribute('viewBox', '0 0 ' + stageR.width + ' ' + stageR.height);
+      var sR = spot.getBoundingClientRect();
+      var rR = row.getBoundingClientRect();
+      var x1 = (sR.left + sR.width) - stageR.left;
+      var y1 = (sR.top + sR.height/2) - stageR.top;
+      var x2 = rR.left - stageR.left;
+      var y2 = (rR.top + rR.height/2) - stageR.top;
+      var mid = (x1 + x2) / 2;
+      leaderP.setAttribute('d', 'M ' + x1 + ' ' + y1 + ' C ' + mid + ' ' + y1 + ', ' + mid + ' ' + y2 + ', ' + x2 + ' ' + y2);
+      leaderE.setAttribute('cx', x2); leaderE.setAttribute('cy', y2);
+      leader.classList.add('is-on');
+    }
+
+    spots.forEach(function(s, i){
+      s.addEventListener('click', function(){ activate(i); });
+      s.addEventListener('mouseenter', function(){ activate(i); });
+      s.addEventListener('focus', function(){ activate(i); });
+    });
+    rows.forEach(function(r, i){
+      r.addEventListener('click', function(){ activate(i); });
+      r.addEventListener('mouseenter', function(){ activate(i); });
+      r.addEventListener('focus', function(){ activate(i); });
+    });
+    if (prev) prev.addEventListener('click', function(){ activate(current - 1); });
+    if (next) next.addEventListener('click', function(){ activate(current + 1); });
+
+    // Swipe support on mobile
+    if (list) {
+      var sx = 0, sy = 0, swiping = false;
+      list.addEventListener('touchstart', function(e){
+        sx = e.touches[0].clientX; sy = e.touches[0].clientY; swiping = true;
+      }, { passive: true });
+      list.addEventListener('touchend', function(e){
+        if (!swiping) return; swiping = false;
+        var t = e.changedTouches[0];
+        var dx = t.clientX - sx, dy = t.clientY - sy;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+          activate(current + (dx < 0 ? 1 : -1));
+        }
+      });
+    }
+
+    var raf;
+    function req(){ cancelAnimationFrame(raf); raf = requestAnimationFrame(drawLeader); }
+    window.addEventListener('resize', req);
+    window.addEventListener('scroll', req, { passive: true });
+
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ activate(0); });
+    else setTimeout(function(){ activate(0); }, 100);
+  });
+})();
+
+{%- comment -%} Re-init when the theme editor swaps the section in or unloads it {%- endcomment -%}
+document.addEventListener('shopify:section:load', function(e){ initMcib(e.target); });
+document.addEventListener('shopify:section:unload', function(e){
+  e.target.querySelectorAll('[data-mcib-stage]').forEach(function(s){ s._mcibReady = false; });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Interactive Benefits",
+  "tag": "section",
+  "class": "section-mcib",
+  "settings": [
+    { "type": "header",   "content": "Header" },
+    { "type": "text",     "id": "kicker",      "label": "Kicker",         "default": "Why N°01" },
+    { "type": "text",     "id": "title",       "label": "Heading",        "default": "More than any watch can do." },
+    { "type": "textarea", "id": "lede",        "label": "Intro paragraph","default": "Your watch counts steps. The N°01 does much more. It tracks your heart, breath, and body heat all day and night. Each morning, it tells you: am I rested? Am I ready to work out?" },
+    { "type": "text",     "id": "aria_label",  "label": "Aria label",     "default": "Why N°01" },
+
+    { "type": "header",   "content": "Image" },
+    { "type": "image_picker", "id": "image",   "label": "Ring image (square works best)" },
+    { "type": "text",     "id": "canvas_tag",  "label": "Image caption",  "default": "N°01 · Schematic" },
+
+    { "type": "header",   "content": "Layout" },
+    { "type": "color",    "id": "bg_color",    "label": "Section background", "default": "#efe8dc" },
+    { "type": "checkbox", "id": "show_controls","label": "Show prev/next controls", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "limit": 9,
+      "settings": [
+        { "type": "text",     "id": "label",   "label": "Short label",  "default": "Sleep" },
+        { "type": "text",     "id": "summary", "label": "One-line summary", "default": "Light, deep, dream sleep, and every time you woke up." },
+        { "type": "textarea", "id": "detail",  "label": "Expanded detail (shown when active)" },
+        { "type": "header",   "content": "Hotspot position on the image (0–100%)" },
+        { "type": "range",    "id": "spot_x",  "label": "X %",  "min": 0, "max": 100, "step": 1, "default": 50 },
+        { "type": "range",    "id": "spot_y",  "label": "Y %",  "min": 0, "max": 100, "step": 1, "default": 50 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Interactive Benefits",
+      "blocks": [
+        { "type": "benefit", "settings": { "label": "Sleep",                "summary": "Light, deep, dream sleep, and every time you woke up.",             "spot_x": 32, "spot_y": 36 } },
+        { "type": "benefit", "settings": { "label": "Heart rate · weekly",  "summary": "Heart rate tracked weekly. Catch stress or illness early.",         "spot_x": 68, "spot_y": 30 } },
+        { "type": "benefit", "settings": { "label": "Daily score",          "summary": "One daily score. Should you push hard or rest today?",             "spot_x": 78, "spot_y": 52 } },
+        { "type": "benefit", "settings": { "label": "Heart rate · overnight","summary": "Heart rate tracked all night. Even while you sleep.",              "spot_x": 56, "spot_y": 62 } },
+        { "type": "benefit", "settings": { "label": "Body temperature",     "summary": "Body temp tracked overnight. Know before you feel sick.",          "spot_x": 38, "spot_y": 68 } },
+        { "type": "benefit", "settings": { "label": "No fees",              "summary": "No monthly fees. Ever. Your data is yours.",                       "spot_x": 22, "spot_y": 50 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

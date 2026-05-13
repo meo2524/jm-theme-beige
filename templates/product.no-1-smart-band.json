@@ -55,75 +55,85 @@
         "custom_padding_bottom": 36
       }
     },
-    "benefit_pitch": {
-      "type": "product-feature",
+    "interactive_benefits": {
+      "type": "interactive-benefits",
       "blocks": {
-        "bullet_sleep": {
-          "type": "bullet",
+        "ben_sleep": {
+          "type": "benefit",
           "settings": {
-            "icon": "moon",
-            "text": "Sleep — light, deep, dream sleep, and every time you woke up.",
-            "caption": ""
+            "label": "Sleep",
+            "summary": "Light, deep, dream sleep, and every time you woke up.",
+            "detail": "A full hypnogram each morning. Four sleep stages, plus your time-awake count. Compare to last week without thinking about it.",
+            "spot_x": 32,
+            "spot_y": 36
           }
         },
-        "bullet_heart": {
-          "type": "bullet",
+        "ben_hr_weekly": {
+          "type": "benefit",
           "settings": {
-            "icon": "heart-alert",
-            "text": "Heart rate tracked weekly. Catch stress or illness early.",
-            "caption": ""
+            "label": "Heart rate · weekly",
+            "summary": "Heart rate tracked weekly. Catch stress or illness early.",
+            "detail": "Resting heart rate trends — week over week. When it rises, we tell you, before you feel it.",
+            "spot_x": 68,
+            "spot_y": 30
           }
         },
-        "bullet_recovery": {
-          "type": "bullet",
+        "ben_score": {
+          "type": "benefit",
           "settings": {
-            "icon": "gauge",
-            "text": "One daily score. Should you push hard or rest today?",
-            "caption": ""
+            "label": "Daily score",
+            "summary": "One daily score. Should you push hard or rest today?",
+            "detail": "Calculated overnight. A single number — 0 to 100 — that tells you what your body can take.",
+            "spot_x": 78,
+            "spot_y": 52
           }
         },
-        "bullet_activity": {
-          "type": "bullet",
+        "ben_hr_night": {
+          "type": "benefit",
           "settings": {
-            "icon": "pulse-night",
-            "text": "Heart rate tracked all night. Even while you sleep.",
-            "caption": ""
+            "label": "Heart rate · overnight",
+            "summary": "Heart rate tracked all night. Even while you sleep.",
+            "detail": "Continuous overnight HR plus HRV. Your nervous-system recovery, drawn for you in the morning.",
+            "spot_x": 56,
+            "spot_y": 62
           }
         },
-        "bullet_subscription": {
-          "type": "bullet",
+        "ben_temp": {
+          "type": "benefit",
           "settings": {
-            "icon": "temp-wave",
-            "text": "Body temp tracked overnight. Know before you feel sick.",
-            "caption": ""
+            "label": "Body temperature",
+            "summary": "Body temp tracked overnight. Know before you feel sick.",
+            "detail": "Your nightly baseline, to 0.1°. A spike often shows up two days before symptoms do.",
+            "spot_x": 38,
+            "spot_y": 68
           }
         },
-        "bullet_ceramic": {
-          "type": "bullet",
+        "ben_fees": {
+          "type": "benefit",
           "settings": {
-            "icon": "infinity",
-            "text": "No monthly fees. Ever. Your data is yours.",
-            "caption": ""
+            "label": "No fees",
+            "summary": "No monthly fees. Ever. Your data is yours.",
+            "detail": "You buy the ring, the app is free for the life of the device. Export your data any time, in plain CSV.",
+            "spot_x": 22,
+            "spot_y": 50
           }
         }
       },
       "block_order": [
-        "bullet_sleep",
-        "bullet_heart",
-        "bullet_recovery",
-        "bullet_activity",
-        "bullet_subscription",
-        "bullet_ceramic"
+        "ben_sleep",
+        "ben_hr_weekly",
+        "ben_score",
+        "ben_hr_night",
+        "ben_temp",
+        "ben_fees"
       ],
       "settings": {
-        "video_url": "https://cdn.shopify.com/videos/c/vp/f12216a2ff264544862d886fee41129a/f12216a2ff264544862d886fee41129a.HD-1080p-4.8Mbps-83316595.mp4",
-        "video_position_y": 25,
-        "eyebrow": "Why N°01",
-        "heading": "More than any watch can do.",
-        "body": "Your watch counts steps. The N°01 does much more. It tracks your heart, breath, and body heat all day and night. Each morning, it tells you: am I rested? Am I ready to work out?",
-        "cta_label": "",
-        "cta_url": "",
-        "reverse": false
+        "kicker": "Why N°01",
+        "title": "More than any watch can do.",
+        "lede": "Your watch counts steps. The N°01 does much more. It tracks your heart, breath, and body heat all day and night. Each morning, it tells you: am I rested? Am I ready to work out?",
+        "aria_label": "Why N°01",
+        "canvas_tag": "N°01 · Schematic",
+        "show_controls": true
       }
     },
     "photo_reviews": {
@@ -701,7 +711,7 @@
   "order": [
     "main",
     "custom_liquid_TgB6HE",
-    "benefit_pitch",
+    "interactive_benefits",
     "photo_reviews",
     "angle_testimonials",
     "ring_comparison",
