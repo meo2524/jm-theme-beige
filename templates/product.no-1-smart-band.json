@@ -186,10 +186,6 @@
         "heading": "Meet the Menders."
       }
     },
-    "app_modal": {
-      "type": "app-modal",
-      "settings": {}
-    },
     "ring_comparison": {
       "type": "ring-comparison",
       "blocks": {
@@ -291,6 +287,10 @@
         "watches_sub": "",
         "caption": ""
       }
+    },
+    "app_modal": {
+      "type": "app-modal",
+      "settings": {}
     },
     "product_science": {
       "type": "product-science",
@@ -742,8 +742,8 @@
     "interactive_benefits",
     "photo_reviews",
     "angle_testimonials",
-    "app_modal",
     "ring_comparison",
+    "app_modal",
     "product_science",
     "app_showcase",
     "product_faq",
