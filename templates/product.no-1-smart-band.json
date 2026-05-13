@@ -132,6 +132,7 @@
         "title": "More than any watch can do.",
         "lede": "Your watch counts steps. The N°01 does much more. It tracks your heart, breath, and body heat all day and night. Each morning, it tells you: am I rested? Am I ready to work out?",
         "aria_label": "Why N°01",
+        "image": "shopify://shop_images/Pink_Ring_1.png",
         "canvas_tag": "N°01 · Schematic",
         "show_controls": true
       }
