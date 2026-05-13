@@ -838,7 +838,7 @@
       b.classList.toggle('is-active', on);
       b.setAttribute('aria-checked', on ? 'true' : 'false');
     });
-    setCardWidth(cardOutline.offsetWidth);
+    setCardSize(isMobile() ? cardOutline.offsetHeight : cardOutline.offsetWidth);
     renderCircles();
     // Update string input
     var prev = parseFloat(stringVal.value);
