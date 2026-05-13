@@ -64,8 +64,8 @@
             "label": "Sleep",
             "summary": "Light, deep, dream sleep, and every time you woke up.",
             "detail": "A full hypnogram each morning. Four sleep stages, plus your time-awake count. Compare to last week without thinking about it.",
-            "spot_x": 32,
-            "spot_y": 36
+            "spot_x": 66,
+            "spot_y": 24
           }
         },
         "ben_hr_weekly": {
@@ -74,8 +74,8 @@
             "label": "Heart rate · weekly",
             "summary": "Heart rate tracked weekly. Catch stress or illness early.",
             "detail": "Resting heart rate trends — week over week. When it rises, we tell you, before you feel it.",
-            "spot_x": 68,
-            "spot_y": 30
+            "spot_x": 74,
+            "spot_y": 39
           }
         },
         "ben_score": {
@@ -84,8 +84,8 @@
             "label": "Daily score",
             "summary": "One daily score. Should you push hard or rest today?",
             "detail": "Calculated overnight. A single number — 0 to 100 — that tells you what your body can take.",
-            "spot_x": 78,
-            "spot_y": 52
+            "spot_x": 70,
+            "spot_y": 60
           }
         },
         "ben_hr_night": {
@@ -95,7 +95,7 @@
             "summary": "Heart rate tracked all night. Even while you sleep.",
             "detail": "Continuous overnight HR plus HRV. Your nervous-system recovery, drawn for you in the morning.",
             "spot_x": 56,
-            "spot_y": 62
+            "spot_y": 78
           }
         },
         "ben_temp": {
@@ -104,7 +104,7 @@
             "label": "Body temperature",
             "summary": "Body temp tracked overnight. Know before you feel sick.",
             "detail": "Your nightly baseline, to 0.1°. A spike often shows up two days before symptoms do.",
-            "spot_x": 38,
+            "spot_x": 29,
             "spot_y": 68
           }
         },
@@ -114,8 +114,8 @@
             "label": "No fees",
             "summary": "No monthly fees. Ever. Your data is yours.",
             "detail": "You buy the ring, the app is free for the life of the device. Export your data any time, in plain CSV.",
-            "spot_x": 22,
-            "spot_y": 50
+            "spot_x": 27,
+            "spot_y": 39
           }
         }
       },
@@ -134,6 +134,7 @@
         "aria_label": "Why N°01",
         "image": "shopify://shop_images/Pink_Ring_1.png",
         "canvas_tag": "N°01 · Schematic",
+        "bg_color": "#efe8dc",
         "show_controls": true
       }
     },
@@ -393,9 +394,7 @@
       "block_order": [
         "judge_me_reviews_review_widget_iFrc3R"
       ],
-      "settings": {
-        "include_margins": true
-      }
+      "settings": {}
     },
     "tech_specs": {
       "type": "tech-specs",
@@ -538,9 +537,7 @@
         "judge_me_reviews_testimonials_carousel_WMGnUP"
       ],
       "disabled": true,
-      "settings": {
-        "include_margins": true
-      }
+      "settings": {}
     },
     "reviews_carousel": {
       "type": "apps",
@@ -582,9 +579,7 @@
         "judge_me_reviews_videos_carousel_WK6GHc"
       ],
       "disabled": true,
-      "settings": {
-        "include_margins": true
-      }
+      "settings": {}
     },
     "health_metrics": {
       "type": "product-feature",
@@ -675,9 +670,7 @@
         "judge_me_reviews_review_widget_QD8Ut3"
       ],
       "disabled": true,
-      "settings": {
-        "include_margins": true
-      }
+      "settings": {}
     },
     "judgeme_reviews": {
       "type": "judgeme-reviews",
