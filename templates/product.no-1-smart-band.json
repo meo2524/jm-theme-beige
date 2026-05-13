@@ -61,6 +61,7 @@
         "gift_bUKnG7": {
           "type": "gift",
           "settings": {
+            "image": "shopify://shop_images/ChatGPTImageMay8_2026_11_26_24PM_772abaec-d63a-4c97-acfa-92657498a43e.png",
             "title": "Travel Charging Case",
             "description": "Keep your ring charged wherever life takes you.",
             "value": "$35.00"
@@ -184,6 +185,10 @@
         "eyebrow": "The Mender Community",
         "heading": "Meet the Menders."
       }
+    },
+    "app_modal": {
+      "type": "app-modal",
+      "settings": {}
     },
     "ring_comparison": {
       "type": "ring-comparison",
@@ -499,10 +504,7 @@
     },
     "science_modal": {
       "type": "science-modal",
-      "settings": {}
-    },
-    "app_modal": {
-      "type": "app-modal",
+      "disabled": true,
       "settings": {}
     },
     "app_download": {
@@ -740,6 +742,7 @@
     "interactive_benefits",
     "photo_reviews",
     "angle_testimonials",
+    "app_modal",
     "ring_comparison",
     "product_science",
     "app_showcase",
@@ -748,7 +751,6 @@
     "tech_specs",
     "ring_size_modal",
     "science_modal",
-    "app_modal",
     "app_download",
     "testimonials",
     "177768635486c7de24",
