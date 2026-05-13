@@ -45,8 +45,8 @@
 
 <style>
   .promo-bar {
-    background: var(--cream-2);
-    border-bottom: 1px solid var(--line);
+    background: var(--gold);
+    border-bottom: 1px solid rgba(107, 63, 160, 0.4);
     height: 36px;
     overflow: hidden;
     position: relative;
@@ -54,15 +54,12 @@
     align-items: center;
     width: 100%;
     box-sizing: border-box;
-    /* contain: layout paint tells iOS Safari that nothing inside this
-       element affects external layout. Prevents the max-content marquee
-       from expanding the page layout viewport on mobile. */
     contain: layout paint;
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: 12px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--char-soft);
+    color: var(--color-text-on-dark);
   }
 
   .promo-bar__item {
@@ -73,23 +70,23 @@
   }
 
   .promo-bar__mark {
-    font-family: var(--font-serif);
+    font-family: var(--font-body);
     font-style: italic;
     font-size: 15px;
-    color: var(--gold-deep);
+    color: var(--color-cta-hover);
     letter-spacing: 0.04em;
   }
 
   .promo-bar__sep { opacity: 0.4; }
 
   .promo-bar__link {
-    color: var(--gold-deep);
+    color: var(--color-cta-hover);
     text-decoration: underline;
     text-underline-offset: 3px;
-    text-decoration-color: rgba(138, 102, 59, 0.45);
+    text-decoration-color: rgba(124, 58, 237, 0.45);
     transition: text-decoration-color 0.15s ease;
   }
-  .promo-bar__link:hover { text-decoration-color: var(--gold-deep); }
+  .promo-bar__link:hover { text-decoration-color: var(--color-cta-hover); }
 </style>
 
 {% schema %}

@@ -62,7 +62,7 @@
 
 <style>
   .story {
-    background: var(--cream);
+    background: var(--cream-2);
     padding: 100px 0 120px;
   }
 
@@ -73,13 +73,15 @@
     align-items: center;
   }
 
-  /* Image column */
   .story__media {
     position: relative;
     width: 100%;
     aspect-ratio: 3 / 4;
     overflow: hidden;
-    border: 1px solid var(--line);
+    border: 1px solid rgba(107, 63, 160, 0.3);
+    border-radius: var(--radius-base);
+    background-color: var(--cream-3);
+    box-shadow: var(--glow-soft);
   }
   .story__media img {
     width: 100%;
@@ -92,15 +94,14 @@
     height: 100%;
   }
 
-  /* Content column */
   .story__content {
     max-width: 480px;
   }
 
   .story__heading {
-    font-family: var(--font-serif);
-    font-size: clamp(2.5rem, 4.2vw, 4rem);  /* up to 64px */
-    font-weight: 400;
+    font-family: var(--font-body);
+    font-size: clamp(2.5rem, 4.2vw, 4rem);
+    font-weight: 900;
     line-height: 1.05;
     letter-spacing: -0.02em;
     color: var(--char);
@@ -109,14 +110,14 @@
   }
   .story__heading em {
     font-style: italic;
-    font-weight: 400;
-    color: var(--gold-deep);
+    font-weight: 700;
+    color: var(--color-cta-hover);
   }
 
   .story__para {
-    font-family: var(--font-serif);
-    font-size: 22px;
-    line-height: 1.55;
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.6;
     color: var(--char-soft);
     margin-top: 24px;
     max-width: 480px;
@@ -140,7 +141,6 @@
       gap: 40px;
     }
     .story__media {
-      /* Portrait crop on mobile — shows Claire's face correctly */
       aspect-ratio: 4 / 5;
     }
   }

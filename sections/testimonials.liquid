@@ -143,7 +143,7 @@
 <style>
 /* ---- Section shell ---- */
 .testimonials {
-  background-color: var(--color-bone);
+  background-color: var(--cream-2);
   padding: 6rem 0 7rem;
 }
 
@@ -151,24 +151,24 @@
 .testimonials__rule {
   width: 40px;
   height: 1.5px;
-  background-color: var(--color-walnut, #8A6240);
-  opacity: 0.6;
+  background-color: var(--color-cta);
+  opacity: 0.7;
   margin-bottom: 1.25rem;
 }
 .testimonials__eyebrow {
-  font-family: var(--font-label, 'Inter', sans-serif);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--color-walnut, #8A6240);
+  color: var(--gold-light);
   margin-bottom: 0.875rem;
 }
 .testimonials__heading {
-  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-family: var(--font-body);
   font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-  font-weight: 400;
-  color: var(--color-black);
+  font-weight: 900;
+  color: var(--char);
   max-width: 26ch;
   line-height: 1.2;
   margin-bottom: 3.5rem;
@@ -178,7 +178,7 @@
 .testimonials__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5px;
+  gap: 1px;
 }
 
 /* ---- Cards ---- */
@@ -187,16 +187,17 @@
   flex-direction: column;
   gap: 1rem;
   padding: 2.25rem 2rem;
-  background-color: rgba(43, 43, 43, 0.06);
-  border: 1px solid rgba(43, 43, 43, 0.12);
+  background-color: var(--cream-3);
+  border: 1px solid rgba(107, 63, 160, 0.25);
   border-radius: 3px;
   margin: 0;
   quotes: none;
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 .t-card:hover {
-  background-color: rgba(43, 43, 43, 0.11);
-  border-color: rgba(166, 137, 102, 0.3);
+  background-color: var(--gold-deep);
+  border-color: rgba(124, 58, 237, 0.45);
+  color: var(--color-text-on-dark);
 }
 
 /* ---- Stars ---- */
@@ -206,28 +207,35 @@
 }
 .t-star {
   font-size: 13px;
-  color: var(--color-walnut, #8A6240);
+  color: var(--color-cta-hover);
   line-height: 1;
 }
 .t-star--empty {
   opacity: 0.2;
 }
 
+/* ---- Hover text overrides (card bg flips dark) ---- */
+.t-card:hover .t-card__title,
+.t-card:hover .t-card__name,
+.t-card:hover .t-card__badge { color: var(--color-text-on-dark); }
+.t-card:hover .t-card__body  { color: rgba(255,255,255,0.85); }
+.t-card:hover .t-card__date  { color: rgba(255,255,255,0.55); }
+
 /* ---- Text ---- */
 .t-card__title {
-  font-family: var(--font-label, 'Inter', sans-serif);
+  font-family: var(--font-body);
   font-size: 0.9375rem;
   font-weight: 600;
-  color: var(--color-black);
+  color: var(--char);
   line-height: 1.4;
 }
 .t-card__body {
-  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-family: var(--font-body);
   font-size: 1rem;
   font-style: italic;
   font-weight: 400;
   line-height: 1.65;
-  color: var(--color-black);
+  color: var(--char-soft);
   flex: 1;
 }
 
@@ -238,7 +246,7 @@
   justify-content: space-between;
   gap: 0.75rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(43, 43, 43, 0.1);
+  border-top: 1px solid rgba(107, 63, 160, 0.2);
   flex-wrap: wrap;
 }
 .t-card__author-wrap {
@@ -247,28 +255,28 @@
   gap: 0.5rem;
 }
 .t-card__name {
-  font-family: var(--font-label, 'Inter', sans-serif);
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--color-black);
+  color: var(--char);
   font-style: normal;
 }
 .t-card__badge {
-  font-family: var(--font-label, 'Inter', sans-serif);
+  font-family: var(--font-body);
   font-size: 0.5625rem;
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--color-black);
-  background-color: rgba(74, 123, 114, 0.85);
-  color: #C8F0EC;
+  background-color: rgba(107, 63, 160, 0.6);
+  color: var(--char);
   padding: 2px 6px;
   border-radius: 2px;
 }
 .t-card__date {
-  font-family: var(--font-label, 'Inter', sans-serif);
+  font-family: var(--font-body);
   font-size: 0.75rem;
-  color: var(--color-olive);
+  color: var(--char-soft);
+  opacity: 0.6;
   white-space: nowrap;
 }
 
@@ -276,7 +284,7 @@
 .testimonials__skeleton {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5px;
+  gap: 1px;
   width: 100%;
   grid-column: 1 / -1;
 }
@@ -284,14 +292,14 @@
   height: 220px;
   background: linear-gradient(
     90deg,
-    rgba(215, 196, 163, 0.04) 0%,
-    rgba(215, 196, 163, 0.08) 50%,
-    rgba(215, 196, 163, 0.04) 100%
+    rgba(107, 63, 160, 0.04) 0%,
+    rgba(107, 63, 160, 0.10) 50%,
+    rgba(107, 63, 160, 0.04) 100%
   );
   background-size: 200% 100%;
   animation: shimmer 1.6s infinite;
   border-radius: 3px;
-  border: 1px solid rgba(215, 196, 163, 0.07);
+  border: 1px solid rgba(107, 63, 160, 0.1);
 }
 @keyframes shimmer {
   0%   { background-position: 200% 0; }
@@ -352,7 +360,7 @@
           "type": "textarea",
           "id": "quote",
           "label": "Quote",
-          "default": "My skin stopped breaking out two weeks after installing it."
+          "default": "I sleep better than I have in years. The ring shows me exactly why."
         },
         {
           "type": "text",

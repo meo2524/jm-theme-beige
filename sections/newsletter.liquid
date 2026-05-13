@@ -82,7 +82,8 @@
 /* ── NEWSLETTER ─────────────────────────────────────────── */
 
 .nl {
-  background: var(--cream);
+  background: var(--cream-3);
+  border-top: 1px solid rgba(107, 63, 160, 0.25);
   padding: 80px 2rem;
 }
 
@@ -92,18 +93,16 @@
   text-align: center;
 }
 
-/* Reuse base .rule-above; add centering override */
 .nl__rule-above {
   margin-inline: auto;
   margin-bottom: 1.5rem;
-  background-color: var(--gold-deep);
+  background-color: var(--color-cta);
 }
 
-/* Heading — Cormorant Garamond serif */
 .nl__heading {
-  font-family: var(--font-serif);
-  font-size: clamp(2rem, 5vw, 3rem);  /* up to 48px */
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--char);
@@ -112,13 +111,12 @@
 }
 .nl__heading em {
   font-style: italic;
-  color: var(--gold-deep);
+  color: var(--color-cta-hover);
 }
 
-/* Subtext — serif italic-friendly */
 .nl__subtext {
-  font-family: var(--font-serif);
-  font-size: 1.1875rem;  /* 19px */
+  font-family: var(--font-body);
+  font-size: 1.1875rem;
   line-height: 1.55;
   color: var(--char-soft);
   margin: 0 0 2rem;
@@ -130,24 +128,23 @@
   display: flex;
   max-width: 480px;
   margin: 0 auto;
-  border: 1px solid var(--line-strong);
+  border: 1px solid rgba(107, 63, 160, 0.4);
   border-radius: 2px;
   overflow: hidden;
-  background: var(--paper);
+  background: var(--cream-2);
 }
 
 .nl__field-row:focus-within {
-  outline: 2px solid var(--gold-deep);
+  outline: 2px solid var(--color-cta);
   outline-offset: 2px;
   border-color: transparent;
 }
 
-/* Input */
 .nl__input {
   flex: 1;
   height: 48px;
   padding: 0 1.125rem;
-  background: var(--paper);
+  background: var(--cream-2);
   border: none;
   font-family: var(--font-body);
   font-size: 0.875rem;
@@ -157,35 +154,34 @@
 }
 
 .nl__input::placeholder {
-  color: var(--ink-mute);
-  font-family: var(--font-mono);
+  color: rgba(26, 8, 38, 0.35);
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   letter-spacing: 0.05em;
 }
 
-/* Button — charcoal mono pill */
 .nl__btn {
   display: flex;
   align-items: center;
   gap: 14px;
   height: 48px;
   padding: 0 28px;
-  background: var(--char);
+  background: var(--color-cta);
   border: none;
   cursor: pointer;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--cream);
+  color: var(--color-text-on-dark);
   white-space: nowrap;
   transition: background 0.2s ease;
   flex-shrink: 0;
 }
 
 .nl__btn:hover {
-  background: #0e0d0c;
+  background: var(--color-cta-hover);
 }
 
 .nl__btn:active {
@@ -200,23 +196,22 @@
   transform: translateX(3px);
 }
 
-/* Privacy note — mono uppercase */
 .nl__privacy {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 12px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--ink-mute);
+  color: rgba(26, 8, 38, 0.45);
   margin: 1.25rem auto 0;
   max-width: none;
   line-height: 1.6;
 }
 
 .nl__privacy-link {
-  color: var(--gold-deep);
+  color: var(--color-cta-hover);
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: rgba(138, 102, 59, 0.45);
+  text-decoration-color: rgba(124, 58, 237, 0.4);
   transition: text-decoration-color 0.15s ease, color 0.15s ease;
 }
 
@@ -228,11 +223,11 @@
 /* ── SUCCESS STATE ─────────────────────────────────────── */
 
 .nl__success {
-  font-family: var(--font-serif);
+  font-family: var(--font-body);
   font-size: 1.5rem;
-  font-weight: 400;
+  font-weight: 700;
   font-style: italic;
-  color: var(--gold-deep);
+  color: var(--color-cta-hover);
   margin: 0;
   padding: 1.5rem 0;
   animation: nl-fade-in 0.4s ease forwards;
@@ -241,11 +236,11 @@
 /* ── ERROR STATE ───────────────────────────────────────── */
 
 .nl__error {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--rose);
+  color: var(--color-cta-hover);
   margin: 0 0 1rem;
   text-align: center;
 }
@@ -286,17 +281,17 @@
   .nl__input {
     height: 80px;
     padding: 0 1.75rem;
-    border: 2px solid rgba(31, 29, 26, 0.22);
+    border: 2px solid rgba(107, 63, 160, 0.4);
     border-radius: 40px;
     outline: none;
     font-size: 1.0625rem;
     width: 100%;
     box-sizing: border-box;
-    background: #fff;
+    background: var(--cream-2);
   }
 
   .nl__input:focus {
-    border-color: var(--color-walnut, #8A6240);
+    border-color: var(--color-cta);
     outline: none;
   }
 
@@ -333,7 +328,7 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Stay in the loop."
+      "default": "Know your body better."
     },
     {
       "type": "textarea",

@@ -1,0 +1,249 @@
+{%- comment -%} pdp-free-gifts.liquid — "What's included free" two-card section {%- endcomment -%}
+
+<section class="pdp-gifts" aria-labelledby="pdp-gifts-heading">
+  <div class="pdp-gifts__inner">
+
+    <div class="pdp-gifts__header">
+      <span class="pdp-gifts__eyebrow">{{ section.settings.eyebrow | default: "Free with every order" }}</span>
+      <h2 class="pdp-gifts__heading" id="pdp-gifts-heading">{{ section.settings.heading | default: "What's included" }}</h2>
+    </div>
+
+    <div class="pdp-gifts__grid">
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'gift' -%}
+          <div class="pdp-gift-card" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <div class="pdp-gift-card__media">
+                {{
+                  block.settings.image
+                  | image_url: width: 800
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '400, 600, 800',
+                    class: 'pdp-gift-card__img'
+                }}
+              </div>
+            {%- else -%}
+              <div class="pdp-gift-card__media pdp-gift-card__media--placeholder">
+                {{ 'product-1' | placeholder_svg_tag: 'pdp-gift-card__img' }}
+              </div>
+            {%- endif -%}
+
+            <div class="pdp-gift-card__body">
+              <span class="pdp-gift-card__free-badge">FREE</span>
+              <h3 class="pdp-gift-card__title">{{ block.settings.title }}</h3>
+              {%- if block.settings.description != blank -%}
+                <p class="pdp-gift-card__desc">{{ block.settings.description }}</p>
+              {%- endif -%}
+              {%- if block.settings.value != blank -%}
+                <span class="pdp-gift-card__value">Value: <s>{{ block.settings.value }}</s></span>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+
+    </div>
+  </div>
+</section>
+
+<style>
+.pdp-gifts {
+  background: var(--cream-3);
+  padding: 4rem 1.5rem;
+}
+
+.pdp-gifts__inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pdp-gifts__header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.pdp-gifts__eyebrow {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.pdp-gifts__heading {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--char);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.pdp-gifts__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .pdp-gifts__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pdp-gifts__heading {
+    font-size: 1.5rem;
+  }
+}
+
+.pdp-gift-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(107, 63, 160, 0.12);
+}
+
+.pdp-gift-card__media {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--cream-3);
+}
+
+.pdp-gift-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.pdp-gift-card:hover .pdp-gift-card__img {
+  transform: scale(1.03);
+}
+
+.pdp-gift-card__media--placeholder svg {
+  width: 100%;
+  height: 100%;
+}
+
+.pdp-gift-card__body {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.pdp-gift-card__free-badge {
+  display: inline-block;
+  background: var(--gold);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.2em 0.65em;
+  border-radius: 4px;
+  margin-bottom: 0.6rem;
+}
+
+.pdp-gift-card__title {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--char);
+  margin: 0 0 0.5rem;
+  line-height: 1.25;
+}
+
+.pdp-gift-card__desc {
+  font-size: 1rem;
+  color: var(--char-soft);
+  line-height: 1.6;
+  margin: 0 0 0.75rem;
+}
+
+.pdp-gift-card__value {
+  font-size: 0.9rem;
+  color: var(--char-soft);
+  font-style: italic;
+}
+
+.pdp-gift-card__value s {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 1rem;
+}
+</style>
+
+{% schema %}
+{
+  "name": "Free Gifts",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Free with every order"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What's included"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "gift",
+      "name": "Gift item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free Gift"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Retail value (e.g. $35.00)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Free Gifts",
+      "blocks": [
+        {
+          "type": "gift",
+          "settings": {
+            "title": "Travel Charging Case",
+            "description": "Keep your ring charged wherever life takes you.",
+            "value": "$35.00"
+          }
+        },
+        {
+          "type": "gift",
+          "settings": {
+            "title": "30-Day Mending E-Book",
+            "description": "Thirty days of science-backed practices to help you sleep, recover, and feel like yourself again.",
+            "value": "$30.00"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

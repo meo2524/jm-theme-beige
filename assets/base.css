@@ -29,6 +29,8 @@
   --rose:                 #b87858;
   --line:                 rgba(31, 29, 26, 0.14);
   --line-strong:          rgba(31, 29, 26, 0.28);
+  --pure:                 #FFFFFF;
+  --glow-soft:            0 0 48px rgba(120, 90, 50, 0.10);
 
   /* Legacy aliases — keep existing sections working through phased rollout */
   --color-black:          var(--char);

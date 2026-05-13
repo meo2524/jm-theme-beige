@@ -4,7 +4,7 @@
   .ps-wrap {
     padding: 96px 20px;
     background: #1f1d1a;
-    color: #efe8dc;
+    color: var(--char);
     margin: 0;
     overflow: hidden;
     position: relative;
@@ -49,7 +49,7 @@
     font-weight: 700;
     margin: 0 0 18px;
     line-height: 1.15;
-    color: #efe8dc;
+    color: var(--char);
   }
   .ps-subtitle {
     font-size: 15px;
@@ -65,13 +65,13 @@
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 1px;
     margin-bottom: 64px;
-    background: rgba(239,232,220,0.08);
+    background: rgba(107, 63, 160, 0.10);
     border-radius: 16px;
     overflow: hidden;
   }
 
   .ps-stat {
-    background: rgba(239,232,220,0.03);
+    background: rgba(107, 63, 160, 0.05);
     padding: 44px 32px;
     text-align: center;
     transition: background 0.3s;
@@ -83,7 +83,7 @@
     font-weight: 800;
     letter-spacing: -0.03em;
     margin: 0 0 12px;
-    background: linear-gradient(135deg, #efe8dc 0%, #9a7e57 100%);
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--color-cta) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -91,7 +91,7 @@
   }
   .ps-stat-desc {
     font-size: 13px;
-    color: #b8aa92;          /* was #8a7d6e — tightened contrast on dark bg */
+    color: var(--char-soft);          /* was #8a7d6e — tightened contrast on dark bg */
     margin: 0 0 16px;
     line-height: 1.65;
   }
@@ -107,9 +107,9 @@
   .ps-quote {
     margin: 0 0 64px;
     padding: 40px 44px;
-    background: rgba(239,232,220,0.03);
+    background: rgba(107, 63, 160, 0.05);
     border-radius: 12px;
-    border: 1px solid rgba(239,232,220,0.08);
+    border: 1px solid rgba(107, 63, 160, 0.15);
     border-left: 3px solid #9a7e57;
     position: relative;
   }
@@ -147,7 +147,7 @@
      consistent with the quote-attr (#9a7e57) and stat-desc (#b8aa92). */
   .ps-sources {
     margin-top: 64px;
-    border-top: 1px solid rgba(239,232,220,0.14);
+    border-top: 1px solid rgba(107, 63, 160, 0.25);
     padding-top: 44px;
   }
 
@@ -177,10 +177,10 @@
   .ps-source-badge {
     text-decoration: none;
     display: block;
-    background: rgba(239,232,220,0.05);
+    background: rgba(107, 63, 160, 0.08);
     padding: 22px 32px;
     border-radius: 12px;
-    border: 1px solid rgba(239,232,220,0.14);
+    border: 1px solid rgba(107, 63, 160, 0.25);
     transition: border-color 0.25s, background 0.25s, transform 0.25s;
     min-width: 280px;
     text-align: center;
@@ -192,7 +192,7 @@
   }
   .ps-source-name {
     margin: 0;
-    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-family: var(--font-body);
     font-size: 18px;
     font-weight: 500;
     color: #e8dec5;
@@ -202,7 +202,7 @@
   .ps-source-sub {
     margin: 6px 0 0;
     font-size: 12px;
-    color: #b8aa92;
+    color: var(--char-soft);
     letter-spacing: 0.02em;
     line-height: 1.45;
   }
@@ -222,7 +222,7 @@
     border: 1px solid rgba(239, 232, 220, 0.18);
     border-radius: 8px;
     color: #c4b89e;
-    font-family: var(--font-label, sans-serif);
+    font-family: var(--font-body);
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.18em;

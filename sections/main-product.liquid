@@ -138,11 +138,27 @@
     </div>
     {%- comment -%} /product-gallery {%- endcomment -%}
 
-
     {%- comment -%} ===========================================
       PRODUCT INFO
     =========================================== {%- endcomment -%}
     <div class="product-info">
+
+      {%- comment -%} -- Rating (above title) -- {%- endcomment -%}
+      {%- if section.settings.rating_show -%}
+        <a class="product-rating" href="#product-reviews" aria-label="Rated 4.9 out of 5, 100+ reviews — scroll to reviews" onclick="event.preventDefault();var r=document.getElementById('judgeme_product_reviews');if(r)r.scrollIntoView({behavior:'smooth'});">
+          <div class="rating-stars" aria-hidden="true">
+            {%- for i in (1..5) -%}
+              <svg class="star" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" style="display:block;">
+                <polygon points="8,1.2 10.2,5.8 15.4,6.4 11.5,10.2 12.7,15.4 8,12.7 3.3,15.4 4.5,10.2 0.6,6.4 5.8,5.8"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <span class="rating-label">Excellent</span>
+          <span class="rating-value-num">4.9</span>
+          <span class="rating-divider" aria-hidden="true"></span>
+          <span class="rating-count">100+ Happy Menders</span>
+        </a>
+      {%- endif -%}
 
       {%- comment -%} -- Eyebrow (renders only when explicitly set) -- {%- endcomment -%}
       {%- if section.settings.eyebrow_text != blank -%}
@@ -152,61 +168,16 @@
       {%- comment -%} -- Title -- {%- endcomment -%}
       <h1 class="product-title">{{ product.title }}{%- if section.settings.model_badge != blank %} <span class="product-title__model">{{ section.settings.model_badge }}</span>{%- endif -%}</h1>
 
-      {%- comment -%} -- Rating -- {%- endcomment -%}
-      {%- liquid
-        comment
-          Priority:
-          1. product.metafields.reviews.rating / reviews.rating_count (Judge.me, Okendo, etc.)
-          2. product.metafields.custom.rating_value / custom.rating_count
-          3. Section setting overrides (manual fallback)
-        endcomment
+      {%- comment -%} -- Simple benefits list (arrow bullets) -- {%- endcomment -%}
+      <ul class="pdp-simple-benefits">
+        <li>See how good your sleep is</li>
+        <li>Know your heart health</li>
+        <li>Count every step</li>
+        <li>Lasts 7 days on one charge</li>
+        <li>Wear it anywhere, even in water</li>
+      </ul>
 
-        assign rating_value = ''
-        assign rating_count = ''
-
-        if product.metafields.reviews.rating != blank
-          assign rating_value = product.metafields.reviews.rating.value
-          assign rating_count = product.metafields.reviews.rating_count.value
-        elsif product.metafields.custom.rating_value != blank
-          assign rating_value = product.metafields.custom.rating_value
-          assign rating_count = product.metafields.custom.rating_count
-        endif
-
-        if section.settings.rating_value != blank
-          assign rating_value = section.settings.rating_value
-        endif
-        if section.settings.rating_count_text != blank
-          assign rating_count = section.settings.rating_count_text
-        endif
-
-        assign rating_href = section.settings.rating_link | default: '#product-reviews'
-      -%}
-      {%- if rating_value != blank and section.settings.rating_show -%}
-        <div class="product-rating" aria-label="Rated {{ rating_value }} out of 5, {{ rating_count }}">
-          <div class="rating-stars-wrap">
-            <div class="rating-stars" aria-hidden="true">
-              {%- for i in (1..5) -%}
-                <svg class="star" viewBox="0 0 16 16" width="24" height="24" aria-hidden="true">
-                  <polygon points="8,1.2 10.2,5.8 15.4,6.4 11.5,10.2 12.7,15.4 8,12.7 3.3,15.4 4.5,10.2 0.6,6.4 5.8,5.8"/>
-                </svg>
-              {%- endfor -%}
-            </div>
-            <span class="rating-value-num">{{ rating_value }}</span>
-          </div>
-          <div class="rating-copy">
-            <span class="rating-count">{{ rating_count }}</span>
-            <span class="rating-verified">
-              <svg viewBox="0 0 12 12" width="11" height="11" fill="none" aria-hidden="true">
-                <circle cx="6" cy="6" r="5.5" fill="var(--color-walnut,#8a6240)" opacity="0.15"/>
-                <polyline points="3.5,6.2 5.2,7.8 8.5,4.5" stroke="var(--color-walnut,#8a6240)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              Verified Menders
-            </span>
-          </div>
-        </div>
-      {%- endif -%}
-
-      {%- comment -%} -- Product badges -- {%- endcomment -%}
+{%- comment -%} -- Product badges -- {%- endcomment -%}
       {%- assign pdp_is_hot = false -%}
       {%- if product.tags contains 'Hot' -%}{%- assign pdp_is_hot = true -%}{%- endif -%}
       {%- assign pdp_on_sale = false -%}
@@ -321,6 +292,15 @@
       {%- endif -%}
 
 
+{%- comment -%} -- Bundle selector (renders in-form when block added via theme editor) -- {%- endcomment -%}
+<div style="display:none" aria-hidden="true">
+{%- for block in section.blocks -%}
+  {%- if block.type == 'bundle_selector' -%}
+    {%- render 'bundle-selector', block: block, product: product, section: section -%}
+  {%- endif -%}
+{%- endfor -%}
+</div>
+
 {%- comment -%} -- Variant picker -- {%- endcomment -%}
       {%- unless product.has_only_default_variant -%}
         {%- for option in product.options_with_values -%}
@@ -415,13 +395,6 @@
           </svg>
         </button>
 
-        {%- comment -%} Sale-ends countdown above ATC {%- endcomment -%}
-        <div class="pdp-countdown" role="status" aria-live="polite">
-          <span class="pdp-countdown__dot" aria-hidden="true"></span>
-          <span class="pdp-countdown__label">Sale ends in</span>
-          <span class="pdp-countdown__clock" data-pdp-countdown>--:--:--</span>
-        </div>
-
         {%- comment -%} Add to cart {%- endcomment -%}
         <button
           type="submit"
@@ -456,7 +429,7 @@
         </svg>
         <span class="pdp-shipping__text">
           <strong>Free US shipping.</strong>
-          Ships within 24 hours. Order today to clear Mother's Day stock.
+          Ships within 24 hours — start mending ASAP.
         </span>
       </div>
 
@@ -587,35 +560,6 @@
           install path once, on the section dedicated to it.
         {%- endcomment -%}
 
-        {%- comment -%} See the science — opens science-modal.liquid {% endcomment -%}
-        <div class="accordion__item accordion__item--size accordion__item--science">
-          <button
-            class="accordion__trigger"
-            type="button"
-            id="AccordionTrigger-{{ section.id }}-science"
-            aria-haspopup="dialog"
-          >
-            <span>See the science</span>
-            <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <polyline points="6 9 12 15 18 9"/>
-            </svg>
-          </button>
-        </div>
-
-        {%- comment -%} The app — opens app-modal.liquid {% endcomment -%}
-        <div class="accordion__item accordion__item--size accordion__item--app-modal">
-          <button
-            class="accordion__trigger"
-            type="button"
-            id="AccordionTrigger-{{ section.id }}-app"
-            aria-haspopup="dialog"
-          >
-            <span>The app</span>
-            <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <polyline points="6 9 12 15 18 9"/>
-            </svg>
-          </button>
-        </div>
 
       </div>
       {%- comment -%} /accordion {%- endcomment -%}
@@ -671,23 +615,23 @@
   width: 100%;
   padding: 16px 20px;
   margin: 16px 0;
-  background: var(--color-walnut, #8a6240);
-  color: var(--color-bone, #F2EDE4);
+  background: var(--gold-deep);
+  color: var(--color-bone, var(--cream-3));
   border: none;
   border-radius: 10px;
-  font-family: var(--font-label, monospace);
+  font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.15s ease;
-  box-shadow: 0 2px 8px rgba(31,29,26,0.08);
+  box-shadow: 0 2px 8px rgba(107, 63, 160, 0.15);
 }
-.pdp-find-size-cta:hover { background: #6f4e32; }
+.pdp-find-size-cta:hover { background: var(--gold-light); }
 .pdp-find-size-cta:active { transform: translateY(1px); }
 .pdp-find-size-cta:focus-visible {
-  outline: 1.5px solid var(--color-walnut, #8A6240);
+  outline: 1.5px solid var(--gold-deep);
   outline-offset: 2px;
 }
 .pdp-find-size-cta__inner {
@@ -709,9 +653,9 @@
   list-style: none;
   margin: 1rem 0 0.5rem;
   padding: 1rem 1.25rem;
-  background: var(--color-bone, #F2EDE4);
+  background: var(--color-bone, var(--cream-3));
   border-radius: 10px;
-  border: 1px solid rgba(31,29,26,0.08);
+  border: 1px solid rgba(107, 63, 160, 0.15);
   box-sizing: border-box;
 }
 .pdp-mobile-benefits__item {
@@ -720,18 +664,18 @@
   gap: 0.75rem;
   font-size: 0.8125rem;
   line-height: 1.5;
-  color: var(--color-black, #1f1d1a);
+  color: var(--color-black, #F3E8FF);
 }
 .pdp-mobile-benefits__icon {
   flex-shrink: 0;
-  color: var(--color-walnut, #8a6240);
+  color: var(--gold-deep);
   display: inline-flex;
   margin-top: 2px;
 }
 .pdp-mobile-benefits__item strong { font-weight: 600; }
 
 .product-section {
-  background: var(--color-bone, #F2EDE4);
+  background: var(--color-bone, var(--cream-3));
   padding: 5rem 0 8rem;
 }
 
@@ -777,8 +721,8 @@
   width: 76px;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: #F2EDE4;
-  border: 1.5px solid rgba(43, 43, 43, 0.08);
+  background: var(--cream-3);
+  border: 1.5px solid rgba(107, 63, 160, 0.20);
   border-radius: 4px;
   cursor: pointer;
   padding: 0;
@@ -788,11 +732,11 @@
 }
 
 .gallery-thumb.is-active {
-  border-color: var(--color-walnut, #8A6240);
+  border-color: var(--gold-deep);
 }
 
 .gallery-thumb:focus-visible {
-  outline: 1.5px solid var(--color-walnut, #8A6240);
+  outline: 1.5px solid var(--gold-deep);
   outline-offset: 2px;
 }
 
@@ -818,9 +762,9 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  border: 1px solid rgba(43, 43, 43, 0.08);
+  border: 1px solid rgba(107, 63, 160, 0.20);
   border-radius: 8px;
-  box-shadow: 0 6px 32px rgba(43, 43, 43, 0.08), 0 1px 4px rgba(43, 43, 43, 0.05);
+  box-shadow: 0 6px 32px rgba(107, 63, 160, 0.20), 0 1px 4px rgba(107, 63, 160, 0.10);
   overflow: hidden;
 }
 
@@ -829,7 +773,7 @@
   position: relative;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: #F2EDE4;
+  background: var(--cream-3);
 }
 
 .gallery-slide {
@@ -939,7 +883,7 @@ body.lightbox-open { overflow: hidden; }
   background: rgba(255, 255, 255, 0.92);
   border: none;
   border-radius: 50%;
-  color: #2D2D2D;
+  color: var(--char);
   cursor: pointer;
   pointer-events: auto;
   box-shadow: 0 2px 8px rgba(0,0,0,0.14);
@@ -956,7 +900,7 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .gallery-arrow:hover {
-  background: #fff;
+  background: var(--cream-2);
 }
 
 /* Dots — mobile only */
@@ -975,22 +919,22 @@ body.lightbox-open { overflow: hidden; }
    Text: mahogany #8A6240 on linen = 7.59:1  (amber clay fails at 2.55:1)
    Amber retained as the decorative border-bottom rule only */
 .product-eyebrow {
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.9375rem;
   font-weight: 600;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--color-walnut, #8A6240);
+  color: var(--gold-deep);
   margin: 0 0 1.25rem;
   padding-bottom: 1.25rem;
-  border-bottom: 1.5px solid var(--color-walnut, #8A6240);
+  border-bottom: 1.5px solid var(--gold-deep);
 }
 
 /* Title */
 .product-title {
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-size: clamp(2.25rem, 4vw, 3.25rem);
-  font-weight: 300;
+  font-weight: 900;
   line-height: 1.2;
   letter-spacing: -0.02em;
   margin: 0 0 1.125rem;
@@ -999,21 +943,21 @@ body.lightbox-open { overflow: hidden; }
   align-items: baseline;
   gap: 0.5rem;
   flex-wrap: wrap;
-  background: linear-gradient(135deg, #a47e54 0%, #8a6240 55%, #5d4128 100%);
+  background: linear-gradient(135deg, var(--gold-deep) 0%, var(--gold) 55%, var(--gold-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .product-title__model {
-  font-family: var(--font-mono, monospace);
+  font-family: var(--font-body);
   font-size: 0.6em;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-walnut, #8A6240);
-  background: rgba(138, 98, 64, 0.1);
-  border: 1px solid rgba(138, 98, 64, 0.25);
+  color: var(--gold);
+  background: rgba(107, 63, 160, 0.1);
+  border: 1px solid rgba(107, 63, 160, 0.25);
   border-radius: 3px;
   padding: 3px 8px;
   vertical-align: middle;
@@ -1027,72 +971,73 @@ body.lightbox-open { overflow: hidden; }
 .product-rating {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
+  gap: 0.6rem;
+  width: 100%;
+  box-sizing: border-box;
   margin-bottom: 1.75rem;
-  background: rgba(138, 98, 64, 0.06);
-  border: 1px solid rgba(138, 98, 64, 0.15);
+  background: rgba(107, 63, 160, 0.06);
+  border: 1px solid rgba(107, 63, 160, 0.15);
   border-radius: 12px;
-  padding: 1.25rem 1.5rem;
-}
-
-.rating-stars-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-shrink: 0;
+  padding: 0.75rem 1.25rem;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .rating-stars {
   display: flex;
-  gap: 3px;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+  line-height: 0;
 }
 
 .star {
-  fill: var(--color-walnut, #8A6240);
+  fill: var(--gold-deep);
+  display: block;
 }
 
-.rating-value-num {
-  font-family: var(--font-heading);
-  font-size: 2.25rem;
-  font-weight: 400;
-  color: var(--color-black);
-  line-height: 1;
-}
-
-.rating-copy {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.4rem;
-}
-
-.rating-count {
-  font-family: var(--font-label);
+.rating-label {
+  font-family: var(--font-body);
   font-size: 1.0625rem;
   font-weight: 700;
   color: var(--color-black);
-  line-height: 1.2;
-}
-
-.rating-subtext {
-  font-family: var(--font-label);
-  font-size: 0.75rem;
-  color: var(--color-olive);
-  line-height: 1.3;
-}
-
-.rating-verified {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-family: var(--font-label);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--color-walnut, #8a6240);
   line-height: 1;
+}
+
+.rating-value-num {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--gold-deep);
+  line-height: 1;
+}
+
+.rating-divider {
+  width: 1px;
+  height: 1rem;
+  background: rgba(107, 63, 160, 0.2);
+  flex-shrink: 0;
+  margin: 0 0.1rem;
+}
+
+.rating-count {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--color-black);
+  line-height: 1;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(107, 63, 160, 0.4);
+}
+
+.product-rating:hover {
+  background: rgba(107, 63, 160, 0.1);
+  border-color: rgba(107, 63, 160, 0.3);
+}
+
+.product-rating:hover .rating-count {
+  text-decoration-color: var(--gold-deep);
 }
 
 /* Product badges */
@@ -1122,7 +1067,7 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .price-now {
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-size: 1.875rem;
   font-weight: 400;
   color: var(--color-black);
@@ -1131,7 +1076,7 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .price-was {
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.9375rem;
   color: var(--color-olive);
   text-decoration: line-through;
@@ -1139,11 +1084,11 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .price-now--on-sale {
-  color: var(--color-walnut, #8A6240);
+  color: var(--gold-deep);
 }
 
 .price-save {
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 1.5px;
@@ -1156,11 +1101,11 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .price-callout {
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.8rem;
   /* Hardcoded blended value: mahogany #8A6240 at ~72% on linen ~ #9A7255, 4.68:1 
      Avoids opacity: which renders ~3.8:1 and is unmeasurable in static audits */
-  color: #9A7255;
+  color: var(--char-soft);
   margin: 0;
 }
 
@@ -1170,7 +1115,7 @@ body.lightbox-open { overflow: hidden; }
   grid-template-columns: 1fr 1fr;
   gap: 0.375rem;
   padding: 0.375rem;
-  background: rgba(43, 43, 43, 0.05);
+  background: rgba(107, 63, 160, 0.10);
   border-radius: 4px;
   margin-bottom: 1.75rem;
 }
@@ -1190,10 +1135,10 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .purchase-toggle__btn.is-active {
-  background: var(--color-bone, #F2EDE4);
+  background: var(--color-bone, var(--cream-3));
   /* Border: mahogany = 7.59:1  (amber = 2.55:1, fails WCAG 1.4.11 non-text 3:1) */
   border-color: var(--color-olive);
-  box-shadow: 0 1px 4px rgba(43, 43, 43, 0.07);
+  box-shadow: 0 1px 4px rgba(107, 63, 160, 0.15);
 }
 
 .purchase-toggle__btn:hover:not(.is-active) {
@@ -1201,7 +1146,7 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .toggle-label {
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--color-black);
@@ -1209,7 +1154,7 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .toggle-price {
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--color-olive);
@@ -1219,11 +1164,11 @@ body.lightbox-open { overflow: hidden; }
 .product-blurb {
   margin: 0 0 1.875rem;
   padding-top: 1.375rem;
-  border-top: 1.5px solid var(--color-walnut, #8A6240);
+  border-top: 1.5px solid var(--gold-deep);
 }
 
 .product-blurb__heading {
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-size: clamp(1.75rem, 3.5vw, 2.375rem);
   font-weight: 300;
   color: var(--color-black);
@@ -1233,11 +1178,11 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .product-blurb__subhead {
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-size: clamp(1.1rem, 2.2vw, 1.375rem);
   font-style: italic;
   font-weight: 400;
-  color: var(--color-walnut, #8A6240);
+  color: var(--gold-deep);
   line-height: 1.45;
   letter-spacing: 0.008em;
   margin: 0 0 0.875rem;
@@ -1261,10 +1206,10 @@ body.lightbox-open { overflow: hidden; }
   align-items: center;
   gap: 0.35rem;
   padding: 0.35rem 0.75rem;
-  background: rgba(138, 98, 64, 0.07);
-  border: 1px solid rgba(138, 98, 64, 0.18);
+  background: rgba(107, 63, 160, 0.07);
+  border: 1px solid rgba(107, 63, 160, 0.18);
   border-radius: 100px;
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--color-olive);
@@ -1273,7 +1218,7 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .spec-pill svg {
-  color: var(--color-walnut, #8A6240);
+  color: var(--gold-deep);
   flex-shrink: 0;
 }
 
@@ -1285,7 +1230,7 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .variant-legend {
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 2.5px;
@@ -1310,8 +1255,8 @@ body.lightbox-open { overflow: hidden; }
   flex-direction: column;
   gap: 0.2rem;
   padding: 0.75rem 1.25rem;
-  background: var(--color-bone, #F2EDE4);
-  border: 1.5px solid rgba(43, 43, 43, 0.16);
+  background: var(--color-bone, var(--cream-3));
+  border: 1.5px solid rgba(107, 63, 160, 0.30);
   border-radius: 3px;
   cursor: pointer;
   transition: border-color 0.18s ease, background 0.18s ease;
@@ -1342,7 +1287,7 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .variant-card__name {
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-black);
@@ -1350,20 +1295,20 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .variant-card__save {
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 500;
   /* Deep Walnut #8A6240 on bone - contrast OK */
-  color: var(--color-walnut, #8A6240);
+  color: var(--gold-deep);
   letter-spacing: 0.5px;
 }
 
 .variant-card__out {
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   /* Blended mahogany 60% on linen -> #AE8E76, 3.52:1  for supplementary small text
      Avoiding opacity: to keep contrast measurable */
-  color: #AE8E76;
+  color: var(--char-soft);
 }
 
 /* Quantity stepper */
@@ -1375,7 +1320,7 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .qty-label {
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 2.5px;
@@ -1388,7 +1333,7 @@ body.lightbox-open { overflow: hidden; }
 .qty-stepper {
   display: inline-flex;
   align-items: center;
-  border: 1.5px solid rgba(43, 43, 43, 0.16);
+  border: 1.5px solid rgba(107, 63, 160, 0.30);
   border-radius: 3px;
   overflow: hidden;
 }
@@ -1411,21 +1356,21 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .qty-btn:hover {
-  background: rgba(43, 43, 43, 0.05);
+  background: rgba(107, 63, 160, 0.10);
 }
 
 .qty-btn:active {
-  background: rgba(43, 43, 43, 0.09);
+  background: rgba(107, 63, 160, 0.20);
 }
 
 .qty-input {
   width: 52px;
   height: 44px;
   border: none;
-  border-left: 1px solid rgba(43, 43, 43, 0.1);
-  border-right: 1px solid rgba(43, 43, 43, 0.1);
+  border-left: 1px solid rgba(107, 63, 160, 0.22);
+  border-right: 1px solid rgba(107, 63, 160, 0.22);
   background: transparent;
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--color-black);
@@ -1440,7 +1385,7 @@ body.lightbox-open { overflow: hidden; }
 
 .qty-input:focus {
   outline: none;
-  background: rgba(43, 43, 43, 0.03);
+  background: rgba(107, 63, 160, 0.06);
 }
 
 /* No-subscription badge — sits directly above ATC */
@@ -1465,9 +1410,9 @@ body.lightbox-open { overflow: hidden; }
   min-width: 36px;
   height: 36px;
   padding: 0 8px;
-  background: var(--color-walnut, #8a6240);
+  background: var(--gold-deep);
   color: var(--color-bone, #f5efe6);
-  font-family: var(--font-serif);
+  font-family: var(--font-body);
   font-style: italic;
   font-size: 1.125rem;
   font-weight: 500;
@@ -1500,11 +1445,11 @@ body.lightbox-open { overflow: hidden; }
   justify-content: center;
   width: 100%;
   height: 56px;
-  background: var(--color-cta, #2D2D2D);
-  color: var(--color-bone, #F2EDE4);
+  background: var(--color-cta, #5B21B6);
+  color: var(--color-bone, var(--cream-3));
   border: none;
   border-radius: 4px;
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 3px;
@@ -1512,59 +1457,72 @@ body.lightbox-open { overflow: hidden; }
   cursor: pointer;
   transition: background 0.2s ease, transform 0.12s ease, box-shadow 0.2s ease;
   margin-bottom: 0.75rem;
-  box-shadow: 0 2px 12px rgba(43, 43, 43, 0.18);
+  box-shadow: 0 2px 12px rgba(107, 63, 160, 0.35);
   position: relative;
   overflow: hidden;
   animation: breathe 2.4s ease-in-out infinite;
 }
 
-/* Native Shop Pay express button hidden — incompatible with KaChing
-   bundles (single-variant API can't carry bundle line items). */
-.pdp-payment-btns {
-  display: none !important;
+
+/* -- Sale countdown -- */
+.pdp-summer-sale {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.6rem 0;
+  background: transparent;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-black, #1a1a1a);
+  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.pdp-summer-sale__hurry {
+  color: var(--gold-deep);
+  font-weight: 800;
+  font-style: italic;
+}
+.pdp-summer-sale__label { color: var(--color-black, #1a1a1a); }
+.pdp-summer-sale__clock {
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  color: var(--gold-deep);
+  letter-spacing: 0.02em;
+}
+.pdp-summer-sale { margin: 0.875rem 0 0; }
+
+/* -- Simple benefits list (between title and countdown) -- */
+.pdp-simple-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.pdp-simple-benefits li {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--color-black, #1a1a1a);
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+.pdp-simple-benefits li::before {
+  content: '→';
+  flex-shrink: 0;
+  color: var(--gold-deep);
+  font-weight: 800;
+  font-size: 1.15rem;
+  line-height: 1;
 }
 
 /* -- Money-back guarantee strip -- */
-/* Sale-ends countdown — sits directly above ATC for max urgency */
-.pdp-countdown {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin: 0.75rem 0;
-  padding: 0.55rem 0.875rem;
-  background: rgba(192, 57, 43, 0.08);
-  border: 1px solid rgba(192, 57, 43, 0.28);
-  border-radius: 8px;
-  font-family: var(--font-label, 'Inter', sans-serif);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #8B2418;
-}
-.pdp-countdown__dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #C0392B;
-  flex-shrink: 0;
-  animation: pdpCountdownPulse 1.4s ease-in-out infinite;
-}
-@keyframes pdpCountdownPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.85); }
-}
-.pdp-countdown__clock {
-  font-variant-numeric: tabular-nums;
-  font-size: 0.875rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  color: #C0392B;
-}
-@media (prefers-reduced-motion: reduce) {
-  .pdp-countdown__dot { animation: none; }
-}
 
 .pdp-shipping,
 .pdp-guarantee {
@@ -1585,11 +1543,11 @@ body.lightbox-open { overflow: hidden; }
   flex-shrink: 0;
   width: 20px;
   height: 20px;
-  color: var(--color-walnut, #8a6240);
+  color: var(--gold-deep);
   margin-top: 1px;
 }
 .pdp-shipping__text strong {
-  color: var(--color-black, #1f1d1a);
+  color: var(--color-black, #F3E8FF);
   font-weight: 600;
   margin-right: 0.25rem;
 }
@@ -1597,11 +1555,11 @@ body.lightbox-open { overflow: hidden; }
   flex-shrink: 0;
   width: 18px;
   height: 18px;
-  color: var(--color-walnut, #8a6240);
+  color: var(--gold-deep);
   margin-top: 1px;
 }
 .pdp-guarantee__text strong {
-  color: var(--color-black, #1f1d1a);
+  color: var(--color-black, #F3E8FF);
   font-weight: 600;
   margin-right: 0.25rem;
 }
@@ -1615,12 +1573,12 @@ body.lightbox-open { overflow: hidden; }
   gap: 0.4rem;
 }
 .pdp-payments__label {
-  font-family: var(--font-label, 'Inter', sans-serif);
+  font-family: var(--font-body);
   font-size: 0.625rem;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-walnut, #8a6240);
+  color: var(--gold-deep);
   opacity: 0.78;
 }
 .pdp-payments__icons {
@@ -1653,7 +1611,7 @@ body.lightbox-open { overflow: hidden; }
   background: rgba(185, 28, 28, 0.06);
   border: 1px solid rgba(185, 28, 28, 0.2);
   border-radius: 8px;
-  font-family: var(--font-label, var(--font-body));
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   font-weight: 600;
   color: #7f1d1d;
@@ -1686,7 +1644,7 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .pdp-payment-btns .shopify-payment-button__button--unbranded {
-  background-color: var(--color-cta, #2D2D2D) !important;
+  background-color: var(--color-cta, #5B21B6) !important;
 }
 
 @media (max-width: 767px) {
@@ -1696,7 +1654,7 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .btn-atc.is-loading {
-  background: var(--color-walnut, #8A6240);
+  background: var(--gold-deep);
   color: #fff;
   pointer-events: none;
   transition: background 0.2s ease, color 0.2s ease;
@@ -1719,8 +1677,8 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .btn-atc:hover:not(:disabled) {
-  background: var(--color-cta-hover, #1A1A1A);
-  box-shadow: 0 4px 20px rgba(43, 43, 43, 0.26);
+  background: var(--color-cta-hover, #7C3AED);
+  box-shadow: 0 4px 20px rgba(107, 63, 160, 0.50);
 }
 
 .btn-atc:active:not(:disabled) {
@@ -1735,9 +1693,9 @@ body.lightbox-open { overflow: hidden; }
 /* -- MINI REVIEW CAROUSEL (below gallery) --------- */
 
 .pdp-review-carousel {
-  border-top: 1px solid rgba(43,43,43,0.09);
+  border-top: 1px solid rgba(107, 63, 160, 0.20);
   padding: 1.125rem 1.375rem 1rem;
-  background: rgba(43,43,43,0.02);
+  background: rgba(107, 63, 160, 0.05);
 }
 
 .prc-track {
@@ -1772,19 +1730,19 @@ body.lightbox-open { overflow: hidden; }
 
 .prc-star {
   font-size: 11px;
-  color: var(--color-walnut, #8A6240);
+  color: var(--gold-deep);
   line-height: 1;
 }
 
 .prc-star--empty { opacity: 0.2; }
 
 .prc-quote {
-  font-family: var(--font-heading, serif);
+  font-family: var(--font-body);
   font-size: 0.875rem;
   font-style: italic;
   font-weight: 400;
   line-height: 1.55;
-  color: var(--color-olive, #8A6240);
+  color: var(--char-soft);
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -1798,7 +1756,7 @@ body.lightbox-open { overflow: hidden; }
   justify-content: space-between;
   gap: 0.5rem;
   padding-top: 0.625rem;
-  border-top: 1px solid rgba(43,43,43,0.08);
+  border-top: 1px solid rgba(107, 63, 160, 0.20);
 }
 
 .prc-author-wrap {
@@ -1808,28 +1766,28 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .prc-name {
-  font-family: var(--font-label, sans-serif);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--color-black, #1f1d1a);
+  color: var(--color-black, #F3E8FF);
 }
 
 .prc-badge {
-  font-family: var(--font-label, sans-serif);
+  font-family: var(--font-body);
   font-size: 0.5rem;
   font-weight: 700;
   letter-spacing: 1.2px;
   text-transform: uppercase;
-  color: #C8F0EC;
+  color: var(--char);
   background: rgba(74,123,114,0.85);
   padding: 2px 5px;
   border-radius: 2px;
 }
 
 .prc-detail {
-  font-family: var(--font-label, sans-serif);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
-  color: var(--color-olive, #8A6240);
+  color: var(--char-soft);
   opacity: 0.7;
 }
 
@@ -1847,17 +1805,17 @@ body.lightbox-open { overflow: hidden; }
   width: 28px;
   height: 28px;
   background: transparent;
-  border: 1px solid rgba(43,43,43,0.15);
+  border: 1px solid rgba(107, 63, 160, 0.30);
   border-radius: 50%;
   cursor: pointer;
-  color: var(--color-black, #1f1d1a);
+  color: var(--color-black, #F3E8FF);
   transition: border-color 0.15s, background 0.15s;
   flex-shrink: 0;
 }
 
 .prc-arrow:hover {
-  border-color: rgba(43,43,43,0.35);
-  background: rgba(43,43,43,0.04);
+  border-color: rgba(107, 63, 160, 0.50);
+  background: rgba(107, 63, 160, 0.10);
 }
 
 .prc-dots {
@@ -1871,14 +1829,14 @@ body.lightbox-open { overflow: hidden; }
   height: 5px;
   border-radius: 50%;
   border: none;
-  background: rgba(43,43,43,0.2);
+  background: rgba(107, 63, 160, 0.40);
   cursor: pointer;
   padding: 0;
   transition: background 0.2s, transform 0.2s;
 }
 
 .prc-dot.is-active {
-  background: var(--color-walnut, #8A6240);
+  background: var(--gold-deep);
   transform: scale(1.4);
 }
 
@@ -1888,8 +1846,8 @@ body.lightbox-open { overflow: hidden; }
   padding: 0.875rem 0;
   margin: 0 0 1.375rem;
   display: flex;
-  border-top: 1px solid rgba(43, 43, 43, 0.09);
-  border-bottom: 1px solid rgba(43, 43, 43, 0.09);
+  border-top: 1px solid rgba(107, 63, 160, 0.20);
+  border-bottom: 1px solid rgba(107, 63, 160, 0.20);
 }
 
 .trust-item {
@@ -1897,7 +1855,7 @@ body.lightbox-open { overflow: hidden; }
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: var(--color-olive);
   flex: 1;
@@ -1907,29 +1865,29 @@ body.lightbox-open { overflow: hidden; }
 
 .trust-item + .trust-item {
   padding-left: 0.75rem;
-  border-left: 1px solid rgba(43, 43, 43, 0.09);
+  border-left: 1px solid rgba(107, 63, 160, 0.20);
 }
 
 .trust-icon {
   width: 17px;
   height: 17px;
-  color: var(--color-walnut, #8A6240);
+  color: var(--gold-deep);
   flex-shrink: 0;
 }
 
 .trust-item .trust-icon,
 .trust-item svg,
 .trust-item__icon {
-  color: var(--color-walnut, #8A6240);
+  color: var(--gold-deep);
 }
 
 /* Accordion */
 .accordion {
-  border-top: 1px solid rgba(43, 43, 43, 0.1);
+  border-top: 1px solid rgba(107, 63, 160, 0.22);
 }
 
 .accordion__item {
-  border-bottom: 1px solid rgba(43, 43, 43, 0.1);
+  border-bottom: 1px solid rgba(107, 63, 160, 0.22);
 }
 
 .accordion__trigger {
@@ -1941,7 +1899,7 @@ body.lightbox-open { overflow: hidden; }
   padding: 1.125rem 0;
   background: transparent;
   border: none;
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-black);
@@ -1958,7 +1916,7 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .accordion__trigger:focus-visible {
-  outline: 1.5px solid var(--color-walnut, #8A6240);
+  outline: 1.5px solid var(--gold-deep);
   outline-offset: 2px;
   border-radius: 2px;
 }
@@ -1973,7 +1931,7 @@ body.lightbox-open { overflow: hidden; }
 
 .accordion__trigger[aria-expanded="true"] .accordion__chevron {
   transform: rotate(180deg);
-  color: var(--color-walnut, #8A6240);
+  color: var(--gold-deep);
 }
 
 .accordion__panel[hidden] {
@@ -1982,8 +1940,8 @@ body.lightbox-open { overflow: hidden; }
 
 .accordion__body {
   padding: 0.25rem 0 1.25rem 1.125rem;
-  border-left: 1.5px solid var(--color-walnut, #8A6240);
-  font-family: var(--font-label);
+  border-left: 1.5px solid var(--gold-deep);
+  font-family: var(--font-body);
   font-size: 0.875rem;
   line-height: 1.78;
   color: var(--color-olive);
@@ -2008,7 +1966,7 @@ body.lightbox-open { overflow: hidden; }
   border: none;
 }
 .science-quote p {
-  font-family: var(--font-serif);
+  font-family: var(--font-body);
   font-size: 0.9375rem;
   font-style: italic;
   line-height: 1.6;
@@ -2016,12 +1974,12 @@ body.lightbox-open { overflow: hidden; }
   margin: 0 0 0.625rem;
 }
 .science-quote footer {
-  font-family: var(--font-label);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-walnut, #8A6240);
+  color: var(--gold-deep);
 }
 
 
@@ -2039,7 +1997,6 @@ body.lightbox-open { overflow: hidden; }
 @media (max-width: 768px) {
   .product-section {
     padding: 2.5rem 0 5rem;
-    overflow-x: hidden;
   }
 
   /* When the mobile video hero is mounted, drop the top padding so
@@ -2066,6 +2023,10 @@ body.lightbox-open { overflow: hidden; }
     max-width: 100%;
     min-width: 0;
     overflow: hidden;
+  }
+
+  .pdp-summer-sale {
+    margin: 0.5rem 0 0;
   }
 
   .gallery-thumbs {
@@ -2154,13 +2115,13 @@ body.lightbox-open { overflow: hidden; }
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: rgba(43, 43, 43, 0.2);
+    background: rgba(107, 63, 160, 0.40);
     transition: background 0.2s, transform 0.2s;
     flex-shrink: 0;
   }
 
   .gallery-dot.is-active {
-    background: var(--color-walnut, #8A6240);
+    background: var(--gold-deep);
     transform: scale(1.4);
   }
 
@@ -2168,7 +2129,6 @@ body.lightbox-open { overflow: hidden; }
     padding: 0 1rem;
     max-width: 100%;
     box-sizing: border-box;
-    overflow-x: hidden;
   }
 
   /* ── Mobile density pass — strip dead air from product info ── */
@@ -2180,7 +2140,22 @@ body.lightbox-open { overflow: hidden; }
     margin: 0 0 0.625rem;
   }
   .product-rating {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0.875rem;
+    gap: 0.4rem;
+    font-size: 0.8125rem;
+  }
+  .product-info-above-gallery .product-rating {
+    margin-bottom: 0;
+  }
+  .rating-label,
+  .rating-value-num,
+  .rating-count {
+    font-size: 0.8125rem;
+  }
+  .rating-stars svg.star {
+    width: 14px;
+    height: 14px;
   }
   .pdp-badges {
     margin-bottom: 0.625rem;
@@ -2247,7 +2222,7 @@ body.lightbox-open { overflow: hidden; }
 
   /* Override the desktop sibling separator */
   .trust-item + .trust-item {
-    border-left: 1px solid rgba(43, 43, 43, 0.09);
+    border-left: 1px solid rgba(107, 63, 160, 0.20);
     padding-left: 0;
   }
 
@@ -2617,6 +2592,25 @@ body.lightbox-open { overflow: hidden; }
 }());
 </script>
 
+<script>
+(function() {
+  var clocks = document.querySelectorAll('[data-summer-countdown]');
+  if (!clocks.length) return;
+  var DURATION = 5 * 60; // 5 minutes in seconds
+  function pad(n) { return String(n).padStart(2, '0'); }
+  var remaining = DURATION;
+  function tick() {
+    if (remaining <= 0) remaining = DURATION;
+    var m = Math.floor(remaining / 60);
+    var s = remaining % 60;
+    clocks.forEach(function(c) { c.textContent = pad(m) + ':' + pad(s); });
+    remaining--;
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+
 {% schema %}
 {
   "name": "Product",
@@ -2844,6 +2838,37 @@ body.lightbox-open { overflow: hidden; }
           "step": 1,
           "default": 5
         }
+      ]
+    },
+    {
+      "type": "bundle_selector",
+      "name": "Bundle Selector",
+      "limit": 1,
+      "settings": [
+        { "type": "header", "content": "Free Gifts" },
+        { "type": "product", "id": "gift_product_1", "label": "Free gift 1" },
+        { "type": "text", "id": "gift_label_1", "label": "Gift 1 label", "default": "Free charging case" },
+        { "type": "product", "id": "gift_product_2", "label": "Free gift 2" },
+        { "type": "text", "id": "gift_label_2", "label": "Gift 2 label", "default": "Free wellness ebook" },
+        { "type": "text", "id": "gift_free_label", "label": "Gift price label", "default": "FREE", "info": "Shown next to each gift item" },
+        { "type": "text", "id": "gifts_line", "label": "Gifts line text", "default": "Free charging case + ebook with every order" },
+        { "type": "text", "id": "bundle_option_name", "label": "Bundle option name", "default": "Bundle", "info": "Must exactly match the product option name in Shopify" },
+        { "type": "header", "content": "Tier 1 — Single Ring" },
+        { "type": "text", "id": "tier1_option_value", "label": "Bundle option value", "info": "Must exactly match the product Bundle option value", "default": "The N°01" },
+        { "type": "text", "id": "tier1_display_name", "label": "Display name", "default": "The N°01" },
+        { "type": "text", "id": "tier1_subheading", "label": "Subheading", "default": "1 ring · Free charging case + ebook" },
+        { "type": "text", "id": "tier1_badge", "label": "Badge text", "info": "Leave blank to hide" },
+        { "type": "text", "id": "tier1_savings", "label": "Savings callout", "info": "Leave blank to hide" },
+        { "type": "range", "id": "tier1_discount", "label": "Discount %", "info": "Automatic discount applied at checkout", "min": 0, "max": 80, "step": 5, "default": 40 },
+        { "type": "header", "content": "Tier 2 — Couple Bundle" },
+        { "type": "text", "id": "tier2_option_value", "label": "Bundle option value", "info": "Must exactly match the product Bundle option value", "default": "Couple Bundle" },
+        { "type": "text", "id": "tier2_display_name", "label": "Display name", "default": "Couple Bundle" },
+        { "type": "text", "id": "tier2_subheading", "label": "Subheading", "default": "2 rings · Free gifts included" },
+        { "type": "text", "id": "tier2_badge", "label": "Badge text", "info": "Leave blank to hide" },
+        { "type": "text", "id": "tier2_savings", "label": "Savings callout", "default": "Save $51" },
+        { "type": "range", "id": "tier2_discount", "label": "Discount %", "info": "Automatic discount applied at checkout", "min": 0, "max": 80, "step": 5, "default": 40 },
+        { "type": "text", "id": "tier2_ring1_prefix", "label": "Ring 1 label prefix", "default": "Ring 1" },
+        { "type": "text", "id": "tier2_ring2_prefix", "label": "Ring 2 label prefix", "default": "Ring 2" }
       ]
     }
   ],

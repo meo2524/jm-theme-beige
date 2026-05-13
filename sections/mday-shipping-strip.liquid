@@ -1,17 +1,45 @@
 {%- comment -%} Social proof strip — rating + review count {% endcomment -%}
 
-<div class="sp-strip" aria-label="Customer rating">
+{%- liquid
+  assign sp_score = ''
+  assign sp_count = ''
+
+  assign jdgm_data = product.metafields.judgeme.review_widget_data
+  if jdgm_data != blank
+    assign sp_score = jdgm_data.average_rating | times: 10 | floor | divided_by: 10.0
+    assign sp_count = jdgm_data.number_of_reviews | append: ' reviews'
+  elsif product.metafields.reviews.rating != blank
+    assign sp_score = product.metafields.reviews.rating.value | round: 1
+    assign sp_count = product.metafields.reviews.rating_count.value | append: ' reviews'
+  endif
+
+  if section.settings.rating_override != blank
+    assign sp_score = section.settings.rating_override
+  endif
+  if section.settings.count_override != blank
+    assign sp_count = section.settings.count_override
+  endif
+
+  if sp_score == ''
+    assign sp_score = '4.9'
+  endif
+  if sp_count == ''
+    assign sp_count = '3,500+ reviews'
+  endif
+-%}
+
+<div class="sp-strip" aria-label="Customer rating: {{ sp_score }} out of 5, {{ sp_count }}">
   <div class="sp-strip__inner">
 
     <div class="sp-strip__rating">
-      <span class="sp-strip__score">4.9</span>
+      <span class="sp-strip__score">{{ sp_score }}</span>
       <span class="sp-strip__stars" aria-hidden="true">★★★★★</span>
     </div>
 
     <div class="sp-strip__divider" aria-hidden="true"></div>
 
     <div class="sp-strip__copy">
-      <span class="sp-strip__count">3,500+ reviews</span>
+      <span class="sp-strip__count">{{ sp_count }}</span>
       <span class="sp-strip__sub">from verified customers</span>
     </div>
 
@@ -20,7 +48,7 @@
 
 <style>
   .sp-strip {
-    background: var(--color-walnut, #8a6240);
+    background: var(--gold-deep);
     color: var(--color-bone, #f5efe6);
     padding: 0.6rem 1.5rem;
     text-align: center;
@@ -42,7 +70,7 @@
   }
 
   .sp-strip__score {
-    font-family: var(--font-heading, 'Cormorant Garamond', serif);
+    font-family: var(--font-body);
     font-size: 1.625rem;
     font-weight: 600;
     line-height: 1;
@@ -72,7 +100,7 @@
   }
 
   .sp-strip__count {
-    font-family: var(--font-label, 'Inter', sans-serif);
+    font-family: var(--font-body);
     font-size: 0.875rem;
     font-weight: 700;
     letter-spacing: 0.04em;
@@ -81,7 +109,7 @@
   }
 
   .sp-strip__sub {
-    font-family: var(--font-label, 'Inter', sans-serif);
+    font-family: var(--font-body);
     font-size: 0.6875rem;
     font-weight: 400;
     letter-spacing: 0.08em;
@@ -103,7 +131,21 @@
 {% schema %}
 {
   "name": "Social proof strip",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "rating_override",
+      "label": "Rating override",
+      "info": "Leave blank to pull from Judge.me metafields automatically."
+    },
+    {
+      "type": "text",
+      "id": "count_override",
+      "label": "Review count override",
+      "placeholder": "3,500+ reviews",
+      "info": "Leave blank to pull from Judge.me metafields automatically."
+    }
+  ],
   "presets": [
     {
       "name": "Social proof strip"

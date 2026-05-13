@@ -259,7 +259,7 @@
         {% if customer %}Account{% else %}Log in{% endif %}
       </a>
     {%- endif -%}
-    <span class="mobile-menu__footer-tagline">Mend what matters.</span>
+    <span class="mobile-menu__footer-tagline">Your body glowing. All day.</span>
   </div>
 </div>
 <!-- /mobile-menu -->
@@ -272,13 +272,13 @@
      STYLES
      ============================================================ -->
 <style>
-  /* ---- Header shell — light on cream ---- */
+  /* ---- Header shell — dark luxury purple ---- */
   .site-header {
     position: sticky;
     top: 0;
     z-index: var(--z-sticky);
-    background-color: var(--cream);
-    border-bottom: 1px solid var(--line);
+    background-color: var(--cream-2);
+    border-bottom: 1px solid rgba(107, 63, 160, 0.25);
     transition: border-color var(--transition-base),
                 box-shadow var(--transition-base);
   }
@@ -310,20 +310,28 @@
   }
 
   .header__logo-text {
-    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-    font-size: 30px;
-    font-weight: 500;
-    color: var(--char);
-    letter-spacing: 0.01em;
+    font-family: var(--font-body);
+    font-size: 22px;
+    font-weight: 800;
+    color: #F7EFE3;
+    background: #6B2FB3;
+    letter-spacing: -0.04em;
     line-height: 1;
     display: inline-flex;
     align-items: baseline;
+    gap: 0.18em;
+    padding: 0.38em 0.75em;
+    border-radius: 999px;
+    white-space: nowrap;
   }
   .header__logo-text em {
-    font-style: italic;
-    font-weight: 400;
-    margin: 0 1px;
-    color: var(--gold-deep);
+    font-style: normal;
+    font-weight: 800;
+    color: #FF3D8A;
+  }
+  .header__logo img {
+    filter: brightness(0) invert(1);
+    opacity: 0.92;
   }
 
   /* ---- Desktop nav ---- */
@@ -341,12 +349,12 @@
 
   .header__nav-link {
     position: relative;
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(31, 29, 26, 0.78);
+    color: var(--char-soft);
     padding-block: var(--space-2);
     transition: color var(--transition-fast);
   }
@@ -366,7 +374,7 @@
 
   .header__nav-link:hover,
   .header__nav-link.is-active {
-    color: var(--gold-deep);
+    color: var(--color-cta-hover);
   }
 
   .header__nav-link:hover::after,
@@ -390,18 +398,18 @@
     justify-content: center;
     width: 44px;
     height: 44px;
-    color: rgba(31, 29, 26, 0.75);
+    color: var(--char-soft);
     border-radius: var(--radius-base);
     transition: color var(--transition-fast),
                 background-color var(--transition-fast);
   }
 
   .header__icon-btn:hover {
-    color: var(--gold-deep);
+    color: var(--color-cta-hover);
   }
 
   .header__icon-btn:focus-visible {
-    outline: 2px solid var(--gold-deep);
+    outline: 2px solid var(--color-cta);
     outline-offset: 2px;
   }
 
@@ -477,7 +485,7 @@
     font-family: var(--font-body);
     font-size: 0.9rem;
     font-weight: 600;
-    color: var(--color-bone, #F2EDE4);
+    color: var(--cream);
     margin: 0;
   }
 
@@ -497,7 +505,7 @@
   }
 
   .account-popup__close:hover {
-    color: var(--color-bone, #F2EDE4);
+    color: var(--cream);
     background: rgba(242, 237, 228, 0.08);
   }
 
@@ -530,7 +538,7 @@
     gap: 10px;
     margin: 14px 0;
     color: rgba(242, 237, 228, 0.35);
-    font-family: var(--font-label);
+    font-family: var(--font-body);
     font-size: 0.7rem;
     letter-spacing: 0.08em;
   }
@@ -567,7 +575,7 @@
     border: none;
     outline: none;
     padding: 11px 14px;
-    color: var(--color-bone, #F2EDE4);
+    color: var(--cream);
     font-family: var(--font-body);
     font-size: 0.88rem;
   }
@@ -591,7 +599,7 @@
   }
 
   .account-popup__email-submit:hover {
-    color: var(--color-bone, #F2EDE4);
+    color: var(--cream);
   }
 
   /* Quick links row */
@@ -618,7 +626,7 @@
 
   .account-popup__quick-btn:hover {
     border-color: rgba(242, 237, 228, 0.3);
-    color: var(--color-bone, #F2EDE4);
+    color: var(--cream);
     background: rgba(242, 237, 228, 0.05);
   }
 
@@ -630,9 +638,9 @@
     min-width: 16px;
     height: 16px;
     padding-inline: 3px;
-    background-color: var(--color-walnut, #8A6240);
-    color: var(--color-bone, #F2EDE4);
-    font-family: var(--font-label);
+    background-color: var(--gold-deep);
+    color: var(--cream);
+    font-family: var(--font-body);
     font-size: 10px;
     font-weight: var(--font-weight-medium);
     line-height: 16px;
@@ -691,7 +699,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    background: var(--char);
+    background: #0A0812;
     padding: 0 40px 48px;
     overflow-y: auto;
     z-index: var(--z-modal);
@@ -747,20 +755,24 @@
   }
 
   .mobile-menu__wordmark {
-    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-    font-size: 28px;
-    font-weight: 500;
-    color: var(--cream);
-    letter-spacing: 0.01em;
+    font-family: var(--font-body);
+    font-size: 22px;
+    font-weight: 800;
+    color: #F7EFE3;
+    background: #6B2FB3;
+    letter-spacing: -0.04em;
     display: inline-flex;
     align-items: baseline;
+    gap: 0.18em;
+    padding: 0.38em 0.75em;
+    border-radius: 999px;
+    white-space: nowrap;
   }
 
   .mobile-menu__wordmark em {
-    font-style: italic;
-    font-weight: 400;
-    margin: 0 2px;
-    color: var(--gold-light, #C9A16B);
+    font-style: normal;
+    font-weight: 800;
+    color: #FF3D8A;
   }
 
   /* Nav list */
@@ -787,7 +799,7 @@
   .mobile-menu__link {
     display: block;
     padding: 18px 0;
-    font-family: var(--font-serif);
+    font-family: var(--font-body);
     font-size: clamp(36px, 8vw, 48px);
     font-weight: 400;
     line-height: 1.1;
@@ -820,7 +832,7 @@
   }
 
   .mobile-menu__footer-link {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -832,7 +844,7 @@
   .mobile-menu__footer-link:hover { color: var(--gold-light, #C9A16B); }
 
   .mobile-menu__footer-tagline {
-    font-family: var(--font-serif);
+    font-family: var(--font-body);
     font-style: italic;
     font-size: 14px;
     color: rgba(239,232,220,0.3);

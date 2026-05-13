@@ -9,12 +9,16 @@
   assign reverse   = section.settings.reverse
 -%}
 
-<section class="product-feature section">
+{%- assign has_media = false -%}
+{%- if video_url != blank or image != blank -%}{%- assign has_media = true -%}{%- endif -%}
+
+<section class="product-feature section{% unless has_media %} product-feature--no-media{% endunless %}">
   <div class="container">
 
-    <div class="product-feature__grid{% if reverse %} product-feature__grid--reverse{% endif %}">
+    <div class="product-feature__grid{% if reverse %} product-feature__grid--reverse{% endif %}{% unless has_media %} product-feature__grid--no-media{% endunless %}">
 
       <!-- Media (video takes priority over image) -->
+      {%- if has_media -%}
       {%- assign video_y = section.settings.video_position_y | default: 50 -%}
       <div class="product-feature__media">
         {%- if video_url != blank -%}
@@ -56,10 +60,9 @@
             height="1100"
             loading="lazy"
           >
-        {%- else -%}
-          <div class="product-feature__media-placeholder" aria-hidden="true"></div>
         {%- endif -%}
       </div>
+      {%- endif -%}
 
       <!-- Copy -->
       <div class="product-feature__copy">
@@ -138,7 +141,7 @@
         {%- endif -%}
 
         {%- if cta_url != blank and cta_label != blank -%}
-          <a href="{{ cta_url }}" class="btn btn--secondary" style="margin-top: var(--space-8);" data-reveal data-reveal-delay="160">
+          <a href="{{ cta_url }}" class="btn btn--primary" style="margin-top: var(--space-8);" data-reveal data-reveal-delay="160">
             {{ cta_label }}
           </a>
         {%- endif -%}
@@ -159,6 +162,23 @@
     align-items: center;
   }
 
+  .product-feature__grid--no-media {
+    grid-template-columns: 1fr;
+    max-width: 900px;
+    margin-inline: auto;
+  }
+
+  .product-feature__grid--no-media .product-feature__copy {
+    text-align: center;
+    align-items: center;
+  }
+
+  .product-feature__grid--no-media .product-feature__body p {
+    max-width: 68ch;
+    margin-inline: auto;
+  }
+
+
   .product-feature__grid--reverse .product-feature__media {
     order: 2;
   }
@@ -170,10 +190,11 @@
   /* ---- Media ---- */
   .product-feature__media {
     position: relative;
-    aspect-ratio: 9 / 11;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
     border-radius: var(--radius-base);
-    background-color: var(--color-bone-alt);
+    background-color: var(--cream-3);
+    box-shadow: var(--glow-soft);
   }
 
   .product-feature__media img,
@@ -188,8 +209,8 @@
   .product-feature__media-placeholder {
     width: 100%;
     height: 100%;
-    background-color: var(--color-bone-alt);
-    border: 1px dashed rgba(166, 137, 102, 0.2);
+    background-color: var(--cream-3);
+    border: 1px dashed rgba(107, 63, 160, 0.3);
   }
 
   /* ---- Copy ---- */
@@ -201,7 +222,7 @@
   }
 
   .product-feature__eyebrow {
-    color: var(--color-walnut);
+    color: var(--color-cta-hover);
     margin-bottom: var(--space-4);
     font-size: 0.875rem;
     font-weight: 600;
@@ -210,11 +231,11 @@
 
   .product-feature__heading {
     margin-bottom: var(--space-3);
-    color: var(--color-black);
+    color: var(--char);
   }
 
   .product-feature__body {
-    color: var(--color-olive);
+    color: var(--char-soft);
     line-height: var(--line-height-body);
     margin-bottom: var(--space-3);
   }
@@ -223,35 +244,74 @@
     max-width: 52ch;
   }
 
+  /* ---- Section: no-media dark mode ---- */
+  .product-feature--no-media {
+    background: #0A0812;
+    padding-block: 80px;
+  }
+
+  .product-feature--no-media .product-feature__eyebrow {
+    color: #C026D3;
+  }
+
+  .product-feature--no-media .product-feature__heading {
+    color: #F3E8FF;
+  }
+
+  .product-feature--no-media .product-feature__body p {
+    color: #C4A8E0;
+  }
+
   /* ---- Bullets (visual icon cards) ---- */
   .product-feature .product-feature__bullets,
   .motion-on .product-feature .product-feature__bullets {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
-    gap: 0.625rem;
+    gap: 1rem;
     list-style: none;
-    margin: 1rem 0 0;
+    margin: 2rem 0 0;
     padding: 0;
+    align-items: start;
   }
 
   .product-feature .product-feature__bullet,
   .motion-on .product-feature .product-feature__bullet {
-    background: var(--color-bone, #F2EDE4) !important;
+    background: var(--cream-3) !important;
+    border: 1px solid rgba(107, 63, 160, 0.3) !important;
     border-radius: 10px !important;
-    padding: 1rem 0.9rem !important;
+    padding: 1.25rem !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
-    gap: 0.4rem;
+    gap: 0.6rem;
     text-align: left;
-    border: none !important;
     box-shadow: none !important;
     min-height: unset !important;
   }
 
+  /* No-media: bento dark cards — match specificity of .motion-on .product-feature .product-feature__bullet (0,3,0) */
+  .product-feature--no-media .product-feature .product-feature__bullet,
+  .motion-on .product-feature--no-media .product-feature__bullet,
+  .product-feature--no-media .product-feature__bullet {
+    background: linear-gradient(145deg, #1C1530 0%, #130F22 100%) !important;
+    border: 1px solid rgba(107,63,160,0.22) !important;
+    border-radius: 20px !important;
+    padding: 2rem !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 1.25rem !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  .product-feature--no-media .product-feature__bullet:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 48px rgba(192,38,211,0.15), 0 0 0 1px rgba(107,63,160,0.45);
+    border-color: rgba(107,63,160,0.5) !important;
+  }
+
   .product-feature .product-feature__bullet-icon,
   .motion-on .product-feature .product-feature__bullet-icon {
-    color: var(--color-walnut, #8a6240);
+    color: var(--color-cta-hover);
     display: inline-flex !important;
     margin-bottom: 0;
     line-height: 0;
@@ -262,31 +322,65 @@
     display: block;
   }
 
+  /* No-media: large glowing icon orb */
+  .product-feature--no-media .product-feature__bullet-icon {
+    width: 72px !important;
+    height: 72px !important;
+    border-radius: 50% !important;
+    background: radial-gradient(circle at 40% 40%, rgba(192,38,211,0.18) 0%, rgba(107,63,160,0.12) 50%, transparent 100%) !important;
+    border: 1px solid rgba(192,38,211,0.2) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #C026D3 !important;
+    flex-shrink: 0;
+  }
+
+  .product-feature--no-media .product-feature__bullet-icon svg {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
   .product-feature__bullet-headline {
-    font-family: var(--font-heading, 'Cormorant Garamond', serif);
+    font-family: var(--font-body);
     font-size: 1.05rem;
-    line-height: 1.15;
-    color: var(--color-black, #1f1d1a);
-    font-weight: 500;
+    line-height: 1.3;
+    color: var(--char);
+    font-weight: 600;
     margin: 0;
   }
 
+  .product-feature--no-media .product-feature__bullet-headline {
+    font-size: 1rem;
+    color: #F3E8FF;
+    letter-spacing: -0.01em;
+  }
+
   .product-feature__bullet-caption {
-    font-family: var(--font-body, Inter, sans-serif);
-    font-size: 0.8rem;
-    line-height: 1.4;
-    color: var(--color-olive, #6a6258);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--char-soft);
     margin: 0;
+  }
+
+  .product-feature--no-media .product-feature__bullet-caption {
+    color: #9B7EC8;
+    font-size: 0.85rem;
   }
 
   @media (max-width: 749px) {
     .product-feature .product-feature__bullets,
     .motion-on .product-feature .product-feature__bullets {
       grid-template-columns: repeat(2, 1fr) !important;
-      gap: 0.5rem;
+      align-items: stretch !important;
+      gap: 0.75rem;
     }
-    .product-feature .product-feature__bullet { padding: 0.75rem 0.75rem !important; }
+    .product-feature .product-feature__bullet { padding: 0.75rem !important; }
+    .product-feature--no-media .product-feature__bullet { padding: 1.25rem !important; justify-content: center !important; }
     .product-feature__bullet-icon svg { width: 30px; height: 30px; }
+    .product-feature--no-media .product-feature__bullet-icon { width: 56px !important; height: 56px !important; }
+    .product-feature--no-media .product-feature__bullet-icon svg { width: 26px !important; height: 26px !important; }
     .product-feature__bullet-headline { font-size: 0.95rem; }
     .product-feature__bullet-caption { font-size: 0.75rem; }
   }
@@ -304,19 +398,16 @@
     }
 
     .product-feature__media {
-      aspect-ratio: 9 / 11;
-      background-color: var(--color-bone-alt);
+      aspect-ratio: 1 / 1;
+      background-color: var(--cream-3);
     }
 
-    /* Mobile: show the whole video (don't crop). Container letterboxes to
-       brand-bone if the video aspect doesn't match exactly. */
     .product-feature__video,
     .product-feature__media img {
       object-fit: contain !important;
       object-position: center center !important;
     }
 
-    /* Extra bottom padding on mobile so the next section has breathing room */
     .product-feature.section {
       padding-bottom: 40px;
     }

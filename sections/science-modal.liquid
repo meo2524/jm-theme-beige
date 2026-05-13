@@ -1,128 +1,139 @@
-{% comment %} Science & Evidence Modal — same shell as ring-size-modal {% endcomment %}
+{% comment %} Science & Evidence — inline section {% endcomment %}
 
-<div id="science-modal" class="rsm-overlay" role="dialog" aria-modal="true" aria-label="The Science" hidden>
-  <div class="rsm-backdrop"></div>
-  <div class="rsm-panel scm-panel">
+<div class="scm-wrap">
+  <div class="scm-inner">
 
-    <button class="rsm-close" aria-label="Close science panel">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20">
-        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-      </svg>
-    </button>
+    <div class="scm-header">
+      <h2 class="scm-title">The Science</h2>
+      <p class="scm-intro">Clinical-grade sensors. Peer-reviewed methods. Here's what powers the ring.</p>
+    </div>
 
-    <div class="rsm-scroll">
+    <div class="scm-grid">
 
-      <!-- Header -->
-      <div class="rsm-header">
-        <p class="rsm-eyebrow">N°01 Smart Ring</p>
-        <h2 class="rsm-title">The Science</h2>
-        <p class="rsm-intro">Clinical-grade sensors. Peer-reviewed methods. Here's what powers the ring.</p>
+      <div class="scm-stat">
+        <p class="scm-number">PPG</p>
+        <p class="scm-label">Photoplethysmography</p>
+        <p class="scm-desc">Optical heart-rate sensor measures blood volume pulse at 100+ Hz — the same principle used in hospital pulse oximeters.</p>
       </div>
 
-      <!-- Stat grid -->
-      <div class="scm-grid">
-
-        <div class="scm-stat">
-          <p class="scm-number">PPG</p>
-          <p class="scm-label">Photoplethysmography</p>
-          <p class="scm-desc">Optical heart-rate sensor measures blood volume pulse at 100+ Hz — the same principle used in hospital pulse oximeters.</p>
-        </div>
-
-        <div class="scm-stat">
-          <p class="scm-number">SpO₂</p>
-          <p class="scm-label">Blood oxygen saturation</p>
-          <p class="scm-desc">Red and infrared LEDs detect haemoglobin absorption to estimate blood-oxygen levels during sleep.</p>
-        </div>
-
-        <div class="scm-stat">
-          <p class="scm-number">6-axis</p>
-          <p class="scm-label">Motion & activity</p>
-          <p class="scm-desc">Accelerometer + gyroscope track movement patterns to separate restless sleep from true wakefulness.</p>
-        </div>
-
-        <div class="scm-stat">
-          <p class="scm-number">0.1 °C</p>
-          <p class="scm-label">Skin temperature</p>
-          <p class="scm-desc">Precision NTC sensor detects nightly temperature variation — an early biomarker for recovery and illness onset.</p>
-        </div>
-
+      <div class="scm-stat">
+        <p class="scm-number">SpO₂</p>
+        <p class="scm-label">Blood oxygen saturation</p>
+        <p class="scm-desc">Red and infrared LEDs detect haemoglobin absorption to estimate blood-oxygen levels during sleep.</p>
       </div>
 
-      <!-- Harvard quote -->
-      <div class="scm-quote">
-        <svg class="scm-quote-mark" viewBox="0 0 40 32" fill="none" aria-hidden="true">
-          <path d="M0 32V19.2C0 8.533 5.867 2.133 17.6 0l1.6 3.2C13.067 4.8 10.133 8 9.6 12.8H16V32H0zm22.4 0V19.2C22.4 8.533 28.267 2.133 40 0l1.6 3.2C35.467 4.8 32.533 8 32 12.8H38.4V32H22.4z" fill="#9a7e57" opacity="0.18"/>
-        </svg>
-        <p class="scm-quote-text">Smart rings may be more accurate for sleep tracking than smartwatches — and their finger-based sensors offer better signal quality than wrist-worn devices.</p>
-        <p class="scm-quote-attr">Harvard Health Publishing · Harvard Medical School</p>
+      <div class="scm-stat">
+        <p class="scm-number">6-axis</p>
+        <p class="scm-label">Motion & activity</p>
+        <p class="scm-desc">Accelerometer + gyroscope track movement patterns to separate restless sleep from true wakefulness.</p>
       </div>
 
-      <!-- Sources -->
-      <div class="scm-sources">
-        <p class="scm-sources-label">Endorsed by</p>
-        <div class="scm-sources-row">
-          <div class="scm-badge">
-            <p class="scm-badge-name">Harvard Health Publishing</p>
-            <p class="scm-badge-sub">Harvard Medical School</p>
-          </div>
-          <div class="scm-badge">
-            <p class="scm-badge-name">Sleep Foundation</p>
-            <p class="scm-badge-sub">Evidence-based sleep research</p>
-          </div>
-          <div class="scm-badge">
-            <p class="scm-badge-name">JMIR mHealth</p>
-            <p class="scm-badge-sub">Peer-reviewed wearable studies</p>
-          </div>
-        </div>
+      <div class="scm-stat">
+        <p class="scm-number">0.1 °C</p>
+        <p class="scm-label">Skin temperature</p>
+        <p class="scm-desc">Precision NTC sensor detects nightly temperature variation — an early biomarker for recovery and illness onset.</p>
       </div>
 
     </div>
+
+    <div class="scm-quote">
+      <svg class="scm-quote-mark" viewBox="0 0 40 32" fill="none" aria-hidden="true">
+        <path d="M0 32V19.2C0 8.533 5.867 2.133 17.6 0l1.6 3.2C13.067 4.8 10.133 8 9.6 12.8H16V32H0zm22.4 0V19.2C22.4 8.533 28.267 2.133 40 0l1.6 3.2C35.467 4.8 32.533 8 32 12.8H38.4V32H22.4z" fill="#8B5CC0" opacity="0.18"/>
+      </svg>
+      <p class="scm-quote-text">Smart rings may be more accurate for sleep tracking than smartwatches — and their finger-based sensors offer better signal quality than wrist-worn devices.</p>
+      <p class="scm-quote-attr">Harvard Health Publishing · Harvard Medical School</p>
+    </div>
+
+    <div class="scm-sources">
+      <p class="scm-sources-label">Endorsed by</p>
+      <div class="scm-sources-row">
+        <div class="scm-badge">
+          <p class="scm-badge-name">Harvard Health Publishing</p>
+          <p class="scm-badge-sub">Harvard Medical School</p>
+        </div>
+        <div class="scm-badge">
+          <p class="scm-badge-name">Sleep Foundation</p>
+          <p class="scm-badge-sub">Evidence-based sleep research</p>
+        </div>
+        <div class="scm-badge">
+          <p class="scm-badge-name">JMIR mHealth</p>
+          <p class="scm-badge-sub">Peer-reviewed wearable studies</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <style>
-  /* Panel — bone/cream to match site */
-  .scm-panel {
-    background: var(--color-bone, #f5efe6) !important;
+  .scm-wrap {
+    background: #FAF8FF;
+    padding: 72px 20px;
   }
-  .scm-panel .rsm-close {
-    background: rgba(138,98,64,0.08) !important;
-    color: var(--color-walnut, #8a6240) !important;
-  }
-  .scm-panel .rsm-close:hover { background: rgba(138,98,64,0.15) !important; }
-  .scm-panel .rsm-eyebrow { color: var(--color-walnut, #8a6240) !important; }
-  .scm-panel .rsm-title   { color: var(--color-black, #1f1d1a) !important; }
-  .scm-panel .rsm-intro   { color: var(--color-olive, #5a4a3a) !important; }
 
-  /* Stat grid */
+  .scm-inner {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .scm-header {
+    text-align: center !important;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .scm-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #8B5CC0;
+    margin: 0 0 12px;
+  }
+
+  .scm-title {
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 700;
+    color: #1A0826;
+    margin: 0 0 12px;
+    line-height: 1.15;
+  }
+
+  .scm-intro {
+    font-size: 15px;
+    color: #5A3A9A;
+    margin: 0;
+    line-height: 1.65;
+    text-align: center !important;
+  }
+
   .scm-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1px;
-    background: rgba(138,98,64,0.12);
+    background: rgba(107,63,160,0.12);
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 32px;
   }
 
   .scm-stat {
-    background: #fff;
-    padding: 24px 20px;
+    background: #F0E8FF;
+    padding: 28px 24px;
     transition: background 0.2s;
-    box-sizing: border-box;
-    min-height: 160px;
     display: flex;
     flex-direction: column;
   }
-  .scm-stat:hover { background: rgba(245,239,230,0.9); }
+  .scm-stat:hover { background: #E4D0FF; }
 
   .scm-number {
-    font-family: var(--font-heading, 'Cormorant Garamond', serif);
+    font-family: var(--font-body);
     font-size: clamp(22px, 4vw, 30px);
     font-weight: 600;
     letter-spacing: -0.02em;
     margin: 0 0 4px;
-    color: var(--color-black, #1f1d1a);
+    color: #4A2980;
     line-height: 1;
   }
 
@@ -131,25 +142,24 @@
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-walnut, #8a6240);
+    color: #8B5CC0;
     margin: 0 0 8px;
   }
 
   .scm-desc {
-    font-size: 12.5px;
+    font-size: 13px;
     line-height: 1.65;
-    color: var(--color-olive, #5a4a3a);
+    color: #5A3A9A;
     margin: 0;
   }
 
-  /* Quote */
   .scm-quote {
     position: relative;
     padding: 28px 24px 24px;
-    background: #fff;
+    background: #F0E8FF;
     border-radius: 12px;
-    border: 1px solid rgba(138,98,64,0.15);
-    border-left: 3px solid var(--color-walnut, #8a6240);
+    border: 1px solid rgba(107,63,160,0.15);
+    border-left: 3px solid #8B5CC0;
     margin-bottom: 32px;
   }
 
@@ -160,110 +170,74 @@
   }
 
   .scm-quote-text {
-    font-family: var(--font-heading, 'Cormorant Garamond', serif);
     font-size: 15px;
     line-height: 1.75;
-    color: var(--color-black, #1f1d1a);
+    color: #1A0826;
     font-style: italic;
     margin: 0 0 14px;
+    text-align: center;
   }
 
   .scm-quote-attr {
     font-size: 10px;
-    color: var(--color-walnut, #8a6240);
+    color: #8B5CC0;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     margin: 0;
+    text-align: center;
   }
 
-  /* Sources */
   .scm-sources-label {
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--color-walnut, #8a6240);
+    color: #8B5CC0;
     margin: 0 0 14px;
     text-align: center;
+    max-width: none;
   }
 
   .scm-sources-row {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
   }
 
   .scm-badge {
-    background: #fff;
-    border: 1px solid rgba(138,98,64,0.18);
+    background: #F0E8FF;
+    border: 1px solid rgba(107,63,160,0.18);
     border-radius: 10px;
-    padding: 14px 18px;
+    padding: 16px 20px;
     text-align: center;
+    flex: 1;
+    min-width: 180px;
   }
 
   .scm-badge-name {
-    font-family: var(--font-heading, 'Cormorant Garamond', serif);
     font-size: 14px;
     font-weight: 600;
-    color: var(--color-black, #1f1d1a);
+    color: #1A0826;
     margin: 0 0 3px;
-    letter-spacing: 0.01em;
   }
 
   .scm-badge-sub {
     font-size: 11px;
-    color: var(--color-olive, #5a4a3a);
+    color: #5A3A9A;
     margin: 0;
-    letter-spacing: 0.02em;
   }
 
-  @media (min-width: 480px) {
-    .scm-sources-row { flex-direction: row; flex-wrap: wrap; justify-content: center; }
-    .scm-badge { flex: 1; min-width: 160px; }
+  @media (max-width: 600px) {
+    .scm-wrap { padding: 48px 20px; }
+    .scm-sources-row { flex-direction: column; }
+    .scm-badge { min-width: unset; }
   }
-
 </style>
-
-<script>
-(function() {
-  var modal    = document.getElementById('science-modal');
-  var backdrop = modal.querySelector('.rsm-backdrop');
-  var closeBtn = modal.querySelector('.rsm-close');
-
-  function openModal() {
-    modal.hidden = false;
-    document.body.style.overflow = 'hidden';
-    closeBtn.focus();
-  }
-  function closeModal() {
-    modal.hidden = true;
-    document.body.style.overflow = '';
-  }
-
-  backdrop.addEventListener('click', closeModal);
-  closeBtn.addEventListener('click', closeModal);
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && !modal.hidden) closeModal();
-  });
-
-  /* Intercept "See the science" accordion trigger */
-  document.addEventListener('click', function(e) {
-    var btn = e.target.closest('.accordion__trigger');
-    if (!btn) return;
-    var text = btn.textContent.trim().toLowerCase();
-    if (text.indexOf('see the science') !== -1 || text.indexOf('the science') !== -1) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      openModal();
-    }
-  }, true);
-})();
-</script>
 
 {% schema %}
 {
-  "name": "Science Modal",
+  "name": "The Science",
   "tag": "section",
   "class": "section-science-modal",
   "settings": []

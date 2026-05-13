@@ -1,9 +1,9 @@
 {% comment %} photo-reviews.liquid — Photo-driven social proof carousel {% endcomment %}
 
 {%- liquid
-  assign eyebrow    = section.settings.eyebrow    | default: 'Verified Menders'
+  assign eyebrow    = section.settings.eyebrow    | default: 'Verified buyers'
   assign heading    = section.settings.heading    | default: 'Real people. Real results.'
-  assign subheading = section.settings.subheading | default: 'Join thousands of Menders who track their health from their finger.'
+  assign subheading = section.settings.subheading | default: 'Join thousands of people who track their health from their finger.'
 -%}
 
 <section class="pr-wrap" data-section-id="{{ section.id }}">
@@ -16,19 +16,57 @@
       <p class="pr-head__sub">{{ subheading }}</p>
     </header>
 
-    <!-- Tabs: women / men -->
-    <div class="pr-tabs" role="tablist" aria-label="Filter reviews">
-      <button class="pr-tab is-active" type="button" role="tab" aria-selected="true" data-set="women">Women</button>
-      <button class="pr-tab" type="button" role="tab" aria-selected="false" data-set="men">Men</button>
-    </div>
-
     <div class="pr-carousel-wrap">
-      <div class="pr-track is-active" id="pr-track-women-{{ section.id }}" data-set="women" role="tabpanel">
+      <div class="pr-track is-active" id="pr-track-{{ section.id }}">
 
-        <!-- Card 1 — Keisha M. -->
+        <!-- Card 1 — Taylor M. -->
         <article class="pr-card">
           <div class="pr-card__photo-wrap">
-            <img src="{{ 'Social_Proof_1.png' | file_url }}" alt="Keisha M. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
+            <img src="{{ 'Woman_1.png' | file_url }}" alt="Taylor M. wearing Mend & Co N°01 Smart Ring" class="pr-card__photo" loading="lazy" width="600" height="750"/>
+          </div>
+          <div class="pr-card__body">
+            <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="pr-card__title">Looks good enough to never take off.</p>
+            <p class="pr-card__text">I've tried bulky trackers before — always ended up in my drawer. This one goes with everything. The sleep data is genuinely useful too. Two weeks in and I've already adjusted my whole evening routine.</p>
+            <footer class="pr-card__footer">
+              <div class="pr-card__meta">
+                <span class="pr-card__name">Taylor M.</span>
+                <span class="pr-verified">
+                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Verified Purchase
+                </span>
+              </div>
+              <span class="pr-card__date">April 28, 2026</span>
+            </footer>
+          </div>
+        </article>
+
+        <!-- Card 2 — Priya S. -->
+        <article class="pr-card">
+          <div class="pr-card__photo-wrap">
+            <img src="{{ 'Woman_2.png' | file_url }}" alt="Priya S. wearing Mend & Co N°01 Smart Ring" class="pr-card__photo" loading="lazy" width="600" height="750"/>
+          </div>
+          <div class="pr-card__body">
+            <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="pr-card__title">I sent this to my entire group chat.</p>
+            <p class="pr-card__text">My recovery score the morning after a bad sleep shift vs a full night? Night and day. I screenshotted and sent it to four friends. Three of them ordered the same week.</p>
+            <footer class="pr-card__footer">
+              <div class="pr-card__meta">
+                <span class="pr-card__name">Priya S.</span>
+                <span class="pr-verified">
+                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Verified Purchase
+                </span>
+              </div>
+              <span class="pr-card__date">May 5, 2026</span>
+            </footer>
+          </div>
+        </article>
+
+        <!-- Card 3 — Keisha M. -->
+        <article class="pr-card">
+          <div class="pr-card__photo-wrap">
+            <img src="{{ 'Social_Proof_1.png' | file_url }}" alt="Keisha M. wearing Mend & Co N°01 Smart Ring" class="pr-card__photo" loading="lazy" width="600" height="750"/>
           </div>
           <div class="pr-card__body">
             <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
@@ -47,10 +85,10 @@
           </div>
         </article>
 
-        <!-- Card 2 — Sarah T. -->
+        <!-- Card 4 — Sarah T. -->
         <article class="pr-card">
           <div class="pr-card__photo-wrap">
-            <img src="{{ 'Social_Proof_2.png' | file_url }}" alt="Sarah T. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
+            <img src="{{ 'Social_Proof_2.png' | file_url }}" alt="Sarah T. wearing Mend & Co N°01 Smart Ring" class="pr-card__photo" loading="lazy" width="600" height="750"/>
           </div>
           <div class="pr-card__body">
             <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
@@ -69,10 +107,10 @@
           </div>
         </article>
 
-        <!-- Card 3 — Kayla R. -->
+        <!-- Card 5 — Kayla R. -->
         <article class="pr-card">
           <div class="pr-card__photo-wrap">
-            <img src="{{ 'Social_Proof_3.png' | file_url }}" alt="Kayla R. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
+            <img src="{{ 'Social_Proof_3.png' | file_url }}" alt="Kayla R. wearing Mend & Co N°01 Smart Ring" class="pr-card__photo" loading="lazy" width="600" height="750"/>
           </div>
           <div class="pr-card__body">
             <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
@@ -87,209 +125,6 @@
                 </span>
               </div>
               <span class="pr-card__date">March 11, 2026</span>
-            </footer>
-          </div>
-        </article>
-
-        <!-- Card 4 — Jessica H. -->
-        <article class="pr-card">
-          <div class="pr-card__photo-wrap">
-            <img src="{{ 'Social_Proof_4.png' | file_url }}" alt="Jessica H. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
-          </div>
-          <div class="pr-card__body">
-            <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="pr-card__title">My husband got one after watching me for a month.</p>
-            <p class="pr-card__text">Got it for sleep, ended up caring about everything. Resting heart rate dropped once I started paying attention. He used to make fun of me. Now he checks his every morning too.</p>
-            <footer class="pr-card__footer">
-              <div class="pr-card__meta">
-                <span class="pr-card__name">Jessica H.</span>
-                <span class="pr-verified">
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Verified Purchase
-                </span>
-              </div>
-              <span class="pr-card__date">January 22, 2026</span>
-            </footer>
-          </div>
-        </article>
-
-        <!-- Card 5 — Amanda W. -->
-        <article class="pr-card">
-          <div class="pr-card__photo-wrap">
-            <img src="{{ 'Social_Proof_5.png' | file_url }}" alt="Amanda W. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
-          </div>
-          <div class="pr-card__body">
-            <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="pr-card__title">When you're up every 2 hours you lose track completely.</p>
-            <p class="pr-card__text">Got it while pregnant thinking it'd help with sleep. Had no idea how much I'd need it after. Having the actual number made me feel less crazy.</p>
-            <footer class="pr-card__footer">
-              <div class="pr-card__meta">
-                <span class="pr-card__name">Amanda W.</span>
-                <span class="pr-verified">
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Verified Purchase
-                </span>
-              </div>
-              <span class="pr-card__date">February 17, 2026</span>
-            </footer>
-          </div>
-        </article>
-
-        <!-- Card 6 — Mei L. -->
-        <article class="pr-card">
-          <div class="pr-card__photo-wrap">
-            <img src="{{ 'Social_Proof_6.png' | file_url }}" alt="Mei L. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
-          </div>
-          <div class="pr-card__body">
-            <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="pr-card__title">My doctor actually took me seriously for once.</p>
-            <p class="pr-card__text">I'm in my 60s. Years of being told to just "sleep better." This showed me my deep sleep has been under 20 minutes most nights. Finally something real to bring to my GP.</p>
-            <footer class="pr-card__footer">
-              <div class="pr-card__meta">
-                <span class="pr-card__name">Mei L.</span>
-                <span class="pr-verified">
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Verified Purchase
-                </span>
-              </div>
-              <span class="pr-card__date">April 19, 2026</span>
-            </footer>
-          </div>
-        </article>
-
-      </div>
-
-      <!-- MEN track -->
-      <div class="pr-track" id="pr-track-men-{{ section.id }}" data-set="men" role="tabpanel" hidden>
-
-        <!-- Card 1 — Marcus T. -->
-        <article class="pr-card">
-          <div class="pr-card__photo-wrap">
-            <img src="{{ 'Social_Proof_Men_1.png' | file_url }}" alt="Marcus T. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
-          </div>
-          <div class="pr-card__body">
-            <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="pr-card__title">Stopped overtraining once I could see the score.</p>
-            <p class="pr-card__text">Used to crush leg day twice a week and wonder why I felt destroyed. Recovery was always low. Lift smarter not just harder, turns out.</p>
-            <footer class="pr-card__footer">
-              <div class="pr-card__meta">
-                <span class="pr-card__name">Marcus T.</span>
-                <span class="pr-verified">
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Verified Purchase
-                </span>
-              </div>
-              <span class="pr-card__date">February 6, 2026</span>
-            </footer>
-          </div>
-        </article>
-
-        <!-- Card 2 — Trevor P. (marathon) — paired with Men_2 (40s runner-look) -->
-        <article class="pr-card">
-          <div class="pr-card__photo-wrap">
-            <img src="{{ 'Social_Proof_Men_2.png' | file_url }}" alt="Trevor P. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
-          </div>
-          <div class="pr-card__body">
-            <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="pr-card__title">Backed off training and PR'd anyway.</p>
-            <p class="pr-card__text">Marathon block was wrecking my HRV. Cut volume by 20% based on what the ring was showing. PR'd by 3 minutes. Wouldn't have caught it without this.</p>
-            <footer class="pr-card__footer">
-              <div class="pr-card__meta">
-                <span class="pr-card__name">Trevor P.</span>
-                <span class="pr-verified">
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Verified Purchase
-                </span>
-              </div>
-              <span class="pr-card__date">March 22, 2026</span>
-            </footer>
-          </div>
-        </article>
-
-        <!-- Card 3 — Kevin M. (doctor) — paired with Men_3 (older gentleman) -->
-        <article class="pr-card">
-          <div class="pr-card__photo-wrap">
-            <img src="{{ 'Social_Proof_Men_3.png' | file_url }}" alt="Kevin M. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
-          </div>
-          <div class="pr-card__body">
-            <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="pr-card__title">First time my doctor actually engaged with my data.</p>
-            <p class="pr-card__text">Wore it a month before my checkup. Brought him resting HR and BP trends. He adjusted my meds based on what I showed him. Felt heard for once.</p>
-            <footer class="pr-card__footer">
-              <div class="pr-card__meta">
-                <span class="pr-card__name">Kevin M.</span>
-                <span class="pr-verified">
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Verified Purchase
-                </span>
-              </div>
-              <span class="pr-card__date">February 19, 2026</span>
-            </footer>
-          </div>
-        </article>
-
-        <!-- Card 4 — Daniel K. (work stress) — paired with Men_4 (smart shirt office vibe) -->
-        <article class="pr-card">
-          <div class="pr-card__photo-wrap">
-            <img src="{{ 'Social_Proof_Men_4.png' | file_url }}" alt="Daniel K. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
-          </div>
-          <div class="pr-card__body">
-            <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="pr-card__title">My HRV tanked every Sunday night. Took weeks to figure out why.</p>
-            <p class="pr-card__text">Connected it to Monday meetings I dreaded. Started saying no to half of them. Numbers actually went back up. Feel less like garbage.</p>
-            <footer class="pr-card__footer">
-              <div class="pr-card__meta">
-                <span class="pr-card__name">Daniel K.</span>
-                <span class="pr-verified">
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Verified Purchase
-                </span>
-              </div>
-              <span class="pr-card__date">March 4, 2026</span>
-            </footer>
-          </div>
-        </article>
-
-        <!-- Card 5 — James L. (new dad) — paired with Men_5 (younger guy) -->
-        <article class="pr-card">
-          <div class="pr-card__photo-wrap">
-            <img src="{{ 'Social_Proof_Men_5.png' | file_url }}" alt="James L. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
-          </div>
-          <div class="pr-card__body">
-            <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="pr-card__title">Two kids under 4. The data confirms I'm not crazy.</p>
-            <p class="pr-card__text">Haven't had real sleep in a year. Now my wife actually believes me when I say I'm running on fumes lol. Useful for setting expectations honestly.</p>
-            <footer class="pr-card__footer">
-              <div class="pr-card__meta">
-                <span class="pr-card__name">James L.</span>
-                <span class="pr-verified">
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Verified Purchase
-                </span>
-              </div>
-              <span class="pr-card__date">January 28, 2026</span>
-            </footer>
-          </div>
-        </article>
-
-        <!-- Card 6 — Jordan B. (style/wife) — paired with Men_6 (gym guy) -->
-        <article class="pr-card">
-          <div class="pr-card__photo-wrap">
-            <img src="{{ 'Social_Proof_Men_6.png' | file_url }}" alt="Jordan B. wearing Marrow Ring N°01" class="pr-card__photo" loading="lazy" width="600" height="750"/>
-          </div>
-          <div class="pr-card__body">
-            <div class="pr-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p class="pr-card__title">Wife got hers first. Made fun of her until I caved.</p>
-            <p class="pr-card__text">Two months later she's making fun of me. Wear it through every lift, every shower, every meeting. Forget I'm wearing it half the time.</p>
-            <footer class="pr-card__footer">
-              <div class="pr-card__meta">
-                <span class="pr-card__name">Jordan B.</span>
-                <span class="pr-verified">
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="#5a8a60"/><polyline points="3.5,6 5.2,7.8 8.5,4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Verified Purchase
-                </span>
-              </div>
-              <span class="pr-card__date">April 5, 2026</span>
             </footer>
           </div>
         </article>
@@ -313,7 +148,7 @@
 
 <style>
 .pr-wrap {
-  background: var(--color-bone, #f5efe6);
+  background: var(--cream-3);
   padding: 5rem 0 4rem;
   overflow: hidden;
 }
@@ -326,59 +161,26 @@
 /* Header */
 .pr-head { margin-bottom: 1.75rem; max-width: 560px; }
 
-/* Tabs (Women / Men) */
-.pr-tabs {
-  display: inline-flex;
-  gap: 4px;
-  background: rgba(43,43,43,0.06);
-  border-radius: 999px;
-  padding: 4px;
-  margin-bottom: 1.5rem;
-}
-.pr-tab {
-  appearance: none;
-  border: none;
-  background: transparent;
-  color: var(--color-olive, #5a4a3a);
-  font-family: var(--font-label, 'Inter', sans-serif);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  padding: 0.5rem 1.125rem;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
-}
-.pr-tab.is-active {
-  background: #fff;
-  color: var(--color-black, #1f1d1a);
-  box-shadow: 0 2px 6px rgba(31,29,26,0.08);
-}
-.pr-tab:focus-visible {
-  outline: 2px solid var(--color-walnut, #8a6240);
-  outline-offset: 2px;
-}
-
-/* Track visibility — actual rules below the original .pr-track block */
+/* Track visibility */
 .pr-head__rule {
   width: 40px; height: 1.5px;
-  background: var(--color-walnut, #8a6240);
+  background: var(--gold-deep);
   opacity: 0.6; margin-bottom: 1.25rem;
 }
 .pr-head__eyebrow {
-  font-family: var(--font-label, 'Inter', sans-serif);
+  font-family: var(--font-body);
   font-size: 0.6875rem; font-weight: 600;
   letter-spacing: 3px; text-transform: uppercase;
-  color: var(--color-walnut, #8a6240); margin: 0 0 0.75rem;
+  color: var(--gold-deep); margin: 0 0 0.75rem;
 }
 .pr-head__heading {
-  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-family: var(--font-body);
   font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-  font-weight: 400; color: var(--color-black, #1f1d1a);
+  font-weight: 700; color: var(--color-black, #1f1d1a);
   line-height: 1.15; margin: 0 0 0.75rem;
 }
 .pr-head__sub {
-  font-family: var(--font-label, 'Inter', sans-serif);
+  font-family: var(--font-body);
   font-size: 0.9375rem; color: var(--color-olive, #5a4a3a);
   opacity: 0.8; margin: 0;
 }
@@ -402,26 +204,22 @@
 }
 .pr-track::-webkit-scrollbar { display: none; }
 
-/* Toggle visibility — only the active set renders. Placed AFTER the
-   .pr-track display:flex rule so source-order cascade wins. */
-.pr-track:not(.is-active) { display: none !important; }
-
 /* Cards */
 .pr-card {
   flex: 0 0 calc(85vw - 2rem); /* mobile: 1 card + peek */
   max-width: 340px;
   scroll-snap-align: start;
-  background: #fff;
+  background: var(--cream-2);
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid rgba(43,43,43,0.16);
-  box-shadow: 0 6px 20px rgba(31,29,26,0.08), 0 1px 3px rgba(31,29,26,0.04);
+  box-shadow: 0 6px 20px rgba(10,8,18,0.08), 0 1px 3px rgba(10,8,18,0.04);
   display: flex;
   flex-direction: column;
   transition: box-shadow 0.22s ease, transform 0.22s ease;
 }
 .pr-card:hover {
-  box-shadow: 0 14px 36px rgba(31,29,26,0.14), 0 2px 6px rgba(31,29,26,0.06);
+  box-shadow: 0 14px 36px rgba(10,8,18,0.14), 0 2px 6px rgba(10,8,18,0.06);
   transform: translateY(-2px);
 }
 
@@ -435,7 +233,7 @@
 /* Photo — 4:5 portrait. Subtle inner border for separation from body. */
 .pr-card__photo-wrap {
   width: 100%; aspect-ratio: 4 / 5;
-  overflow: hidden; background: #e8e1d9;
+  overflow: hidden; background: var(--cream-3);
   border-bottom: 1px solid rgba(43,43,43,0.06);
 }
 .pr-card__photo {
@@ -452,17 +250,17 @@
   display: flex; flex-direction: column; gap: 0.5rem; flex: 1;
 }
 .pr-stars {
-  color: var(--color-walnut, #8a6240);
+  color: var(--gold-deep);
   font-size: 12px; letter-spacing: 2px; line-height: 1;
 }
 .pr-card__title {
-  font-family: var(--font-label, 'Inter', sans-serif);
+  font-family: var(--font-body);
   font-size: 0.9375rem; font-weight: 700;
   color: var(--color-black, #1f1d1a); line-height: 1.3; margin: 0;
 }
 .pr-card__text {
-  font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: 1.0625rem; font-style: italic; font-weight: 400;
+  font-family: var(--font-body, 'Nunito', system-ui, sans-serif);
+  font-size: 0.9375rem; font-style: normal; font-weight: 400;
   line-height: 1.65; color: var(--color-black, #1f1d1a); margin: 0; flex: 1;
 }
 .pr-card__footer {
@@ -472,42 +270,43 @@
 }
 .pr-card__meta { display: flex; flex-direction: column; gap: 0.3rem; }
 .pr-card__name {
-  font-family: var(--font-label, 'Inter', sans-serif);
+  font-family: var(--font-body);
   font-size: 0.8125rem; font-weight: 700; color: var(--color-black, #1f1d1a);
 }
 .pr-verified {
   display: inline-flex; align-items: center; gap: 0.3rem;
-  font-family: var(--font-label, 'Inter', sans-serif);
+  font-family: var(--font-body);
   font-size: 0.6875rem; font-weight: 500; color: #5a8a60; letter-spacing: 0.02em;
 }
 .pr-card__date {
-  font-family: var(--font-label, 'Inter', sans-serif);
+  font-family: var(--font-body);
   font-size: 0.6875rem; color: var(--color-olive, #5a4a3a);
   opacity: 0.5; text-align: right;
 }
 
 /* Nav buttons */
 .pr-btn {
-  display: none; /* JS shows these */
-  position: absolute; top: 40%;
+  display: none !important;
+  position: absolute !important;
+  top: 40% !important;
   transform: translateY(-50%);
   width: 42px; height: 42px; border-radius: 50%;
-  border: 1.5px solid rgba(138,98,64,0.3);
-  background: rgba(245,239,230,0.92);
+  border: 1.5px solid rgba(107, 63, 160,0.3);
+  background: var(--cream-2);
   backdrop-filter: blur(4px);
   cursor: pointer;
   align-items: center; justify-content: center;
-  color: var(--color-walnut, #8a6240);
+  color: var(--gold-deep);
   transition: background 0.18s, border-color 0.18s, opacity 0.18s;
-  z-index: 2;
+  z-index: 10;
 }
-.pr-btn:hover { background: rgba(138,98,64,0.12); border-color: var(--color-walnut, #8a6240); }
+.pr-btn:hover { background: rgba(107, 63, 160,0.15); border-color: var(--gold-deep); }
 .pr-btn:disabled { opacity: 0.2; pointer-events: none; }
-.pr-btn--prev { left: -16px; }
-.pr-btn--next { right: -16px; }
+.pr-btn--prev { left: -16px !important; }
+.pr-btn--next { right: -16px !important; }
 
 @media (min-width: 768px) {
-  .pr-btn { display: flex; }
+  .pr-btn { display: flex !important; }
 }
 
 /* Dots */
@@ -517,12 +316,12 @@
 }
 .pr-dot {
   width: 7px; height: 7px; border-radius: 50%;
-  background: rgba(138,98,64,0.22);
+  background: rgba(107, 63, 160,0.22);
   border: none; padding: 0; cursor: pointer;
   transition: background 0.2s, transform 0.2s;
 }
 .pr-dot.is-active {
-  background: var(--color-walnut, #8a6240);
+  background: var(--gold-deep);
   transform: scale(1.35);
 }
 
@@ -558,36 +357,32 @@
   var dotsWrap = document.getElementById('pr-dots-{{ section.id }}');
   var btnPrev  = document.getElementById('pr-prev-{{ section.id }}');
   var btnNext  = document.getElementById('pr-next-{{ section.id }}');
-  var tabs     = section.querySelectorAll('.pr-tab');
-  var tracks   = section.querySelectorAll('.pr-track');
+  var track    = document.getElementById('pr-track-{{ section.id }}');
+  var cards    = Array.from(track.querySelectorAll('.pr-card'));
+  var dots     = [];
 
-  /* State for the active track. Rebuilt when user switches tabs. */
-  var current = { track: null, cards: [], dots: [] };
-
-  function buildDots(count) {
+  function buildDots() {
     dotsWrap.innerHTML = '';
-    for (var i = 0; i < count; i++) {
+    dots = cards.map(function(_, i) {
       var d = document.createElement('button');
       d.className = 'pr-dot' + (i === 0 ? ' is-active' : '');
       d.setAttribute('aria-label', 'Review ' + (i + 1));
       d.dataset.idx = i;
       dotsWrap.appendChild(d);
-    }
-    return Array.from(dotsWrap.querySelectorAll('.pr-dot'));
+      return d;
+    });
   }
 
   function scrollTo(idx) {
-    var card = current.cards[idx];
-    if (!card || !current.track) return;
-    current.track.scrollTo({ left: card.offsetLeft - current.track.offsetLeft, behavior: 'smooth' });
+    var card = cards[idx];
+    if (!card) return;
+    track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: 'smooth' });
   }
 
   function getActive() {
-    if (!current.track) return 0;
-    var scrollLeft = current.track.scrollLeft;
     var best = 0, bestDist = Infinity;
-    current.cards.forEach(function(c, i) {
-      var dist = Math.abs(c.offsetLeft - current.track.offsetLeft - scrollLeft);
+    cards.forEach(function(c, i) {
+      var dist = Math.abs(c.offsetLeft - track.offsetLeft - track.scrollLeft);
       if (dist < bestDist) { bestDist = dist; best = i; }
     });
     return best;
@@ -595,52 +390,22 @@
 
   function update() {
     var active = getActive();
-    current.dots.forEach(function(d, i) { d.classList.toggle('is-active', i === active); });
+    dots.forEach(function(d, i) { d.classList.toggle('is-active', i === active); });
     btnPrev.disabled = active === 0;
-    btnNext.disabled = active >= current.cards.length - 1;
+    btnNext.disabled = active >= cards.length - 1;
   }
 
-  function activateTrack(set) {
-    tracks.forEach(function(t) {
-      var match = t.dataset.set === set;
-      t.classList.toggle('is-active', match);
-      t.hidden = !match;
-    });
-    tabs.forEach(function(b) {
-      var match = b.dataset.set === set;
-      b.classList.toggle('is-active', match);
-      b.setAttribute('aria-selected', match ? 'true' : 'false');
-    });
-    var newTrack = section.querySelector('.pr-track[data-set="' + set + '"]');
-    if (!newTrack) return;
-    current.track = newTrack;
-    current.cards = Array.from(newTrack.querySelectorAll('.pr-card'));
-    current.dots  = buildDots(current.cards.length);
-    newTrack.scrollLeft = 0;
-    update();
-  }
-
-  /* Wire tabs */
-  tabs.forEach(function(b) {
-    b.addEventListener('click', function() { activateTrack(b.dataset.set); });
-  });
-
-  /* Wire prev/next + dots (use current state) */
   btnPrev.addEventListener('click', function() { scrollTo(Math.max(0, getActive() - 1)); });
-  btnNext.addEventListener('click', function() { scrollTo(Math.min(current.cards.length - 1, getActive() + 1)); });
+  btnNext.addEventListener('click', function() { scrollTo(Math.min(cards.length - 1, getActive() + 1)); });
   dotsWrap.addEventListener('click', function(e) {
     var d = e.target.closest('.pr-dot');
     if (d) scrollTo(parseInt(d.dataset.idx));
   });
-
-  /* Listen for scroll on whichever track is active */
-  tracks.forEach(function(t) {
-    t.addEventListener('scroll', function() { if (t === current.track) update(); }, { passive: true });
-  });
+  track.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update, { passive: true });
 
-  /* Initialize on the women set */
-  activateTrack('women');
+  buildDots();
+  update();
 })();
 </script>
 
@@ -650,9 +415,9 @@
   "tag": "section",
   "class": "section-photo-reviews",
   "settings": [
-    { "type": "text", "id": "eyebrow",    "label": "Eyebrow",    "default": "Verified Menders" },
+    { "type": "text", "id": "eyebrow",    "label": "Eyebrow",    "default": "Verified buyers" },
     { "type": "text", "id": "heading",    "label": "Heading",    "default": "Real people. Real results." },
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Join thousands of Menders who track their health from their finger." }
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Join thousands of people who track their health from their finger." }
   ],
   "presets": [{ "name": "Photo reviews" }]
 }
