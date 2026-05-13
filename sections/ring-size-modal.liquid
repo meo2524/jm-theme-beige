@@ -20,8 +20,8 @@
 
         <!-- Unit toggle -->
         <div class="rsm-unit-toggle" role="group" aria-label="Unit system">
-          <button class="rsm-unit-btn is-active" data-unit="mm" aria-pressed="true">mm</button>
-          <button class="rsm-unit-btn" data-unit="in" aria-pressed="false">in</button>
+          <button class="rsm-unit-btn is-active" data-unit="in" aria-pressed="true">in</button>
+          <button class="rsm-unit-btn" data-unit="mm" aria-pressed="false">mm</button>
         </div>
       </div>
 
@@ -458,7 +458,7 @@
   var panel      = modal.querySelector('.rsm-panel');
 
   /* ── Unit system ────────────────────────────────────────── */
-  var currentUnit = 'mm';
+  var currentUnit = 'in';
 
   try {
     var saved = localStorage.getItem('rsm-unit');
