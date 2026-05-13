@@ -55,6 +55,37 @@
         "custom_padding_bottom": 36
       }
     },
+    "pdp_free_gifts_8N7R6R": {
+      "type": "pdp-free-gifts",
+      "blocks": {
+        "gift_bUKnG7": {
+          "type": "gift",
+          "settings": {
+            "title": "Travel Charging Case",
+            "description": "Keep your ring charged wherever life takes you.",
+            "value": "$35.00"
+          }
+        },
+        "gift_bWgXjx": {
+          "type": "gift",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260513_050827_96e19378-e83c-46ec-8aaf-6bd24cd21a7c.png",
+            "title": "The Mend Protocol 1st Edition E-Book",
+            "description": "Thirty days of science-backed practices to help you sleep, recover, and feel like yourself again.",
+            "value": "$30.00"
+          }
+        }
+      },
+      "block_order": [
+        "gift_bUKnG7",
+        "gift_bWgXjx"
+      ],
+      "name": "Free Gifts",
+      "settings": {
+        "eyebrow": "Free with every order",
+        "heading": "What's included"
+      }
+    },
     "interactive_benefits": {
       "type": "interactive-benefits",
       "blocks": {
@@ -705,6 +736,7 @@
   "order": [
     "main",
     "custom_liquid_TgB6HE",
+    "pdp_free_gifts_8N7R6R",
     "interactive_benefits",
     "photo_reviews",
     "angle_testimonials",
