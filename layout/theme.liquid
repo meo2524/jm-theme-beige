@@ -813,10 +813,9 @@
 
 
   <script>
-  /* Mobile: move eyebrow/title/reviews above the gallery, and when
-     motion is on, wrap them in a full-bleed video hero (Apple/Oura
-     product-page style) using the smart-band hero clip. */
+  /* Mobile hero above gallery — disabled, gallery-first layout preferred. */
   (function () {
+    return; /* layout: gallery → thumbnails → product-info */
     if (!window.matchMedia('(max-width: 767px)').matches) return;
     var gallery = document.querySelector('.product-gallery');
     if (!gallery) return;
