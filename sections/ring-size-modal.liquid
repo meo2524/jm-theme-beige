@@ -1,874 +1,563 @@
-{% comment %} Ring Sizer Modal — 3-step calibrated wizard (Calibrate → Pick → Confirm) {% endcomment %}
+{% comment %} Ring Size Guide Modal — metric / imperial toggle {% endcomment %}
 
-<div id="ring-size-modal" class="rsz-modal" role="dialog" aria-modal="true" aria-labelledby="rsz-title" hidden>
-  <div class="rsz-card">
-    <button class="rsz-close" id="rsz-close" aria-label="Close">×</button>
+<div id="ring-size-modal" class="rsm-overlay" role="dialog" aria-modal="true" aria-label="Ring Size Guide" hidden>
+  <div class="rsm-backdrop"></div>
+  <div class="rsm-panel">
 
-    <div class="rsz-eyebrow">N°01 Smart Ring · Sizing</div>
-    <h2 class="rsz-title" id="rsz-title">Find your true size.</h2>
-    <p class="rsz-lede">Calibrate your screen with any credit card, then hold a ring against it. Takes thirty seconds.</p>
+    <button class="rsm-close" aria-label="Close size guide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
 
-    <div class="rsz-unit" role="radiogroup" aria-label="Measurement unit">
-      <button class="rsz-unit-btn is-active" type="button" data-unit="in" role="radio" aria-checked="true">IN</button>
-      <button class="rsz-unit-btn" type="button" data-unit="mm" role="radio" aria-checked="false">MM</button>
-    </div>
+    <div class="rsm-scroll">
 
-    <!-- Stepper -->
-    <div class="rsz-steps" id="rsz-stepper">
-      <span class="rsz-step-mark is-active" data-step="cal"><span class="rsz-num">1</span>Calibrate</span>
-      <span class="rsz-step-rule"></span>
-      <span class="rsz-step-mark" data-step="pick"><span class="rsz-num">2</span>Pick</span>
-      <span class="rsz-step-rule"></span>
-      <span class="rsz-step-mark" data-step="done"><span class="rsz-num">3</span>Confirm</span>
-    </div>
+      <!-- Header -->
+      <div class="rsm-header">
+        <p class="rsm-eyebrow">N°01 Smart Ring</p>
+        <h2 class="rsm-title">Find your size</h2>
+        <p class="rsm-intro">Measure in under a minute. Two methods — pick whichever is easier.</p>
 
-    <!-- Step 1 — Calibrate -->
-    <div class="rsz-step is-active" data-step="cal">
-      <h3>Step 1 — Place a credit card on the screen.</h3>
-      <p class="rsz-instr">Drag the corner handle until the outline matches your card exactly. Any standard card works (credit, debit, driver's licence).</p>
-
-      <div class="rsz-cal-stage">
-        <div class="rsz-card-outline" id="rsz-card-outline">
-          <span class="rsz-card-label">ANY CARD</span>
-          <span class="rsz-card-dim" id="rsz-card-dim">3.37 × 2.13″</span>
-          <div class="rsz-card-handle" id="rsz-card-handle" aria-label="Drag to resize"></div>
+        <!-- Unit toggle -->
+        <div class="rsm-unit-toggle" role="group" aria-label="Unit system">
+          <button class="rsm-unit-btn is-active" data-unit="mm" aria-pressed="true">mm</button>
+          <button class="rsm-unit-btn" data-unit="in" aria-pressed="false">in</button>
         </div>
-        <p class="rsz-cal-hint">Drag the <b>gold handle</b> until the outline matches your physical card.</p>
       </div>
 
-      <div class="rsz-controls">
-        <a href="#" class="rsz-btn ghost" id="rsz-skip">No card? Use string</a>
-        <button class="rsz-btn" id="rsz-cal-next">Continue →</button>
-      </div>
-    </div>
+      <!-- Methods -->
+      <div class="rsm-methods">
 
-    <!-- Step 2 — Pick -->
-    <div class="rsz-step" data-step="pick">
-      <h3>Step 2 — Hold your ring against the matching circle.</h3>
-      <p class="rsz-instr">Place a ring you already wear over each circle. The one your <b>inner diameter</b> fits over exactly is your size.</p>
-
-      <div class="rsz-pick-stage">
-        <div class="rsz-circles" id="rsz-circles" role="radiogroup" aria-label="Ring size circles"></div>
-      </div>
-
-      <div class="rsz-controls">
-        <button class="rsz-btn ghost" data-back="cal">← Recalibrate</button>
-        <button class="rsz-btn" id="rsz-pick-next" disabled>Continue →</button>
-      </div>
-    </div>
-
-    <!-- Step 3 — Result -->
-    <div class="rsz-step" data-step="done">
-      <h3>Your size.</h3>
-      <p class="rsz-instr">Save this — we'll pre-select it on the product.</p>
-
-      <div class="rsz-result">
-        <div class="rsz-result-mm" id="rsz-result-mm">— mm</div>
-        <div class="rsz-result-size" id="rsz-result-size">US —</div>
-        <p class="rsz-result-note">Measure at the end of the day — fingers swell. Between sizes? Go up one. Worn on the index or middle finger for best HR readings.</p>
-      </div>
-
-      <div class="rsz-controls">
-        <button class="rsz-btn ghost" data-back="pick">← Pick a different size</button>
-        <button class="rsz-btn" id="rsz-confirm">Use this size</button>
-      </div>
-    </div>
-
-    <!-- Alternate: String -->
-    <div class="rsz-step" data-step="string">
-      <h3>Measure with string.</h3>
-      <p class="rsz-instr">Useful if you don't have a card or an existing ring handy.</p>
-
-      <div class="rsz-string">
-        <ol>
-          <li>Wrap a piece of string around the base of your finger.</li>
-          <li>Mark where it meets, then lay it flat.</li>
-          <li>Measure the length and enter it below.</li>
-        </ol>
-        <div class="rsz-string-input">
-          <input id="rsz-string-val" type="number" inputmode="decimal" min="1.5" max="3.5" step="0.05" placeholder="e.g. 2.18" aria-label="String length" />
-          <div class="rsz-string-unit" id="rsz-string-unit">in</div>
+        <div class="rsm-method">
+          <div class="rsm-method-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40">
+              <rect x="8" y="20" width="32" height="12" rx="2"/>
+              <path d="M16 20v-4a8 8 0 0116 0v4"/>
+              <line x1="18" y1="26" x2="18" y2="26" stroke-linecap="round" stroke-width="2"/>
+              <line x1="24" y1="26" x2="24" y2="26" stroke-linecap="round" stroke-width="2"/>
+              <line x1="30" y1="26" x2="30" y2="26" stroke-linecap="round" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="rsm-method-body">
+            <h3 class="rsm-method-title">Method 1 — String or paper strip</h3>
+            <ol class="rsm-steps">
+              <li>Cut a thin strip of paper or use a piece of string.</li>
+              <li>Wrap it snugly around the base of the finger you'll wear the ring on.</li>
+              <li>Mark where the strip meets itself, then measure that length in <span data-mm="millimetres" data-in="inches" class="rsm-unit-word">millimetres</span>.</li>
+              <li>That measurement is your <strong>circumference</strong> — match it in the table below.</li>
+            </ol>
+          </div>
         </div>
-        <div class="rsz-string-result" id="rsz-string-result">Enter a length to see your size.</div>
+
+        <div class="rsm-divider"><span>or</span></div>
+
+        <div class="rsm-method">
+          <div class="rsm-method-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40">
+              <circle cx="24" cy="24" r="14"/>
+              <circle cx="24" cy="24" r="8"/>
+              <line x1="24" y1="4" x2="24" y2="10"/>
+              <line x1="24" y1="38" x2="24" y2="44"/>
+              <line x1="4" y1="24" x2="10" y2="24"/>
+              <line x1="38" y1="24" x2="44" y2="24"/>
+            </svg>
+          </div>
+          <div class="rsm-method-body">
+            <h3 class="rsm-method-title">Method 2 — Existing ring</h3>
+            <ol class="rsm-steps">
+              <li>Find a ring that already fits the finger you'll wear this on.</li>
+              <li>Measure the <strong>inside diameter</strong> (across the centre of the ring, inside edge to inside edge) in <span data-mm="millimetres" data-in="inches" class="rsm-unit-word">millimetres</span>.</li>
+              <li>Match that diameter in the table below.</li>
+            </ol>
+          </div>
+        </div>
+
       </div>
 
-      <div class="rsz-controls">
-        <button class="rsz-btn ghost" data-back="cal">← Back to calibration</button>
-        <button class="rsz-btn" id="rsz-string-confirm" disabled>Use this size</button>
+      <!-- Visual ring sizer -->
+      <div class="rsm-sizer-wrap">
+        <h3 class="rsm-sizer-heading">Visual ring sizer</h3>
+        <p class="rsm-sizer-note">Hold a ruler to your screen. Each circle shows the inside diameter at actual size (96 DPI reference). Use for guidance only — measure for accuracy.</p>
+        <div class="rsm-sizer-row">
+          {%- assign sizes      = "5,6,7,8,9,10,11,12,13"                                           | split: "," -%}
+          {%- assign dias_mm    = "15.7,16.5,17.3,18.3,19.1,20.0,20.8,21.6,22.4"                   | split: "," -%}
+          {%- assign dias_in    = "0.618,0.650,0.681,0.720,0.752,0.787,0.819,0.850,0.882"           | split: "," -%}
+          {%- for size in sizes -%}
+            {%- assign dia_mm = dias_mm[forloop.index0] | times: 1.0 -%}
+            {%- assign dia_in = dias_in[forloop.index0] -%}
+            {%- assign px = dia_mm | times: 3.78 | round -%}
+            <button class="rsm-circle-btn"
+                    data-size="{{ size }}"
+                    style="width:{{ px }}px;height:{{ px }}px;"
+                    aria-label="Size {{ size }}, {{ dia_mm }}mm">
+              <span class="rsm-circle-size">{{ size }}</span>
+              <span class="rsm-circle-dia" data-mm="{{ dia_mm }}mm" data-in='{{ dia_in }}"'>{{ dia_mm }}mm</span>
+            </button>
+          {%- endfor -%}
+        </div>
       </div>
-    </div>
 
-    <div class="rsz-foot">
-      <span>Mend &amp; Co · Sizing helper</span>
-      <details class="rsz-chart-details">
-        <summary class="rsz-foot-link">See full size chart →</summary>
-        <div class="rsz-chart-wrap">
-          <table class="rsz-table">
+      <!-- Size chart -->
+      <div class="rsm-chart-wrap">
+        <h3 class="rsm-chart-heading">Size chart</h3>
+        <div class="rsm-table-wrap">
+          <table class="rsm-table">
             <thead>
-              <tr><th>US Size</th><th>Inner diameter</th><th>Circumference</th></tr>
+              <tr>
+                <th>Size</th>
+                <th class="rsm-th-dia">Inner diameter</th>
+                <th class="rsm-th-circ">Circumference</th>
+              </tr>
             </thead>
             <tbody>
-              {%- assign sizes    = "6,7,8,9,10,11,12,13"                                          | split: "," -%}
-              {%- assign dias_mm  = "16.51,17.32,18.14,18.95,19.76,20.57,21.39,22.20"             | split: "," -%}
-              {%- assign dias_in  = "0.65,0.68,0.71,0.75,0.78,0.81,0.84,0.87"                    | split: "," -%}
-              {%- assign circs_mm = "51.9,54.4,57.0,59.5,62.1,64.6,67.2,69.7"                    | split: "," -%}
-              {%- assign circs_in = "2.04,2.14,2.24,2.34,2.44,2.54,2.65,2.75"                    | split: "," -%}
+              {%- assign circs_mm = "49.3,51.9,54.4,57.5,60.0,62.8,65.3,67.9,70.4" | split: "," -%}
+              {%- assign circs_in = "1.94,2.04,2.14,2.26,2.36,2.47,2.57,2.67,2.77" | split: "," -%}
               {%- for size in sizes -%}
+                {%- assign dia_mm  = dias_mm[forloop.index0] -%}
+                {%- assign dia_in  = dias_in[forloop.index0] -%}
+                {%- assign circ_mm = circs_mm[forloop.index0] -%}
+                {%- assign circ_in = circs_in[forloop.index0] -%}
                 <tr>
                   <td>{{ size }}</td>
-                  <td>{{ dias_mm[forloop.index0] }} mm · {{ dias_in[forloop.index0] }}"</td>
-                  <td>{{ circs_mm[forloop.index0] }} mm · {{ circs_in[forloop.index0] }}"</td>
+                  <td><span class="rsm-val" data-mm="{{ dia_mm }} mm" data-in='{{ dia_in }}"'>{{ dia_mm }} mm</span></td>
+                  <td><span class="rsm-val" data-mm="{{ circ_mm }} mm" data-in='{{ circ_in }}"'>{{ circ_mm }} mm</span></td>
                 </tr>
               {%- endfor -%}
             </tbody>
           </table>
         </div>
-      </details>
+      </div>
+
+      <!-- Tips -->
+      <div class="rsm-tips">
+        <h3 class="rsm-tips-heading">Tips for an accurate fit</h3>
+        <ul class="rsm-tips-list">
+          <li>Measure at the <strong>end of the day</strong> — fingers are slightly larger then.</li>
+          <li>If you're between sizes, <strong>go up one size</strong>.</li>
+          <li>The ring should slide on snugly but come off without effort.</li>
+          <li>For best sensor accuracy, wear on your <strong>index or middle finger</strong>.</li>
+          <li>Avoid measuring when you're very cold or hot.</li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </div>
 
 <style>
-  /* ── Tokens ────────────────────────────────────────────── */
-  .rsz-modal { --rsz-mute: var(--char-soft); }
+  /* Overlay */
+  .rsm-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .rsm-overlay[hidden] { display: none !important; }
 
-  /* ── Overlay ────────────────────────────────────────────── */
-  .rsz-modal {
-    position: fixed; inset: 0; z-index: 10002;
-    display: flex; align-items: flex-start; justify-content: center;
-    overflow-y: auto;
-    background: rgba(31,29,26,0.55);
+  .rsm-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(31,29,26,0.60);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
-    padding: 32px 16px;
-    opacity: 0;
-    transition: opacity .25s ease;
-    pointer-events: none;
+    cursor: pointer;
+    animation: rsmFadeIn 0.25s ease;
   }
-  .rsz-modal[hidden] { display: none !important; }
-  .rsz-modal.is-open { opacity: 1; pointer-events: auto; }
 
-  /* ── Card ───────────────────────────────────────────────── */
-  .rsz-card {
-    width: 100%; max-width: 720px;
-    background: var(--cream);
-    color: var(--char);
-    border: 1px solid var(--line);
-    box-shadow: 0 30px 80px rgba(0,0,0,0.28);
-    padding: 36px 36px 28px;
+  @keyframes rsmFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes rsmSlideUp {
+    from { transform: translateY(32px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  /* Panel */
+  .rsm-panel {
     position: relative;
-    transform: translateY(12px);
-    transition: transform .25s ease;
+    background: #f5efe4;
+    width: 100%;
+    max-width: 680px;
+    max-height: 90vh;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    flex-direction: column;
+    animation: rsmSlideUp 0.3s cubic-bezier(0.34,1.1,0.64,1);
+    box-shadow: 0 -8px 48px rgba(0,0,0,0.18);
+    z-index: 1;
   }
-  .rsz-modal.is-open .rsz-card { transform: translateY(0); }
 
-  .rsz-close {
-    position: absolute; right: 12px; top: 12px;
-    width: 36px; height: 36px; border: 0;
+  @media (min-width: 700px) {
+    .rsm-overlay { align-items: center; }
+    .rsm-panel {
+      border-radius: 20px;
+      max-height: 88vh;
+      animation: rsmFadeIn 0.25s ease, rsmSlideUp 0.3s cubic-bezier(0.34,1.1,0.64,1);
+    }
+  }
+
+  .rsm-close {
+    position: absolute;
+    top: 18px; right: 18px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
     background: rgba(31,29,26,0.07);
-    border-radius: 50%; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--char-soft);
-    font-size: 18px; line-height: 1;
-    transition: background .2s, color .2s;
-  }
-  .rsz-close:hover { background: var(--char); color: var(--cream); }
-
-  /* ── Header ─────────────────────────────────────────────── */
-  .rsz-eyebrow {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
-    color: var(--gold-deep);
-    display: inline-flex; align-items: center; gap: 12px;
-    margin-bottom: 12px;
-  }
-  .rsz-eyebrow::before { content: ""; width: 24px; height: 1px; background: currentColor; opacity: 0.6; }
-
-  .rsz-title {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 26px; font-weight: 500; letter-spacing: -0.01em;
-    margin: 0 0 8px; color: var(--char);
-  }
-  .rsz-lede {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 12.5px; line-height: 1.55;
-    color: var(--char-soft);
-    margin: 0 0 20px; max-width: 56ch;
-  }
-
-  /* ── Unit toggle ────────────────────────────────────────── */
-  .rsz-unit {
-    display: inline-flex; border: 1px solid var(--line-strong);
-    margin-bottom: 20px; background: var(--cream-2);
-  }
-  .rsz-unit-btn {
-    appearance: none; border: 0; background: transparent;
-    padding: 9px 18px; cursor: pointer;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--char-soft);
-    transition: background .2s, color .2s;
-  }
-  .rsz-unit-btn + .rsz-unit-btn { border-left: 1px solid var(--line-strong); }
-  .rsz-unit-btn.is-active { background: var(--char); color: var(--cream); }
-
-  /* ── Stepper ────────────────────────────────────────────── */
-  .rsz-steps {
-    display: flex; align-items: center; gap: 12px;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--char-soft);
-    margin-bottom: 24px;
-    padding-top: 16px;
-    border-top: 1px solid var(--line);
-    transition: opacity .25s;
-  }
-  .rsz-step-mark {
-    display: inline-flex; align-items: center; gap: 8px;
-    transition: color .25s;
-  }
-  .rsz-step-mark .rsz-num {
-    width: 22px; height: 22px; border-radius: 50%;
-    border: 1px solid var(--line-strong);
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 10px; letter-spacing: 0;
-    transition: background .25s, color .25s, border-color .25s;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: background 0.2s;
     flex-shrink: 0;
   }
-  .rsz-step-mark.is-done .rsz-num { background: var(--gold-deep); color: var(--cream); border-color: var(--gold-deep); }
-  .rsz-step-mark.is-active { color: var(--char); }
-  .rsz-step-mark.is-active .rsz-num { border-color: var(--char); color: var(--char); }
-  .rsz-step-rule { flex: 1; height: 1px; background: var(--line); }
+  .rsm-close:hover { background: rgba(31,29,26,0.13); }
 
-  /* ── Steps ──────────────────────────────────────────────── */
-  .rsz-step { display: none; }
-  .rsz-step.is-active { display: block; }
-  .rsz-step h3 {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 13px; font-weight: 500;
-    margin: 0 0 6px; letter-spacing: 0.01em;
-  }
-  .rsz-instr {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 12px; line-height: 1.55;
-    color: var(--char-soft);
-    margin: 0 0 18px;
-  }
-
-  /* ── Calibration stage ──────────────────────────────────── */
-  .rsz-cal-stage {
-    background: var(--cream-2);
-    padding: 28px 20px 32px;
-    border: 1px solid var(--line);
-    display: flex; flex-direction: column; align-items: center; gap: 16px;
-    overflow: hidden;
-  }
-  .rsz-card-outline {
-    position: relative;
-    border: 1.5px solid var(--char);
-    background: repeating-linear-gradient(135deg, transparent 0 8px, rgba(31,29,26,0.04) 8px 9px);
-    width: 320px;
-    max-width: calc(100% - 48px);
-    aspect-ratio: 85.6 / 53.98;
-    border-radius: 6px;
-    user-select: none;
-    touch-action: none;
-  }
-  .rsz-card-label {
-    position: absolute; top: 10px; left: 12px;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 8px; letter-spacing: 0.28em; text-transform: uppercase;
-    color: var(--char-soft);
-  }
-  .rsz-card-dim {
-    position: absolute; bottom: 8px; right: 10px;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 9px; letter-spacing: 0.06em;
-    color: var(--rsz-mute);
-  }
-  .rsz-card-handle {
-    position: absolute; right: -18px; bottom: -18px;
-    width: 36px; height: 36px;
-    background: var(--gold-deep); color: var(--cream);
-    border-radius: 50%; cursor: nwse-resize;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 12px rgba(168,129,79,0.4);
-    touch-action: none;
-  }
-  .rsz-card-handle::before {
-    content: ""; width: 12px; height: 12px;
-    border-right: 1.5px solid currentColor;
-    border-bottom: 1.5px solid currentColor;
-  }
-  .rsz-cal-hint {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 11px; letter-spacing: 0.03em;
-    color: var(--char-soft); text-align: center;
-    max-width: 340px;
-  }
-  .rsz-cal-hint b { color: var(--gold-deep); font-weight: 500; }
-
-  /* ── Pick stage ─────────────────────────────────────────── */
-  .rsz-pick-stage {
-    background: var(--cream-2);
-    border: 1px solid var(--line);
-    padding: 24px 20px;
-    min-height: 160px;
-    overflow-x: auto; overflow-y: hidden;
+  .rsm-scroll {
+    overflow-y: auto;
+    padding: 44px 32px 40px;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
   }
-  .rsz-pick-stage::-webkit-scrollbar { height: 5px; }
-  .rsz-pick-stage::-webkit-scrollbar-thumb { background: rgba(31,29,26,0.18); border-radius: 3px; }
 
-  .rsz-circles {
-    display: flex; flex-wrap: wrap; gap: 14px;
-    justify-content: center; align-items: center;
-    margin-bottom: 4px;
+  /* Header */
+  .rsm-eyebrow {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #9a7e57;
+    margin: 0 0 8px;
   }
-  .rsz-circle {
-    appearance: none;
-    border: 1.5px solid var(--char-soft);
-    background: var(--cream); cursor: pointer;
+  .rsm-title {
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 700;
+    margin: 0 0 10px;
+    color: #111;
+    line-height: 1.15;
+  }
+  .rsm-intro {
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 20px;
+  }
+
+  /* ── Unit toggle ─────────────────────────────────────── */
+  .rsm-unit-toggle {
+    display: inline-flex;
+    background: rgba(31,29,26,0.06);
+    border-radius: 8px;
+    padding: 3px;
+    gap: 2px;
+    margin-bottom: 32px;
+  }
+
+  .rsm-unit-btn {
+    height: 32px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(31,29,26,0.5);
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s;
+  }
+
+  .rsm-unit-btn.is-active {
+    background: #1f1d1a;
+    color: #f5efe4;
+  }
+
+  .rsm-unit-btn:not(.is-active):hover {
+    background: rgba(31,29,26,0.1);
+    color: #1f1d1a;
+  }
+
+  /* Methods */
+  .rsm-methods { margin-bottom: 40px; }
+
+  .rsm-method {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .rsm-method-icon {
+    flex-shrink: 0;
+    width: 52px; height: 52px;
+    background: #f0ede8;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9a7e57;
+  }
+  .rsm-method-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 0 10px;
+    color: #111;
+  }
+  .rsm-steps {
+    padding-left: 18px;
+    margin: 0;
+    color: #444;
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+  .rsm-steps li { margin-bottom: 4px; }
+
+  .rsm-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0;
+    color: #bbb;
+    font-size: 12px;
+  }
+  .rsm-divider::before, .rsm-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e5e0d8;
+  }
+
+  /* Visual sizer */
+  .rsm-sizer-wrap {
+    background: #fff;
+    border: 1px solid #e8e3db;
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-bottom: 32px;
+  }
+  .rsm-sizer-heading {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    color: #111;
+  }
+  .rsm-sizer-note {
+    font-size: 12px;
+    color: #999;
+    margin: 0 0 20px;
+    line-height: 1.6;
+  }
+  .rsm-sizer-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .rsm-circle-btn {
     border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
+    border: 2px solid #d0cbc3;
+    background: #f5efe4;
+    cursor: pointer;
+    display: flex;
     flex-direction: column;
-    position: relative;
-    transition: border-color .15s, background .15s, transform .15s;
-    padding: 0; color: var(--char);
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    flex-shrink: 0;
   }
-  .rsz-circle:hover { border-color: var(--gold-deep); transform: scale(1.04); }
-  .rsz-circle .rsz-circle-num {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 11px; font-weight: 500; line-height: 1;
+  .rsm-circle-btn:hover,
+  .rsm-circle-btn.is-active {
+    border-color: #9a7e57;
+    background: rgba(154,126,87,0.08);
+    transform: scale(1.05);
   }
-  .rsz-circle .rsz-circle-sub {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 8px; color: var(--rsz-mute); margin-top: 2px;
+  .rsm-circle-size {
+    font-size: 13px;
+    font-weight: 700;
+    color: #111;
+    line-height: 1;
   }
-  .rsz-circle.is-selected {
-    border-color: var(--char); background: var(--char);
-    color: var(--cream); border-width: 2px;
-  }
-  .rsz-circle.is-selected .rsz-circle-sub { color: rgba(247,239,227,0.55); }
-  .rsz-circle:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 3px; }
-
-  /* ── Result panel ───────────────────────────────────────── */
-  .rsz-result {
-    background: var(--cream-2);
-    border: 1px solid var(--line);
-    padding: 24px; text-align: center;
-    display: flex; flex-direction: column; gap: 10px; align-items: center;
-    margin-bottom: 0;
-  }
-  .rsz-result-size {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 40px; font-weight: 500; line-height: 1; letter-spacing: -0.01em;
-    color: var(--char);
-  }
-  .rsz-result-mm {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--gold-deep);
-  }
-  .rsz-result-note {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 11.5px; line-height: 1.55;
-    color: var(--char-soft);
-    max-width: 38ch; margin: 2px 0 0;
+  .rsm-circle-dia {
+    font-size: 9px;
+    color: #999;
+    line-height: 1;
+    transition: opacity 0.15s;
   }
 
-  /* ── Controls row ───────────────────────────────────────── */
-  .rsz-controls {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-top: 18px; gap: 10px; flex-wrap: wrap;
+  /* Table */
+  .rsm-chart-wrap { margin-bottom: 32px; }
+  .rsm-chart-heading {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 0 14px;
+    color: #111;
   }
-  .rsz-btn {
-    appearance: none; border: 1px solid var(--char);
-    background: var(--char); color: var(--cream);
-    padding: 13px 20px; cursor: pointer;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    text-decoration: none;
-    transition: background .15s, color .15s, opacity .15s;
-    display: inline-flex; align-items: center;
+  .rsm-table-wrap { overflow-x: auto; }
+  .rsm-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
   }
-  .rsz-btn:hover:not([disabled]) { background: transparent; color: var(--char); }
-  .rsz-btn[disabled] { opacity: 0.32; cursor: not-allowed; }
-  .rsz-btn.ghost { background: transparent; color: var(--char); border-color: var(--line-strong); }
-  .rsz-btn.ghost:hover:not([disabled]) { background: var(--char); color: var(--cream); border-color: var(--char); }
+  .rsm-table th {
+    text-align: left;
+    padding: 10px 16px;
+    background: #f0ede8;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #666;
+    font-weight: 600;
+    border-bottom: 1px solid #e5e0d8;
+  }
+  .rsm-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0ede8;
+    color: #333;
+  }
+  .rsm-table tbody tr:last-child td { border-bottom: none; }
+  .rsm-table tbody tr:hover td { background: rgba(154,126,87,0.04); }
+  .rsm-table td:first-child { font-weight: 700; color: #111; }
 
-  /* ── String method ──────────────────────────────────────── */
-  .rsz-string {
-    background: var(--cream-2);
-    border: 1px solid var(--line);
-    padding: 22px;
+  /* Value swap animation */
+  .rsm-val, .rsm-circle-dia, .rsm-unit-word {
+    transition: opacity 0.12s ease;
   }
-  .rsz-string ol {
-    margin: 0 0 16px; padding-left: 18px;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 12px; line-height: 1.7; color: var(--char-soft);
+  .rsm-swapping .rsm-val,
+  .rsm-swapping .rsm-circle-dia,
+  .rsm-swapping .rsm-unit-word {
+    opacity: 0;
   }
-  .rsz-string ol li::marker { color: var(--gold-deep); }
-  .rsz-string-input {
-    display: flex; align-items: stretch;
-    border: 1px solid var(--char-soft);
-    background: var(--cream);
-    max-width: 260px; margin-top: 8px;
-  }
-  .rsz-string-input input {
-    flex: 1; appearance: none; border: 0; background: transparent;
-    padding: 13px 14px;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 15px; font-weight: 500;
-    color: var(--char); outline: none; min-width: 0;
-  }
-  .rsz-string-unit {
-    display: flex; align-items: center; padding: 0 14px;
-    border-left: 1px solid var(--line);
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 11px; letter-spacing: 0.18em;
-    color: var(--rsz-mute);
-  }
-  .rsz-string-result {
-    margin-top: 14px;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 12.5px; color: var(--char-soft);
-    line-height: 1.5;
-  }
-  .rsz-string-result b { color: var(--char); font-weight: 500; }
 
-  /* ── Footer / size chart ────────────────────────────────── */
-  .rsz-foot {
-    margin-top: 20px; padding-top: 16px;
-    border-top: 1px solid var(--line);
-    display: flex; justify-content: space-between; align-items: flex-start;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--rsz-mute);
-    flex-wrap: wrap; gap: 10px;
+  /* Tips */
+  .rsm-tips-heading {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: #111;
   }
-  .rsz-chart-details { display: inline; }
-  .rsz-foot-link {
-    list-style: none; cursor: pointer;
-    color: var(--gold-deep); text-decoration: none;
-    border-bottom: 1px solid currentColor; padding-bottom: 2px;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-    background: none; border-top: 0; border-left: 0; border-right: 0;
+  .rsm-tips-list {
+    padding-left: 18px;
+    margin: 0;
+    color: #555;
+    font-size: 13.5px;
+    line-height: 1.75;
   }
-  .rsz-foot-link::-webkit-details-marker { display: none; }
-  .rsz-foot-link:hover { color: var(--char); }
-  .rsz-chart-wrap {
-    margin-top: 12px; overflow-x: auto;
-    border: 1px solid var(--line);
-  }
-  .rsz-table {
-    width: 100%; border-collapse: collapse;
-    font-size: 12px; letter-spacing: 0.02em;
-    background: var(--cream);
-  }
-  .rsz-table th {
-    text-align: left; padding: 10px 14px;
-    background: var(--cream-2);
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--char-soft); font-weight: 500;
-    border-bottom: 1px solid var(--line);
-  }
-  .rsz-table td {
-    padding: 10px 14px; border-bottom: 1px solid var(--line);
-    color: var(--char-soft);
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-  }
-  .rsz-table tbody tr:last-child td { border-bottom: none; }
-  .rsz-table td:first-child { font-weight: 500; color: var(--char); }
+  .rsm-tips-list li { margin-bottom: 4px; }
 
-  /* ── Mobile ─────────────────────────────────────────────── */
-  @media (max-width: 600px) {
-    .rsz-modal { padding: 14px 8px; }
-    .rsz-card { padding: 24px 18px 20px; }
-    .rsz-title { font-size: 20px; }
-    .rsz-lede { font-size: 12px; }
-    .rsz-steps { font-size: 9px; gap: 8px; }
-    .rsz-step-mark .rsz-num { width: 20px; height: 20px; font-size: 9px; }
-    .rsz-cal-stage { padding: 18px 10px 28px; }
-    /* Mobile: height-driven resize — drag handle sits at bottom-centre */
-    .rsz-card-outline { width: auto; height: 155px; max-width: calc(100% - 16px); }
-    .rsz-card-handle {
-      width: 32px; height: 32px;
-      right: auto; left: 50%; bottom: -14px;
-      transform: translateX(-50%);
-      cursor: ns-resize;
-    }
-    /* Rotate the corner arrow to point down */
-    .rsz-card-handle::before { transform: rotate(45deg); }
-    .rsz-pick-stage { padding: 16px 12px; }
-    .rsz-circles { gap: 10px; justify-content: flex-start; flex-wrap: wrap; }
-    .rsz-result-size { font-size: 32px; }
-    .rsz-controls { flex-direction: column-reverse; }
-    .rsz-controls .rsz-btn { width: 100%; text-align: center; justify-content: center; }
-    .rsz-foot { font-size: 9px; }
-  }
-  @media (max-width: 380px) {
-    .rsz-modal { padding: 10px 6px; }
-    .rsz-card { padding: 20px 14px 16px; }
-    .rsz-title { font-size: 18px; }
-    .rsz-unit-btn { padding: 8px 13px; font-size: 10px; }
-    .rsz-card-outline { height: 125px; }
+  @media (max-width: 480px) {
+    .rsm-scroll { padding: 36px 20px 32px; }
   }
 </style>
 
 <script>
-(function(){
-  // ─── Size data — US 6–13 whole sizes ───
-  var SIZES = [
-    { us: 6,  mm: 16.51, c: 51.9 },
-    { us: 7,  mm: 17.32, c: 54.4 },
-    { us: 8,  mm: 18.14, c: 57.0 },
-    { us: 9,  mm: 18.95, c: 59.5 },
-    { us: 10, mm: 19.76, c: 62.1 },
-    { us: 11, mm: 20.57, c: 64.6 },
-    { us: 12, mm: 21.39, c: 67.2 },
-    { us: 13, mm: 22.20, c: 69.7 }
-  ];
-  var CARD_MM   = 85.6;
-  var STORE_KEY = 'mc_rsz_pxpermm';
-  var UNIT_KEY  = 'mc_rsz_unit';
+(function() {
+  var modal      = document.getElementById('ring-size-modal');
+  var backdrop   = modal.querySelector('.rsm-backdrop');
+  var closeBtn   = modal.querySelector('.rsm-close');
+  var circleBtns = modal.querySelectorAll('.rsm-circle-btn');
+  var unitBtns   = modal.querySelectorAll('.rsm-unit-btn');
+  var panel      = modal.querySelector('.rsm-panel');
 
-  var modal       = document.getElementById('ring-size-modal');
-  var closeBtn    = document.getElementById('rsz-close');
-  var stepper     = document.getElementById('rsz-stepper');
-  var cardOutline = document.getElementById('rsz-card-outline');
-  var cardHandle  = document.getElementById('rsz-card-handle');
-  var cardDim     = document.getElementById('rsz-card-dim');
-  var calNext     = document.getElementById('rsz-cal-next');
-  var skipBtn     = document.getElementById('rsz-skip');
-  var circlesEl   = document.getElementById('rsz-circles');
-  var pickNext    = document.getElementById('rsz-pick-next');
-  var resultSize  = document.getElementById('rsz-result-size');
-  var resultMm    = document.getElementById('rsz-result-mm');
-  var stringVal   = document.getElementById('rsz-string-val');
-  var stringUnit  = document.getElementById('rsz-string-unit');
-  var stringRes   = document.getElementById('rsz-string-result');
-  var stringConf  = document.getElementById('rsz-string-confirm');
-  var confirmBtn  = document.getElementById('rsz-confirm');
-  var unitBtns    = Array.from(modal.querySelectorAll('.rsz-unit-btn'));
-  var steps       = Array.from(modal.querySelectorAll('.rsz-step'));
+  /* ── Unit system ────────────────────────────────────────── */
+  var currentUnit = 'mm';
 
-  var unit = 'in';
   try {
-    var saved = localStorage.getItem(UNIT_KEY);
-    if (saved === 'mm' || saved === 'in') unit = saved;
-  } catch(e){}
+    var saved = localStorage.getItem('rsm-unit');
+    if (saved === 'mm' || saved === 'in') currentUnit = saved;
+  } catch(e) {}
 
-  var pxPerMm = parseFloat(localStorage.getItem(STORE_KEY)) || 3.78;
-  var selectedSize = null;
+  function applyUnit(unit, animate) {
+    if (animate) panel.classList.add('rsm-swapping');
 
-  // ─── Formatting ───
-  function fmt(mm, prec) {
-    prec = prec != null ? prec : (unit === 'in' ? 2 : 1);
-    if (unit === 'in') return (mm / 25.4).toFixed(prec) + '″';
-    return mm.toFixed(prec) + ' mm';
-  }
-  function fmtShort(mm) {
-    if (unit === 'in') return (mm / 25.4).toFixed(2) + '"';
-    return mm.toFixed(1) + 'mm';
-  }
-
-  // ─── Open / close ───
-  function openModal() {
-    modal.removeAttribute('hidden');
-    // Restyle: delay display so transition works
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() {
-        modal.classList.add('is-open');
+    function swap() {
+      /* Values: data-mm / data-in on .rsm-val and .rsm-circle-dia */
+      modal.querySelectorAll('[data-mm][data-in]').forEach(function(el) {
+        el.textContent = el.getAttribute('data-' + unit);
       });
+
+      /* aria-label on circle buttons */
+      circleBtns.forEach(function(btn) {
+        var size = btn.dataset.size;
+        var dia  = btn.querySelector('.rsm-circle-dia');
+        if (dia) btn.setAttribute('aria-label', 'Size ' + size + ', ' + dia.getAttribute('data-' + unit));
+      });
+
+      /* Toggle button states */
+      unitBtns.forEach(function(b) {
+        var active = b.dataset.unit === unit;
+        b.classList.toggle('is-active', active);
+        b.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+
+      currentUnit = unit;
+      try { localStorage.setItem('rsm-unit', unit); } catch(e) {}
+
+      if (animate) {
+        requestAnimationFrame(function() {
+          panel.classList.remove('rsm-swapping');
+        });
+      }
+    }
+
+    if (animate) {
+      setTimeout(swap, 120); /* wait for fade-out */
+    } else {
+      swap();
+    }
+  }
+
+  /* Apply saved preference immediately (no animation) */
+  applyUnit(currentUnit, false);
+
+  unitBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (btn.dataset.unit !== currentUnit) {
+        applyUnit(btn.dataset.unit, true);
+      }
     });
+  });
+
+  /* ── Open / close ───────────────────────────────────────── */
+  function openModal() {
+    modal.hidden = false;
     document.body.style.overflow = 'hidden';
-    setCardSize(isMobile() ? pxPerMm * CARD_H_MM : pxPerMm * CARD_MM);
-    renderCircles();
-    showStep('cal');
-    applyUnit(unit, false);
     closeBtn.focus();
   }
   function closeModal() {
-    modal.classList.remove('is-open');
+    modal.hidden = true;
     document.body.style.overflow = '';
-    setTimeout(function() { modal.setAttribute('hidden', ''); }, 260);
   }
 
+  backdrop.addEventListener('click', closeModal);
   closeBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && !modal.hasAttribute('hidden')) closeModal();
+    if (e.key === 'Escape' && !modal.hidden) closeModal();
   });
 
-  // ─── External triggers ───
+  /* Intercept any "Find your size" link/button across the page */
   document.addEventListener('click', function(e) {
     var el = e.target.closest('[data-size-guide], .rsm-trigger, a[href="#size-guide"]');
     if (el) { e.preventDefault(); openModal(); }
   });
-  // Accordion trigger "Find your size" / "Size guide"
+
+  /* Also intercept the accordion trigger labelled "Find your size" */
   document.addEventListener('click', function(e) {
     var btn = e.target.closest('.accordion__trigger');
     if (!btn) return;
     var text = btn.textContent.trim().toLowerCase();
     if (text.indexOf('find your size') !== -1 || text.indexOf('size guide') !== -1) {
-      e.preventDefault(); e.stopImmediatePropagation(); openModal();
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      openModal();
     }
   }, true);
 
-  // ─── Step navigation ───
-  function showStep(name) {
-    steps.forEach(function(s) { s.classList.toggle('is-active', s.dataset.step === name); });
-    var order = ['cal', 'pick', 'done'];
-    var i = order.indexOf(name);
-    Array.from(stepper.querySelectorAll('.rsz-step-mark')).forEach(function(m) {
-      var j = order.indexOf(m.dataset.step);
-      m.classList.toggle('is-active', j === i);
-      m.classList.toggle('is-done', j < i && i >= 0);
+  /* Circle button highlight */
+  circleBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      circleBtns.forEach(function(b) { b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
     });
-    stepper.style.opacity = name === 'string' ? '0.4' : '1';
-  }
-  Array.from(modal.querySelectorAll('[data-back]')).forEach(function(b) {
-    b.addEventListener('click', function() { showStep(b.dataset.back); });
-  });
-  calNext.addEventListener('click', function() { renderCircles(); showStep('pick'); });
-  skipBtn.addEventListener('click', function(e) { e.preventDefault(); showStep('string'); });
-  pickNext.addEventListener('click', function() {
-    if (!selectedSize) return;
-    resultSize.textContent = 'US ' + selectedSize.us;
-    resultMm.textContent = fmt(selectedSize.mm, 2) + ' inner diameter';
-    showStep('done');
-  });
-
-  // ─── Confirm: apply to Shopify variant picker + Kaching ───
-  function applySizeToPage(size) {
-    var sizeStr = String(size);
-    try {
-      document.querySelectorAll('fieldset.variant-fieldset').forEach(function(fs) {
-        var legend = fs.querySelector('legend');
-        if (!legend || legend.textContent.trim().toLowerCase() !== 'size') return;
-        var radio = fs.querySelector('input[type="radio"][value="' + sizeStr + '"]');
-        if (radio) {
-          if (!radio.checked) {
-            radio.checked = true;
-            radio.dispatchEvent(new Event('input',  { bubbles: true }));
-            radio.dispatchEvent(new Event('change', { bubbles: true }));
-          }
-          var labels = fs.querySelectorAll('label.variant-card');
-          labels.forEach(function(l) { l.classList.remove('is-selected'); });
-          var lbl = radio.closest('label.variant-card');
-          if (lbl) lbl.classList.add('is-selected');
-        } else {
-          var clickable = Array.from(fs.querySelectorAll('button, label, [role="button"]'))
-            .filter(function(el) { return el.textContent.trim() === sizeStr; });
-          if (clickable[0]) clickable[0].click();
-        }
-      });
-    } catch(err){}
-    try {
-      document.querySelectorAll('select.kaching-bundles__bar-variant-select').forEach(function(s) {
-        var name = s.getAttribute('data-name') || '';
-        if (name && name.toLowerCase() !== 'size') return;
-        var match = Array.from(s.options).find(function(o) { return o.value === sizeStr; });
-        if (!match) return;
-        s.value = sizeStr;
-        s.dispatchEvent(new Event('input',  { bubbles: true }));
-        s.dispatchEvent(new Event('change', { bubbles: true }));
-      });
-    } catch(err){}
-    try {
-      Array.from(document.querySelectorAll(
-        '.kaching-bundles__bar-variants button,' +
-        '.kaching-bundles__bar-variants [role="button"],' +
-        '.kaching-bundles__bar-variants label,' +
-        '.kaching-bundles__bar-variants [data-value]'
-      )).filter(function(el) {
-        if (el.tagName === 'OPTION') return false;
-        if (el.dataset && el.dataset.value === sizeStr) return true;
-        return el.textContent.trim() === sizeStr;
-      }).forEach(function(el) { try { el.click(); } catch(e){} });
-    } catch(err){}
-  }
-
-  confirmBtn.addEventListener('click', function() {
-    if (selectedSize) applySizeToPage(selectedSize.us);
-    closeModal();
-    try {
-      document.querySelectorAll('fieldset.variant-fieldset').forEach(function(fs) {
-        var legend = fs.querySelector('legend');
-        if (legend && legend.textContent.trim().toLowerCase() === 'size') {
-          fs.scrollIntoView({ block: 'center', behavior: 'smooth' });
-        }
-      });
-    } catch(err){}
-  });
-
-  // ─── Calibration drag ───
-  // On mobile (≤600px) we calibrate by HEIGHT (drag downward) so the card
-  // fits comfortably in portrait mode. On desktop we calibrate by WIDTH.
-  var CARD_H_MM = 53.98; // physical card height
-  function isMobile() { return window.innerWidth <= 600; }
-
-  function setCardWidth(px) {
-    var stage = cardOutline.parentElement;
-    var maxByStage = stage ? Math.max(140, stage.clientWidth - 52) : 480;
-    px = Math.max(110, Math.min(maxByStage, px));
-    cardOutline.style.width = px + 'px';
-    cardOutline.style.height = '';
-    pxPerMm = px / CARD_MM;
-    cardDim.textContent = fmt(CARD_MM, 2) + ' × ' + fmt(CARD_H_MM, 2);
-  }
-  function setCardHeight(px) {
-    var stage = cardOutline.parentElement;
-    var maxByStage = stage ? Math.max(90, stage.clientHeight - 52) : 260;
-    px = Math.max(90, Math.min(maxByStage, px));
-    cardOutline.style.height = px + 'px';
-    cardOutline.style.width = ''; // aspect-ratio drives width
-    pxPerMm = px / CARD_H_MM;
-    cardDim.textContent = fmt(CARD_MM, 2) + ' × ' + fmt(CARD_H_MM, 2);
-  }
-  function setCardSize(px) {
-    if (isMobile()) { setCardHeight(px); } else { setCardWidth(px); }
-  }
-
-  var dragOrigin = 0, startDim = 0, dragging = false;
-  function startDrag(e) {
-    dragging = true;
-    var p = e.touches ? e.touches[0] : e;
-    if (isMobile()) {
-      dragOrigin = p.clientY; startDim = cardOutline.offsetHeight;
-    } else {
-      dragOrigin = p.clientX; startDim = cardOutline.offsetWidth;
-    }
-    e.preventDefault();
-  }
-  function moveDrag(e) {
-    if (!dragging) return;
-    var p = e.touches ? e.touches[0] : e;
-    if (isMobile()) {
-      setCardHeight(startDim + (p.clientY - dragOrigin));
-    } else {
-      setCardWidth(startDim + (p.clientX - dragOrigin));
-    }
-  }
-  function endDrag() {
-    if (!dragging) return;
-    dragging = false;
-    try { localStorage.setItem(STORE_KEY, String(pxPerMm)); } catch(e){}
-  }
-  cardHandle.addEventListener('mousedown', startDrag);
-  cardHandle.addEventListener('touchstart', startDrag, { passive: false });
-  window.addEventListener('mousemove', moveDrag);
-  window.addEventListener('touchmove', moveDrag, { passive: false });
-  window.addEventListener('mouseup', endDrag);
-  window.addEventListener('touchend', endDrag);
-
-  // ─── True-size circles ───
-  function renderCircles() {
-    circlesEl.innerHTML = '';
-    selectedSize = null;
-    pickNext.disabled = true;
-    SIZES.forEach(function(sz) {
-      var px = pxPerMm * sz.mm;
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'rsz-circle';
-      b.style.width  = px + 'px';
-      b.style.height = px + 'px';
-      b.setAttribute('role', 'radio');
-      b.setAttribute('aria-checked', 'false');
-      b.setAttribute('aria-label', 'US size ' + sz.us + ', ' + sz.mm.toFixed(2) + ' mm');
-      b.innerHTML =
-        '<span class="rsz-circle-num">' + sz.us + '</span>' +
-        '<span class="rsz-circle-sub">' + fmtShort(sz.mm) + '</span>';
-      b.addEventListener('click', function() {
-        Array.from(circlesEl.querySelectorAll('.rsz-circle')).forEach(function(c) {
-          c.classList.remove('is-selected');
-          c.setAttribute('aria-checked', 'false');
-        });
-        b.classList.add('is-selected');
-        b.setAttribute('aria-checked', 'true');
-        selectedSize = sz;
-        pickNext.disabled = false;
-      });
-      circlesEl.appendChild(b);
-    });
-  }
-
-  // ─── String method ───
-  function nearestByCircumference(mm) {
-    var best = SIZES[0], bestD = Math.abs(SIZES[0].c - mm);
-    SIZES.forEach(function(s) {
-      var d = Math.abs(s.c - mm);
-      if (d < bestD) { bestD = d; best = s; }
-    });
-    return { match: best, off: bestD };
-  }
-  stringVal.addEventListener('input', function() {
-    var v = parseFloat(stringVal.value);
-    if (!isFinite(v) || v <= 0) {
-      stringRes.textContent = unit === 'in' ? 'Enter a length between 1.5 and 3.5 inches.' : 'Enter a length between 40 and 90 mm.';
-      stringConf.disabled = true; return;
-    }
-    var mm = unit === 'in' ? v * 25.4 : v;
-    if (mm < 30 || mm > 100) {
-      stringRes.textContent = unit === 'in' ? 'Enter a length between 1.5 and 3.5 inches.' : 'Enter a length between 40 and 90 mm.';
-      stringConf.disabled = true; return;
-    }
-    var r = nearestByCircumference(mm);
-    stringRes.innerHTML = 'Closest size: <b>US ' + r.match.us + '</b> (' + fmt(r.match.mm, 2) + ' diameter · ' + fmt(r.match.c, 1) + ' around). Off by ' + fmt(r.off, 1) + '.';
-    selectedSize = r.match;
-    stringConf.disabled = false;
-  });
-  stringConf.addEventListener('click', function() {
-    if (!selectedSize) return;
-    resultSize.textContent = 'US ' + selectedSize.us;
-    resultMm.textContent = fmt(selectedSize.mm, 2) + ' inner diameter';
-    showStep('done');
-  });
-
-  // ─── Unit toggle ───
-  function applyUnit(u, save) {
-    unit = u;
-    unitBtns.forEach(function(b) {
-      var on = b.dataset.unit === unit;
-      b.classList.toggle('is-active', on);
-      b.setAttribute('aria-checked', on ? 'true' : 'false');
-    });
-    setCardSize(isMobile() ? cardOutline.offsetHeight : cardOutline.offsetWidth);
-    renderCircles();
-    // Update string input
-    var prev = parseFloat(stringVal.value);
-    if (unit === 'in') {
-      stringVal.placeholder = 'e.g. 2.18';
-      stringVal.min = 1.5; stringVal.max = 3.5; stringVal.step = 0.05;
-      stringUnit.textContent = 'in';
-      if (isFinite(prev) && prev > 5) stringVal.value = (prev / 25.4).toFixed(2);
-    } else {
-      stringVal.placeholder = 'e.g. 55.4';
-      stringVal.min = 40; stringVal.max = 90; stringVal.step = 0.1;
-      stringUnit.textContent = 'mm';
-      if (isFinite(prev) && prev < 5) stringVal.value = (prev * 25.4).toFixed(1);
-    }
-    if (stringVal.value) stringVal.dispatchEvent(new Event('input'));
-    if (selectedSize && resultMm) {
-      resultMm.textContent = fmt(selectedSize.mm, 2) + ' inner diameter';
-    }
-    if (save) { try { localStorage.setItem(UNIT_KEY, unit); } catch(e){} }
-  }
-  unitBtns.forEach(function(b) {
-    b.addEventListener('click', function() {
-      if (b.dataset.unit !== unit) applyUnit(b.dataset.unit, true);
-    });
-  });
-
-  // Redraw on resize / rotation
-  window.addEventListener('resize', function() {
-    if (modal.hasAttribute('hidden')) return;
-    setCardSize(isMobile() ? cardOutline.offsetHeight : cardOutline.offsetWidth);
   });
 })();
 </script>
