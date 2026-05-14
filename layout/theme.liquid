@@ -956,6 +956,19 @@
     new MutationObserver(paint).observe(document.body, { childList: true, subtree: true });
   })();
   </script>
+  <script>
+  // Kaching sets z-index:50 inline on the options panel via JS, which beats CSS !important.
+  // Override it immediately on insertion.
+  new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      m.addedNodes.forEach(function(node) {
+        if (node.nodeType === 1 && node.className && node.className.indexOf('swatch-dropdown__options') !== -1) {
+          node.style.setProperty('z-index', '99999', 'important');
+        }
+      });
+    });
+  }).observe(document.documentElement, { childList: true, subtree: true });
+  </script>
 
 </body>
 </html>
