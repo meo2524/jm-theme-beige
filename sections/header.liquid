@@ -33,7 +33,6 @@
           alt="{{ shop.name }}"
           loading="eager"
           fetchpriority="high"
-          style="width: {{ logo_width }}px; height: auto;"
         >
       {%- else -%}
         {%- comment -%}
@@ -307,6 +306,8 @@
 
   .header__logo img {
     display: block;
+    width: {{ logo_width }}px;
+    height: auto;
     max-width: 100%;
   }
 
@@ -329,9 +330,6 @@
     font-style: normal;
     font-weight: 800;
     color: #FF3D8A;
-  }
-  .header__logo img {
-    opacity: 0.92;
   }
 
   /* ---- Desktop nav ---- */
