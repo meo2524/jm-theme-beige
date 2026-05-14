@@ -33,6 +33,7 @@
           alt="{{ shop.name }}"
           loading="eager"
           fetchpriority="high"
+          style="width: {{ logo_width }}px; height: auto;"
         >
       {%- else -%}
         {%- comment -%}
@@ -305,9 +306,8 @@
   }
 
   .header__logo img {
-    height: auto;
-    width: auto;
-    max-height: 60px;
+    display: block;
+    max-width: 100%;
   }
 
   .header__logo-text {
