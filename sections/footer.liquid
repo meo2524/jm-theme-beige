@@ -5,6 +5,7 @@
   assign legal_menu     = section.settings.legal_menu  | default: 'footer-legal'
   assign tagline_text   = section.settings.tagline | default: 'Your body glowing. All day.'
   assign brand_text     = section.settings.brand_statement | default: 'Join the mending journey.'
+  assign logo_width     = section.settings.logo_width | default: 160
 
   # Compute the current year as Roman numerals (works for 2000–2099).
   # 2026 → MMXXVI. Fallback to Gregorian if outside that range.
@@ -38,8 +39,8 @@
             {%- endif -%}
             {%- if footer_logo != blank -%}
               <img
-                src="{{ footer_logo | image_url: width: 160 }}"
-                width="160"
+                src="{{ footer_logo | image_url: width: logo_width }}"
+                width="{{ logo_width }}"
                 height="auto"
                 alt="{{ shop.name }}"
                 loading="lazy"
@@ -189,8 +190,10 @@
   text-decoration: none;
 }
 .footer__logo-img {
-  height: 32px;
-  width: auto;
+  display: block;
+  width: {{ logo_width }}px;
+  height: auto;
+  max-width: 100%;
   filter: brightness(0);
   opacity: 0.85;
 }
@@ -372,6 +375,15 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Logo (footer)"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width (px)",
+      "min": 80,
+      "max": 300,
+      "step": 10,
+      "default": 160
     },
     {
       "type": "text",
