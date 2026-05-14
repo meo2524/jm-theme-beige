@@ -6,6 +6,10 @@
     <div class="pdp-gifts__header">
       <span class="pdp-gifts__eyebrow">{{ section.settings.eyebrow | default: "Free with every order" }}</span>
       <h2 class="pdp-gifts__heading" id="pdp-gifts-heading">{{ section.settings.heading | default: "What's included" }}</h2>
+      <p class="pdp-gifts__urgency">
+        <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><polyline points="8,4.5 8,8 10.5,9.5"/></svg>
+        Mend in May exclusive — bundle removed after sale ends
+      </p>
     </div>
 
     <div class="pdp-gifts__grid">
@@ -81,6 +85,21 @@
   color: var(--char);
   margin: 0;
   line-height: 1.2;
+}
+
+.pdp-gifts__urgency {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 14px auto 0;
+  padding: 6px 14px;
+  background: rgba(154,126,87,0.12);
+  border: 1px solid rgba(154,126,87,0.3);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--gold-deep, #735b3f);
 }
 
 .pdp-gifts__grid {
