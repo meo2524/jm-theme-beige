@@ -40,6 +40,14 @@
         "trust_3_text": "No subscription — ever"
       }
     },
+    "photo_reviews": {
+      "type": "photo-reviews",
+      "settings": {
+        "eyebrow": "Verified Menders",
+        "heading": "Real people. Real results.",
+        "subheading": "Join thousands of people who track their health with us."
+      }
+    },
     "custom_liquid_TgB6HE": {
       "type": "custom-liquid",
       "disabled": true,
@@ -168,14 +176,6 @@
         "canvas_tag": "N°01 · Schematic",
         "bg_color": "#efe8dc",
         "show_controls": true
-      }
-    },
-    "photo_reviews": {
-      "type": "photo-reviews",
-      "settings": {
-        "eyebrow": "Verified Menders",
-        "heading": "Real people. Real results.",
-        "subheading": "Join thousands of people who track their health with us."
       }
     },
     "angle_testimonials": {
@@ -737,10 +737,10 @@
   },
   "order": [
     "main",
+    "photo_reviews",
     "custom_liquid_TgB6HE",
     "pdp_free_gifts_8N7R6R",
     "interactive_benefits",
-    "photo_reviews",
     "angle_testimonials",
     "ring_comparison",
     "app_modal",
