@@ -35,7 +35,7 @@
         "atc_label": "Add to Cart",
         "atc_sold_out_label": "Notify Me",
         "variant_sold_out_label": "Sold out",
-        "trust_1_text": "Free US shipping",
+        "trust_1_text": "Free shipping",
         "trust_2_text": "Free 30-day returns",
         "trust_3_text": "No subscription — ever"
       }
@@ -562,7 +562,8 @@
             "show_drop_shadow": false,
             "transition_speed": 5,
             "header_text": "Customers are saying",
-            "show_average_rating": true
+            "show_average_rating": true,
+            "rating_display": "default"
           }
         }
       },
@@ -604,7 +605,8 @@
             "transition_speed": 5,
             "carousel_style": "highlight",
             "header_text": "Real customer stories",
-            "show_average_rating": true
+            "show_average_rating": true,
+            "rating_display": "default"
           }
         }
       },
