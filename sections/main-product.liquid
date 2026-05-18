@@ -267,10 +267,11 @@
         value=""
       >
 
-      {%- comment -%} -- Short description -- {%- endcomment -%}
+      {%- comment -%} -- Short description / product description -- {%- endcomment -%}
       {%- assign blurb_heading    = product.metafields.custom.blurb_heading    | default: section.settings.blurb_heading -%}
       {%- assign blurb_subheading = product.metafields.custom.blurb_subheading | default: section.settings.blurb_subheading -%}
-      {%- if blurb_heading != blank or blurb_subheading != blank -%}
+      {%- assign blurb_body = product.metafields.custom.short_description | default: section.settings.short_description -%}
+      {%- if blurb_heading != blank or blurb_subheading != blank or blurb_body != blank -%}
         <div class="product-blurb">
           {%- if blurb_heading != blank -%}
             <p class="product-blurb__heading">{{ blurb_heading }}</p>
@@ -278,16 +279,11 @@
           {%- if blurb_subheading != blank -%}
             <p class="product-blurb__subhead">{{ blurb_subheading }}</p>
           {%- endif -%}
-          <p class="product-blurb__body">
-            {%- if product.metafields.custom.short_description != blank -%}
-              {{ product.metafields.custom.short_description }}
-            {%- elsif section.settings.short_description != blank -%}
-              {{ section.settings.short_description }}
-            {%- else -%}
-              {{ product.description | strip_html | truncate: 200 }}
-            {%- endif -%}
-          </p>
+          <div class="product-blurb__body">{{ blurb_body }}</div>
         </div>
+      {%- endif -%}
+      {%- if product.description != blank -%}
+        <div class="product-description rte">{{ product.description }}</div>
       {%- endif -%}
 
 
@@ -1186,7 +1182,16 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .product-blurb__body {
-  display: none;
+  font-size: 0.9375rem;
+  color: var(--color-olive, #5a5040);
+  line-height: 1.65;
+}
+
+.product-description {
+  margin: 0 0 1.5rem;
+  font-size: 0.9375rem;
+  color: var(--color-black, #1f1d1a);
+  line-height: 1.65;
 }
 
 /* Spec pills */
