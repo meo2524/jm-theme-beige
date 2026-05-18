@@ -48,21 +48,6 @@
         "subheading": "Join hundreds of people who track their health with us."
       }
     },
-    "custom_liquid_TgB6HE": {
-      "type": "custom-liquid",
-      "disabled": true,
-      "name": "t:sections.custom-liquid.name",
-      "settings": {
-        "show_on": "both",
-        "custom_liquid": "<style>\n  .mc-desc * { box-sizing: border-box; margin: 0; padding: 0; }\n  .mc-desc { font-family: 'Jost', sans-serif; color: #2C1A0E; padding: 0 0 20px; }\n  .mc-desc-pill {\n    font-size: 11px;\n    font-weight: 500;\n    letter-spacing: 0.14em;\n    text-transform: uppercase;\n    color: #7A5C3A;\n    background: #EDE0CE;\n    padding: 6px 16px;\n    border-radius: 20px;\n    display: inline-flex;\n    width: fit-content;\n    margin-bottom: 18px;\n  }\n  .mc-desc-product-label {\n    font-family: 'Jost', sans-serif;\n    font-size: 11px;\n    font-weight: 400;\n    letter-spacing: 0.18em;\n    text-transform: uppercase;\n    color: #9A8070;\n    margin-bottom: 8px;\n    display: block;\n  }\n  .mc-desc-h2 {\n    font-family: 'Cormorant Garamond', serif;\n    font-size: 2.6rem;\n    font-weight: 400;\n    line-height: 1.05;\n    color: #2C1A0E;\n    margin-bottom: 4px;\n  }\n  .mc-desc-h2-italic {\n    font-family: 'Cormorant Garamond', serif;\n    font-size: 2.6rem;\n    font-weight: 400;\n    font-style: italic;\n    line-height: 1.05;\n    color: #9C7A5A;\n    display: block;\n    margin-bottom: 20px;\n  }\n  .mc-desc-body {\n    border-left: 3px solid #D6C9B8;\n    padding-left: 14px;\n    margin-bottom: 20px;\n  }\n  .mc-desc-body p {\n    font-size: 13.5px;\n    font-weight: 300;\n    line-height: 1.75;\n    color: #6B5040;\n  }\n  </style>\n\n<div class=\"mc-desc\">\n  <span class=\"mc-desc-pill\">Mend &amp; Co&#8482; Official</span>\n  <span class=\"mc-desc-product-label\">N&#176;01 &mdash; The Smart Ring</span>\n  <h2 class=\"mc-desc-h2\">Know your body.</h2>\n  <span class=\"mc-desc-h2-italic\">See it before it tells you first.</span>\n  <div class=\"mc-desc-body\">\n    <p>The Smart Ring tracks sleep, heart rate, blood oxygen, and recovery. It works all day and night. No monthly fees. Water safe. Made to be worn and trusted.</p>\n  </div>",
-        "color_scheme": "scheme-1",
-        "custom_color_scheme": "",
-        "padding___top": "inherit",
-        "custom_padding_top": 36,
-        "padding___bottom": "inherit",
-        "custom_padding_bottom": 36
-      }
-    },
     "pdp_free_gifts_8N7R6R": {
       "type": "pdp-free-gifts",
       "blocks": {
@@ -178,14 +163,6 @@
         "show_controls": true
       }
     },
-    "angle_testimonials": {
-      "type": "angle-testimonials",
-      "disabled": true,
-      "settings": {
-        "eyebrow": "The Mender Community",
-        "heading": "Meet the Menders."
-      }
-    },
     "ring_comparison": {
       "type": "ring-comparison",
       "blocks": {
@@ -296,54 +273,6 @@
       "type": "product-science",
       "disabled": true,
       "settings": {}
-    },
-    "app_showcase": {
-      "type": "app-showcase",
-      "blocks": {
-        "feature_sleep": {
-          "type": "feature",
-          "settings": {
-            "image_filename": "app-sleep.jpg",
-            "image_url": "",
-            "heading": "Sleep",
-            "body": "See how well you slept. Light sleep, deep sleep, and how many times you woke up."
-          }
-        },
-        "feature_heart": {
-          "type": "feature",
-          "settings": {
-            "image_filename": "app-heart-rate.jpg",
-            "image_url": "",
-            "heading": "Heart rate",
-            "body": "Your heart rate all day. Numbers you would never know without the ring."
-          }
-        },
-        "feature_activity": {
-          "type": "feature",
-          "settings": {
-            "image_filename": "app-activity.jpg",
-            "image_url": "",
-            "heading": "Activity",
-            "body": "Walks, workouts, and every bit of movement you make."
-          }
-        }
-      },
-      "block_order": [
-        "feature_sleep",
-        "feature_heart",
-        "feature_activity"
-      ],
-      "disabled": true,
-      "settings": {
-        "eyebrow": "The app",
-        "heading": "See what your body did overnight.",
-        "body": "Sync the N°01 to the free QRing app. See your sleep, heart rate, and steps in one place. Works on iPhone and Android. No sign-up. No fees.",
-        "hero_image_filename": "",
-        "hero_image_url": "",
-        "apple_url": "https://apps.apple.com/nz/app/qring/id6473672621",
-        "google_url": "https://play.google.com/store/apps/details?id=com.app.cq.ring&hl=en_NZ",
-        "privacy_text": "Your health data stays on your device."
-      }
     },
     "product_faq": {
       "type": "product-faq",
@@ -507,260 +436,25 @@
       "disabled": true,
       "settings": {}
     },
-    "app_download": {
-      "type": "custom-liquid",
-      "disabled": true,
-      "name": "t:sections.custom-liquid.name",
-      "settings": {
-        "show_on": "both",
-        "custom_liquid": "<style>.mc-app{background:var(--color-bone,#f5efe4);padding:56px 24px;font-family:var(--font-label,'Inter',sans-serif)}.mc-app__inner{max-width:640px;margin:0 auto;text-align:center}.mc-app__rule{width:40px;height:1.5px;background:var(--color-walnut,#8a6240);opacity:.6;margin:0 auto 1.25rem}.mc-app__eyebrow{font-size:.6875rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--color-walnut,#8a6240);margin:0 0 .875rem}.mc-app__heading{font-family:var(--font-heading,'Playfair Display',serif);font-size:clamp(1.625rem,3vw,2.25rem);font-weight:400;color:var(--color-black,#1f1d1a);line-height:1.2;margin:0 0 .75rem}.mc-app__sub{font-family:var(--font-heading,'Playfair Display',serif);font-size:1.0625rem;font-style:italic;color:var(--color-walnut,#8a6240);margin:0 0 1.25rem}.mc-app__body{font-size:.9375rem;color:var(--color-olive,#5a5040);line-height:1.7;margin:0 0 2rem;max-width:480px;margin-left:auto;margin-right:auto}.mc-app__steps{display:flex;flex-direction:column;gap:.625rem;margin:0 0 2rem;text-align:left;max-width:420px;margin-left:auto;margin-right:auto}.mc-app__step{display:flex;align-items:flex-start;gap:.875rem}.mc-app__step-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--color-walnut,#8a6240);color:#f5efe4;font-size:.6875rem;font-weight:700;letter-spacing:.05em;display:flex;align-items:center;justify-content:center;margin-top:.1rem}.mc-app__step-text{font-size:.875rem;color:var(--color-olive,#5a5040);line-height:1.6}.mc-app__step-text strong{color:var(--color-black,#1f1d1a);font-weight:600}.mc-app__badges{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}.mc-app__badge{display:inline-flex;align-items:center;gap:.625rem;background:#1f1d1a;color:#f5efe4;text-decoration:none;padding:.75rem 1.375rem;border-radius:10px;transition:background .2s ease}.mc-app__badge:hover{background:#3a3632}.mc-app__badge-icon{flex-shrink:0;opacity:.9}.mc-app__badge-copy{display:flex;flex-direction:column;line-height:1}.mc-app__badge-sub{font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-bottom:2px}.mc-app__badge-name{font-size:.9375rem;font-weight:600;letter-spacing:-.01em}@media(max-width:540px){.mc-app{padding:40px 20px}.mc-app__badges{flex-direction:column;align-items:center}.mc-app__badge{width:100%;max-width:240px;justify-content:center}}</style><div class=\"mc-app\"><div class=\"mc-app__inner\"><div class=\"mc-app__rule\"></div><p class=\"mc-app__eyebrow\">The App</p><h2 class=\"mc-app__heading\">All your body data,<br>in one place.</h2><p class=\"mc-app__sub\">Free forever. No subscription.</p><p class=\"mc-app__body\">Sync your N°01 Smart Ring with the QRing app. See your sleep, heart rate, recovery score, blood oxygen, and daily steps — all in one clean view.</p><div class=\"mc-app__steps\"><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">1</span><p class=\"mc-app__step-text\"><strong>Download QRing</strong> — free on the App Store or Google Play.</p></div><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">2</span><p class=\"mc-app__step-text\"><strong>Turn on Bluetooth</strong> on your phone and power on the ring.</p></div><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">3</span><p class=\"mc-app__step-text\"><strong>Tap 'Add Device'</strong> in the app — the ring pairs in under 30 seconds.</p></div><div class=\"mc-app__step\"><span class=\"mc-app__step-num\">4</span><p class=\"mc-app__step-text\"><strong>Wear it to sleep</strong> — your data syncs by morning.</p></div></div><div class=\"mc-app__badges\"><a href=\"https://apps.apple.com/nz/app/qring/id6473672621\" target=\"_blank\" rel=\"noopener\" class=\"mc-app__badge\"><svg class=\"mc-app__badge-icon\" width=\"22\" height=\"26\" viewBox=\"0 0 22 26\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M18.05 13.77c-.03-3.2 2.62-4.75 2.74-4.82-1.5-2.19-3.82-2.49-4.64-2.52-1.97-.2-3.86 1.17-4.86 1.17-1.01 0-2.57-1.14-4.23-1.11C4.9 6.52 2.87 7.7 1.76 9.57c-2.27 3.94-.58 9.76 1.63 12.95 1.08 1.56 2.36 3.31 4.04 3.25 1.63-.07 2.24-1.05 4.2-1.05 1.96 0 2.52 1.05 4.24 1.02 1.75-.03 2.85-1.59 3.92-3.16 1.24-1.81 1.75-3.57 1.77-3.66-.04-.02-3.48-1.33-3.51-5.15zM14.78 4.28C15.67 3.2 16.27 1.7 16.1 0c-1.47.06-3.27.98-4.32 2.04-.95.99-1.77 2.57-1.55 4.08 1.63.13 3.3-.83 4.55-1.84z\"/></svg><span class=\"mc-app__badge-copy\"><span class=\"mc-app__badge-sub\">Download on the</span><span class=\"mc-app__badge-name\">App Store</span></span></a><a href=\"https://play.google.com/store/apps/details?id=com.app.cq.ring&hl=en_NZ\" target=\"_blank\" rel=\"noopener\" class=\"mc-app__badge\"><svg class=\"mc-app__badge-icon\" width=\"22\" height=\"24\" viewBox=\"0 0 22 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M1.22.48C.8.7.5 1.18.5 1.8v20.4c0 .62.3 1.1.72 1.32l.1.06 11.42-11.42v-.27L1.32.42l-.1.06zm15.56 15.7l-3.8-3.8v-.27l3.8-3.8.09.05 4.5 2.56c1.28.73 1.28 1.92 0 2.65l-4.5 2.56-.09.05zM16.88 16.28L13 12.39 1.22 24.17c.42.24.98.2 1.67-.2l14-7.69\"/><path d=\"M16.88 8.52L2.89.83C2.2.43 1.64.39 1.22.63L13 12.41l3.88-3.89z\"/></svg><span class=\"mc-app__badge-copy\"><span class=\"mc-app__badge-sub\">Get it on</span><span class=\"mc-app__badge-name\">Google Play</span></span></a></div></div></div>",
-        "color_scheme": "scheme-1",
-        "custom_color_scheme": "",
-        "padding___top": "inherit",
-        "custom_padding_top": 0,
-        "padding___bottom": "inherit",
-        "custom_padding_bottom": 0
-      }
-    },
-    "testimonials": {
-      "type": "testimonials",
-      "disabled": true,
-      "settings": {
-        "eyebrow": "83 reviews · 4.9 stars",
-        "heading": "Real people. Real data.",
-        "reviews_count": 6
-      }
-    },
-    "177768635486c7de24": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_testimonials_carousel_WMGnUP": {
-          "type": "shopify://apps/judge-me-reviews/blocks/testimonials_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "disabled": true,
-          "settings": {
-            "show_sample_reviews": true,
-            "reviews_selection": "all",
-            "products": [],
-            "star_rating": "all",
-            "max_reviews": 20,
-            "quote_marks_size": "small",
-            "product_name_text_size": "small",
-            "verified_badge_style": "icon",
-            "card_height": "medium",
-            "text_size": "small",
-            "stars_size": "medium",
-            "arrows_position": "bottom",
-            "max_width": 1100,
-            "corner_styling": "soft",
-            "quote_marks_style": "serif",
-            "card_color": "#f9f9f9",
-            "stars_and_quote_marks_color": "#108474",
-            "text_color": "#000000",
-            "arrows_color": "#000000",
-            "show_border": false,
-            "border_color": "#108474",
-            "show_drop_shadow": false,
-            "transition_speed": 5,
-            "header_text": "Customers are saying",
-            "show_average_rating": true,
-            "rating_display": "default"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_testimonials_carousel_WMGnUP"
-      ],
-      "disabled": true,
-      "settings": {}
-    },
-    "reviews_carousel": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_videos_carousel_WK6GHc": {
-          "type": "shopify://apps/judge-me-reviews/blocks/videos_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "show_sample_reviews": false,
-            "reviews_selection": "current_product",
-            "products": [
-              "n-01-smart-band"
-            ],
-            "star_rating": "all",
-            "review_type": "photo_and_video",
-            "max_reviews": 20,
-            "show_reviewer_name": true,
-            "stars_size": "medium",
-            "text_size": "medium",
-            "arrows_position": "bottom",
-            "max_width": 1100,
-            "corner_styling": "soft",
-            "header_text_color": "#000000",
-            "card_color": "#7d7d7d",
-            "stars_color": "",
-            "text_color": "#ffffff",
-            "arrows_color": "#000000",
-            "show_drop_shadow": false,
-            "show_border": false,
-            "border_color": "#108474",
-            "autoplay_media": true,
-            "transition_speed": 5,
-            "carousel_style": "highlight",
-            "header_text": "Real customer stories",
-            "show_average_rating": true,
-            "rating_display": "default"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_videos_carousel_WK6GHc"
-      ],
-      "disabled": true,
-      "settings": {}
-    },
-    "health_metrics": {
-      "type": "product-feature",
-      "blocks": {
-        "bullet_sleep": {
-          "type": "bullet",
-          "settings": {
-            "icon": "",
-            "text": "Sleep stages — deep, light, dream sleep, and a sleep score",
-            "caption": ""
-          }
-        },
-        "bullet_hrv": {
-          "type": "bullet",
-          "settings": {
-            "icon": "",
-            "text": "Heart rate changes — shows how well you recovered",
-            "caption": ""
-          }
-        },
-        "bullet_spo2": {
-          "type": "bullet",
-          "settings": {
-            "icon": "",
-            "text": "Blood oxygen — tracked all night while you sleep",
-            "caption": ""
-          }
-        },
-        "bullet_stress": {
-          "type": "bullet",
-          "settings": {
-            "icon": "",
-            "text": "Stress score — know when to push and when to rest",
-            "caption": ""
-          }
-        },
-        "bullet_activity": {
-          "type": "bullet",
-          "settings": {
-            "icon": "",
-            "text": "Steps, distance, calories — workouts detected on their own",
-            "caption": ""
-          }
-        },
-        "bullet_camera": {
-          "type": "bullet",
-          "settings": {
-            "icon": "",
-            "text": "Remote camera control — take photos from your finger",
-            "caption": ""
-          }
-        }
-      },
-      "block_order": [
-        "bullet_sleep",
-        "bullet_hrv",
-        "bullet_spo2",
-        "bullet_stress",
-        "bullet_activity",
-        "bullet_camera"
-      ],
-      "disabled": true,
-      "settings": {
-        "video_url": "https://cdn.shopify.com/videos/c/vp/f12216a2ff264544862d886fee41129a/f12216a2ff264544862d886fee41129a.HD-1080p-4.8Mbps-83316595.mp4",
-        "video_position_y": 50,
-        "eyebrow": "What it tracks",
-        "heading": "One ring. Everything that matters.",
-        "body": "Your body is always sending signals. Most trackers only catch one or two. The N°01 reads six, all day and night. It even works as a remote camera.",
-        "cta_label": "",
-        "cta_url": "",
-        "reverse": true
-      }
-    },
-    "reviews_widget": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_QD8Ut3": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_QD8Ut3"
-      ],
-      "disabled": true,
-      "settings": {}
-    },
     "judgeme_reviews": {
       "type": "judgeme-reviews",
       "disabled": true,
       "settings": {}
-    },
-    "related": {
-      "type": "product-grid",
-      "disabled": true,
-      "settings": {
-        "eyebrow": "More from Mend",
-        "heading": "You may also like.",
-        "collection": "",
-        "product_limit": 3
-      }
-    },
-    "countdown": {
-      "type": "countdown-sale",
-      "disabled": true,
-      "settings": {
-        "heading": "Limited Time Offer",
-        "subheading": "<p>Use this section to showcase offers that require a sense of urgency.</p>",
-        "button_label": "Shop Now",
-        "button_link": "",
-        "padding___top": "large",
-        "custom_padding_top": 72,
-        "padding___bottom": "large",
-        "custom_padding_bottom": 72
-      }
     }
   },
   "order": [
     "main",
     "photo_reviews",
-    "custom_liquid_TgB6HE",
     "pdp_free_gifts_8N7R6R",
     "interactive_benefits",
-    "angle_testimonials",
     "ring_comparison",
     "app_modal",
     "product_science",
-    "app_showcase",
     "product_faq",
     "17779692662038a0a0",
     "tech_specs",
     "ring_size_modal",
     "science_modal",
-    "app_download",
-    "testimonials",
-    "177768635486c7de24",
-    "reviews_carousel",
-    "health_metrics",
-    "reviews_widget",
-    "judgeme_reviews",
-    "related",
-    "countdown"
+    "judgeme_reviews"
   ]
 }
