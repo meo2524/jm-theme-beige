@@ -9,1208 +9,162 @@
  */
 {
   "sections": {
-    "atlas_dependencies": {
-      "type": "a-dependencies",
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Meet the N°01.",
+        "heading": "Know how",
+        "heading_em": "your body",
+        "heading_2": "is doing.",
+        "subtext": "Wear it all day and night. It tracks your sleep, heart, and steps. Each morning, you get clear answers. No monthly fees. Ever.",
+        "cta_label": "Get the Smart Ring",
+        "cta_url": "/products/smart-ring",
+        "hero_video_url": "",
+        "show_scroll_cue": true
+      }
+    },
+    "stats-strip": {
+      "type": "stats-strip",
+      "settings": {
+        "stat_1_value": "5–7 days",
+        "stat_1_label": "Battery life",
+        "stat_2_value": "Swim-safe",
+        "stat_2_label": "Pool, ocean, sauna",
+        "stat_3_value": "$0",
+        "stat_3_label": "No fees ever"
+      }
+    },
+    "smart_band_spotlight": {
+      "type": "product-feature",
+      "blocks": {
+        "bullet_sleep": {
+          "type": "bullet",
+          "settings": {
+            "icon": "moon",
+            "text": "Sleep — light, deep, dream sleep, and every time you woke up.",
+            "caption": ""
+          }
+        },
+        "bullet_heart": {
+          "type": "bullet",
+          "settings": {
+            "icon": "heart-alert",
+            "text": "Heart rate tracked weekly. Catch stress or illness early.",
+            "caption": ""
+          }
+        },
+        "bullet_recovery": {
+          "type": "bullet",
+          "settings": {
+            "icon": "gauge",
+            "text": "One daily score. Should you push hard or rest today?",
+            "caption": ""
+          }
+        },
+        "bullet_activity": {
+          "type": "bullet",
+          "settings": {
+            "icon": "pulse-night",
+            "text": "Heart rate tracked all night. Even while you sleep.",
+            "caption": ""
+          }
+        },
+        "bullet_temp": {
+          "type": "bullet",
+          "settings": {
+            "icon": "temp-wave",
+            "text": "Body temp tracked overnight. Know before you feel sick.",
+            "caption": ""
+          }
+        },
+        "bullet_sub": {
+          "type": "bullet",
+          "settings": {
+            "icon": "infinity",
+            "text": "No monthly fees. Ever. Your data is yours.",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "bullet_sleep",
+        "bullet_heart",
+        "bullet_recovery",
+        "bullet_activity",
+        "bullet_temp",
+        "bullet_sub"
+      ],
+      "settings": {
+        "video_url": "https://cdn.shopify.com/videos/c/vp/f12216a2ff264544862d886fee41129a/f12216a2ff264544862d886fee41129a.HD-1080p-4.8Mbps-83316595.mp4",
+        "video_position_y": 25,
+        "eyebrow": "Now available",
+        "heading": "More than any watch can do.",
+        "body": "Your watch counts steps. The N°01 does much more. It tracks your heart, breath, and body heat all day and night. Each morning, it tells you: am I rested? Am I ready to work out?",
+        "cta_label": "Get the Smart Ring",
+        "cta_url": "/products/smart-band",
+        "reverse": false
+      }
+    },
+    "founder_story": {
+      "type": "story",
+      "settings": {
+        "eyebrow": "Our story",
+        "heading_pre": "Made to",
+        "heading_em": "help you",
+        "heading_post": "feel better.",
+        "paragraph_1": "Mend & Co makes tools you buy once and keep. The N°01 Smart Ring is our first. It helps you track your health every day. More tools are coming. Each one is made to fix something most people ignore.",
+        "paragraph_2": "",
+        "link_label": "About Mend & Co →",
+        "link_url": "/pages/about-us",
+        "image": "shopify://shop_images/hf_20260508_095321_e6c3ea7d-b274-4488-a745-042539f5f110.png",
+        "image_label": "hands · oil · linen"
+      }
+    },
+    "177700770423191747": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_homepage_L48nQp": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "product": "smart-band",
+            "review_data": "real_data",
+            "max_width": 900
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_homepage_L48nQp"
+      ],
       "settings": {}
     },
-    "image_banner_TVECWz": {
-      "type": "a-image-banner",
-      "blocks": {
-        "rating_PafcFX": {
-          "type": "rating",
-          "settings": {
-            "overall_rating_value": 4.8,
-            "rating_text": "Excellent {rating_value} | {num} Customers",
-            "overall_rating_star_size": 16,
-            "star_color": "#F0429C",
-            "overall_rating_text_color": "#ffffff",
-            "overall_rating_text_size": 14,
-            "overall_rating_text_size_mobile": 12,
-            "overall_rating_have_background": false,
-            "overall_rating_background_color": "#F472B6",
-            "overall_rating_use_gradient": false,
-            "overall_rating_gradient_color": "linear-gradient(160deg, rgba(251,51,164, 1) 0%, rgba(96,77,188, 1) 100%)",
-            "overall_rating_border_radius": 3,
-            "padding_top_desktop": 5,
-            "padding_bottom_desktop": 14,
-            "padding_top_mobile": 0,
-            "padding_bottom_mobile": 3
-          }
-        },
-        "heading_j6VgPc": {
-          "type": "heading",
-          "settings": {
-            "heading": "Stop The Itch In 3 Seconds Naturally",
-            "size": 40,
-            "mobile_font_size": 25,
-            "color": "#ffffff",
-            "highlighted_color": "#ffffff",
-            "heading_use_gradient": false,
-            "heading_gradient_color": "",
-            "padding_top_desktop": 5,
-            "padding_bottom_desktop": 14,
-            "padding_top_mobile": 3,
-            "padding_bottom_mobile": 3
-          }
-        },
-        "text_BpPwbx": {
-          "type": "text",
-          "settings": {
-            "text": "Safe Relief For Every Adventure",
-            "size": 15,
-            "size_mobile": 12,
-            "color": "#ffffff",
-            "highlighted_color": "#000000",
-            "text_use_gradient": false,
-            "text_gradient_color": "",
-            "padding_top_desktop": 5,
-            "padding_bottom_desktop": 20,
-            "padding_top_mobile": 9,
-            "padding_bottom_mobile": 13
-          }
-        },
-        "buttons_k9izFg": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop Now",
-            "button_link_1": "shopify://products/a93z-insect-sting-and-bite-relief-chemical-free-bug-bite-healer-for-natural-relief-from-itching-mosquito-itch-relief-device",
-            "button_label_1_size": 14,
-            "button_label_1_size_mobile": 12,
-            "button_1_text_color": "#ffffff",
-            "button_1_background_color": "#F472B6",
-            "button_1_border_radius": 6,
-            "button_padding_vertical": 8,
-            "button_width_increase_desktop": 45,
-            "button_width_increase_mobile": 69,
-            "padding_top_desktop": 0,
-            "padding_bottom_desktop": 5,
-            "padding_top_mobile": 3,
-            "padding_bottom_mobile": 20
-          }
-        }
-      },
-      "block_order": [
-        "rating_PafcFX",
-        "heading_j6VgPc",
-        "text_BpPwbx",
-        "buttons_k9izFg"
-      ],
+    "testimonials": {
+      "type": "testimonials",
+      "disabled": true,
       "settings": {
-        "image": "shopify://shop_images/S0112e3da6b2a43df923597adbe792c61i_f051b6de-b54f-4e5d-98cc-e414aff5e5fc.webp",
-        "image_height": "adapt",
-        "image_or_content_first": "image",
-        "enable_waves": true,
-        "shape_color": "#ffffff",
-        "shape_height_desktop": 100,
-        "shape_height_mobile": 47,
-        "desktop_content_position": "middle-center",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "center",
-        "use_gradient_background": false,
-        "section_background_gradient": "linear-gradient(180deg, rgba(251,51,164, 1) 0%, rgba(96,77,188, 1) 100%)",
-        "section_background_color": "#112C45"
+        "eyebrow": "Real results",
+        "heading": "What people say.",
+        "reviews_count": 6
       }
     },
-    "scrolling_images_aajYaC": {
-      "type": "a-scrolling-images",
-      "blocks": {
-        "slide_daDrML": {
-          "type": "slide",
-          "settings": {
-            "image": "",
-            "link": ""
-          }
-        },
-        "slide_MD6URA": {
-          "type": "slide",
-          "settings": {
-            "image": "",
-            "link": ""
-          }
-        },
-        "slide_H7aXCW": {
-          "type": "slide",
-          "settings": {
-            "image": "",
-            "link": ""
-          }
-        },
-        "slide_cVqRDk": {
-          "type": "slide",
-          "settings": {
-            "image": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide_daDrML",
-        "slide_MD6URA",
-        "slide_H7aXCW",
-        "slide_cVqRDk"
-      ],
+    "newsletter": {
+      "type": "newsletter",
       "settings": {
-        "section_heading": "As seen on",
-        "heading_alignment": "center",
-        "font_size": 20,
-        "mobile_font_size": 16,
-        "header_color": "#112C45",
-        "header_highlighted_color": "#112C45",
-        "heading_use_gradient": false,
-        "heading_gradient_color": "",
-        "pause_hover": true,
-        "slider_direction": "right",
-        "scrolling_velocity": 2,
-        "slider_gap": 52,
-        "slider_gap_mobile": 15,
-        "icon_width": 120,
-        "icon_width_mobile": 250,
-        "image_border_radius": 8,
-        "use_gradient_background": false,
-        "section_background_gradient": "linear-gradient(180deg, rgba(251, 51, 166, 1), rgba(127, 72, 176, 1) 50%, rgba(48, 145, 211, 1) 100%)",
-        "section_background_color": "#ffffff",
-        "padding_top": 12,
-        "padding_bottom": 12
-      }
-    },
-    "image_with_text_NrYFbe": {
-      "type": "a-image-with-text",
-      "settings": {
-        "image": "shopify://shop_images/S0ef057d5e4244985992f5afd93ad6d3ar_18d72655-d81e-46db-82e3-6b4e1e9c37b6.webp",
-        "image_radius": 6,
-        "defer_loading_image": true,
-        "heading": "Stop The Itch Instantly",
-        "text": "<p>Persistent itching ruins your outdoor fun and irritates sensitive skin. This chemical-free tool provides instant relief using advanced, localized heat therapy.</p>",
-        "button_text": "",
-        "button_link": "",
-        "layout": "image_first",
-        "height": "medium",
-        "desktop_content_alignment": "left",
-        "grid_border_radius": 6,
-        "section_padding_left_padding": 12,
-        "section_padding_right_padding": 12,
-        "section_padding_bottom": 12,
-        "section_padding_top": 12,
-        "desktop_font_size": 35,
-        "mobile_font_size": 18,
-        "heading_font_weight": "700",
-        "heading_color": "#112C45",
-        "heading_use_gradient": false,
-        "heading_gradient_color": "",
-        "heading_highlighted_color": "#112C45",
-        "font_size": 14,
-        "body_color": "#112C45",
-        "body_highlighted_color": "#112C45",
-        "use_gradient_background": false,
-        "section_background_gradient": "linear-gradient(180deg, rgba(251, 51, 166, 1), rgba(127, 72, 176, 1) 50%, rgba(48, 145, 211, 1) 100%)",
-        "section_background_color": "#ffffff",
-        "card_use_gradient": false,
-        "card_background_color": "#F8EDE3",
-        "card_gradient": "",
-        "benefit_1_text": "Fast 3-second relief",
-        "benefit_1_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 24 24\" height=\"24px\" viewbox=\"0 0 24 24\" width=\"24px\" fill=\"#e3e3e3\"><g><rect fill=\"none\" height=\"24\" width=\"24\"></rect></g><g><path d=\"M23,12l-2.44-2.79l0.34-3.69l-3.61-0.82L15.4,1.5L12,2.96L8.6,1.5L6.71,4.69L3.1,5.5L3.44,9.2L1,12l2.44,2.79l-0.34,3.7 l3.61,0.82L8.6,22.5l3.4-1.47l3.4,1.46l1.89-3.19l3.61-0.82l-0.34-3.69L23,12z M10.09,16.72l-3.8-3.81l1.48-1.48l2.32,2.33 l5.85-5.87l1.48,1.48L10.09,16.72z\"></path></g></svg>",
-        "benefit_2_text": "Totally chemical-free",
-        "benefit_2_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 24 24\" height=\"24px\" viewbox=\"0 0 24 24\" width=\"24px\" fill=\"#e3e3e3\"><g><rect fill=\"none\" height=\"24\" width=\"24\"></rect></g><g><path d=\"M23,12l-2.44-2.79l0.34-3.69l-3.61-0.82L15.4,1.5L12,2.96L8.6,1.5L6.71,4.69L3.1,5.5L3.44,9.2L1,12l2.44,2.79l-0.34,3.7 l3.61,0.82L8.6,22.5l3.4-1.47l3.4,1.46l1.89-3.19l3.61-0.82l-0.34-3.69L23,12z M10.09,16.72l-3.8-3.81l1.48-1.48l2.32,2.33 l5.85-5.87l1.48,1.48L10.09,16.72z\"></path></g></svg>",
-        "benefit_3_text": "Safe for kids",
-        "benefit_3_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 24 24\" height=\"24px\" viewbox=\"0 0 24 24\" width=\"24px\" fill=\"#e3e3e3\"><g><rect fill=\"none\" height=\"24\" width=\"24\"></rect></g><g><path d=\"M23,12l-2.44-2.79l0.34-3.69l-3.61-0.82L15.4,1.5L12,2.96L8.6,1.5L6.71,4.69L3.1,5.5L3.44,9.2L1,12l2.44,2.79l-0.34,3.7 l3.61,0.82L8.6,22.5l3.4-1.47l3.4,1.46l1.89-3.19l3.61-0.82l-0.34-3.69L23,12z M10.09,16.72l-3.8-3.81l1.48-1.48l2.32,2.33 l5.85-5.87l1.48,1.48L10.09,16.72z\"></path></g></svg>",
-        "benefits_icon_size": 20,
-        "benefits_text_size": 14,
-        "benefits_gap": 12,
-        "benefits_icon_color": "#F472B6",
-        "benefits_text_color": "#112C45",
-        "benefits_text_highlighted_color": "#112C45",
-        "card_max_width": 1600,
-        "button_label_1_size": 14,
-        "button_label_1_size_mobile": 12,
-        "button_1_text_color": "#000000",
-        "button_1_background_color": "#F472B6",
-        "button_1_border_radius": 6,
-        "button_padding_vertical": 8,
-        "button_width_increase_desktop": 0,
-        "button_width_increase_mobile": 0,
-        "padding_top": 12,
-        "padding_bottom": 12
-      }
-    },
-    "benefits_cards_AHFLcL": {
-      "type": "a-benefits-cards",
-      "blocks": {
-        "benefit_kDAbrL": {
-          "type": "benefit",
-          "settings": {
-            "benefit_text": "<p>3-Second Instant Relief</p>",
-            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewbox=\"0 -960 960 960\" width=\"24px\" fill=\"#e3e3e3\"><path d=\"m438-338 226-226-57-57-169 169-84-84-57 57 141 141Zm42 258q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-84q104-33 172-132t68-220v-189l-240-90-240 90v189q0 121 68 220t172 132Zm0-316Z\"></path></svg>"
-          }
-        },
-        "benefit_9mAp3c": {
-          "type": "benefit",
-          "settings": {
-            "benefit_text": "<p>Totally Chemical-Free</p>",
-            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewbox=\"0 -960 960 960\" width=\"24px\" fill=\"#e3e3e3\"><path d=\"m438-426 198-198-57-57-141 141-56-56-57 57 113 113Zm42 240q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z\"></path></svg>"
-          }
-        },
-        "benefit_kcN8ye": {
-          "type": "benefit",
-          "settings": {
-            "benefit_text": "<p>Safe for Children</p>",
-            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewbox=\"0 -960 960 960\" width=\"24px\" fill=\"#e3e3e3\"><path d=\"M40-200v-560h80v560H40Zm120 0v-560h80v560h-80Zm120 0v-560h40v560h-40Zm120 0v-560h80v560h-80Zm120 0v-560h120v560H520Zm160 0v-560h40v560h-40Zm120 0v-560h120v560H800Z\"></path></svg>"
-          }
-        },
-        "benefit_pNj3Rj": {
-          "type": "benefit",
-          "settings": {
-            "benefit_text": "<p>Easy One-Button Use</p>",
-            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewbox=\"0 -960 960 960\" width=\"24px\" fill=\"#e3e3e3\"><path d=\"m40-240 20-80h220l-20 80H40Zm80-160 20-80h260l-20 80H120Zm623 240 20-160 29-240 10-79-59 479ZM240-80q-33 0-56.5-23.5T160-160h583l59-479H692l-11 85q-2 17-15 26.5t-30 7.5q-17-2-26.5-14.5T602-564l9-75H452l-11 84q-2 17-15 27t-30 8q-17-2-27-15t-8-30l9-74H220q4-34 26-57.5t54-23.5h80q8-75 51.5-117.5T550-880q64 0 106.5 47.5T698-720h102q36 1 60 28t19 63l-60 480q-4 30-26.5 49.5T740-80H240Zm220-640h159q1-33-22.5-56.5T540-800q-35 0-55.5 21.5T460-720Z\"></path></svg>"
-          }
-        }
-      },
-      "block_order": [
-        "benefit_kDAbrL",
-        "benefit_9mAp3c",
-        "benefit_kcN8ye",
-        "benefit_pNj3Rj"
-      ],
-      "name": "Benefits cards",
-      "settings": {
-        "text_size": 14,
-        "cards_per_row": 4,
-        "card_background_color": "#F8EDE3",
-        "card_background_color_opacity": 100,
-        "card_border_radius": 10,
-        "card_vertical_padding": 22,
-        "card_horizontal_padding": 15,
-        "gap_cards": 18,
-        "gap_icon_text": 15,
-        "icon_size": 50,
-        "icon_color": "#F472B6",
-        "text_color": "#F472B6",
-        "icon_background_color": "#ffffff",
-        "use_gradient_background": false,
-        "section_background_gradient": "linear-gradient(180deg, rgba(251, 51, 166, 1), rgba(127, 72, 176, 1) 50%, rgba(48, 145, 211, 1) 100%)",
-        "section_background_color": "#ffffff",
-        "padding_top": 12,
-        "padding_bottom": 12
-      }
-    },
-    "rich_text_P9Xf6T": {
-      "type": "a-rich-text",
-      "blocks": {
-        "list-cards": {
-          "type": "_a-rich-text-list-cards",
-          "disabled": true,
-          "static": true,
-          "settings": {
-            "text_alignment": "center",
-            "cards_layout": "left",
-            "font_size": 14,
-            "color": "#ffffff",
-            "bg_color": "#ffffff",
-            "background_opacity": 45,
-            "border_color": "#ffffff",
-            "border_radius": 10,
-            "gap_between_cards": 18,
-            "padding_top": 37,
-            "padding_bottom": 0
-          },
-          "blocks": {}
-        }
-      },
-      "name": "Rich text",
-      "settings": {
-        "heading": "Customer's Review Title",
-        "text": "<p>Insert review text here</p>",
-        "content_alignment": "center",
-        "text_max_width_percentage": 80,
-        "text_max_width_percentage_mobile": 100,
-        "heading_font_size": 35,
-        "mobile_heading_font_size": 25,
-        "heading_color": "#ffffff",
-        "heading_highlighted_color": "#ffffff",
-        "heading_use_gradient": false,
-        "heading_gradient_color": "",
-        "body_font_size": 14,
-        "body_color": "#ffffff",
-        "body_highlighted_color": "#ffffff",
-        "use_gradient_background": false,
-        "section_background_gradient": "linear-gradient(180deg, rgba(251, 51, 166, 1), rgba(127, 72, 176, 1) 50%, rgba(48, 145, 211, 1) 100%)",
-        "section_background_color": "#112C45",
-        "button_label": "",
-        "button_link": "",
-        "button_font_size": 14,
-        "button_font_size_mobile": 12,
-        "button_color": "#000000",
-        "button_bg_color": "#F472B6",
-        "button_border_radius": 6,
-        "button_padding_vertical": 8,
-        "button_width_increase_desktop": 0,
-        "button_padding_vertical_mobile": 8,
-        "button_width_increase_mobile": 80,
-        "padding_top": 24,
-        "padding_bottom": 36
-      }
-    },
-    "key_features_qFGttc": {
-      "type": "a-key-features",
-      "blocks": {
-        "key_features_list_KxEY6K": {
-          "type": "_a-key-features-list",
-          "settings": {
-            "card_list_item_title_font_size_desktop": 16,
-            "card_list_item_title_font_size_mobile": 14,
-            "card_list_item_title_color": "#ffffff",
-            "card_list_item_text_font_size_desktop": 14,
-            "card_list_item_text_font_size_mobile": 12,
-            "card_list_item_text_color": "#eaeaea",
-            "card_list_item_badge_font_size_desktop": 13,
-            "card_list_item_badge_font_size_mobile": 12,
-            "card_list_item_badge_color": "#1e1e1e",
-            "card_list_item_badge_background_color": "#ffffff",
-            "badge_has_border": true,
-            "badge_border_color": "#ffffff",
-            "badge_border_width": 1,
-            "card_list_item_badge_border_radius": 140,
-            "card_list_item_badge_padding_vertical": 3,
-            "card_list_item_badge_padding_horizontal": 10,
-            "card_list_item_left_line_color": "#ffffff",
-            "card_list_item_left_line_has_gradient": false,
-            "card_list_item_left_line_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_list_item_left_line_opacity": 60,
-            "card_list_item_left_line_width": 1,
-            "card_list_arrow_size": 18,
-            "card_list_item_arrow_color": "#ffffff",
-            "card_list_item_arrow_opacity": 60
-          },
-          "blocks": {
-            "key_feature_item_K4k9tx": {
-              "type": "_a-key-feature-item",
-              "name": "Key feature",
-              "settings": {
-                "badge": "<p>First Benefit</p>",
-                "title": "<p>Rapid Relief</p>",
-                "text": "<p>Stop the itch in three seconds flat.</p>",
-                "image": "shopify://shop_images/Sb0785aec547d43c680af5e99a9cc5fc6g_d4209f17-a295-44b5-8fb6-e918e532906e.webp"
-              },
-              "blocks": {}
-            },
-            "key_feature_item_txmV6j": {
-              "type": "_a-key-feature-item",
-              "name": "Key feature",
-              "settings": {
-                "badge": "<p>Second Benefit</p>",
-                "title": "<p>Purely Natural</p>",
-                "text": "<p>Zero chemicals for safe family protection.</p>",
-                "image": "shopify://shop_images/Sb0785aec547d43c680af5e99a9cc5fc6g_d4209f17-a295-44b5-8fb6-e918e532906e.webp"
-              },
-              "blocks": {}
-            },
-            "key_feature_item_KnfB6T": {
-              "type": "_a-key-feature-item",
-              "name": "Key feature",
-              "settings": {
-                "badge": "<p>Third Benefit </p>",
-                "title": "<p>Ultra-Portable</p>",
-                "text": "<p>Carry fast relief in your pocket anywhere.</p>",
-                "image": "shopify://shop_images/Sb0785aec547d43c680af5e99a9cc5fc6g_d4209f17-a295-44b5-8fb6-e918e532906e.webp"
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "key_feature_item_K4k9tx",
-            "key_feature_item_txmV6j",
-            "key_feature_item_KnfB6T"
-          ]
-        }
-      },
-      "block_order": [
-        "key_features_list_KxEY6K"
-      ],
-      "name": "Product key features",
-      "settings": {
-        "card_title": "<p>Enjoy Bug-Free Comfort All Summer Long</p>",
-        "card_image": "shopify://shop_images/Sb0785aec547d43c680af5e99a9cc5fc6g_d4209f17-a295-44b5-8fb6-e918e532906e.webp",
-        "image_height": "small",
-        "card_title_font_size_desktop": 35,
-        "card_title_font_size_mobile": 25,
-        "card_title_color": "#ffffff",
-        "card_title_color_bold": "#ffffff",
-        "card_title_use_gradient": false,
-        "card_title_color_bold_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-        "card_max_width": 1600,
-        "card_gap_desktop": 60,
-        "card_gap_mobile": 30,
-        "card_border_radius": 5,
-        "card_top_padding": 16,
-        "card_bottom_padding": 16,
-        "card_left_padding": 16,
-        "card_right_padding": 16,
-        "card_image_border_radius": 8,
-        "card_use_gradient_background": false,
-        "card_background_gradient": "linear-gradient(180deg, rgba(251,51,164, 1) 0%, rgba(96,77,188, 1) 100%)",
-        "card_background_color": "rgb(244, 114, 182)",
-        "use_gradient_background": false,
-        "section_background_gradient": "linear-gradient(180deg, rgba(251, 51, 166, 1), rgba(127, 72, 176, 1) 50%, rgba(48, 145, 211, 1) 100%)",
-        "section_background_color": "#ffffff",
-        "padding_top": 24,
-        "padding_bottom": 24
-      }
-    },
-    "testimonials_zhAzJk": {
-      "type": "a-testimonials",
-      "blocks": {
-        "slide_TTyzff": {
-          "type": "slide",
-          "settings": {
-            "review_heading": "Review header of 2-4 words",
-            "review_text": "<em>A text review talking about the experience with the product - how it transformed their life, how they use it, what their experience is and so on.</em>",
-            "author_image": "",
-            "author_thumbnail_image": "",
-            "review_name": "Sarah Michell's",
-            "author_name_color": "#112C45",
-            "highlight_review": false,
-            "num_stars": 5,
-            "review_star_size": 20,
-            "review_slide_heading_size": 16,
-            "review_heading_color": "#112C45",
-            "review_bolded_heading_color": "#112C45",
-            "review_slide_text_size": 15,
-            "review_body_color": "#112C45",
-            "review_bolded_body_color": "#112C45"
-          }
-        },
-        "slide_zxFfGK": {
-          "type": "slide",
-          "settings": {
-            "review_heading": "Review header of 2-4 words",
-            "review_text": "<em>A text review talking about the experience with the product - how it transformed their life, how they use it, what their experience is and so on.</em>",
-            "author_image": "",
-            "author_thumbnail_image": "",
-            "review_name": "Emily A.",
-            "author_name_color": "#112C45",
-            "highlight_review": true,
-            "num_stars": 5,
-            "review_star_size": 20,
-            "review_slide_heading_size": 16,
-            "review_heading_color": "#112C45",
-            "review_bolded_heading_color": "#112C45",
-            "review_slide_text_size": 15,
-            "review_body_color": "#112C45",
-            "review_bolded_body_color": "#112C45"
-          }
-        },
-        "slide_6VGPnY": {
-          "type": "slide",
-          "settings": {
-            "review_heading": "Review header of 2-4 words",
-            "review_text": "<em>A text review talking about the experience with the product - how it transformed their life, how they use it, what their experience is and so on.</em>",
-            "author_image": "",
-            "author_thumbnail_image": "",
-            "review_name": "Will I.",
-            "author_name_color": "#112C45",
-            "highlight_review": false,
-            "num_stars": 5,
-            "review_star_size": 20,
-            "review_slide_heading_size": 16,
-            "review_heading_color": "#112C45",
-            "review_bolded_heading_color": "#112C45",
-            "review_slide_text_size": 15,
-            "review_body_color": "#112C45",
-            "review_bolded_body_color": "#112C45"
-          }
-        },
-        "slide_nGQn7p": {
-          "type": "slide",
-          "settings": {
-            "review_heading": "Review header of 2-4 words",
-            "review_text": "<em>A text review talking about the experience with the product - how it transformed their life, how they use it, what their experience is and so on.</em>",
-            "author_image": "",
-            "author_thumbnail_image": "",
-            "review_name": "Denisa N.",
-            "author_name_color": "#112C45",
-            "highlight_review": false,
-            "num_stars": 5,
-            "review_star_size": 20,
-            "review_slide_heading_size": 20,
-            "review_heading_color": "#112C45",
-            "review_bolded_heading_color": "#112C45",
-            "review_slide_text_size": 15,
-            "review_body_color": "#112C45",
-            "review_bolded_body_color": "#112C45"
-          }
-        }
-      },
-      "block_order": [
-        "slide_TTyzff",
-        "slide_zxFfGK",
-        "slide_6VGPnY",
-        "slide_nGQn7p"
-      ],
-      "settings": {
-        "section_heading": "Join over 10,000+ Happy Customers",
-        "show_navigation_buttons": true,
-        "show_overall_rating": true,
-        "overall_rating_text": "{rating_value} | {num} Customers",
-        "overall_rating_value": 4.8,
-        "show_opacity_on_inactive_slides": false,
-        "heading_font_size": 35,
-        "mobile_heading_font_size": 25,
-        "heading_color": "#112C45",
-        "bolded_heading_color": "#112C45",
-        "heading_use_gradient": false,
-        "heading_gradient_color": "",
-        "use_gradient_background": false,
-        "section_background_gradient": "linear-gradient(180deg, rgba(251, 51, 166, 1), rgba(127, 72, 176, 1) 50%, rgba(48, 145, 211, 1) 100%)",
-        "section_background_color": "#ffffff",
-        "overall_rating_star_size": 16,
-        "star_color": "#F0429C",
-        "overall_rating_text_size": 14,
-        "overall_rating_text_color": "#ffffff",
-        "overall_rating_background_color": "rgb(244, 114, 182)",
-        "overall_rating_use_gradient": false,
-        "overall_rating_gradient_color": "linear-gradient(160deg, rgba(251,51,164, 1) 0%, rgba(96,77,188, 1) 100%)",
-        "overall_rating_border_radius": 3,
-        "slide_box_shadow": false,
-        "slide_background_color": "rgb(232,232,232)",
-        "navigation_button_size": 35,
-        "navgiation_button_background_color": "#ffffff",
-        "left_right_icon_color": "#F472B6",
-        "navigation_button_border_color": "#F472B6",
-        "navigation_button_border_opacity": 50,
-        "navigation_button_border_width": 1,
-        "progress_bar_color": "#F472B6",
-        "author_thumbnail_size": 66,
-        "author_thumbnail_border_color": "#ffffff",
-        "author_thumbnail_border_width": 2,
-        "review_slide_icon_color": "#000000",
-        "highlight_use_gradient_background": false,
-        "highlight_background_gradient": "linear-gradient(180deg, rgba(251,51,164, 1) 0%, rgba(96,77,188, 1) 100%)",
-        "highlight_background_color": "rgb(244, 114, 182)",
-        "highlight_review_icon_color": "#ffffff",
-        "highlight_review_heading_color": "#ffffff",
-        "highlight_review_bolded_heading_color": "#000000",
-        "highlight_review_body_color": "#ffffff",
-        "highlight_review_bolded_body_color": "#ffffff",
-        "highlight_review_name_color": "#ffffff",
-        "section_padding_top": 24,
-        "section_padding_bottom": 36
-      }
-    },
-    "borders_TanT6h": {
-      "type": "a-borders",
-      "settings": {
-        "shape": "waves",
-        "border_size": "60",
-        "flip_horizontal": true,
-        "flip_vertical": false,
-        "border_shape_color": "#112C45",
-        "section_bg_color": "#ffffff",
-        "use_section_bg_gradient": false,
-        "section_bg_gradient": "linear-gradient(180deg, rgba(251, 51, 164, 1) 0%, rgba(96, 77, 188, 1) 100%)",
-        "padding_top": 10,
-        "padding_bottom": 10
-      }
-    },
-    "comparison_table_zM4Ngh": {
-      "type": "a-comparison-table",
-      "blocks": {
-        "comparison_table_content_HJKENH": {
-          "type": "_a-comparison-table-content",
-          "settings": {
-            "content_heading": "The Smarter Way to Heal",
-            "body_content": "<p>Stop the itch instantly with a chemical-free solution that uses targeted heat to neutralize toxins in seconds, offering a faster and cleaner alternative to messy, slow-acting medicated creams.</p>",
-            "content_alignment": "center",
-            "heading_size": 40,
-            "heading_mob_size": 25,
-            "heading_color": "#ffffff",
-            "bolded_heading_color": "#ffffff",
-            "heading_use_gradient": false,
-            "heading_gradient_color": "",
-            "body_size": 12,
-            "body_mob_size": 16,
-            "body_color": "#ffffff",
-            "bolded_body_color": "#757575"
-          },
-          "blocks": {}
-        },
-        "comparison_table_Q4UMiC": {
-          "type": "_a-comparison-table",
-          "settings": {
-            "table_border_color": "#c4c4c4",
-            "table_border_opacity": 15,
-            "self_cells_background_color": "#ffffff",
-            "self_cells_background_opacity": 27,
-            "enable_product_column_custom_border": false,
-            "product_column_custom_border_color": "#000000",
-            "product_column_custom_border_opacity": 100,
-            "product_column_custom_border_width": 1,
-            "product_column_custom_border_radius": 10,
-            "enable_product_column_shadow": false,
-            "product_column_shadow_color": "#c8c8c8",
-            "product_column_shadow_opacity": 60
-          },
-          "blocks": {
-            "comparison_table_header_Tkd9Bt": {
-              "type": "_a-comparison-table-header",
-              "settings": {
-                "show_brand_name": true,
-                "us_label": "",
-                "other_brands_label": "Others",
-                "logo": "shopify://shop_images/Bolt.svg",
-                "logo_width": 90,
-                "mobile_logo_width": 60,
-                "other_brands_logo_width": 74,
-                "other_brands_mobile_logo_width": 60,
-                "cell_header_brand_text_size": 16,
-                "cell_header_brand_text_color": "#ffffff",
-                "cell_header_competitor_text_size": 16,
-                "cell_header_competitor_text_color": "#383838"
-              },
-              "blocks": {}
-            },
-            "comparison_table_rows_WHTa7V": {
-              "type": "_a-comparison-table-rows",
-              "settings": {
-                "benefits_desktop_size": 16,
-                "benefits_mobile_size": 14,
-                "bold_features_text": false,
-                "icon_cells_background_color": "rgba(0,0,0,0)",
-                "features_background_color": "rgba(0,0,0,0)",
-                "product_column_border_top_color": "rgba(0,0,0,0)",
-                "enable_product_column_border_top_gradient": false,
-                "product_column_border_top_gradient": "linear-gradient(180deg, rgba(251,51,164, 1), rgba(96,77,188, 1) 100%)",
-                "product_column_border_opacity": 100
-              },
-              "blocks": {
-                "comparison_table_row_RkKmf4": {
-                  "type": "_a-comparison-table-row",
-                  "settings": {
-                    "benefit": "Chemical-Free",
-                    "us": true,
-                    "others": false,
-                    "feature_text_color": "#ffffff",
-                    "heading_highlighted_color": "#ffffff",
-                    "benefit_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewbox=\"0 -960 960 960\" width=\"24px\" fill=\"#ffffff\"><path d=\"m344-60-76-128-144-32 14-148-98-112 98-112-14-148 144-32 76-128 136 58 136-58 76 128 144 32-14 148 98 112-98 112 14 148-144 32-76 128-136-58-136 58Zm94-278 226-226-56-58-170 170-86-84-56 56 142 142Z\"></path></svg>",
-                    "benefit_icon_size": 20,
-                    "benefit_icon_color": "#ffffff"
-                  },
-                  "blocks": {}
-                },
-                "comparison_table_row_LP66XH": {
-                  "type": "_a-comparison-table-row",
-                  "settings": {
-                    "benefit": "Relief in Seconds",
-                    "us": true,
-                    "others": false,
-                    "feature_text_color": "#ffffff",
-                    "heading_highlighted_color": "#ffffff",
-                    "benefit_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewbox=\"0 -960 960 960\" width=\"24px\" fill=\"#ffffff\"><path d=\"m344-60-76-128-144-32 14-148-98-112 98-112-14-148 144-32 76-128 136 58 136-58 76 128 144 32-14 148 98 112-98 112 14 148-144 32-76 128-136-58-136 58Zm94-278 226-226-56-58-170 170-86-84-56 56 142 142Z\"></path></svg>",
-                    "benefit_icon_size": 20,
-                    "benefit_icon_color": "#ffffff"
-                  },
-                  "blocks": {}
-                },
-                "comparison_table_row_UgaiJJ": {
-                  "type": "_a-comparison-table-row",
-                  "settings": {
-                    "benefit": "Lifetime Use",
-                    "us": true,
-                    "others": false,
-                    "feature_text_color": "#ffffff",
-                    "heading_highlighted_color": "#ffffff",
-                    "benefit_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewbox=\"0 -960 960 960\" width=\"24px\" fill=\"#ffffff\"><path d=\"m344-60-76-128-144-32 14-148-98-112 98-112-14-148 144-32 76-128 136 58 136-58 76 128 144 32-14 148 98 112-98 112 14 148-144 32-76 128-136-58-136 58Zm94-278 226-226-56-58-170 170-86-84-56 56 142 142Z\"></path></svg>",
-                    "benefit_icon_size": 20,
-                    "benefit_icon_color": "#ffffff"
-                  },
-                  "blocks": {}
-                },
-                "comparison_table_row_H4xrLR": {
-                  "type": "_a-comparison-table-row",
-                  "settings": {
-                    "benefit": "No Messy Residue",
-                    "us": true,
-                    "others": false,
-                    "feature_text_color": "#ffffff",
-                    "heading_highlighted_color": "#ffffff",
-                    "benefit_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewbox=\"0 -960 960 960\" width=\"24px\" fill=\"#ffffff\"><path d=\"m344-60-76-128-144-32 14-148-98-112 98-112-14-148 144-32 76-128 136 58 136-58 76 128 144 32-14 148 98 112-98 112 14 148-144 32-76 128-136-58-136 58Zm94-278 226-226-56-58-170 170-86-84-56 56 142 142Z\"></path></svg>",
-                    "benefit_icon_size": 20,
-                    "benefit_icon_color": "#ffffff"
-                  },
-                  "blocks": {}
-                },
-                "comparison_table_row_q83zHz": {
-                  "type": "_a-comparison-table-row",
-                  "settings": {
-                    "benefit": "Kid-Safe Mode",
-                    "us": true,
-                    "others": false,
-                    "feature_text_color": "#ffffff",
-                    "heading_highlighted_color": "#ffffff",
-                    "benefit_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewbox=\"0 -960 960 960\" width=\"24px\" fill=\"#ffffff\"><path d=\"m344-60-76-128-144-32 14-148-98-112 98-112-14-148 144-32 76-128 136 58 136-58 76 128 144 32-14 148 98 112-98 112 14 148-144 32-76 128-136-58-136 58Zm94-278 226-226-56-58-170 170-86-84-56 56 142 142Z\"></path></svg>",
-                    "benefit_icon_size": 20,
-                    "benefit_icon_color": "#ffffff"
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "comparison_table_row_RkKmf4",
-                "comparison_table_row_LP66XH",
-                "comparison_table_row_UgaiJJ",
-                "comparison_table_row_H4xrLR",
-                "comparison_table_row_q83zHz"
-              ]
-            }
-          },
-          "block_order": [
-            "comparison_table_header_Tkd9Bt",
-            "comparison_table_rows_WHTa7V"
-          ]
-        }
-      },
-      "block_order": [
-        "comparison_table_content_HJKENH",
-        "comparison_table_Q4UMiC"
-      ],
-      "name": "Comparison table",
-      "settings": {
-        "button_label": "Shop Now",
-        "link": "shopify://products/a93z-insect-sting-and-bite-relief-chemical-free-bug-bite-healer-for-natural-relief-from-itching-mosquito-itch-relief-device",
-        "button_text_size": 12,
-        "button_text_color": "#000000",
-        "button_background_color": "#F472B6",
-        "button_border_radius": 9,
-        "button_border_width": 0,
-        "button_border_color": "#000000",
-        "button_padding_vertical": 16,
-        "button_width_increase_desktop": 69,
-        "button_width_increase_mobile": 95,
-        "icon_size": 22,
-        "checkmark_color": "#ffffff",
-        "x_color": "#ffffff",
-        "checkmark_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewbox=\"0 -960 960 960\" width=\"24px\" fill=\"#ffffff\"><path d=\"m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z\"></path></svg>",
-        "x_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewbox=\"0 -960 960 960\" width=\"24px\" fill=\"#ffffff\"><path d=\"m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z\"></path></svg>",
-        "use_gradient_background": false,
-        "section_background_gradient": "linear-gradient(180deg, rgba(251,51,164, 1) 0%, rgba(96,77,188, 1) 100%)",
-        "section_background_color": "#112C45",
-        "section_padding_top_desktop": 36,
-        "section_padding_bottom_desktop": 36
-      }
-    },
-    "collapsible_content_4h9Diq": {
-      "type": "a-collapsible-content",
-      "blocks": {
-        "collapsible_content_list_6BLT4W": {
-          "type": "_a-collapsible-content-list",
-          "settings": {
-            "heading_font_size": 16,
-            "heading_font_size_mobile": 16,
-            "body_font_size": 16,
-            "body_font_size_mobile": 16,
-            "index_number_size": 30,
-            "index_number_color": "#F472B6",
-            "index_number_background_color": "#ffffff",
-            "rows_have_border": false,
-            "row_gap": 15,
-            "border_radius": 6,
-            "row_container_bg_color_scheme": "#F8EDE3",
-            "rows_border_color": "#000000",
-            "rows_border_color_opacity": 15,
-            "rows_border_width": 1,
-            "vertical_padding": 13,
-            "horizontal_padding": 19,
-            "icon_size": 11,
-            "icon_color": "#F472B6",
-            "title_row_has_underline_on_hover": false
-          },
-          "blocks": {
-            "collapsible_content_row_UafVj7": {
-              "type": "_a-collapsible-content-row",
-              "settings": {
-                "heading": "How does heat therapy actually stop the itching so quickly?",
-                "row_content": "<p>It’s all about science, not magic. The device applies a precise, localized thermal pulse that neutralizes the proteins in insect saliva responsible for itching and swelling. By breaking down these toxins instantly, it triggers your body’s natural healing response, providing relief in seconds without any messy chemicals.</p>",
-                "heading_color": "#112C45",
-                "heading_highlighted_color": "#112C45",
-                "body_color": "#112C45",
-                "body_highlighted_color": "#112C45"
-              },
-              "blocks": {}
-            },
-            "collapsible_content_row_UTbPqm": {
-              "type": "_a-collapsible-content-row",
-              "settings": {
-                "heading": "Is the heat safe for my child’s sensitive skin?",
-                "row_content": "<p>Safety is our top priority. The device features two distinct settings: a gentle 3-second pulse specifically designed for children and those with sensitive skin, and a 6-second setting for standard use. It provides just enough concentrated warmth to stop the itch effectively while remaining comfortable for the whole family.</p>",
-                "heading_color": "#112C45",
-                "heading_highlighted_color": "#112C45",
-                "body_color": "#112C45",
-                "body_highlighted_color": "#112C45"
-              },
-              "blocks": {}
-            },
-            "collapsible_content_row_Lm4LG6": {
-              "type": "_a-collapsible-content-row",
-              "settings": {
-                "heading": "Why should I choose this over traditional anti-itch creams?",
-                "row_content": "<p>Traditional creams are often greasy, smell medicinal, and rely on chemicals that absorb into your skin. This device is 100% chemical-free and works in under 10 seconds. Plus, it’s a durable, one-time purchase that never expires, making it more cost-effective and environmentally friendly than buying endless tubes of ointment.</p>",
-                "heading_color": "#112C45",
-                "heading_highlighted_color": "#112C45",
-                "body_color": "#112C45",
-                "body_highlighted_color": "#112C45"
-              },
-              "blocks": {}
-            },
-            "collapsible_content_row_rVDQNY": {
-              "type": "_a-collapsible-content-row",
-              "name": "Collapsible content row",
-              "settings": {
-                "heading": "Is this device portable enough for hiking and travel?",
-                "row_content": "<p>Absolutely! We designed this with the adventurer in mind. It is battery-operated, lightweight, and small enough to slip into your pocket, backpack, or first-aid kit. Whether you are deep in the woods or at a backyard BBQ, you will have instant, professional-grade relief ready whenever a bug strikes.</p>",
-                "heading_color": "#112C45",
-                "heading_highlighted_color": "#112C45",
-                "body_color": "#112C45",
-                "body_highlighted_color": "#112C45"
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "collapsible_content_row_UafVj7",
-            "collapsible_content_row_UTbPqm",
-            "collapsible_content_row_Lm4LG6",
-            "collapsible_content_row_rVDQNY"
-          ]
-        }
-      },
-      "block_order": [
-        "collapsible_content_list_6BLT4W"
-      ],
-      "name": "FAQ's",
-      "settings": {
-        "heading": "Frequently Asked Questions",
-        "subheading": "Find quick answers to the most common questions about our product.",
-        "show_index": true,
-        "content_max_width_desktop": 1100,
-        "desktop_layout": "image_first",
-        "image_ratio": "adapt",
-        "heading_alignment": "center",
-        "heading_subheading_gap": 7,
-        "heading_subheading_gap_mobile": 7,
-        "font_size": 35,
-        "mob_font_size": 25,
-        "heading_color": "#112C45",
-        "heading_highlighted_color": "#112C45",
-        "heading_use_gradient": false,
-        "heading_gradient_color": "",
-        "subheading_size": 16,
-        "subheading_mob_size": 16,
-        "subheading_color": "#112C45",
-        "subheading_highlighted_color": "#112C45",
-        "subheading_use_gradient": false,
-        "subheading_gradient_color": "linear-gradient(180deg, rgba(251,51,164, 1), rgba(127, 72, 176, 1) 50%, rgba(48, 145, 211, 1) 100%)",
-        "use_gradient_background": false,
-        "section_background_gradient": "linear-gradient(180deg, rgba(251, 51, 166, 1), rgba(127, 72, 176, 1) 50%, rgba(48, 145, 211, 1) 100%)",
-        "section_background_color": "#ffffff",
-        "padding_top_content": 29,
-        "padding_bottom_content": 0,
-        "padding_top": 24,
-        "padding_bottom": 24
-      }
-    },
-    "feature_icons_MMNaQM": {
-      "type": "a-feature-icons",
-      "blocks": {
-        "column_p6KBTG": {
-          "type": "column",
-          "settings": {
-            "icon": "<svg width=\"91\" height=\"93\" viewBox=\"0 0 91 93\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n <g filter=\"url(#filter0_d_5281_3537)\">\r\n <circle cx=\"45.5\" cy=\"43.5\" r=\"43.5\" fill=\"white\"/>\r\n </g>\r\n <path d=\"M47.7075 63C46.0929 63 44.5504 62.3267 41.4655 60.9801C37.8648 59.4084 35.1084 58.2052 33.196 57.0798H26M47.7075 63C49.3222 63 50.8647 62.3267 53.9496 60.9801C61.6287 57.6281 65.4683 55.9521 65.4683 53.1329V32.4121M47.7075 63V41.2925M29.9468 32.4121V38.3323\" stroke=\"rgb(0,0,0)\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\r\n <path d=\"M40.4575 38.71L34.6928 35.9205C31.5291 34.3897 29.9473 33.6242 29.9473 32.4121C29.9473 31.2 31.5291 30.4345 34.6928 28.9037L40.4575 26.1142C44.0154 24.3926 45.7944 23.5317 47.708 23.5317C49.6216 23.5317 51.4006 24.3926 54.9585 26.1142L60.7232 28.9037C63.8869 30.4345 65.4687 31.2 65.4687 32.4121C65.4687 33.6242 63.8869 34.3897 60.7232 35.9205L54.9585 38.71C51.4006 40.4316 49.6216 41.2925 47.708 41.2925C45.7944 41.2925 44.0154 40.4316 40.4575 38.71Z\" stroke=\"rgb(0,0,0)\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\r\n <path d=\"M57.8438 27.5093L37.5781 37.3156\" stroke=\"rgb(0,0,0)\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\r\n <path d=\"M26 45.2393H31.9202\" stroke=\"rgb(0,0,0)\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\r\n <path d=\"M26 51.1597H31.9202\" stroke=\"rgb(0,0,0)\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\r\n <defs>\r\n <filter id=\"filter0_d_5281_3537\" x=\"0\" y=\"0\" width=\"91\" height=\"93\" filterUnits=\"userSpaceOnUse\" color-interpolation-filters=\"sRGB\">\r\n <feFlood flood-opacity=\"0\" result=\"BackgroundImageFix\"/>\r\n <feColorMatrix in=\"SourceAlpha\" type=\"matrix\" values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0\" result=\"hardAlpha\"/>\r\n <feOffset dy=\"4\"/>\r\n <feGaussianBlur stdDeviation=\"1\"/>\r\n <feComposite in2=\"hardAlpha\" operator=\"out\"/>\r\n <feColorMatrix type=\"matrix\" values=\"0 0 0 0 0.856463 0 0 0 0 0.903726 0 0 0 0 0.918269 0 0 0 1 0\"/>\r\n <feBlend mode=\"normal\" in2=\"BackgroundImageFix\" result=\"effect1_dropShadow_5281_3537\"/>\r\n <feBlend mode=\"normal\" in=\"SourceGraphic\" in2=\"effect1_dropShadow_5281_3537\" result=\"shape\"/>\r\n </filter>\r\n </defs>\r\n </svg>",
-            "custom_icon_image": "shopify://shop_images/Group_166541_1.png",
-            "title": "",
-            "text": "<p>Worldwide Shipping</p>",
-            "icon_heading_font_size": 24,
-            "icon_heading_color": "#112C45",
-            "icon_bolded_heading_color": "#112C45",
-            "column_text_size": 15,
-            "column_text_color": "#112C45",
-            "column_text_highlighted_color": "#112C45",
-            "custom_icon_color": "#F472B6"
-          }
-        },
-        "column_kbGexz": {
-          "type": "column",
-          "settings": {
-            "icon": "<svg width=\"91\" height=\"93\" viewBox=\"0 0 91 93\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n <g filter=\"url(#filter0_d_5281_3538)\">\r\n <circle cx=\"45.5\" cy=\"43.5\" r=\"43.5\" fill=\"white\"/>\r\n </g>\r\n <path d=\"M56.5009 40.9111C56.5009 40.1615 56.5009 39.7866 56.6135 39.453C56.9407 38.4823 57.8052 38.1075 58.6719 37.7131C59.6425 37.269 60.1279 37.048 60.611 37.009C61.157 36.9656 61.7052 37.0826 62.1732 37.3448C62.7929 37.6915 63.2262 38.3545 63.6682 38.8918C65.7114 41.3748 66.734 42.6163 67.1067 43.9835C67.41 45.0885 67.41 46.2455 67.1067 47.3483C66.5629 49.346 64.8404 51.0186 63.5642 52.57C62.912 53.3608 62.5849 53.7573 62.1732 53.9891C61.6972 54.2531 61.1535 54.37 60.611 54.325C60.1279 54.286 59.6425 54.065 58.6697 53.6208C57.803 53.2265 56.9407 52.8516 56.6135 51.881C56.5009 51.5473 56.5009 51.1725 56.5009 50.4228V40.9111ZM34.8342 40.9111C34.8342 39.9665 34.8082 39.1193 34.0455 38.4563C33.7682 38.2158 33.3999 38.049 32.6654 37.7131C31.6925 37.2711 31.2072 37.048 30.724 37.009C29.2789 36.892 28.501 37.88 27.669 38.894C25.6237 41.3748 24.601 42.6163 24.2262 43.9856C23.9246 45.087 23.9246 46.2491 24.2262 47.3505C24.7722 49.346 26.4969 51.0208 27.7709 52.57C28.5747 53.545 29.3439 54.4355 30.724 54.325C31.2072 54.286 31.6925 54.065 32.6654 53.6208C33.402 53.2871 33.7682 53.1181 34.0455 52.8776C34.8082 52.2146 34.8342 51.3675 34.8342 50.425V40.9111Z\" stroke=\"rgb(0,0,0)\" stroke-width=\"2.4\" fill=\"none\"/>\r\n <path d=\"M30.502 37C30.502 29.8197 37.2923 24 45.6686 24C54.045 24 60.8353 29.8197 60.8353 37\" stroke=\"rgb(0,0,0)\" stroke-width=\"2.4\" stroke-linecap=\"square\" stroke-linejoin=\"round\" fill=\"none\"/>\r\n <path d=\"M60.8359 54.333V56.0663C60.8359 59.8948 56.9576 62.9997 52.1693 62.9997H47.8359\" stroke=\"rgb(0,0,0)\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\r\n <defs>\r\n <filter id=\"filter0_d_5281_3538\" x=\"0\" y=\"0\" width=\"91\" height=\"93\" filterUnits=\"userSpaceOnUse\" color-interpolation-filters=\"sRGB\">\r\n <feFlood flood-opacity=\"0\" result=\"BackgroundImageFix\"/>\r\n <feColorMatrix in=\"SourceAlpha\" type=\"matrix\" values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0\" result=\"hardAlpha\"/>\r\n <feOffset dy=\"4\"/>\r\n <feGaussianBlur stdDeviation=\"1\"/>\r\n <feComposite in2=\"hardAlpha\" operator=\"out\"/>\r\n <feColorMatrix type=\"matrix\" values=\"0 0 0 0 0.856463 0 0 0 0 0.903726 0 0 0 0 0.918269 0 0 0 1 0\"/>\r\n <feBlend mode=\"normal\" in2=\"BackgroundImageFix\" result=\"effect1_dropShadow_5281_3538\"/>\r\n <feBlend mode=\"normal\" in=\"SourceGraphic\" in2=\"effect1_dropShadow_5281_3538\" result=\"shape\"/>\r\n </filter>\r\n </defs>\r\n </svg>",
-            "custom_icon_image": "shopify://shop_images/Group_166607_48d2b0fe-890f-4e11-8a8a-d897d1a49b1e.png",
-            "title": "",
-            "text": "<p>24/7 Support</p>",
-            "icon_heading_font_size": 24,
-            "icon_heading_color": "#112C45",
-            "icon_bolded_heading_color": "#112C45",
-            "column_text_size": 15,
-            "column_text_color": "#112C45",
-            "column_text_highlighted_color": "#112C45",
-            "custom_icon_color": "#F472B6"
-          }
-        },
-        "column_ijLX4A": {
-          "type": "column",
-          "settings": {
-            "icon": "<svg width=\"91\" height=\"93\" viewBox=\"0 0 91 93\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n <g filter=\"url(#filter0_d_5281_3539)\">\r\n <circle cx=\"45.5\" cy=\"43.5\" r=\"43.5\" fill=\"white\"/>\r\n </g>\r\n <path d=\"M44.2393 24.2246C44.4789 23.488 45.5211 23.488 45.7607 24.2246L49.2471 34.9541C49.6754 36.2724 50.9039 37.1658 52.29 37.166H63.5723C64.3471 37.1662 64.6689 38.1568 64.042 38.6123L54.915 45.2441C53.7937 46.059 53.3247 47.503 53.7529 48.8213L57.2393 59.5508C57.4787 60.2878 56.6348 60.9008 56.0078 60.4453L46.8809 53.8145C45.7593 52.9996 44.2407 52.9996 43.1191 53.8145L33.9922 60.4453C33.3652 60.9008 32.5213 60.2878 32.7607 59.5508L36.2471 48.8213C36.6753 47.503 36.2063 46.059 35.085 45.2441L25.958 38.6123C25.3311 38.1568 25.6529 37.1662 26.4277 37.166H37.71C39.0961 37.1658 40.3246 36.2724 40.7529 34.9541L44.2393 24.2246Z\" stroke=\"rgb(0,0,0)\" stroke-width=\"2.4\" fill=\"none\"/>\r\n <defs>\r\n <filter id=\"filter0_d_5281_3539\" x=\"0\" y=\"0\" width=\"91\" height=\"93\" filterUnits=\"userSpaceOnUse\" color-interpolation-filters=\"sRGB\">\r\n <feFlood flood-opacity=\"0\" result=\"BackgroundImageFix\"/>\r\n <feColorMatrix in=\"SourceAlpha\" type=\"matrix\" values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0\" result=\"hardAlpha\"/>\r\n <feOffset dy=\"4\"/>\r\n <feGaussianBlur stdDeviation=\"1\"/>\r\n <feComposite in2=\"hardAlpha\" operator=\"out\"/>\r\n <feColorMatrix type=\"matrix\" values=\"0 0 0 0 0.856463 0 0 0 0 0.903726 0 0 0 0 0.918269 0 0 0 1 0\"/>\r\n <feBlend mode=\"normal\" in2=\"BackgroundImageFix\" result=\"effect1_dropShadow_5281_3539\"/>\r\n <feBlend mode=\"normal\" in=\"SourceGraphic\" in2=\"effect1_dropShadow_5281_3539\" result=\"shape\"/>\r\n </filter>\r\n </defs>\r\n </svg>",
-            "custom_icon_image": "shopify://shop_images/Group_166608.png",
-            "title": "",
-            "text": "<p>Verified quality only</p>",
-            "icon_heading_font_size": 24,
-            "icon_heading_color": "#112C45",
-            "icon_bolded_heading_color": "#112C45",
-            "column_text_size": 15,
-            "column_text_color": "#112C45",
-            "column_text_highlighted_color": "#112C45",
-            "custom_icon_color": "#F472B6"
-          }
-        },
-        "column_jtc7mK": {
-          "type": "column",
-          "settings": {
-            "icon": "<svg width=\"91\" height=\"93\" viewBox=\"0 0 91 93\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n <g filter=\"url(#filter0_d_5118_3448)\">\r\n <circle cx=\"45.5\" cy=\"43.5\" r=\"43.5\" fill=\"white\"/>\r\n </g>\r\n <path d=\"M52.3774 51.2542H58.6945C61.189 51.2122 65 52.5254 65 57.2618C65 62.1762 60.2973 63 58.6945 63C57.0917 63 41.9551 63 37.5922 63C32.7051 63 26 62.0099 26 53.5773L26 35.7H65V44.5105M52.3774 51.2542C52.3879 50.8371 52.5654 50.4234 52.9101 50.1227L56.2288 47.3525M52.3774 51.2542C52.3662 51.6995 52.5453 52.1486 52.9144 52.4682L56.2288 55.1671\" stroke=\"rgb(0,0,0)\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\r\n <path d=\"M26 35.693L27.7975 31.2014C29.2561 27.7107 29.9854 25.9654 31.4637 24.9827C32.9419 24 34.8381 24 38.6304 24H52.3221C56.1145 24 58.0105 24 59.4889 24.9827C60.9672 25.9654 61.6963 27.7107 63.1551 31.2014L65 35.7\" stroke=\"rgb(0,0,0)\" stroke-width=\"2.4\" stroke-linecap=\"round\" fill=\"none\"/>\r\n <path d=\"M45.5 35.7V24\" stroke=\"rgb(0,0,0)\" stroke-width=\"2.4\" stroke-linecap=\"round\" fill=\"none\"/>\r\n <path d=\"M41.5996 43.5H49.3996\" stroke=\"rgb(0,0,0)\" stroke-width=\"2.4\" stroke-linecap=\"round\" fill=\"none\"/>\r\n <defs>\r\n <filter id=\"filter0_d_5118_3448\" x=\"0\" y=\"0\" width=\"91\" height=\"93\" filterUnits=\"userSpaceOnUse\" color-interpolation-filters=\"sRGB\">\r\n <feFlood flood-opacity=\"0\" result=\"BackgroundImageFix\"/>\r\n <feColorMatrix in=\"SourceAlpha\" type=\"matrix\" values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0\" result=\"hardAlpha\"/>\r\n <feOffset dy=\"4\"/>\r\n <feGaussianBlur stdDeviation=\"1\"/>\r\n <feComposite in2=\"hardAlpha\" operator=\"out\"/>\r\n <feColorMatrix type=\"matrix\" values=\"0 0 0 0 0.856463 0 0 0 0 0.903726 0 0 0 0 0.918269 0 0 0 1 0\"/>\r\n <feBlend mode=\"normal\" in2=\"BackgroundImageFix\" result=\"effect1_dropShadow_5118_3448\"/>\r\n <feBlend mode=\"normal\" in=\"SourceGraphic\" in2=\"effect1_dropShadow_5118_3448\" result=\"shape\"/>\r\n </filter>\r\n </defs>\r\n </svg>",
-            "custom_icon_image": "shopify://shop_images/Group_166610.png",
-            "title": "",
-            "text": "<p>Hassle-free returns</p>",
-            "icon_heading_font_size": 24,
-            "icon_heading_color": "#112C45",
-            "icon_bolded_heading_color": "#112C45",
-            "column_text_size": 15,
-            "column_text_color": "#112C45",
-            "column_text_highlighted_color": "#112C45",
-            "custom_icon_color": "#F472B6"
-          }
-        }
-      },
-      "block_order": [
-        "column_p6KBTG",
-        "column_kbGexz",
-        "column_ijLX4A",
-        "column_jtc7mK"
-      ],
-      "settings": {
-        "title": "",
-        "text": "",
-        "columns_desktop": 4,
-        "padding_horizontal_desktop": 50,
-        "columns_mobile": "2",
-        "heading_size": 40,
-        "heading_mob_size": 28,
-        "heading_color": "#112C45",
-        "bolded_heading_color": "#112C45",
-        "heading_use_gradient": false,
-        "heading_gradient_color": "",
-        "body_size": 16,
-        "body_color": "#112C45",
-        "bolded_body_color": "#112C45",
-        "icon_size": "medium",
-        "icon_card_vertical_padding_desktop": 25,
-        "icon_card_horizontal_padding_desktop": 25,
-        "icon_card_vertical_padding_mobile": 25,
-        "icon_card_horizontal_padding_mobile": 25,
-        "swipe_on_mobile": false,
-        "background_style": "none",
-        "card_background_color": "#F8EDE3",
-        "use_gradient_background": false,
-        "section_background_gradient": "linear-gradient(180deg, rgba(251, 51, 166, 1), rgba(127, 72, 176, 1) 50%, rgba(48, 145, 211, 1) 100%)",
-        "section_background_color": "#ffffff",
-        "padding_top": 24,
-        "padding_bottom": 24
-      }
-    },
-    "image_comparison_slider_y3wPPw": {
-      "type": "a-image-comparison-slider",
-      "blocks": {
-        "heading_xVYWke": {
-          "type": "heading",
-          "settings": {
-            "heading": "Our Exciting Results",
-            "size": 40,
-            "mobile_font_size": 28,
-            "color": "#000000",
-            "highlighted_color": "#000000",
-            "heading_use_gradient": false,
-            "heading_gradient_color": "",
-            "padding_top_desktop": 5,
-            "padding_bottom_desktop": 5,
-            "padding_top_mobile": 3,
-            "padding_bottom_mobile": 3
-          }
-        },
-        "text_NXFM34": {
-          "type": "text",
-          "settings": {
-            "text": "Discover the difference for yourself and see why our customers love the results.",
-            "size": 14,
-            "size_mobile": 14,
-            "color": "#666666",
-            "highlighted_color": "#000000",
-            "text_use_gradient": false,
-            "text_gradient_color": "",
-            "padding_top_desktop": 5,
-            "padding_bottom_desktop": 5,
-            "padding_top_mobile": 3,
-            "padding_bottom_mobile": 3
-          }
-        },
-        "buttons_rhA7qi": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop Now",
-            "button_link_1": "shopify://products/a93z-insect-sting-and-bite-relief-chemical-free-bug-bite-healer-for-natural-relief-from-itching-mosquito-itch-relief-device",
-            "button_label_1_size": 14,
-            "button_label_1_size_mobile": 12,
-            "button_1_text_color": "#000000",
-            "button_1_background_color": "#F472B6",
-            "button_1_border_radius": 6,
-            "button_padding_vertical": 8,
-            "button_width_increase_desktop": 68,
-            "button_width_increase_mobile": 68,
-            "padding_top_desktop": 5,
-            "padding_bottom_desktop": 5,
-            "padding_top_mobile": 11,
-            "padding_bottom_mobile": 27
-          }
-        }
-      },
-      "block_order": [
-        "heading_xVYWke",
-        "text_NXFM34",
-        "buttons_rhA7qi"
-      ],
-      "name": "Before and after",
-      "settings": {
-        "before_image": "shopify://shop_images/S7498f0b1fbc34d66aa356b0edf56ea0dq_3f60fe87-eeb3-4680-bd47-3c3b07c40528.webp",
-        "after_image": "shopify://shop_images/S7498f0b1fbc34d66aa356b0edf56ea0dq_3f60fe87-eeb3-4680-bd47-3c3b07c40528.webp",
-        "image_height": 500,
-        "image_height_mobile": 300,
-        "enable_grayscale_before_image": true,
-        "before_label": "Before",
-        "after_label": "After",
-        "default_slider_position": 50,
-        "layout_desktop": "slider_second",
-        "layout_mobile": "slider_first_mobile",
-        "desktop_content_alignment": "center",
-        "mobile_content_alignment": "center",
-        "card_background_color": "#F8EDE3",
-        "card_border_radius": 6,
-        "labels_background_color": "#F472B6",
-        "labels_text_color": "#000000",
-        "labels_font_size": 14,
-        "labels_border_radius": 5,
-        "line_color": "#ffffff",
-        "line_width": 4,
-        "divider_icon_color": "#F472B6",
-        "divider_icon_size": 40,
-        "use_gradient_background": false,
-        "section_background_gradient": "linear-gradient(180deg, rgba(251, 51, 166, 1), rgba(127, 72, 176, 1) 50%, rgba(48, 145, 211, 1) 100%)",
-        "section_background_color": "#ffffff",
-        "card_padding_top": 0,
-        "card_padding_right": 0,
-        "card_padding_bottom": 0,
-        "card_padding_left": 0,
-        "card_padding_top_mobile": 0,
-        "card_padding_right_mobile": 0,
-        "card_padding_bottom_mobile": 0,
-        "card_padding_left_mobile": 0,
-        "padding_top": 24,
-        "padding_bottom": 24
-      }
-    },
-    "newsletter_rVzhVN": {
-      "type": "a-newsletter",
-      "blocks": {
-        "heading_kLeYC7": {
-          "type": "heading",
-          "settings": {
-            "heading": "Join Our Newsletter",
-            "font_size": 35,
-            "mobile_font_size": 28,
-            "heading_text": "#112C45",
-            "bolded_heading_text": "#112C45",
-            "heading_use_gradient": false,
-            "heading_gradient_color": "linear-gradient(180deg, rgba(251,51,164, 1), rgba(127, 72, 176, 1) 50%, rgba(48, 145, 211, 1) 100%)",
-            "heading_padding_top": 0,
-            "heading_padding_top_mobile": 25,
-            "heading_padding_bottom": 7,
-            "heading_padding_bottom_mobile": 20
-          }
-        },
-        "paragraph_KfDwNn": {
-          "type": "paragraph",
-          "settings": {
-            "text": "<p>Get the latest updates, offers, and news delivered straight to your inbox.</p>",
-            "font_size": 14,
-            "mobile_font_size": 14,
-            "body_text": "#666666",
-            "bolded_body_text": "#000000",
-            "body_use_gradient": false,
-            "body_gradient_color": "linear-gradient(180deg, rgba(251,51,164, 1), rgba(127, 72, 176, 1) 50%, rgba(48, 145, 211, 1) 100%)",
-            "body_padding_top": 0,
-            "body_padding_top_mobile": 0,
-            "body_padding_bottom": 34,
-            "body_padding_bottom_mobile": 20
-          }
-        },
-        "email_form_mnzHQz": {
-          "type": "email_form",
-          "settings": {
-            "button_label": "Subscribe to our Newsletter",
-            "email_form_input_gap": 17,
-            "input_text_color": "#000000",
-            "input_placeholder_color": "#000000",
-            "input_background_color": "rgb(232,232,232)",
-            "border_radius": 6,
-            "border_width": 1,
-            "border_color": "#f2f2f2",
-            "button_font_size": 14,
-            "button_text_color": "#000000",
-            "button_background_color": "#F472B6",
-            "button_border_radius": 6,
-            "email_form_padding_top": 0,
-            "email_form_padding_top_mobile": 0,
-            "email_form_padding_bottom": 0,
-            "email_form_padding_bottom_mobile": 33
-          }
-        }
-      },
-      "block_order": [
-        "heading_kLeYC7",
-        "paragraph_KfDwNn",
-        "email_form_mnzHQz"
-      ],
-      "name": "Our newsletter",
-      "settings": {
-        "side_block_image": "shopify://shop_images/Se5fbdfc46eb64b5f8adb921280263d53P_db4524d6-bc0f-4dde-9ff7-3c0f0b7b61b4.webp",
-        "image_height": "small",
-        "image_first_desktop": false,
-        "content_alignment_desktop": "center",
-        "content_alignment_mobile": "center",
-        "full_width": false,
-        "use_gradient_background": false,
-        "section_background_gradient": "linear-gradient(180deg, rgba(251, 51, 166, 1), rgba(127, 72, 176, 1) 50%, rgba(48, 145, 211, 1) 100%)",
-        "section_background_color": "#ffffff",
-        "padding_top": 24,
-        "padding_bottom": 24
+        "heading": "Stay in the loop.",
+        "subtext": "Tips, deals, and news. We send emails every two weeks.",
+        "btn_label": "Subscribe",
+        "success_message": "You're in! Talk soon.",
+        "privacy_note": "We keep your info safe. Leave any time.",
+        "privacy_link_label": "Privacy Policy"
       }
     }
   },
   "order": [
-    "atlas_dependencies",
-    "image_banner_TVECWz",
-    "scrolling_images_aajYaC",
-    "image_with_text_NrYFbe",
-    "benefits_cards_AHFLcL",
-    "rich_text_P9Xf6T",
-    "key_features_qFGttc",
-    "testimonials_zhAzJk",
-    "borders_TanT6h",
-    "comparison_table_zM4Ngh",
-    "collapsible_content_4h9Diq",
-    "feature_icons_MMNaQM",
-    "image_comparison_slider_y3wPPw",
-    "newsletter_rVzhVN"
+    "hero",
+    "stats-strip",
+    "smart_band_spotlight",
+    "founder_story",
+    "177700770423191747",
+    "testimonials",
+    "newsletter"
   ]
 }
