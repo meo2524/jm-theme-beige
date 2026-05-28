@@ -6,17 +6,6 @@
         "rating_count_text": "164+ Happy Menders"
       }
     },
-    "benefit_pitch": {
-      "type": "product-feature",
-      "settings": {
-        "eyebrow": "Why Mend",
-        "heading": "",
-        "body": "",
-        "cta_label": "",
-        "cta_url": "",
-        "reverse": false
-      }
-    },
     "before_after": {
       "type": "before-after",
       "settings": {
