@@ -183,8 +183,8 @@
           "settings": {
             "before_image": "shopify://shop_images/hf_20260528_085924_c3132d6e-8acf-4fba-9b50-90b61b9609ec.png",
             "after_image": "shopify://shop_images/hf_20260528_085904_8224848f-c933-47a9-8116-41ee0195472f.png",
-            "desktop_width_percent": 100,
-            "border_radius": 0,
+            "desktop_width_percent": 60,
+            "border_radius": 20,
             "before_label": "Before",
             "after_label": "After",
             "label_font_size": 14,
