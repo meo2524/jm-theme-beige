@@ -47,8 +47,10 @@
           "type": "_before-after-block",
           "name": "Before and after image",
           "settings": {
-            "text_before": "Before",
-            "text_after": "After"
+            "image_before": "shopify://shop_images/hf_20260528_085428_61708b2d-487e-47a0-8286-3977b6d11fe8.png",
+            "text_before": "Before The Mend",
+            "image_after": "shopify://shop_images/hf_20260528_084802_ebe6efa1-22c7-44a8-88d4-b04c76eac2be.png",
+            "text_after": "After The Mend"
           },
           "blocks": {}
         }
