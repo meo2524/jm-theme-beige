@@ -156,7 +156,7 @@
           <span class="rating-label">Excellent</span>
           <span class="rating-value-num">4.9</span>
           <span class="rating-divider" aria-hidden="true"></span>
-          <span class="rating-count">100+ Happy Menders</span>
+          <span class="rating-count">{{ section.settings.rating_count_text | default: '100+ Happy Menders' }}</span>
         </a>
       {%- endif -%}
 
