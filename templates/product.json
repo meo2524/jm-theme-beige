@@ -40,20 +40,6 @@
         "trust_3_text": "2-year warranty"
       }
     },
-    "benefit_pitch": {
-      "type": "product-feature",
-      "disabled": true,
-      "settings": {
-        "video_url": "",
-        "video_position_y": 50,
-        "eyebrow": "Why Mend",
-        "heading": "Your water hates your skin.",
-        "body": "Unfiltered tap water carries chlorine, chloramine, and trace heavy metals. Over time they dry your skin, dull your hair, and undo every product you layer on afterwards. Mend fixes it at the source.",
-        "cta_label": "",
-        "cta_url": "",
-        "reverse": false
-      }
-    },
     "before_after": {
       "type": "before-after",
       "blocks": {
@@ -82,20 +68,6 @@
         "custom_padding_bottom": 48
       }
     },
-    "science": {
-      "type": "product-feature",
-      "disabled": true,
-      "settings": {
-        "video_url": "",
-        "video_position_y": 50,
-        "eyebrow": "The science",
-        "heading": "Dual-stage filtration, built for daily use.",
-        "body": "KDF-55 media neutralises chlorine and reduces heavy metals on contact. Coconut-shell activated carbon catches what's left. Installs in under 60 seconds with no tools. One cartridge lasts roughly 6 months.",
-        "cta_label": "",
-        "cta_url": "",
-        "reverse": true
-      }
-    },
     "testimonials": {
       "type": "testimonials",
       "settings": {
@@ -104,38 +76,29 @@
         "reviews_count": 6
       }
     },
-    "related": {
-      "type": "product-grid",
-      "disabled": true,
-      "settings": {
-        "eyebrow": "More from Mend",
-        "heading": "You may also like.",
-        "collection": "",
-        "product_limit": 3
-      }
-    },
-    "countdown": {
-      "type": "countdown-sale",
-      "disabled": true,
-      "settings": {
-        "heading": "Limited Time Offer",
-        "subheading": "<p>Use this section to showcase offers that require a sense of urgency.</p>",
-        "button_label": "Shop Now",
-        "button_link": "",
-        "padding___top": "large",
-        "custom_padding_top": 72,
-        "padding___bottom": "large",
-        "custom_padding_bottom": 72
-      }
+    "17799567988ed90e8e": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_JikeFa": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 900,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_JikeFa"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "main",
-    "benefit_pitch",
     "before_after",
-    "science",
     "testimonials",
-    "related",
-    "countdown"
+    "17799567988ed90e8e"
   ]
 }
