@@ -1,0 +1,218 @@
+{%- assign img1     = section.settings.image_1 -%}
+{%- assign img2     = section.settings.image_2 -%}
+{%- assign cta_url  = section.settings.cta_link -%}
+{%- assign cta_text = section.settings.cta_text | default: 'See the ring I got her →' -%}
+
+<article class="adv">
+
+  {%- if img1 != blank -%}
+    <div class="adv__hero">
+      {{-
+        img1
+        | image_url: width: 800
+        | image_tag:
+          loading: 'eager',
+          fetchpriority: 'high',
+          widths: '390, 600, 800',
+          sizes: '100vw',
+          class: 'adv__hero-img',
+          alt: ''
+      -}}
+    </div>
+  {%- endif -%}
+
+  <div class="adv__post">
+
+    <p class="adv__byline">
+      Posted by {{ section.settings.byline_name | default: 'Sarah M.' }}
+      &middot;
+      {{ section.settings.byline_date | default: 'May 2025' }}
+    </p>
+
+    <h1 class="adv__headline">
+      I regret not taking better care of my dad. Here&rsquo;s what I did for my mom.
+    </h1>
+
+    <div class="adv__body">
+      <p>I don&rsquo;t normally post stuff like this but I&rsquo;ve been sitting with it and I need to get it out.</p>
+      <p>My dad passed away earlier this year. That photo was taken when I went to see him in the hospital. We thought he was going to be okay.</p>
+      <p>He had a stroke. The doctors said it was from high blood pressure he&rsquo;d had for years and never managed. He was 71. He never complained, never really went to the doctor. We just assumed he was fine. I assumed he was fine.</p>
+      <p>I lived 40 minutes away from my parents and barely went. I was always busy with work, my own life, whatever was happening that week. I kept telling myself I&rsquo;d visit more when things slowed down. They never did.</p>
+      <p>The last time I talked to him, he asked if I was coming home for Easter. I said I&rsquo;d try. I never gave him a real answer. I think about that all the time.</p>
+      <p>My mom is 70 now and living alone in their house. She tells me she&rsquo;s fine. But I said the same thing about my dad and I was wrong. So I don&rsquo;t really trust myself on that anymore.</p>
+    </div>
+
+    {%- if img2 != blank -%}
+      <div class="adv__inline-wrap">
+        {{-
+          img2
+          | image_url: width: 800
+          | image_tag:
+            loading: 'lazy',
+            widths: '390, 600, 800',
+            sizes: '100vw',
+            class: 'adv__inline-img',
+            alt: ''
+        -}}
+      </div>
+    {%- endif -%}
+
+    <div class="adv__body">
+      <p>A friend of mine who&rsquo;s a doctor suggested a smart ring. Said families use them to track a parent&rsquo;s heart rate, blood oxygen and sleep from their phone. I hadn&rsquo;t heard of them before that.</p>
+      <p>So I got one for my mom. It connects to an app on my phone and I can check her heart rate, her sleep, her blood oxygen anytime I want. Even when I haven&rsquo;t called in a few days. I just open the app and I can see she&rsquo;s okay.</p>
+      <p>It doesn&rsquo;t fix the guilt. Nothing is going to fix the guilt. But it makes me feel a little less terrible about not being by her side every day.</p>
+    </div>
+
+    {%- if cta_url != blank -%}
+      <a href="{{ cta_url }}" class="adv__btn">{{ cta_text }}</a>
+    {%- endif -%}
+
+    <div class="adv__body">
+      <p>This morning her heart rate was normal. She&rsquo;d slept well. She was already up and moving.</p>
+      <p>I just sat there for a second feeling relieved.</p>
+      <p>I can&rsquo;t get my dad back. But I can make sure I don&rsquo;t lose her the same way.</p>
+      <p>If you still have your parents, please just take care of them while you can. They&rsquo;re not going to be here forever &mdash; and you don&rsquo;t realize that until they&rsquo;re not.</p>
+    </div>
+
+    {%- if cta_url != blank -%}
+      <a href="{{ cta_url }}" class="adv__btn">{{ cta_text }}</a>
+    {%- endif -%}
+
+  </div>
+</article>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  .adv {
+    background: #F2E8DC;
+    min-height: 100vh;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #2d2b28;
+  }
+
+  /* Hero image — full bleed, 5:4 crop on mobile */
+  .adv__hero { width: 100%; }
+  .adv__hero-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  /* Article container */
+  .adv__post {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 28px 20px 72px;
+  }
+
+  /* Byline */
+  .adv__byline {
+    font-size: 13px;
+    color: #888;
+    margin: 0 0 18px;
+  }
+
+  /* Headline */
+  .adv__headline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #1f1d1a;
+    margin: 0 0 24px;
+  }
+
+  /* Body copy */
+  .adv__body { margin-bottom: 4px; }
+  .adv__body p {
+    font-size: 17px;
+    line-height: 1.8;
+    margin: 0 0 20px;
+  }
+
+  /* Inline mid-story image */
+  .adv__inline-wrap { margin: 32px 0; }
+  .adv__inline-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+
+  /* CTA button — full width, tap-friendly */
+  .adv__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 52px;
+    background: #1f1d1a;
+    color: #F2E8DC;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-radius: 4px;
+    margin: 28px 0;
+    padding: 14px 20px;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .adv__btn:hover,
+  .adv__btn:active { background: #2d2b28; }
+
+  /* Desktop */
+  @media (min-width: 768px) {
+    .adv__hero-img  { aspect-ratio: auto; max-height: 560px; }
+    .adv__headline  { font-size: 34px; }
+    .adv__body p    { font-size: 18px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Advertorial — Ring",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Hero image (top of page)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Inline image (mid-story)"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link — smart ring product page"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA button text",
+      "default": "See the ring I got her →"
+    },
+    {
+      "type": "text",
+      "id": "byline_name",
+      "label": "Byline name",
+      "default": "Sarah M."
+    },
+    {
+      "type": "text",
+      "id": "byline_date",
+      "label": "Byline date",
+      "default": "May 2025"
+    }
+  ],
+  "presets": [
+    { "name": "Advertorial — Ring" }
+  ]
+}
+{% endschema %}
