@@ -47,9 +47,9 @@
           "type": "_before-after-block",
           "name": "Before and after image",
           "settings": {
-            "image_before": "shopify://shop_images/hf_20260528_085428_61708b2d-487e-47a0-8286-3977b6d11fe8.png",
+            "image_before": "shopify://shop_images/hf_20260528_085904_8224848f-c933-47a9-8116-41ee0195472f.png",
             "text_before": "Before",
-            "image_after": "shopify://shop_images/hf_20260528_084802_ebe6efa1-22c7-44a8-88d4-b04c76eac2be.png",
+            "image_after": "shopify://shop_images/hf_20260528_085924_c3132d6e-8acf-4fba-9b50-90b61b9609ec.png",
             "text_after": "After"
           },
           "blocks": {}
@@ -69,36 +69,10 @@
         "padding___bottom": "medium",
         "custom_padding_bottom": 48
       }
-    },
-    "related": {
-      "type": "product-grid",
-      "disabled": true,
-      "settings": {
-        "eyebrow": "More from Mend",
-        "heading": "You may also like.",
-        "collection": "",
-        "product_limit": 3
-      }
-    },
-    "countdown": {
-      "type": "countdown-sale",
-      "disabled": true,
-      "settings": {
-        "heading": "Limited Time Offer",
-        "subheading": "<p>Use this section to showcase offers that require a sense of urgency.</p>",
-        "button_label": "Shop Now",
-        "button_link": "",
-        "padding___top": "large",
-        "custom_padding_top": 72,
-        "padding___bottom": "large",
-        "custom_padding_bottom": 72
-      }
     }
   },
   "order": [
     "main",
-    "before_after",
-    "related",
-    "countdown"
+    "before_after"
   ]
 }
