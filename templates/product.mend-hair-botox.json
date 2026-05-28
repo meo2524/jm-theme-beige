@@ -12,6 +12,7 @@
     "main": {
       "type": "main-product",
       "settings": {
+        "show_size_guide": false,
         "eyebrow_text": "Biometric tracking",
         "model_badge": "",
         "blurb_heading": "",
