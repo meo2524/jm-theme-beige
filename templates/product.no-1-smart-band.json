@@ -12,9 +12,9 @@
     "main": {
       "type": "main-product",
       "settings": {
+        "show_size_guide": true,
         "eyebrow_text": "Smart Ring · Health Tracking",
         "model_badge": "",
-        "benefits_list": "",
         "blurb_heading": "",
         "blurb_subheading": "",
         "short_description": "",
@@ -27,7 +27,7 @@
         "accordion_ingredients-certifications": "",
         "rating_show": true,
         "rating_value": "4.9",
-        "rating_count_text": "3,500+ reviews",
+        "rating_count_text": "105+ reviews",
         "rating_subtext": "",
         "toggle_onetime_label": "One-time",
         "toggle_subscribe_label": "Subscribe & Save",
