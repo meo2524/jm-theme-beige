@@ -47,78 +47,41 @@
         "trust_3_text": "2-year warranty"
       }
     },
-    "1779959606bec96905": {
-      "type": "apps",
+    "17799622903d320805": {
+      "type": "_blocks",
       "blocks": {
-        "judge_me_reviews_cards_carousel_Ed93Fn": {
-          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "ai_gen_block_21aa88f_W8yRgd": {
+          "type": "ai_gen_block_21aa88f",
           "settings": {
-            "show_sample_reviews": false,
-            "reviews_selection": "current_product",
-            "products": [
-              "mend-hair-botox"
-            ],
-            "star_rating": "all",
-            "show_review_media": true,
-            "display_order": "media_first",
-            "no_image_fallback": "review_text_only",
-            "max_reviews": 20,
-            "review_length": "small",
-            "text_size": "small",
-            "image_ratio": "1",
-            "reviews_shown": 4,
-            "show_reviewer_name": true,
-            "show_product_name": true,
-            "hide_arrows_mobile": false,
-            "arrows_position": "sides",
-            "max_width": 900,
-            "corner_styling": "soft",
-            "header_text_color": "#000000",
-            "text_color": "#000000",
-            "card_color": "#f9f9f9",
-            "stars_color": "#8a6240",
-            "arrows_color": "#8a6240",
-            "transition_speed": 5,
-            "header_text": "See what other Menders are saying",
-            "show_average_rating": false
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_cards_carousel_Ed93Fn"
-      ],
-      "disabled": true,
-      "settings": {}
-    },
-    "before_after": {
-      "type": "before-after",
-      "blocks": {
-        "before_after_block_6mUQUy": {
-          "type": "_before-after-block",
-          "name": "Before and after image",
-          "settings": {
-            "image_before": "shopify://shop_images/hf_20260528_085904_8224848f-c933-47a9-8116-41ee0195472f.png",
-            "text_before": "Before",
-            "image_after": "shopify://shop_images/hf_20260528_085924_c3132d6e-8acf-4fba-9b50-90b61b9609ec.png",
-            "text_after": "After"
+            "before_image": "shopify://shop_images/hf_20260528_085924_c3132d6e-8acf-4fba-9b50-90b61b9609ec.png",
+            "after_image": "shopify://shop_images/hf_20260528_085904_8224848f-c933-47a9-8116-41ee0195472f.png",
+            "desktop_width_percent": 60,
+            "border_radius": 20,
+            "before_label": "Before",
+            "after_label": "After",
+            "label_font_size": 14,
+            "label_position_top": 20,
+            "label_position_side": 20,
+            "label_padding_vertical": 8,
+            "label_padding_horizontal": 16,
+            "label_border_radius": 4,
+            "label_bg_color": "#2D2D2D",
+            "label_text_color": "#F2EDE4",
+            "divider_width": 4,
+            "divider_color": "#F2EDE4",
+            "handle_size": 50,
+            "handle_color": "#F2EDE4",
+            "handle_border_color": "#2D2D2D",
+            "handle_border_width": 2,
+            "handle_icon_color": "#2D2D2D"
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "before_after_block_6mUQUy"
+        "ai_gen_block_21aa88f_W8yRgd"
       ],
-      "settings": {
-        "heading": "See the difference.",
-        "subheading": "One treatment. Visibly smoother hair.",
-        "initial_direction": "horizontal",
-        "initial_position": 50,
-        "image_height": 700,
-        "padding___top": "medium",
-        "custom_padding_top": 48,
-        "padding___bottom": "medium",
-        "custom_padding_bottom": 48
-      }
+      "settings": {}
     },
     "1779959625dfb75552": {
       "type": "apps",
@@ -174,50 +137,12 @@
         "heading": "Everything you want to know.",
         "subheading": ""
       }
-    },
-    "17799622903d320805": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_21aa88f_W8yRgd": {
-          "type": "ai_gen_block_21aa88f",
-          "settings": {
-            "before_image": "shopify://shop_images/hf_20260528_085924_c3132d6e-8acf-4fba-9b50-90b61b9609ec.png",
-            "after_image": "shopify://shop_images/hf_20260528_085904_8224848f-c933-47a9-8116-41ee0195472f.png",
-            "desktop_width_percent": 60,
-            "border_radius": 20,
-            "before_label": "Before",
-            "after_label": "After",
-            "label_font_size": 14,
-            "label_position_top": 20,
-            "label_position_side": 20,
-            "label_padding_vertical": 8,
-            "label_padding_horizontal": 16,
-            "label_border_radius": 4,
-            "label_bg_color": "#2D2D2D",
-            "label_text_color": "#F2EDE4",
-            "divider_width": 4,
-            "divider_color": "#F2EDE4",
-            "handle_size": 50,
-            "handle_color": "#F2EDE4",
-            "handle_border_color": "#2D2D2D",
-            "handle_border_width": 2,
-            "handle_icon_color": "#2D2D2D"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_21aa88f_W8yRgd"
-      ],
-      "settings": {}
     }
   },
   "order": [
     "main",
-    "1779959606bec96905",
-    "before_after",
+    "17799622903d320805",
     "1779959625dfb75552",
-    "product_faq_nzQWrk",
-    "17799622903d320805"
+    "product_faq_nzQWrk"
   ]
 }
