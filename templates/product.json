@@ -13,12 +13,39 @@
       "type": "main-product",
       "settings": {
         "eyebrow_text": "Shower Filtration",
-        "per_use_text": "~$0.18/shower  lasts 6 months"
+        "model_badge": "",
+        "blurb_heading": "",
+        "blurb_subheading": "",
+        "short_description": "",
+        "per_use_text": "~$0.18/shower  lasts 6 months",
+        "accordion_label_1": "What's included",
+        "accordion_label_2": "How it works",
+        "accordion_label_3": "Ingredients & certifications",
+        "accordion_whats-included": "",
+        "accordion_how-it-works": "",
+        "accordion_ingredients-certifications": "",
+        "rating_show": true,
+        "rating_value": "",
+        "rating_count_text": "",
+        "rating_subtext": "Trusted by verified buyers",
+        "toggle_onetime_label": "One-time",
+        "toggle_subscribe_label": "Subscribe & Save",
+        "toggle_subscribe_savings": "10% off",
+        "qty_label": "Qty",
+        "atc_label": "Add to Cart",
+        "atc_sold_out_label": "Sold Out",
+        "variant_sold_out_label": "Sold out",
+        "trust_1_text": "Free shipping over $60",
+        "trust_2_text": "30-day returns",
+        "trust_3_text": "2-year warranty"
       }
     },
     "benefit_pitch": {
       "type": "product-feature",
+      "disabled": true,
       "settings": {
+        "video_url": "",
+        "video_position_y": 50,
         "eyebrow": "Why Mend",
         "heading": "Your water hates your skin.",
         "body": "Unfiltered tap water carries chlorine, chloramine, and trace heavy metals. Over time they dry your skin, dull your hair, and undo every product you layer on afterwards. Mend fixes it at the source.",
@@ -29,15 +56,38 @@
     },
     "before_after": {
       "type": "before-after",
+      "blocks": {
+        "before_after_block_teYJCQ": {
+          "type": "_before-after-block",
+          "name": "Before and after image",
+          "settings": {
+            "text_before": "Before",
+            "text_after": "After"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "before_after_block_teYJCQ"
+      ],
       "settings": {
         "heading": "See the difference.",
         "subheading": "Filtered water. Visibly healthier skin and hair.",
-        "initial_position": 50
+        "initial_direction": "horizontal",
+        "initial_position": 50,
+        "image_height": 700,
+        "padding___top": "medium",
+        "custom_padding_top": 48,
+        "padding___bottom": "medium",
+        "custom_padding_bottom": 48
       }
     },
     "science": {
       "type": "product-feature",
+      "disabled": true,
       "settings": {
+        "video_url": "",
+        "video_position_y": 50,
         "eyebrow": "The science",
         "heading": "Dual-stage filtration, built for daily use.",
         "body": "KDF-55 media neutralises chlorine and reduces heavy metals on contact. Coconut-shell activated carbon catches what's left. Installs in under 60 seconds with no tools. One cartridge lasts roughly 6 months.",
@@ -56,6 +106,7 @@
     },
     "related": {
       "type": "product-grid",
+      "disabled": true,
       "settings": {
         "eyebrow": "More from Mend",
         "heading": "You may also like.",
@@ -65,9 +116,16 @@
     },
     "countdown": {
       "type": "countdown-sale",
+      "disabled": true,
       "settings": {
         "heading": "Limited Time Offer",
-        "button_label": "Shop Now"
+        "subheading": "<p>Use this section to showcase offers that require a sense of urgency.</p>",
+        "button_label": "Shop Now",
+        "button_link": "",
+        "padding___top": "large",
+        "custom_padding_top": 72,
+        "padding___bottom": "large",
+        "custom_padding_bottom": 72
       }
     }
   },
