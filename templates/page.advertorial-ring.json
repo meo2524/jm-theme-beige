@@ -1,0 +1,10 @@
+{
+  "layout": "advertorial",
+  "sections": {
+    "main": {
+      "type": "advertorial-ring",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
