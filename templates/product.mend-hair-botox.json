@@ -15,16 +15,11 @@
         "show_size_guide": false,
         "eyebrow_text": "Hair Treatment",
         "model_badge": "",
-        "benefits_list": "Frizz-free, glass-smooth hair in minutes\nKeratin + biotin + collagen complex\nNo salon needed — use at home\nResults last 4–8 weeks per treatment",
+        "benefits_list": "",
         "blurb_heading": "",
         "blurb_subheading": "",
         "short_description": "",
         "per_use_text": "10 treatments per box · results last 4–8 weeks",
-        "shipping_label": "Free shipping.",
-        "shipping_subtext": "Ships within 24 hours — your best hair days start now.",
-        "guarantee_label": "30-day money-back guarantee.",
-        "guarantee_subtext": "Try it for a full month. If your hair isn't smoother, we'll refund every cent — no questions.",
-        "show_secure_checkout": true,
         "accordion_label_1": "What's included",
         "accordion_label_2": "How it works",
         "accordion_label_3": "Ingredients & certifications",
@@ -42,6 +37,11 @@
         "atc_label": "Add to Cart",
         "atc_sold_out_label": "Sold Out",
         "variant_sold_out_label": "Sold out",
+        "shipping_label": "Free shipping.",
+        "shipping_subtext": "Ships within 24 hours — start mending ASAP.",
+        "guarantee_label": "30-day money-back guarantee.",
+        "guarantee_subtext": "Wear it for 30 nights. If it's not for you, send it back for a full refund — no questions.",
+        "show_secure_checkout": true,
         "trust_1_text": "Free shipping over $60",
         "trust_2_text": "30-day returns",
         "trust_3_text": "2-year warranty"
@@ -137,12 +137,50 @@
         "judge_me_reviews_review_widget_Ej7xte"
       ],
       "settings": {}
+    },
+    "product_faq_nzQWrk": {
+      "type": "product-faq",
+      "blocks": {
+        "faq_item_t4QVVd": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>Your answer here.</p>"
+          }
+        },
+        "faq_item_7jnciW": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>Your answer here.</p>"
+          }
+        },
+        "faq_item_iW4FAr": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>Your answer here.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_t4QVVd",
+        "faq_item_7jnciW",
+        "faq_item_iW4FAr"
+      ],
+      "name": "Product FAQ",
+      "settings": {
+        "eyebrow": "Questions",
+        "heading": "Everything you want to know.",
+        "subheading": ""
+      }
     }
   },
   "order": [
     "main",
     "1779959606bec96905",
     "before_after",
-    "1779959625dfb75552"
+    "1779959625dfb75552",
+    "product_faq_nzQWrk"
   ]
 }
