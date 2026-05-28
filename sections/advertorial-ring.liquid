@@ -29,18 +29,13 @@
       {{ section.settings.byline_date | default: 'May 2025' }}
     </p>
 
-    <h1 class="adv__headline">
-      I regret not taking better care of my dad. Here&rsquo;s what I did for my mom.
-    </h1>
+    {%- if section.settings.headline != blank -%}
+      <h1 class="adv__headline">{{ section.settings.headline }}</h1>
+    {%- endif -%}
 
-    <div class="adv__body">
-      <p>I don&rsquo;t normally post stuff like this but I&rsquo;ve been sitting with it and I need to get it out.</p>
-      <p>My dad passed away earlier this year. That photo was taken when I went to see him in the hospital. We thought he was going to be okay.</p>
-      <p>He had a stroke. The doctors said it was from high blood pressure he&rsquo;d had for years and never managed. He was 71. He never complained, never really went to the doctor. We just assumed he was fine. I assumed he was fine.</p>
-      <p>I lived 40 minutes away from my parents and barely went. I was always busy with work, my own life, whatever was happening that week. I kept telling myself I&rsquo;d visit more when things slowed down. They never did.</p>
-      <p>The last time I talked to him, he asked if I was coming home for Easter. I said I&rsquo;d try. I never gave him a real answer. I think about that all the time.</p>
-      <p>My mom is 70 now and living alone in their house. She tells me she&rsquo;s fine. But I said the same thing about my dad and I was wrong. So I don&rsquo;t really trust myself on that anymore.</p>
-    </div>
+    {%- if section.settings.story_intro != blank -%}
+      <div class="adv__body">{{ section.settings.story_intro }}</div>
+    {%- endif -%}
 
     {%- if img2 != blank -%}
       <div class="adv__inline-wrap">
@@ -57,18 +52,17 @@
       </div>
     {%- endif -%}
 
-    <div class="adv__body">
-      <p>A friend of mine who&rsquo;s a doctor suggested a smart ring. Said families use them to track a parent&rsquo;s heart rate, blood oxygen and sleep from their phone. I hadn&rsquo;t heard of them before that.</p>
-      <p>So I got one for my mom. It connects to an app on my phone and I can check her heart rate, her sleep, her blood oxygen anytime I want. Even when I haven&rsquo;t called in a few days. I just open the app and I can see she&rsquo;s okay.</p>
-      <p>It doesn&rsquo;t fix the guilt. Nothing is going to fix the guilt. But it makes me feel a little less terrible about not being by her side every day.</p>
-    </div>
+    {%- if section.settings.story_discovery != blank -%}
+      <div class="adv__body">{{ section.settings.story_discovery }}</div>
+    {%- endif -%}
 
-    <div class="adv__body">
-      <p>This morning her heart rate was normal. She&rsquo;d slept well. She was already up and moving.</p>
-      <p>I just sat there for a second feeling relieved.</p>
-      <p>I can&rsquo;t get my dad back. But I can make sure I don&rsquo;t lose her the same way.</p>
-      <p>If you still have your parents, please just take care of them while you can. They&rsquo;re not going to be here forever &mdash; and you don&rsquo;t realize that until they&rsquo;re not.</p>
-    </div>
+    {%- if section.settings.story_benefits != blank -%}
+      <div class="adv__body">{{ section.settings.story_benefits }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.story_conclusion != blank -%}
+      <div class="adv__body">{{ section.settings.story_conclusion }}</div>
+    {%- endif -%}
 
     {%- if cta_url != blank -%}
       <a href="{{ cta_url }}" class="adv__btn">{{ cta_text }}</a>
@@ -173,6 +167,7 @@
 {
   "name": "Advertorial — Ring",
   "settings": [
+    { "type": "header", "content": "Images" },
     {
       "type": "image_picker",
       "id": "image_1",
@@ -183,28 +178,65 @@
       "id": "image_2",
       "label": "Inline image (mid-story)"
     },
-    {
-      "type": "url",
-      "id": "cta_link",
-      "label": "CTA link — smart ring product page"
-    },
-    {
-      "type": "text",
-      "id": "cta_text",
-      "label": "CTA button text",
-      "default": "See the ring I got her →"
-    },
+
+    { "type": "header", "content": "Header text" },
     {
       "type": "text",
       "id": "byline_name",
-      "label": "Byline name",
+      "label": "Posted by (name)",
       "default": "Sarah M."
     },
     {
       "type": "text",
       "id": "byline_date",
-      "label": "Byline date",
+      "label": "Posted date",
       "default": "May 2025"
+    },
+    {
+      "type": "textarea",
+      "id": "headline",
+      "label": "Headline",
+      "default": "I regret not taking better care of my dad. Here's what I did for my mom."
+    },
+
+    { "type": "header", "content": "Story content" },
+    { "type": "paragraph", "content": "Each block is a section of the story. Edit, add, or remove paragraphs freely." },
+    {
+      "type": "richtext",
+      "id": "story_intro",
+      "label": "1. Opening (before mid-story image)",
+      "default": "<p>I don&rsquo;t normally post stuff like this but I&rsquo;ve been sitting with it and I need to get it out.</p><p>My dad passed away earlier this year. That photo was taken when I went to see him in the hospital. We thought he was going to be okay.</p><p>He had a stroke. The doctors said it was from high blood pressure he&rsquo;d had for years and never managed. He was 71. He never complained, never really went to the doctor. We just assumed he was fine. I assumed he was fine.</p><p>I lived 40 minutes away from my parents and barely went. I was always busy with work, my own life, whatever was happening that week. I kept telling myself I&rsquo;d visit more when things slowed down. They never did.</p><p>The last time I talked to him, he asked if I was coming home for Easter. I said I&rsquo;d try. I never gave him a real answer. I think about that all the time.</p><p>My mom is 70 now and living alone in their house. She tells me she&rsquo;s fine. But I said the same thing about my dad and I was wrong. So I don&rsquo;t really trust myself on that anymore.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "story_discovery",
+      "label": "2. Finding the ring (after mid-story image)",
+      "default": "<p>A friend of mine who&rsquo;s a doctor suggested a smart ring. Said families use them to track a parent&rsquo;s heart rate, blood oxygen and sleep from their phone. I hadn&rsquo;t heard of them before that.</p><p>So I got one for my mom. It connects to an app on my phone and I can check her heart rate, her sleep, her blood oxygen anytime I want. Even when I haven&rsquo;t called in a few days. I just open the app and I can see she&rsquo;s okay.</p><p>It doesn&rsquo;t fix the guilt. Nothing is going to fix the guilt. But it makes me feel a little less terrible about not being by her side every day.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "story_benefits",
+      "label": "3. What changed for mom",
+      "default": "<p>At first I wasn&rsquo;t sure she&rsquo;d actually wear it. My mom isn&rsquo;t really a gadget person. She still writes everything down in a paper diary and the only reason she owns a smartphone is so my kids can FaceTime her. I half expected the ring to end up in a drawer next to the Fitbit my brother got her three Christmases ago.</p><p>But she actually likes it. She says she forgets she&rsquo;s wearing it. She keeps it on in the shower, in the garden, when she sleeps. The battery lasts about a week and the little charging stand sits on her kitchen counter so it&rsquo;s just part of her routine now.</p><p>What I didn&rsquo;t expect is that having the ring has made her pay more attention to her own health, not less. She texts me things like &ldquo;the ring says I slept terribly last night&rdquo; or &ldquo;I did 7,000 steps today, can you check?&rdquo; She&rsquo;s never been someone who cared about that stuff. Now she does.</p><p>A couple of months ago her resting heart rate was elevated for three days in a row. I noticed it on my phone before she even thought to mention anything was off. I called her and asked if she was feeling okay. She&rsquo;d been fighting off a cold and just hadn&rsquo;t told anyone. We caught it early. She went to the doctor before it turned into anything worse. That alone was worth every cent I paid for the ring.</p><p>The other thing I didn&rsquo;t see coming is that it&rsquo;s given us a reason to talk more. Health used to be the topic neither of us would bring up. Now it just comes up naturally. She asks me about her numbers. I ask how she&rsquo;s feeling. We have conversations now that we never had in 38 years.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "story_conclusion",
+      "label": "4. Closing",
+      "default": "<p>This morning her heart rate was normal. She&rsquo;d slept well. She was already up and moving.</p><p>I just sat there for a second feeling relieved.</p><p>I can&rsquo;t get my dad back. But I can make sure I don&rsquo;t lose her the same way.</p><p>If you still have your parents, please just take care of them while you can. They&rsquo;re not going to be here forever &mdash; and you don&rsquo;t realize that until they&rsquo;re not.</p>"
+    },
+
+    { "type": "header", "content": "Call to action" },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link (smart ring product page)"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "See the ring I got her →"
     }
   ],
   "presets": [
