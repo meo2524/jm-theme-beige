@@ -40,6 +40,15 @@
         "trust_3_text": "2-year warranty"
       }
     },
+    "photo_reviews_CEFWpH": {
+      "type": "photo-reviews",
+      "name": "Photo reviews",
+      "settings": {
+        "eyebrow": "Verified menders",
+        "heading": "See the results",
+        "subheading": "Join thousands of people who mended their hair with the botox"
+      }
+    },
     "before_after": {
       "type": "before-after",
       "blocks": {
@@ -70,14 +79,6 @@
         "custom_padding_bottom": 48
       }
     },
-    "testimonials": {
-      "type": "testimonials",
-      "settings": {
-        "eyebrow": "Real results",
-        "heading": "From people who stopped guessing.",
-        "reviews_count": 6
-      }
-    },
     "related": {
       "type": "product-grid",
       "disabled": true,
@@ -105,8 +106,8 @@
   },
   "order": [
     "main",
+    "photo_reviews_CEFWpH",
     "before_after",
-    "testimonials",
     "related",
     "countdown"
   ]
