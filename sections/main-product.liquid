@@ -377,6 +377,7 @@
         </div>
 
         {%- comment -%} Find your size CTA — primary-styled, opens ring-size modal {%- endcomment -%}
+        {%- if section.settings.show_size_guide != false -%}
         <button type="button" class="pdp-find-size-cta" data-size-guide data-open-size-modal aria-label="Open ring size guide">
           <span class="pdp-find-size-cta__inner">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
@@ -389,6 +390,7 @@
             <polyline points="9 6 15 12 9 18"/>
           </svg>
         </button>
+        {%- endif -%}
 
         {%- comment -%} Add to cart {%- endcomment -%}
         <button
@@ -2618,6 +2620,13 @@ body.lightbox-open { overflow: hidden; }
   "tag": "section",
   "class": "section-main-product",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_size_guide",
+      "label": "Show 'Find your size' button",
+      "default": true,
+      "info": "Enable for ring products. Disable for non-ring products."
+    },
     {
       "type": "text",
       "id": "eyebrow_text",
