@@ -169,12 +169,18 @@
       <h1 class="product-title">{{ product.title }}{%- if section.settings.model_badge != blank %} <span class="product-title__model">{{ section.settings.model_badge }}</span>{%- endif -%}</h1>
 
       {%- comment -%} -- Simple benefits list (arrow bullets) -- {%- endcomment -%}
-      <ul class="pdp-simple-benefits">
-        <li>Monitor your sleeping patterns</li>
-        <li>Understand your heart health</li>
-        <li>One charge lasts up to 7 days</li>
-        <li>5ATM waterproof</li>
-      </ul>
+      {%- assign benefits_raw = section.settings.benefits_list | default: '' -%}
+      {%- if benefits_raw != blank -%}
+        {%- assign benefits_items = benefits_raw | newline_to_br | split: '<br />' -%}
+        <ul class="pdp-simple-benefits">
+          {%- for item in benefits_items -%}
+            {%- assign item_clean = item | strip -%}
+            {%- if item_clean != blank -%}
+              <li>{{ item_clean }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
 
 {%- comment -%} -- Product badges -- {%- endcomment -%}
       {%- assign pdp_is_hot = false -%}
@@ -425,8 +431,10 @@
           <circle cx="18" cy="19" r="2"/>
         </svg>
         <span class="pdp-shipping__text">
-          <strong>Free shipping.</strong>
-          Ships within 24 hours — start mending ASAP.
+          {%- assign shipping_label = section.settings.shipping_label | default: 'Free shipping.' -%}
+          {%- assign shipping_sub   = section.settings.shipping_subtext | default: 'Ships within 24 hours — start mending ASAP.' -%}
+          <strong>{{ shipping_label }}</strong>
+          {{ shipping_sub }}
         </span>
       </div>
 
@@ -436,11 +444,14 @@
           <path d="M9 12l2 2 4-4"/>
         </svg>
         <span class="pdp-guarantee__text">
-          <strong>30-day money-back guarantee.</strong>
-          Wear it for 30 nights. If it's not for you, send it back for a full refund — no questions.
+          {%- assign guarantee_label = section.settings.guarantee_label | default: '30-day money-back guarantee.' -%}
+          {%- assign guarantee_sub   = section.settings.guarantee_subtext | default: 'Wear it for 30 nights. If it\'s not for you, send it back for a full refund — no questions.' -%}
+          <strong>{{ guarantee_label }}</strong>
+          {{ guarantee_sub }}
         </span>
       </div>
 
+      {%- if section.settings.show_secure_checkout != false -%}
       <div class="pdp-payments" aria-label="Accepted payment methods">
         <span class="pdp-payments__label">Secure checkout</span>
         <ul class="pdp-payments__icons" role="list">
@@ -454,6 +465,34 @@
           {%- endfor -%}
         </ul>
       </div>
+      {%- endif -%}
+
+      {%- comment -%} -- Trust strip -- {%- endcomment -%}
+      {%- assign t1 = section.settings.trust_1_text | default: '' -%}
+      {%- assign t2 = section.settings.trust_2_text | default: '' -%}
+      {%- assign t3 = section.settings.trust_3_text | default: '' -%}
+      {%- if t1 != blank or t2 != blank or t3 != blank -%}
+      <ul class="trust-strip" aria-label="Trust signals">
+        {%- if t1 != blank -%}
+        <li class="trust-item">
+          <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="6" width="14" height="11" rx="1"/><path d="M15 9h4l3 3v5h-7"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg>
+          {{ t1 }}
+        </li>
+        {%- endif -%}
+        {%- if t2 != blank -%}
+        <li class="trust-item">
+          <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
+          {{ t2 }}
+        </li>
+        {%- endif -%}
+        {%- if t3 != blank -%}
+        <li class="trust-item">
+          <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          {{ t3 }}
+        </li>
+        {%- endif -%}
+      </ul>
+      {%- endif -%}
 
       {%- comment -%} -- Accordion -- {%- endcomment -%}
       <div class="accordion" id="Accordion-{{ section.id }}">
@@ -2641,6 +2680,12 @@ body.lightbox-open { overflow: hidden; }
       "info": "Small pill shown beside the product title. e.g. 'N°01'. Leave blank to hide."
     },
     {
+      "type": "textarea",
+      "id": "benefits_list",
+      "label": "Benefits list (one per line)",
+      "info": "Each line becomes an arrow bullet under the title. Leave blank to hide the list."
+    },
+    {
       "type": "text",
       "id": "blurb_heading",
       "label": "Blurb heading (fallback)",
@@ -2786,6 +2831,48 @@ body.lightbox-open { overflow: hidden; }
       "id": "variant_sold_out_label",
       "label": "Variant sold-out tag",
       "default": "Sold out"
+    },
+    {
+      "type": "header",
+      "content": "Shipping strip"
+    },
+    {
+      "type": "text",
+      "id": "shipping_label",
+      "label": "Shipping label (bold)",
+      "default": "Free shipping."
+    },
+    {
+      "type": "text",
+      "id": "shipping_subtext",
+      "label": "Shipping subtext",
+      "default": "Ships within 24 hours — start mending ASAP."
+    },
+    {
+      "type": "header",
+      "content": "Guarantee strip"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_label",
+      "label": "Guarantee label (bold)",
+      "default": "30-day money-back guarantee."
+    },
+    {
+      "type": "textarea",
+      "id": "guarantee_subtext",
+      "label": "Guarantee subtext",
+      "default": "Wear it for 30 nights. If it's not for you, send it back for a full refund — no questions."
+    },
+    {
+      "type": "header",
+      "content": "Secure checkout"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secure_checkout",
+      "label": "Show secure checkout strip",
+      "default": true
     },
     {
       "type": "header",
