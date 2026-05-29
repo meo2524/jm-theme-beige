@@ -23,16 +23,21 @@
     max-width: {{ max_width }}px;
   }
 
+  /* Match the other section headings: JetBrains Mono, bold, brand sizing */
   .ai-review-carousel__title-{{ ai_gen_id }} {
-    font-size: {{ block.settings.heading_size }}px;
+    font-family: var(--font-heading, 'JetBrains Mono', ui-monospace, monospace);
+    font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
     color: {{ block.settings.heading_color }};
-    margin: 0 0 12px;
-    font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
-    font-weight: {{ block.settings.heading_font.weight }};
+    margin: 0 0 0.75rem;
   }
 
   .ai-review-carousel__subtitle-{{ ai_gen_id }} {
-    font-size: {{ block.settings.subtitle_size }}px;
+    font-family: var(--font-body, 'JetBrains Mono', ui-monospace, monospace);
+    font-size: clamp(0.85rem, 2.4vw, 0.95rem);
+    line-height: 1.7;
     color: {{ block.settings.subtitle_color }};
     margin: 0;
   }
@@ -246,13 +251,7 @@
       margin-bottom: 24px;
     }
 
-    .ai-review-carousel__title-{{ ai_gen_id }} {
-      font-size: calc({{ block.settings.heading_size }}px * 0.8);
-    }
-
-    .ai-review-carousel__subtitle-{{ ai_gen_id }} {
-      font-size: calc({{ block.settings.subtitle_size }}px * 0.9);
-    }
+    /* title + subtitle sizes are handled by clamp() in the base rules */
   }
 
   @media screen and (min-width: 750px) and (max-width: 989px) {
