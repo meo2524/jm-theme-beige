@@ -262,21 +262,22 @@
      ════════════════════════════════════════════════════════ */
   @supports (animation-timeline: view()) {
     @media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
-      .ic { padding: clamp(3rem, 12vh, 5rem) 0 clamp(3rem, 10vh, 5rem); }
-      /* pin the heading while the orbs scroll through behind it */
+      .ic { padding: clamp(2.5rem, 6vh, 3.5rem) 0; }
+      /* pin the heading briefly while the orbs scroll through behind it */
       .ic__head {
         position: sticky;
-        top: 9vh;
+        top: 6vh;
         z-index: 2;
-        margin-bottom: 10vh;
-        padding: 1.25rem 0;
+        margin-bottom: 4vh;
+        padding: 1rem 0;
         background: radial-gradient(120% 150% at 50% 42%, var(--ic-bg, #1f1d1a) 45%, rgba(31, 29, 26, 0) 100%);
         pointer-events: none;
       }
-      .ic__rows { gap: 24vh; padding-bottom: 8vh; }
+      /* compact rows — content height + a comfortable gap, no big dead space */
+      .ic__rows { gap: 5vh; padding-bottom: 0; }
       .ic__row,
       .ic__row:nth-child(even) {
-        min-height: 52vh;
+        min-height: 0;
         opacity: 1 !important;
         transform: none !important;
       }
