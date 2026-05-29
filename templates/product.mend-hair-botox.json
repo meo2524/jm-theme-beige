@@ -47,6 +47,196 @@
         "trust_3_text": "2-year warranty"
       }
     },
+    "repair_benefits": {
+      "type": "repair-benefits",
+      "blocks": {
+        "rb1": {
+          "type": "benefit",
+          "settings": {
+            "label": "Nourishing",
+            "description": "Deeply penetrates to hydrate, lifting dryness and dullness."
+          }
+        },
+        "rb2": {
+          "type": "benefit",
+          "settings": {
+            "label": "Smoothness",
+            "description": "Tames frizz and split ends for a sleek, silky finish."
+          }
+        },
+        "rb3": {
+          "type": "benefit",
+          "settings": {
+            "label": "Strengthening",
+            "description": "Fills the gaps in damaged hair, reducing breakage and fragility."
+          }
+        }
+      },
+      "block_order": [
+        "rb1",
+        "rb2",
+        "rb3"
+      ],
+      "settings": {
+        "eyebrow": "Triple-action repair",
+        "heading": "Revitalising repair, root to tip.",
+        "lede": "One rinse-out treatment that hydrates, smooths and rebuilds damaged hair from the inside out.",
+        "image_caption": "",
+        "bg_color": "#f5efe6"
+      }
+    },
+    "ingredient_core": {
+      "type": "ingredient-core",
+      "blocks": {
+        "ic1": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Acetyl Hexapeptide-8",
+            "description": "Strengthens the hair's structure, reducing breakage and split ends."
+          }
+        },
+        "ic2": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Hydrolysed Collagen + Keratin",
+            "description": "Fills hair gaps and rebuilds the strand's protein network."
+          }
+        },
+        "ic3": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Biotin",
+            "description": "Boosts hair resilience and nourishes against future damage."
+          }
+        }
+      },
+      "block_order": [
+        "ic1",
+        "ic2",
+        "ic3"
+      ],
+      "settings": {
+        "eyebrow": "The repair core",
+        "heading": "The science salons call hair botox.",
+        "lede": "No needles, no toxins — just a targeted complex that rebuilds damaged hair from the core out.",
+        "bg_color": "#1f1d1a",
+        "accent_color": "#c9a36b"
+      }
+    },
+    "botanical_extracts": {
+      "type": "botanical-extracts",
+      "blocks": {
+        "be1": {
+          "type": "extract",
+          "settings": {
+            "name": "Ginseng Root Extract",
+            "description": "Nourishes the roots, easing dryness and fragility."
+          }
+        },
+        "be2": {
+          "type": "extract",
+          "settings": {
+            "name": "Camellia Seed Oil",
+            "description": "Smooths and adds shine, reducing frizz and tangles."
+          }
+        },
+        "be3": {
+          "type": "extract",
+          "settings": {
+            "name": "Lactic Acid",
+            "description": "Gently conditions, improving hair flexibility."
+          }
+        }
+      },
+      "block_order": [
+        "be1",
+        "be2",
+        "be3"
+      ],
+      "settings": {
+        "eyebrow": "Botanical actives",
+        "heading": "Carefully selected, for every strand.",
+        "lede": "A short list of proven actives — chosen to nourish, smooth and protect, with nothing along for the ride.",
+        "bg_color": "#f8f3ea"
+      }
+    },
+    "blocks_yUqMef": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_523a02b_ehbQx4": {
+          "type": "ai_gen_block_523a02b",
+          "settings": {
+            "heading": "What our customers say",
+            "subtitle": "Real reviews from real people",
+            "heading_alignment": "center",
+            "heading_size": 36,
+            "subtitle_size": 16,
+            "heading_font": "assistant_n4",
+            "heading_color": "#2d2d2d",
+            "subtitle_color": "#7a8471",
+            "desktop_width_percent": 100,
+            "cards_per_row_desktop": 3,
+            "card_gap": 20,
+            "section_padding": 40,
+            "background_color": "#f2ede4",
+            "card_background": "#ffffff",
+            "card_border_radius": 12,
+            "card_shadow": "0 2px 8px rgba(0,0,0,0.1)",
+            "card_padding": 20,
+            "media_aspect_ratio": 100,
+            "show_rating": true,
+            "star_color": "#ffd700",
+            "star_empty_color": "#e0e0e0",
+            "review_text_size": 14,
+            "review_text_color": "#2d2d2d",
+            "author_text_size": 13,
+            "author_text_color": "#7a8471",
+            "button_background": "#2d2d2d",
+            "button_hover_background": "#8a6240",
+            "button_icon_color": "#ffffff",
+            "dot_color": "#d9c5b2",
+            "dot_active_color": "#2d2d2d",
+            "review_1_media_type": "image",
+            "review_1_video": "",
+            "review_1_rating": 5,
+            "review_1_text": "This product exceeded my expectations! The quality is outstanding and it works exactly as described.",
+            "review_1_author": "Sarah M.",
+            "review_2_media_type": "image",
+            "review_2_video": "",
+            "review_2_rating": 5,
+            "review_2_text": "Absolutely love it! Fast shipping and great customer service. Highly recommend to anyone looking for quality.",
+            "review_2_author": "James T.",
+            "review_3_media_type": "image",
+            "review_3_video": "",
+            "review_3_rating": 5,
+            "review_3_text": "Best purchase I've made this year. The attention to detail is incredible and it's built to last.",
+            "review_3_author": "Emily R.",
+            "review_4_media_type": "image",
+            "review_4_video": "",
+            "review_4_rating": 5,
+            "review_4_text": "Five stars all the way! This has become an essential part of my daily routine. Couldn't be happier.",
+            "review_4_author": "Michael K.",
+            "review_5_media_type": "image",
+            "review_5_video": "",
+            "review_5_rating": 5,
+            "review_5_text": "Worth every penny! The results speak for themselves. I've already recommended it to all my friends.",
+            "review_5_author": "Lisa P.",
+            "review_6_media_type": "image",
+            "review_6_video": "",
+            "review_6_rating": 5,
+            "review_6_text": "Exceptional quality and service. This company really cares about their customers and it shows in every detail.",
+            "review_6_author": "David L."
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_523a02b_ehbQx4"
+      ],
+      "disabled": true,
+      "name": "Review carousel",
+      "settings": {}
+    },
     "17799622903d320805": {
       "type": "_blocks",
       "blocks": {
@@ -184,194 +374,6 @@
         "eyebrow": "FAQ",
         "heading": "Hair Botox, answered.",
         "subheading": ""
-      }
-    },
-    "blocks_yUqMef": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_523a02b_ehbQx4": {
-          "type": "ai_gen_block_523a02b",
-          "settings": {
-            "heading": "What our customers say",
-            "subtitle": "Real reviews from real people",
-            "heading_alignment": "center",
-            "heading_size": 36,
-            "subtitle_size": 16,
-            "heading_font": "assistant_n4",
-            "heading_color": "#2D2D2D",
-            "subtitle_color": "#7A8471",
-            "desktop_width_percent": 100,
-            "cards_per_row_desktop": 3,
-            "card_gap": 20,
-            "section_padding": 40,
-            "background_color": "#F2EDE4",
-            "card_background": "#FFFFFF",
-            "card_border_radius": 12,
-            "card_shadow": "0 2px 8px rgba(0,0,0,0.1)",
-            "card_padding": 20,
-            "media_aspect_ratio": 100,
-            "show_rating": true,
-            "star_color": "#FFD700",
-            "star_empty_color": "#E0E0E0",
-            "review_text_size": 14,
-            "review_text_color": "#2D2D2D",
-            "author_text_size": 13,
-            "author_text_color": "#7A8471",
-            "button_background": "#2D2D2D",
-            "button_hover_background": "#8A6240",
-            "button_icon_color": "#FFFFFF",
-            "dot_color": "#D9C5B2",
-            "dot_active_color": "#2D2D2D",
-            "review_1_media_type": "image",
-            "review_1_video": "",
-            "review_1_rating": 5,
-            "review_1_text": "This product exceeded my expectations! The quality is outstanding and it works exactly as described.",
-            "review_1_author": "Sarah M.",
-            "review_2_media_type": "image",
-            "review_2_video": "",
-            "review_2_rating": 5,
-            "review_2_text": "Absolutely love it! Fast shipping and great customer service. Highly recommend to anyone looking for quality.",
-            "review_2_author": "James T.",
-            "review_3_media_type": "image",
-            "review_3_video": "",
-            "review_3_rating": 5,
-            "review_3_text": "Best purchase I've made this year. The attention to detail is incredible and it's built to last.",
-            "review_3_author": "Emily R.",
-            "review_4_media_type": "image",
-            "review_4_video": "",
-            "review_4_rating": 5,
-            "review_4_text": "Five stars all the way! This has become an essential part of my daily routine. Couldn't be happier.",
-            "review_4_author": "Michael K.",
-            "review_5_media_type": "image",
-            "review_5_video": "",
-            "review_5_rating": 5,
-            "review_5_text": "Worth every penny! The results speak for themselves. I've already recommended it to all my friends.",
-            "review_5_author": "Lisa P.",
-            "review_6_media_type": "image",
-            "review_6_video": "",
-            "review_6_rating": 5,
-            "review_6_text": "Exceptional quality and service. This company really cares about their customers and it shows in every detail.",
-            "review_6_author": "David L."
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_523a02b_ehbQx4"
-      ],
-      "name": "Review carousel",
-      "settings": {}
-    },
-    "repair_benefits": {
-      "type": "repair-benefits",
-      "blocks": {
-        "rb1": {
-          "type": "benefit",
-          "settings": {
-            "label": "Nourishing",
-            "description": "Deeply penetrates to hydrate, lifting dryness and dullness."
-          }
-        },
-        "rb2": {
-          "type": "benefit",
-          "settings": {
-            "label": "Smoothness",
-            "description": "Tames frizz and split ends for a sleek, silky finish."
-          }
-        },
-        "rb3": {
-          "type": "benefit",
-          "settings": {
-            "label": "Strengthening",
-            "description": "Fills the gaps in damaged hair, reducing breakage and fragility."
-          }
-        }
-      },
-      "block_order": [
-        "rb1",
-        "rb2",
-        "rb3"
-      ],
-      "settings": {
-        "eyebrow": "Triple-action repair",
-        "heading": "Revitalising repair, root to tip.",
-        "lede": "One rinse-out treatment that hydrates, smooths and rebuilds damaged hair from the inside out.",
-        "bg_color": "#f5efe6"
-      }
-    },
-    "ingredient_core": {
-      "type": "ingredient-core",
-      "blocks": {
-        "ic1": {
-          "type": "ingredient",
-          "settings": {
-            "name": "Acetyl Hexapeptide-8",
-            "description": "Strengthens the hair's structure, reducing breakage and split ends."
-          }
-        },
-        "ic2": {
-          "type": "ingredient",
-          "settings": {
-            "name": "Hydrolysed Collagen + Keratin",
-            "description": "Fills hair gaps and rebuilds the strand's protein network."
-          }
-        },
-        "ic3": {
-          "type": "ingredient",
-          "settings": {
-            "name": "Biotin",
-            "description": "Boosts hair resilience and nourishes against future damage."
-          }
-        }
-      },
-      "block_order": [
-        "ic1",
-        "ic2",
-        "ic3"
-      ],
-      "settings": {
-        "eyebrow": "The repair core",
-        "heading": "The science salons call hair botox.",
-        "lede": "No needles, no toxins — just a targeted complex that rebuilds damaged hair from the core out.",
-        "bg_color": "#1f1d1a",
-        "accent_color": "#c9a36b"
-      }
-    },
-    "botanical_extracts": {
-      "type": "botanical-extracts",
-      "blocks": {
-        "be1": {
-          "type": "extract",
-          "settings": {
-            "name": "Ginseng Root Extract",
-            "description": "Nourishes the roots, easing dryness and fragility."
-          }
-        },
-        "be2": {
-          "type": "extract",
-          "settings": {
-            "name": "Camellia Seed Oil",
-            "description": "Smooths and adds shine, reducing frizz and tangles."
-          }
-        },
-        "be3": {
-          "type": "extract",
-          "settings": {
-            "name": "Lactic Acid",
-            "description": "Gently conditions, improving hair flexibility."
-          }
-        }
-      },
-      "block_order": [
-        "be1",
-        "be2",
-        "be3"
-      ],
-      "settings": {
-        "eyebrow": "Botanical actives",
-        "heading": "Carefully selected, for every strand.",
-        "lede": "A short list of proven actives — chosen to nourish, smooth and protect, with nothing along for the ride.",
-        "bg_color": "#f8f3ea"
       }
     }
   },
