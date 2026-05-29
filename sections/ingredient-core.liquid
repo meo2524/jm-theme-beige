@@ -150,7 +150,7 @@
     justify-content: center;
     aspect-ratio: 1;
     width: 100%;
-    max-width: 240px;
+    max-width: 290px;
     margin: 0 auto;
   }
   .ic__orb {
@@ -204,8 +204,8 @@
     aspect-ratio: 1;
     object-fit: contain;
     /* crop to a clean circle so only the orb shows — no background box */
-    -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 50%, transparent 62%);
-            mask-image: radial-gradient(circle at 50% 50%, #000 50%, transparent 62%);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 41%, transparent 53%);
+            mask-image: radial-gradient(circle at 50% 50%, #000 41%, transparent 53%);
     filter: drop-shadow(0 0 46px rgba(201, 163, 107, 0.22));
     animation: ic-float 7s ease-in-out infinite;
     will-change: transform;
@@ -246,7 +246,7 @@
     .ic__row:nth-child(even) .ic__orbwrap { order: 0; }
     .ic__row:nth-child(even) .ic__text { order: 0; text-align: center; }
     .ic__row:nth-child(even) .ic__desc { margin-left: auto; margin-right: auto; }
-    .ic__orbwrap { max-width: 230px; }
+    .ic__orbwrap { max-width: 290px; }
     .ic__desc { margin-left: auto; margin-right: auto; }
   }
 

@@ -146,15 +146,17 @@
       {%- comment -%} -- Rating (above title) -- {%- endcomment -%}
       {%- if section.settings.rating_show -%}
         <a class="product-rating" href="#product-reviews" aria-label="Rated 4.9 out of 5, 100+ reviews — scroll to reviews" onclick="event.preventDefault();var r=document.getElementById('judgeme_product_reviews');if(r)r.scrollIntoView({behavior:'smooth'});">
-          <div class="rating-stars" aria-hidden="true">
-            {%- for i in (1..5) -%}
-              <svg class="star" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" style="display:block;">
-                <polygon points="8,1.2 10.2,5.8 15.4,6.4 11.5,10.2 12.7,15.4 8,12.7 3.3,15.4 4.5,10.2 0.6,6.4 5.8,5.8"/>
-              </svg>
-            {%- endfor -%}
-          </div>
-          <span class="rating-label">Excellent</span>
-          <span class="rating-value-num">4.9</span>
+          <span class="rating-left">
+            <div class="rating-stars" aria-hidden="true">
+              {%- for i in (1..5) -%}
+                <svg class="star" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" style="display:block;">
+                  <polygon points="8,1.2 10.2,5.8 15.4,6.4 11.5,10.2 12.7,15.4 8,12.7 3.3,15.4 4.5,10.2 0.6,6.4 5.8,5.8"/>
+                </svg>
+              {%- endfor -%}
+            </div>
+            <span class="rating-label">Excellent</span>
+            <span class="rating-value-num">4.9</span>
+          </span>
           <span class="rating-divider" aria-hidden="true"></span>
           <span class="rating-count">{{ section.settings.rating_count_text | default: '100+ Happy Menders' }}</span>
         </a>
@@ -1043,6 +1045,13 @@ body.lightbox-open { overflow: hidden; }
   font-weight: 700;
   color: var(--gold-deep);
   line-height: 1;
+}
+
+.rating-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
 }
 
 .rating-divider {
@@ -2184,10 +2193,17 @@ body.lightbox-open { overflow: hidden; }
   .product-rating {
     margin-bottom: 0.5rem;
     padding: 0.5rem 0.875rem;
-    gap: 0.4rem;
+    gap: 0.5rem;
     font-size: 0.8125rem;
-    justify-content: center;
+    /* two equal cells flanking a centred divider — minmax(0,1fr) forces
+       the columns equal regardless of content width (1fr alone won't
+       shrink below content, which pushed the divider off-centre) */
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
   }
+  .product-rating .rating-left { justify-content: center; }
+  .product-rating .rating-count { justify-self: center; text-align: center; }
   .product-info-above-gallery .product-rating {
     margin-bottom: 0;
   }
