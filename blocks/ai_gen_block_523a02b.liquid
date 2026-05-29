@@ -38,8 +38,10 @@
     font-family: var(--font-body, 'JetBrains Mono', ui-monospace, monospace);
     font-size: clamp(0.85rem, 2.4vw, 0.95rem);
     line-height: 1.7;
-    color: {{ block.settings.subtitle_color }};
-    margin: 0;
+    color: var(--char-soft, #5a4a3a);
+    text-align: center;
+    margin: 0 auto;
+    max-width: 46ch;
   }
 
   .ai-review-carousel__container-{{ ai_gen_id }} {
