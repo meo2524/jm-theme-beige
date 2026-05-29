@@ -23,7 +23,7 @@
         "type": "announcement-bar",
         "settings": {
           "show": true,
-          "speed": 20
+          "speed": 15
         }
       },
       "header": {
