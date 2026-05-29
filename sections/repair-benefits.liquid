@@ -37,9 +37,12 @@
             loading="lazy"
           >
         {%- else -%}
-          <div class="rb__img rb__img--placeholder" aria-hidden="true">
-            <span class="rb__placeholder-mark">M</span>
-          </div>
+          <img
+            class="rb__img"
+            src="{{ 'repair-hero.jpg' | asset_url }}"
+            alt="{{ heading | escape }}"
+            loading="lazy"
+          >
         {%- endif -%}
         {%- if caption != blank -%}
           <span class="rb__caption">{{ caption }}</span>

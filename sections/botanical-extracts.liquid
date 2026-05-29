@@ -51,9 +51,13 @@
                   loading="lazy"
                 >
               {%- else -%}
-                <div class="be__img-el be__img-el--placeholder" aria-hidden="true">
-                  <span class="be__mark">M</span>
-                </div>
+                {%- assign be_file = 'botanical-' | append: forloop.index | append: '.jpg' -%}
+                <img
+                  class="be__img-el"
+                  src="{{ be_file | asset_url }}"
+                  alt="{{ block.settings.name | escape }}"
+                  loading="lazy"
+                >
               {%- endif -%}
             </div>
             <div class="be__body">
