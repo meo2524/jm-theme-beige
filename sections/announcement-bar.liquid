@@ -1,44 +1,31 @@
 {%- comment -%}
   Mend & Co — Promo bar (ledger marquee)
-  Replaces the flash-sale countdown with brand-appropriate scrolling
-  entries: journal posts, restocks, ritual notes. Each item has a
-  short "mark" (N° XX, ✶, ◐) + text + optional link.
+  Scrolling announcement strip below the header. The blurbs are editable
+  section SETTINGS (item_1…item_6) — reliably editable on a static section,
+  unlike blocks. Marks auto-cycle. Speed is configurable.
 {%- endcomment -%}
 
 {%- if section.settings.show -%}
-  {%- assign items = section.blocks -%}
+  {%- liquid
+    assign scroll_speed = section.settings.speed | default: 60
+    assign marks = '◐|—|✶|·|◇|—' | split: '|'
+    assign raw = section.settings.item_1 | append: '||' | append: section.settings.item_2 | append: '||' | append: section.settings.item_3 | append: '||' | append: section.settings.item_4 | append: '||' | append: section.settings.item_5 | append: '||' | append: section.settings.item_6
+    assign items = raw | split: '||'
+  -%}
 
-  {%- comment -%}
-    Default items when no blocks are configured in the theme editor.
-    Distilled 2026-05-05 from 5 entries to 2 — concrete value beats poetry.
-  {%- endcomment -%}
-  {%- assign default_marks = '◐|—|✶' | split: '|' -%}
-  {%- assign default_texts = 'Built on hardware shipped to 30,000+ wearers worldwide|Free 30-day returns|No subscription — own your data outright' | split: '|' -%}
-
-  {%- assign scroll_speed = section.settings.speed | default: 60 -%}
   <div class="promo-bar" role="region" aria-label="Announcements">
     <div class="marquee promo-bar__marquee" style="animation-duration: {{ scroll_speed }}s;">
       {%- for cycle in (1..2) -%}
-        {%- if items.size > 0 -%}
-          {%- for block in items -%}
-            <span class="promo-bar__item" {{ block.shopify_attributes }}>
-              <span class="promo-bar__mark">{{ block.settings.mark | default: '✶' }}</span>
-              <span class="promo-bar__text">{{ block.settings.text | escape }}</span>
-              {%- if block.settings.link_url != blank and block.settings.link_label != blank -%}
-                <span class="promo-bar__sep" aria-hidden="true">·</span>
-                <a class="promo-bar__link" href="{{ block.settings.link_url }}">{{ block.settings.link_label }}</a>
-              {%- endif -%}
-            </span>
-          {%- endfor -%}
-        {%- else -%}
-          {%- assign default_count = default_texts.size | minus: 1 -%}
-          {%- for i in (0..default_count) -%}
+        {%- for text in items -%}
+          {%- assign t = text | strip -%}
+          {%- if t != blank -%}
+            {%- assign mark_i = forloop.index0 | modulo: marks.size -%}
             <span class="promo-bar__item">
-              <span class="promo-bar__mark">{{ default_marks[i] }}</span>
-              <span class="promo-bar__text">{{ default_texts[i] }}</span>
+              <span class="promo-bar__mark">{{ marks[mark_i] }}</span>
+              <span class="promo-bar__text">{{ t }}</span>
             </span>
-          {%- endfor -%}
-        {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
       {%- endfor -%}
     </div>
   </div>
@@ -77,17 +64,6 @@
     color: var(--color-cta-hover);
     letter-spacing: 0.04em;
   }
-
-  .promo-bar__sep { opacity: 0.4; }
-
-  .promo-bar__link {
-    color: var(--color-cta-hover);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    text-decoration-color: rgba(124, 58, 237, 0.45);
-    transition: text-decoration-color 0.15s ease;
-  }
-  .promo-bar__link:hover { text-decoration-color: var(--color-cta-hover); }
 </style>
 
 {% schema %}
@@ -111,46 +87,16 @@
       "default": 60
     },
     {
-      "type": "paragraph",
-      "content": "Brand-appropriate ledger marquee. Add 3–6 items (journal entries, restocks, ritual notes). They scroll continuously."
-    }
-  ],
-  "blocks": [
-    {
-      "type": "item",
-      "name": "Marquee item",
-      "settings": [
-        {
-          "type": "text",
-          "id": "mark",
-          "label": "Mark (e.g. N° 04, ✶, ◐)",
-          "default": "✶"
-        },
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Text",
-          "default": "Restocked — Restorative Elixir, 30ml"
-        },
-        {
-          "type": "text",
-          "id": "link_label",
-          "label": "Link label",
-          "default": "read"
-        },
-        {
-          "type": "url",
-          "id": "link_url",
-          "label": "Link URL"
-        }
-      ]
-    }
-  ],
-  "max_blocks": 6,
-  "presets": [
-    {
-      "name": "Promo bar"
-    }
+      "type": "header",
+      "content": "Blurbs",
+      "info": "Leave a field blank to hide it. They scroll continuously with auto-cycling marks."
+    },
+    { "type": "text", "id": "item_1", "label": "Blurb 1", "default": "Free shipping on orders over $60" },
+    { "type": "text", "id": "item_2", "label": "Blurb 2", "default": "30-day money-back guarantee" },
+    { "type": "text", "id": "item_3", "label": "Blurb 3", "default": "Loved by 30,000+ Menders worldwide" },
+    { "type": "text", "id": "item_4", "label": "Blurb 4", "default": "Salon-grade repair — at home" },
+    { "type": "text", "id": "item_5", "label": "Blurb 5", "default": "" },
+    { "type": "text", "id": "item_6", "label": "Blurb 6", "default": "" }
   ]
 }
 {% endschema %}

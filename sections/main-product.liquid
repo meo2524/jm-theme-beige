@@ -1006,14 +1006,14 @@ body.lightbox-open { overflow: hidden; }
 .product-rating {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: clamp(0.3rem, 1.6vw, 0.6rem);
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 1.75rem;
   background: rgba(154, 126, 87, 0.08);
   border: 1px solid rgba(154, 126, 87, 0.25);
   border-radius: 12px;
-  padding: 0.75rem 1.25rem;
+  padding: clamp(0.5rem, 2vw, 0.75rem) clamp(0.65rem, 3vw, 1.25rem);
   text-decoration: none;
   cursor: pointer;
 }
@@ -1029,19 +1029,22 @@ body.lightbox-open { overflow: hidden; }
 .star {
   fill: var(--gold-deep);
   display: block;
+  width: clamp(13px, 3.6vw, 20px);
+  height: auto;
 }
 
 .rating-label {
   font-family: var(--font-body);
-  font-size: 1.0625rem;
+  font-size: clamp(0.72rem, 2.7vw, 1.0625rem);
   font-weight: 700;
   color: var(--color-black);
   line-height: 1;
+  white-space: nowrap;
 }
 
 .rating-value-num {
   font-family: var(--font-body);
-  font-size: 1.0625rem;
+  font-size: clamp(0.72rem, 2.7vw, 1.0625rem);
   font-weight: 700;
   color: var(--gold-deep);
   line-height: 1;
@@ -1050,7 +1053,7 @@ body.lightbox-open { overflow: hidden; }
 .rating-left {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: clamp(0.3rem, 1.6vw, 0.6rem);
   min-width: 0;
 }
 
@@ -1064,10 +1067,11 @@ body.lightbox-open { overflow: hidden; }
 
 .rating-count {
   font-family: var(--font-body);
-  font-size: 1.0625rem;
+  font-size: clamp(0.72rem, 2.7vw, 1.0625rem);
   font-weight: 700;
   color: var(--color-black);
   line-height: 1;
+  white-space: nowrap;
   text-decoration: underline;
   text-underline-offset: 2px;
   text-decoration-color: rgba(154, 126, 87, 0.4);
@@ -2207,15 +2211,7 @@ body.lightbox-open { overflow: hidden; }
   .product-info-above-gallery .product-rating {
     margin-bottom: 0;
   }
-  .rating-label,
-  .rating-value-num,
-  .rating-count {
-    font-size: 0.8125rem;
-  }
-  .rating-stars svg.star {
-    width: 14px;
-    height: 14px;
-  }
+  /* font sizes + star size now scale fluidly via clamp() in the base rules */
   .pdp-badges {
     margin-bottom: 0.625rem;
   }
