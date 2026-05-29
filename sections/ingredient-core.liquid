@@ -36,13 +36,29 @@
     {%- if section.blocks.size > 0 -%}
       <div class="ic__rows">
         {%- for block in section.blocks -%}
-          {%- assign num = forloop.index | prepend: '0' | slice: -2, 2 -%}
-          {%- assign delay = forloop.index0 | times: 80 -%}
+          {%- liquid
+            assign num = forloop.index | prepend: '0' | slice: -2, 2
+            assign delay = forloop.index0 | times: 80
+            assign mol_alt = block.settings.name | append: ' molecular structure'
+            assign mol_src = ''
+            if block.settings.image != blank
+              assign mol_src = block.settings.image | image_url: width: 760
+            elsif block.settings.molecule != 'none' and block.settings.molecule != blank
+              assign mol_file = 'molecule-' | append: block.settings.molecule | append: '.jpg'
+              assign mol_src = mol_file | asset_url
+            endif
+          -%}
           <div class="ic__row" data-reveal data-reveal-delay="{{ delay }}" {{ block.shopify_attributes }}>
             <div class="ic__orbwrap">
-              <div class="ic__orb">
-                <span class="ic__orb-num">{{ num }}</span>
-              </div>
+              {%- if mol_src != blank -%}
+                <div class="ic__mol">
+                  <img class="ic__mol-img" src="{{ mol_src }}" alt="{{ mol_alt | escape }}" width="760" height="760" loading="lazy">
+                </div>
+              {%- else -%}
+                <div class="ic__orb">
+                  <span class="ic__orb-num">{{ num }}</span>
+                </div>
+              {%- endif -%}
             </div>
             <div class="ic__text">
               <span class="ic__rownum">{{ num }}</span>
@@ -160,6 +176,29 @@
     50%      { transform: translateY(6px); }
   }
 
+  /* ── Molecule droplet image (replaces orb when a structure/
+       image is set). The render's dark edges are feathered into
+       the charcoal panel with a radial mask so there is no box. ── */
+  .ic__mol {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    justify-content: center;
+  }
+  .ic__mol-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: contain;
+    -webkit-mask-image: radial-gradient(circle at 50% 48%, #000 55%, transparent 84%);
+            mask-image: radial-gradient(circle at 50% 48%, #000 55%, transparent 84%);
+    filter: drop-shadow(0 0 46px rgba(201, 163, 107, 0.22));
+    animation: ic-float 7s ease-in-out infinite;
+    will-change: transform;
+  }
+  .ic__row:nth-child(2) .ic__mol-img { animation-duration: 8.5s; animation-delay: -1.5s; }
+  .ic__row:nth-child(3) .ic__mol-img { animation-duration: 9.5s; animation-delay: -3s; }
+
   .ic__text { min-width: 0; }
   .ic__rownum {
     font-family: var(--font-body, 'JetBrains Mono', monospace);
@@ -193,12 +232,12 @@
     .ic__row:nth-child(even) .ic__orbwrap { order: 0; }
     .ic__row:nth-child(even) .ic__text { order: 0; text-align: center; }
     .ic__row:nth-child(even) .ic__desc { margin-left: auto; margin-right: auto; }
-    .ic__orbwrap { max-width: 168px; }
+    .ic__orbwrap { max-width: 230px; }
     .ic__desc { margin-left: auto; margin-right: auto; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ic__orb { animation: none; }
+    .ic__orb, .ic__mol-img { animation: none; }
   }
 
   /* ════════════════════════════════════════════════════════
@@ -273,7 +312,14 @@
       "name": "Ingredient",
       "settings": [
         { "type": "text", "id": "name", "label": "Name", "default": "Acetyl Hexapeptide-8" },
-        { "type": "textarea", "id": "description", "label": "Description", "default": "Strengthens the hair's structure, reducing breakage and split ends." }
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Strengthens the hair's structure, reducing breakage and split ends." },
+        { "type": "select", "id": "molecule", "label": "Molecule droplet", "options": [
+          { "value": "peptide", "label": "Peptide chain" },
+          { "value": "helix", "label": "Helix" },
+          { "value": "ring", "label": "Ring" },
+          { "value": "none", "label": "None (glass orb)" }
+        ], "default": "peptide" },
+        { "type": "image_picker", "id": "image", "label": "Custom molecule image (overrides droplet above)" }
       ]
     }
   ],
@@ -282,9 +328,9 @@
     {
       "name": "Ingredient Core",
       "blocks": [
-        { "type": "ingredient", "settings": { "name": "Acetyl Hexapeptide-8", "description": "Strengthens the hair's structure, reducing breakage and split ends." } },
-        { "type": "ingredient", "settings": { "name": "Hydrolysed Collagen + Keratin", "description": "Fills hair gaps and rebuilds the strand's protein network." } },
-        { "type": "ingredient", "settings": { "name": "Biotin", "description": "Boosts hair resilience and nourishes against future damage." } }
+        { "type": "ingredient", "settings": { "name": "Acetyl Hexapeptide-8", "description": "Strengthens the hair's structure, reducing breakage and split ends.", "molecule": "peptide" } },
+        { "type": "ingredient", "settings": { "name": "Hydrolysed Collagen + Keratin", "description": "Fills hair gaps and rebuilds the strand's protein network.", "molecule": "helix" } },
+        { "type": "ingredient", "settings": { "name": "Biotin", "description": "Boosts hair resilience and nourishes against future damage.", "molecule": "ring" } }
       ]
     }
   ]

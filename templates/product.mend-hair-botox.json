@@ -92,21 +92,24 @@
           "type": "ingredient",
           "settings": {
             "name": "Acetyl Hexapeptide-8",
-            "description": "Strengthens the hair's structure, reducing breakage and split ends."
+            "description": "Strengthens the hair's structure, reducing breakage and split ends.",
+            "molecule": "peptide"
           }
         },
         "ic2": {
           "type": "ingredient",
           "settings": {
             "name": "Hydrolysed Collagen + Keratin",
-            "description": "Fills hair gaps and rebuilds the strand's protein network."
+            "description": "Fills hair gaps and rebuilds the strand's protein network.",
+            "molecule": "helix"
           }
         },
         "ic3": {
           "type": "ingredient",
           "settings": {
             "name": "Biotin",
-            "description": "Boosts hair resilience and nourishes against future damage."
+            "description": "Boosts hair resilience and nourishes against future damage.",
+            "molecule": "ring"
           }
         }
       },
