@@ -22,6 +22,42 @@
       "announcement-bar": {
         "type": "announcement-bar",
         "blocks": {
+          "item_HQ3mBd": {
+            "type": "item",
+            "settings": {
+              "mark": "✶",
+              "text": "Restocked — Restorative Elixir, 30ml",
+              "link_label": "read",
+              "link_url": ""
+            }
+          },
+          "item_9bKV48": {
+            "type": "item",
+            "settings": {
+              "mark": "✶",
+              "text": "Restocked — Restorative Elixir, 30ml",
+              "link_label": "read",
+              "link_url": ""
+            }
+          },
+          "item_xrwFHK": {
+            "type": "item",
+            "settings": {
+              "mark": "✶",
+              "text": "Restocked — Restorative Elixir, 30ml",
+              "link_label": "read",
+              "link_url": ""
+            }
+          },
+          "item_d3fbqP": {
+            "type": "item",
+            "settings": {
+              "mark": "✶",
+              "text": "Restocked — Restorative Elixir, 30ml",
+              "link_label": "read",
+              "link_url": ""
+            }
+          },
           "item_j7prAp": {
             "type": "item",
             "settings": {
@@ -33,6 +69,10 @@
           }
         },
         "block_order": [
+          "item_HQ3mBd",
+          "item_9bKV48",
+          "item_xrwFHK",
+          "item_d3fbqP",
           "item_j7prAp"
         ],
         "settings": {
