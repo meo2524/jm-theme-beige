@@ -1,0 +1,116 @@
+{%- comment -%}
+  Mend & Co — Promo banner (top-of-page urgency strip)
+  Configurable replacement for the old hard-coded scarcity banner.
+  Toggle, text, colours, pulsing dot and shimmer are all editor settings.
+  Self-contained CSS (does not depend on motion.css / .motion-on).
+{%- endcomment -%}
+
+{%- if section.settings.show and section.settings.text != blank -%}
+  {%- liquid
+    assign bg1 = section.settings.bg_start | default: '#C0392B'
+    assign bg2 = section.settings.bg_end | default: '#8B2418'
+    assign fg  = section.settings.text_color | default: '#ffffff'
+    assign tag = 'div'
+    if section.settings.link_url != blank
+      assign tag = 'a'
+    endif
+  -%}
+  <{{ tag }}
+    class="promo-banner{% if section.settings.show_shimmer %} promo-banner--shimmer{% endif %}"
+    {% if section.settings.link_url != blank %}href="{{ section.settings.link_url }}"{% else %}role="status" aria-live="polite"{% endif %}
+    style="--pb-bg1: {{ bg1 }}; --pb-bg2: {{ bg2 }}; --pb-fg: {{ fg }};"
+  >
+    <span class="promo-banner__inner">
+      {%- if section.settings.show_dot -%}
+        <span class="promo-banner__dot" aria-hidden="true"></span>
+      {%- endif -%}
+      <span class="promo-banner__text">{{ section.settings.text }}</span>
+    </span>
+  </{{ tag }}>
+{%- endif -%}
+
+<style>
+  .promo-banner {
+    display: block;
+    width: 100%;
+    background: linear-gradient(90deg, var(--pb-bg1, #C0392B) 0%, var(--pb-bg2, #8B2418) 100%);
+    color: var(--pb-fg, #fff);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 10px -3px rgba(0, 0, 0, 0.35);
+    text-decoration: none;
+    z-index: 3;
+  }
+  .promo-banner__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.55rem 1rem;
+    font-family: var(--font-label, var(--font-body));
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .promo-banner__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+    animation: promo-banner-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  @keyframes promo-banner-pulse {
+    0%   { box-shadow: 0 0 0 0   rgba(255, 255, 255, 0.85); }
+    70%  { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+    100% { box-shadow: 0 0 0 0   rgba(255, 255, 255, 0); }
+  }
+  .promo-banner--shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.18) 50%, transparent 65%);
+    transform: translateX(-130%);
+    animation: promo-banner-shine 4.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes promo-banner-shine {
+    0%   { transform: translateX(-130%); }
+    55%  { transform: translateX(130%); }
+    100% { transform: translateX(130%); }
+  }
+  @media (max-width: 600px) {
+    .promo-banner__inner { font-size: 0.7rem; letter-spacing: 0.05em; padding: 0.5rem 0.75rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .promo-banner__dot,
+    .promo-banner--shimmer::after { animation: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Promo banner",
+  "tag": "section",
+  "class": "section-promo-banner",
+  "settings": [
+    { "type": "checkbox", "id": "show", "label": "Show banner", "default": true },
+    { "type": "text", "id": "text", "label": "Text", "default": "LIMITED OFFER · FREE SHIPPING · 30-DAY TRIAL" },
+    { "type": "url", "id": "link_url", "label": "Link (optional)" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_start", "label": "Background (left)", "default": "#C0392B" },
+    { "type": "color", "id": "bg_end", "label": "Background (right)", "default": "#8B2418" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#ffffff" },
+    { "type": "header", "content": "Effects" },
+    { "type": "checkbox", "id": "show_dot", "label": "Pulsing dot", "default": true },
+    { "type": "checkbox", "id": "show_shimmer", "label": "Shimmer sweep", "default": true }
+  ],
+  "presets": [
+    { "name": "Promo banner" }
+  ]
+}
+{% endschema %}

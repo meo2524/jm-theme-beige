@@ -454,24 +454,11 @@
 
 <body class="template-{{ template.name | replace: '/', '-' }}{% if customer %} customer-logged-in{% endif %}{% if settings.motion_enabled %} motion-on{% endif %}">
 
+  {%- comment -%} Top-of-page promo banner — configurable section (text, colours, toggle). {%- endcomment -%}
+  {%- section 'promo-banner' -%}
+
   {%- if template.name == 'product' and settings.motion_enabled -%}
     <div data-scroll-progress aria-hidden="true"></div>
-
-    {%- comment -%}
-      Top-of-page Mother's Day banner. Was previously "Only 47 left" —
-      a static fake-scarcity number that doesn't reflect real inventory
-      and erodes trust on refresh. Replaced with a real shipping-cutoff
-      message that creates legitimate urgency without lying. Matches
-      the Mday strip's deadline (11 May 2026 23:59 NZT, hidden after).
-    {%- endcomment -%}
-    <div class="mc-scarcity-banner" role="status" aria-live="polite" data-mc-scarcity>
-      <div class="mc-scarcity-banner__inner">
-        <span class="mc-scarcity-banner__dot" aria-hidden="true"></span>
-        <span class="mc-scarcity-banner__text">
-          <strong>LIMITED OFFER</strong> &middot; FREE SHIPPING &middot; 30-DAY TRIAL
-        </span>
-      </div>
-    </div>
   {%- endif -%}
 
   <script>
@@ -500,14 +487,14 @@
 
 
   <!-- ============================================================
-       ANNOUNCEMENT BAR
-       ============================================================ -->
-  {%- section 'announcement-bar' -%}
-
-  <!-- ============================================================
        HEADER
        ============================================================ -->
   {%- section 'header' -%}
+
+  <!-- ============================================================
+       ANNOUNCEMENT BAR (brown marquee — sits below the header)
+       ============================================================ -->
+  {%- section 'announcement-bar' -%}
 
   <!-- ============================================================
        MAIN CONTENT
