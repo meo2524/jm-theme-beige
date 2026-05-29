@@ -19,7 +19,7 @@
         "blurb_heading": "",
         "blurb_subheading": "",
         "short_description": "",
-        "per_use_text": "10 treatments per box · results last 4–8 weeks",
+        "per_use_text": "20 treatments per box · results last 4–8 weeks",
         "accordion_label_1": "What's included",
         "accordion_label_2": "How it works",
         "accordion_label_3": "Ingredients & certifications",
@@ -107,34 +107,82 @@
         "faq_item_t4QVVd": {
           "type": "faq_item",
           "settings": {
-            "question": "What is your return policy?",
-            "answer": "<p>Your answer here.</p>"
+            "question": "Is this the same \"Botox\" my dermatologist uses?",
+            "answer": "<p>No needles, no toxins. Hair Botox is the beauty world's nickname for an intensive repair mask — ours is a keratin, collagen and peptide treatment that fills in the damaged spots along each strand. Nothing is injected and nothing freezes; the name just describes the smooth, plumped result.</p>"
           }
         },
         "faq_item_7jnciW": {
           "type": "faq_item",
           "settings": {
-            "question": "What is your return policy?",
-            "answer": "<p>Your answer here.</p>"
+            "question": "How do I use it?",
+            "answer": "<p>After shampooing, towel-dry until your hair stops dripping. Work a generous amount through the mid-lengths to the ends — skip the scalp. Leave it on for 5 to 20 minutes, then rinse thoroughly. One sachet is sized for a single treatment.</p>"
           }
         },
         "faq_item_iW4FAr": {
           "type": "faq_item",
           "settings": {
-            "question": "What is your return policy?",
-            "answer": "<p>Your answer here.</p>"
+            "question": "How often should I use it?",
+            "answer": "<p>Two to three times a week while you're repairing damage, then drop back to once a week to maintain. Most Menders feel the difference from the very first wash.</p>"
+          }
+        },
+        "faq_item_box20": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How many treatments are in a box?",
+            "answer": "<p>Twenty. Each box holds 20 single-use 10g sachets — one sachet per treatment — so a single box keeps you going for weeks.</p>"
+          }
+        },
+        "faq_item_safe": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will it damage my hair, or contain formaldehyde?",
+            "answer": "<p>No. Unlike the salon keratin and botox smoothing treatments you may have heard about, ours is a simple rinse-out mask — there's no formaldehyde, no flat-iron sealing and no harsh fumes. You're nourishing your hair, not chemically altering it.</p>"
+          }
+        },
+        "faq_item_ingr": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's actually in it?",
+            "answer": "<p>A repair complex of hydrolyzed keratin, collagen and Acetyl Hexapeptide-8, plus biotin, camellia seed oil, ginseng root extract and lactic acid — chosen to rebuild damaged strands, lock in moisture and smooth the cuticle.</p>"
+          }
+        },
+        "faq_item_colour": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it safe for coloured or chemically-treated hair?",
+            "answer": "<p>Yes. It's gentle enough for colour-treated, bleached and previously keratin-treated hair — in fact, over-processed hair is exactly what it's built for. If your skin is sensitive, patch-test first.</p>"
+          }
+        },
+        "faq_item_results": {
+          "type": "faq_item",
+          "settings": {
+            "question": "When will I see results, and how long do they last?",
+            "answer": "<p>Your hair feels smoother and softer from the very first treatment. With regular use the results build, and each treatment lasts roughly 4 to 8 weeks.</p>"
+          }
+        },
+        "faq_item_ship": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What about shipping and returns?",
+            "answer": "<p>Shipping is free and every order leaves us within 24 hours. You're also covered by our 30-day money-back guarantee — try it for a full month, and if your hair isn't smoother we'll refund every cent.</p>"
           }
         }
       },
       "block_order": [
         "faq_item_t4QVVd",
         "faq_item_7jnciW",
-        "faq_item_iW4FAr"
+        "faq_item_iW4FAr",
+        "faq_item_box20",
+        "faq_item_safe",
+        "faq_item_ingr",
+        "faq_item_colour",
+        "faq_item_results",
+        "faq_item_ship"
       ],
       "name": "Product FAQ",
       "settings": {
-        "eyebrow": "Questions",
-        "heading": "Everything you want to know.",
+        "eyebrow": "FAQ",
+        "heading": "Hair Botox, answered.",
         "subheading": ""
       }
     }
