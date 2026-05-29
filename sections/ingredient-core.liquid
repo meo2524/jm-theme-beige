@@ -200,6 +200,57 @@
   @media (prefers-reduced-motion: reduce) {
     .ic__orb { animation: none; }
   }
+
+  /* ════════════════════════════════════════════════════════
+     Immersive mobile scroll — the signature "core" chapter.
+     The title PINS while each glowing orb rises, scales and
+     settles in turn. Scroll-driven; degrades to the standard
+     reveal where unsupported / reduced-motion.
+     ════════════════════════════════════════════════════════ */
+  @supports (animation-timeline: view()) {
+    @media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+      .ic { padding: clamp(3rem, 12vh, 5rem) 0 clamp(3rem, 10vh, 5rem); }
+      /* pin the heading while the orbs scroll through behind it */
+      .ic__head {
+        position: sticky;
+        top: 9vh;
+        z-index: 2;
+        margin-bottom: 10vh;
+        padding: 1.25rem 0;
+        background: radial-gradient(120% 150% at 50% 42%, var(--ic-bg, #1f1d1a) 45%, rgba(31, 29, 26, 0) 100%);
+        pointer-events: none;
+      }
+      .ic__rows { gap: 24vh; padding-bottom: 8vh; }
+      .ic__row,
+      .ic__row:nth-child(even) {
+        min-height: 52vh;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      /* orb scrubs up: scale + rotate + glow-in (float lives on the
+         inner .ic__orb, so the two animations never collide) */
+      .ic__orbwrap {
+        animation: ic-orb-scrub linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 48%;
+        transform-origin: center;
+        will-change: transform, opacity;
+      }
+      @keyframes ic-orb-scrub {
+        from { opacity: 0.12; transform: scale(0.5) translateY(46px) rotate(-9deg); }
+        to   { opacity: 1; transform: scale(1) translateY(0) rotate(0deg); }
+      }
+      .ic__text {
+        animation: ic-text-scrub linear both;
+        animation-timeline: view();
+        animation-range: entry 14% cover 44%;
+      }
+      @keyframes ic-text-scrub {
+        from { opacity: 0; transform: translateY(26px); }
+        to   { opacity: 1; transform: none; }
+      }
+    }
+  }
 </style>
 
 {% schema %}

@@ -220,6 +220,58 @@
     .rb__img { aspect-ratio: 16 / 11; }
     .rb__heading { max-width: none; }
   }
+
+  /* ════════════════════════════════════════════════════════
+     Immersive mobile scroll (progressive enhancement).
+     Scroll-driven via animation-timeline — degrades to the
+     standard data-reveal where unsupported / reduced-motion.
+     ════════════════════════════════════════════════════════ */
+  @supports (animation-timeline: view()) {
+    @media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+      .rb { padding-top: clamp(2rem, 8vh, 4rem); }
+      .rb__media {
+        position: static;
+        margin: 0 -1.25rem 0.5rem;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+      }
+      /* full-bleed hero that scales as it travels through view */
+      .rb__img {
+        height: 68vh;
+        aspect-ratio: auto;
+        animation: rb-hero-scrub linear both;
+        animation-timeline: view();
+        animation-range: cover 0% cover 100%;
+        transform-origin: center 35%;
+        will-change: transform;
+      }
+      @keyframes rb-hero-scrub {
+        from { transform: scale(1.2) translateY(-2%); }
+        to   { transform: scale(1) translateY(2%); }
+      }
+      /* each benefit rises in, scrubbed to scroll position */
+      .rb__item {
+        animation: rb-item-scrub linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 65%;
+      }
+      @keyframes rb-item-scrub {
+        from { opacity: 0; transform: translateY(30px); }
+        to   { opacity: 1; transform: none; }
+      }
+      .rb__num {
+        display: inline-block;
+        animation: rb-num-scrub linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 78%;
+      }
+      @keyframes rb-num-scrub {
+        from { opacity: 0; transform: scale(0.5); }
+        to   { opacity: 1; transform: scale(1); }
+      }
+    }
+  }
 </style>
 
 {% schema %}

@@ -173,6 +173,39 @@
   @media (prefers-reduced-motion: reduce) {
     .be__img-el, .be__card.is-visible .be__img-el { transform: none; }
   }
+
+  /* ════════════════════════════════════════════════════════
+     Immersive mobile scroll — each card lifts and un-zooms into
+     place as it enters. Scroll-driven; degrades to the standard
+     reveal where unsupported / reduced-motion.
+     ════════════════════════════════════════════════════════ */
+  @supports (animation-timeline: view()) {
+    @media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+      .be__grid { gap: 7vh; max-width: 420px; }
+      .be__card {
+        opacity: 1 !important;
+        animation: be-card-scrub linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 42%;
+        transform-origin: center bottom;
+        will-change: transform, opacity;
+      }
+      @keyframes be-card-scrub {
+        from { opacity: 0; transform: translateY(44px) scale(0.95); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      .be__media { aspect-ratio: 4 / 5; }
+      .be__img-el {
+        animation: be-img-scrub linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 65%;
+      }
+      @keyframes be-img-scrub {
+        from { transform: scale(1.28); }
+        to   { transform: scale(1); }
+      }
+    }
+  }
 </style>
 
 {% schema %}
