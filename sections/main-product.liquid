@@ -157,7 +157,6 @@
             <span class="rating-label">Excellent</span>
             <span class="rating-value-num">4.9</span>
           </span>
-          <span class="rating-divider" aria-hidden="true"></span>
           <span class="rating-count">{{ section.settings.rating_count_text | default: '100+ Happy Menders' }}</span>
         </a>
       {%- endif -%}
@@ -425,33 +424,36 @@
 
       {%- comment -%} -- Guarantee + payment methods strip -- {%- endcomment -%}
       {%- comment -%} -- Free shipping urgency strip -- {%- endcomment -%}
-      <div class="pdp-shipping" data-reveal data-reveal-delay="300">
-        <svg class="pdp-shipping__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-          <rect x="1" y="6" width="14" height="11" rx="1"/>
-          <path d="M15 9h4l3 3v5h-7"/>
-          <circle cx="6" cy="19" r="2"/>
-          <circle cx="18" cy="19" r="2"/>
-        </svg>
-        <span class="pdp-shipping__text">
-          {%- assign shipping_label = section.settings.shipping_label | default: 'Free shipping.' -%}
-          {%- assign shipping_sub   = section.settings.shipping_subtext | default: 'Ships within 24 hours — start mending ASAP.' -%}
-          <strong>{{ shipping_label }}</strong>
-          {{ shipping_sub }}
-        </span>
-      </div>
+      {%- comment -%} Strips render ONLY when the editor settings have content — no hardcoded fallbacks. {%- endcomment -%}
+      {%- assign shipping_label = section.settings.shipping_label -%}
+      {%- assign shipping_sub   = section.settings.shipping_subtext -%}
+      {%- if shipping_label != blank or shipping_sub != blank -%}
+        <div class="pdp-shipping" data-reveal data-reveal-delay="300">
+          <svg class="pdp-shipping__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <rect x="1" y="6" width="14" height="11" rx="1"/>
+            <path d="M15 9h4l3 3v5h-7"/>
+            <circle cx="6" cy="19" r="2"/>
+            <circle cx="18" cy="19" r="2"/>
+          </svg>
+          <span class="pdp-shipping__text">
+            {%- if shipping_label != blank -%}<strong>{{ shipping_label }}</strong> {% endif -%}{{ shipping_sub }}
+          </span>
+        </div>
+      {%- endif -%}
 
-      <div class="pdp-guarantee" data-reveal data-reveal-delay="320">
-        <svg class="pdp-guarantee__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M9 12l2 2 4-4"/>
-        </svg>
-        <span class="pdp-guarantee__text">
-          {%- assign guarantee_label = section.settings.guarantee_label | default: '30-day money-back guarantee.' -%}
-          {%- assign guarantee_sub   = section.settings.guarantee_subtext | default: "Wear it for 30 nights. If it’s not for you, send it back for a full refund — no questions." -%}
-          <strong>{{ guarantee_label }}</strong>
-          {{ guarantee_sub }}
-        </span>
-      </div>
+      {%- assign guarantee_label = section.settings.guarantee_label -%}
+      {%- assign guarantee_sub   = section.settings.guarantee_subtext -%}
+      {%- if guarantee_label != blank or guarantee_sub != blank -%}
+        <div class="pdp-guarantee" data-reveal data-reveal-delay="320">
+          <svg class="pdp-guarantee__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+          <span class="pdp-guarantee__text">
+            {%- if guarantee_label != blank -%}<strong>{{ guarantee_label }}</strong> {% endif -%}{{ guarantee_sub }}
+          </span>
+        </div>
+      {%- endif -%}
 
       {%- if section.settings.show_secure_checkout != false -%}
       <div class="pdp-payments" aria-label="Accepted payment methods">
@@ -1006,7 +1008,9 @@ body.lightbox-open { overflow: hidden; }
 .product-rating {
   display: flex;
   align-items: center;
-  gap: clamp(0.3rem, 1.6vw, 0.6rem);
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(0.5rem, 2.4vw, 1rem);
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 1.75rem;
@@ -2197,17 +2201,8 @@ body.lightbox-open { overflow: hidden; }
   .product-rating {
     margin-bottom: 0.5rem;
     padding: 0.5rem 0.875rem;
-    gap: 0.5rem;
-    font-size: 0.8125rem;
-    /* two equal cells flanking a centred divider — minmax(0,1fr) forces
-       the columns equal regardless of content width (1fr alone won't
-       shrink below content, which pushed the divider off-centre) */
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    align-items: center;
+    /* whole content centred as one cluster (no divider) */
   }
-  .product-rating .rating-left { justify-content: center; }
-  .product-rating .rating-count { justify-self: center; text-align: center; }
   .product-info-above-gallery .product-rating {
     margin-bottom: 0;
   }
