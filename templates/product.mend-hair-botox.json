@@ -69,7 +69,7 @@
             "reviews_shown": 4,
             "show_reviewer_name": true,
             "show_product_name": true,
-            "hide_arrows_mobile": true,
+            "hide_arrows_mobile": false,
             "arrows_position": "sides",
             "max_width": 1100,
             "corner_styling": "soft",
