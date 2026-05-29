@@ -348,6 +348,15 @@
         padding-right: 0 !important;
       }
 
+      /* Cards-carousel widget: the generic .jdgm-widget padding above squeezes
+         the carousel and throws off Judge.me's card-centring on mobile (cards
+         clip). Let the app control its own width/padding. */
+      .jdgm-widget.jdgm-cards-carousel {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        overflow: hidden !important;
+      }
+
       /* Photo/media gallery — let it scroll horizontally within its own box */
       .jdgm-carousel-wrapper,
       .jdgm-carousel,
