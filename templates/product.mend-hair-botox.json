@@ -38,13 +38,13 @@
         "atc_sold_out_label": "Sold Out",
         "variant_sold_out_label": "Sold out",
         "shipping_label": "",
-        "shipping_subtext": "",
+        "shipping_subtext": "Ships within 24 hours — your best hair days start now.",
         "guarantee_label": "",
-        "guarantee_subtext": "",
+        "guarantee_subtext": "Use it for a full month. If your hair isn't visibly smoother and stronger, send it back for a full refund — no questions.",
         "show_secure_checkout": true,
         "trust_1_text": "",
         "trust_2_text": "",
-        "trust_3_text": ""
+        "trust_3_text": "Formaldehyde-free"
       }
     },
     "repair_benefits": {
