@@ -23,7 +23,7 @@
         "accordion_label_1": "Why it's different",
         "accordion_label_2": "What you'll notice",
         "accordion_label_3": "How to use it",
-        "accordion_whats-included": "<p>This isn’t a coat-it-and-hope mask. It works <em>inside</em> the strand — hydrolysed keratin, collagen and Acetyl Hexapeptide-8 fill the gaps in damaged hair and seal in moisture.</p><ul><li><strong>It repairs — it doesn’t just straighten.</strong> Restores your hair’s health without changing your natural texture.</li><li><strong>No formaldehyde, no flat-iron, no salon.</strong> A 5–20 minute rinse-out mask, gentle on coloured and over-processed hair.</li><li><strong>20 single-use treatments per box</strong> — backed by a 30-day money-back guarantee.</li></ul>",
+        "accordion_whats-included": "<p>This isn’t a coat-it-and-hope mask. It works <em>inside</em> the strand — hydrolyzed keratin, collagen and Acetyl Hexapeptide-8 fill the gaps in damaged hair and seal in moisture.</p><ul><li><strong>It repairs — it doesn’t just straighten.</strong> Restores your hair’s health without changing your natural texture.</li><li><strong>No formaldehyde, no flat-iron, no salon.</strong> A 5–20 minute rinse-out mask, gentle on colored and over-processed hair.</li><li><strong>20 single-use treatments per box</strong> — backed by a 30-day money-back guarantee.</li></ul>",
         "accordion_how-it-works": "<ul><li><strong>Less breakage, fuller-looking hair.</strong> When strands stop snapping mid-length, hair looks thicker and healthier from root to tip.</li><li><strong>Frizz tamed, shine restored.</strong> A smooth, glass-like finish from the very first treatment.</li><li><strong>Hydration that lasts.</strong> Dry, brittle, lifeless hair brought back to life — and the results build for weeks.</li></ul>",
         "accordion_ingredients-certifications": "<ol><li>After shampooing, towel-dry until your hair stops dripping.</li><li>Work a generous amount through the mid-lengths to the ends — skip the scalp.</li><li>Leave on for 5–20 minutes, then rinse thoroughly.</li><li>Use 2–3 times a week while repairing, then weekly to maintain. One sachet per treatment.</li></ol>",
         "rating_show": true,
@@ -232,7 +232,7 @@
       ],
       "settings": {
         "eyebrow": "Triple-action repair",
-        "heading": "Revitalising repair, root to tip.",
+        "heading": "Revitalizing repair, root to tip.",
         "lede": "One rinse-out treatment that hydrates, smooths and rebuilds damaged hair from the inside out.",
         "image_caption": "",
         "bg_color": "#f5efe6"
@@ -252,7 +252,7 @@
         "ic2": {
           "type": "ingredient",
           "settings": {
-            "name": "Hydrolysed Collagen + Keratin",
+            "name": "Hydrolyzed Collagen + Keratin",
             "description": "Fills hair gaps and rebuilds the strand's protein network.",
             "molecule": "auto"
           }
@@ -386,8 +386,8 @@
         "faq_item_colour": {
           "type": "faq_item",
           "settings": {
-            "question": "Is it safe for coloured or chemically-treated hair?",
-            "answer": "<p>Yes. It's gentle enough for colour-treated, bleached and previously keratin-treated hair — in fact, over-processed hair is exactly what it's built for. If your skin is sensitive, patch-test first.</p>"
+            "question": "Is it safe for colored or chemically-treated hair?",
+            "answer": "<p>Yes. It is gentle enough for color-treated, bleached and previously keratin-treated hair &mdash; and damaged, over-processed hair is exactly what it is made for. If your skin is sensitive, patch-test first.</p>"
           }
         },
         "faq_item_results": {
@@ -412,7 +412,7 @@
         "faq_item_box20",
         "faq_item_safe",
         "faq_item_ingr",
-        "faq_item_colour",
+        "faq_item_color",
         "faq_item_results",
         "faq_item_ship"
       ],

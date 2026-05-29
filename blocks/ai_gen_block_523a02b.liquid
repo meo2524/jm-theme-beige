@@ -224,8 +224,22 @@
   }
 
   @media screen and (max-width: 749px) {
+    /* scale the cards down on mobile so they don't dominate the screen:
+       narrower card (peek of the next), shorter media, tighter content */
     .ai-review-carousel__card-{{ ai_gen_id }} {
-      flex: 0 0 calc(100% - {{ block.settings.card_gap }}px);
+      flex: 0 0 calc(82% - {{ block.settings.card_gap }}px);
+    }
+
+    .ai-review-carousel__media-{{ ai_gen_id }} {
+      padding-bottom: 70%;
+    }
+
+    .ai-review-carousel__content-{{ ai_gen_id }} {
+      padding: 16px;
+    }
+
+    .ai-review-carousel__text-{{ ai_gen_id }} {
+      font-size: clamp(12px, 3.4vw, {{ block.settings.review_text_size }}px);
     }
 
     .ai-review-carousel__header-{{ ai_gen_id }} {
