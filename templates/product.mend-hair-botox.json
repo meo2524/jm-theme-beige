@@ -261,10 +261,125 @@
       ],
       "name": "Review carousel",
       "settings": {}
+    },
+    "repair_benefits": {
+      "type": "repair-benefits",
+      "blocks": {
+        "rb1": {
+          "type": "benefit",
+          "settings": {
+            "label": "Nourishing",
+            "description": "Deeply penetrates to hydrate, lifting dryness and dullness."
+          }
+        },
+        "rb2": {
+          "type": "benefit",
+          "settings": {
+            "label": "Smoothness",
+            "description": "Tames frizz and split ends for a sleek, silky finish."
+          }
+        },
+        "rb3": {
+          "type": "benefit",
+          "settings": {
+            "label": "Strengthening",
+            "description": "Fills the gaps in damaged hair, reducing breakage and fragility."
+          }
+        }
+      },
+      "block_order": [
+        "rb1",
+        "rb2",
+        "rb3"
+      ],
+      "settings": {
+        "eyebrow": "Triple-action repair",
+        "heading": "Revitalising repair, root to tip.",
+        "lede": "One rinse-out treatment that hydrates, smooths and rebuilds damaged hair from the inside out.",
+        "bg_color": "#f5efe6"
+      }
+    },
+    "ingredient_core": {
+      "type": "ingredient-core",
+      "blocks": {
+        "ic1": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Acetyl Hexapeptide-8",
+            "description": "Strengthens the hair's structure, reducing breakage and split ends."
+          }
+        },
+        "ic2": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Hydrolysed Collagen + Keratin",
+            "description": "Fills hair gaps and rebuilds the strand's protein network."
+          }
+        },
+        "ic3": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Biotin",
+            "description": "Boosts hair resilience and nourishes against future damage."
+          }
+        }
+      },
+      "block_order": [
+        "ic1",
+        "ic2",
+        "ic3"
+      ],
+      "settings": {
+        "eyebrow": "The repair core",
+        "heading": "The science salons call hair botox.",
+        "lede": "No needles, no toxins — just a targeted complex that rebuilds damaged hair from the core out.",
+        "bg_color": "#1f1d1a",
+        "accent_color": "#c9a36b"
+      }
+    },
+    "botanical_extracts": {
+      "type": "botanical-extracts",
+      "blocks": {
+        "be1": {
+          "type": "extract",
+          "settings": {
+            "name": "Ginseng Root Extract",
+            "description": "Nourishes the roots, easing dryness and fragility."
+          }
+        },
+        "be2": {
+          "type": "extract",
+          "settings": {
+            "name": "Camellia Seed Oil",
+            "description": "Smooths and adds shine, reducing frizz and tangles."
+          }
+        },
+        "be3": {
+          "type": "extract",
+          "settings": {
+            "name": "Lactic Acid",
+            "description": "Gently conditions, improving hair flexibility."
+          }
+        }
+      },
+      "block_order": [
+        "be1",
+        "be2",
+        "be3"
+      ],
+      "settings": {
+        "eyebrow": "Botanical actives",
+        "heading": "Carefully selected, for every strand.",
+        "lede": "A short list of proven actives — chosen to nourish, smooth and protect, with nothing along for the ride.",
+        "bg_color": "#f8f3ea"
+      }
     }
   },
   "order": [
     "main",
+    "repair_benefits",
+    "ingredient_core",
+    "botanical_extracts",
     "blocks_yUqMef",
     "17799622903d320805",
     "1779959625dfb75552",

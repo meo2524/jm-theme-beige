@@ -1,0 +1,214 @@
+{%- comment -%}
+  ──────────────────────────────────────────────────────────────────
+  sections/botanical-extracts.liquid
+  Mend & Co — Botanical Extracts (scroll-story panel 3 of 3)
+
+  Bone/cream panel. 3-up image cards that stagger-reveal, with the
+  image easing from a slight zoom to rest as each card enters view
+  (transform on the inner <img>, driven by .is-visible on the card —
+  so it never collides with the card's own reveal transform).
+
+  image_picker per card; graceful cream/monogram fallback when empty.
+  ──────────────────────────────────────────────────────────────────
+{%- endcomment -%}
+
+{%- liquid
+  assign eyebrow = section.settings.eyebrow | default: 'Botanical actives'
+  assign heading = section.settings.heading | default: 'Carefully selected, for every strand.'
+  assign lede    = section.settings.lede
+  assign bg      = section.settings.bg_color | default: '#f8f3ea'
+-%}
+
+<section class="be" style="--be-bg: {{ bg }};">
+  <div class="be__inner">
+
+    <div class="be__head">
+      {%- if eyebrow != blank -%}
+        <p class="be__eyebrow" data-reveal data-reveal-delay="0">{{ eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="be__heading" data-word-reveal>{{ heading }}</h2>
+      {%- if lede != blank -%}
+        <p class="be__lede" data-reveal data-reveal-delay="120">{{ lede }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="be__grid">
+        {%- for block in section.blocks -%}
+          {%- assign img = block.settings.image -%}
+          {%- assign delay = forloop.index0 | times: 110 -%}
+          <article class="be__card" data-reveal data-reveal-delay="{{ delay }}" {{ block.shopify_attributes }}>
+            <div class="be__media">
+              {%- if img != blank -%}
+                <img
+                  class="be__img-el"
+                  src="{{ img | image_url: width: 700 }}"
+                  srcset="{{ img | image_url: width: 400 }} 400w, {{ img | image_url: width: 700 }} 700w"
+                  sizes="(max-width: 767px) 90vw, 30vw"
+                  alt="{{ img.alt | default: block.settings.name | escape }}"
+                  width="{{ img.width }}"
+                  height="{{ img.height }}"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <div class="be__img-el be__img-el--placeholder" aria-hidden="true">
+                  <span class="be__mark">M</span>
+                </div>
+              {%- endif -%}
+            </div>
+            <div class="be__body">
+              {%- if block.settings.name != blank -%}
+                <h3 class="be__name">{{ block.settings.name }}</h3>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <p class="be__desc">{{ block.settings.description }}</p>
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<style>
+  .be {
+    background: var(--be-bg, #f8f3ea);
+    padding: clamp(4rem, 9vw, 7.5rem) 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(138, 98, 64, 0.14);
+  }
+  .be__inner { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+
+  .be__head { text-align: center; max-width: 34ch; margin: 0 auto clamp(2.75rem, 6vw, 4.5rem); }
+  .be__eyebrow {
+    font-family: var(--font-body, 'JetBrains Mono', monospace);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--color-walnut, #8a6240);
+    margin: 0 0 1rem;
+  }
+  .be__heading {
+    font-family: var(--font-heading, 'JetBrains Mono', monospace);
+    font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-black, #1f1d1a);
+    margin: 0 auto;
+  }
+  .be__lede {
+    font-family: var(--font-body, 'JetBrains Mono', monospace);
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--char-soft, #5a4a3a);
+    margin: 1.1rem auto 0;
+    max-width: 46ch;
+  }
+
+  .be__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.25rem, 3vw, 2.25rem);
+  }
+  .be__card {
+    background: #fffdf9;
+    border: 1px solid rgba(138, 98, 64, 0.22);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .be__card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 26px 50px -28px rgba(31, 29, 26, 0.4);
+    border-color: rgba(138, 98, 64, 0.4);
+  }
+  .be__media { overflow: hidden; aspect-ratio: 4 / 3; }
+  .be__img-el {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.06);
+    transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .be__card.is-visible .be__img-el { transform: scale(1); }
+  .be__img-el--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(120% 90% at 30% 20%, #fbf7ef 0%, #efe5d6 55%, #e3d4bf 100%);
+  }
+  .be__mark {
+    font-family: var(--font-heading, 'JetBrains Mono', monospace);
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: rgba(138, 98, 64, 0.32);
+  }
+  .be__body { padding: 1.4rem 1.4rem 1.6rem; }
+  .be__name {
+    font-family: var(--font-heading, 'JetBrains Mono', monospace);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--color-black, #1f1d1a);
+    margin: 0 0 0.5rem;
+  }
+  .be__desc {
+    font-family: var(--font-body, 'JetBrains Mono', monospace);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--char-soft, #5a4a3a);
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .be__grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
+  }
+  @media (max-width: 767px) {
+    .be__inner { padding: 0 1.25rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .be__img-el, .be__card.is-visible .be__img-el { transform: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Botanical Extracts",
+  "tag": "section",
+  "class": "section-botanical-extracts",
+  "settings": [
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Botanical actives" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Carefully selected, for every strand." },
+    { "type": "textarea", "id": "lede", "label": "Intro paragraph", "default": "A short list of proven actives — chosen to nourish, smooth and protect, with nothing along for the ride." },
+    { "type": "header", "content": "Layout" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#f8f3ea" }
+  ],
+  "blocks": [
+    {
+      "type": "extract",
+      "name": "Extract",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Ginseng Root Extract" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Nourishes the roots, easing dryness and fragility." }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Botanical Extracts",
+      "blocks": [
+        { "type": "extract", "settings": { "name": "Ginseng Root Extract", "description": "Nourishes the roots, easing dryness and fragility." } },
+        { "type": "extract", "settings": { "name": "Camellia Seed Oil", "description": "Smooths and adds shine, reducing frizz and tangles." } },
+        { "type": "extract", "settings": { "name": "Lactic Acid", "description": "Gently conditions, improving hair flexibility." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

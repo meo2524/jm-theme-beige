@@ -1,0 +1,263 @@
+{%- comment -%}
+  ──────────────────────────────────────────────────────────────────
+  sections/repair-benefits.liquid
+  Mend & Co — Repair Benefits (scroll-story panel 1 of 3)
+
+  Two-column editorial: sticky/parallax media + stagger-revealing
+  numbered benefit list. Cream background. Reuses the theme reveal
+  system (base.css §16 + motion.js) — no new JS.
+
+  All copy & imagery are theme-editor settings/blocks. Nothing hardcoded.
+  ──────────────────────────────────────────────────────────────────
+{%- endcomment -%}
+
+{%- liquid
+  assign eyebrow = section.settings.eyebrow | default: 'Triple-action repair'
+  assign heading = section.settings.heading | default: 'Revitalising repair, root to tip.'
+  assign lede    = section.settings.lede
+  assign image   = section.settings.image
+  assign caption = section.settings.image_caption
+  assign bg      = section.settings.bg_color | default: '#f5efe6'
+-%}
+
+<section class="rb" style="--rb-bg: {{ bg }};">
+  <div class="rb__inner">
+
+    <div class="rb__media-col">
+      <div class="rb__media" data-reveal>
+        {%- if image != blank -%}
+          <img
+            class="rb__img"
+            src="{{ image | image_url: width: 1200 }}"
+            srcset="{{ image | image_url: width: 600 }} 600w, {{ image | image_url: width: 1200 }} 1200w"
+            sizes="(max-width: 767px) 92vw, 46vw"
+            alt="{{ image.alt | default: heading | escape }}"
+            width="{{ image.width }}"
+            height="{{ image.height }}"
+            loading="lazy"
+          >
+        {%- else -%}
+          <div class="rb__img rb__img--placeholder" aria-hidden="true">
+            <span class="rb__placeholder-mark">M</span>
+          </div>
+        {%- endif -%}
+        {%- if caption != blank -%}
+          <span class="rb__caption">{{ caption }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="rb__content">
+      {%- if eyebrow != blank -%}
+        <p class="rb__eyebrow" data-reveal data-reveal-delay="0">{{ eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="rb__heading" data-word-reveal>{{ heading }}</h2>
+      {%- if lede != blank -%}
+        <p class="rb__lede" data-reveal data-reveal-delay="120">{{ lede }}</p>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <ol class="rb__list">
+          {%- for block in section.blocks -%}
+            {%- assign delay = forloop.index0 | times: 90 | plus: 120 -%}
+            <li class="rb__item" data-reveal data-reveal-delay="{{ delay }}" {{ block.shopify_attributes }}>
+              <span class="rb__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+              <div class="rb__item-text">
+                {%- if block.settings.label != blank -%}
+                  <h3 class="rb__item-label">{{ block.settings.label }}</h3>
+                {%- endif -%}
+                {%- if block.settings.description != blank -%}
+                  <p class="rb__item-desc">{{ block.settings.description }}</p>
+                {%- endif -%}
+              </div>
+            </li>
+          {%- endfor -%}
+        </ol>
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .rb {
+    background: var(--rb-bg, #f5efe6);
+    padding: clamp(4rem, 9vw, 7.5rem) 0;
+    overflow: hidden;
+  }
+  .rb__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+
+  /* media column — sticky + soft parallax on desktop */
+  .rb__media-col { position: relative; }
+  .rb__media {
+    position: sticky;
+    top: clamp(2rem, 8vh, 6rem);
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(138, 98, 64, 0.30);
+    box-shadow: 0 24px 60px -32px rgba(31, 29, 26, 0.45);
+  }
+  .rb__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+  .rb__img--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(120% 90% at 30% 20%, #fbf7ef 0%, #efe5d6 55%, #e3d4bf 100%);
+  }
+  .rb__placeholder-mark {
+    font-family: var(--font-heading, 'JetBrains Mono', monospace);
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 500;
+    color: rgba(138, 98, 64, 0.35);
+    letter-spacing: 0.05em;
+  }
+  .rb__caption {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    font-family: var(--font-body, 'JetBrains Mono', monospace);
+    font-size: 0.625rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #f8f3ea;
+    background: rgba(31, 29, 26, 0.55);
+    backdrop-filter: blur(4px);
+    padding: 0.4rem 0.7rem;
+    border-radius: 999px;
+  }
+
+  /* content column */
+  .rb__content { padding-top: clamp(0.5rem, 4vh, 2.5rem); }
+  .rb__eyebrow {
+    font-family: var(--font-body, 'JetBrains Mono', monospace);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--color-walnut, #8a6240);
+    margin: 0 0 1.25rem;
+  }
+  .rb__heading {
+    font-family: var(--font-heading, 'JetBrains Mono', monospace);
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--color-black, #1f1d1a);
+    margin: 0 0 1.25rem;
+    max-width: 16ch;
+  }
+  .rb__lede {
+    font-family: var(--font-body, 'JetBrains Mono', monospace);
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--char-soft, #5a4a3a);
+    margin: 0 0 2.5rem;
+    max-width: 42ch;
+  }
+
+  .rb__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .rb__item {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.6rem 0;
+    border-top: 1px solid rgba(138, 98, 64, 0.20);
+  }
+  .rb__item:last-child { border-bottom: 1px solid rgba(138, 98, 64, 0.20); }
+  .rb__num {
+    font-family: var(--font-body, 'JetBrains Mono', monospace);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--color-walnut, #8a6240);
+    padding-top: 0.2rem;
+    flex-shrink: 0;
+  }
+  .rb__item-label {
+    font-family: var(--font-heading, 'JetBrains Mono', monospace);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--color-black, #1f1d1a);
+    margin: 0 0 0.4rem;
+  }
+  .rb__item-desc {
+    font-family: var(--font-body, 'JetBrains Mono', monospace);
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--char-soft, #5a4a3a);
+    margin: 0;
+    max-width: 46ch;
+  }
+
+  @media (max-width: 767px) {
+    .rb__inner {
+      grid-template-columns: 1fr;
+      gap: 2.25rem;
+      padding: 0 1.25rem;
+    }
+    .rb__media { position: static; top: auto; }
+    .rb__img { aspect-ratio: 16 / 11; }
+    .rb__heading { max-width: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Repair Benefits",
+  "tag": "section",
+  "class": "section-repair-benefits",
+  "settings": [
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Triple-action repair" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Revitalising repair, root to tip." },
+    { "type": "textarea", "id": "lede", "label": "Intro paragraph", "default": "One rinse-out treatment that hydrates, smooths and rebuilds damaged hair from the inside out." },
+    { "type": "header", "content": "Media" },
+    { "type": "image_picker", "id": "image", "label": "Image (portrait 4:5 works best)" },
+    { "type": "text", "id": "image_caption", "label": "Image caption (optional)" },
+    { "type": "header", "content": "Layout" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#f5efe6" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Nourishing" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Deeply penetrates to hydrate, lifting dryness and dullness." }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Repair Benefits",
+      "blocks": [
+        { "type": "benefit", "settings": { "label": "Nourishing", "description": "Deeply penetrates to hydrate, lifting dryness and dullness." } },
+        { "type": "benefit", "settings": { "label": "Smoothness", "description": "Tames frizz and split ends for a sleek, silky finish." } },
+        { "type": "benefit", "settings": { "label": "Strengthening", "description": "Fills the gaps in damaged hair, reducing breakage and fragility." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
