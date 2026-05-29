@@ -158,10 +158,38 @@
             "review_6_author": "David L."
           },
           "blocks": {}
+        },
+        "ai_gen_block_21aa88f_cqqWjf": {
+          "type": "ai_gen_block_21aa88f",
+          "settings": {
+            "before_image": "shopify://shop_images/hf_20260528_085924_c3132d6e-8acf-4fba-9b50-90b61b9609ec.png",
+            "after_image": "shopify://shop_images/hf_20260528_085904_8224848f-c933-47a9-8116-41ee0195472f.png",
+            "desktop_width_percent": 50,
+            "border_radius": 20,
+            "before_label": "Before",
+            "after_label": "After",
+            "label_font_size": 14,
+            "label_position_top": 20,
+            "label_position_side": 20,
+            "label_padding_vertical": 8,
+            "label_padding_horizontal": 16,
+            "label_border_radius": 4,
+            "label_bg_color": "#2d2d2d",
+            "label_text_color": "#f2ede4",
+            "divider_width": 4,
+            "divider_color": "#f2ede4",
+            "handle_size": 50,
+            "handle_color": "#f2ede4",
+            "handle_border_color": "#2d2d2d",
+            "handle_border_width": 2,
+            "handle_icon_color": "#2d2d2d"
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "ai_gen_block_523a02b_Mm7gBg"
+        "ai_gen_block_523a02b_Mm7gBg",
+        "ai_gen_block_21aa88f_cqqWjf"
       ],
       "name": "Review carousel",
       "settings": {}
@@ -284,38 +312,6 @@
     },
     "17799622903d320805": {
       "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_21aa88f_W8yRgd": {
-          "type": "ai_gen_block_21aa88f",
-          "settings": {
-            "before_image": "shopify://shop_images/hf_20260528_085924_c3132d6e-8acf-4fba-9b50-90b61b9609ec.png",
-            "after_image": "shopify://shop_images/hf_20260528_085904_8224848f-c933-47a9-8116-41ee0195472f.png",
-            "desktop_width_percent": 50,
-            "border_radius": 20,
-            "before_label": "Before",
-            "after_label": "After",
-            "label_font_size": 14,
-            "label_position_top": 20,
-            "label_position_side": 20,
-            "label_padding_vertical": 8,
-            "label_padding_horizontal": 16,
-            "label_border_radius": 4,
-            "label_bg_color": "#2d2d2d",
-            "label_text_color": "#f2ede4",
-            "divider_width": 4,
-            "divider_color": "#f2ede4",
-            "handle_size": 50,
-            "handle_color": "#f2ede4",
-            "handle_border_color": "#2d2d2d",
-            "handle_border_width": 2,
-            "handle_icon_color": "#2d2d2d"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_21aa88f_W8yRgd"
-      ],
       "settings": {}
     },
     "1779959625dfb75552": {

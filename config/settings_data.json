@@ -21,6 +21,20 @@
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
+        "blocks": {
+          "item_j7prAp": {
+            "type": "item",
+            "settings": {
+              "mark": "✶",
+              "text": "Restocked — Restorative Elixir, 30ml",
+              "link_label": "read",
+              "link_url": ""
+            }
+          }
+        },
+        "block_order": [
+          "item_j7prAp"
+        ],
         "settings": {
           "show": true,
           "speed": 15
