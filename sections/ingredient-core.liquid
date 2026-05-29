@@ -203,8 +203,9 @@
     height: auto;
     aspect-ratio: 1;
     object-fit: contain;
-    -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 72%, transparent 96%);
-            mask-image: radial-gradient(circle at 50% 50%, #000 72%, transparent 96%);
+    /* crop to a clean circle so only the orb shows — no background box */
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 49%, transparent 57%);
+            mask-image: radial-gradient(circle at 50% 50%, #000 49%, transparent 57%);
     filter: drop-shadow(0 0 46px rgba(201, 163, 107, 0.22));
     animation: ic-float 7s ease-in-out infinite;
     will-change: transform;
@@ -284,18 +285,20 @@
       .ic__orbwrap {
         animation: ic-orb-scrub linear both;
         animation-timeline: view();
-        animation-range: entry 0% cover 48%;
+        animation-range: entry 0% cover 40%;
         transform-origin: center;
-        will-change: transform, opacity;
+        will-change: transform;
       }
+      /* transform only — never opacity — so the last orb can't get
+         stuck dim if the section ends before it fully centres */
       @keyframes ic-orb-scrub {
-        from { opacity: 0.12; transform: scale(0.5) translateY(46px) rotate(-9deg); }
-        to   { opacity: 1; transform: scale(1) translateY(0) rotate(0deg); }
+        from { transform: scale(0.55) translateY(46px) rotate(-9deg); }
+        to   { transform: scale(1) translateY(0) rotate(0deg); }
       }
       .ic__text {
         animation: ic-text-scrub linear both;
         animation-timeline: view();
-        animation-range: entry 14% cover 44%;
+        animation-range: entry 5% entry 85%;
       }
       @keyframes ic-text-scrub {
         from { opacity: 0; transform: translateY(26px); }
