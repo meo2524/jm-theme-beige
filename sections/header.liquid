@@ -230,7 +230,17 @@
     {%- assign clean_name = shop.name | replace: '&amp;', '&' -%}
     {%- assign name_parts = clean_name | split: '&' -%}
     <a href="{{ routes.root_url }}" class="mobile-menu__brand-link" aria-label="{{ shop.name }}">
-      {%- if name_parts.size == 2 -%}
+      {%- if logo != blank -%}
+        <img
+          class="mobile-menu__logo-img"
+          src="{{ logo_src_1x }}"
+          srcset="{{ logo_src_1x }} 1x, {{ logo_src_2x }} 2x"
+          width="{{ logo_width }}"
+          height="auto"
+          alt="{{ shop.name }}"
+          loading="lazy"
+        >
+      {%- elsif name_parts.size == 2 -%}
         <span class="mobile-menu__wordmark">{{ name_parts[0] | strip }}<em>&amp;</em>{{ name_parts[1] | strip }}</span>
       {%- else -%}
         <span class="mobile-menu__wordmark">{{ clean_name }}</span>
@@ -771,6 +781,14 @@
     font-style: normal;
     font-weight: 800;
     color: #FF3D8A;
+  }
+
+  .mobile-menu__logo-img {
+    display: block;
+    width: auto;
+    max-width: 160px;
+    height: auto;
+    max-height: 40px;
   }
 
   /* Nav list */
