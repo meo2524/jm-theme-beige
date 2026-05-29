@@ -61,7 +61,7 @@
             "star_rating": "5_star",
             "show_review_media": true,
             "display_order": "most_recent",
-            "no_image_fallback": "product_image",
+            "no_image_fallback": "review_text_only",
             "max_reviews": 20,
             "review_length": "medium",
             "text_size": "medium",
