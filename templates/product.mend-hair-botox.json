@@ -60,7 +60,7 @@
             ],
             "star_rating": "all",
             "show_review_media": true,
-            "display_order": "media_first",
+            "display_order": "most_recent",
             "no_image_fallback": "review_text_only",
             "max_reviews": 20,
             "review_length": "medium",
