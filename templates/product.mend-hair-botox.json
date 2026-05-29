@@ -23,9 +23,9 @@
         "accordion_label_1": "Why it's different",
         "accordion_label_2": "What you'll notice",
         "accordion_label_3": "How to use it",
-        "accordion_whats-included": "<p>This isn&rsquo;t a coat-it-and-hope mask. It works <em>inside</em> the strand &mdash; hydrolysed keratin, collagen and Acetyl Hexapeptide-8 fill the gaps in damaged hair and seal in moisture.</p><ul><li><strong>It repairs &mdash; it doesn&rsquo;t just straighten.</strong> Restores your hair&rsquo;s health without changing your natural texture.</li><li><strong>No formaldehyde, no flat-iron, no salon.</strong> A 5&ndash;20 minute rinse-out mask, gentle on coloured and over-processed hair.</li><li><strong>20 single-use treatments per box</strong> &mdash; backed by a 30-day money-back guarantee.</li></ul>",
-        "accordion_how-it-works": "<ul><li><strong>Less breakage, fuller-looking hair.</strong> When strands stop snapping mid-length, hair looks thicker and healthier from root to tip.</li><li><strong>Frizz tamed, shine restored.</strong> A smooth, glass-like finish from the very first treatment.</li><li><strong>Hydration that lasts.</strong> Dry, brittle, lifeless hair brought back to life &mdash; and the results build for weeks.</li></ul>",
-        "accordion_ingredients-certifications": "<ol><li>After shampooing, towel-dry until your hair stops dripping.</li><li>Work a generous amount through the mid-lengths to the ends &mdash; skip the scalp.</li><li>Leave on for 5&ndash;20 minutes, then rinse thoroughly.</li><li>Use 2&ndash;3 times a week while repairing, then weekly to maintain. One sachet per treatment.</li></ol>",
+        "accordion_whats-included": "<p>This isn’t a coat-it-and-hope mask. It works <em>inside</em> the strand — hydrolysed keratin, collagen and Acetyl Hexapeptide-8 fill the gaps in damaged hair and seal in moisture.</p><ul><li><strong>It repairs — it doesn’t just straighten.</strong> Restores your hair’s health without changing your natural texture.</li><li><strong>No formaldehyde, no flat-iron, no salon.</strong> A 5–20 minute rinse-out mask, gentle on coloured and over-processed hair.</li><li><strong>20 single-use treatments per box</strong> — backed by a 30-day money-back guarantee.</li></ul>",
+        "accordion_how-it-works": "<ul><li><strong>Less breakage, fuller-looking hair.</strong> When strands stop snapping mid-length, hair looks thicker and healthier from root to tip.</li><li><strong>Frizz tamed, shine restored.</strong> A smooth, glass-like finish from the very first treatment.</li><li><strong>Hydration that lasts.</strong> Dry, brittle, lifeless hair brought back to life — and the results build for weeks.</li></ul>",
+        "accordion_ingredients-certifications": "<ol><li>After shampooing, towel-dry until your hair stops dripping.</li><li>Work a generous amount through the mid-lengths to the ends — skip the scalp.</li><li>Leave on for 5–20 minutes, then rinse thoroughly.</li><li>Use 2–3 times a week while repairing, then weekly to maintain. One sachet per treatment.</li></ol>",
         "rating_show": true,
         "rating_value": "",
         "rating_count_text": "164+ Menders",
@@ -53,7 +53,7 @@
         "judge_me_reviews_cards_carousel_f6Qc3p": {
           "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
-            "show_sample_reviews": true,
+            "show_sample_reviews": false,
             "reviews_selection": "product_reviews",
             "products": [
               "mend-hair-botox"
