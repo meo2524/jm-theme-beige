@@ -422,6 +422,10 @@
         "heading": "Hair Botox, answered.",
         "subheading": ""
       }
+    },
+    "us_vs_them": {
+      "type": "us-vs-them",
+      "settings": {}
     }
   },
   "order": [
@@ -431,6 +435,7 @@
     "repair_benefits",
     "ingredient_core",
     "botanical_extracts",
+    "us_vs_them",
     "17799622903d320805",
     "1779959625dfb75552",
     "product_faq_nzQWrk"

@@ -1,0 +1,193 @@
+{%- comment -%}
+  ──────────────────────────────────────────────────────────────────
+  sections/us-vs-them.liquid
+  Mend & Co — "Us vs Them" comparison table.
+
+  Editable in the theme editor: header, the two column labels, and up to
+  6 comparison rows (feature + Mend value + competitor value). Row content
+  lives in section SETTINGS with defaults so it renders even if Shopify's
+  sync strips the template values. Brand: cream, JetBrains Mono, gold.
+  ──────────────────────────────────────────────────────────────────
+{%- endcomment -%}
+
+{%- liquid
+  assign eyebrow   = section.settings.eyebrow   | default: 'Why Mend'
+  assign heading   = section.settings.heading   | default: 'Mend vs. the rest.'
+  assign subtext   = section.settings.subtext
+  assign us_label  = section.settings.us_label  | default: 'Mend Hair Botox'
+  assign them_label = section.settings.them_label | default: 'Other masks'
+  assign bg        = section.settings.bg_color   | default: '#f8f3ea'
+-%}
+
+<section class="uvt" style="--uvt-bg: {{ bg }};">
+  <div class="uvt__inner">
+
+    <div class="uvt__head">
+      {%- if eyebrow != blank -%}
+        <p class="uvt__eyebrow" data-reveal data-reveal-delay="0">{{ eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="uvt__heading" data-word-reveal>{{ heading }}</h2>
+      {%- if subtext != blank -%}
+        <p class="uvt__subtext" data-reveal data-reveal-delay="120">{{ subtext }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="uvt__table" data-reveal data-reveal-delay="120">
+      <div class="uvt__row uvt__row--head">
+        <span class="uvt__cell uvt__feature"></span>
+        <span class="uvt__cell uvt__us uvt__us--head">{{ us_label }}</span>
+        <span class="uvt__cell uvt__them uvt__them--head">{{ them_label }}</span>
+      </div>
+
+      {%- for i in (1..6) -%}
+        {%- liquid
+          assign f_key = 'row_' | append: i | append: '_feature'
+          assign u_key = 'row_' | append: i | append: '_us'
+          assign t_key = 'row_' | append: i | append: '_them'
+          assign feature = section.settings[f_key]
+          assign us = section.settings[u_key]
+          assign them = section.settings[t_key]
+        -%}
+        {%- if feature != blank -%}
+          <div class="uvt__row">
+            <span class="uvt__cell uvt__feature">{{ feature }}</span>
+            <span class="uvt__cell uvt__us">
+              <svg class="uvt__ic uvt__ic--yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              {%- if us != blank -%}<span class="uvt__val">{{ us }}</span>{%- endif -%}
+            </span>
+            <span class="uvt__cell uvt__them">
+              <svg class="uvt__ic uvt__ic--no" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              {%- if them != blank -%}<span class="uvt__val">{{ them }}</span>{%- endif -%}
+            </span>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .uvt {
+    background: var(--uvt-bg, #f8f3ea);
+    padding: clamp(4rem, 9vw, 7rem) 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(138, 98, 64, 0.14);
+  }
+  .uvt__inner { max-width: 920px; margin: 0 auto; padding: 0 1.25rem; }
+
+  .uvt__head { text-align: center; max-width: 34ch; margin: 0 auto clamp(2.25rem, 5vw, 3.5rem); }
+  .uvt__eyebrow {
+    font-family: var(--font-body, 'JetBrains Mono', monospace);
+    font-size: 0.6875rem; font-weight: 500; letter-spacing: 3.5px;
+    text-transform: uppercase; color: var(--color-walnut, #8a6240); margin: 0 0 1rem;
+  }
+  .uvt__heading {
+    font-family: var(--font-heading, 'JetBrains Mono', monospace);
+    font-size: clamp(1.7rem, 3.4vw, 2.6rem); font-weight: 700;
+    letter-spacing: -0.02em; line-height: 1.15; color: var(--color-black, #1f1d1a); margin: 0 auto;
+  }
+  .uvt__subtext {
+    font-family: var(--font-body, 'JetBrains Mono', monospace);
+    font-size: clamp(0.85rem, 2.4vw, 0.95rem); line-height: 1.7;
+    color: var(--char-soft, #5a4a3a); margin: 1rem auto 0; max-width: 46ch;
+  }
+
+  .uvt__table {
+    border: 1px solid rgba(138, 98, 64, 0.22);
+    border-radius: 14px;
+    overflow: hidden;
+    background: #fffdf9;
+  }
+  .uvt__row {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr 1fr;
+    align-items: stretch;
+    border-top: 1px solid rgba(138, 98, 64, 0.16);
+  }
+  .uvt__row:first-child { border-top: 0; }
+  .uvt__cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    justify-content: center;
+    padding: clamp(0.8rem, 2.2vw, 1.15rem) clamp(0.7rem, 2vw, 1.1rem);
+    font-family: var(--font-body, 'JetBrains Mono', monospace);
+    font-size: clamp(0.75rem, 2.1vw, 0.875rem);
+    line-height: 1.45;
+  }
+  .uvt__feature {
+    font-weight: 600;
+    color: var(--color-black, #1f1d1a);
+  }
+  /* Mend column — highlighted */
+  .uvt__us {
+    background: rgba(138, 98, 64, 0.08);
+    border-left: 1px solid rgba(138, 98, 64, 0.16);
+    border-right: 1px solid rgba(138, 98, 64, 0.16);
+    color: var(--char-soft, #5a4a3a);
+  }
+  .uvt__them { color: rgba(90, 74, 58, 0.72); }
+
+  .uvt__row--head .uvt__cell {
+    font-family: var(--font-heading, 'JetBrains Mono', monospace);
+    font-weight: 700;
+    font-size: clamp(0.72rem, 2vw, 0.95rem);
+    letter-spacing: 0.01em;
+    padding-top: clamp(1rem, 2.6vw, 1.35rem);
+    padding-bottom: clamp(1rem, 2.6vw, 1.35rem);
+  }
+  .uvt__us--head { color: var(--color-walnut, #8a6240); background: rgba(138, 98, 64, 0.14); }
+  .uvt__them--head { color: rgba(90, 74, 58, 0.85); }
+
+  .uvt__ic { width: clamp(15px, 4vw, 18px); height: clamp(15px, 4vw, 18px); flex-shrink: 0; }
+  .uvt__ic--yes { color: #4f7a3a; }
+  .uvt__ic--no  { color: rgba(90, 74, 58, 0.5); }
+  .uvt__val { display: block; }
+
+  @media (max-width: 600px) {
+    .uvt__row { grid-template-columns: 1.3fr 1fr 1fr; }
+    .uvt__cell { letter-spacing: -0.01em; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Us vs Them",
+  "tag": "section",
+  "class": "section-us-vs-them",
+  "settings": [
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why Mend" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Mend vs. the rest." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Most at-home masks just coat the surface. Here's what sets Mend Hair Botox apart." },
+    { "type": "header", "content": "Column labels" },
+    { "type": "text", "id": "us_label", "label": "Your column", "default": "Mend Hair Botox" },
+    { "type": "text", "id": "them_label", "label": "Their column", "default": "Other masks" },
+    { "type": "header", "content": "Layout" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#f8f3ea" },
+    { "type": "header", "content": "Rows", "info": "Leave a feature blank to hide that row. Mend column shows a check; their column a cross." },
+    { "type": "text", "id": "row_1_feature", "label": "Row 1 — feature", "default": "Repairs from within" },
+    { "type": "text", "id": "row_1_us", "label": "Row 1 — Mend", "default": "Keratin, collagen & peptides rebuild the strand" },
+    { "type": "text", "id": "row_1_them", "label": "Row 1 — others", "default": "Surface coat that washes out" },
+    { "type": "text", "id": "row_2_feature", "label": "Row 2 — feature", "default": "Formaldehyde & flat-iron" },
+    { "type": "text", "id": "row_2_us", "label": "Row 2 — Mend", "default": "None — a gentle rinse-out mask" },
+    { "type": "text", "id": "row_2_them", "label": "Row 2 — others", "default": "Often formaldehyde + heat sealing" },
+    { "type": "text", "id": "row_3_feature", "label": "Row 3 — feature", "default": "Keeps your natural texture" },
+    { "type": "text", "id": "row_3_us", "label": "Row 3 — Mend", "default": "Repairs without straightening" },
+    { "type": "text", "id": "row_3_them", "label": "Row 3 — others", "default": "Forces hair poker-straight" },
+    { "type": "text", "id": "row_4_feature", "label": "Row 4 — feature", "default": "Treatments per box" },
+    { "type": "text", "id": "row_4_us", "label": "Row 4 — Mend", "default": "20 single-use sachets" },
+    { "type": "text", "id": "row_4_them", "label": "Row 4 — others", "default": "3–5 — dry out fast" },
+    { "type": "text", "id": "row_5_feature", "label": "Row 5 — feature", "default": "Risk-free trial" },
+    { "type": "text", "id": "row_5_us", "label": "Row 5 — Mend", "default": "30-day money-back guarantee" },
+    { "type": "text", "id": "row_5_them", "label": "Row 5 — others", "default": "No returns on imports" },
+    { "type": "text", "id": "row_6_feature", "label": "Row 6 — feature", "default": "Support & shipping" },
+    { "type": "text", "id": "row_6_us", "label": "Row 6 — Mend", "default": "Real support · fast, tracked" },
+    { "type": "text", "id": "row_6_them", "label": "Row 6 — others", "default": "Faceless dropship · slow" }
+  ],
+  "presets": [
+    { "name": "Us vs Them" }
+  ]
+}
+{% endschema %}
