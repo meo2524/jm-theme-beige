@@ -177,6 +177,35 @@
     margin: 0.75rem auto 0;
     max-width: 46ch;
   }
+
+  .ai-before-after-toggle-{{ ai_gen_id }} {
+    display: flex;
+    width: max-content;
+    gap: 4px;
+    margin: 0 auto 1.5rem;
+    padding: 4px;
+    border-radius: 999px;
+    background: rgba(138, 98, 64, 0.10);
+    border: 1px solid rgba(138, 98, 64, 0.22);
+  }
+  .ai-ba-toggle-btn-{{ ai_gen_id }} {
+    font-family: var(--font-body, 'JetBrains Mono', ui-monospace, monospace);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--char-soft, #5a4a3a);
+    background: transparent;
+    border: none;
+    border-radius: 999px;
+    padding: 0.5rem 1.4rem;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .ai-ba-toggle-btn-{{ ai_gen_id }}.is-active {
+    background: var(--color-walnut, #8a6240);
+    color: #f8f3ea;
+  }
 {% endstyle %}
 
 {% if block.settings.heading != blank or block.settings.subtitle != blank %}
@@ -190,8 +219,34 @@
   </div>
 {% endif %}
 
+{%- liquid
+  assign f_before = block.settings.before_image | image_url: width: 2000
+  assign f_after  = block.settings.after_image  | image_url: width: 2000
+  if block.settings.before_image_male != blank
+    assign m_before = block.settings.before_image_male | image_url: width: 2000
+  else
+    assign m_before = 'before-after-male-before.jpg' | asset_url
+  endif
+  if block.settings.after_image_male != blank
+    assign m_after = block.settings.after_image_male | image_url: width: 2000
+  else
+    assign m_after = 'before-after-male-after.jpg' | asset_url
+  endif
+-%}
+
+{% if block.settings.show_toggle %}
+  <div class="ai-before-after-toggle-{{ ai_gen_id }}" role="tablist" aria-label="Choose hair type">
+    <button class="ai-ba-toggle-btn-{{ ai_gen_id }} is-active" data-ba-variant="female" type="button" role="tab" aria-selected="true">{{ block.settings.female_label | default: 'Women' }}</button>
+    <button class="ai-ba-toggle-btn-{{ ai_gen_id }}" data-ba-variant="male" type="button" role="tab" aria-selected="false">{{ block.settings.male_label | default: 'Men' }}</button>
+  </div>
+{% endif %}
+
 <before-after-slider-{{ ai_gen_id }}
   class="ai-before-after-{{ ai_gen_id }}"
+  data-f-before="{{ f_before }}"
+  data-f-after="{{ f_after }}"
+  data-m-before="{{ m_before }}"
+  data-m-after="{{ m_after }}"
   {{ block.shopify_attributes }}
 >
   <div class="ai-before-after-container-{{ ai_gen_id }}">
