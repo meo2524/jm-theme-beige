@@ -13,7 +13,7 @@
 
 {%- liquid
   assign eyebrow = section.settings.eyebrow | default: 'Triple-action repair'
-  assign heading = section.settings.heading | default: 'Revitalizing repair, root to tip.'
+  assign heading = section.settings.heading | default: 'Repair and straighten, in one.'
   assign lede    = section.settings.lede
   assign image   = section.settings.image
   assign caption = section.settings.image_caption
@@ -285,7 +285,7 @@
   "settings": [
     { "type": "header", "content": "Header" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Triple-action repair" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Revitalizing repair, root to tip." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Repair and straighten, in one." },
     { "type": "textarea", "id": "lede", "label": "Intro paragraph", "default": "One rinse-out treatment that hydrates, smooths and rebuilds damaged hair from the inside out." },
     { "type": "header", "content": "Media" },
     { "type": "image_picker", "id": "image", "label": "Image (portrait 4:5 works best)" },
@@ -309,7 +309,7 @@
       "name": "Repair Benefits",
       "blocks": [
         { "type": "benefit", "settings": { "label": "Nourishing", "description": "Deeply penetrates to hydrate, lifting dryness and dullness." } },
-        { "type": "benefit", "settings": { "label": "Smoothness", "description": "Tames frizz and split ends for a sleek, silky finish." } },
+        { "type": "benefit", "settings": { "label": "Smoothness", "description": "Smooths and relaxes frizz for a visibly straighter, silky finish." } },
         { "type": "benefit", "settings": { "label": "Strengthening", "description": "Fills the gaps in damaged hair, reducing breakage and fragility." } }
       ]
     }

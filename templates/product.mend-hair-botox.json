@@ -13,7 +13,7 @@
       "type": "main-product",
       "settings": {
         "show_size_guide": false,
-        "eyebrow_text": "Hair Treatment",
+        "eyebrow_text": "Repair + straighten",
         "model_badge": "",
         "benefits_list": "",
         "blurb_heading": "",
@@ -214,7 +214,7 @@
           "type": "benefit",
           "settings": {
             "label": "Smoothness",
-            "description": "Tames frizz and split ends for a sleek, silky finish."
+            "description": "Smooths and relaxes frizz for a visibly straighter, silky finish."
           }
         },
         "rb3": {
@@ -232,7 +232,7 @@
       ],
       "settings": {
         "eyebrow": "Triple-action repair",
-        "heading": "Revitalizing repair, root to tip.",
+        "heading": "Repair and straighten, in one.",
         "lede": "One rinse-out treatment that hydrates, smooths and rebuilds damaged hair from the inside out.",
         "image_caption": "",
         "bg_color": "#f5efe6"
