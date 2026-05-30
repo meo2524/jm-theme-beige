@@ -76,7 +76,7 @@
             "corner_styling": "square",
             "header_text_color": "#000000",
             "text_color": "#000000",
-            "card_color": "#F9F9F9",
+            "card_color": "#f9f9f9",
             "stars_color": "",
             "arrows_color": "#000000",
             "transition_speed": 5,
@@ -102,30 +102,31 @@
             "heading_size": 36,
             "subtitle_size": 16,
             "heading_font": "assistant_n4",
-            "heading_color": "#2D2D2D",
-            "subtitle_color": "#7A8471",
+            "heading_color": "#2d2d2d",
+            "subtitle_color": "#7a8471",
             "desktop_width_percent": 100,
+            "max_width": 1200,
             "cards_per_row_desktop": 3,
             "card_gap": 20,
             "section_padding": 40,
-            "background_color": "#F2EDE4",
-            "card_background": "#FFFFFF",
+            "background_color": "#f2ede4",
+            "card_background": "#ffffff",
             "card_border_radius": 12,
             "card_shadow": "0 2px 8px rgba(0,0,0,0.1)",
             "card_padding": 20,
             "media_aspect_ratio": 100,
             "show_rating": true,
-            "star_color": "#FFD700",
-            "star_empty_color": "#E0E0E0",
+            "star_color": "#ffd700",
+            "star_empty_color": "#e0e0e0",
             "review_text_size": 14,
-            "review_text_color": "#2D2D2D",
+            "review_text_color": "#2d2d2d",
             "author_text_size": 13,
-            "author_text_color": "#7A8471",
-            "button_background": "#2D2D2D",
-            "button_hover_background": "#8A6240",
-            "button_icon_color": "#FFFFFF",
-            "dot_color": "#D9C5B2",
-            "dot_active_color": "#2D2D2D",
+            "author_text_color": "#7a8471",
+            "button_background": "#2d2d2d",
+            "button_hover_background": "#8a6240",
+            "button_icon_color": "#ffffff",
+            "dot_color": "#d9c5b2",
+            "dot_active_color": "#2d2d2d",
             "review_1_media_type": "image",
             "review_1_image": "shopify://shop_images/A028f0836fdd94950a67381f461d94d90H.avif",
             "review_1_video": "",
@@ -168,8 +169,15 @@
         "ai_gen_block_21aa88f_cqqWjf": {
           "type": "ai_gen_block_21aa88f",
           "settings": {
+            "heading": "See the difference",
+            "subtitle": "One treatment. Visibly smoother, healthier-looking hair.",
             "before_image": "shopify://shop_images/hf_20260528_085904_8224848f-c933-47a9-8116-41ee0195472f.png",
             "after_image": "shopify://shop_images/hf_20260528_085924_c3132d6e-8acf-4fba-9b50-90b61b9609ec.png",
+            "show_toggle": true,
+            "female_label": "Women",
+            "male_label": "Men",
+            "before_image_male": "shopify://shop_images/before-after-male-before.jpg",
+            "after_image_male": "shopify://shop_images/before-after-male-after.jpg",
             "desktop_width_percent": 50,
             "border_radius": 20,
             "before_label": "Before",
@@ -188,8 +196,7 @@
             "handle_color": "#f2ede4",
             "handle_border_color": "#2d2d2d",
             "handle_border_width": 2,
-            "handle_icon_color": "#2d2d2d",
-            "show_toggle": true
+            "handle_icon_color": "#2d2d2d"
           },
           "blocks": {}
         }
@@ -317,6 +324,35 @@
         "bg_color": "#f8f3ea"
       }
     },
+    "us_vs_them": {
+      "type": "us-vs-them",
+      "settings": {
+        "eyebrow": "Why Mend",
+        "heading": "Mend vs. the rest.",
+        "subtext": "Salon keratin straightens but damages. Ordinary masks repair but don't straighten. Mend does both — in one rinse-out treatment.",
+        "us_label": "Mend Hair Botox",
+        "them_label": "Other masks",
+        "bg_color": "#f8f3ea",
+        "row_1_feature": "Repairs AND straightens",
+        "row_1_us": "Both — in one rinse-out mask",
+        "row_1_them": "Repair or smoothing — not both",
+        "row_2_feature": "Rebuilds from within",
+        "row_2_us": "Keratin, collagen & peptides repair the strand",
+        "row_2_them": "Surface coat that washes out",
+        "row_3_feature": "No formaldehyde or flat-iron",
+        "row_3_us": "Gentle rinse-out — no fumes or heat",
+        "row_3_them": "Salon keratin uses both",
+        "row_4_feature": "Treatments per box",
+        "row_4_us": "20 single-use sachets",
+        "row_4_them": "3–5 — dry out fast",
+        "row_5_feature": "Risk-free trial",
+        "row_5_us": "30-day money-back guarantee",
+        "row_5_them": "No returns on imports",
+        "row_6_feature": "Support & shipping",
+        "row_6_us": "Real support · fast, tracked",
+        "row_6_them": "Faceless dropship · slow"
+      }
+    },
     "17799622903d320805": {
       "type": "_blocks",
       "settings": {}
@@ -384,13 +420,6 @@
             "answer": "<p>A repair complex of hydrolyzed keratin, collagen and Acetyl Hexapeptide-8, plus biotin, camellia seed oil, ginseng root extract and lactic acid — chosen to rebuild damaged strands, lock in moisture and smooth the cuticle.</p>"
           }
         },
-        "faq_item_colour": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Is it safe for colored or chemically-treated hair?",
-            "answer": "<p>Yes. It is gentle enough for color-treated, bleached and previously keratin-treated hair &mdash; and damaged, over-processed hair is exactly what it is made for. If your skin is sensitive, patch-test first.</p>"
-          }
-        },
         "faq_item_results": {
           "type": "faq_item",
           "settings": {
@@ -413,7 +442,6 @@
         "faq_item_box20",
         "faq_item_safe",
         "faq_item_ingr",
-        "faq_item_color",
         "faq_item_results",
         "faq_item_ship"
       ],
@@ -423,10 +451,6 @@
         "heading": "Hair Botox, answered.",
         "subheading": ""
       }
-    },
-    "us_vs_them": {
-      "type": "us-vs-them",
-      "settings": {}
     }
   },
   "order": [
