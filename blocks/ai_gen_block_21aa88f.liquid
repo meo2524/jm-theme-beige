@@ -329,7 +329,39 @@
         this.beforeLabel = this.querySelector('.ai-before-after-label-before-{{ ai_gen_id }}');
         this.afterLabel = this.querySelector('.ai-before-after-label-after-{{ ai_gen_id }}');
 
+        var imgs = this.querySelectorAll('.ai-before-after-image-{{ ai_gen_id }}');
+        this.beforeImg = imgs[0];
+        this.afterImg = imgs[1];
+
         this.setupEventListeners();
+        this.setupToggle();
+      }
+
+      setupToggle() {
+        var self = this;
+        if (!this.parentNode) return;
+        var buttons = this.parentNode.querySelectorAll('.ai-ba-toggle-btn-{{ ai_gen_id }}');
+        if (!buttons.length) return;
+        var sets = {
+          female: { before: this.getAttribute('data-f-before'), after: this.getAttribute('data-f-after') },
+          male:   { before: this.getAttribute('data-m-before'), after: this.getAttribute('data-m-after') }
+        };
+        buttons.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var set = sets[btn.getAttribute('data-ba-variant')];
+            if (!set) return;
+            if (self.beforeImg && set.before) self.beforeImg.src = set.before;
+            if (self.afterImg && set.after) self.afterImg.src = set.after;
+            buttons.forEach(function (b) {
+              var on = b === btn;
+              b.classList.toggle('is-active', on);
+              b.setAttribute('aria-selected', on ? 'true' : 'false');
+            });
+            self.currentPosition = 50;
+            self.updatePosition(50);
+            self.updateLabels(50);
+          });
+        });
       }
 
       setupEventListeners() {
@@ -429,6 +461,38 @@
       "type": "image_picker",
       "id": "after_image",
       "label": "After image"
+    },
+    {
+      "type": "header",
+      "content": "Women / Men toggle"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_toggle",
+      "label": "Show Women / Men toggle",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "female_label",
+      "label": "First toggle label",
+      "default": "Women"
+    },
+    {
+      "type": "text",
+      "id": "male_label",
+      "label": "Second toggle label",
+      "default": "Men"
+    },
+    {
+      "type": "image_picker",
+      "id": "before_image_male",
+      "label": "Men — before (falls back to bundled)"
+    },
+    {
+      "type": "image_picker",
+      "id": "after_image_male",
+      "label": "Men — after (falls back to bundled)"
     },
     {
       "type": "range",
