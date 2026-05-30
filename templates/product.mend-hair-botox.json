@@ -188,7 +188,8 @@
             "handle_color": "#f2ede4",
             "handle_border_color": "#2d2d2d",
             "handle_border_width": 2,
-            "handle_icon_color": "#2d2d2d"
+            "handle_icon_color": "#2d2d2d",
+            "show_toggle": true
           },
           "blocks": {}
         }
