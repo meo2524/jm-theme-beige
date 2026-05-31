@@ -23,7 +23,13 @@
         "type": "announcement-bar",
         "settings": {
           "show": true,
-          "speed": 20
+          "speed": 20,
+          "item_1": "Free shipping on orders over $60",
+          "item_2": "30-day money-back guarantee",
+          "item_3": "Loved by 30,000+ Menders worldwide",
+          "item_4": "Fast, tracked delivery",
+          "item_5": "Easy, hassle-free returns",
+          "item_6": "Secure checkout"
         }
       },
       "header": {
@@ -57,7 +63,7 @@
       "promo-banner": {
         "type": "promo-banner",
         "settings": {
-          "show": true,
+          "show": false,
           "text": "LIMITED OFFER · FREE SHIPPING · 30-DAY TRIAL",
           "link_url": "",
           "bg_start": "#c0392b",
