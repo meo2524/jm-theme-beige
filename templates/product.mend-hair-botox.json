@@ -357,24 +357,6 @@
       "type": "_blocks",
       "settings": {}
     },
-    "1779959625dfb75552": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_Ej7xte": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_Ej7xte"
-      ],
-      "settings": {}
-    },
     "product_faq_nzQWrk": {
       "type": "product-faq",
       "blocks": {
@@ -448,9 +430,27 @@
       "name": "Product FAQ",
       "settings": {
         "eyebrow": "FAQ",
-        "heading": "Hair Botox, answered.",
+        "heading": "Mend Botox, answered.",
         "subheading": ""
       }
+    },
+    "1779959625dfb75552": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_Ej7xte": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_Ej7xte"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -462,7 +462,7 @@
     "botanical_extracts",
     "us_vs_them",
     "17799622903d320805",
-    "1779959625dfb75552",
-    "product_faq_nzQWrk"
+    "product_faq_nzQWrk",
+    "1779959625dfb75552"
   ]
 }
