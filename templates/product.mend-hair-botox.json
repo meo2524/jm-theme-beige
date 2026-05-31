@@ -168,6 +168,7 @@
         },
         "ai_gen_block_21aa88f_cqqWjf": {
           "type": "ai_gen_block_21aa88f",
+          "disabled": true,
           "settings": {
             "heading": "See the difference",
             "subtitle": "One treatment. Visibly smoother, healthier-looking hair.",
@@ -437,15 +438,15 @@
             "label_padding_vertical": 8,
             "label_padding_horizontal": 16,
             "label_border_radius": 4,
-            "label_bg_color": "#2D2D2D",
-            "label_text_color": "#F2EDE4",
+            "label_bg_color": "#2d2d2d",
+            "label_text_color": "#f2ede4",
             "divider_width": 4,
-            "divider_color": "#F2EDE4",
+            "divider_color": "#f2ede4",
             "handle_size": 50,
-            "handle_color": "#F2EDE4",
-            "handle_border_color": "#2D2D2D",
+            "handle_color": "#f2ede4",
+            "handle_border_color": "#2d2d2d",
             "handle_border_width": 2,
-            "handle_icon_color": "#2D2D2D"
+            "handle_icon_color": "#2d2d2d"
           },
           "blocks": {}
         }
@@ -453,7 +454,6 @@
       "block_order": [
         "ai_gen_block_21aa88f_BP7jbR"
       ],
-      "disabled": true,
       "name": "Before and after slider",
       "settings": {}
     },
@@ -561,9 +561,9 @@
     "transformation_timeline",
     "ingredient_core",
     "botanical_extracts",
+    "blocks_h93VL9",
     "us_vs_them",
     "17799622903d320805",
-    "blocks_h93VL9",
     "product_faq_nzQWrk",
     "1779959625dfb75552"
   ]
