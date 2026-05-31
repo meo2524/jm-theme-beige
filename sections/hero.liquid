@@ -44,7 +44,8 @@
     </div>
   {%- endif -%}
 
-  <!-- Ring video -->
+  <!-- Ring video (only when no background image is set) -->
+  {%- if bg_image == blank -%}
   <div class="hero__ring-stage" aria-hidden="true">
     <video
       class="hero__ring-video"
@@ -57,6 +58,7 @@
       data-src-sd="https://cdn.shopify.com/videos/c/vp/ee10541771864ebc970ce82f9b7359bb/ee10541771864ebc970ce82f9b7359bb.SD-480p-1.5Mbps-83245518.mp4"
     ></video>
   </div>
+  {%- endif -%}
 
 
   <!-- Content -->

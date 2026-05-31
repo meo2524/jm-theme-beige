@@ -12,13 +12,14 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "eyebrow": "Meet the N°01.",
-        "heading": "Know how",
-        "heading_em": "your body",
-        "heading_2": "is doing.",
-        "subtext": "Wear it all day and night. It tracks your sleep, heart, and steps. Each morning, you get clear answers. No monthly fees. Ever.",
-        "cta_label": "Get the Smart Ring",
-        "cta_url": "/products/smart-ring",
+        "eyebrow": "Mend & Co",
+        "heading": "Buy it once.",
+        "heading_em": "Keep it",
+        "heading_2": "for good.",
+        "subtext": "Mend & Co makes simple, honest tools you buy once and keep — built to fix the things you've learned to live with. No subscriptions, no gimmicks. Starting with our Hair Botox.",
+        "cta_label": "Shop the Hair Botox",
+        "cta_url": "/products/mend-hair-botox",
+        "bg_image": "shopify://shop_images/hf_20260528_085924_c3132d6e-8acf-4fba-9b50-90b61b9609ec.png",
         "hero_video_url": "",
         "show_scroll_cue": true
       }
@@ -26,82 +27,56 @@
     "stats-strip": {
       "type": "stats-strip",
       "settings": {
-        "stat_1_value": "5–7 days",
-        "stat_1_label": "Battery life",
-        "stat_2_value": "Swim-safe",
-        "stat_2_label": "Pool, ocean, sauna",
-        "stat_3_value": "$0",
-        "stat_3_label": "No fees ever"
+        "stat_1_value": "Buy once",
+        "stat_1_label": "No subscriptions, ever",
+        "stat_2_value": "30-day",
+        "stat_2_label": "Money-back guarantee",
+        "stat_3_value": "24-hour",
+        "stat_3_label": "Fast, tracked dispatch"
       }
     },
     "smart_band_spotlight": {
       "type": "product-feature",
       "blocks": {
-        "bullet_sleep": {
-          "type": "bullet",
-          "settings": {
-            "icon": "moon",
-            "text": "Sleep — light, deep, dream sleep, and every time you woke up.",
-            "caption": ""
-          }
-        },
-        "bullet_heart": {
-          "type": "bullet",
-          "settings": {
-            "icon": "heart-alert",
-            "text": "Heart rate tracked weekly. Catch stress or illness early.",
-            "caption": ""
-          }
-        },
-        "bullet_recovery": {
-          "type": "bullet",
-          "settings": {
-            "icon": "gauge",
-            "text": "One daily score. Should you push hard or rest today?",
-            "caption": ""
-          }
-        },
-        "bullet_activity": {
-          "type": "bullet",
-          "settings": {
-            "icon": "pulse-night",
-            "text": "Heart rate tracked all night. Even while you sleep.",
-            "caption": ""
-          }
-        },
-        "bullet_temp": {
-          "type": "bullet",
-          "settings": {
-            "icon": "temp-wave",
-            "text": "Body temp tracked overnight. Know before you feel sick.",
-            "caption": ""
-          }
-        },
-        "bullet_sub": {
+        "promise_keep": {
           "type": "bullet",
           "settings": {
             "icon": "infinity",
-            "text": "No monthly fees. Ever. Your data is yours.",
+            "text": "Buy once, keep it. No subscriptions or monthly fees — ever.",
+            "caption": ""
+          }
+        },
+        "promise_guarantee": {
+          "type": "bullet",
+          "settings": {
+            "icon": "gauge",
+            "text": "See real results, or your money back within 30 days.",
+            "caption": ""
+          }
+        },
+        "promise_support": {
+          "type": "bullet",
+          "settings": {
+            "icon": "heart-alert",
+            "text": "Real human support — we actually answer. Fast, tracked shipping.",
             "caption": ""
           }
         }
       },
       "block_order": [
-        "bullet_sleep",
-        "bullet_heart",
-        "bullet_recovery",
-        "bullet_activity",
-        "bullet_temp",
-        "bullet_sub"
+        "promise_keep",
+        "promise_guarantee",
+        "promise_support"
       ],
       "settings": {
-        "video_url": "https://cdn.shopify.com/videos/c/vp/f12216a2ff264544862d886fee41129a/f12216a2ff264544862d886fee41129a.HD-1080p-4.8Mbps-83316595.mp4",
-        "video_position_y": 25,
-        "eyebrow": "Now available",
-        "heading": "More than any watch can do.",
-        "body": "Your watch counts steps. The N°01 does much more. It tracks your heart, breath, and body heat all day and night. Each morning, it tells you: am I rested? Am I ready to work out?",
-        "cta_label": "Get the Smart Ring",
-        "cta_url": "/products/smart-ring",
+        "image": "shopify://shop_images/hf_20260531_024557_a917625a-d3bf-4c0f-8b57-ff7acdeaba9e.png",
+        "video_url": "",
+        "video_position_y": 50,
+        "eyebrow": "Featured",
+        "heading": "Repair and straighten, in one.",
+        "body": "Our Hair Botox rebuilds and smooths damaged hair in a single rinse-out treatment — keratin, collagen and peptides, no salon and no heat. Like everything we make: buy it once, and it just works.",
+        "cta_label": "Shop the Hair Botox",
+        "cta_url": "/products/mend-hair-botox",
         "reverse": false
       }
     },
@@ -112,7 +87,7 @@
         "heading_pre": "Made to",
         "heading_em": "help you",
         "heading_post": "feel better.",
-        "paragraph_1": "Mend & Co makes tools you buy once and keep. The N°01 Smart Ring is our first. It helps you track your health every day. More tools are coming. Each one is made to fix something most people ignore.",
+        "paragraph_1": "Mend & Co makes tools you buy once and keep. Each one is built to fix something most people have just learned to live with — damaged hair, restless nights, the small things that wear you down. Simple, honest, and made to last.",
         "paragraph_2": "",
         "link_label": "About Mend & Co →",
         "link_url": "/pages/about-us",
@@ -127,7 +102,7 @@
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "disabled": true,
           "settings": {
-            "product": "smart-band",
+            "product": "mend-hair-botox",
             "review_data": "real_data",
             "max_width": 900
           }
