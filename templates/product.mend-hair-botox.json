@@ -254,6 +254,7 @@
           "settings": {
             "day_label": "Day 01",
             "tag": "First treatment",
+            "title": "",
             "body": "One rinse-out and hair already feels softer, smoother and easier to manage. Frizz visibly calmer."
           }
         },
@@ -262,6 +263,7 @@
           "settings": {
             "day_label": "Day 07",
             "tag": "2–3 treatments in",
+            "title": "",
             "body": "Strands feel stronger and the comb glides — less snagging, with a healthier natural shine starting to show."
           }
         },
@@ -270,6 +272,7 @@
           "settings": {
             "day_label": "Day 13",
             "tag": "Halfway",
+            "title": "",
             "body": "Smoothing builds. Hair falls straighter and styles faster, with less heat needed."
           }
         },
@@ -278,6 +281,7 @@
           "settings": {
             "day_label": "Day 30",
             "tag": "Full box",
+            "title": "",
             "body": "Repaired, sleek, healthy-looking hair — the look you keep up with ongoing use."
           }
         }
@@ -408,6 +412,51 @@
       "type": "_blocks",
       "settings": {}
     },
+    "blocks_h93VL9": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_21aa88f_BP7jbR": {
+          "type": "ai_gen_block_21aa88f",
+          "settings": {
+            "heading": "See the difference",
+            "subtitle": "One treatment. Visibly smoother, healthier-looking hair.",
+            "before_image": "shopify://shop_images/hf_20260528_085428_61708b2d-487e-47a0-8286-3977b6d11fe8.png",
+            "after_image": "shopify://shop_images/hf_20260528_084802_ebe6efa1-22c7-44a8-88d4-b04c76eac2be.png",
+            "show_toggle": true,
+            "female_label": "Women",
+            "male_label": "Men",
+            "before_image_male": "shopify://shop_images/before-after-male-before.jpg",
+            "after_image_male": "shopify://shop_images/before-after-male-after.jpg",
+            "desktop_width_percent": 50,
+            "border_radius": 0,
+            "before_label": "Before",
+            "after_label": "After",
+            "label_font_size": 14,
+            "label_position_top": 20,
+            "label_position_side": 20,
+            "label_padding_vertical": 8,
+            "label_padding_horizontal": 16,
+            "label_border_radius": 4,
+            "label_bg_color": "#2D2D2D",
+            "label_text_color": "#F2EDE4",
+            "divider_width": 4,
+            "divider_color": "#F2EDE4",
+            "handle_size": 50,
+            "handle_color": "#F2EDE4",
+            "handle_border_color": "#2D2D2D",
+            "handle_border_width": 2,
+            "handle_icon_color": "#2D2D2D"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_21aa88f_BP7jbR"
+      ],
+      "disabled": true,
+      "name": "Before and after slider",
+      "settings": {}
+    },
     "product_faq_nzQWrk": {
       "type": "product-faq",
       "blocks": {
@@ -514,6 +563,7 @@
     "botanical_extracts",
     "us_vs_them",
     "17799622903d320805",
+    "blocks_h93VL9",
     "product_faq_nzQWrk",
     "1779959625dfb75552"
   ]
