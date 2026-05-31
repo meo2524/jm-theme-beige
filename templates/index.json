@@ -27,8 +27,8 @@
     "stats-strip": {
       "type": "stats-strip",
       "settings": {
-        "stat_1_value": "Buy once",
-        "stat_1_label": "No subscriptions, ever",
+        "stat_1_value": "Subscribe & save",
+        "stat_1_label": "10% off, cancel anytime",
         "stat_2_value": "30-day",
         "stat_2_label": "Money-back guarantee",
         "stat_3_value": "24-hour",
