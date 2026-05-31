@@ -442,7 +442,7 @@
 
         this.track.addEventListener('touchstart', this.touchStart.bind(this));
         this.track.addEventListener('touchend', this.touchEnd.bind(this));
-        this.track.addEventListener('touchmove', this.touchMove.bind(this));
+        this.track.addEventListener('touchmove', this.touchMove.bind(this), { passive: false });
 
         this.track.addEventListener('mousedown', this.touchStart.bind(this));
         this.track.addEventListener('mouseup', this.touchEnd.bind(this));
@@ -493,16 +493,35 @@
 
       touchStart(event) {
         this.isDragging = true;
+        this.axisLock = null;
         this.startPos = this.getPositionX(event);
+        this.startPosY = this.getPositionY(event);
         this.animationID = requestAnimationFrame(this.animation.bind(this));
         this.track.style.cursor = 'grabbing';
       }
 
       touchMove(event) {
-        if (this.isDragging) {
-          const currentPosition = this.getPositionX(event);
-          this.currentTranslate = this.prevTranslate + currentPosition - this.startPos;
+        if (!this.isDragging) return;
+        const currentPosition = this.getPositionX(event);
+
+        // Lock to one axis on the first meaningful touch move so a vertical
+        // page scroll never drags the carousel (and vice versa).
+        if (this.axisLock === null && event.type.includes('touch')) {
+          const dx = Math.abs(currentPosition - this.startPos);
+          const dy = Math.abs(this.getPositionY(event) - this.startPosY);
+          if (dx < 8 && dy < 8) return; // below threshold — wait for intent
+          this.axisLock = dx > dy ? 'x' : 'y';
+          if (this.axisLock === 'y') {
+            // vertical intent: release the carousel, let the page scroll
+            this.isDragging = false;
+            cancelAnimationFrame(this.animationID);
+            return;
+          }
         }
+
+        // horizontal swipe (or mouse drag): drive the carousel, block page pan
+        if (event.cancelable) event.preventDefault();
+        this.currentTranslate = this.prevTranslate + currentPosition - this.startPos;
       }
 
       touchEnd() {
@@ -525,6 +544,10 @@
 
       getPositionX(event) {
         return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+      }
+
+      getPositionY(event) {
+        return event.type.includes('mouse') ? event.pageY : event.touches[0].clientY;
       }
 
       animation() {
