@@ -1,0 +1,375 @@
+{%- comment -%}
+  ──────────────────────────────────────────────────────────────────
+  sections/transformation-timeline.liquid
+  Mend & Co — Transformation Timeline (30-day usage journey)
+
+  A vertical, scroll-revealed "what to expect" timeline. A gold rail
+  fills downward as you scroll; each milestone (Day 01 → 30) reveals a
+  photo + day marker + one honest line.
+
+  HONEST FRAMING: this is "what to expect over 30 days", NOT one
+  person's literal before/after. Copy is hedged; imagery is an
+  illustrative, faceless lifestyle progression. No efficacy guarantees.
+
+  Reuses the theme reveal system (base.css §16 + motion.js) — no new JS.
+  Scroll-fill is pure CSS animation-timeline: view() with graceful
+  fallback. All copy & imagery are theme-editor settings/blocks.
+  ──────────────────────────────────────────────────────────────────
+{%- endcomment -%}
+
+{%- liquid
+  assign eyebrow = section.settings.eyebrow | default: 'The 30-day journey'
+  assign heading = section.settings.heading | default: 'What to expect, week by week'
+  assign lede    = section.settings.lede
+  assign bg      = section.settings.bg_color | default: '#f5efe6'
+  assign alt     = section.settings.layout
+-%}
+
+<section class="tl{% if alt == 'alternating' %} tl--alt{% endif %}" style="--tl-bg: {{ bg }};">
+  <div class="tl__inner">
+
+    <header class="tl__head">
+      {%- if eyebrow != blank -%}
+        <p class="tl__eyebrow" data-reveal data-reveal-delay="0">{{ eyebrow }}</p>
+      {%- endif -%}
+      {%- if heading != blank -%}
+        <h2 class="tl__heading" data-word-reveal>{{ heading }}</h2>
+      {%- endif -%}
+      {%- if lede != blank -%}
+        <p class="tl__lede" data-reveal data-reveal-delay="120">{{ lede }}</p>
+      {%- endif -%}
+    </header>
+
+    {%- if section.blocks.size > 0 -%}
+      <ol class="tl__nodes">
+        <span class="tl__rail" aria-hidden="true">
+          <span class="tl__rail-fill"></span>
+        </span>
+
+        {%- for block in section.blocks -%}
+          {%- assign delay = forloop.index0 | times: 80 -%}
+          {%- assign idx = forloop.index -%}
+          <li class="tl__node" data-reveal data-reveal-delay="{{ delay }}" {{ block.shopify_attributes }}>
+            <span class="tl__marker" aria-hidden="true"></span>
+
+            <div class="tl__row">
+              <figure class="tl__media">
+                {%- if block.settings.image != blank -%}
+                  <img
+                    class="tl__img"
+                    src="{{ block.settings.image | image_url: width: 720 }}"
+                    srcset="{{ block.settings.image | image_url: width: 360 }} 360w, {{ block.settings.image | image_url: width: 720 }} 720w"
+                    sizes="(max-width: 767px) 88vw, 30vw"
+                    alt="{{ block.settings.image.alt | default: block.settings.day_label | escape }}"
+                    width="{{ block.settings.image.width }}"
+                    height="{{ block.settings.image.height }}"
+                    loading="lazy"
+                  >
+                {%- else -%}
+                  {%- assign fallback = 'timeline-' | append: idx | append: '.jpg' -%}
+                  <img
+                    class="tl__img"
+                    src="{{ fallback | asset_url }}"
+                    alt="{{ block.settings.day_label | escape }}"
+                    loading="lazy"
+                  >
+                {%- endif -%}
+              </figure>
+
+              <div class="tl__body">
+                {%- if block.settings.day_label != blank -%}
+                  <p class="tl__day">{{ block.settings.day_label }}</p>
+                {%- endif -%}
+                {%- if block.settings.tag != blank -%}
+                  <p class="tl__tag">{{ block.settings.tag }}</p>
+                {%- endif -%}
+                {%- if block.settings.title != blank -%}
+                  <h3 class="tl__title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+                {%- if block.settings.body != blank -%}
+                  <p class="tl__copy">{{ block.settings.body }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    {%- endif -%}
+
+    {%- if section.settings.disclaimer != blank -%}
+      <p class="tl__disclaimer" data-reveal>{{ section.settings.disclaimer }}</p>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<style>
+  .tl {
+    background: var(--tl-bg, #f5efe6);
+    padding: clamp(4rem, 9vw, 7.5rem) 0;
+    overflow: hidden;
+  }
+  .tl__inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* ── header ───────────────────────────────────── */
+  .tl__head { max-width: 34ch; margin: 0 0 clamp(2.5rem, 6vw, 4rem); }
+  .tl__eyebrow {
+    font-family: var(--font-body, 'JetBrains Mono', monospace);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--color-walnut, #8a6240);
+    margin: 0 0 1rem;
+  }
+  .tl__heading {
+    font-family: var(--font-heading, 'JetBrains Mono', monospace);
+    font-size: clamp(1.8rem, 4vw, 2.85rem);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--color-black, #1f1d1a);
+    margin: 0 0 1rem;
+  }
+  .tl__lede {
+    font-family: var(--font-body, 'JetBrains Mono', monospace);
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--char-soft, #5a4a3a);
+    margin: 0;
+    max-width: 46ch;
+  }
+
+  /* ── timeline track ───────────────────────────── */
+  .tl__nodes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  /* the rail lives in the gutter of every node (24px column, centred at 11px) */
+  .tl__rail {
+    position: absolute;
+    top: 0.4rem;
+    bottom: 0.4rem;
+    left: 11px;
+    width: 1px;
+    background: rgba(138, 98, 64, 0.18);
+  }
+  .tl__rail-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--color-walnut, #8a6240);
+    transform: scaleY(0);
+    transform-origin: top center;
+  }
+
+  .tl__node {
+    position: relative;
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    column-gap: clamp(1.25rem, 3vw, 2.25rem);
+    padding: clamp(1.75rem, 4vw, 3rem) 0;
+  }
+
+  .tl__marker {
+    position: relative;
+    z-index: 1;
+    width: 13px;
+    height: 13px;
+    margin-top: 0.35rem;
+    border-radius: 50%;
+    background: var(--tl-bg, #f5efe6);
+    border: 1.5px solid var(--color-walnut, #8a6240);
+    box-shadow: 0 0 0 4px var(--tl-bg, #f5efe6);
+  }
+
+  /* node content: photo + copy side by side */
+  .tl__row {
+    display: grid;
+    grid-template-columns: minmax(0, 300px) 1fr;
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    align-items: center;
+  }
+  .tl--alt .tl__node:nth-child(even) .tl__row { direction: rtl; }
+  .tl--alt .tl__node:nth-child(even) .tl__row > * { direction: ltr; }
+
+  .tl__media {
+    margin: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(138, 98, 64, 0.30);
+    box-shadow: 0 18px 44px -28px rgba(31, 29, 26, 0.5);
+  }
+  .tl__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .tl__body { min-width: 0; }
+  .tl__day {
+    font-family: var(--font-heading, 'JetBrains Mono', monospace);
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-black, #1f1d1a);
+    margin: 0;
+    line-height: 1;
+  }
+  .tl__tag {
+    font-family: var(--font-body, 'JetBrains Mono', monospace);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--color-walnut, #8a6240);
+    margin: 0.7rem 0 0;
+  }
+  .tl__title {
+    font-family: var(--font-heading, 'JetBrains Mono', monospace);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--color-black, #1f1d1a);
+    margin: 0.9rem 0 0;
+  }
+  .tl__copy {
+    font-family: var(--font-body, 'JetBrains Mono', monospace);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--char-soft, #5a4a3a);
+    margin: 0.8rem 0 0;
+    max-width: 38ch;
+  }
+
+  .tl__disclaimer {
+    font-family: var(--font-body, 'JetBrains Mono', monospace);
+    font-size: 0.6875rem;
+    line-height: 1.6;
+    color: rgba(90, 74, 58, 0.7);
+    margin: clamp(2rem, 5vw, 3rem) 0 0;
+    padding-left: calc(24px + clamp(1.25rem, 3vw, 2.25rem));
+    max-width: 60ch;
+  }
+
+  /* ── mobile ───────────────────────────────────── */
+  @media (max-width: 767px) {
+    .tl__inner { padding: 0 1.25rem; }
+    .tl__node {
+      grid-template-columns: 20px 1fr;
+      column-gap: 1.1rem;
+      padding: 1.5rem 0;
+    }
+    .tl__rail { left: 9px; }
+    .tl__marker { width: 11px; height: 11px; }
+    .tl__row {
+      grid-template-columns: 1fr;
+      gap: 1.1rem;
+    }
+    .tl--alt .tl__node:nth-child(even) .tl__row { direction: ltr; }
+    .tl__img { aspect-ratio: 4 / 5; max-height: 60vh; }
+    .tl__disclaimer { padding-left: calc(20px + 1.1rem); }
+  }
+
+  /* ════════════════════════════════════════════════
+     Scroll-driven enhancement (progressive).
+     Rail fills + dots light up + nodes scrub in as you
+     scroll. Degrades to data-reveal where unsupported
+     or when reduced-motion is requested.
+     ════════════════════════════════════════════════ */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      /* rail fills across the whole track's pass through view */
+      .tl__rail-fill {
+        animation: tl-fill linear both;
+        animation-timeline: view();
+        animation-range: cover 8% cover 88%;
+      }
+      @keyframes tl-fill {
+        from { transform: scaleY(0); }
+        to   { transform: scaleY(1); }
+      }
+      /* each dot fills gold as it reaches the viewport middle */
+      .tl__marker {
+        animation: tl-dot linear both;
+        animation-timeline: view();
+        animation-range: entry 20% cover 45%;
+      }
+      @keyframes tl-dot {
+        from { background: var(--tl-bg, #f5efe6); transform: scale(0.85); }
+        to   { background: var(--color-walnut, #8a6240); transform: scale(1); }
+      }
+      /* each node rises + fades, scrubbed to scroll position */
+      .tl__node {
+        animation: tl-node-scrub linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 60%;
+      }
+      @keyframes tl-node-scrub {
+        from { opacity: 0; transform: translateY(34px); }
+        to   { opacity: 1; transform: none; }
+      }
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Transformation Timeline",
+  "tag": "section",
+  "class": "section-transformation-timeline",
+  "settings": [
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The 30-day journey" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What to expect, week by week" },
+    { "type": "textarea", "id": "lede", "label": "Intro paragraph", "default": "Used 2–3 times a week, here's how hair tends to look and feel as you move through your first box." },
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Photo arrangement",
+      "options": [
+        { "value": "single", "label": "Consistent (photo left)" },
+        { "value": "alternating", "label": "Alternating (zig-zag)" }
+      ],
+      "default": "single"
+    },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#f5efe6" },
+    { "type": "header", "content": "Compliance" },
+    { "type": "textarea", "id": "disclaimer", "label": "Disclaimer", "default": "Illustrative of a typical usage journey. Individual results vary with hair type and routine." }
+  ],
+  "blocks": [
+    {
+      "type": "milestone",
+      "name": "Milestone",
+      "settings": [
+        { "type": "text", "id": "day_label", "label": "Day label", "default": "Day 01" },
+        { "type": "text", "id": "tag", "label": "Stage tag", "default": "First treatment" },
+        { "type": "text", "id": "title", "label": "Title (optional)" },
+        { "type": "textarea", "id": "body", "label": "What to expect", "default": "One rinse-out and hair already feels softer, smoother and easier to manage." },
+        { "type": "image_picker", "id": "image", "label": "Photo (portrait 4:5)" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Transformation Timeline",
+      "blocks": [
+        { "type": "milestone", "settings": { "day_label": "Day 01", "tag": "First treatment", "body": "One rinse-out and hair already feels softer, smoother and easier to manage. Frizz visibly calmer." } },
+        { "type": "milestone", "settings": { "day_label": "Day 07", "tag": "2–3 treatments in", "body": "Strands feel stronger and the comb glides — less snagging, with a healthier natural shine starting to show." } },
+        { "type": "milestone", "settings": { "day_label": "Day 13", "tag": "Halfway", "body": "Smoothing builds. Hair falls straighter and styles faster, with less heat needed." } },
+        { "type": "milestone", "settings": { "day_label": "Day 30", "tag": "Full box", "body": "Repaired, sleek, healthy-looking hair — the look you keep up with ongoing use." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

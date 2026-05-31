@@ -246,6 +246,57 @@
         "bg_color": "#f5efe6"
       }
     },
+    "transformation_timeline": {
+      "type": "transformation-timeline",
+      "blocks": {
+        "tl1": {
+          "type": "milestone",
+          "settings": {
+            "day_label": "Day 01",
+            "tag": "First treatment",
+            "body": "One rinse-out and hair already feels softer, smoother and easier to manage. Frizz visibly calmer."
+          }
+        },
+        "tl2": {
+          "type": "milestone",
+          "settings": {
+            "day_label": "Day 07",
+            "tag": "2–3 treatments in",
+            "body": "Strands feel stronger and the comb glides — less snagging, with a healthier natural shine starting to show."
+          }
+        },
+        "tl3": {
+          "type": "milestone",
+          "settings": {
+            "day_label": "Day 13",
+            "tag": "Halfway",
+            "body": "Smoothing builds. Hair falls straighter and styles faster, with less heat needed."
+          }
+        },
+        "tl4": {
+          "type": "milestone",
+          "settings": {
+            "day_label": "Day 30",
+            "tag": "Full box",
+            "body": "Repaired, sleek, healthy-looking hair — the look you keep up with ongoing use."
+          }
+        }
+      },
+      "block_order": [
+        "tl1",
+        "tl2",
+        "tl3",
+        "tl4"
+      ],
+      "settings": {
+        "eyebrow": "The 30-day journey",
+        "heading": "What to expect, week by week",
+        "lede": "Used 2–3 times a week, here's how hair tends to look and feel as you move through your first box.",
+        "layout": "single",
+        "bg_color": "#f5efe6",
+        "disclaimer": "Illustrative of a typical usage journey. Individual results vary with hair type and routine."
+      }
+    },
     "ingredient_core": {
       "type": "ingredient-core",
       "blocks": {
@@ -458,6 +509,7 @@
     "1780057559154df1e3",
     "blocks_ajDGzb",
     "repair_benefits",
+    "transformation_timeline",
     "ingredient_core",
     "botanical_extracts",
     "us_vs_them",
