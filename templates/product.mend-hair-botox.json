@@ -23,7 +23,7 @@
         "accordion_label_1": "Why it's different",
         "accordion_label_2": "What you'll notice",
         "accordion_label_3": "How to use it",
-        "accordion_whats-included": "<p>Most masks make you choose: <em>repair</em> your hair, or <em>smooth and straighten</em> it. Mend Hair Botox does both in one rinse-out treatment &mdash; hydrolyzed keratin, collagen and Acetyl Hexapeptide-8 rebuild damaged strands while relaxing frizz for a visibly straighter, glassier finish.</p><ul><li><strong>Repair + straighten in one.</strong> Two results from a single 5-minute mask &mdash; no separate treatments.</li><li><strong>No formaldehyde, no flat-iron, no salon.</strong> The smoothing a salon keratin gives you, without the fumes or heat damage.</li><li><strong>20 single-use treatments per box</strong> &mdash; backed by a 30-day money-back guarantee.</li></ul>",
+        "accordion_whats-included": "<p>Most masks make you choose: <em>repair</em> your hair, or <em>smooth and straighten</em> it. Mend Hair Botox does both in one rinse-out treatment — hydrolyzed keratin, collagen and Acetyl Hexapeptide-8 rebuild damaged strands while relaxing frizz for a visibly straighter, glassier finish.</p><ul><li><strong>Repair + straighten in one.</strong> Two results from a single 5-minute mask — no separate treatments.</li><li><strong>No formaldehyde, no flat-iron, no salon.</strong> The smoothing a salon keratin gives you, without the fumes or heat damage.</li><li><strong>20 single-use treatments per box</strong> — backed by a 30-day money-back guarantee.</li></ul>",
         "accordion_how-it-works": "<ul><li><strong>Less breakage, fuller-looking hair.</strong> When strands stop snapping mid-length, hair looks thicker and healthier from root to tip.</li><li><strong>Frizz tamed, shine restored.</strong> A smooth, glass-like finish from the very first treatment.</li><li><strong>Hydration that lasts.</strong> Dry, brittle, lifeless hair brought back to life — and the results build for weeks.</li></ul>",
         "accordion_ingredients-certifications": "<ol><li>After shampooing, towel-dry until your hair stops dripping.</li><li>Work a generous amount through the mid-lengths to the ends — skip the scalp.</li><li>Leave on for 5–20 minutes, then rinse thoroughly.</li><li>Use 2–3 times a week while repairing, then weekly to maintain. One sachet per treatment.</li></ol>",
         "rating_show": true,
@@ -380,39 +380,6 @@
         "bg_color": "#f8f3ea"
       }
     },
-    "us_vs_them": {
-      "type": "us-vs-them",
-      "settings": {
-        "eyebrow": "Why Mend",
-        "heading": "Mend vs. the rest.",
-        "subtext": "Salon keratin straightens but damages. Ordinary masks repair but don't straighten. Mend does both — in one rinse-out treatment.",
-        "us_label": "Mend Hair Botox",
-        "them_label": "Other masks",
-        "bg_color": "#f8f3ea",
-        "row_1_feature": "Repairs AND straightens",
-        "row_1_us": "Both — in one rinse-out mask",
-        "row_1_them": "Repair or smoothing — not both",
-        "row_2_feature": "Rebuilds from within",
-        "row_2_us": "Keratin, collagen & peptides repair the strand",
-        "row_2_them": "Surface coat that washes out",
-        "row_3_feature": "No formaldehyde or flat-iron",
-        "row_3_us": "Gentle rinse-out — no fumes or heat",
-        "row_3_them": "Salon keratin uses both",
-        "row_4_feature": "Treatments per box",
-        "row_4_us": "20 single-use sachets",
-        "row_4_them": "3–5 — dry out fast",
-        "row_5_feature": "Risk-free trial",
-        "row_5_us": "30-day money-back guarantee",
-        "row_5_them": "No returns on imports",
-        "row_6_feature": "Support & shipping",
-        "row_6_us": "Real support · fast, tracked",
-        "row_6_them": "Faceless dropship · slow"
-      }
-    },
-    "17799622903d320805": {
-      "type": "_blocks",
-      "settings": {}
-    },
     "blocks_h93VL9": {
       "type": "_blocks",
       "blocks": {
@@ -455,6 +422,39 @@
         "ai_gen_block_21aa88f_BP7jbR"
       ],
       "name": "Before and after slider",
+      "settings": {}
+    },
+    "us_vs_them": {
+      "type": "us-vs-them",
+      "settings": {
+        "eyebrow": "Why Mend",
+        "heading": "Mend vs. the rest.",
+        "subtext": "Salon keratin straightens but damages. Ordinary masks repair but don't straighten. Mend does both — in one rinse-out treatment.",
+        "us_label": "Mend Rebuild",
+        "them_label": "Other masks",
+        "bg_color": "#f8f3ea",
+        "row_1_feature": "Repairs AND straightens",
+        "row_1_us": "Both — in one rinse-out mask",
+        "row_1_them": "Repair or smoothing — not both",
+        "row_2_feature": "Rebuilds from within",
+        "row_2_us": "Keratin, collagen & peptides repair the strand",
+        "row_2_them": "Surface coat that washes out",
+        "row_3_feature": "No formaldehyde or flat-iron",
+        "row_3_us": "Gentle rinse-out — no fumes or heat",
+        "row_3_them": "Salon keratin uses both",
+        "row_4_feature": "Treatments per box",
+        "row_4_us": "20 single-use sachets",
+        "row_4_them": "3–5 — dry out fast",
+        "row_5_feature": "Risk-free trial",
+        "row_5_us": "30-day money-back guarantee",
+        "row_5_them": "No returns on imports",
+        "row_6_feature": "Support & shipping",
+        "row_6_us": "Real support · fast, tracked",
+        "row_6_them": "Faceless dropship · slow"
+      }
+    },
+    "17799622903d320805": {
+      "type": "_blocks",
       "settings": {}
     },
     "product_faq_nzQWrk": {
@@ -530,7 +530,7 @@
       "name": "Product FAQ",
       "settings": {
         "eyebrow": "FAQ",
-        "heading": "Mend Botox, answered.",
+        "heading": "Mend Rebuild, answered.",
         "subheading": ""
       }
     },

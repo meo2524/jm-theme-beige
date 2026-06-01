@@ -17,10 +17,10 @@
         "heading_em": "Keep it",
         "heading_2": "for good.",
         "subtext": "Mend & Co makes simple, honest tools you buy once and keep — built to fix the things you've learned to live with. No subscriptions, no gimmicks. Starting with our Hair Botox.",
-        "cta_label": "Shop the Hair Botox",
+        "cta_label": "Shop the Mend Rebuild",
         "cta_url": "/products/mend-hair-botox",
-        "bg_image": "shopify://shop_images/hf_20260528_085924_c3132d6e-8acf-4fba-9b50-90b61b9609ec.png",
         "hero_video_url": "",
+        "bg_image": "shopify://shop_images/hf_20260528_085924_c3132d6e-8acf-4fba-9b50-90b61b9609ec.png",
         "show_scroll_cue": true
       }
     },
@@ -69,13 +69,13 @@
         "promise_support"
       ],
       "settings": {
-        "image": "shopify://shop_images/hf_20260531_024557_a917625a-d3bf-4c0f-8b57-ff7acdeaba9e.png",
         "video_url": "",
         "video_position_y": 50,
+        "image": "shopify://shop_images/hf_20260531_024557_a917625a-d3bf-4c0f-8b57-ff7acdeaba9e.png",
         "eyebrow": "Featured",
         "heading": "Repair and straighten, in one.",
         "body": "Our Hair Botox rebuilds and smooths damaged hair in a single rinse-out treatment — keratin, collagen and peptides, no salon and no heat. Like everything we make: buy it once, and it just works.",
-        "cta_label": "Shop the Hair Botox",
+        "cta_label": "Shop the Mend Rebuild",
         "cta_url": "/products/mend-hair-botox",
         "reverse": false
       }
