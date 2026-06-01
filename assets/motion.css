@@ -1534,6 +1534,24 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* ── 19c. Keep the bundle price inside the card (mobile overflow fix) ──
+   The KaChing bar row is flex; .bar-content / .bar-content-left default to
+   min-width:auto, so a long bundle name ("One for you One for me") can't
+   shrink and pushes the enlarged 1.85rem price past the card's right edge.
+   Let those columns shrink so the title wraps; trim the price a touch on
+   small screens so it never crowds out. */
+.motion-on .kaching-bundles__bar-content,
+.motion-on .kaching-bundles__bar-content-left {
+  min-width: 0 !important;
+}
+
+@media (max-width: 480px) {
+  .motion-on .kaching-bundles__bar-price      { font-size: 1.35rem !important; }
+  .motion-on .kaching-bundles__bar-title      { font-size: 1.05rem !important; line-height: 1.15 !important; }
+  .motion-on .kaching-bundles__bar-full-price { font-size: 0.9rem !important; }
+  .motion-on .kaching-bundles__bar-main       { gap: 12px !important; }
+}
+
 /* SAVE chip — louder, with pulse */
 .motion-on .kaching-bundles__block .kaching-bundles__discount,
 .motion-on [class*="kaching-bundles__bar-discount"],
