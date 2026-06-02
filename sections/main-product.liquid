@@ -13,6 +13,9 @@
 {%- elsif section.settings.bundle_hook_text != blank -%}
   <style>:root{ --mc-bundle-hook:"{{ section.settings.bundle_hook_text }}"; }</style>
 {%- endif -%}
+{%- if section.settings.title_font_size -%}
+  <style>[data-section-id="{{ section.id }}"]{ --pdp-title-size:{{ section.settings.title_font_size }}px; }</style>
+{%- endif -%}
 
 <section
   class="product-section"
@@ -980,7 +983,7 @@ body.lightbox-open { overflow: hidden; }
 /* Title */
 .product-title {
   font-family: var(--font-body);
-  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  font-size: var(--pdp-title-size, clamp(2rem, 3.4vw, 2.75rem));
   font-weight: 900;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -2687,6 +2690,18 @@ body.lightbox-open { overflow: hidden; }
       "label": "Offer strip text",
       "default": "● LIMITED OFFER · FREE SHIPPING · 30-DAY GUARANTEE",
       "info": "The red strip above the Bundle & Save picker. Keep the ● at the start if you want the dot."
+    },
+    { "type": "header", "content": "Product title" },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "min": 28,
+      "max": 56,
+      "step": 1,
+      "unit": "px",
+      "label": "Title size (desktop)",
+      "default": 44,
+      "info": "Mobile auto-scales smaller to fit."
     },
     {
       "type": "checkbox",
