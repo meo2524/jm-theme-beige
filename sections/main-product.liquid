@@ -963,6 +963,7 @@ body.lightbox-open { overflow: hidden; }
 
 .product-info {
   padding-top: 0.25rem;
+  container-type: inline-size; /* lets the title size to THIS column's width (cqw), not the viewport */
 }
 
 /* Eyebrow
@@ -983,8 +984,9 @@ body.lightbox-open { overflow: hidden; }
 /* Title */
 .product-title {
   font-family: var(--font-body);
-  /* editable px on desktop, but never wider than 7vw so it stays on ONE line on any screen */
-  font-size: min(var(--pdp-title-size, 44px), 7vw);
+  /* editable px is the cap; 8.4cqw scales to THIS column's width so it's the
+     biggest size that stays on ONE line without overflowing the container. */
+  font-size: min(var(--pdp-title-size, 44px), 8.4cqw);
   white-space: nowrap;
   font-weight: 900;
   line-height: 1.2;
