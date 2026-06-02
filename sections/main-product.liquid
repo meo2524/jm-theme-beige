@@ -983,7 +983,9 @@ body.lightbox-open { overflow: hidden; }
 /* Title */
 .product-title {
   font-family: var(--font-body);
-  font-size: var(--pdp-title-size, clamp(2rem, 3.4vw, 2.75rem));
+  /* editable px on desktop, but never wider than 7vw so it stays on ONE line on any screen */
+  font-size: min(var(--pdp-title-size, 44px), 7vw);
+  white-space: nowrap;
   font-weight: 900;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -2250,9 +2252,7 @@ body.lightbox-open { overflow: hidden; }
     box-sizing: border-box;
   }
 
-  .product-title {
-    font-size: 1.875rem;
-  }
+  /* title size handled by min(var, 7vw) in the base rule — one line at any width */
 
   .variant-cards {
     gap: 0.4rem;
