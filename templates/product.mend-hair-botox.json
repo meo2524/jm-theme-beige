@@ -12,6 +12,9 @@
     "main": {
       "type": "main-product",
       "settings": {
+        "bundle_hook_show": true,
+        "bundle_hook_text": "● LIMITED OFFER · FREE SHIPPING · 30-DAY GUARANTEE",
+        "title_font_size": 38,
         "show_size_guide": false,
         "eyebrow_text": "Repair + straighten",
         "model_badge": "",
