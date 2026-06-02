@@ -7,6 +7,13 @@
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
+{%- comment -%} Editable offer strip above the KaChing bundle picker — feeds the CSS ::before in theme.liquid via a custom property. {%- endcomment -%}
+{%- if section.settings.bundle_hook_show == false -%}
+  <style>.kaching-bundles__block::before{ content:none !important; display:none !important; }</style>
+{%- elsif section.settings.bundle_hook_text != blank -%}
+  <style>:root{ --mc-bundle-hook:"{{ section.settings.bundle_hook_text }}"; }</style>
+{%- endif -%}
+
 <section
   class="product-section"
   data-section-id="{{ section.id }}"
@@ -2667,6 +2674,20 @@ body.lightbox-open { overflow: hidden; }
   "tag": "section",
   "class": "section-main-product",
   "settings": [
+    { "type": "header", "content": "Bundle offer strip" },
+    {
+      "type": "checkbox",
+      "id": "bundle_hook_show",
+      "label": "Show offer strip above the bundles",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "bundle_hook_text",
+      "label": "Offer strip text",
+      "default": "● LIMITED OFFER · FREE SHIPPING · 30-DAY GUARANTEE",
+      "info": "The red strip above the Bundle & Save picker. Keep the ● at the start if you want the dot."
+    },
     {
       "type": "checkbox",
       "id": "show_size_guide",
