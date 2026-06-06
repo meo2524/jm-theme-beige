@@ -86,10 +86,11 @@
         "bundle_selector_yErP4z"
       ],
       "custom_css": [
-        ".gallery-thumbs{display:flex!important;flex-wrap:wrap!important;gap:4px!important}",
-        ".gallery-thumb img{width:60px!important;height:75px!important;object-fit:cover!important}",
+        ".gallery-thumbs{display:none!important}",
         ".gallery-track,.gallery-slide{aspect-ratio:4/5!important;height:auto!important}",
-        ".gallery-slide__img{width:100%!important;height:100%!important;object-fit:cover!important}"
+        ".gallery-slide__img{width:100%!important;height:100%!important;object-fit:cover!important;aspect-ratio:4/5!important}",
+        ".gallery-arrow{opacity:1!important;display:flex!important}",
+        ".gallery-dots{display:flex!important}"
       ],
       "name": "Product",
       "settings": {
