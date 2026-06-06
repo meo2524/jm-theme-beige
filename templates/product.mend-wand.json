@@ -9,47 +9,6 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "main-product",
-      "settings": {
-        "bundle_hook_show": true,
-        "bundle_hook_text": "● LIMITED OFFER · FREE SHIPPING · 30-DAY GUARANTEE",
-        "title_font_size": 38,
-        "show_size_guide": false,
-        "eyebrow_text": "Repair + straighten",
-        "model_badge": "",
-        "benefits_list": "Repairs AND straightens in one 5-minute rinse-out mask\nSalon-smooth results — no salon, no formaldehyde\nVisibly stronger, sleeker, shinier hair from day one",
-        "blurb_heading": "",
-        "blurb_subheading": "",
-        "short_description": "",
-        "per_use_text": "20 treatments per box · results last 4–8 weeks",
-        "accordion_label_1": "Why it's different",
-        "accordion_label_2": "What you'll notice",
-        "accordion_label_3": "How to use it",
-        "accordion_whats-included": "<p>Most masks make you choose: <em>repair</em> your hair, or <em>smooth and straighten</em> it. Rebuild by Mend&Co does both in one rinse-out treatment — hydrolyzed keratin, collagen and Acetyl Hexapeptide-8 rebuild damaged strands while relaxing frizz for a visibly straighter, glassier finish.</p><ul><li><strong>Repair + straighten in one.</strong> Two results from a single 5-minute mask — no separate treatments.</li><li><strong>No formaldehyde, no flat-iron, no salon.</strong> The smoothing a salon keratin gives you, without the fumes or heat damage.</li><li><strong>20 single-use treatments per box</strong> — backed by a 30-day money-back guarantee.</li></ul>",
-        "accordion_how-it-works": "<ul><li><strong>Less breakage, fuller-looking hair.</strong> When strands stop snapping mid-length, hair looks thicker and healthier from root to tip.</li><li><strong>Frizz tamed, shine restored.</strong> A smooth, glass-like finish from the very first treatment.</li><li><strong>Hydration that lasts.</strong> Dry, brittle, lifeless hair brought back to life — and the results build for weeks.</li></ul>",
-        "accordion_ingredients-certifications": "<ol><li>After shampooing, towel-dry until your hair stops dripping.</li><li>Work a generous amount through the mid-lengths to the ends — skip the scalp.</li><li>Leave on for 5–20 minutes, then rinse thoroughly.</li><li>Use 2–3 times a week while repairing, then weekly to maintain. One sachet per treatment.</li></ol>",
-        "rating_show": true,
-        "rating_value": "",
-        "rating_count_text": "225+ Menders",
-        "rating_subtext": "Trusted by verified buyers",
-        "toggle_onetime_label": "One-time",
-        "toggle_subscribe_label": "Subscribe & Save",
-        "toggle_subscribe_savings": "10% off",
-        "qty_label": "Qty",
-        "atc_label": "Add to Cart",
-        "atc_sold_out_label": "Sold Out",
-        "variant_sold_out_label": "Sold out",
-        "shipping_label": "",
-        "shipping_subtext": "Ships within 24 hours — your best hair days start now.",
-        "guarantee_label": "",
-        "guarantee_subtext": "Use it for a full month. If your hair isn't visibly smoother and stronger, send it back for a full refund — no questions.",
-        "show_secure_checkout": true,
-        "trust_1_text": "",
-        "trust_2_text": "",
-        "trust_3_text": ""
-      }
-    },
     "1780057559154df1e3": {
       "type": "apps",
       "blocks": {
@@ -92,6 +51,79 @@
         "judge_me_reviews_cards_carousel_f6Qc3p"
       ],
       "settings": {}
+    },
+    "main_product_LQjAFh": {
+      "type": "main-product",
+      "blocks": {
+        "bundle_selector_yErP4z": {
+          "type": "bundle_selector",
+          "settings": {
+            "gift_product_1": "",
+            "gift_label_1": "Free charging case",
+            "gift_product_2": "",
+            "gift_label_2": "Free wellness ebook",
+            "gift_free_label": "FREE",
+            "gifts_line": "Free charging case + ebook with every order",
+            "bundle_option_name": "Bundle",
+            "tier1_option_value": "The N°01",
+            "tier1_display_name": "The N°01",
+            "tier1_subheading": "1 ring · Free charging case + ebook",
+            "tier1_badge": "",
+            "tier1_savings": "",
+            "tier1_discount": 40,
+            "tier2_option_value": "Couple Bundle",
+            "tier2_display_name": "Couple Bundle",
+            "tier2_subheading": "2 rings · Free gifts included",
+            "tier2_badge": "",
+            "tier2_savings": "Save $51",
+            "tier2_discount": 40,
+            "tier2_ring1_prefix": "Ring 1",
+            "tier2_ring2_prefix": "Ring 2"
+          }
+        }
+      },
+      "block_order": [
+        "bundle_selector_yErP4z"
+      ],
+      "name": "Product",
+      "settings": {
+        "bundle_hook_show": true,
+        "bundle_hook_text": "● LIMITED OFFER · FREE SHIPPING · 30-DAY GUARANTEE",
+        "title_font_size": 44,
+        "show_size_guide": true,
+        "eyebrow_text": "Biometric tracking",
+        "model_badge": "",
+        "benefits_list": "",
+        "blurb_heading": "",
+        "blurb_subheading": "",
+        "short_description": "",
+        "per_use_text": "5–7 day battery · no subscription",
+        "accordion_label_1": "What's included",
+        "accordion_label_2": "How it works",
+        "accordion_label_3": "Ingredients & certifications",
+        "accordion_whats-included": "",
+        "accordion_how-it-works": "",
+        "accordion_ingredients-certifications": "",
+        "rating_show": false,
+        "rating_value": "",
+        "rating_count_text": "",
+        "rating_subtext": "Trusted by verified buyers",
+        "toggle_onetime_label": "One-time",
+        "toggle_subscribe_label": "Subscribe & Save",
+        "toggle_subscribe_savings": "10% off",
+        "qty_label": "Qty",
+        "atc_label": "Add to Cart",
+        "atc_sold_out_label": "Sold Out",
+        "variant_sold_out_label": "Sold out",
+        "shipping_label": "Free shipping.",
+        "shipping_subtext": "Ships within 24 hours — start mending ASAP.",
+        "guarantee_label": "30-day money-back guarantee.",
+        "guarantee_subtext": "Wear it for 30 nights. If it's not for you, send it back for a full refund — no questions.",
+        "show_secure_checkout": true,
+        "trust_1_text": "Free shipping over $60",
+        "trust_2_text": "30-day returns",
+        "trust_3_text": "2-year warranty"
+      }
     },
     "blocks_ajDGzb": {
       "type": "_blocks",
@@ -554,11 +586,25 @@
         "judge_me_reviews_review_widget_Ej7xte"
       ],
       "settings": {}
+    },
+    "custom_liquid_pz3J9W": {
+      "type": "custom-liquid",
+      "name": "Custom Liquid",
+      "settings": {
+        "show_on": "both",
+        "custom_liquid": "",
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 36
+      }
     }
   },
   "order": [
-    "main",
     "1780057559154df1e3",
+    "main_product_LQjAFh",
     "blocks_ajDGzb",
     "repair_benefits",
     "transformation_timeline",
@@ -568,6 +614,7 @@
     "us_vs_them",
     "17799622903d320805",
     "product_faq_nzQWrk",
-    "1779959625dfb75552"
+    "1779959625dfb75552",
+    "custom_liquid_pz3J9W"
   ]
 }
