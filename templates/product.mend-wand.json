@@ -86,11 +86,11 @@
         "bundle_selector_yErP4z"
       ],
       "custom_css": [
-        ".gallery-thumbs{display:none!important}",
-        ".gallery-track,.gallery-slide{aspect-ratio:4/5!important;height:auto!important}",
-        ".gallery-slide__img{width:100%!important;height:100%!important;object-fit:cover!important;aspect-ratio:4/5!important}",
-        ".gallery-arrow{opacity:1!important;display:flex!important}",
-        ".gallery-dots{display:flex!important}"
+        ".gallery-thumbs {display: none !important;}",
+        ".gallery-track,.gallery-slide {aspect-ratio: 4/5 !important; height: auto !important;}",
+        ".gallery-slide__img {width: 100% !important; height: 100% !important; object-fit: cover !important; aspect-ratio: 4/5 !important;}",
+        ".gallery-arrow {opacity: 1 !important; display: flex !important;}",
+        ".gallery-dots {display: flex !important;}"
       ],
       "name": "Product",
       "settings": {
@@ -98,7 +98,7 @@
         "bundle_hook_text": "● LIMITED OFFER · FREE SHIPPING · 30-DAY GUARANTEE",
         "title_font_size": 44,
         "show_size_guide": true,
-        "eyebrow_text": "Biometric tracking",
+        "eyebrow_text": "INTELLIGENT HAIR CARE ",
         "model_badge": "",
         "benefits_list": "",
         "blurb_heading": "",
