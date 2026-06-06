@@ -1,0 +1,573 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "bundle_hook_show": true,
+        "bundle_hook_text": "● LIMITED OFFER · FREE SHIPPING · 30-DAY GUARANTEE",
+        "title_font_size": 38,
+        "show_size_guide": false,
+        "eyebrow_text": "Repair + straighten",
+        "model_badge": "",
+        "benefits_list": "Repairs AND straightens in one 5-minute rinse-out mask\nSalon-smooth results — no salon, no formaldehyde\nVisibly stronger, sleeker, shinier hair from day one",
+        "blurb_heading": "",
+        "blurb_subheading": "",
+        "short_description": "",
+        "per_use_text": "20 treatments per box · results last 4–8 weeks",
+        "accordion_label_1": "Why it's different",
+        "accordion_label_2": "What you'll notice",
+        "accordion_label_3": "How to use it",
+        "accordion_whats-included": "<p>Most masks make you choose: <em>repair</em> your hair, or <em>smooth and straighten</em> it. Rebuild by Mend&Co does both in one rinse-out treatment — hydrolyzed keratin, collagen and Acetyl Hexapeptide-8 rebuild damaged strands while relaxing frizz for a visibly straighter, glassier finish.</p><ul><li><strong>Repair + straighten in one.</strong> Two results from a single 5-minute mask — no separate treatments.</li><li><strong>No formaldehyde, no flat-iron, no salon.</strong> The smoothing a salon keratin gives you, without the fumes or heat damage.</li><li><strong>20 single-use treatments per box</strong> — backed by a 30-day money-back guarantee.</li></ul>",
+        "accordion_how-it-works": "<ul><li><strong>Less breakage, fuller-looking hair.</strong> When strands stop snapping mid-length, hair looks thicker and healthier from root to tip.</li><li><strong>Frizz tamed, shine restored.</strong> A smooth, glass-like finish from the very first treatment.</li><li><strong>Hydration that lasts.</strong> Dry, brittle, lifeless hair brought back to life — and the results build for weeks.</li></ul>",
+        "accordion_ingredients-certifications": "<ol><li>After shampooing, towel-dry until your hair stops dripping.</li><li>Work a generous amount through the mid-lengths to the ends — skip the scalp.</li><li>Leave on for 5–20 minutes, then rinse thoroughly.</li><li>Use 2–3 times a week while repairing, then weekly to maintain. One sachet per treatment.</li></ol>",
+        "rating_show": true,
+        "rating_value": "",
+        "rating_count_text": "225+ Menders",
+        "rating_subtext": "Trusted by verified buyers",
+        "toggle_onetime_label": "One-time",
+        "toggle_subscribe_label": "Subscribe & Save",
+        "toggle_subscribe_savings": "10% off",
+        "qty_label": "Qty",
+        "atc_label": "Add to Cart",
+        "atc_sold_out_label": "Sold Out",
+        "variant_sold_out_label": "Sold out",
+        "shipping_label": "",
+        "shipping_subtext": "Ships within 24 hours — your best hair days start now.",
+        "guarantee_label": "",
+        "guarantee_subtext": "Use it for a full month. If your hair isn't visibly smoother and stronger, send it back for a full refund — no questions.",
+        "show_secure_checkout": true,
+        "trust_1_text": "",
+        "trust_2_text": "",
+        "trust_3_text": ""
+      }
+    },
+    "1780057559154df1e3": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_cards_carousel_f6Qc3p": {
+          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {
+            "show_sample_reviews": false,
+            "reviews_selection": "product_reviews",
+            "products": [
+              "mend-hair-botox"
+            ],
+            "star_rating": "5_star",
+            "show_review_media": true,
+            "display_order": "most_recent",
+            "no_image_fallback": "review_text_only",
+            "max_reviews": 20,
+            "review_length": "medium",
+            "text_size": "medium",
+            "image_ratio": "1",
+            "reviews_shown": 4,
+            "show_reviewer_name": true,
+            "show_product_name": true,
+            "hide_arrows_mobile": false,
+            "arrows_position": "sides",
+            "max_width": 800,
+            "corner_styling": "square",
+            "header_text_color": "#000000",
+            "text_color": "#000000",
+            "card_color": "#f9f9f9",
+            "stars_color": "",
+            "arrows_color": "#000000",
+            "transition_speed": 5,
+            "header_text": "Customers are saying",
+            "show_average_rating": false
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_cards_carousel_f6Qc3p"
+      ],
+      "settings": {}
+    },
+    "blocks_ajDGzb": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_523a02b_Mm7gBg": {
+          "type": "ai_gen_block_523a02b",
+          "settings": {
+            "heading": "What our customers say",
+            "subtitle": "Real reviews from real Menders.",
+            "heading_alignment": "center",
+            "heading_size": 36,
+            "subtitle_size": 16,
+            "heading_font": "assistant_n4",
+            "heading_color": "#2d2d2d",
+            "subtitle_color": "#7a8471",
+            "desktop_width_percent": 100,
+            "max_width": 1200,
+            "cards_per_row_desktop": 3,
+            "card_gap": 20,
+            "section_padding": 40,
+            "background_color": "#f2ede4",
+            "card_background": "#ffffff",
+            "card_border_radius": 12,
+            "card_shadow": "0 2px 8px rgba(0,0,0,0.1)",
+            "card_padding": 20,
+            "media_aspect_ratio": 100,
+            "show_rating": true,
+            "star_color": "#ffd700",
+            "star_empty_color": "#e0e0e0",
+            "review_text_size": 14,
+            "review_text_color": "#2d2d2d",
+            "author_text_size": 13,
+            "author_text_color": "#7a8471",
+            "button_background": "#2d2d2d",
+            "button_hover_background": "#8a6240",
+            "button_icon_color": "#ffffff",
+            "dot_color": "#d9c5b2",
+            "dot_active_color": "#2d2d2d",
+            "review_1_media_type": "image",
+            "review_1_image": "shopify://shop_images/hf_20260531_023315_93f97a1d-2521-4c36-bd44-90be37433432.png",
+            "review_1_video": "",
+            "review_1_rating": 5,
+            "review_1_text": "Magical product, I loved the result. My hair was super damaged and when I used this product, my hair came back to life.",
+            "review_1_author": "Kayla H.",
+            "review_2_media_type": "image",
+            "review_2_image": "shopify://shop_images/hf_20260531_024557_a917625a-d3bf-4c0f-8b57-ff7acdeaba9e.png",
+            "review_2_video": "",
+            "review_2_rating": 5,
+            "review_2_text": "I was skeptical. The final result impressed me! I have dry, damaged hair, which is also extremely fine. After blow-drying, my hair became shiny, soft, full of life, easy to style, and smells really good. I'm quite sure I will order again.",
+            "review_2_author": "Bennett O.",
+            "review_3_media_type": "image",
+            "review_3_image": "shopify://shop_images/hf_20260531_041335_110da793-ce23-49e6-a953-dd01ebb4de7b.png",
+            "review_3_video": "",
+            "review_3_rating": 5,
+            "review_3_text": "I put it on the first time and it helped me. I will continue using it.",
+            "review_3_author": "Filiberto M.",
+            "review_4_media_type": "image",
+            "review_4_image": "shopify://shop_images/hf_20260531_041337_49b18be0-5481-407d-9d67-bf40cf823500.png",
+            "review_4_video": "",
+            "review_4_rating": 5,
+            "review_4_text": "😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍",
+            "review_4_author": "Rueben O.",
+            "review_5_media_type": "image",
+            "review_5_image": "shopify://shop_images/A3d5e9aadacba452cb482eaa4ede919fbl.avif",
+            "review_5_video": "",
+            "review_5_rating": 5,
+            "review_5_text": "It arrived in perfect condition and met my expectations. I recommend them 100%.",
+            "review_5_author": "Lisa P.",
+            "review_6_media_type": "image",
+            "review_6_image": "shopify://shop_images/A39455336370e42bea108d9a9e4492c4eY.avif",
+            "review_6_video": "",
+            "review_6_rating": 5,
+            "review_6_text": "Complete packaging - very satisfied",
+            "review_6_author": "Shea R."
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_21aa88f_cqqWjf": {
+          "type": "ai_gen_block_21aa88f",
+          "disabled": true,
+          "settings": {
+            "heading": "See the difference",
+            "subtitle": "One treatment. Visibly smoother, healthier-looking hair.",
+            "before_image": "shopify://shop_images/hf_20260528_085904_8224848f-c933-47a9-8116-41ee0195472f.png",
+            "after_image": "shopify://shop_images/hf_20260528_085924_c3132d6e-8acf-4fba-9b50-90b61b9609ec.png",
+            "show_toggle": true,
+            "female_label": "Women",
+            "male_label": "Men",
+            "before_image_male": "shopify://shop_images/before-after-male-before.jpg",
+            "after_image_male": "shopify://shop_images/before-after-male-after.jpg",
+            "desktop_width_percent": 50,
+            "border_radius": 20,
+            "before_label": "Before",
+            "after_label": "After",
+            "label_font_size": 14,
+            "label_position_top": 20,
+            "label_position_side": 20,
+            "label_padding_vertical": 8,
+            "label_padding_horizontal": 16,
+            "label_border_radius": 4,
+            "label_bg_color": "#2d2d2d",
+            "label_text_color": "#f2ede4",
+            "divider_width": 4,
+            "divider_color": "#f2ede4",
+            "handle_size": 50,
+            "handle_color": "#f2ede4",
+            "handle_border_color": "#2d2d2d",
+            "handle_border_width": 2,
+            "handle_icon_color": "#2d2d2d"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_523a02b_Mm7gBg",
+        "ai_gen_block_21aa88f_cqqWjf"
+      ],
+      "name": "Review carousel",
+      "settings": {}
+    },
+    "repair_benefits": {
+      "type": "repair-benefits",
+      "blocks": {
+        "rb1": {
+          "type": "benefit",
+          "settings": {
+            "label": "Nourishing",
+            "description": "Deeply penetrates to hydrate, lifting dryness and dullness."
+          }
+        },
+        "rb2": {
+          "type": "benefit",
+          "settings": {
+            "label": "Smoothness",
+            "description": "Smooths and relaxes frizz for a visibly straighter, silky finish."
+          }
+        },
+        "rb3": {
+          "type": "benefit",
+          "settings": {
+            "label": "Strengthening",
+            "description": "Fills the gaps in damaged hair, reducing breakage and fragility."
+          }
+        }
+      },
+      "block_order": [
+        "rb1",
+        "rb2",
+        "rb3"
+      ],
+      "settings": {
+        "eyebrow": "Triple-action repair",
+        "heading": "Repair and straighten, in one.",
+        "lede": "One rinse-out treatment that hydrates, smooths and rebuilds damaged hair from the inside out.",
+        "image_caption": "",
+        "bg_color": "#f5efe6"
+      }
+    },
+    "transformation_timeline": {
+      "type": "transformation-timeline",
+      "blocks": {
+        "tl1": {
+          "type": "milestone",
+          "settings": {
+            "day_label": "Day 01",
+            "tag": "First treatment",
+            "title": "",
+            "body": "One rinse-out and hair already feels softer, smoother and easier to manage. Frizz visibly calmer."
+          }
+        },
+        "tl2": {
+          "type": "milestone",
+          "settings": {
+            "day_label": "Day 07",
+            "tag": "2–3 treatments in",
+            "title": "",
+            "body": "Strands feel stronger and the comb glides — less snagging, with a healthier natural shine starting to show."
+          }
+        },
+        "tl3": {
+          "type": "milestone",
+          "settings": {
+            "day_label": "Day 13",
+            "tag": "Halfway",
+            "title": "",
+            "body": "Smoothing builds. Hair falls straighter and styles faster, with less heat needed."
+          }
+        },
+        "tl4": {
+          "type": "milestone",
+          "settings": {
+            "day_label": "Day 30",
+            "tag": "Full box",
+            "title": "",
+            "body": "Repaired, sleek, healthy-looking hair — the look you keep up with ongoing use."
+          }
+        }
+      },
+      "block_order": [
+        "tl1",
+        "tl2",
+        "tl3",
+        "tl4"
+      ],
+      "settings": {
+        "eyebrow": "The 30-day journey",
+        "heading": "What to expect, week by week",
+        "lede": "Used 2–3 times a week, here's how hair tends to look and feel as you move through your first box.",
+        "layout": "single",
+        "bg_color": "#f5efe6",
+        "disclaimer": "Illustrative of a typical usage journey. Individual results vary with hair type and routine."
+      }
+    },
+    "ingredient_core": {
+      "type": "ingredient-core",
+      "blocks": {
+        "ic1": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Acetyl Hexapeptide-8",
+            "description": "Strengthens the hair's structure, reducing breakage and split ends.",
+            "molecule": "auto"
+          }
+        },
+        "ic2": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Hydrolyzed Collagen + Keratin",
+            "description": "Fills hair gaps and rebuilds the strand's protein network.",
+            "molecule": "auto"
+          }
+        },
+        "ic3": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Biotin",
+            "description": "Boosts hair resilience and nourishes against future damage.",
+            "molecule": "auto"
+          }
+        }
+      },
+      "block_order": [
+        "ic1",
+        "ic2",
+        "ic3"
+      ],
+      "settings": {
+        "eyebrow": "The repair core",
+        "heading": "The science salons call hair botox.",
+        "lede": "No needles, no toxins — just a targeted complex that rebuilds damaged hair from the core out.",
+        "bg_color": "#1f1d1a",
+        "accent_color": "#c9a36b"
+      }
+    },
+    "botanical_extracts": {
+      "type": "botanical-extracts",
+      "blocks": {
+        "be1": {
+          "type": "extract",
+          "settings": {
+            "name": "Ginseng Root Extract",
+            "description": "Nourishes the roots, easing dryness and fragility."
+          }
+        },
+        "be2": {
+          "type": "extract",
+          "settings": {
+            "name": "Camellia Seed Oil",
+            "description": "Smooths and adds shine, reducing frizz and tangles."
+          }
+        },
+        "be3": {
+          "type": "extract",
+          "settings": {
+            "name": "Lactic Acid",
+            "description": "Gently conditions, improving hair flexibility."
+          }
+        }
+      },
+      "block_order": [
+        "be1",
+        "be2",
+        "be3"
+      ],
+      "settings": {
+        "eyebrow": "Botanical actives",
+        "heading": "Carefully selected, for every strand.",
+        "lede": "A short list of proven actives — chosen to nourish, smooth and protect, with nothing along for the ride.",
+        "bg_color": "#f8f3ea"
+      }
+    },
+    "blocks_h93VL9": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_21aa88f_BP7jbR": {
+          "type": "ai_gen_block_21aa88f",
+          "settings": {
+            "heading": "See the difference",
+            "subtitle": "One treatment. Visibly smoother, healthier-looking hair.",
+            "before_image": "shopify://shop_images/hf_20260528_085428_61708b2d-487e-47a0-8286-3977b6d11fe8.png",
+            "after_image": "shopify://shop_images/hf_20260528_084802_ebe6efa1-22c7-44a8-88d4-b04c76eac2be.png",
+            "show_toggle": true,
+            "female_label": "Women",
+            "male_label": "Men",
+            "before_image_male": "shopify://shop_images/before-after-male-before.jpg",
+            "after_image_male": "shopify://shop_images/before-after-male-after.jpg",
+            "desktop_width_percent": 50,
+            "border_radius": 0,
+            "before_label": "Before",
+            "after_label": "After",
+            "label_font_size": 14,
+            "label_position_top": 20,
+            "label_position_side": 20,
+            "label_padding_vertical": 8,
+            "label_padding_horizontal": 16,
+            "label_border_radius": 4,
+            "label_bg_color": "#2d2d2d",
+            "label_text_color": "#f2ede4",
+            "divider_width": 4,
+            "divider_color": "#f2ede4",
+            "handle_size": 50,
+            "handle_color": "#f2ede4",
+            "handle_border_color": "#2d2d2d",
+            "handle_border_width": 2,
+            "handle_icon_color": "#2d2d2d"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_21aa88f_BP7jbR"
+      ],
+      "name": "Before and after slider",
+      "settings": {}
+    },
+    "us_vs_them": {
+      "type": "us-vs-them",
+      "settings": {
+        "eyebrow": "Why Rebuild",
+        "heading": "Rebuild vs. the rest.",
+        "subtext": "Salon keratin straightens but damages. Ordinary masks repair but don't straighten. Rebuild does both — in one rinse-out treatment.",
+        "us_label": "Mend Rebuild",
+        "them_label": "Other masks",
+        "bg_color": "#f8f3ea",
+        "row_1_feature": "Repairs AND straightens",
+        "row_1_us": "Both — in one rinse-out mask",
+        "row_1_them": "Repair or smoothing — not both",
+        "row_2_feature": "Rebuilds from within",
+        "row_2_us": "Keratin, collagen & peptides repair the strand",
+        "row_2_them": "Surface coat that washes out",
+        "row_3_feature": "No formaldehyde or flat-iron",
+        "row_3_us": "Gentle rinse-out — no fumes or heat",
+        "row_3_them": "Salon keratin uses both",
+        "row_4_feature": "Treatments per box",
+        "row_4_us": "20 single-use sachets",
+        "row_4_them": "3–5 — dry out fast",
+        "row_5_feature": "Risk-free trial",
+        "row_5_us": "30-day money-back guarantee",
+        "row_5_them": "No returns on imports",
+        "row_6_feature": "Support & shipping",
+        "row_6_us": "Real support · fast, tracked",
+        "row_6_them": "Faceless dropship · slow"
+      }
+    },
+    "17799622903d320805": {
+      "type": "_blocks",
+      "settings": {}
+    },
+    "product_faq_nzQWrk": {
+      "type": "product-faq",
+      "blocks": {
+        "faq_item_t4QVVd": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is this the same \"Botox\" my dermatologist uses?",
+            "answer": "<p>No needles, no toxins. Hair Botox is the beauty world's nickname for an intensive repair mask — ours is a keratin, collagen and peptide treatment that fills in the damaged spots along each strand. Nothing is injected and nothing freezes; the name just describes the smooth, plumped result.</p>"
+          }
+        },
+        "faq_item_7jnciW": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I use it?",
+            "answer": "<p>After shampooing, towel-dry until your hair stops dripping. Work a generous amount through the mid-lengths to the ends — skip the scalp. Leave it on for 5 to 20 minutes, then rinse thoroughly. One sachet is sized for a single treatment.</p>"
+          }
+        },
+        "faq_item_iW4FAr": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How often should I use it?",
+            "answer": "<p>Two to three times a week while you're repairing damage, then drop back to once a week to maintain. Most Menders feel the difference from the very first wash.</p>"
+          }
+        },
+        "faq_item_box20": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How many treatments are in a box?",
+            "answer": "<p>Twenty. Each box holds 20 single-use 10g sachets — one sachet per treatment — so a single box keeps you going for weeks.</p>"
+          }
+        },
+        "faq_item_safe": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will it damage my hair, or contain formaldehyde?",
+            "answer": "<p>No. Unlike the salon keratin and botox smoothing treatments you may have heard about, ours is a simple rinse-out mask — there's no formaldehyde, no flat-iron sealing and no harsh fumes. You're nourishing your hair, not chemically altering it.</p>"
+          }
+        },
+        "faq_item_ingr": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's actually in it?",
+            "answer": "<p>A repair complex of hydrolyzed keratin, collagen and Acetyl Hexapeptide-8, plus biotin, camellia seed oil, ginseng root extract and lactic acid — chosen to rebuild damaged strands, lock in moisture and smooth the cuticle.</p>"
+          }
+        },
+        "faq_item_results": {
+          "type": "faq_item",
+          "settings": {
+            "question": "When will I see results, and how long do they last?",
+            "answer": "<p>Your hair feels smoother and softer from the very first treatment. With regular use the results build, and each treatment lasts roughly 4 to 8 weeks.</p>"
+          }
+        },
+        "faq_item_ship": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What about shipping and returns?",
+            "answer": "<p>Shipping is free and every order leaves us within 24 hours. You're also covered by our 30-day money-back guarantee — try it for a full month, and if your hair isn't smoother we'll refund every cent.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_t4QVVd",
+        "faq_item_7jnciW",
+        "faq_item_iW4FAr",
+        "faq_item_box20",
+        "faq_item_safe",
+        "faq_item_ingr",
+        "faq_item_results",
+        "faq_item_ship"
+      ],
+      "name": "Product FAQ",
+      "settings": {
+        "eyebrow": "FAQ",
+        "heading": "Mend Rebuild, answered.",
+        "subheading": ""
+      }
+    },
+    "1779959625dfb75552": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_Ej7xte": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 900,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_Ej7xte"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "1780057559154df1e3",
+    "blocks_ajDGzb",
+    "repair_benefits",
+    "transformation_timeline",
+    "ingredient_core",
+    "botanical_extracts",
+    "blocks_h93VL9",
+    "us_vs_them",
+    "17799622903d320805",
+    "product_faq_nzQWrk",
+    "1779959625dfb75552"
+  ]
+}
