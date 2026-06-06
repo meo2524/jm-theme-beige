@@ -586,20 +586,6 @@
         "judge_me_reviews_review_widget_Ej7xte"
       ],
       "settings": {}
-    },
-    "custom_liquid_pz3J9W": {
-      "type": "custom-liquid",
-      "name": "Custom Liquid",
-      "settings": {
-        "show_on": "both",
-        "custom_liquid": "",
-        "color_scheme": "scheme-1",
-        "custom_color_scheme": "",
-        "padding___top": "inherit",
-        "custom_padding_top": 36,
-        "padding___bottom": "inherit",
-        "custom_padding_bottom": 36
-      }
     }
   },
   "order": [
@@ -614,7 +600,6 @@
     "us_vs_them",
     "17799622903d320805",
     "product_faq_nzQWrk",
-    "1779959625dfb75552",
-    "custom_liquid_pz3J9W"
+    "1779959625dfb75552"
   ]
 }
