@@ -85,6 +85,12 @@
       "block_order": [
         "bundle_selector_yErP4z"
       ],
+      "custom_css": [
+        ".gallery-thumbs{display:flex!important;flex-wrap:wrap!important;gap:4px!important}",
+        ".gallery-thumb img{width:60px!important;height:75px!important;object-fit:cover!important}",
+        ".gallery-track,.gallery-slide{aspect-ratio:4/5!important;height:auto!important}",
+        ".gallery-slide__img{width:100%!important;height:100%!important;object-fit:cover!important}"
+      ],
       "name": "Product",
       "settings": {
         "bundle_hook_show": true,
