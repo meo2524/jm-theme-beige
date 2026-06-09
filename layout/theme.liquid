@@ -681,15 +681,37 @@
       .kaching-bundles__bar-most-popular { transform: scale(0.7) !important; transform-origin: top right !important; }
     }
 
-    /* KaChing variant dropdown — bars need their own stacking context so the
-       open dropdown floats above the next row. Match purple theme approach. */
+    /* KaChing variant dropdown ("choice lists") — multi-variant products
+       (e.g. The Mend Wand: Color × Quantity) render a custom variant selector
+       inside each bundle bar. Its open panel must float ABOVE the sibling bar
+       below it. The old fix relied on KaChing adding .is-open / --dropdown-open
+       to the bar; that class is no longer firing on the current widget, so the
+       open panel sat at the bar's z-index:1 and the next bar (also z-index:1,
+       later in the DOM) painted over it. Hardened 2026-06-09 to be
+       class-independent: lift the bar whenever any control inside it has focus
+       (= its dropdown is open), and stop ancestors clipping the open panel. */
     .kaching-bundles__bar {
       position: relative;
       z-index: 1;
     }
+    /* Class-independent trigger: tapping/opening the variant select focuses
+       within the bar, so this fires exactly when a choice list is open. */
+    .kaching-bundles__bar:focus-within {
+      z-index: 100;
+    }
+    /* Legacy KaChing open-state classes kept as a belt-and-suspenders fallback. */
     .kaching-bundles__bar.is-open,
     .kaching-bundles__bar--dropdown-open {
-      z-index: 10;
+      z-index: 100;
+    }
+    /* Don't let the bar / its variant containers clip the open dropdown panel. */
+    .kaching-bundles__bar,
+    .kaching-bundles__bar-container,
+    .kaching-bundles__bar-variants,
+    .kaching-bundles__bar-variant,
+    .kaching-bundles__bar-variant-selector-wrapper,
+    .kaching-bundles__bar-variant-selects {
+      overflow: visible !important;
     }
 
     .back-to-top {
