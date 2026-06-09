@@ -98,7 +98,7 @@
         "bundle_hook_show": true,
         "bundle_hook_text": "● LIMITED OFFER · FREE SHIPPING · 30-DAY GUARANTEE",
         "title_font_size": 44,
-        "show_size_guide": true,
+        "show_size_guide": false,
         "eyebrow_text": "INTELLIGENT HAIR CARE ",
         "model_badge": "",
         "benefits_list": "",
