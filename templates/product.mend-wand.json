@@ -335,6 +335,7 @@
         "tl3",
         "tl4"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "The 30-day journey",
         "heading": "What to expect, week by week",
@@ -377,6 +378,7 @@
         "ic2",
         "ic3"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "The repair core",
         "heading": "The science salons call hair botox.",
@@ -415,6 +417,7 @@
         "be2",
         "be3"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "Botanical actives",
         "heading": "Carefully selected, for every strand.",
