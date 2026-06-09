@@ -465,23 +465,7 @@
         </div>
       {%- endif -%}
 
-      {%- if section.settings.show_secure_checkout != false -%}
-      <div class="pdp-payments" aria-label="Accepted payment methods">
-        <span class="pdp-payments__label">Secure checkout</span>
-        <ul class="pdp-payments__icons" role="list">
-          {%- comment -%}
-            shop.enabled_payment_types reflects exactly what's enabled in
-            Shopify Admin → Settings → Payments. No Apple Pay if you're not
-            on a payment provider that supports it, etc.
-          {%- endcomment -%}
-          {%- for method in shop.enabled_payment_types -%}
-            <li class="pdp-payments__icon">{{ method | payment_type_svg_tag }}</li>
-          {%- endfor -%}
-        </ul>
-      </div>
-      {%- endif -%}
-
-      {%- comment -%} -- Trust strip -- {%- endcomment -%}
+      {%- comment -%} -- Trust strip (above the payment-method icons) -- {%- endcomment -%}
       {%- assign t1 = section.settings.trust_1_text | default: '' -%}
       {%- assign t2 = section.settings.trust_2_text | default: '' -%}
       {%- assign t3 = section.settings.trust_3_text | default: '' -%}
@@ -506,6 +490,22 @@
         </li>
         {%- endif -%}
       </ul>
+      {%- endif -%}
+
+      {%- if section.settings.show_secure_checkout != false -%}
+      <div class="pdp-payments" aria-label="Accepted payment methods">
+        <span class="pdp-payments__label">Secure checkout</span>
+        <ul class="pdp-payments__icons" role="list">
+          {%- comment -%}
+            shop.enabled_payment_types reflects exactly what's enabled in
+            Shopify Admin → Settings → Payments. No Apple Pay if you're not
+            on a payment provider that supports it, etc.
+          {%- endcomment -%}
+          {%- for method in shop.enabled_payment_types -%}
+            <li class="pdp-payments__icon">{{ method | payment_type_svg_tag }}</li>
+          {%- endfor -%}
+        </ul>
+      </div>
       {%- endif -%}
 
       {%- comment -%} -- Accordion -- {%- endcomment -%}
