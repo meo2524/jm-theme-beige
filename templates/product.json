@@ -12,14 +12,14 @@
     "main": {
       "type": "main-product",
       "custom_css": [
-        ".gallery-slide__img {object-fit: cover !important; }"
+        ".gallery-slide__img {object-fit: cover !important;}"
       ],
       "settings": {
         "bundle_hook_show": true,
         "bundle_hook_text": "● LIMITED OFFER · FREE SHIPPING · 30-DAY GUARANTEE",
         "title_font_size": 30,
         "show_size_guide": true,
-        "eyebrow_text": "Shower Filtration",
+        "eyebrow_text": "natural scalp care",
         "model_badge": "",
         "benefits_list": "",
         "blurb_heading": "",
