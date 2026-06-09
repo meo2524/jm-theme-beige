@@ -19,7 +19,7 @@
             "show_sample_reviews": false,
             "reviews_selection": "product_reviews",
             "products": [
-              "mend-hair-botox"
+              "the-mend-wand"
             ],
             "star_rating": "5_star",
             "show_review_media": true,
@@ -59,26 +59,26 @@
           "type": "bundle_selector",
           "settings": {
             "gift_product_1": "",
-            "gift_label_1": "Free charging case",
+            "gift_label_1": "",
             "gift_product_2": "",
-            "gift_label_2": "Free wellness ebook",
+            "gift_label_2": "",
             "gift_free_label": "FREE",
-            "gifts_line": "Free charging case + ebook with every order",
+            "gifts_line": "",
             "bundle_option_name": "Bundle",
-            "tier1_option_value": "The N°01",
-            "tier1_display_name": "The N°01",
-            "tier1_subheading": "1 ring · Free charging case + ebook",
+            "tier1_option_value": "Single",
+            "tier1_display_name": "Single Wand",
+            "tier1_subheading": "1 Mend Wand",
             "tier1_badge": "",
             "tier1_savings": "",
             "tier1_discount": 40,
             "tier2_option_value": "Couple Bundle",
             "tier2_display_name": "Couple Bundle",
-            "tier2_subheading": "2 rings · Free gifts included",
+            "tier2_subheading": "2 Wands · one to gift",
             "tier2_badge": "",
-            "tier2_savings": "Save $51",
+            "tier2_savings": "",
             "tier2_discount": 40,
-            "tier2_ring1_prefix": "Ring 1",
-            "tier2_ring2_prefix": "Ring 2"
+            "tier2_ring1_prefix": "Wand 1",
+            "tier2_ring2_prefix": "Wand 2"
           }
         }
       },
@@ -107,7 +107,7 @@
         "per_use_text": "5–7 day battery · no subscription",
         "accordion_label_1": "What's included",
         "accordion_label_2": "How it works",
-        "accordion_label_3": "Ingredients & certifications",
+        "accordion_label_3": "Care & warranty",
         "accordion_whats-included": "",
         "accordion_how-it-works": "",
         "accordion_ingredients-certifications": "",
@@ -137,6 +137,7 @@
       "blocks": {
         "ai_gen_block_523a02b_Mm7gBg": {
           "type": "ai_gen_block_523a02b",
+          "disabled": true,
           "settings": {
             "heading": "What our customers say",
             "subtitle": "Real reviews from real Menders.",
@@ -213,7 +214,7 @@
           "disabled": true,
           "settings": {
             "heading": "See the difference",
-            "subtitle": "One treatment. Visibly smoother, healthier-looking hair.",
+            "subtitle": "Dry, static and full of flyaways — to smooth, hydrated and shiny after one mist-and-comb.",
             "before_image": "shopify://shop_images/hf_20260528_085904_8224848f-c933-47a9-8116-41ee0195472f.png",
             "after_image": "shopify://shop_images/hf_20260528_085924_c3132d6e-8acf-4fba-9b50-90b61b9609ec.png",
             "show_toggle": true,
@@ -257,22 +258,22 @@
         "rb1": {
           "type": "benefit",
           "settings": {
-            "label": "Nourishing",
-            "description": "Deeply penetrates to hydrate, lifting dryness and dullness."
+            "label": "Hydrate",
+            "description": "A fine botanical mist carries water, serum or oil from root to tip with every stroke."
           }
         },
         "rb2": {
           "type": "benefit",
           "settings": {
-            "label": "Smoothness",
-            "description": "Smooths and relaxes frizz for a visibly straighter, silky finish."
+            "label": "Soothe",
+            "description": "Massaging ball-tip bristles and a warm 650nm glow turn brushing into a calming scalp ritual."
           }
         },
         "rb3": {
           "type": "benefit",
           "settings": {
-            "label": "Strengthening",
-            "description": "Fills the gaps in damaged hair, reducing breakage and fragility."
+            "label": "Detangle",
+            "description": "Anti-static bristles glide through tangles without snag or static — then self-clean at one click."
           }
         }
       },
@@ -282,9 +283,9 @@
         "rb3"
       ],
       "settings": {
-        "eyebrow": "Triple-action repair",
-        "heading": "Repair and straighten, in one.",
-        "lede": "One rinse-out treatment that hydrates, smooths and rebuilds damaged hair from the inside out.",
+        "eyebrow": "Triple-action care",
+        "heading": "Hydrate, soothe, detangle — in one stroke.",
+        "lede": "A cordless mist comb that hydrates as you style, soothes with a warm red-light scalp massage, and glides through tangles static-free.",
         "image_caption": "",
         "bg_color": "#f5efe6"
       }
@@ -432,7 +433,7 @@
           "type": "ai_gen_block_21aa88f",
           "settings": {
             "heading": "See the difference",
-            "subtitle": "One treatment. Visibly smoother, healthier-looking hair.",
+            "subtitle": "Dry, static and full of flyaways — to smooth, hydrated and shiny after one mist-and-comb.",
             "before_image": "shopify://shop_images/hf_20260528_085428_61708b2d-487e-47a0-8286-3977b6d11fe8.png",
             "after_image": "shopify://shop_images/hf_20260528_084802_ebe6efa1-22c7-44a8-88d4-b04c76eac2be.png",
             "show_toggle": true,
@@ -472,30 +473,30 @@
     "us_vs_them": {
       "type": "us-vs-them",
       "settings": {
-        "eyebrow": "Why Rebuild",
-        "heading": "Rebuild vs. the rest.",
-        "subtext": "Salon keratin straightens but damages. Ordinary masks repair but don't straighten. Rebuild does both — in one rinse-out treatment.",
-        "us_label": "Mend Rebuild",
-        "them_label": "Other masks",
+        "eyebrow": "Why the Wand",
+        "heading": "The Wand vs. an ordinary brush.",
+        "subtext": "A normal brush just drags through dry, static-prone hair. The Mend Wand mists, soothes and detangles in one — turning everyday styling into a scalp ritual.",
+        "us_label": "Mend Wand",
+        "them_label": "Ordinary brush",
         "bg_color": "#f8f3ea",
-        "row_1_feature": "Repairs AND straightens",
-        "row_1_us": "Both — in one rinse-out mask",
-        "row_1_them": "Repair or smoothing — not both",
-        "row_2_feature": "Rebuilds from within",
-        "row_2_us": "Keratin, collagen & peptides repair the strand",
-        "row_2_them": "Surface coat that washes out",
-        "row_3_feature": "No formaldehyde or flat-iron",
-        "row_3_us": "Gentle rinse-out — no fumes or heat",
-        "row_3_them": "Salon keratin uses both",
-        "row_4_feature": "Treatments per box",
-        "row_4_us": "20 single-use sachets",
-        "row_4_them": "3–5 — dry out fast",
-        "row_5_feature": "Risk-free trial",
-        "row_5_us": "30-day money-back guarantee",
-        "row_5_them": "No returns on imports",
-        "row_6_feature": "Support & shipping",
-        "row_6_us": "Real support · fast, tracked",
-        "row_6_them": "Faceless dropship · slow"
+        "row_1_feature": "Hydrates as you style",
+        "row_1_us": "Fine botanical mist, root to tip",
+        "row_1_them": "Dry brushing only",
+        "row_2_feature": "Scalp massage + red light",
+        "row_2_us": "Massaging bristles & a warm 650nm glow",
+        "row_2_them": "None",
+        "row_3_feature": "Anti-static glide",
+        "row_3_us": "Ball-tipped — frizz-free, no snag",
+        "row_3_them": "Static, pulling and snagging",
+        "row_4_feature": "Self-cleaning",
+        "row_4_us": "One-click retractable bristles",
+        "row_4_them": "Pick trapped hair out by hand",
+        "row_5_feature": "Cordless & rechargeable",
+        "row_5_us": "5–7 day battery · no subscription",
+        "row_5_them": "n/a",
+        "row_6_feature": "Guarantee & warranty",
+        "row_6_us": "30-day money-back · 2-year warranty",
+        "row_6_them": "Varies"
       }
     },
     "17799622903d320805": {
@@ -508,57 +509,57 @@
         "faq_item_t4QVVd": {
           "type": "faq_item",
           "settings": {
-            "question": "Is this the same \"Botox\" my dermatologist uses?",
-            "answer": "<p>No needles, no toxins. Hair Botox is the beauty world's nickname for an intensive repair mask — ours is a keratin, collagen and peptide treatment that fills in the damaged spots along each strand. Nothing is injected and nothing freezes; the name just describes the smooth, plumped result.</p>"
+            "question": "What does the mist actually do?",
+            "answer": "<p>The Wand has a small refillable tank. As you comb, it releases a fine botanical mist — fill it with plain water to refresh and de-static, or add your favourite lightweight serum or hair oil to carry it evenly from root to tip.</p>"
           }
         },
         "faq_item_7jnciW": {
           "type": "faq_item",
           "settings": {
-            "question": "How do I use it?",
-            "answer": "<p>After shampooing, towel-dry until your hair stops dripping. Work a generous amount through the mid-lengths to the ends — skip the scalp. Leave it on for 5 to 20 minutes, then rinse thoroughly. One sachet is sized for a single treatment.</p>"
+            "question": "What's the red light for?",
+            "answer": "<p>The warm 650nm glow is part of the at-home scalp ritual — a soothing, spa-like warmth as the bristles massage your scalp. We keep our claims honest: it's there for comfort and relaxation, not as a medical hair-loss treatment.</p>"
           }
         },
         "faq_item_iW4FAr": {
           "type": "faq_item",
           "settings": {
-            "question": "How often should I use it?",
-            "answer": "<p>Two to three times a week while you're repairing damage, then drop back to once a week to maintain. Most Menders feel the difference from the very first wash.</p>"
+            "question": "Can I use it on wet or dry hair?",
+            "answer": "<p>Both. Mist-and-comb damp hair to smooth and style, or run it through dry hair through the day to refresh, de-static and tame flyaways.</p>"
           }
         },
         "faq_item_box20": {
           "type": "faq_item",
           "settings": {
-            "question": "How many treatments are in a box?",
-            "answer": "<p>Twenty. Each box holds 20 single-use 10g sachets — one sachet per treatment — so a single box keeps you going for weeks.</p>"
+            "question": "How do I clean it?",
+            "answer": "<p>One click. The self-cleaning bristles retract to release trapped hair instantly — no picking strands out by hand. Wipe the bristles and tank and you're done.</p>"
           }
         },
         "faq_item_safe": {
           "type": "faq_item",
           "settings": {
-            "question": "Will it damage my hair, or contain formaldehyde?",
-            "answer": "<p>No. Unlike the salon keratin and botox smoothing treatments you may have heard about, ours is a simple rinse-out mask — there's no formaldehyde, no flat-iron sealing and no harsh fumes. You're nourishing your hair, not chemically altering it.</p>"
+            "question": "How long does the battery last?",
+            "answer": "<p>Around 5 to 7 days of regular use on a full charge. It's cordless and USB-rechargeable, with no pods, refills or subscription to buy.</p>"
           }
         },
         "faq_item_ingr": {
           "type": "faq_item",
           "settings": {
-            "question": "What's actually in it?",
-            "answer": "<p>A repair complex of hydrolyzed keratin, collagen and Acetyl Hexapeptide-8, plus biotin, camellia seed oil, ginseng root extract and lactic acid — chosen to rebuild damaged strands, lock in moisture and smooth the cuticle.</p>"
+            "question": "Is it gentle on my scalp and all hair types?",
+            "answer": "<p>Yes. The ball-tipped, anti-static bristles are shaped to glide and massage without scratching, and the mist suits straight, wavy, curly and coily hair alike.</p>"
           }
         },
         "faq_item_results": {
           "type": "faq_item",
           "settings": {
-            "question": "When will I see results, and how long do they last?",
-            "answer": "<p>Your hair feels smoother and softer from the very first treatment. With regular use the results build, and each treatment lasts roughly 4 to 8 weeks.</p>"
+            "question": "Which colour should I choose?",
+            "answer": "<p>Whichever you love — Blush Pink, Lavender Purple or Ivory Creme. They're identical inside; the colour is the only difference.</p>"
           }
         },
         "faq_item_ship": {
           "type": "faq_item",
           "settings": {
-            "question": "What about shipping and returns?",
-            "answer": "<p>Shipping is free and every order leaves us within 24 hours. You're also covered by our 30-day money-back guarantee — try it for a full month, and if your hair isn't smoother we'll refund every cent.</p>"
+            "question": "What about shipping, returns and warranty?",
+            "answer": "<p>Shipping is free and every order leaves us within 24 hours. You're covered by a 30-day money-back guarantee and a 2-year warranty — if it's not for you, we'll make it right.</p>"
           }
         }
       },
@@ -575,7 +576,7 @@
       "name": "Product FAQ",
       "settings": {
         "eyebrow": "FAQ",
-        "heading": "Mend Rebuild, answered.",
+        "heading": "The Mend Wand, answered.",
         "subheading": ""
       }
     },
