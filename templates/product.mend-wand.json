@@ -253,16 +253,6 @@
       "name": "Review carousel",
       "settings": {}
     },
-    "product_video": {
-      "type": "product-video",
-      "settings": {
-        "eyebrow": "In motion",
-        "heading": "A two-minute ritual.",
-        "subtext": "Mist, massage and glide — the daily moment your hair looks forward to.",
-        "video_url": "https://cdn.shopify.com/videos/c/vp/0878a8d823334e1fb9e1bb609e490437/0878a8d823334e1fb9e1bb609e490437.HD-720p-4.5Mbps-86055547.mp4",
-        "bg_color": "#f5efe6"
-      }
-    },
     "repair_benefits": {
       "type": "repair-benefits",
       "blocks": {
@@ -298,6 +288,17 @@
         "heading": "Hydrate, soothe, detangle — in one stroke.",
         "lede": "A cordless mist comb that hydrates as you style, soothes with a warm red-light scalp massage, and glides through tangles static-free.",
         "image_caption": "",
+        "bg_color": "#f5efe6"
+      }
+    },
+    "product_video": {
+      "type": "product-video",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "In motion",
+        "heading": "A two-minute ritual.",
+        "subtext": "Mist, massage and glide — the daily moment your hair looks forward to.",
+        "video_url": "https://cdn.shopify.com/videos/c/vp/0878a8d823334e1fb9e1bb609e490437/0878a8d823334e1fb9e1bb609e490437.HD-720p-4.5Mbps-86055547.mp4",
         "bg_color": "#f5efe6"
       }
     },
