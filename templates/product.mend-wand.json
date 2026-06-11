@@ -95,7 +95,7 @@
       ],
       "name": "Product",
       "settings": {
-        "bundle_hook_show": true,
+        "bundle_hook_show": false,
         "bundle_hook_text": "● LIMITED OFFER · FREE SHIPPING · 30-DAY GUARANTEE",
         "title_font_size": 44,
         "show_size_guide": false,
