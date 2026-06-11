@@ -293,7 +293,7 @@
     },
     "product_video": {
       "type": "product-video",
-      "disabled": false,
+      "disabled": true,
       "settings": {
         "eyebrow": "In motion",
         "heading": "A two-minute ritual.",
